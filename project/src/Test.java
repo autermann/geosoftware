@@ -1,2 +1,7 @@
+/**
+ * 
+ * @author stefan
+ *
+ */
 class Test {
 }
