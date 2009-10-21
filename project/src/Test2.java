@@ -1,6 +1,6 @@
 /**
  * 
- * @author dustin, stefan
+ * @author dustin, stefan, auti
  *
  */
 public class Test2 {
