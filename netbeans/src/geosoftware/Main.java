@@ -6,7 +6,7 @@
 package geosoftware;
 
 /**
- *
+ * Main-Klasse
  * @author Christian Autermann
  */
 public class Main {
