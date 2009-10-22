@@ -1,0 +1,34 @@
+\frame{
+\title{Wozu Versionierung?}
+Erfassung von Änderungen an Dokumenten oder Dateien
+
+Beherrscht: Protokollierung, Archivierung, Wiederherstellung
+
+
+}
+\frame{
+\title{Geschichte}
+
+RCS [Revision Control System] (1980)
+CVS [Concurrent Versioning System](1989)
+SVN [Subversion] (2004)
+
+
+}
+
+\frame{
+\title{Funktionsweise}
+P: L-T vs P: T-L
+Örtlich, Zeitlich => Versionierung jedes Inhaltes
+Zeitlich, Örtlich => Versionierung des gesamten Projektes 
+
+}
+
+\frame{
+\title{Vorteile von P:T-L}
+Versionierung des gesamten Projektes statt nur einzelner Orte
+Vereinfachung der Versionsbeschreibung
+Lokale Speicherung älterer Revisionen.
+
+
+}
