@@ -1,0 +1,203 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{ngerman}
+\usepackage{hyperref}
+\usepackage{multicol}
+
+
+
+
+
+
+
+\newcommand{\itemiz}[1]{\begin{itemize}#1\end{itemize}}
+\title{Subversion}
+\author{Dustin Demuth\\Stefan Arndt\\Christian Autermann}
+\date{\today}
+
+
+\begin{document}
+\frame{\titlepage}
+
+\frame{
+\frametitle{Wozu Versionierung?}
+\begin{itemize}
+\item Erfassung von Änderungen an Dokumenten oder Dateien
+\item Beherrscht: Protokollierung, Archivierung, Wiederherstellung
+\end{itemize}
+}
+
+\frame{
+\frametitle{Geschichte}
+\begin{itemize}
+\item RCS [Revision Control System] (1980)
+\item CVS [Concurrent Versioning System](1989)
+\item SVN [Subversion] (2004)
+\end{itemize}
+}
+
+\frame{
+\frametitle{Funktionsweise}
+\begin{itemize}
+\item P: L-T vs P: T-L
+\item Örtlich, Zeitlich $\Rightarrow$ Versionierung jedes Inhaltes
+\item Zeitlich, Örtlich $\Rightarrow$ Versionierung des gesamten Projektes 
+\end{itemize}
+}
+
+\frame{
+\frametitle{Vorteile von P:T-L}
+\begin{itemize}
+\item Versionierung des gesamten Projektes statt nur einzelner Orte
+\item Vereinfachung der Versionsbeschreibung
+\item Lokale Speicherung älterer Revisionen.
+\end{itemize}
+}
+
+\frame{
+\frametitle{Repository -- Struktur}
+\begin{description}
+\item[Trunk] Hauptentwicklungszweig
+\item[Branch]
+Nebenzweige\\
+alternative Konzepte/Ideen		
+\item[Tag]
+Release Candidates\\
+Zwischenstände
+\end{description}
+}
+
+
+
+\frame{
+\frametitle{Zugriffsmöglichkeiten}
+\begin{itemize}
+
+	\item Lokaler Zugriff
+	\item Entfernter Zugriff
+		\begin{itemize}
+			\item svn://
+			\item http://
+			\item https://
+			\item svn+ssh://	
+		\end{itemize}
+\end{itemize}
+}
+
+\frame{
+\frametitle{Revision}
+\begin{itemize}
+	\item Jede Änderung entspricht neuer Revision
+	\item Nur geänderte Dateien erhalten neue Nummer
+	\item Revision entspricht der letzen Änderung
+	\item \emph{head} -- neuste Revision
+	\item \emph{base} -- die Revision einer lokalen Arbeistkopie
+\end{itemize}
+}	
+
+
+\frame{
+\frametitle{Wichtige Operationen}
+\begin{description}
+\item[Checkout (co)] Abrufen von Dateien
+\item[Commit (ci)] Einreichen von Änderungen
+\item[Add (add)] Versionierung einer neuen Datei
+\item[Update (up)] lokale Dateien auf neuste Revision bringen	
+\end{description}
+}
+
+\frame{
+\frametitle{Konflikte}
+\itemiz{
+\item A lädt r21\item B lädt r21
+\item B ändert Datei Beispiel.java
+\item A ändert Datei Beispiel.java
+\item A commited r22
+\item B will r22 commiten $\Rightarrow$ Konflikt
+}
+}
+
+\frame{
+\frametitle{Merge}
+B "`mergt"' Beispiel.java und commited r23\\
+$\Rightarrow$ nur bei textbasierten Dateien sinnvoll
+\itemiz{
+\item Quellcode
+\item xml
+\item configfiles
+\dots
+}
+}
+\frame{
+\frametitle{Locks}	
+\itemiz{
+\item A fordert Lock für bild.jpg (svn lock bild.jpg)
+\item A bearbeitet bild.jpg
+\item B fordert Lock für bild.jpg $\Rightarrow$ Fehler
+\item A gibt bild.jpg wieder frei (svn unlock bild.jpg)
+\item sinnvoll bei binären Dateien
+\itemiz{
+\item Grafiken
+\item Sound
+\item Video
+	\item \dots
+}
+}
+}
+
+\frame{
+\frametitle{Kommandozeile}
+\begin{multicols}{3}
+\itemize{
+\item add
+\item   blame (praise, annotate, ann)
+\item   cat
+\item   changelist (cl)
+\item   checkout (co)
+\item   cleanup
+\item   commit (ci)
+\item   copy (cp)
+\item   delete (del, remove, rm)
+\item   diff (di)
+\item   export
+\item   help (?, h)
+\item   import
+\item   info
+\item   list (ls)
+\item   lock
+\item   log
+\item   merge
+\item   mergeinfo
+\item   mkdir
+\item   move (mv, rename, ren)
+\item   propdel (pdel, pd)
+\item   propedit (pedit, pe)
+\item   propget (pget, pg)
+\item   proplist (plist, pl)
+\item   propset (pset, ps)
+\item   resolve
+\item   resolved
+\item   revert
+\item   status (stat, st)
+\item   switch (sw)
+\item   unlock
+\item   update (up)
+}	
+\end{multicols}
+}
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
