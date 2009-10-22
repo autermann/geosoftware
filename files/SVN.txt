@@ -1,0 +1,20 @@
+Dustin:
+Wozu Versionierung?
+GEschichte: (1980)RCS -> CVS -> SVN
+SVN als freie Software
+Funktionsweise auf Serverseite => CVS: P:L-T , SVN: P:T-L
+SVN ist Codeunabhängig
+
+Christian:
+Dateiverwaltung
+Repository
+Revision
+Merges, Checkout, Commit Funktionen
+Branches, Tags, Trunk - Architektur
+Konflickte, Lösung durch Merges und Locks
+CLI
+
+Stefan:
+GUIs:
+SVN Tortoise, SMART SVN, Subversive / Subclipse
+
