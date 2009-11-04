@@ -1,33 +1,20 @@
 \section{Wichtige Begriffe}
-	\subsection{Repository}
-		Unter einem Repository versteht man ein zentrales, auf einem Server 
-		lagerndes Archiv, das über die gesamte Versionsgeschichte jeder Datei, 
-		die im Repository abgelegt wurde, verfügt.
-		Da man in der Regel für jedes Projekt ein eigenes Repository benutzt, 
-		ist ein Subversion-Server in der Lage mehrere Repositories zu verwalten.
-		
-		Zum Bearbeiten der versionierten Dateien lädt man sich eine lokale 
-		Arbeitskopie aus dem Repository und lädt anschließend die veränderten 
-		Dateien in das Repository.
-		
-		\subsubsection{Trunk}
-			Unter dem Trunk versteht man den Hauptentwicklungszweig eines 
-			Projektes.
-		\subsubsection{Branch}
-			Unter einem Branch versteht man eine Kopie des 
-			Hauptentwicklungszweiges
-		\subsubsection{Tag}
-	\subsection{Revision}
-		Im jedem Repository gibt es die sogenannte Revisionsnummer. Beim Anlegen 
-		eines Repositories beträgt sie null und wird bei jeder eingereichten 
-		Änderung inkrementiert. Für jede versionierte Datei wird zusätzlich die
-		Revisionsnummer der letzten Bearbeitung gespeichert.
-	 	Durch Angabe einer Nummer lässt sich die Version einer Datei eindeutig 
-	 	bestimmen und so auch der Zustand einer Datei oder des gesamten Projektes 
-	 	zu einem bestimmten Zeitpunkt wiederherstellen.
-	 	
+\subsection{Repository}
+Unter einem Repository versteht man ein zentrales, auf einem Server lagerndes Archiv, das über die gesamte Versionsgeschichte jeder Datei, die im Repository abgelegt wurde, verfügt.\\
+Da man in der Regel für jedes Projekt ein eigenes Repository benutzt, ist ein Subversion-Server in der Lage mehrere Repositories zu verwalten.\\
+Zum Bearbeiten der versionierten Dateien lädt man sich eine lokale Arbeitskopie aus dem Repository und lädt anschließend die veränderten Dateien in das Repository.
+\subsection{Revision}
+Im jedem Repository gibt es die sogenannte Revisionsnummer. Beim Anlegen eines Repositories beträgt sie null und wird bei jeder eingereichten Änderung um 1 inkrementiert. Für jede versionierte Datei wird zusätzlich die Revisionsnummer der letzten Bearbeitung gespeichert.\\
+Durch Angabe einer Nummer lässt sich die Version einer Datei eindeutig bestimmen und so auch der Zustand einer Datei oder des gesamten Projektes zu einem bestimmten Zeitpunkt wiederherstellen.\\
+Die aktuellste des Repository nennt man auch \emph{Head} und die lokale, noch nicht eingereichte Revision, heißt \emph{base}.
+\subsection{Verzeichnisstruktur}
+Unabhängig von der Art des Projektes hat sich eine Verzeichnisstruktur etabliert, die mehrere Entwicklungsstränge ermöglicht.\\
+Der Hauptentwicklungszweig lagert in \emph{trunk}, Nebenzweige werden in \emph{branch} abgelegt und \emph{tag} enthält benannte Versionen.\\
+Da in Subversion beim kopieren einer Datei, nicht die Datei kopiert wird, sondern nur ein neuer Verweis in der Datenbank angelegt wird, ist es möglich ohne zusätzlichen Speicherbedarf Dateien zu kopieren und deren Versionsgeschichte zu erhalten. Möchte man nun eine eine benannte Version (bspw. ein Release Candidate o.ä.) erstellen, reicht es mit Hilfe von Subversion das Projekt aus \emph{trunk} nach \emph{tag} zu kopieren und dort umzubennen. Subversion legt dabei nur eine Verknüpfung unter dem neuen Namen mit der Versionsgeschichte der Originaldateien an.\\
+Gleiches geschieht beim Erstellen eines neuen Entwicklungszweiges in \emph{branch}.
+
 \section{Konflikte}
-	\subsection{Merge}
-	\subsection{Locks}
+\subsection{Merge}
+\subsection{Locks}
 
 \section{Die Kommandozeile}
