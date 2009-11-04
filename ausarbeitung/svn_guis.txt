@@ -1,3 +1,15 @@
+zur erkl‰rung... das macht dir ne grafik. wenne die nummer der grafik haben willst schreib einfach \ref{fig:name}....
+
+
+\begin{figure}%[!htb]
+	\centering
+	\includegraphics[width=1\textwidth]{dateiname}
+	\caption{Bildbeschreibung}
+	\label{fig:name}
+\end{figure}
+
+
+
 Graphic Frontends:
 
 Es gibt eine groﬂe Auswahl von graphischen Benutzeroberfl‰chen um auf Subversion-Repositorys zuzugreifen. Sie vereinfachen den Umgang mit SVN enorm, da komplett auf die Kommandozeilen Eingabe verzichtet wird.
