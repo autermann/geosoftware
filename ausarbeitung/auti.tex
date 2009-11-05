@@ -1,7 +1,6 @@
 \section{Wichtige Begriffe}
 \subsection{Repository}
-Unter einem Repository versteht man ein zentrales, auf einem Server lagerndes Archiv, das über die gesamte Versionsgeschichte jeder Datei, die im Repository abgelegt wurde, verfügt.\\
-Da man in der Regel für jedes Projekt ein eigenes Repository benutzt, ist ein Subversion-Server in der Lage mehrere Repositories zu verwalten.\\
+Unter einem Repository versteht man ein zentrales Archiv, das über die gesamte Versionsgeschichte jeder Datei, die im Repository abgelegt wurde, verfügt. In der Regel nutzt man für jedes Projekt ein eigenes Repository.\\
 Zum Bearbeiten der versionierten Dateien lädt man sich eine lokale Arbeitskopie aus dem Repository und lädt anschließend die veränderten Dateien in das Repository.
 \subsection{Revision}
 Im jedem Repository gibt es die sogenannte Revisionsnummer. Beim Anlegen eines Repositories beträgt sie null und wird bei jeder eingereichten Änderung um 1 inkrementiert. Für jede versionierte Datei wird zusätzlich die Revisionsnummer der letzten Bearbeitung gespeichert.\\
@@ -28,4 +27,6 @@ Locks eigenen sich besonders für binäre Dateien, bei denen ein synoptischer Ve
 Um Konflikte zu Verhindern wird bevor die Datei bearbeitet wird eine Sperre (der sogenannte Lock) für die Datei angefordert. Alle anderen Personen können ab diesem Zeitpunkt zwar die Datei lesen und bearbeiten, allerdings nicht commiten. Erst mit dem nächsten Commit des Lock-Inhabers wird die Datei wieder für andere freigegeben.\\
 Da man eine von jemand Anders gesperrte Datei in seiner Arbeitskopie beliebig verändern kann und über ein Lock nur bei einem versuchten Commit informiert wird, empfiehlt es sich vor jedem Bearbeiten den Status einer Binärdatei zu überprüfen um unnötige Arbeit zu verhindern.
 
-\section{Die Kommandozeile}
+\section{Client-Server-Architektur}
+Subversion besteht aus den Kommandozeilenprogrammen \texttt{svn}, \texttt{svnlook}, \texttt{svnadmin} und \texttt{svnserve}. Zum Erzeugen und Verwalten eines Repositories dient \texttt{svnadmin}. Um auf ein Repository zuzugreifen dienen \texttt{svn} und \texttt{svnlook}, wobei letzteres zu lesend zugreift und nur lokal verwendet werden kann.\\
+Der Subversion-Server \texttt{svnserve} bietet einen Server für das svn-Protokoll, sodass auch entfernter Zugriff auf das Repository per \texttt{svn} möglich ist. Alternativ existiert auch eine Erweiterung für den Apache-Web-Server, der das Repository über WebDAV zu Verfügung stellt. Für einen sicheren entfernten Zugriff empfiehlt es sich das svn-Protokoll über SSH zu tunneln oder den WebDAV-Zugriff mittels SSL zu verschlüsseln.
