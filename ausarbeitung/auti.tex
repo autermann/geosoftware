@@ -11,7 +11,7 @@ Unabhängig von der Art des Projektes hat sich eine Verzeichnisstruktur etablier
 Der Hauptentwicklungszweig lagert in \emph{trunk}, Nebenzweige werden in \emph{branch} abgelegt und \emph{tag} enthält benannte Versionen.\\
 Da in Subversion das Kopieren einer Datei durch einen neuen Verweis in der Datenbank  realisiert ist, ist es möglich ohne zusätzlichen Speicherbedarf Dateien zu kopieren und deren Versionsgeschichte zu erhalten. Möchte man nun eine eine benannte Version (bspw. ein Release Candidate o.ä.) erstellen, reicht es mit Hilfe von Subversion das Projekt aus \emph{trunk} nach \emph{tag} zu kopieren und dort umzubennen. Subversion legt dabei nur eine Verknüpfung unter dem neuen Namen mit der Versionsgeschichte der Originaldateien an.\\
 Gleiches geschieht beim Erstellen eines neuen Entwicklungszweiges in \emph{branch}.
-\section{Konflikte}
+\subsection{Konflikte}
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=0.7\textwidth]{konflikt}
@@ -19,10 +19,10 @@ Gleiches geschieht beim Erstellen eines neuen Entwicklungszweiges in \emph{branc
 \label{fig:konflikt}
 \end{figure}
 Subversion erlaubt das gleichzeitige Arbeiten mehrerer Personen an der selben Datei. Dies führt zwangsläufig zu Konflikten wie Abbildung \ref{fig:konflikt} zeigt. Subversion bietet hierfür zwei Lösungen an.
-\subsection{Merge}
+\subsubsection{Merge}
 In Abbildung \ref{fig:konflikt} kann B nicht einfach seine Änderungen commiten, da dies alle Änderungen, die A gemacht hat, verwerfen würde. Daher ist B gezwungen die im Konflikt stehenden Dateiversionen zu verschmelzen (zu mergen). Dies kann automatisch (bsplw. wenn sich die Veränderungen nicht gegenseitig beeinflussen) oder von Hand geschehen. Um dies zu Vereinfachen gibt es eine Vielzahl Tools die einen synoptischen Vergleich der Dateien ermöglichen und die Unterschiede visualisieren.
 
-\subsection{Locks}
+\subsubsection{Locks}
 Locks eigenen sich besonders für binäre Dateien, bei denen ein synoptischer Vergleich der beiden in Konflikt stehenden Dateien nicht möglich ist.\\
 Um Konflikte zu Verhindern wird bevor die Datei bearbeitet wird eine Sperre (der sogenannte Lock) für die Datei angefordert. Alle anderen Personen können ab diesem Zeitpunkt zwar die Datei lesen und bearbeiten, allerdings nicht commiten. Erst mit dem nächsten Commit des Lock-Inhabers wird die Datei wieder für andere freigegeben.\\
 Da man eine von jemand Anders gesperrte Datei in seiner Arbeitskopie beliebig verändern kann und über ein Lock nur bei einem versuchten Commit informiert wird, empfiehlt es sich vor jedem Bearbeiten den Status einer Binärdatei zu überprüfen um unnötige Arbeit zu verhindern.
