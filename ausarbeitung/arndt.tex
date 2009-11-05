@@ -1,2 +1,36 @@
 \section{Graphical Frontends}
-%%% arndt
+Es gibt eine große Auswahl von graphischen Benutzeroberflächen um auf Subversion-Repositorys zuzugreifen. Sie vereinfachen den Umgang mit SVN enorm, da komplett auf die Kommandozeilen Eingabe verzichtet wird.\\
+Drei verschiedene Arten von GUIs werden wir hier nun kurz  vorstellen:
+\subsection{SmartSVN}
+SmartSVN ist ein eigenständies Programm, das auf den Betriebssystemen Linux, UNIX, Mac OS X, Windows lauffähig ist. Im Internet ist eine gratis Demoversion für 30Tage auffindbar, wenn man allerdings die Vollversion benutzen möchte, muss man dafür zahlen.\\
+Neben dem Standalone-Client integriert sich SmartSVN unter Windows zusätzlich auch noch in den Explorer (Abbildung \ref{fig:smart1}). Das Menü bietet eine übersichtliche Dateiverwaltung (Abbildung \ref{fig:smart2}) und optisch gut aufbereitete Vergleiche der Versionen an (Abbildung \ref{fig:smart3}).
+Neben dem HTTP-Protokoll, werden auch noch HTTPS, SVN, und SVN+SSH unterstützt\footnote{Quelle: \url{http://www.syntevo.com/smartsvn}}.
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=.8\textwidth]{1_smartsvn1.png}
+	\caption{Bildbeschreibung}
+	\label{fig:smart1}
+\end{figure}  
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=.9\textwidth]{2_smartsvn2.png}
+	\caption{Bildbeschreibung}
+	\label{fig:smart2}
+\end{figure}  
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=.9\textwidth]{3_smartsvn3.png}
+	\caption{Bildbeschreibung}
+	\label{fig:smart3}
+\end{figure}  
+\subsection{Tortoise SVN}
+Tortoise hingegen ist ein kostenloser Windows-Client der unter der GNU GPL Lizenz steht. Es integriert sich ebenfalls in den Windows-Explorer und ist deshalb ebenfalls außerhalb und unabhängig von einer IDE verwendbar. Im Gegensatz zu SmartSVN ist TortoiseSVN aber kein standalone-Client, sondern bietet nur die reine Shell-Extension (Abbildung \ref{fig:tortoise1}).
+Zur Zeit ist die Software in 34 Sprachen verfügbar.
+Die unterstützten Protokolle sind: http, https, svn, svn+ssh, file, svn+xxx\footnote{Quelle: \url{http://tortoisesvn.tigris.org/}, \url{http://de.wikipedia.org/wiki/TortoiseSVN}}.
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=.45\textwidth]{4_turtoise1.png}
+	\caption{Bildbeschreibung}
+	\label{fig:tortoise1}
+\end{figure}  
+\subsection{Subclipse SVN}
