@@ -8,7 +8,8 @@
 \usepackage{fancyhdr}               % Kopf- und Fusszeile
 \usepackage{lastpage}               % erzeugt Referez zu der letzten Seite
 \usepackage{moreverb}               % verbatimtab Umgeung
-\usepackage[latin1]{inputenc}                    %Windows
+\usepackage[utf8]{inputenc}                    %Windows
+\usepackage{epstopdf}
 \usepackage{hyperref} % muss vor minutes geladen werden
 \usepackage{url}
 \usepackage{color}
@@ -34,8 +35,8 @@
 
 %eigene Befehle
 
-%Fraglich: Markiert Rot und Ergänzt mit Zu Prüfen
-\newcommand{\fraglich}[1]{\newline{\color{red}Zu prüfen: #1}}
+%Fraglich: Markiert Rot und Ergï¿½nzt mit Zu Prï¿½fen
+\newcommand{\fraglich}[1]{\newline{\color{red}Zu prï¿½fen: #1}}
 %Entwicklungsstatus des Dokuments
 \newcommand{\status}[1]{\def\MyStatus{#1}}
 \def\MyStatus{~}
