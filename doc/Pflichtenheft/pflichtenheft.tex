@@ -27,32 +27,57 @@
 %Ab gehts im Text
 
 \section{Zielbestimmung}
-	\subsection{Musskriterien}
-		\begin{itemize}
-			\item Webportal
-			\item Eingabe von raumbezogenen Daten (mit Karte)
-			\item Visualisierung von Daten
-			\item Administrationsmöglichkeiten
-			\item Registrierung/Anmeldung
-		\end{itemize}
-	\subsection{Sollkriterien}
-		\begin{itemize}
-			\item Definieren von Anwendungsmöglichkeiten per Admin-Panel
-			\item Intuitive Benutzerführung
-			\item WFS zum Abgreifen der Daten
-			\item Leichte Wartbarkeit
-		\end{itemize}
-	\subsection{Kannkriterien}
-	\subsection{Abgrenzungskriterien}
+\subsection{Musskriterien}
+\begin{itemize}
+\item Webportal
+\item Eingabe von raumbezogenen Daten (mit Karte)
+\item Visualisierung von Daten
+\item Administrationsmöglichkeiten
+\item Registrierung/Anmeldung
+\end{itemize}
+\subsection{Sollkriterien}
+\begin{itemize}
+\item Definieren von Anwendungsmöglichkeiten per Admin-Panel
+\item Intuitive Benutzerführung
+\item WFS zum Abgreifen der Daten
+\item Leichte Wartbarkeit
+\item melden von missbrauch
+\end{itemize}
+%\subsection{Kannkriterien}
+\subsection{Abgrenzungskriterien}
+\begin{itemize}
+\item Begränzung auf eine Stadt
+\end{itemize}
 \section{Produkteinsatz}
-	\subsection{Anwendungsbereiche}
-	\subsection{Zielgruppen}
-	\subsection{Betriebsbedingungen}
-		\subsubsection{physikalische Umgebung des Systems}
-		\subsubsection{tägliche Betriebszeit}
-		\subsubsection{ständige Beobachtung des Systems durch Bediener}
-		\subsubsection{Unbeaufsichtigte Installation / Unbeaufsichtigter Betrieb}
-
+\subsection{Anwendungsbereiche}
+\begin{itemize}
+\item Müllbeobachtungen, Verschmutzung, Verunreinigung
+%\item Graffiti
+%\item Vandalismus
+%\item Verkehrssünder
+%\item Blitzer
+%\item 
+\end{itemize}
+\subsection{Zielgruppen}
+\begin{itemize}
+\item Bürger
+\item Verwaltung
+\end{itemize}
+\subsection{Betriebsbedingungen}
+\subsubsection{physikalische Umgebung des Systems}
+\begin{itemize}
+\item Server(-raum)
+\item Client: ortsunabhängig
+\end{itemize}
+\subsubsection{tägliche Betriebszeit}
+24/7
+\subsubsection{ständige Beobachtung des Systems durch Bediener}
+nö
+\subsubsection{Unbeaufsichtigte Installation / Unbeaufsichtigter Betrieb}
+\begin{itemize}
+\item nein/nein
+\item Installation durch Fachpersonal
+\end{itemize}
 
 %\section{Produktübersicht}
 
@@ -62,54 +87,91 @@
 	\subsection{Benutzerfunktionen}
 		\subsubsection{Nutzermanagement}
 			\paragraph{LF31110}
+			+ in Datenbank gespeichert
 			\paragraph{LF31120}
+			übernehmen
 			\paragraph{LF31130}
+			auch übernehmen
 			
 		\subsubsection{Eingabe von Beobachtungen}
-			\paragraph{LF31210}
-			\paragraph{LF31220}
-			\paragraph{LF31230}
-			\paragraph{LF31240}
-			\paragraph{LF31250}
-			\paragraph{LF31260}
-			\paragraph{LF31270}
-			\paragraph{LF31280}
-			\paragraph{LF31290}
-			
-		\subsubsection{Abrufen von Beobachtungen}
-			\paragraph{LF31310}
-			\paragraph{LF31320}
-			\paragraph{LF31330}
-			\paragraph{LF31340}
-			\paragraph{LF31350}
-			\paragraph{LF31360}
-			\paragraph{LF31370}
-		
-		\paragraph{Administratorfunktion}
-			\paragraph{LF32100}
-			\paragraph{LF32200}
-			\paragraph{LF32300}
-
-
+\paragraph{LF31210}
+Identifizierte Nutzer können Beobachtungen, die sie gemacht haben über ein Formular eingeben.
+\paragraph{LF31211}
+Identifiziere Nutzer können bei Mißbrauch Beobachtungen anderer Benutzer melden.
+\paragraph{LF31220}
+ Bei der Eingabe von Beobachtungen wird die räumliche Position der Beobachtung mit eingegeben.		
+\paragraph{LF31230}
+Bei der Eingabe der räumlichen Position der Beobachtung kann der Nutzer entweder manuell entsprechende Koordinaten eingeben oder die Position über eine Kartendarstellung auswählen.		\paragraph{LF31240}
+Bei der Eingabe von Beobachtungen wird der Zeitpunkt der Beobachtung mit eingegeben.			\paragraph{LF31250}
+Bei der Eingabe von Beobachtungen wird das beobachtete Phänomen (z.B. Temperatur, Verschmutzung, Schadstoffkonzentration, Verkehrsstörung) mit eingegeben.
+\paragraph{LF31260}
+Bei der Eingabe von Beobachtungen wird der Beobachter mit erfasst.
+\paragraph{LF31270}
+Benutzer erhalten eine Rückmeldung, ob die Eingabe einer Beobachtung erfolgreich war.
+\paragraph{LF31280}
+Die Eingabe von Beobachtungen erfolgt über ein Formular via Web-Browser.
+\paragraph{LF31290}
+Die Eingabe von Beobachtungen soll sowohl numerische Werte (inkl. Maßeinheit) und textuelle Beschreibungen erlauben.
+\subsubsection{Abrufen von Beobachtungen}
+\paragraph{LF31310}
+Benutzer können eine Kartendarstellung abrufen, welche die Positionen der im System erhaltenen Beobachtungen darstellt.
+\paragraph{LF31320}
+Benutzer können über die Kartenansicht einzelne Beobachtungen abrufen und den Inhalt dieser Beobachtung anzeigen lassen.
+\paragraph{LF31330}
+Bei der Anzeige des Inhalts einer Beobachtung sind ihr Wert, Zeitpunkt, Raumbezug, das beobachtete Phänomen und Beobachter anzugeben.
+\paragraph{LF31340}
+Der Benutzer kann innerhalb der Kartenansicht zoomen.
+\paragraph{LF31350}
+Der Benutzer kann den dargestellten Kartenausschnitt verschieben.
+\paragraph{LF31360}
+Die Kartendarstellung ermöglicht die Einbindung topographischer Karten.
+\paragraph{LF31370}
+Der Benutzer kann die Kartendarstellung mit Hilfe eines Web-Browsers aufrufen.
+\paragraph{Administratorfunktion}
+\paragraph{LF32100}
+Der Administrator kann auf eine Liste aller registrierten Benutzer zugreifen.
+\paragraph{LF32200}
+Der Administrator kann Benutzer sperren, editieren und aus dem System entfernen.
+\paragraph{LF32300}
+Der Administrator kann Beobachtungen aus dem System entfernen und editieren.
+\paragraph{LF32400}
+Der Administrator kann gemeldete Beobachtungen einsehen und gemäß LF32300/LF32200 bearbeiten.
 
 %laber zeugs
-\section{Produktdaten}
-\section{Produktleistungen bezüglich Zeit und Genauigkeit}
-\section{Qualitätsanforderungen}
-\section{Grafische Benutzeroberfläche / Benutzungsoberfläche und Zugriffsrechte}
+%\section{Produktdaten}
+%\section{Produktleistungen bezüglich Zeit und Genauigkeit}
+%\section{Qualitätsanforderungen}
+%\section{Grafische Benutzeroberfläche / Benutzungsoberfläche und Zugriffsrechte}
+
+
+
+
 \section{Nichtfunktionale Anforderungen}
+Bei den Client-Komponenten ist sicherzustellen, dass sie auf jedem Webbrowser dargestellt werden können, die sich an den XHTML-Standard des W3C halten.
 \section{Technische Produktumgebung}
-	\subsection{Software für Server und Client, falls vorhanden}
-	\subsection{Hardware für Server und Client getrennt}
-	\subsection{Orgware, organisatorische Rahmenbedingungen}
-	\subsection{Produktschnittstellen}
+\subsection{Software für Server und Client}
+Server:
+\begin{itemize}
+\item JRE 1.6
+\item Apache Tomcat 6.x 
+\item MySQL 5.1
+\end{itemize}
+Client:
+\begin{itemize}
+\item grafikfähiger, JavaScript-fähiger Webbrowser
+\end{itemize}
+\subsection{Hardware für Server}
+Den anforderungen der Software entsprechend.
+\subsection{Orgware, organisatorische Rahmenbedingungen}
+Wird durch die Entwickler gestellt.
+\subsection{Produktschnittstellen}
+Implementierung eines WFS zum Zugriff auf eingetragene Daten.
 \section{Spezielle Anforderungen an die Entwicklungsumgebung}
-	\subsection{Software}
-	\subsection{Hardware}
-	\subsection{Orgware}
-	\subsection{Entwicklungsschnittstellen}
+Der Entwickler stellt eigene Hardware und Software bereit.
 \section{Gliederung in Teilprodukte}
-\section{Ergänzungen}
+Es wird ein Gesamtpaket bereit gestellt.
+%\section{Ergänzungen}
+
 \section{Glossar}
 
 
