@@ -8,7 +8,7 @@
 \date{\today}
 \version{0.0.1}
 \status{under construction}
-\authormail{christian@autermann.org}
+\authormail{sloth@vespuccis.de}
 %Titelseite wird Kreiert
 \maketitle
 \thispagestyle{empty}
@@ -29,34 +29,35 @@
 \section{Zielbestimmung}
 	\subsection{Musskriterien}
 		\begin{itemize}
-			\item Webportal
-			\item Eingabe von raumbezogenen Daten (mit Karte)
-			\item Visualisierung von Daten
-			\item Administrationsmöglichkeiten
-			\item Registrierung/Anmeldung
+			\item Den Benutzern muss die Möglichkeit gegeben werden, sich in einem Webportal zu registrieren und dort dann raumbezogene Daten 
+                    einzugeben. Diese Daten können sowohl in Adressform als auch interaktiv über eine Karte eingegeben werden.
+                    Nachdem die Daten eingetragen worden sind, können Sie zeitgleich auf der Seite des Webportals visualisiert werden.
+            \item Über einen seperaten Administrationsbereich wird dem Besitzer die Möglichkeit gegeben, die eingegebenen Daten und die 
+                    registrierten Benutzer zu verwalten. 
 		\end{itemize}
 	\subsection{Sollkriterien}
 		\begin{itemize}
-			\item Definieren von Anwendungsmöglichkeiten per Admin-Panel
-			\item Intuitive Benutzerführung
-			\item WFS zum Abgreifen der Daten
-			\item Leichte Wartbarkeit
-			\item melden von missbrauch
+			\item In dem Administrationsbereich können die Anwendungsmöglichkeiten, also die Art der eingegebenen 
+                    Beobachtungen genauer definiert werden
+			\item Das Webportal bietet eine intuitive Benutzerführung
+			\item Der Server bietet einen WFS zum externen Zugriff auf die Daten.
+			\item Den Benutzern wird die Möglichkeit geboten, andere Meldungen als Missbrauch zu kennzeichnen,
 		\end{itemize}
 	%\subsection{Kannkriterien}
 	\subsection{Abgrenzungskriterien}
 		\begin{itemize}
-			\item Begränzung auf eine Stadt
+			\item Die Eingabemöglichkeiten werden auf die grenzen der jeweiligen Stadtgrenzen beschränkt.
 		\end{itemize}
 \section{Produkteinsatz}
 	\subsection{Anwendungsbereiche}
 		\begin{itemize}
-			\item Müllbeobachtungen, Verschmutzung, Verunreinigung
+			\item Den Bürgern der Stadt soll die Möglichkeit gegeben werden Beobachtungen in Form von Verschmutzung, Verunreinigung,
+                    Vandalismus oder ähnliche Vorgänge mit Hilfe des Webportals zu melden.
 			%\item Graffiti
 			%\item Vandalismus
 			%\item Verkehrssünder
 			%\item Blitzer
-			%\item 
+			%\item
 		\end{itemize}
 	\subsection{Zielgruppen}
 		\begin{itemize}
@@ -72,11 +73,11 @@
 		\subsubsection{Tägliche Betriebszeit}
 			Kontinuierlicher Betrieb.
 		\subsubsection{Ständige Beobachtung des Systems durch Bediener}
-			nö
+			Nicht notwendig.
 		\subsubsection{Unbeaufsichtigte Installation / Unbeaufsichtigter Betrieb}
 			\begin{itemize}
-				\item nein/nein
-				\item Installation durch Fachpersonal
+				\item Die Installation findet durch bereitgestelltes Fachpersonal statt.
+				\item Zur regelmäßigen Wartung wird das Personal bei der Auslieferung durch Fachpersonal geschult.
 			\end{itemize}
 
 %\section{Produktübersicht}
@@ -88,7 +89,7 @@
 		\subsubsection{Nutzermanagement}
 			\paragraph{LF31110}
 				Nutzer können sich unter Angabe von Name und E-Mail-Adresse beim System registrieren.
-				+ in Datenbank gespeichert
+				Die eingegebenen Daten werden in einer Datenbank gespeichert.
 			\paragraph{LF31120}
 				Die Registrierung von Nutzern erfolgt über ein Formular via Web-Browser.
 			\paragraph{LF31130}
@@ -105,13 +106,13 @@
 			\paragraph{LF31240}
 				Bei der Eingabe von Beobachtungen wird der Zeitpunkt der Beobachtung mit eingegeben.			
 			\paragraph{LF31250}
-				Bei der Eingabe von Beobachtungen wird das beobachtete Phänomen (z.B. Temperatur, Verschmutzung, Schadstoffkonzentration, Verkehrsstörung) mit eingegeben.
+				Bei der Eingabe von Beobachtungen wird das beobachtete Phänomen (z.B. Verschmutzung) mit eingegeben.
 			\paragraph{LF31260}
 				Bei der Eingabe von Beobachtungen wird der Beobachter mit erfasst.
 			\paragraph{LF31270}
 				Benutzer erhalten eine Rückmeldung, ob die Eingabe einer Beobachtung erfolgreich war.
 			\paragraph{LF31280}
-				Die Eingabe von Beobachtungen erfolgt über ein Formular via Web-Browser.
+				Die Eingabe von Beobachtungen erfolgt über ein Formular oder interaktive Karte via Web-Browser.
 			\paragraph{LF31290}
 				Die Eingabe von Beobachtungen soll sowohl numerische Werte (inkl. Maßeinheit) und textuelle Beschreibungen erlauben.
 		\subsubsection{Abrufen von Beobachtungen}
@@ -155,12 +156,12 @@
 		Server:
 		\begin{itemize}
 			\item JRE 1.6
-			\item Apache Tomcat 6.x 
+			\item Apache Tomcat 6.x
 			\item MySQL 5.1
 		\end{itemize}
 		Client:
 		\begin{itemize}
-			\item grafik- und JavaScript-fähiger Webbrowser
+			\item Grafik- und JavaScript-fähiger Webbrowser
 		\end{itemize}
 	\subsection{Hardware für Server}
 		Den Anforderungen der Software entsprechend.
