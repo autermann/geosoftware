@@ -1,7 +1,8 @@
 %Pakete
 \usepackage[ngerman]{babel}         % Neue deutsche Rechtschreibung
 \usepackage[T1]{fontenc}            % Bessere Schriftdarstellung
-\usepackage{lmodern}                % Aktuelle Schrift
+%findet er irgendwie nich unter linux..
+%\usepackage{lmodern}                % Aktuelle Schrift
 \usepackage[intlimits]{amsmath}     % Zusaetzliche Matheumgebungen
 \usepackage{amssymb}                % Mathematische Symbole
 \usepackage{graphicx}               % notwendig fuer \includegraphics
@@ -13,6 +14,11 @@
 \usepackage{hyperref} % muss vor minutes geladen werden
 \usepackage{url}
 \usepackage{color}
+
+%Logo-Font
+\usepackage{ocr}
+
+
 \usepackage{authoraftertitle}
 %Umgang mit Hyperlinks:
 \hypersetup {
@@ -51,7 +57,7 @@
 
 \fancyhead[R]{\MyAuthor \\ \MyDate}
 %dustindemuth.de logo PFAD!!:
-\fancyhead[L]{\href{http://geosoftware.googlecode.com}{\includegraphics[width=1cm]{images/logo2}}}
+\fancyhead[L]{\href{http://geosoftware.googlecode.com}{\includegraphics[width=1cm]{images/logo2}} \textsuperscript{\textsuperscript{\Large{\texttt{\bf\ocrnegfamily SlothInc.}}}}}
 \fancyfoot[L]{Vers.:~\MyVersion}
 \fancyfoot[C]{\MyTitle~--~\MyStatus}
 \fancyfoot[R]{~\thepage~}
