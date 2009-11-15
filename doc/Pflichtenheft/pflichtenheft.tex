@@ -140,11 +140,15 @@
 %\section{Produktdaten}
 %\section{Produktleistungen bezüglich Zeit und Genauigkeit}
 %\section{Qualitätsanforderungen}
-%\section{Grafische Benutzeroberfläche / Benutzungsoberfläche und Zugriffsrechte}
-
-
-
-
+\section{Grafische Benutzeroberfläche}
+	\subsection{Server}
+		Der Server wird über keine grafische Benutzeroberfläche verfügen. Die Administration erfolgt über Konfigurationsdateien und die Client-Applikation.
+	\subsection{Client}
+		Die Oberfläche des Client ist eine dreigeteilte Website. Am oberen Rand wird sich eine Leiste zur Benutzerverwaltung. Im unangemeldeten Zustand umfasst sie Felder zum Eintragen von Benutzername und Passwort und die die Button \glqq Anmelden\grqq\ und \glqq Registrieren\grqq . Im angemeldeten Zustand enthält sie einen Button zum Abmelden und ein Anzeige des momentanen Status (bspw. der Benutzername). Für Administratoren enthält sie zudem einen Link zum Administratorpanel, für normale Benutzer einen Link zum Ändern der eigenen Einstellungen (Account löschen, E-Mail/Passwort ändern, etc.).\\
+		Der untere Abschnitt wird zweigeteilt. Auf der linken, schmaleren Seite befindet sich ein Suchfeld um bereits eingetragene Beobachtungen zu finden. Diese werden darunter textuell dargestellt. Jeder Beschreibung ist ein “Link” beigefügt, der die Hervorhebung des Ereignisses auf der rechts gelegenden Karte ermöglicht. Andersherum wird beim Auswählen einer Beobachtung in der Karte die textuelle Beschreibung angezeigt. Für Administratoren wird das Löschen der Beobachtung sowohl aus der Liste als auch aus der Karte heraus ermöglicht. Für normale Benutzer wird eine Melde-Funktion bereit gestellt. Im linken Abschnitt wird sich außerdem ein Button zum Erstellen einer neuen Beobachtung finden.\\
+		Das Admin-Panel ermöglicht die Auflistung der Beobachtungen und registrierten Benutzer und ermöglicht eine Filterungs- und Editierfunktion.\\
+		Alle Funktionaltitäten werden mit HTML und JavaScript umgesetzt.
+		
 \section{Nichtfunktionale Anforderungen}
 	Bei den Client-Komponenten ist sicherzustellen, dass sie auf jedem Webbrowser dargestellt werden können, die sich an den XHTML-Standard des W3C halten.
 \section{Technische Produktumgebung}
