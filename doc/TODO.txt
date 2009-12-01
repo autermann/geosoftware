@@ -1,2 +1,4 @@
 Anwendungsfall: Benutzerlisteanzeigen
 Sequenzdiagramme: WFS
+Klassendiagramm
+Gant-Chart
