@@ -18,3 +18,5 @@
 \contentsline {subsection}{\numberline {3.13}Ereignis l\IeC {\"o}schen}{14}{subsection.3.13}
 \contentsline {subsection}{\numberline {3.14}Ereignis melden}{14}{subsection.3.14}
 \contentsline {subsection}{\numberline {3.15}Karteninteraktion}{15}{subsection.3.15}
+\contentsline {section}{\numberline {4}Zeitplanung f\IeC {\"u}r Implementierung}{16}{section.4}
+\contentsline {subsection}{\numberline {4.1}Ganttchart}{16}{subsection.4.1}

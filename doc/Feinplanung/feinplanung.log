@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2009.11.9)  3 DEC 2009 15:27
+This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2009.11.9)  3 DEC 2009 15:39
 entering extended mode
 **E:/Dustin/Eigene*Dokumente/Arbeit/Studium/5.*Semester/geosoftware/doc/Feinpla
 nung/feinplanung.tex
@@ -698,9 +698,12 @@ Class scrartcl Info: You've told me to use the font selection of the element
 Class scrartcl Info: You've told me to use the font selection of the element
 (scrartcl)           `sectioning' that is an alias of element `disposition'
 (scrartcl)            on input line 5.
+Class scrartcl Info: You've told me to use the font selection of the element
+(scrartcl)           `sectioning' that is an alias of element `disposition'
+(scrartcl)            on input line 21.
 )
 \tf@toc=\write5
- <images/logo2.pdf, id=110, 127.47626pt x 114.4275pt>
+ <images/logo2.pdf, id=120, 127.47626pt x 114.4275pt>
 File: images/logo2.pdf Graphic file (type pdf)
 
 <use images/logo2.pdf>
@@ -739,7 +742,7 @@ d-to.pdf images/classes.eps>
 (epstopdf)             \includegraphics on input line 40.
 Package epstopdf Info: Output file is already uptodate.
 
-<images/classes-eps-converted-to.pdf, id=131, 988.69376pt x 729.72626pt>
+<images/classes-eps-converted-to.pdf, id=141, 988.69376pt x 729.72626pt>
 File: images/classes-eps-converted-to.pdf Graphic file (type pdf)
 
 <use images/classes-eps-converted-to.pdf>
@@ -760,7 +763,7 @@ converted-to.pdf images/seq01_einloggen.eps>
 (epstopdf)             \includegraphics on input line 54.
 Package epstopdf Info: Output file is already uptodate.
 
-<images/seq01_einloggen-eps-converted-to.pdf, id=142, 555.07375pt x 262.9825pt>
+<images/seq01_einloggen-eps-converted-to.pdf, id=152, 555.07375pt x 262.9825pt>
 File: images/seq01_einloggen-eps-converted-to.pdf Graphic file (type pdf)
 <use images/seq01_einloggen-eps-converted-to.pdf>
 Package epstopdf Info: Source file: <images/seq02_ausloggen.eps>
@@ -775,12 +778,9 @@ converted-to.pdf images/seq02_ausloggen.eps>
 (epstopdf)             \includegraphics on input line 64.
 Package epstopdf Info: Output file is already uptodate.
 
-<images/seq02_ausloggen-eps-converted-to.pdf, id=143, 279.0425pt x 261.97874pt>
+<images/seq02_ausloggen-eps-converted-to.pdf, id=153, 279.0425pt x 261.97874pt>
 File: images/seq02_ausloggen-eps-converted-to.pdf Graphic file (type pdf)
 <use images/seq02_ausloggen-eps-converted-to.pdf>
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 Package epstopdf Info: Source file: <images/seq03_KontoAnlegen.eps>
 (epstopdf)                    date: 2009-12-03 15:19:56
 (epstopdf)                    size: 5469 bytes
@@ -793,12 +793,9 @@ ps-converted-to.pdf images/seq03_KontoAnlegen.eps>
 (epstopdf)             \includegraphics on input line 75.
 Package epstopdf Info: Output file is already uptodate.
 
-<images/seq03_KontoAnlegen-eps-converted-to.pdf, id=144, 439.6425pt x 264.99pt>
+<images/seq03_KontoAnlegen-eps-converted-to.pdf, id=154, 439.6425pt x 264.99pt>
 File: images/seq03_KontoAnlegen-eps-converted-to.pdf Graphic file (type pdf)
 <use images/seq03_KontoAnlegen-eps-converted-to.pdf>
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 Package epstopdf Info: Source file: <images/seq04_KontoLoeschen.eps>
 (epstopdf)                    date: 2009-12-03 15:19:56
 (epstopdf)                    size: 7546 bytes
@@ -811,13 +808,10 @@ eps-converted-to.pdf images/seq04_KontoLoeschen.eps>
 (epstopdf)             \includegraphics on input line 86.
 Package epstopdf Info: Output file is already uptodate.
 
-<images/seq04_KontoLoeschen-eps-converted-to.pdf, id=145, 437.635pt x 259.97125
+<images/seq04_KontoLoeschen-eps-converted-to.pdf, id=155, 437.635pt x 259.97125
 pt>
 File: images/seq04_KontoLoeschen-eps-converted-to.pdf Graphic file (type pdf)
  <use images/seq04_KontoLoeschen-eps-converted-to.pdf>
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 Package epstopdf Info: Source file: <images/seq05_KontoDetailsEinsehen.eps>
 (epstopdf)                    date: 2009-12-03 15:19:56
 (epstopdf)                    size: 3247 bytes
@@ -830,14 +824,11 @@ nsehen-eps-converted-to.pdf images/seq05_KontoDetailsEinsehen.eps>
 (epstopdf)             \includegraphics on input line 97.
 Package epstopdf Info: Output file is already uptodate.
 
-<images/seq05_KontoDetailsEinsehen-eps-converted-to.pdf, id=146, 215.80624pt x 
+<images/seq05_KontoDetailsEinsehen-eps-converted-to.pdf, id=156, 215.80624pt x 
 259.97125pt>
 File: images/seq05_KontoDetailsEinsehen-eps-converted-to.pdf Graphic file (type
  pdf)
  <use images/seq05_KontoDetailsEinsehen-eps-converted-to.pdf>
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 Package epstopdf Info: Source file: <images/seq06_KontoDatenAendern.eps>
 (epstopdf)                    date: 2009-12-03 15:19:56
 (epstopdf)                    size: 6913 bytes
@@ -850,14 +841,11 @@ ern-eps-converted-to.pdf images/seq06_KontoDatenAendern.eps>
 (epstopdf)             \includegraphics on input line 108.
 Package epstopdf Info: Output file is already uptodate.
 
-<images/seq06_KontoDatenAendern-eps-converted-to.pdf, id=147, 443.6575pt x 259.
+<images/seq06_KontoDatenAendern-eps-converted-to.pdf, id=157, 443.6575pt x 259.
 97125pt>
 File: images/seq06_KontoDatenAendern-eps-converted-to.pdf Graphic file (type pd
 f)
  <use images/seq06_KontoDatenAendern-eps-converted-to.pdf>
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 Package epstopdf Info: Source file: <images/seq07_KontoRechteAendern.eps>
 (epstopdf)                    date: 2009-12-03 15:19:56
 (epstopdf)                    size: 7368 bytes
@@ -870,14 +858,11 @@ dern-eps-converted-to.pdf images/seq07_KontoRechteAendern.eps>
 (epstopdf)             \includegraphics on input line 119.
 Package epstopdf Info: Output file is already uptodate.
 
-<images/seq07_KontoRechteAendern-eps-converted-to.pdf, id=148, 500.87125pt x 25
+<images/seq07_KontoRechteAendern-eps-converted-to.pdf, id=158, 500.87125pt x 25
 9.97125pt>
 File: images/seq07_KontoRechteAendern-eps-converted-to.pdf Graphic file (type p
 df)
  <use images/seq07_KontoRechteAendern-eps-converted-to.pdf>
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 Package epstopdf Info: Source file: <images/seq08_benutzerlisteAnzeigen.eps>
 (epstopdf)                    date: 2009-12-03 15:19:56
 (epstopdf)                    size: 6259 bytes
@@ -890,14 +875,11 @@ nzeigen-eps-converted-to.pdf images/seq08_benutzerlisteAnzeigen.eps>
 (epstopdf)             \includegraphics on input line 130.
 Package epstopdf Info: Output file is already uptodate.
 
-<images/seq08_benutzerlisteAnzeigen-eps-converted-to.pdf, id=149, 440.64626pt x
+<images/seq08_benutzerlisteAnzeigen-eps-converted-to.pdf, id=159, 440.64626pt x
  260.975pt>
 File: images/seq08_benutzerlisteAnzeigen-eps-converted-to.pdf Graphic file (typ
 e pdf)
  <use images/seq08_benutzerlisteAnzeigen-eps-converted-to.pdf>
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 Package epstopdf Info: Source file: <images/seq09_EreignisEintragen.eps>
 (epstopdf)                    date: 2009-12-03 15:19:56
 (epstopdf)                    size: 7081 bytes
@@ -910,14 +892,11 @@ gen-eps-converted-to.pdf images/seq09_EreignisEintragen.eps>
 (epstopdf)             \includegraphics on input line 141.
 Package epstopdf Info: Output file is already uptodate.
 
-<images/seq09_EreignisEintragen-eps-converted-to.pdf, id=150, 446.66875pt x 260
+<images/seq09_EreignisEintragen-eps-converted-to.pdf, id=160, 446.66875pt x 260
 .975pt>
 File: images/seq09_EreignisEintragen-eps-converted-to.pdf Graphic file (type pd
 f)
  <use images/seq09_EreignisEintragen-eps-converted-to.pdf>
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 Package epstopdf Info: Source file: <images/seq10_EreignisEinsehen.eps>
 (epstopdf)                    date: 2009-12-03 15:19:56
 (epstopdf)                    size: 4780 bytes
@@ -930,14 +909,11 @@ en-eps-converted-to.pdf images/seq10_EreignisEinsehen.eps>
 (epstopdf)             \includegraphics on input line 152.
 Package epstopdf Info: Output file is already uptodate.
 
-<images/seq10_EreignisEinsehen-eps-converted-to.pdf, id=151, 343.2825pt x 260.9
+<images/seq10_EreignisEinsehen-eps-converted-to.pdf, id=161, 343.2825pt x 260.9
 75pt>
 File: images/seq10_EreignisEinsehen-eps-converted-to.pdf Graphic file (type pdf
 )
  <use images/seq10_EreignisEinsehen-eps-converted-to.pdf>
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 Package epstopdf Info: Source file: <images/seq11_EreignisAendern.eps>
 (epstopdf)                    date: 2009-12-03 15:19:56
 (epstopdf)                    size: 5879 bytes
@@ -950,14 +926,11 @@ n-eps-converted-to.pdf images/seq11_EreignisAendern.eps>
 (epstopdf)             \includegraphics on input line 164.
 Package epstopdf Info: Output file is already uptodate.
 
-<images/seq11_EreignisAendern-eps-converted-to.pdf, id=152, 395.4775pt x 260.97
+<images/seq11_EreignisAendern-eps-converted-to.pdf, id=162, 395.4775pt x 260.97
 5pt>
 File: images/seq11_EreignisAendern-eps-converted-to.pdf Graphic file (type pdf)
 
  <use images/seq11_EreignisAendern-eps-converted-to.pdf>
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 Package epstopdf Info: Source file: <images/seq12_EreignisSuchen.eps>
 (epstopdf)                    date: 2009-12-03 15:19:56
 (epstopdf)                    size: 4769 bytes
@@ -970,13 +943,10 @@ to.pdf>
 (epstopdf)             \includegraphics on input line 176.
 Package epstopdf Info: Output file is already uptodate.
 
-<images/seq12_EreignisSuchen-eps-converted-to.pdf, id=153, 343.2825pt x 259.971
+<images/seq12_EreignisSuchen-eps-converted-to.pdf, id=163, 343.2825pt x 259.971
 25pt>
 File: images/seq12_EreignisSuchen-eps-converted-to.pdf Graphic file (type pdf)
  <use images/seq12_EreignisSuchen-eps-converted-to.pdf>
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 Package epstopdf Info: Source file: <images/seq13_EreignisLoeschen.eps>
 (epstopdf)                    date: 2009-12-03 15:19:56
 (epstopdf)                    size: 5888 bytes
@@ -989,14 +959,11 @@ en-eps-converted-to.pdf images/seq13_EreignisLoeschen.eps>
 (epstopdf)             \includegraphics on input line 187.
 Package epstopdf Info: Output file is already uptodate.
 
-<images/seq13_EreignisLoeschen-eps-converted-to.pdf, id=154, 395.4775pt x 260.9
+<images/seq13_EreignisLoeschen-eps-converted-to.pdf, id=164, 395.4775pt x 260.9
 75pt>
 File: images/seq13_EreignisLoeschen-eps-converted-to.pdf Graphic file (type pdf
 )
  <use images/seq13_EreignisLoeschen-eps-converted-to.pdf>
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 Package epstopdf Info: Source file: <images/seq14_EreignisMelden.eps>
 (epstopdf)                    date: 2009-12-03 15:19:56
 (epstopdf)                    size: 5888 bytes
@@ -1009,13 +976,10 @@ to.pdf>
 (epstopdf)             \includegraphics on input line 200.
 Package epstopdf Info: Output file is already uptodate.
 
-<images/seq14_EreignisMelden-eps-converted-to.pdf, id=155, 400.49625pt x 260.97
+<images/seq14_EreignisMelden-eps-converted-to.pdf, id=165, 400.49625pt x 260.97
 5pt>
 File: images/seq14_EreignisMelden-eps-converted-to.pdf Graphic file (type pdf)
  <use images/seq14_EreignisMelden-eps-converted-to.pdf>
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 Package epstopdf Info: Source file: <images/seq15_KartenInteraktion.eps>
 (epstopdf)                    date: 2009-12-03 15:19:56
 (epstopdf)                    size: 4782 bytes
@@ -1028,38 +992,37 @@ ion-eps-converted-to.pdf images/seq15_KartenInteraktion.eps>
 (epstopdf)             \includegraphics on input line 211.
 Package epstopdf Info: Output file is already uptodate.
 
-<images/seq15_KartenInteraktion-eps-converted-to.pdf, id=156, 313.17pt x 259.97
+<images/seq15_KartenInteraktion-eps-converted-to.pdf, id=166, 313.17pt x 259.97
 125pt>
 File: images/seq15_KartenInteraktion-eps-converted-to.pdf Graphic file (type pd
 f)
  <use images/seq15_KartenInteraktion-eps-converted-to.pdf>
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-AED: lastpage setting LastPage
 File: images/logo2.pdf Graphic file (type pdf)
- <use images/logo2.pdf> [5
+
+<use images/logo2.pdf> [5
 
  <E:/Dustin/Eigene Dokumente/Arbeit/Studium/5. Semester/geosoftware/doc/Feinpla
 nung/images/seq01_einloggen-eps-converted-to.pdf>]
 File: images/logo2.pdf Graphic file (type pdf)
- <use images/logo2.pdf> [6 <E:/Dustin/Eigene Dokumente/Arbeit/Studium/5. Semest
-er/geosoftware/doc/Feinplanung/images/seq02_ausloggen-eps-converted-to.pdf>]
-File: images/logo2.pdf Graphic file (type pdf)
- <use images/logo2.pdf> [7 <E:/Dustin/Eigene Dokumente/Arbeit/Studium/5. Semest
-er/geosoftware/doc/Feinplanung/images/seq03_KontoAnlegen-eps-converted-to.pdf> 
-<E:/Dustin/Eigene Dokumente/Arbeit/Studium/5. Semester/geosoftware/doc/Feinplan
-ung/images/seq04_KontoLoeschen-eps-converted-to.pdf>]
+
+<use images/logo2.pdf> [6 <E:/Dustin/Eigene Dokumente/Arbeit/Studium/5. Semeste
+r/geosoftware/doc/Feinplanung/images/seq02_ausloggen-eps-converted-to.pdf>]
 File: images/logo2.pdf Graphic file (type pdf)
 
-<use images/logo2.pdf> [8 <E:/Dustin/Eigene Dokumente/Arbeit/Studium/5. Semeste
-r/geosoftware/doc/Feinplanung/images/seq05_KontoDetailsEinsehen-eps-converted-t
-o.pdf>]
+<use images/logo2.pdf> [7 <E:/Dustin/Eigene Dokumente/Arbeit/Studium/5. Semeste
+r/geosoftware/doc/Feinplanung/images/seq03_KontoAnlegen-eps-converted-to.pdf> <
+E:/Dustin/Eigene Dokumente/Arbeit/Studium/5. Semester/geosoftware/doc/Feinplanu
+ng/images/seq04_KontoLoeschen-eps-converted-to.pdf>]
 File: images/logo2.pdf Graphic file (type pdf)
- <use images/logo2.pdf> [9 <E:/Dustin/Eigene Dokumente/Arbeit/Studium/5. Semest
-er/geosoftware/doc/Feinplanung/images/seq06_KontoDatenAendern-eps-converted-to.
-pdf> <E:/Dustin/Eigene Dokumente/Arbeit/Studium/5. Semester/geosoftware/doc/Fei
-nplanung/images/seq07_KontoRechteAendern-eps-converted-to.pdf>]
+ <use images/logo2.pdf>
+[8 <E:/Dustin/Eigene Dokumente/Arbeit/Studium/5. Semester/geosoftware/doc/Feinp
+lanung/images/seq05_KontoDetailsEinsehen-eps-converted-to.pdf>]
+File: images/logo2.pdf Graphic file (type pdf)
+
+<use images/logo2.pdf> [9 <E:/Dustin/Eigene Dokumente/Arbeit/Studium/5. Semeste
+r/geosoftware/doc/Feinplanung/images/seq06_KontoDatenAendern-eps-converted-to.p
+df> <E:/Dustin/Eigene Dokumente/Arbeit/Studium/5. Semester/geosoftware/doc/Fein
+planung/images/seq07_KontoRechteAendern-eps-converted-to.pdf>]
 File: images/logo2.pdf Graphic file (type pdf)
 
 <use images/logo2.pdf> [10 <E:/Dustin/Eigene Dokumente/Arbeit/Studium/5. Semest
@@ -1088,7 +1051,15 @@ File: images/logo2.pdf Graphic file (type pdf)
 
 <use images/logo2.pdf> [15 <E:/Dustin/Eigene Dokumente/Arbeit/Studium/5. Semest
 er/geosoftware/doc/Feinplanung/images/seq15_KartenInteraktion-eps-converted-to.
-pdf>]
+pdf>] <images/ganttchart.png, id=284, 1040.38687pt x 239.39438pt>
+File: images/ganttchart.png Graphic file (type png)
+
+<use images/ganttchart.png>
+File: images/logo2.pdf Graphic file (type pdf)
+ <use images/logo2.pdf> [16
+
+ <E:/Dustin/Eigene Dokumente/Arbeit/Studium/5. Semester/geosoftware/doc/Feinpla
+nung/images/ganttchart.png (PNG copy)>] AED: lastpage setting LastPage
 ("E:\Dustin\Eigene Dokumente\Arbeit\Studium\5. Semester\geosoftware\doc\Feinpla
 nung\feinplanung.aux")
 
@@ -1096,28 +1067,29 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 7539 strings out of 495285
- 112215 string characters out of 3179875
- 196404 words of memory out of 3000000
- 10482 multiletter control sequences out of 15000+200000
- 22029 words of font info for 61 fonts, out of 3000000 for 9000
+ 7553 strings out of 495285
+ 112435 string characters out of 3179875
+ 196455 words of memory out of 3000000
+ 10490 multiletter control sequences out of 15000+200000
+ 22718 words of font info for 62 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 54i,18n,45p,402b,493s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 54i,18n,45p,402b,491s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\Dustin\AppData\Local\MiKTeX\2.8\fonts\pk\ljfour\jknappen\ec\dpi600
-\ecsx1200.pk> <C:\Users\Dustin\AppData\Local\MiKTeX\2.8\fonts\pk\ljfour\jknappe
-n\ec\dpi600\ecrm1000.pk> <C:\Users\Dustin\AppData\Local\MiKTeX\2.8\fonts\pk\ljf
-our\jknappen\ec\dpi600\ecsx1095.pk> <C:\Users\Dustin\AppData\Local\MiKTeX\2.8\f
-onts\pk\ljfour\jknappen\ec\dpi600\ecsx1440.pk> <C:\Users\Dustin\AppData\Local\M
-iKTeX\2.8\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1095.pk> <C:\Users\Dustin\AppD
-ata\Local\MiKTeX\2.8\fonts\pk\ljfour\unknown\unknown\dpi864\ocrb10x.pk> <C:\Use
-rs\Dustin\AppData\Local\MiKTeX\2.8\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1095.
+\ecti1095.pk> <C:\Users\Dustin\AppData\Local\MiKTeX\2.8\fonts\pk\ljfour\jknappe
+n\ec\dpi600\ecsx1200.pk> <C:\Users\Dustin\AppData\Local\MiKTeX\2.8\fonts\pk\ljf
+our\jknappen\ec\dpi600\ecrm1000.pk> <C:\Users\Dustin\AppData\Local\MiKTeX\2.8\f
+onts\pk\ljfour\jknappen\ec\dpi600\ecsx1095.pk> <C:\Users\Dustin\AppData\Local\M
+iKTeX\2.8\fonts\pk\ljfour\jknappen\ec\dpi600\ecsx1440.pk> <C:\Users\Dustin\AppD
+ata\Local\MiKTeX\2.8\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1095.pk> <C:\Users\
+Dustin\AppData\Local\MiKTeX\2.8\fonts\pk\ljfour\unknown\unknown\dpi864\ocrb10x.
 pk> <C:\Users\Dustin\AppData\Local\MiKTeX\2.8\fonts\pk\ljfour\jknappen\ec\dpi60
-0\ecrm1440.pk> <C:\Users\Dustin\AppData\Local\MiKTeX\2.8\fonts\pk\ljfour\jknapp
-en\ec\dpi600\ecsx1000.pk> <C:\Users\Dustin\AppData\Local\MiKTeX\2.8\fonts\pk\lj
-four\jknappen\ec\dpi600\ecsx2074.pk>
-Output written on feinplanung.pdf (15 pages, 167888 bytes).
+0\ecbx1095.pk> <C:\Users\Dustin\AppData\Local\MiKTeX\2.8\fonts\pk\ljfour\jknapp
+en\ec\dpi600\ecrm1440.pk> <C:\Users\Dustin\AppData\Local\MiKTeX\2.8\fonts\pk\lj
+four\jknappen\ec\dpi600\ecsx1000.pk> <C:\Users\Dustin\AppData\Local\MiKTeX\2.8\
+fonts\pk\ljfour\jknappen\ec\dpi600\ecsx2074.pk>
+Output written on feinplanung.pdf (16 pages, 226172 bytes).
 PDF statistics:
- 567 PDF objects out of 1000 (max. 8388607)
- 52 named destinations out of 1000 (max. 500000)
- 238 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 605 PDF objects out of 1000 (max. 8388607)
+ 56 named destinations out of 1000 (max. 500000)
+ 259 words of extra memory for PDF output out of 10000 (max. 10000000)
 
