@@ -1,0 +1,20 @@
+\select@language {ngerman}
+\contentsline {section}{\numberline {1}Zielbestimmung}{3}{section.1}
+\contentsline {section}{\numberline {2}Verwendete Klassen}{3}{section.2}
+\contentsline {subsection}{\numberline {2.1}Klassendiagramm}{4}{subsection.2.1}
+\contentsline {section}{\numberline {3}Sequenzen}{5}{section.3}
+\contentsline {subsection}{\numberline {3.1}Einloggen}{5}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Ausloggen}{6}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Konto Anlegen}{7}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}Konto L\IeC {\"o}schen}{7}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.5}Konto Details Einsehen}{8}{subsection.3.5}
+\contentsline {subsection}{\numberline {3.6}Konto Daten \IeC {\"A}ndern}{9}{subsection.3.6}
+\contentsline {subsection}{\numberline {3.7}\IeC {\"A}ndern von Zugriffsrechten}{9}{subsection.3.7}
+\contentsline {subsection}{\numberline {3.8}Benutzerliste Anzeigen}{10}{subsection.3.8}
+\contentsline {subsection}{\numberline {3.9}Ereignis eintragen}{10}{subsection.3.9}
+\contentsline {subsection}{\numberline {3.10}Ereignis einsehen}{11}{subsection.3.10}
+\contentsline {subsection}{\numberline {3.11}Ereignis \IeC {\"a}ndern}{12}{subsection.3.11}
+\contentsline {subsection}{\numberline {3.12}Ereignis suchen}{13}{subsection.3.12}
+\contentsline {subsection}{\numberline {3.13}Ereignis l\IeC {\"o}schen}{14}{subsection.3.13}
+\contentsline {subsection}{\numberline {3.14}Ereignis melden}{14}{subsection.3.14}
+\contentsline {subsection}{\numberline {3.15}Karteninteraktion}{15}{subsection.3.15}
