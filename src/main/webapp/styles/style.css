@@ -1,17 +1,10 @@
-/* 
-    Document   : style
-    Created on : 04.12.2009, 04:57:52
-    Author     : auti
-    Description:
-        Purpose of the stylesheet follows.
-*/
-
-/* 
-   TODO customize this sample style
-   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
-*/
-
-root { 
-    display: block;
+body{
+	background-color:black;
+	color:silver;
+	font-family:helvetica;
+	font-size:2em;
+	text-align:center;
+	padding:1em;
 }
+	
 
