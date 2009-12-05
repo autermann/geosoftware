@@ -15,24 +15,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-package de.ifgi.sloth.geosoftware.core;
-
-import de.ifgi.sloth.geosoftware.data.BoundingBox;
-import de.ifgi.sloth.geosoftware.data.Map;
+package de.ifgi.sloth.geosoftware.exceptions;
 
 /**
  *
  * @author Christian Autermann
  */
-public class MapManagement {
-
+public class NotAuthorizedException extends Exception {
 	/**
 	 * 
-	 * @param coverage
-	 * @return
 	 */
-	public Map getMap(BoundingBox coverage){
-		return null;
-	}
+	public static final long serialVersionUID = 0;
 }

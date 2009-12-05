@@ -20,7 +20,7 @@ package de.ifgi.sloth.geosoftware.data;
 
 /**
  *
- * @author auti
+ * @author Christian Autermann
  */
 public class MapTile {
 

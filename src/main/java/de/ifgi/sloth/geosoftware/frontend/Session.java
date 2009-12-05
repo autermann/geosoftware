@@ -16,23 +16,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.ifgi.sloth.geosoftware.core;
-
-import de.ifgi.sloth.geosoftware.data.BoundingBox;
-import de.ifgi.sloth.geosoftware.data.Map;
+package de.ifgi.sloth.geosoftware.frontend;
 
 /**
  *
  * @author Christian Autermann
  */
-public class MapManagement {
+public class Session {
 
-	/**
-	 * 
-	 * @param coverage
-	 * @return
-	 */
-	public Map getMap(BoundingBox coverage){
-		return null;
-	}
 }

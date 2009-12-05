@@ -18,10 +18,102 @@
 
 package de.ifgi.sloth.geosoftware.io.db;
 
+import de.ifgi.sloth.geosoftware.data.BoundingBox;
+import de.ifgi.sloth.geosoftware.data.Observation;
+import de.ifgi.sloth.geosoftware.data.ObservationCategorie;
+import de.ifgi.sloth.geosoftware.data.User;
+import java.util.Calendar;
+import java.util.Collection;
+
 /**
  *
- * @author auti
+ * @author Christian Autermann
  */
 public class SQLBinding implements DBBinding {
+
+	@Override
+	public DBBinding getInstance() {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	@Override
+	public Collection<Observation> getObservations() {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	@Override
+	public Observation getObservationById(long id) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	@Override
+	public Collection<Observation> getObservationsByCategorie(ObservationCategorie oc) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	@Override
+	public Collection<Observation> getObservationsByKeyword(String s) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	@Override
+	public Collection<Observation> getObservationsByUser(User u) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	@Override
+	public Collection<Observation> getObservationsByDate(Calendar after, Calendar before) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	@Override
+	public Collection<Observation> getObservationsByCoverage(BoundingBox coverage) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	@Override
+	public void addObservation(Observation o) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	@Override
+	public void reportObservation(Observation o, String reason) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	@Override
+	public void deleteObservation(Observation o) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	@Override
+	public void updateObservation(Observation o) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	@Override
+	public void deleteUser(User u) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	@Override
+	public void updateUser(User u) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	@Override
+	public Collection<User> getUserList() {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	@Override
+	public void addUser(User u) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	@Override
+	public User getUserByEmail(String mail) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
 
 }

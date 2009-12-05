@@ -20,7 +20,7 @@ package de.ifgi.sloth.geosoftware.io.wms;
 
 /**
  *
- * @author auti
+ * @author Christian Autermann
  */
 public interface WMSBinding {
 

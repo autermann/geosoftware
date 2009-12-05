@@ -15,13 +15,84 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package de.ifgi.sloth.geosoftware.core;
+
+import de.ifgi.sloth.geosoftware.data.Rights;
+import de.ifgi.sloth.geosoftware.data.User;
+import de.ifgi.sloth.geosoftware.exceptions.NotAuthorizedException;
+import de.ifgi.sloth.geosoftware.frontend.Session;
+import java.util.Collection;
 
 /**
  *
- * @author auti
+ * @author Christian Autermann
  */
 public class UserManagement {
 
+	/**
+	 * 
+	 * @param session
+	 * @return
+	 */
+	public static UserManagement getInstance(Session session) {
+		return null;
+	}
+
+	/**
+	 * 
+	 * @param u
+	 * @throws NotAuthorizedException
+	 */
+	public void deleteUser(User u) throws NotAuthorizedException {
+	}
+
+	/**
+	 *
+	 */
+	public void updateUser() {
+	}
+
+	/**
+	 * 
+	 * @return
+	 * @throws NotAuthorizedException
+	 */
+	public Collection<User> getUserList() throws NotAuthorizedException {
+		return null;
+	}
+
+	/**
+	 *
+	 * @param u
+	 * @param rights
+	 * @throws NotAuthorizedException
+	 */
+	public void changeRights(User u, Rights rights) throws NotAuthorizedException {
+	}
+
+	/**
+	 *
+	 * @param email
+	 * @param passwd
+	 * @return
+	 */
+	public boolean logIn(String email, String passwd) {
+		return false;
+	}
+
+	/**
+	 *
+	 */
+	public void logOut() {
+	}
+
+	/**
+	 *
+	 * @param email
+	 * @param name
+	 * @param familyName
+	 * @param passwd
+	 */
+	public void registrateUser(String email, String name, String familyName, String passwd) {
+	}
 }

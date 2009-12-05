@@ -20,8 +20,65 @@ package de.ifgi.sloth.geosoftware.data;
 
 /**
  *
- * @author auti
+ * @author Christian Autermann
  */
 public class User {
+	private String name, familyName, eMail, passwort;
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * @return the familyName
+	 */
+	public String getFamilyName() {
+		return familyName;
+	}
+
+	/**
+	 * @param familyName the familyName to set
+	 */
+	public void setFamilyName(String familyName) {
+		this.familyName = familyName;
+	}
+
+	/**
+	 * @return the eMail
+	 */
+	public String geteMail() {
+		return eMail;
+	}
+
+	/**
+	 * @param eMail the eMail to set
+	 */
+	public void seteMail(String eMail) {
+		this.eMail = eMail;
+	}
+
+	/**
+	 * @return the passwort
+	 */
+	public String getPasswort() {
+		return passwort;
+	}
+
+	/**
+	 * @param passwort the passwort to set
+	 */
+	public void setPasswort(String passwort) {
+		this.passwort = passwort;
+	}
 
 }
