@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth,
- *                     Christoph Fendrich, Christian Paluschek
+ * 					 Christoph Fendrich, Christian Paluschek
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,12 +16,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.ifgi.sloth.geosoftware;
+package de.ifgi.sloth.geosoftware.data;
 
 /**
  *
  * @author auti
  */
-public class MapTile {
+public class BoundingBox {
 
 }
