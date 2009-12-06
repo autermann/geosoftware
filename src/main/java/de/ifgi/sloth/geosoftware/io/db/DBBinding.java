@@ -21,11 +21,10 @@ import de.ifgi.sloth.geosoftware.data.BoundingBox;
 import de.ifgi.sloth.geosoftware.data.Observation;
 import de.ifgi.sloth.geosoftware.data.ObservationCategorie;
 import de.ifgi.sloth.geosoftware.data.User;
-import de.ifgi.sloth.geosoftware.data.util.Configuration;
-import de.ifgi.sloth.geosoftware.data.util.Log;
+import de.ifgi.sloth.geosoftware.util.Configuration;
+import de.ifgi.sloth.geosoftware.util.Log;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.ResourceBundle;
 
 /**
  *

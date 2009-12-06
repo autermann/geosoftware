@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.ifgi.sloth.geosoftware.data.util;
+package de.ifgi.sloth.geosoftware.util;
 
 import java.security.MessageDigest;
 import sun.misc.BASE64Encoder;
