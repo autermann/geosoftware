@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-	<comment>Main Configuration File</comment>
 	<entry key="LOG_FILE">log.xml</entry>
 	<entry key="LOG_NAME">de.ifgi.sloth.geosoftware</entry>
 	<entry key="LOG_LEVEL">ALL</entry>
 	<entry key="DATABASE_INTERFACE">de.ifgi.sloth.geosoftware.io.db.SQLBinding</entry>
-	<entry key="SQL_HOST"></entry>
-	<entry key="SQL_PORT"></entry>
-	<entry key="SQL_USERNAME"></entry>
-	<entry key="SQL_PASSWORD"></entry>
+	<entry key="SQL_HOST">localhost</entry>
+	<entry key="SQL_PORT">3306</entry>
+	<entry key="SQL_USERNAME">test</entry>
+	<entry key="SQL_PASSWORD">test</entry>
 </properties>
 
