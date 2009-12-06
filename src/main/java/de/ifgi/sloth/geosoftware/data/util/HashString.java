@@ -17,9 +17,7 @@
  */
 package de.ifgi.sloth.geosoftware.data.util;
 
-import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import sun.misc.BASE64Encoder;
 
 /**
@@ -30,19 +28,16 @@ public final class HashString {
 
 	/**
 	 * 
-	 * @param plaintext
+	 * @param plain
 	 * @return
-	 * @throws Exception
 	 */
-	public static synchronized String hash(String plaintext) throws Exception {
+	public static synchronized String hash(String plain) {
 		MessageDigest md = null;
 		try {
 			md = MessageDigest.getInstance("SHA");
-			md.update(plaintext.getBytes("UTF-8"));
-		} catch (UnsupportedEncodingException e) {
-			throw new Exception(e.getMessage());
-		} catch (NoSuchAlgorithmException e) {
-			throw new Exception(e.getMessage());
+			md.update(plain.getBytes("UTF-8"));
+		} catch (Exception e) {
+			Log.getLogger().throwing(HashString.class.getName(), "hash()", e);
 		}
 		return (new BASE64Encoder()).encode(md.digest());
 	}
