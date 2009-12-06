@@ -68,12 +68,12 @@ public class Configuration {
 			stream = new FileOutputStream(fileName);
 			props.storeToXML(stream, "Configuration File");
 		} catch (Exception e) {
-			Log.getLogger().throwing(Configuration.class.getName(), "get()", e);
+			Log.getLogger().throwing(Configuration.class.getName(), "put()", e);
 		} finally {
 			try {
 				stream.close();
 			} catch (Exception e) {
-				Log.getLogger().throwing(Configuration.class.getName(), "get()", e);
+				Log.getLogger().throwing(Configuration.class.getName(), "put()", e);
 			}
 		}
 
