@@ -21,54 +21,69 @@ import de.ifgi.sloth.geosoftware.data.BoundingBox;
 import de.ifgi.sloth.geosoftware.data.Observation;
 import de.ifgi.sloth.geosoftware.data.ObservationCategorie;
 import de.ifgi.sloth.geosoftware.data.User;
+import de.ifgi.sloth.geosoftware.data.util.Configuration;
+import de.ifgi.sloth.geosoftware.data.util.Log;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.ResourceBundle;
 
 /**
  *
  * @author Christian Autermann
  */
-public interface DBBinding {
+public abstract class DBBinding {
+
+	private static DBBinding binding;
 
 	/**
 	 * 
 	 * @return
 	 */
-	public DBBinding getInstance();
+	public static DBBinding getInstance() {
+		if (binding == null){
+			try {
+				binding = (DBBinding) Class.forName(Configuration.get("DATABASE_INTERFACE")).newInstance();
+			} catch (Exception e) {
+				Log.getLogger().throwing(DBBinding.class.getName(), "getInstance()", e);
+				System.exit(1);
+			}
+		}
+		return binding;
+	}
 
 	/**
 	 * 
 	 * @return
 	 */
-	public Collection<Observation> getObservations();
+	public abstract Collection<Observation> getObservations();
 
 	/**
 	 *
 	 * @param id
 	 * @return
 	 */
-	public Observation getObservationById(long id);
+	public abstract Observation getObservationById(long id);
 
 	/**
 	 *
 	 * @param oc
 	 * @return
 	 */
-	public Collection<Observation> getObservationsByCategorie(ObservationCategorie oc);
+	public abstract Collection<Observation> getObservationsByCategorie(ObservationCategorie oc);
 
 	/**
 	 *
 	 * @param s
 	 * @return
 	 */
-	public Collection<Observation> getObservationsByKeyword(String s);
+	public abstract Collection<Observation> getObservationsByKeyword(String s);
 
 	/**
 	 *
 	 * @param u
 	 * @return
 	 */
-	public Collection<Observation> getObservationsByUser(User u);
+	public abstract Collection<Observation> getObservationsByUser(User u);
 
 	/**
 	 *
@@ -76,69 +91,69 @@ public interface DBBinding {
 	 * @param before
 	 * @return
 	 */
-	public Collection<Observation> getObservationsByDate(Calendar after, Calendar before);
+	public abstract Collection<Observation> getObservationsByDate(Calendar after, Calendar before);
 
 	/**
 	 *
 	 * @param coverage
 	 * @return
 	 */
-	public Collection<Observation> getObservationsByCoverage(BoundingBox coverage);
+	public abstract Collection<Observation> getObservationsByCoverage(BoundingBox coverage);
 
 	/**
 	 *
 	 *
 	 * @param o 
 	 */
-	public void addObservation(Observation o);
+	public abstract void addObservation(Observation o);
 
 	/**
 	 *
 	 * @param o
 	 * @param reason
 	 */
-	public void reportObservation(Observation o, String reason);
+	public abstract void reportObservation(Observation o, String reason);
 
 	/**
 	 *
 	 * @param o
 	 */
-	public void deleteObservation(Observation o);
+	public abstract void deleteObservation(Observation o);
 
 	/**
 	 *
 	 * @param o
 	 */
-	public void updateObservation(Observation o);
+	public abstract void updateObservation(Observation o);
 
 	/**
 	 *
 	 * @param u
 	 */
-	public void deleteUser(User u);
+	public abstract void deleteUser(User u);
 
 	/**
 	 * 
 	 * @param u 
 	 */
-	public void updateUser(User u);
+	public abstract void updateUser(User u);
 
 	/**
 	 *
 	 * @return
 	 */
-	public Collection<User> getUserList();
+	public abstract Collection<User> getUserList();
 
 	/**
 	 *
 	 * @param u
 	 */
-	public void addUser(User u);
+	public abstract void addUser(User u);
 
 	/**
 	 *
 	 * @param mail
 	 * @return
 	 */
-	public User getUserByEmail(String mail);
+	public abstract User getUserByEmail(String mail);
 }

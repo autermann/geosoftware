@@ -32,7 +32,7 @@ import java.util.logging.SimpleFormatter;
  */
 public class Log {
 
-	private static final String filename = "log.txt";
+	private static final String filename = Configuration.get("LOG_FILE");
 	private static Logger log = null;
 	private static Filter filter = new Filter() {
 
@@ -42,7 +42,8 @@ public class Log {
 		}
 	};
 
-	private Log(){}
+	private Log() {
+	}
 
 	/**
 	 * 
@@ -50,8 +51,8 @@ public class Log {
 	 */
 	public static Logger getLogger() {
 		if (log == null) {
-			log = Logger.getLogger("de.ifgi.sloth.geosoftware");
-			log.setLevel(Level.ALL);
+			log = Logger.getLogger(Configuration.get("LOG_NAME"));
+			log.setLevel(Level.parse(Configuration.get("LOG_LEVEL")));
 			log.setFilter(filter);
 			try {
 				if (filename.endsWith("txt")) {

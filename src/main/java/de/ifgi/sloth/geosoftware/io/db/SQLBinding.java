@@ -29,12 +29,7 @@ import java.util.Collection;
  *
  * @author Christian Autermann
  */
-public class SQLBinding implements DBBinding {
-
-	@Override
-	public DBBinding getInstance() {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
+public class SQLBinding extends DBBinding {
 
 	@Override
 	public Collection<Observation> getObservations() {
