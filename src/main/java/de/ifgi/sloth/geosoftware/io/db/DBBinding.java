@@ -32,7 +32,7 @@ import java.util.Collection;
  */
 public abstract class DBBinding {
 
-	private static DBBinding binding;
+	private static DBBinding binding = null;
 
 	/**
 	 * 
@@ -43,7 +43,7 @@ public abstract class DBBinding {
 			try {
 				binding = (DBBinding) Class.forName(Configuration.get("DATABASE_INTERFACE")).newInstance();
 			} catch (Exception e) {
-				Log.getLogger().throwing(DBBinding.class.getName(), "getInstance()", e);
+				Log.throwing(e);
 				System.exit(1);
 			}
 		}

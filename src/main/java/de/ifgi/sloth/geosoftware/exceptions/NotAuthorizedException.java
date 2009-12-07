@@ -22,8 +22,24 @@ package de.ifgi.sloth.geosoftware.exceptions;
  * @author Christian Autermann
  */
 public class NotAuthorizedException extends Exception {
+
 	/**
 	 * 
 	 */
 	public static final long serialVersionUID = 0;
+
+	/**
+	 *
+	 * @param message
+	 */
+	public NotAuthorizedException(String message) {
+		super(message);
+	}
+
+	/**
+	 * 
+	 */
+	public NotAuthorizedException() {
+		super();
+	}
 }

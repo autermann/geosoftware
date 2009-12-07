@@ -38,12 +38,12 @@ public class Configuration {
 			stream = new FileInputStream(fileName);
 			props.loadFromXML(stream);
 		} catch (Exception e) {
-			Log.getLogger().throwing(Configuration.class.getName(), "Configuration()", e);
+			Log.throwing(e);
 		} finally {
 			try {
 				stream.close();
 			} catch (Exception e) {
-				Log.getLogger().throwing(Configuration.class.getName(), "Configuration()", e);
+				Log.throwing(e);
 			}
 		}
 	}
@@ -68,12 +68,12 @@ public class Configuration {
 			stream = new FileOutputStream(fileName);
 			props.storeToXML(stream, "Configuration File");
 		} catch (Exception e) {
-			Log.getLogger().throwing(Configuration.class.getName(), "put()", e);
+			Log.throwing(e);
 		} finally {
 			try {
 				stream.close();
 			} catch (Exception e) {
-				Log.getLogger().throwing(Configuration.class.getName(), "put()", e);
+				Log.throwing(e);
 			}
 		}
 

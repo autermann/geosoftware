@@ -45,11 +45,7 @@ public class Log {
 	private Log() {
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
-	public static Logger getLogger() {
+	static {
 		if (log == null) {
 			log = Logger.getLogger(Configuration.get("LOG_NAME"));
 			log.setLevel(Level.parse(Configuration.get("LOG_LEVEL")));
@@ -68,7 +64,51 @@ public class Log {
 				e.printStackTrace();
 			}
 		}
+		log.throwing(filename, filename, null);
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public static Logger getLogger() {
 		return log;
+	}
+
+	/**
+	 * 
+	 * @param t
+	 */
+	public static void throwing(Throwable t) {
+		StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
+		log.throwing(stackTrace[1].getClassName(), stackTrace[1].getMethodName(), t);
+
+	}
+
+	/**
+	 * 
+	 */
+	public static void entering() {
+		StackTraceElement stackTrace = getCaller();
+		log.entering(stackTrace.getClassName(), stackTrace.getMethodName());
+	}
+
+	/**
+	 * 
+	 */
+	public static void exiting() {
+		StackTraceElement stackTrace = getCaller();
+		log.exiting(stackTrace.getClassName(), stackTrace.getMethodName());
+	}
+
+	private static StackTraceElement getCaller() {
+		StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
+		if (stackTrace.length >= 2) {
+			return stackTrace[2];
+		} else {
+			return null;
+		}
+
 	}
 }
 

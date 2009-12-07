@@ -24,4 +24,8 @@ package de.ifgi.sloth.geosoftware.io.wms;
  */
 public class OSMBinding {
 
+	public OSMBinding(){
+		
+	}
+
 }

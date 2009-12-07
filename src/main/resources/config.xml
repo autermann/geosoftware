@@ -5,6 +5,7 @@
 	<entry key="LOG_NAME">de.ifgi.sloth.geosoftware</entry>
 	<entry key="LOG_LEVEL">ALL</entry>
 	<entry key="DATABASE_INTERFACE">de.ifgi.sloth.geosoftware.io.db.SQLBinding</entry>
+	<entry key="WMS_INTERFACE">de.ifgi.sloth.geosoftware.io.wms.OSMBinding</entry>
 	<entry key="SQL_HOST">localhost</entry>
 	<entry key="SQL_PORT">3306</entry>
 	<entry key="SQL_USERNAME">test</entry>

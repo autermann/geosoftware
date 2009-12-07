@@ -15,13 +15,36 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package de.ifgi.sloth.geosoftware.io.wms;
+
+import de.ifgi.sloth.geosoftware.data.BoundingBox;
+import de.ifgi.sloth.geosoftware.data.Map;
+import de.ifgi.sloth.geosoftware.util.Log;
+import de.ifgi.sloth.geosoftware.util.Configuration;
 
 /**
  *
  * @author Christian Autermann
  */
-public interface WMSBinding {
+public abstract class WMSBinding {
+	private static WMSBinding binding = null;
 
+	public static WMSBinding getInstance() {
+		if (binding == null) {
+			try {
+				binding = (WMSBinding) Class.forName(Configuration.get("WMS_INTERFACE")).newInstance();
+			} catch (Exception e) {
+				Log.throwing(e);
+				System.exit(1);
+			}
+		}
+		return binding;
+	}
+
+	/**
+	 * 
+	 * @param bb
+	 * @return
+	 */
+	public abstract Map getMap(BoundingBox bb);
 }

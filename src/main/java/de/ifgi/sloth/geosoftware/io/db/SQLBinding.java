@@ -31,6 +31,13 @@ import java.util.Collection;
  */
 public class SQLBinding extends DBBinding {
 
+	/**
+	 * 
+	 */
+	public SQLBinding(){
+		
+	}
+
 	@Override
 	public Collection<Observation> getObservations() {
 		throw new UnsupportedOperationException("Not supported yet.");

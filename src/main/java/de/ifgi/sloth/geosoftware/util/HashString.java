@@ -31,13 +31,13 @@ public final class HashString {
 	 * @param plain
 	 * @return
 	 */
-	public static synchronized String hash(String plain) {
+	public static String hash(String plain) {
 		MessageDigest md = null;
 		try {
 			md = MessageDigest.getInstance("SHA");
 			md.update(plain.getBytes("UTF-8"));
 		} catch (Exception e) {
-			Log.getLogger().throwing(HashString.class.getName(), "hash()", e);
+			Log.throwing(e);
 		}
 		return (new BASE64Encoder()).encode(md.digest());
 	}
