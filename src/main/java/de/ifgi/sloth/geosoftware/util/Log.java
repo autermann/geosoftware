@@ -42,8 +42,7 @@ public class Log {
 		}
 	};
 
-	private Log() {
-	}
+	private Log() {}
 
 	static {
 		if (log == null) {
@@ -69,14 +68,6 @@ public class Log {
 
 	/**
 	 * 
-	 * @return
-	 */
-	public static Logger getLogger() {
-		return log;
-	}
-
-	/**
-	 * 
 	 * @param t
 	 */
 	public static void throwing(Throwable t) {
@@ -87,10 +78,11 @@ public class Log {
 
 	/**
 	 * 
+	 * @param params
 	 */
-	public static void entering() {
+	public static void entering(Object... params) {
 		StackTraceElement stackTrace = getCaller();
-		log.entering(stackTrace.getClassName(), stackTrace.getMethodName());
+		log.entering(stackTrace.getClassName(), stackTrace.getMethodName(), params);
 	}
 
 	/**
@@ -101,14 +93,106 @@ public class Log {
 		log.exiting(stackTrace.getClassName(), stackTrace.getMethodName());
 	}
 
+	/**
+	 *
+	 * @param result 
+	 */
+	public static void exiting(Object result) {
+		StackTraceElement stackTrace = getCaller();
+		log.exiting(stackTrace.getClassName(), stackTrace.getMethodName(), result);
+	}
+
+	/**
+	 * 
+	 * @param msg
+	 */
+	public static void fine(String msg) {
+		LogRecord record = new LogRecord(Level.FINE, msg);
+		StackTraceElement e = getCaller();
+		record.setSourceClassName(e.getClassName());
+		record.setSourceMethodName(e.getMethodName());
+		log.log(record);
+	}
+
+	/**
+	 *
+	 * @param msg
+	 */
+	public static void finer(String msg) {
+		LogRecord record = new LogRecord(Level.FINER, msg);
+		StackTraceElement e = getCaller();
+		record.setSourceClassName(e.getClassName());
+		record.setSourceMethodName(e.getMethodName());
+		log.log(record);
+	}
+
+	/**
+	 * 
+	 * @param msg
+	 */
+	public static void finest(String msg) {
+		LogRecord record = new LogRecord(Level.FINEST, msg);
+		StackTraceElement e = getCaller();
+		record.setSourceClassName(e.getClassName());
+		record.setSourceMethodName(e.getMethodName());
+		log.log(record);
+	}
+
+	/**
+	 *
+	 * @param msg
+	 */
+	public static void info(String msg) {
+		LogRecord record = new LogRecord(Level.INFO, msg);
+		StackTraceElement e = getCaller();
+		record.setSourceClassName(e.getClassName());
+		record.setSourceMethodName(e.getMethodName());
+		log.log(record);
+	}
+
+	/**
+	 * 
+	 * @param msg
+	 */
+	public static void severe(String msg) {
+		LogRecord record = new LogRecord(Level.SEVERE, msg);
+		StackTraceElement e = getCaller();
+		record.setSourceClassName(e.getClassName());
+		record.setSourceMethodName(e.getMethodName());
+		log.log(record);
+	}
+
+	/**
+	 *
+	 * @param msg
+	 */
+	public static void config(String msg) {
+		LogRecord record = new LogRecord(Level.CONFIG, msg);
+		StackTraceElement e = getCaller();
+		record.setSourceClassName(e.getClassName());
+		record.setSourceMethodName(e.getMethodName());
+		log.log(record);
+	}
+
+	/**
+	 *
+	 * @param msg
+	 */
+	public static void warning(String msg) {
+		LogRecord record = new LogRecord(Level.SEVERE, msg);
+		StackTraceElement e = getCaller();
+		record.setSourceClassName(e.getClassName());
+		record.setSourceMethodName(e.getMethodName());
+		log.log(record);
+	}
+
 	private static StackTraceElement getCaller() {
 		StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
-		if (stackTrace.length >= 2) {
-			return stackTrace[2];
+		if (stackTrace.length >= 3) {
+			return stackTrace[3];
 		} else {
 			return null;
 		}
-
 	}
 }
 
