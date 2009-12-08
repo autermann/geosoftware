@@ -1,0 +1,17 @@
+1. install Eclipse IDE for Java EE Developers from http://www.eclipse.org/downloads/
+2. install m2eclipse plugin:
+	Update site: http://m2eclipse.sonatype.org/update-dev/
+3. install subclipse plugin:
+	Update site: http://subclipse.tigris.org/update_1.6.x
+3. download and untar to any folder:
+	http://apache.imsam.info/tomcat/tomcat-6/v6.0.20/bin/apache-tomcat-6.0.20.tar.gz
+4. start eclipse; click on 
+	File -> New -> Other -> Server -> Server -> Next -> Apache -> Tomcat v6.0 Server -> Next 
+	-> Browse -> choose the unpacked apache-tomcat-6.0.20 directory -> Finish
+5. click on:
+	File -> New -> Other -> SVN -> Checkout Projects from SVN -> Next -> Next 
+	-> enter https://geosoftware.googlecode.com/svn/trunk/src 
+	-> enter your username and your password found here: https://code.google.com/hosting/settings
+	-> check Save Password -> OK -> select top folder -> Finish
+
+
