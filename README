@@ -1,3 +1,4 @@
+Configuring Eclipse/Tomcat and checkout project from svn:
 1. install Eclipse IDE for Java EE Developers from http://www.eclipse.org/downloads/
 2. install m2eclipse plugin:
 	Update site: http://m2eclipse.sonatype.org/update-dev/
@@ -10,8 +11,19 @@
 	-> Browse -> choose the unpacked apache-tomcat-6.0.20 directory -> Finish
 5. click on:
 	File -> New -> Other -> SVN -> Checkout Projects from SVN -> Next -> Next 
-	-> enter https://geosoftware.googlecode.com/svn/trunk/src 
+	-> enter https://geosoftware.googlecode.com/svn/
 	-> enter your username and your password found here: https://code.google.com/hosting/settings
-	-> check Save Password -> OK -> select top folder -> Finish
-
-
+	-> check Save Password -> OK -> select folder trunk/eclipse -> Finish
+6. right-click on Sloth -> Run As -> Run on Server -> select localhost/Tomcat v6.0
+	-> check Always use this server when running this project 
+	-> Next -> Finish
+7. Tada!!!
+#############################################################################################################
+Commiting changes:
+1. Change what you want
+2. Select Window -> Show View -> Other -> Team -> Synchronize -> No
+3. In the "Synchronize" view click on the "Synchronize Workspace"-symbol -> SVN -> Next 
+	-> check Sloth-project -> Finish
+4. To get latest changes click on "Update All Incoming Changes"
+5. To commit your changes click on "Commit All Outgoing Changes" and enter a comment
+6. To refresh changes click on "Syncronize SVN"
