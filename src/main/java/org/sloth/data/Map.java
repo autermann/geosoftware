@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth,
- * 					 Christoph Fendrich, Christian Paluschek
+ *                     Christoph Fendrich, Christian Paluschek
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,31 +15,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.ifgi.sloth.geosoftware.exceptions;
+
+package org.sloth.data;
 
 /**
  *
  * @author Christian Autermann
  */
-public class NotAuthorizedException extends Exception {
+public class Map {
 
-	/**
-	 * 
-	 */
-	public static final long serialVersionUID = 0;
-
-	/**
-	 *
-	 * @param message
-	 */
-	public NotAuthorizedException(String message) {
-		super(message);
-	}
-
-	/**
-	 * 
-	 */
-	public NotAuthorizedException() {
-		super();
-	}
 }

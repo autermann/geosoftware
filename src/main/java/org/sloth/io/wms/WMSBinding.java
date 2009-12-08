@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth,
- *                     Christoph Fendrich, Christian Paluschek
+ * 					 Christoph Fendrich, Christian Paluschek
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,13 +15,36 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+package org.sloth.io.wms;
 
-package de.ifgi.sloth.geosoftware.data;
+import org.sloth.data.BoundingBox;
+import org.sloth.data.Map;
+import org.sloth.util.Log;
+import org.sloth.util.Configuration;
 
 /**
  *
  * @author Christian Autermann
  */
-public class MapTile {
+public abstract class WMSBinding {
+	private static WMSBinding binding = null;
 
+	public static WMSBinding getInstance() {
+		if (binding == null) {
+			try {
+				binding = (WMSBinding) Class.forName(Configuration.get("WMS_INTERFACE")).newInstance();
+			} catch (Exception e) {
+				Log.throwing(e);
+				System.exit(1);
+			}
+		}
+		return binding;
+	}
+
+	/**
+	 * 
+	 * @param bb
+	 * @return
+	 */
+	public abstract Map getMap(BoundingBox bb);
 }

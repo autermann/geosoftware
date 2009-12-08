@@ -8,6 +8,11 @@
         <title>JSP Page</title>
     </head>
     <body>
-		Das wird einmal unser Web-Frontend ;-)
+		<div id="header">
+			header
+		</div>
+		<p id="greeting">
+			Das wird einmal unser Web-Frontend ;-)
+		</p>
     </body>
 </html>

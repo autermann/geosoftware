@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth,
- * 					 Christoph Fendrich, Christian Paluschek
+ *                     Christoph Fendrich, Christian Paluschek
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,16 +16,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.ifgi.sloth.geosoftware.io.wms;
+package org.sloth.data;
 
 /**
  *
  * @author Christian Autermann
  */
-public class OSMBinding {
-
-	public OSMBinding(){
-		
-	}
+public class MapTile {
 
 }

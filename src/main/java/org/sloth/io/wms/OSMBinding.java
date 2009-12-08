@@ -16,51 +16,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.ifgi.sloth.geosoftware.data;
+package org.sloth.io.wms;
 
 /**
  *
  * @author Christian Autermann
  */
-public class ObservationCategorie {
-	private String name, description;
+public class OSMBinding {
 
-	/**
-	 * 
-	 * @param name
-	 * @param description
-	 */
-	public ObservationCategorie(String name, String description){
-		this.name = name;
-		this.description = description;
-	}
-
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	/**
-	 * @return the description
-	 */
-	public String getDescription() {
-		return description;
-	}
-
-	/**
-	 * @param description the description to set
-	 */
-	public void setDescription(String description) {
-		this.description = description;
+	public OSMBinding(){
+		
 	}
 
 }

@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.ifgi.sloth.geosoftware.data;
+package org.sloth.data;
 
 import java.util.Calendar;
 

@@ -1,10 +1,27 @@
 body {
-	background-color:black;
-	color:silver;
+	background-color:white;
 	font-family:helvetica;
+}
+
+
+p#greeting{
+	font-variant:small-caps;
+	color:navy;
 	font-size:2em;
 	text-align:center;
 	padding:1em;
 }
-	
+
+#header{
+	margin:0;
+	color:white;
+	position:absolute;
+	top:0;
+	left:0;
+	padding:5px 5px 5px 5px;
+	width:50%;
+	height:1em;
+	background:gray;
+	border-bottom:solid 1px black;
+}
 

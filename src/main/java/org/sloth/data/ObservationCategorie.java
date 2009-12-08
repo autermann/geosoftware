@@ -15,32 +15,52 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.ifgi.sloth.geosoftware.util;
 
-import java.security.MessageDigest;
-import sun.misc.BASE64Encoder;
+package org.sloth.data;
 
 /**
  *
  * @author Christian Autermann
  */
-public final class HashString {
+public class ObservationCategorie {
+	private String name, description;
 
 	/**
 	 * 
-	 * @param plain
-	 * @return
+	 * @param name
+	 * @param description
 	 */
-	public static String hash(String plain) {
-		MessageDigest md = null;
-		try {
-			md = MessageDigest.getInstance("SHA");
-			md.update(plain.getBytes("UTF-8"));
-		} catch (Exception e) {
-			Log.throwing(e);
-		}
-		return (new BASE64Encoder()).encode(md.digest());
+	public ObservationCategorie(String name, String description){
+		this.name = name;
+		this.description = description;
 	}
 
-	private HashString() {}
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * @param description the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 }

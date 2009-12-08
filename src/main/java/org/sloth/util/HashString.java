@@ -15,24 +15,32 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+package org.sloth.util;
 
-package de.ifgi.sloth.geosoftware.core;
-
-import de.ifgi.sloth.geosoftware.data.BoundingBox;
-import de.ifgi.sloth.geosoftware.data.Map;
+import java.security.MessageDigest;
+import sun.misc.BASE64Encoder;
 
 /**
  *
  * @author Christian Autermann
  */
-public class MapManagement {
+public final class HashString {
 
 	/**
 	 * 
-	 * @param coverage
+	 * @param plain
 	 * @return
 	 */
-	public Map getMap(BoundingBox coverage){
-		return null;
+	public static String hash(String plain) {
+		MessageDigest md = null;
+		try {
+			md = MessageDigest.getInstance("SHA");
+			md.update(plain.getBytes("UTF-8"));
+		} catch (Exception e) {
+			Log.throwing(e);
+		}
+		return (new BASE64Encoder()).encode(md.digest());
 	}
+
+	private HashString() {}
 }

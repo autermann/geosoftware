@@ -15,36 +15,31 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.ifgi.sloth.geosoftware.io.wms;
-
-import de.ifgi.sloth.geosoftware.data.BoundingBox;
-import de.ifgi.sloth.geosoftware.data.Map;
-import de.ifgi.sloth.geosoftware.util.Log;
-import de.ifgi.sloth.geosoftware.util.Configuration;
+package org.sloth.exceptions;
 
 /**
  *
  * @author Christian Autermann
  */
-public abstract class WMSBinding {
-	private static WMSBinding binding = null;
+public class NotAuthorizedException extends Exception {
 
-	public static WMSBinding getInstance() {
-		if (binding == null) {
-			try {
-				binding = (WMSBinding) Class.forName(Configuration.get("WMS_INTERFACE")).newInstance();
-			} catch (Exception e) {
-				Log.throwing(e);
-				System.exit(1);
-			}
-		}
-		return binding;
+	/**
+	 * 
+	 */
+	public static final long serialVersionUID = 0;
+
+	/**
+	 *
+	 * @param message
+	 */
+	public NotAuthorizedException(String message) {
+		super(message);
 	}
 
 	/**
 	 * 
-	 * @param bb
-	 * @return
 	 */
-	public abstract Map getMap(BoundingBox bb);
+	public NotAuthorizedException() {
+		super();
+	}
 }

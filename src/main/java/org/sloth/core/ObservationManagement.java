@@ -15,14 +15,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.ifgi.sloth.geosoftware.core;
+package org.sloth.core;
 
-import de.ifgi.sloth.geosoftware.data.BoundingBox;
-import de.ifgi.sloth.geosoftware.data.Observation;
-import de.ifgi.sloth.geosoftware.data.ObservationCategorie;
-import de.ifgi.sloth.geosoftware.data.User;
-import de.ifgi.sloth.geosoftware.exceptions.NotAuthorizedException;
-import de.ifgi.sloth.geosoftware.frontend.Session;
+import org.sloth.data.BoundingBox;
+import org.sloth.data.Observation;
+import org.sloth.data.ObservationCategorie;
+import org.sloth.data.User;
+import org.sloth.exceptions.NotAuthorizedException;
+import org.sloth.frontend.Session;
 import java.util.Calendar;
 import java.util.Collection;
 
