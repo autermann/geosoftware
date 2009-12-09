@@ -27,7 +27,7 @@ import java.util.Properties;
  */
 public class Configuration {
 
-	private static final String fileName = "/resources/config.xml";
+	private static final String fileName = "/config.xml";
 	private static Properties props = new Properties();
 
 	static {
