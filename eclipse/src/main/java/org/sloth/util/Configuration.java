@@ -17,8 +17,8 @@
  */
 package org.sloth.util;
 
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.Properties;
 
 /**
@@ -27,15 +27,13 @@ import java.util.Properties;
  */
 public class Configuration {
 
-	private static final String fileName = "config.xml";
+	private static final String fileName = "/resources/config.xml";
 	private static Properties props = new Properties();
 
-	private Configuration() {}
-
 	static {
-		FileInputStream stream = null;
+		InputStream stream = null;
 		try {
-			stream = new FileInputStream(fileName);
+			stream = Configuration.class.getResourceAsStream(fileName);
 			props.loadFromXML(stream);
 		} catch (Exception e) {
 			Log.throwing(e);

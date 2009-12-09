@@ -44,7 +44,7 @@ public class Log {
 
 	private Log() {}
 
-	static {
+	private static void getLogger() {
 		if (log == null) {
 			log = Logger.getLogger(Configuration.get("LOG_NAME"));
 			log.setLevel(Level.parse(Configuration.get("LOG_LEVEL")));
@@ -63,7 +63,6 @@ public class Log {
 				e.printStackTrace();
 			}
 		}
-		log.throwing(filename, filename, null);
 	}
 
 	/**
@@ -72,6 +71,7 @@ public class Log {
 	 */
 	public static void throwing(Throwable t) {
 		StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
+		getLogger();
 		log.throwing(stackTrace[1].getClassName(), stackTrace[1].getMethodName(), t);
 
 	}
@@ -82,6 +82,7 @@ public class Log {
 	 */
 	public static void entering(Object... params) {
 		StackTraceElement stackTrace = getCaller();
+		getLogger();
 		log.entering(stackTrace.getClassName(), stackTrace.getMethodName(), params);
 	}
 
@@ -90,6 +91,7 @@ public class Log {
 	 */
 	public static void exiting() {
 		StackTraceElement stackTrace = getCaller();
+		getLogger();
 		log.exiting(stackTrace.getClassName(), stackTrace.getMethodName());
 	}
 
@@ -98,7 +100,9 @@ public class Log {
 	 * @param result 
 	 */
 	public static void exiting(Object result) {
+		
 		StackTraceElement stackTrace = getCaller();
+		getLogger();
 		log.exiting(stackTrace.getClassName(), stackTrace.getMethodName(), result);
 	}
 
@@ -111,6 +115,7 @@ public class Log {
 		StackTraceElement e = getCaller();
 		record.setSourceClassName(e.getClassName());
 		record.setSourceMethodName(e.getMethodName());
+		getLogger();
 		log.log(record);
 	}
 
@@ -123,6 +128,7 @@ public class Log {
 		StackTraceElement e = getCaller();
 		record.setSourceClassName(e.getClassName());
 		record.setSourceMethodName(e.getMethodName());
+		getLogger();
 		log.log(record);
 	}
 
@@ -135,6 +141,7 @@ public class Log {
 		StackTraceElement e = getCaller();
 		record.setSourceClassName(e.getClassName());
 		record.setSourceMethodName(e.getMethodName());
+		getLogger();
 		log.log(record);
 	}
 
@@ -147,6 +154,7 @@ public class Log {
 		StackTraceElement e = getCaller();
 		record.setSourceClassName(e.getClassName());
 		record.setSourceMethodName(e.getMethodName());
+		getLogger();
 		log.log(record);
 	}
 
@@ -159,6 +167,7 @@ public class Log {
 		StackTraceElement e = getCaller();
 		record.setSourceClassName(e.getClassName());
 		record.setSourceMethodName(e.getMethodName());
+		getLogger();
 		log.log(record);
 	}
 
@@ -171,6 +180,7 @@ public class Log {
 		StackTraceElement e = getCaller();
 		record.setSourceClassName(e.getClassName());
 		record.setSourceMethodName(e.getMethodName());
+		getLogger();
 		log.log(record);
 	}
 
@@ -183,6 +193,7 @@ public class Log {
 		StackTraceElement e = getCaller();
 		record.setSourceClassName(e.getClassName());
 		record.setSourceMethodName(e.getMethodName());
+		getLogger();
 		log.log(record);
 	}
 
