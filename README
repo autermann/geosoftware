@@ -13,12 +13,16 @@ Configuring Eclipse/Tomcat and checkout project from svn:
 	File -> New -> Other -> SVN -> Checkout Projects from SVN -> Next -> Next 
 	-> enter https://geosoftware.googlecode.com/svn/
 	-> enter your username and your password found here: https://code.google.com/hosting/settings
-	-> check Save Password -> OK -> select folder trunk/eclipse -> Finish
+	-> check Save Password -> OK -> select folder trunk/ -> Finish
 6. right-click on Sloth -> Run As -> Run on Server -> select localhost/Tomcat v6.0
 	-> check Always use this server when running this project 
 	-> Next -> Finish
 7. Tada!!!
+
+You can also simply open the trunk folder with Netbeans...
+
 #############################################################################################################
+
 Commiting changes:
 1. Change what you want
 2. Select Window -> Show View -> Other -> Team -> Synchronize -> No
