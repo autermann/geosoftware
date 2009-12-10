@@ -61,21 +61,11 @@ div, p, td {font-family: Tahoma, Verdana, Arial, MS Sans Serif; color: black; fo
           <td class="fontSB" style="border-bottom: 1px solid #606060" width="1%">AutoInc</td>
         </tr>
         <tr>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">sloth_obsTable_sloth_obsTypes_obsTypeID</td>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">INT</td>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0"><b>sloth_observations_obsID</b></td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0"><b>INTEGER</b></td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">PK</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">NN</td>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
-        </tr>
-        <tr>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">sloth_obsTable_obsID</td>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">INT</td>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">NN</td>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">UNSIGNED </td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
@@ -113,9 +103,14 @@ div, p, td {font-family: Tahoma, Verdana, Arial, MS Sans Serif; color: black; fo
           <td class="fontSB" style="border-bottom: 1px solid #606060" width="15%">Columns</td>
         </tr>
         <tr>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0" valign="top">PRIMARY</td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0" valign="top">PRIMARY</td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">sloth_observations_obsID<br></td>
+        </tr>
+        <tr>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0" valign="top">sloth_obsCoordinates_FKIndex1</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0" valign="top">Index</td>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">sloth_obsTable_obsID<br>sloth_obsTable_sloth_obsTypes_obsTypeID<br></td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">sloth_observations_obsID<br></td>
         </tr>
 
       </table>
@@ -127,7 +122,7 @@ div, p, td {font-family: Tahoma, Verdana, Arial, MS Sans Serif; color: black; fo
 <br>
 <table cellpadding="2" cellspacing="0" border="0" width="100%" bgcolor="#e4efff">
   <tr>
-    <td class="fontX">sloth_obsTable
+    <td class="fontX">sloth_observations
      <font class="fontS"><br></font></td>
   </tr>
   <tr>
@@ -145,27 +140,27 @@ div, p, td {font-family: Tahoma, Verdana, Arial, MS Sans Serif; color: black; fo
         </tr>
         <tr>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0"><b>obsID</b></td>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0"><b>INT</b></td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0"><b>INTEGER</b></td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">PK</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">NN</td>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">UNSIGNED </td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">AI</td>
         </tr>
         <tr>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0"><b>sloth_obsTypes_obsTypeID</b></td>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0"><b>INT</b></td>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">PK</td>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">NN</td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">sloth_obsTypes_obsTypeID</td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">INTEGER</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">NN</td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">UNSIGNED </td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
         </tr>
         <tr>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">obsName</td>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">LINESTRING</td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">VARCHAR(45)</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">NN</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
@@ -175,7 +170,7 @@ div, p, td {font-family: Tahoma, Verdana, Arial, MS Sans Serif; color: black; fo
         </tr>
         <tr>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">obsDescription</td>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">LONGTEXT</td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">VARCHAR(1000)</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">NN</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
@@ -218,10 +213,10 @@ div, p, td {font-family: Tahoma, Verdana, Arial, MS Sans Serif; color: black; fo
         <tr>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0" valign="top">PRIMARY</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0" valign="top">PRIMARY</td>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">obsID<br>sloth_obsTypes_obsTypeID<br></td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">obsID<br></td>
         </tr>
         <tr>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0" valign="top">sloth_obsTable_FKIndex1</td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0" valign="top">sloth_obsTable_FKIndex2</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0" valign="top">Index</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">sloth_obsTypes_obsTypeID<br></td>
         </tr>
@@ -253,17 +248,17 @@ div, p, td {font-family: Tahoma, Verdana, Arial, MS Sans Serif; color: black; fo
         </tr>
         <tr>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0"><b>obsTypeID</b></td>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0"><b>INT</b></td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0"><b>INTEGER</b></td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">PK</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">NN</td>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">UNSIGNED </td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">AI</td>
         </tr>
         <tr>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">obsTypeName</td>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">LINESTRING</td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">VARCHAR(45)</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">NN</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
@@ -273,7 +268,7 @@ div, p, td {font-family: Tahoma, Verdana, Arial, MS Sans Serif; color: black; fo
         </tr>
         <tr>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">obsTypeDesc</td>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">LONGTEXT</td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">VARCHAR(100)</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">NN</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
@@ -308,7 +303,7 @@ div, p, td {font-family: Tahoma, Verdana, Arial, MS Sans Serif; color: black; fo
 <br>
 <table cellpadding="2" cellspacing="0" border="0" width="100%" bgcolor="#e4efff">
   <tr>
-    <td class="fontX">sloth_userAccesRights
+    <td class="fontX">sloth_userAccessRights
      <font class="fontS"><br></font></td>
   </tr>
   <tr>
@@ -326,17 +321,17 @@ div, p, td {font-family: Tahoma, Verdana, Arial, MS Sans Serif; color: black; fo
         </tr>
         <tr>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0"><b>uarID</b></td>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0"><b>INT</b></td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0"><b>INTEGER</b></td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">PK</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">NN</td>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">UNSIGNED </td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">AI</td>
         </tr>
         <tr>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">uarName</td>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">LINESTRING</td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">VARCHAR(20)</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">NN</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
@@ -346,7 +341,7 @@ div, p, td {font-family: Tahoma, Verdana, Arial, MS Sans Serif; color: black; fo
         </tr>
         <tr>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">uarDesc</td>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">LONGTEXT</td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">VARCHAR(100)</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
@@ -381,7 +376,7 @@ div, p, td {font-family: Tahoma, Verdana, Arial, MS Sans Serif; color: black; fo
 <br>
 <table cellpadding="2" cellspacing="0" border="0" width="100%" bgcolor="#e4efff">
   <tr>
-    <td class="fontX">sloth_userTable
+    <td class="fontX">sloth_users
      <font class="fontS"><br></font></td>
   </tr>
   <tr>
@@ -399,27 +394,27 @@ div, p, td {font-family: Tahoma, Verdana, Arial, MS Sans Serif; color: black; fo
         </tr>
         <tr>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0"><b>userID</b></td>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0"><b>INT</b></td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0"><b>INTEGER</b></td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">PK</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">NN</td>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">UNSIGNED </td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">AI</td>
         </tr>
         <tr>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">sloth_userAccesRights_uarID</td>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">INT</td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">sloth_userAccessRights_uarID</td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">INTEGER</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">NN</td>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">UNSIGNED </td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
         </tr>
         <tr>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">userLastName</td>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">LINESTRING</td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">VARCHAR(45)</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">NN</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
@@ -429,7 +424,7 @@ div, p, td {font-family: Tahoma, Verdana, Arial, MS Sans Serif; color: black; fo
         </tr>
         <tr>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">userFirstName</td>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">LINESTRING</td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">VARCHAR(45)</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">NN</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
@@ -449,7 +444,7 @@ div, p, td {font-family: Tahoma, Verdana, Arial, MS Sans Serif; color: black; fo
         </tr>
         <tr>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">userHashedPwd</td>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">LONGTEXT</td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">CHAR(100)</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">NN</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
@@ -459,7 +454,7 @@ div, p, td {font-family: Tahoma, Verdana, Arial, MS Sans Serif; color: black; fo
         </tr>
         <tr>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">userEmail</td>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">LINESTRING</td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">CHAR(60)</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">NN</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
@@ -485,9 +480,82 @@ div, p, td {font-family: Tahoma, Verdana, Arial, MS Sans Serif; color: black; fo
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0">userID<br></td>
         </tr>
         <tr>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0" valign="top">sloth_userTable_FKIndex1</td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0" valign="top">sloth_users_FKIndex1</td>
           <td class="fontS" style="border-bottom: 1px solid #C0C0C0" valign="top">Index</td>
-          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">sloth_userAccesRights_uarID<br></td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">sloth_userAccessRights_uarID<br></td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+
+</table>
+<br>
+<br>
+<table cellpadding="2" cellspacing="0" border="0" width="100%" bgcolor="#e4efff">
+  <tr>
+    <td class="fontX">sloth_usrobs
+     <font class="fontS"><br>In dieser Tabelle werden die Nutzer - Observation Zuordnungnen abegelegt.<br><br>Verbindungen bestehen zu:<br><br>Observations<br>Users</font></td>
+  </tr>
+  <tr>
+    <td>
+      <table cellpadding="2" cellspacing="0" border="0" width="100%" bgcolor="#d0dfff">
+        <tr>
+          <td class="fontSB" style="border-bottom: 1px solid #606060" width="15%">ColumnName</td>
+          <td class="fontSB" style="border-bottom: 1px solid #606060" width="15%">DataType</td>
+          <td class="fontSB" style="border-bottom: 1px solid #606060" width="1%">PrimaryKey&nbsp;&nbsp;</td>
+          <td class="fontSB" style="border-bottom: 1px solid #606060" width="1%">NotNull&nbsp;&nbsp;</td>
+          <td class="fontSB" style="border-bottom: 1px solid #606060" width="1%">Flags</td>
+          <td class="fontSB" style="border-bottom: 1px solid #606060" width="15%">Default Value</td>
+          <td class="fontSB" style="border-bottom: 1px solid #606060" width="20%">Comment</td>
+          <td class="fontSB" style="border-bottom: 1px solid #606060" width="1%">AutoInc</td>
+        </tr>
+        <tr>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0"><b>sloth_users_userID</b></td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0"><b>INTEGER</b></td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">PK</td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">NN</td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">UNSIGNED </td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
+        </tr>
+        <tr>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0"><b>sloth_observations_obsID</b></td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0"><b>INTEGER</b></td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">PK</td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">NN</td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">UNSIGNED </td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">&nbsp;</td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td class="fontB">
+      <table cellpadding="2" cellspacing="0" border="0" width="100%" bgcolor="#d8e6ff">
+        <tr>
+          <td class="fontSB" style="border-bottom: 1px solid #606060" width="15%">IndexName</td>
+          <td class="fontSB" style="border-bottom: 1px solid #606060" width="15%">IndexType</td>
+          <td class="fontSB" style="border-bottom: 1px solid #606060" width="15%">Columns</td>
+        </tr>
+        <tr>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0" valign="top">PRIMARY</td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0" valign="top">PRIMARY</td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">sloth_users_userID<br>sloth_observations_obsID<br></td>
+        </tr>
+        <tr>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0" valign="top">sloth_usrobs_FKIndex1</td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0" valign="top">Index</td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">sloth_users_userID<br></td>
+        </tr>
+        <tr>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0" valign="top">sloth_usrobs_FKIndex2</td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0" valign="top">Index</td>
+          <td class="fontS" style="border-bottom: 1px solid #C0C0C0">sloth_observations_obsID<br></td>
         </tr>
 
       </table>

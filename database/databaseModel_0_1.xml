@@ -1,7 +1,7 @@
 <?xml version="1.0" standalone="yes" ?>
 <DBMODEL Version="4.0">
 <SETTINGS>
-<GLOBALSETTINGS ModelName="databaseModel_0_1" IDModel="0" IDVersion="0" VersionStr="1.0.0.0" Comments="" UseVersionHistroy="1" AutoIncVersion="1" DatabaseType="MySQL" ZoomFac="100.00" XPos="0" YPos="0" DefaultDataType="5" DefaultTablePrefix="0" DefSaveDBConn="" DefSyncDBConn="local" DefQueryDBConn="" Printer="" HPageCount="4.0" PageAspectRatio="1.440892512336408" PageOrientation="1" PageFormat="A4 (210x297 mm, 8.26x11.7 inches)" SelectedPages="" UsePositionGrid="0" PositionGridX="20" PositionGridY="20" TableNameInRefs="1" DefaultTableType="0" ActivateRefDefForNewRelations="1" FKPrefix="" FKPostfix="" CreateFKRefDefIndex="1" DBQuoteCharacter="`" CreateSQLforLinkedObjects="0" DefModelFont="Tahoma" CanvasWidth="4096" CanvasHeight="2842" />
+<GLOBALSETTINGS ModelName="databaseModel_0_1" IDModel="0" IDVersion="0" VersionStr="1.0.0.0" Comments="" UseVersionHistroy="1" AutoIncVersion="1" DatabaseType="MySQL" ZoomFac="100.00" XPos="0" YPos="0" DefaultDataType="5" DefaultTablePrefix="0" DefSaveDBConn="" DefSyncDBConn="sloth" DefQueryDBConn="" Printer="" HPageCount="4.0" PageAspectRatio="1.440892512336408" PageOrientation="1" PageFormat="A4 (210x297 mm, 8.26x11.7 inches)" SelectedPages="" UsePositionGrid="0" PositionGridX="20" PositionGridY="20" TableNameInRefs="1" DefaultTableType="0" ActivateRefDefForNewRelations="1" FKPrefix="" FKPostfix="" CreateFKRefDefIndex="1" DBQuoteCharacter="`" CreateSQLforLinkedObjects="0" DefModelFont="Tahoma" CanvasWidth="4096" CanvasHeight="2842" />
 <DATATYPEGROUPS>
 <DATATYPEGROUP Name="Numeric Types" Icon="1" />
 <DATATYPEGROUP Name="Date and Time Types" Icon="2" />
@@ -258,45 +258,54 @@
 </SETTINGS>
 <METADATA>
 <REGIONS>
+<REGION ID="1303" RegionName="Observations" XPos="685" YPos="0" Width="325" Height="599" RegionColor="1" TablePrefix="0" TableType="0" OverwriteTablePrefix="0" OverwriteTableType="0" Comments="" IsLinkedObject="0" IDLinkedModel="-1" Obj_id_Linked="-1" OrderPos="13" />
+<REGION ID="1305" RegionName="Users" XPos="12" YPos="0" Width="308" Height="604" RegionColor="3" TablePrefix="0" TableType="0" OverwriteTablePrefix="0" OverwriteTableType="0" Comments="" IsLinkedObject="0" IDLinkedModel="-1" Obj_id_Linked="-1" OrderPos="14" />
 </REGIONS>
 <TABLES>
-<TABLE ID="1000" Tablename="sloth_userTable" PrevTableName="Table_01" XPos="50" YPos="97" TableType="0" TablePrefix="0" nmTable="0" Temporary="0" UseStandardInserts="0" StandardInserts="\n" TableOptions="DelayKeyTblUpdates=0\nPackKeys=0\nRowChecksum=0\nRowFormat=0\nUseRaid=0\nRaidType=0\n" Comments="" Collapsed="0" IsLinkedObject="0" IDLinkedModel="-1" Obj_id_Linked="-1" OrderPos="2" >
+<TABLE ID="1000" Tablename="sloth_users" PrevTableName="Table_01" XPos="32" YPos="48" TableType="0" TablePrefix="0" nmTable="0" Temporary="0" UseStandardInserts="0" StandardInserts="\n" TableOptions="DelayKeyTblUpdates=0\nPackKeys=0\nRowChecksum=0\nRowFormat=0\nUseRaid=0\nRaidType=0\n" Comments="" Collapsed="0" IsLinkedObject="0" IDLinkedModel="-1" Obj_id_Linked="-1" OrderPos="2" >
 <COLUMNS>
-<COLUMN ID="1002" ColName="userID" PrevColName="" Pos="0" idDatatype="4" DatatypeParams="" Width="-1" Prec="-1" PrimaryKey="1" NotNull="1" AutoInc="1" IsForeignKey="0" DefaultValue="" Comments="">
+<COLUMN ID="1002" ColName="userID" PrevColName="" Pos="0" idDatatype="5" DatatypeParams="" Width="-1" Prec="-1" PrimaryKey="1" NotNull="1" AutoInc="1" IsForeignKey="0" DefaultValue="" Comments="">
 <OPTIONSELECTED>
-<OPTIONSELECT Value="0" />
-<OPTIONSELECT Value="0" />
-</OPTIONSELECTED>
-</COLUMN>
-<COLUMN ID="1125" ColName="sloth_userAccesRights_uarID" PrevColName="" Pos="1" idDatatype="4" DatatypeParams="" Width="-1" Prec="-1" PrimaryKey="0" NotNull="1" AutoInc="0" IsForeignKey="1" DefaultValue="" Comments="">
-<OPTIONSELECTED>
-<OPTIONSELECT Value="0" />
+<OPTIONSELECT Value="1" />
 <OPTIONSELECT Value="0" />
 </OPTIONSELECTED>
 </COLUMN>
-<COLUMN ID="1004" ColName="userLastName" PrevColName="" Pos="1" idDatatype="38" DatatypeParams="" Width="-1" Prec="-1" PrimaryKey="0" NotNull="1" AutoInc="0" IsForeignKey="0" DefaultValue="" Comments="">
+<COLUMN ID="1217" ColName="sloth_userAccessRights_uarID" PrevColName="" Pos="1" idDatatype="5" DatatypeParams="" Width="-1" Prec="-1" PrimaryKey="0" NotNull="1" AutoInc="0" IsForeignKey="1" DefaultValue="" Comments="">
 <OPTIONSELECTED>
+<OPTIONSELECT Value="1" />
+<OPTIONSELECT Value="0" />
 </OPTIONSELECTED>
 </COLUMN>
-<COLUMN ID="1005" ColName="userFirstName" PrevColName="" Pos="2" idDatatype="38" DatatypeParams="" Width="-1" Prec="-1" PrimaryKey="0" NotNull="1" AutoInc="0" IsForeignKey="0" DefaultValue="" Comments="">
+<COLUMN ID="1004" ColName="userLastName" PrevColName="" Pos="1" idDatatype="20" DatatypeParams="(45)" Width="-1" Prec="-1" PrimaryKey="0" NotNull="1" AutoInc="0" IsForeignKey="0" DefaultValue="" Comments="">
 <OPTIONSELECTED>
+<OPTIONSELECT Value="0" />
+</OPTIONSELECTED>
+</COLUMN>
+<COLUMN ID="1005" ColName="userFirstName" PrevColName="" Pos="2" idDatatype="20" DatatypeParams="(45)" Width="-1" Prec="-1" PrimaryKey="0" NotNull="1" AutoInc="0" IsForeignKey="0" DefaultValue="" Comments="">
+<OPTIONSELECTED>
+<OPTIONSELECT Value="0" />
 </OPTIONSELECTED>
 </COLUMN>
 <COLUMN ID="1006" ColName="userSignDate" PrevColName="" Pos="3" idDatatype="14" DatatypeParams="" Width="-1" Prec="-1" PrimaryKey="0" NotNull="1" AutoInc="0" IsForeignKey="0" DefaultValue="" Comments="">
 <OPTIONSELECTED>
 </OPTIONSELECTED>
 </COLUMN>
-<COLUMN ID="1007" ColName="userHashedPwd" PrevColName="" Pos="4" idDatatype="30" DatatypeParams="" Width="-1" Prec="-1" PrimaryKey="0" NotNull="1" AutoInc="0" IsForeignKey="0" DefaultValue="" Comments="">
+<COLUMN ID="1007" ColName="userHashedPwd" PrevColName="" Pos="4" idDatatype="19" DatatypeParams="(100)" Width="-1" Prec="-1" PrimaryKey="0" NotNull="1" AutoInc="0" IsForeignKey="0" DefaultValue="" Comments="">
 <OPTIONSELECTED>
+<OPTIONSELECT Value="0" />
 </OPTIONSELECTED>
 </COLUMN>
-<COLUMN ID="1011" ColName="userEmail" PrevColName="" Pos="5" idDatatype="38" DatatypeParams="" Width="-1" Prec="-1" PrimaryKey="0" NotNull="1" AutoInc="0" IsForeignKey="0" DefaultValue="" Comments="">
+<COLUMN ID="1011" ColName="userEmail" PrevColName="" Pos="5" idDatatype="19" DatatypeParams="(60)" Width="-1" Prec="-1" PrimaryKey="0" NotNull="1" AutoInc="0" IsForeignKey="0" DefaultValue="" Comments="">
 <OPTIONSELECTED>
+<OPTIONSELECT Value="0" />
 </OPTIONSELECTED>
 </COLUMN>
 </COLUMNS>
+<RELATIONS_START>
+<RELATION_START ID="1284" />
+</RELATIONS_START>
 <RELATIONS_END>
-<RELATION_END ID="1124" />
+<RELATION_END ID="1216" />
 </RELATIONS_END>
 <INDICES>
 <INDEX ID="1003" IndexName="PRIMARY" IndexKind="0" FKRefDef_Obj_id="-1">
@@ -304,32 +313,34 @@
 <INDEXCOLUMN idColumn="1002" LengthParam="0" />
 </INDEXCOLUMNS>
 </INDEX>
-<INDEX ID="1126" IndexName="sloth_userTable_FKIndex1" IndexKind="1" FKRefDef_Obj_id="1124">
+<INDEX ID="1218" IndexName="sloth_users_FKIndex1" IndexKind="1" FKRefDef_Obj_id="1216">
 <INDEXCOLUMNS>
-<INDEXCOLUMN idColumn="1125" LengthParam="0" />
+<INDEXCOLUMN idColumn="1217" LengthParam="0" />
 </INDEXCOLUMNS>
 </INDEX>
 </INDICES>
 </TABLE>
-<TABLE ID="1022" Tablename="sloth_obsTypes" PrevTableName="Table_03" XPos="926" YPos="127" TableType="0" TablePrefix="0" nmTable="0" Temporary="0" UseStandardInserts="0" StandardInserts="\n" TableOptions="DelayKeyTblUpdates=0\nPackKeys=0\nRowChecksum=0\nRowFormat=0\nUseRaid=0\nRaidType=0\n" Comments="" Collapsed="0" IsLinkedObject="0" IDLinkedModel="-1" Obj_id_Linked="-1" OrderPos="4" >
+<TABLE ID="1022" Tablename="sloth_obsTypes" PrevTableName="Table_03" XPos="764" YPos="21" TableType="0" TablePrefix="0" nmTable="0" Temporary="0" UseStandardInserts="0" StandardInserts="\n" TableOptions="DelayKeyTblUpdates=0\nPackKeys=0\nRowChecksum=0\nRowFormat=0\nUseRaid=0\nRaidType=0\n" Comments="" Collapsed="0" IsLinkedObject="0" IDLinkedModel="-1" Obj_id_Linked="-1" OrderPos="4" >
 <COLUMNS>
-<COLUMN ID="1024" ColName="obsTypeID" PrevColName="" Pos="0" idDatatype="4" DatatypeParams="" Width="-1" Prec="-1" PrimaryKey="1" NotNull="1" AutoInc="1" IsForeignKey="0" DefaultValue="" Comments="">
+<COLUMN ID="1024" ColName="obsTypeID" PrevColName="" Pos="0" idDatatype="5" DatatypeParams="" Width="-1" Prec="-1" PrimaryKey="1" NotNull="1" AutoInc="1" IsForeignKey="0" DefaultValue="" Comments="">
 <OPTIONSELECTED>
-<OPTIONSELECT Value="0" />
+<OPTIONSELECT Value="1" />
 <OPTIONSELECT Value="0" />
 </OPTIONSELECTED>
 </COLUMN>
-<COLUMN ID="1026" ColName="obsTypeName" PrevColName="" Pos="1" idDatatype="38" DatatypeParams="" Width="-1" Prec="-1" PrimaryKey="0" NotNull="1" AutoInc="0" IsForeignKey="0" DefaultValue="" Comments="">
+<COLUMN ID="1026" ColName="obsTypeName" PrevColName="" Pos="1" idDatatype="20" DatatypeParams="(45)" Width="-1" Prec="-1" PrimaryKey="0" NotNull="1" AutoInc="0" IsForeignKey="0" DefaultValue="" Comments="">
 <OPTIONSELECTED>
+<OPTIONSELECT Value="0" />
 </OPTIONSELECTED>
 </COLUMN>
-<COLUMN ID="1027" ColName="obsTypeDesc" PrevColName="" Pos="2" idDatatype="30" DatatypeParams="" Width="-1" Prec="-1" PrimaryKey="0" NotNull="1" AutoInc="0" IsForeignKey="0" DefaultValue="" Comments="">
+<COLUMN ID="1027" ColName="obsTypeDesc" PrevColName="" Pos="2" idDatatype="20" DatatypeParams="(100)" Width="-1" Prec="-1" PrimaryKey="0" NotNull="1" AutoInc="0" IsForeignKey="0" DefaultValue="" Comments="">
 <OPTIONSELECTED>
+<OPTIONSELECT Value="0" />
 </OPTIONSELECTED>
 </COLUMN>
 </COLUMNS>
 <RELATIONS_START>
-<RELATION_START ID="1133" />
+<RELATION_START ID="1211" />
 </RELATIONS_START>
 <INDICES>
 <INDEX ID="1025" IndexName="PRIMARY" IndexKind="0" FKRefDef_Obj_id="-1">
@@ -339,26 +350,28 @@
 </INDEX>
 </INDICES>
 </TABLE>
-<TABLE ID="1013" Tablename="sloth_obsTable" PrevTableName="Table_02" XPos="507" YPos="250" TableType="0" TablePrefix="0" nmTable="0" Temporary="0" UseStandardInserts="0" StandardInserts="\n" TableOptions="DelayKeyTblUpdates=0\nPackKeys=0\nRowChecksum=0\nRowFormat=0\nUseRaid=0\nRaidType=0\n" Comments="" Collapsed="0" IsLinkedObject="0" IDLinkedModel="-1" Obj_id_Linked="-1" OrderPos="3" >
+<TABLE ID="1013" Tablename="sloth_observations" PrevTableName="Table_02" XPos="729" YPos="179" TableType="0" TablePrefix="0" nmTable="0" Temporary="0" UseStandardInserts="0" StandardInserts="\n" TableOptions="DelayKeyTblUpdates=0\nPackKeys=0\nRowChecksum=0\nRowFormat=0\nUseRaid=0\nRaidType=0\n" Comments="" Collapsed="0" IsLinkedObject="0" IDLinkedModel="-1" Obj_id_Linked="-1" OrderPos="3" >
 <COLUMNS>
-<COLUMN ID="1015" ColName="obsID" PrevColName="" Pos="0" idDatatype="4" DatatypeParams="" Width="-1" Prec="-1" PrimaryKey="1" NotNull="1" AutoInc="1" IsForeignKey="0" DefaultValue="" Comments="">
+<COLUMN ID="1015" ColName="obsID" PrevColName="" Pos="0" idDatatype="5" DatatypeParams="" Width="-1" Prec="-1" PrimaryKey="1" NotNull="1" AutoInc="1" IsForeignKey="0" DefaultValue="" Comments="">
 <OPTIONSELECTED>
-<OPTIONSELECT Value="0" />
-<OPTIONSELECT Value="0" />
-</OPTIONSELECTED>
-</COLUMN>
-<COLUMN ID="1134" ColName="sloth_obsTypes_obsTypeID" PrevColName="" Pos="1" idDatatype="4" DatatypeParams="" Width="-1" Prec="-1" PrimaryKey="1" NotNull="1" AutoInc="0" IsForeignKey="1" DefaultValue="" Comments="">
-<OPTIONSELECTED>
-<OPTIONSELECT Value="0" />
+<OPTIONSELECT Value="1" />
 <OPTIONSELECT Value="0" />
 </OPTIONSELECTED>
 </COLUMN>
-<COLUMN ID="1018" ColName="obsName" PrevColName="" Pos="2" idDatatype="38" DatatypeParams="" Width="-1" Prec="-1" PrimaryKey="0" NotNull="1" AutoInc="0" IsForeignKey="0" DefaultValue="" Comments="">
+<COLUMN ID="1212" ColName="sloth_obsTypes_obsTypeID" PrevColName="" Pos="1" idDatatype="5" DatatypeParams="" Width="-1" Prec="-1" PrimaryKey="0" NotNull="1" AutoInc="0" IsForeignKey="1" DefaultValue="" Comments="">
 <OPTIONSELECTED>
+<OPTIONSELECT Value="1" />
+<OPTIONSELECT Value="0" />
 </OPTIONSELECTED>
 </COLUMN>
-<COLUMN ID="1019" ColName="obsDescription" PrevColName="" Pos="3" idDatatype="30" DatatypeParams="" Width="-1" Prec="-1" PrimaryKey="0" NotNull="1" AutoInc="0" IsForeignKey="0" DefaultValue="" Comments="">
+<COLUMN ID="1018" ColName="obsName" PrevColName="" Pos="2" idDatatype="20" DatatypeParams="(45)" Width="-1" Prec="-1" PrimaryKey="0" NotNull="1" AutoInc="0" IsForeignKey="0" DefaultValue="" Comments="">
 <OPTIONSELECTED>
+<OPTIONSELECT Value="0" />
+</OPTIONSELECTED>
+</COLUMN>
+<COLUMN ID="1019" ColName="obsDescription" PrevColName="" Pos="3" idDatatype="20" DatatypeParams="(1000)" Width="-1" Prec="-1" PrimaryKey="0" NotNull="1" AutoInc="0" IsForeignKey="0" DefaultValue="" Comments="">
+<OPTIONSELECTED>
+<OPTIONSELECT Value="0" />
 </OPTIONSELECTED>
 </COLUMN>
 <COLUMN ID="1048" ColName="obsDate" PrevColName="" Pos="4" idDatatype="14" DatatypeParams="" Width="-1" Prec="-1" PrimaryKey="0" NotNull="1" AutoInc="0" IsForeignKey="0" DefaultValue="" Comments="">
@@ -371,36 +384,30 @@
 </COLUMN>
 </COLUMNS>
 <RELATIONS_START>
-<RELATION_START ID="1059" />
+<RELATION_START ID="1240" />
+<RELATION_START ID="1288" />
 </RELATIONS_START>
 <RELATIONS_END>
-<RELATION_END ID="1133" />
+<RELATION_END ID="1211" />
 </RELATIONS_END>
 <INDICES>
 <INDEX ID="1016" IndexName="PRIMARY" IndexKind="0" FKRefDef_Obj_id="-1">
 <INDEXCOLUMNS>
 <INDEXCOLUMN idColumn="1015" LengthParam="0" />
-<INDEXCOLUMN idColumn="1134" LengthParam="0" />
 </INDEXCOLUMNS>
 </INDEX>
-<INDEX ID="1135" IndexName="sloth_obsTable_FKIndex1" IndexKind="1" FKRefDef_Obj_id="1133">
+<INDEX ID="1213" IndexName="sloth_obsTable_FKIndex2" IndexKind="1" FKRefDef_Obj_id="1211">
 <INDEXCOLUMNS>
-<INDEXCOLUMN idColumn="1134" LengthParam="0" />
+<INDEXCOLUMN idColumn="1212" LengthParam="0" />
 </INDEXCOLUMNS>
 </INDEX>
 </INDICES>
 </TABLE>
-<TABLE ID="1052" Tablename="sloth_obsCoordinates" PrevTableName="Table_06" XPos="929" YPos="472" TableType="0" TablePrefix="0" nmTable="0" Temporary="0" UseStandardInserts="0" StandardInserts="\n" TableOptions="DelayKeyTblUpdates=0\nPackKeys=0\nRowChecksum=0\nRowFormat=0\nUseRaid=0\nRaidType=0\n" Comments="" Collapsed="0" IsLinkedObject="0" IDLinkedModel="-1" Obj_id_Linked="-1" OrderPos="6" >
+<TABLE ID="1052" Tablename="sloth_obsCoordinates" PrevTableName="Table_06" XPos="736" YPos="457" TableType="0" TablePrefix="0" nmTable="0" Temporary="0" UseStandardInserts="0" StandardInserts="\n" TableOptions="DelayKeyTblUpdates=0\nPackKeys=0\nRowChecksum=0\nRowFormat=0\nUseRaid=0\nRaidType=0\n" Comments="" Collapsed="0" IsLinkedObject="0" IDLinkedModel="-1" Obj_id_Linked="-1" OrderPos="6" >
 <COLUMNS>
-<COLUMN ID="1142" ColName="sloth_obsTable_sloth_obsTypes_obsTypeID" PrevColName="" Pos="1" idDatatype="4" DatatypeParams="" Width="-1" Prec="-1" PrimaryKey="0" NotNull="1" AutoInc="0" IsForeignKey="1" DefaultValue="" Comments="">
+<COLUMN ID="1241" ColName="sloth_observations_obsID" PrevColName="" Pos="1" idDatatype="5" DatatypeParams="" Width="-1" Prec="-1" PrimaryKey="1" NotNull="1" AutoInc="0" IsForeignKey="1" DefaultValue="" Comments="">
 <OPTIONSELECTED>
-<OPTIONSELECT Value="0" />
-<OPTIONSELECT Value="0" />
-</OPTIONSELECTED>
-</COLUMN>
-<COLUMN ID="1060" ColName="sloth_obsTable_obsID" PrevColName="" Pos="1" idDatatype="4" DatatypeParams="" Width="-1" Prec="-1" PrimaryKey="0" NotNull="1" AutoInc="0" IsForeignKey="1" DefaultValue="" Comments="">
-<OPTIONSELECTED>
-<OPTIONSELECT Value="0" />
+<OPTIONSELECT Value="1" />
 <OPTIONSELECT Value="0" />
 </OPTIONSELECTED>
 </COLUMN>
@@ -416,36 +423,42 @@
 </COLUMN>
 </COLUMNS>
 <RELATIONS_END>
-<RELATION_END ID="1059" />
+<RELATION_END ID="1240" />
 </RELATIONS_END>
 <INDICES>
-<INDEX ID="1061" IndexName="sloth_obsCoordinates_FKIndex1" IndexKind="1" FKRefDef_Obj_id="1059">
+<INDEX ID="1200" IndexName="PRIMARY" IndexKind="0" FKRefDef_Obj_id="-1">
 <INDEXCOLUMNS>
-<INDEXCOLUMN idColumn="1060" LengthParam="0" />
-<INDEXCOLUMN idColumn="1142" LengthParam="0" />
+<INDEXCOLUMN idColumn="1241" LengthParam="0" />
+</INDEXCOLUMNS>
+</INDEX>
+<INDEX ID="1242" IndexName="sloth_obsCoordinates_FKIndex1" IndexKind="1" FKRefDef_Obj_id="1240">
+<INDEXCOLUMNS>
+<INDEXCOLUMN idColumn="1241" LengthParam="0" />
 </INDEXCOLUMNS>
 </INDEX>
 </INDICES>
 </TABLE>
-<TABLE ID="1069" Tablename="sloth_userAccesRights" PrevTableName="Table_08" XPos="520" YPos="21" TableType="0" TablePrefix="0" nmTable="0" Temporary="0" UseStandardInserts="0" StandardInserts="\n" TableOptions="DelayKeyTblUpdates=0\nPackKeys=0\nRowChecksum=0\nRowFormat=0\nUseRaid=0\nRaidType=0\n" Comments="" Collapsed="0" IsLinkedObject="0" IDLinkedModel="-1" Obj_id_Linked="-1" OrderPos="8" >
+<TABLE ID="1069" Tablename="sloth_userAccessRights" PrevTableName="Table_08" XPos="88" YPos="454" TableType="0" TablePrefix="0" nmTable="0" Temporary="0" UseStandardInserts="0" StandardInserts="\n" TableOptions="DelayKeyTblUpdates=0\nPackKeys=0\nRowChecksum=0\nRowFormat=0\nUseRaid=0\nRaidType=0\n" Comments="" Collapsed="0" IsLinkedObject="0" IDLinkedModel="-1" Obj_id_Linked="-1" OrderPos="8" >
 <COLUMNS>
-<COLUMN ID="1071" ColName="uarID" PrevColName="" Pos="0" idDatatype="4" DatatypeParams="" Width="-1" Prec="-1" PrimaryKey="1" NotNull="1" AutoInc="1" IsForeignKey="0" DefaultValue="" Comments="">
+<COLUMN ID="1071" ColName="uarID" PrevColName="" Pos="0" idDatatype="5" DatatypeParams="" Width="-1" Prec="-1" PrimaryKey="1" NotNull="1" AutoInc="1" IsForeignKey="0" DefaultValue="" Comments="">
 <OPTIONSELECTED>
-<OPTIONSELECT Value="0" />
+<OPTIONSELECT Value="1" />
 <OPTIONSELECT Value="0" />
 </OPTIONSELECTED>
 </COLUMN>
-<COLUMN ID="1073" ColName="uarName" PrevColName="" Pos="1" idDatatype="38" DatatypeParams="" Width="-1" Prec="-1" PrimaryKey="0" NotNull="1" AutoInc="0" IsForeignKey="0" DefaultValue="" Comments="">
+<COLUMN ID="1073" ColName="uarName" PrevColName="" Pos="1" idDatatype="20" DatatypeParams="(20)" Width="-1" Prec="-1" PrimaryKey="0" NotNull="1" AutoInc="0" IsForeignKey="0" DefaultValue="" Comments="">
 <OPTIONSELECTED>
+<OPTIONSELECT Value="0" />
 </OPTIONSELECTED>
 </COLUMN>
-<COLUMN ID="1075" ColName="uarDesc" PrevColName="" Pos="2" idDatatype="30" DatatypeParams="" Width="-1" Prec="-1" PrimaryKey="0" NotNull="0" AutoInc="0" IsForeignKey="0" DefaultValue="" Comments="">
+<COLUMN ID="1075" ColName="uarDesc" PrevColName="" Pos="2" idDatatype="20" DatatypeParams="(100)" Width="-1" Prec="-1" PrimaryKey="0" NotNull="0" AutoInc="0" IsForeignKey="0" DefaultValue="" Comments="">
 <OPTIONSELECTED>
+<OPTIONSELECT Value="0" />
 </OPTIONSELECTED>
 </COLUMN>
 </COLUMNS>
 <RELATIONS_START>
-<RELATION_START ID="1124" />
+<RELATION_START ID="1216" />
 </RELATIONS_START>
 <INDICES>
 <INDEX ID="1072" IndexName="PRIMARY" IndexKind="0" FKRefDef_Obj_id="-1">
@@ -455,11 +468,51 @@
 </INDEX>
 </INDICES>
 </TABLE>
+<TABLE ID="1282" Tablename="sloth_usrobs" PrevTableName="Table_13" XPos="369" YPos="196" TableType="0" TablePrefix="0" nmTable="1" Temporary="0" UseStandardInserts="0" StandardInserts="\n" TableOptions="DelayKeyTblUpdates=0\nPackKeys=0\nRowChecksum=0\nRowFormat=0\nUseRaid=0\nRaidType=0\n" Comments="In dieser Tabelle werden die Nutzer - Observation Zuordnungnen abegelegt.\n\nVerbindungen bestehen zu:\n\nObservations\nUsers" Collapsed="0" IsLinkedObject="0" IDLinkedModel="-1" Obj_id_Linked="-1" OrderPos="10" >
+<COLUMNS>
+<COLUMN ID="1285" ColName="sloth_users_userID" PrevColName="" Pos="1" idDatatype="5" DatatypeParams="" Width="-1" Prec="-1" PrimaryKey="1" NotNull="1" AutoInc="0" IsForeignKey="1" DefaultValue="" Comments="">
+<OPTIONSELECTED>
+<OPTIONSELECT Value="1" />
+<OPTIONSELECT Value="0" />
+</OPTIONSELECTED>
+</COLUMN>
+<COLUMN ID="1289" ColName="sloth_observations_obsID" PrevColName="" Pos="1" idDatatype="5" DatatypeParams="" Width="-1" Prec="-1" PrimaryKey="1" NotNull="1" AutoInc="0" IsForeignKey="1" DefaultValue="" Comments="">
+<OPTIONSELECTED>
+<OPTIONSELECT Value="1" />
+<OPTIONSELECT Value="0" />
+</OPTIONSELECTED>
+</COLUMN>
+</COLUMNS>
+<RELATIONS_END>
+<RELATION_END ID="1284" />
+<RELATION_END ID="1288" />
+</RELATIONS_END>
+<INDICES>
+<INDEX ID="1287" IndexName="PRIMARY" IndexKind="0" FKRefDef_Obj_id="-1">
+<INDEXCOLUMNS>
+<INDEXCOLUMN idColumn="1285" LengthParam="0" />
+<INDEXCOLUMN idColumn="1289" LengthParam="0" />
+</INDEXCOLUMNS>
+</INDEX>
+<INDEX ID="1286" IndexName="sloth_usrobs_FKIndex1" IndexKind="1" FKRefDef_Obj_id="1284">
+<INDEXCOLUMNS>
+<INDEXCOLUMN idColumn="1285" LengthParam="0" />
+</INDEXCOLUMNS>
+</INDEX>
+<INDEX ID="1290" IndexName="sloth_usrobs_FKIndex2" IndexKind="1" FKRefDef_Obj_id="1288">
+<INDEXCOLUMNS>
+<INDEXCOLUMN idColumn="1289" LengthParam="0" />
+</INDEXCOLUMNS>
+</INDEX>
+</INDICES>
+</TABLE>
 </TABLES>
 <RELATIONS>
-<RELATION ID="1059" RelationName="getFromObservationCoordinates" Kind="5" SrcTable="1013" DestTable="1052" FKFields="obsID=sloth_obsTable_obsID\nsloth_obsTypes_obsTypeID=sloth_obsTable_sloth_obsTypes_obsTypeID\n" FKFieldsComments="\n\n" relDirection="2" MidOffset="0" OptionalStart="0" OptionalEnd="0" CaptionOffsetX="0" CaptionOffsetY="0" StartIntervalOffsetX="0" StartIntervalOffsetY="0" EndIntervalOffsetX="0" EndIntervalOffsetY="0" CreateRefDef="1" Invisible="0" RefDef="Matching=0\nOnDelete=1\nOnUpdate=1\n" Comments="" FKRefDefIndex_Obj_id="1061" Splitted="0" IsLinkedObject="0" IDLinkedModel="-1" Obj_id_Linked="-1" OrderPos="7" />
-<RELATION ID="1124" RelationName="getFromUAR" Kind="2" SrcTable="1069" DestTable="1000" FKFields="uarID=sloth_userAccesRights_uarID\n" FKFieldsComments="\n" relDirection="4" MidOffset="0" OptionalStart="0" OptionalEnd="0" CaptionOffsetX="0" CaptionOffsetY="0" StartIntervalOffsetX="0" StartIntervalOffsetY="0" EndIntervalOffsetX="0" EndIntervalOffsetY="0" CreateRefDef="1" Invisible="0" RefDef="Matching=0\nOnDelete=3\nOnUpdate=3\n" Comments="" FKRefDefIndex_Obj_id="1126" Splitted="0" IsLinkedObject="0" IDLinkedModel="-1" Obj_id_Linked="-1" OrderPos="9" />
-<RELATION ID="1133" RelationName="getFromObsTypes" Kind="2" SrcTable="1022" DestTable="1013" FKFields="obsTypeID=sloth_obsTypes_obsTypeID\n" FKFieldsComments="\n" relDirection="4" MidOffset="0" OptionalStart="0" OptionalEnd="0" CaptionOffsetX="0" CaptionOffsetY="0" StartIntervalOffsetX="0" StartIntervalOffsetY="0" EndIntervalOffsetX="0" EndIntervalOffsetY="0" CreateRefDef="1" Invisible="0" RefDef="Matching=0\nOnDelete=3\nOnUpdate=3\n" Comments="" FKRefDefIndex_Obj_id="1135" Splitted="0" IsLinkedObject="0" IDLinkedModel="-1" Obj_id_Linked="-1" OrderPos="9" />
+<RELATION ID="1211" RelationName="obsTable - obsTypes" Kind="2" SrcTable="1022" DestTable="1013" FKFields="obsTypeID=sloth_obsTypes_obsTypeID\n" FKFieldsComments="\n" relDirection="3" MidOffset="0" OptionalStart="0" OptionalEnd="0" CaptionOffsetX="82" CaptionOffsetY="-21" StartIntervalOffsetX="0" StartIntervalOffsetY="0" EndIntervalOffsetX="0" EndIntervalOffsetY="0" CreateRefDef="1" Invisible="0" RefDef="Matching=0\nOnDelete=3\nOnUpdate=3\n" Comments="" FKRefDefIndex_Obj_id="1213" Splitted="0" IsLinkedObject="0" IDLinkedModel="-1" Obj_id_Linked="-1" OrderPos="8" />
+<RELATION ID="1216" RelationName="users - userAccesRights" Kind="2" SrcTable="1069" DestTable="1000" FKFields="uarID=sloth_userAccessRights_uarID\n" FKFieldsComments="\n" relDirection="1" MidOffset="0" OptionalStart="0" OptionalEnd="0" CaptionOffsetX="0" CaptionOffsetY="0" StartIntervalOffsetX="0" StartIntervalOffsetY="0" EndIntervalOffsetX="0" EndIntervalOffsetY="0" CreateRefDef="1" Invisible="0" RefDef="Matching=0\nOnDelete=3\nOnUpdate=3\n" Comments="" FKRefDefIndex_Obj_id="1218" Splitted="0" IsLinkedObject="0" IDLinkedModel="-1" Obj_id_Linked="-1" OrderPos="9" />
+<RELATION ID="1240" RelationName="observations - obscoordinates" Kind="0" SrcTable="1013" DestTable="1052" FKFields="obsID=sloth_observations_obsID\n" FKFieldsComments="\n" relDirection="3" MidOffset="0" OptionalStart="0" OptionalEnd="0" CaptionOffsetX="0" CaptionOffsetY="0" StartIntervalOffsetX="0" StartIntervalOffsetY="0" EndIntervalOffsetX="0" EndIntervalOffsetY="0" CreateRefDef="1" Invisible="0" RefDef="Matching=0\nOnDelete=1\nOnUpdate=1\n" Comments="" FKRefDefIndex_Obj_id="1242" Splitted="0" IsLinkedObject="0" IDLinkedModel="-1" Obj_id_Linked="-1" OrderPos="9" />
+<RELATION ID="1284" RelationName="User Observation" Kind="0" SrcTable="1000" DestTable="1282" FKFields="userID=sloth_users_userID\n" FKFieldsComments="\n" relDirection="2" MidOffset="0" OptionalStart="0" OptionalEnd="0" CaptionOffsetX="-55" CaptionOffsetY="-4" StartIntervalOffsetX="0" StartIntervalOffsetY="0" EndIntervalOffsetX="0" EndIntervalOffsetY="0" CreateRefDef="1" Invisible="0" RefDef="Matching=0\nOnDelete=3\nOnUpdate=3\n" Comments="" FKRefDefIndex_Obj_id="1286" Splitted="0" IsLinkedObject="0" IDLinkedModel="-1" Obj_id_Linked="-1" OrderPos="11" />
+<RELATION ID="1288" RelationName="Observation User" Kind="0" SrcTable="1013" DestTable="1282" FKFields="obsID=sloth_observations_obsID\n" FKFieldsComments="\n" relDirection="4" MidOffset="0" OptionalStart="0" OptionalEnd="0" CaptionOffsetX="1" CaptionOffsetY="14" StartIntervalOffsetX="-11" StartIntervalOffsetY="0" EndIntervalOffsetX="8" EndIntervalOffsetY="0" CreateRefDef="1" Invisible="0" RefDef="Matching=0\nOnDelete=1\nOnUpdate=1\n" Comments="" FKRefDefIndex_Obj_id="1290" Splitted="0" IsLinkedObject="0" IDLinkedModel="-1" Obj_id_Linked="-1" OrderPos="12" />
 </RELATIONS>
 <NOTES>
 </NOTES>
@@ -470,13 +523,33 @@
 <PLUGINDATARECORDS>
 <PLUGINDATARECORD PluginName="HTMLReport" Obj_id="-1" DataValue="nil">
 <PLUGINDATAPARAMS>
-<PLUGINDATAPARAM Value="SelectedTables=sloth_userTable;sloth_obsTypes;sloth_obsTable;sloth_obsCoordinates;sloth_userAccesRights;" />
+<PLUGINDATAPARAM Value="SelectedTables=sloth_userTable;sloth_obsTypes;sloth_obsTable;sloth_obsCoordinates;sloth_userAccesRights;sloth_observations;sloth_users;sloth_user-Observation;sloth_usrobs;sloth_userAccessRights;" />
 </PLUGINDATAPARAMS>
 </PLUGINDATARECORD>
 </PLUGINDATARECORDS>
 </PLUGINDATA>
 <QUERYDATA>
 <QUERYRECORDS>
+<QUERYRECORD SQLCmdType="4" StoredPosition="09.12 16:46:52" SQLText="SELECT * \nFROM sloth_users\nORDER BY userID" />
+<QUERYRECORD SQLCmdType="4" StoredPosition="09.12 16:31:53" SQLText="SELECT * \nFROM sloth_userAccessRights\nORDER BY uarID" />
+<QUERYRECORD SQLCmdType="4" StoredPosition="09.12 16:31:42" SQLText="SELECT * \nFROM sloth_observations\nORDER BY obsID" />
+<QUERYRECORD SQLCmdType="4" StoredPosition="09.12 16:31:31" SQLText="SELECT * \nFROM sloth_usrobs\nORDER BY sloth_users_userID, sloth_observations_obsID" />
+<QUERYRECORD SQLCmdType="4" StoredPosition="09.12 15:59:37" SQLText="drop table sloth_users, sloth_useraccesrights, sloth_observations, sloth_obstypes, sloth_obscoordinates;" />
+<QUERYRECORD SQLCmdType="4" StoredPosition="09.12 15:59:22" SQLText="drop sloth_users, sloth_useraccesrights, sloth_observations, sloth_obstypes, sloth_obscoordinates;" />
+<QUERYRECORD SQLCmdType="4" StoredPosition="09.12 15:58:36" SQLText="drop sloth" />
+<QUERYRECORD SQLCmdType="4" StoredPosition="09.12 13:25:14" SQLText="SELECT * \nFROM sloth_obsCoordinates\nORDER BY obsCoordID" />
+<QUERYRECORD SQLCmdType="4" StoredPosition="09.12 13:24:17" SQLText="delete \nFROM sloth_observations where obsID = \a1\a" />
+<QUERYRECORD SQLCmdType="4" StoredPosition="09.12 13:23:51" SQLText="delete *\nFROM sloth_observations where obsID = \a1\a;" />
+<QUERYRECORD SQLCmdType="4" StoredPosition="09.12 13:23:38" SQLText="delete *\nFROM sloth_observations where obsID = \a1\a" />
+<QUERYRECORD SQLCmdType="4" StoredPosition="09.12 13:23:02" SQLText="delete *\nFROM sloth_observations where obsID = 1" />
+<QUERYRECORD SQLCmdType="4" StoredPosition="09.12 13:21:11" SQLText="SELECT *\nFROM sloth_observations s, sloth_obsCoordinates s1" />
+<QUERYRECORD SQLCmdType="4" StoredPosition="09.12 13:18:03" SQLText="SELECT *\nFROM sloth_observations s" />
+<QUERYRECORD SQLCmdType="4" StoredPosition="09.12 13:15:41" SQLText="SELECT * \nFROM sloth_obsTypes\nORDER BY obsTypeID" />
+<QUERYRECORD SQLCmdType="4" StoredPosition="09.12 13:14:08" SQLText="INSERT INTO sloth_observations (obsName, obsDescription, obsDate, obsTime) VALUES(\aTestName\a, \aTestBeschreibung\a, \a12.12.2009\a, \a11:39\a)" />
+<QUERYRECORD SQLCmdType="4" StoredPosition="09.12 13:12:12" SQLText="select * from sloth_userAccesRights" />
+<QUERYRECORD SQLCmdType="4" StoredPosition="09.12 13:12:03" SQLText="select * from slot_userAccesRights" />
+<QUERYRECORD SQLCmdType="4" StoredPosition="09.12 13:11:52" SQLText="select * from slot_userAccesRight" />
+<QUERYRECORD SQLCmdType="4" StoredPosition="09.12 13:11:25" SQLText="Insert into sloth_useraccesrights (uarName, uarDesc) values (\aStandard Nutzer\a , \aDies ist ein Standardnutzer\a);" />
 </QUERYRECORDS>
 </QUERYDATA>
 <LINKEDMODELS>
