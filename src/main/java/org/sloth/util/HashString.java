@@ -43,4 +43,10 @@ public final class HashString {
 	}
 
 	private HashString() {}
+	
+	public static void main(String[] args){
+		String[] strings = {"a","b","ab"};
+		for (String s : strings)
+			System.out.println(hash(s));
+	}
 }

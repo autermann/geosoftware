@@ -30,18 +30,22 @@ public class Configuration {
 	private static final String fileName = "/config.xml";
 	private static Properties props = new Properties();
 
+	private Configuration(){}
+	
 	static {
 		InputStream stream = null;
 		try {
 			stream = Configuration.class.getResourceAsStream(fileName);
 			props.loadFromXML(stream);
-		} catch (Exception e) {
-			Log.throwing(e);
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.exit(1);
 		} finally {
 			try {
 				stream.close();
-			} catch (Exception e) {
-				Log.throwing(e);
+			} catch(Exception e) {
+				e.printStackTrace();
+				System.exit(1);
 			}
 		}
 	}
@@ -65,15 +69,16 @@ public class Configuration {
 		try {
 			stream = new FileOutputStream(fileName);
 			props.storeToXML(stream, "Configuration File");
-		} catch (Exception e) {
+		} catch(Exception e) {
 			Log.throwing(e);
 		} finally {
 			try {
 				stream.close();
-			} catch (Exception e) {
+			} catch(Exception e) {
 				Log.throwing(e);
 			}
 		}
 
 	}
+
 }

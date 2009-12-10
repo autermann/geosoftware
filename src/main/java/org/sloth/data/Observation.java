@@ -29,26 +29,26 @@ public class Observation {
 	private String description;
 	private Calendar date;
 	private long id;
-	private Rights rights;
 	private Coordinate coordinate;
 	private ObservationCategorie categorie;
+	private User user;
 
 	/**
 	 * 
+	 * @param user
 	 * @param title
 	 * @param description
 	 * @param date
 	 * @param id
-	 * @param rights
 	 * @param coordinate
 	 * @param categorie
 	 */
-	public Observation(String title, String description, Calendar date, long id, Rights rights, Coordinate coordinate, ObservationCategorie categorie) {
+	public Observation(User user, String title, String description, Calendar date, long id, Coordinate coordinate, ObservationCategorie categorie) {
 		this.title = title;
 		this.description = description;
 		this.date = date;
 		this.id = id;
-		this.rights = rights;
+		this.user = user;
 		this.coordinate = coordinate;
 		this.categorie = categorie;
 	}
@@ -111,20 +111,6 @@ public class Observation {
 	}
 
 	/**
-	 * @return the rights
-	 */
-	public Rights getRights() {
-		return rights;
-	}
-
-	/**
-	 * @param rights the rights to set
-	 */
-	public void setRights(Rights rights) {
-		this.rights = rights;
-	}
-
-	/**
 	 * @return the coordinate
 	 */
 	public Coordinate getCoordinate() {
@@ -150,6 +136,20 @@ public class Observation {
 	 */
 	public void setCategorie(ObservationCategorie categorie) {
 		this.categorie = categorie;
+	}
+
+	/**
+	 * @return the user
+	 */
+	public User getUser() {
+		return user;
+	}
+
+	/**
+	 * @param user the user to set
+	 */
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

@@ -39,7 +39,9 @@ public enum Rights {
 		false,//CAN_MODIFY_OTHER_USERS,
 		true,//CAN_MODIFY_HIMSELF,
 		true,//CAN_MODIFY_RIGHTS,
-		true//CAN_REPORT_OBSERVATIONS
+		true,//CAN_REPORT_OBSERVATIONS
+		true,//CAN_VIEW_OBSERVATIONS_BY_USER
+		true//CAN_LIST_USERS
 	),
 	/**
 	 *
@@ -57,7 +59,9 @@ public enum Rights {
 		false,//CAN_MODIFY_OTHER_USERS,
 		false,//CAN_MODIFY_HIMSELF,
 		false,//CAN_MODIFY_RIGHTS,
-		false//CAN_REPORT_OBSERVATIONS
+		false,//CAN_REPORT_OBSERVATIONS
+		false,//CAN_VIEW_OBSERVATIONS_BY_USER
+		false//CAN_LIST_USERS
 	),
 	/**
 	 *
@@ -75,7 +79,9 @@ public enum Rights {
 		false,//CAN_MODIFY_OTHER_USERS,
 		true,//CAN_MODIFY_HIMSELF,
 		false,//CAN_MODIFY_RIGHTS,
-		true//CAN_REPORT_OBSERVATIONS
+		true,//CAN_REPORT_OBSERVATIONS
+		false,//CAN_VIEW_OBSERVATIONS_BY_USER
+		false//CAN_LIST_USERS
 	);
 	/**
 	 *
@@ -129,6 +135,14 @@ public enum Rights {
 	 *
 	 */
 	public final boolean CAN_REPORT_OBSERVATIONS;
+	/**
+	 *
+	 */
+	public final boolean CAN_VIEW_OBSERVATIONS_BY_USER;
+	/**
+	 *
+	 */
+	public final boolean CAN_LIST_USERS;
 
 	private Rights(boolean CAN_DELETE_OTHER_USERS,
 			boolean CAN_DELETE_HIMSELF,
@@ -142,7 +156,9 @@ public enum Rights {
 			boolean CAN_MODIFY_OTHER_USERS,
 			boolean CAN_MODIFY_HIMSELF,
 			boolean CAN_MODIFY_RIGHTS,
-			boolean CAN_REPORT_OBSERVATIONS) {
+			boolean CAN_REPORT_OBSERVATIONS,
+			boolean CAN_VIEW_OBSERVATIONS_BY_USER,
+			boolean CAN_LIST_USERS) {
 		this.CAN_DELETE_OTHER_USERS = CAN_DELETE_OTHER_USERS;
 		this.CAN_DELETE_HIMSELF = CAN_DELETE_HIMSELF;
 		this.CAN_DELETE_OWN_OBSERVATIONS = CAN_DELETE_OWN_OBSERVATIONS;
@@ -156,5 +172,7 @@ public enum Rights {
 		this.CAN_MODIFY_HIMSELF = CAN_MODIFY_HIMSELF;
 		this.CAN_MODIFY_RIGHTS = CAN_MODIFY_RIGHTS;
 		this.CAN_REPORT_OBSERVATIONS = CAN_REPORT_OBSERVATIONS;
+		this.CAN_VIEW_OBSERVATIONS_BY_USER = CAN_VIEW_OBSERVATIONS_BY_USER;
+		this.CAN_LIST_USERS = CAN_LIST_USERS;
 	}
 }

@@ -18,12 +18,19 @@
 
 package org.sloth.data;
 
+import org.sloth.util.HashString;
+
 /**
  *
  * @author Christian Autermann
  */
 public class User {
-	private String name, familyName, eMail, passwort;
+	/**
+	 * 
+	 */
+	public static final User GUEST = new User();
+	private String name = "Guest", familyName = "", eMail = "not@available.tld", passwort = "";
+	private Rights rights = Rights.Guest;
 
 	/**
 	 * @return the name
@@ -78,7 +85,30 @@ public class User {
 	 * @param passwort the passwort to set
 	 */
 	public void setPasswort(String passwort) {
-		this.passwort = passwort;
+		this.passwort = HashString.hash(passwort);
+	}
+
+	/**
+	 * @return the rights
+	 */
+	public Rights getRights() {
+		return rights;
+	}
+
+	/**
+	 * @param rights the rights to set
+	 */
+	public void setRights(Rights rights) {
+		this.rights = rights;
+	}
+	
+	/**
+	 * 
+	 * @param passwd
+	 * @return
+	 */
+	public boolean testPassword(String passwd) {
+		return this.passwort.equals(HashString.hash(passwd));
 	}
 
 }

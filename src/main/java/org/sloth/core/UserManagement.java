@@ -22,6 +22,7 @@ import org.sloth.data.User;
 import org.sloth.exceptions.NotAuthorizedException;
 import org.sloth.frontend.Session;
 import java.util.Collection;
+import org.sloth.io.db.DBBinding;
 
 /**
  *
@@ -29,13 +30,31 @@ import java.util.Collection;
  */
 public class UserManagement {
 
+	private Session session;
+
 	/**
 	 * 
 	 * @param session
 	 * @return
 	 */
 	public static UserManagement getInstance(Session session) {
-		return null;
+		if (session == null) {
+			throw new NullPointerException();
+		}
+		UserManagement um = new UserManagement();
+		um.setSession(session);
+		return um;
+	}
+
+	private UserManagement() {
+	}
+
+	private void setSession(Session session) {
+		this.session = session;
+	}
+
+	private Session getSession() {
+		return session;
 	}
 
 	/**
@@ -44,12 +63,36 @@ public class UserManagement {
 	 * @throws NotAuthorizedException
 	 */
 	public void deleteUser(User u) throws NotAuthorizedException {
+		boolean me = u.equals(getSession().getUser());
+		if (me) {
+			if (!getSession().getUser().getRights().CAN_DELETE_HIMSELF) {
+				throw new NotAuthorizedException();
+			}
+		} else if (!getSession().getUser().getRights().CAN_DELETE_OTHER_USERS) {
+			throw new NotAuthorizedException();
+		}
+		DBBinding.getInstance().deleteUser(u);
+		if (me) {
+			getSession().setUser(User.GUEST);
+		}
 	}
 
 	/**
 	 *
+	 *
+	 * @param u
+	 * @throws NotAuthorizedException
 	 */
-	public void updateUser() {
+	public void updateUser(User u) throws NotAuthorizedException {
+		boolean me = u.equals(getSession().getUser());
+		if (me) {
+			if (!getSession().getUser().getRights().CAN_MODIFY_HIMSELF) {
+				throw new NotAuthorizedException();
+			}
+		} else if (!getSession().getUser().getRights().CAN_MODIFY_OTHER_USERS) {
+			throw new NotAuthorizedException();
+		}
+		DBBinding.getInstance().updateUser(u);
 	}
 
 	/**
@@ -58,7 +101,10 @@ public class UserManagement {
 	 * @throws NotAuthorizedException
 	 */
 	public Collection<User> getUserList() throws NotAuthorizedException {
-		return null;
+		if (!getSession().getUser().getRights().CAN_LIST_USERS) {
+			throw new NotAuthorizedException();
+		}
+		return DBBinding.getInstance().getUserList();
 	}
 
 	/**
@@ -67,23 +113,41 @@ public class UserManagement {
 	 * @param rights
 	 * @throws NotAuthorizedException
 	 */
-	public void changeRights(User u, Rights rights) throws NotAuthorizedException {
+	public void changeRights(User u, Rights rights) throws
+			NotAuthorizedException {
+		if (rights == null) {
+			throw new NullPointerException();
+		}
+		if (!getSession().getUser().getRights().CAN_MODIFY_RIGHTS) {
+			throw new NotAuthorizedException();
+		}
+		getSession().getUser().setRights(rights);
+		updateUser(u);
 	}
 
 	/**
 	 *
 	 * @param email
 	 * @param passwd
-	 * @return
+	 * @throws NotAuthorizedException 
 	 */
-	public boolean logIn(String email, String passwd) {
-		return false;
+	public void logIn(String email, String passwd) throws
+			NotAuthorizedException {
+		User u = DBBinding.getInstance().getUserByEmail(email);
+		if (u == null) {
+			throw new NotAuthorizedException("wrong email");
+		}
+		if (!u.testPassword(passwd)) {
+			throw new NotAuthorizedException("wrong password");
+		}
+		getSession().setUser(u);
 	}
 
 	/**
 	 *
 	 */
 	public void logOut() {
+		getSession().setUser(User.GUEST);
 	}
 
 	/**
@@ -92,7 +156,23 @@ public class UserManagement {
 	 * @param name
 	 * @param familyName
 	 * @param passwd
+	 * @throws Exception 
 	 */
-	public void registrateUser(String email, String name, String familyName, String passwd) {
+	public void registrateUser(String email, String name, String familyName,
+							   String passwd) throws Exception {
+
+		if (DBBinding.getInstance().getUserByEmail(email) == null) {
+			User u = new User();
+			u.setFamilyName(familyName);
+			u.setName(name);
+			u.seteMail(email);
+			u.setPasswort(passwd);
+			DBBinding.getInstance().addUser(u);
+		} else {
+			throw new Exception("email not available");
+		}
+
+
 	}
+
 }

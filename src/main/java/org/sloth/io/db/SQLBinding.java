@@ -15,15 +15,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package org.sloth.io.db;
 
-import org.sloth.data.BoundingBox;
-import org.sloth.data.Observation;
-import org.sloth.data.ObservationCategorie;
-import org.sloth.data.User;
-import java.util.Calendar;
-import java.util.Collection;
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.sloth.data.*;
+import java.util.*;
+import static org.sloth.util.Log.*;
+import static org.sloth.util.Configuration.get;
 
 /**
  *
@@ -34,8 +34,36 @@ public class SQLBinding extends DBBinding {
 	/**
 	 * 
 	 */
-	public SQLBinding(){
-		
+	public SQLBinding() {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch(ClassNotFoundException e) {
+			throwing(e);
+		}
+	}
+
+	private ResultSet executeQuery(String sql) {
+		Connection cn = null;
+		Statement st = null;
+		ResultSet rs = null;
+		try {
+			String url = "jdbc:mysql://" + get("SQL_HOST") + ":" + get(
+					"SQL_PORT") + "/" + get("SQL_DB_NAME");
+			cn = DriverManager.getConnection(url, get("SQL_USERNAME"),
+					get("SQL_PASSWORD"));
+			st = cn.createStatement();
+			rs = st.executeQuery(sql);
+		} catch(Exception e) {
+			throwing(e);
+		} finally {
+			try {if (null != rs) {rs.close();}}
+			catch(Exception e) {throwing(e);}
+			try {if (null != st) {st.close();}}
+			catch(Exception e) {throwing(e);}
+			try {if (null != cn) {cn.close();}}
+			catch(Exception e) {throwing(e);}
+		}
+		return rs;
 	}
 
 	@Override
@@ -44,12 +72,14 @@ public class SQLBinding extends DBBinding {
 	}
 
 	@Override
-	public Observation getObservationById(long id) {
+	public Observation getObservationById(
+			long id) {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 	@Override
-	public Collection<Observation> getObservationsByCategorie(ObservationCategorie oc) {
+	public Collection<Observation> getObservationsByCategorie(
+			ObservationCategorie oc) {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
@@ -64,12 +94,14 @@ public class SQLBinding extends DBBinding {
 	}
 
 	@Override
-	public Collection<Observation> getObservationsByDate(Calendar after, Calendar before) {
+	public Collection<Observation> getObservationsByDate(Calendar after,
+														 Calendar before) {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 	@Override
-	public Collection<Observation> getObservationsByCoverage(BoundingBox coverage) {
+	public Collection<Observation> getObservationsByCoverage(
+			BoundingBox coverage) {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
@@ -114,7 +146,8 @@ public class SQLBinding extends DBBinding {
 	}
 
 	@Override
-	public User getUserByEmail(String mail) {
+	public User getUserByEmail(
+			String mail) {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 

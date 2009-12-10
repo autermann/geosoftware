@@ -1,0 +1,56 @@
+body {
+	background-color:white;
+	font-family:helvetica;
+}
+
+
+p#greeting{
+	font-variant:small-caps;
+	color:navy;
+	font-size:2em;
+	text-align:center;
+	padding:1em;
+}
+
+#header{
+	margin:0;
+	color:white;
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	background:gray;
+	border-bottom:solid 1px black;
+}
+
+#welcome{
+	padding:.1em .1em .1em .1em;
+	float:left;
+}
+#login{
+	padding:.1em .1em .1em .1em;
+	float:right;
+}
+
+#listView{
+	padding-top:1em;
+	position:absolute;
+	top:2em;
+	left:0%;
+	width:30%;
+	bottom:0%;
+	border: 1px solid black;
+	float:left;
+}
+
+#mapView{
+	padding-top:1em;
+	float:right;
+	position:absolute;
+	top:2em;
+	left:30%;
+	bottom:0%;
+	border: 1px solid black;
+	width:70%;
+
+}

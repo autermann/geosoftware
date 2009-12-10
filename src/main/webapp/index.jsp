@@ -12,13 +12,20 @@
     </head>
     <body>
 		<div id="header">
-			header
+			<span id="welcome">Willkommen zum <b>Sloth</b>-Geosoftware-Projekt</span>
+			<span id="login"><b>Login</b></span><br>
 		</div>
-		<p id="greeting">
-			Das wird einmal unser Web-Frontend ;-)<br>
-			<%=
-				Configuration.get("LOG_FILE")
-			%>
-		</p>
+		<div id="listView">
+		<ul type="disc">
+			<li>Hier</li>
+			<li>kommt</li>
+			<li>die</li>
+			<li>Listenansicht</li>
+			<li>hin</li>
+		</ul>
+		</div>
+		<div id="mapView">
+			asdf
+		</div>
     </body> 
 </html>
