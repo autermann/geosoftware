@@ -51,7 +51,8 @@ public class SQLBinding extends DBBinding {
 					"SQL_PORT") + "/" + get("SQL_DB_NAME");
 			cn = DriverManager.getConnection(url, get("SQL_USERNAME"),
 					get("SQL_PASSWORD"));
-			st = cn.createStatement();
+			st = cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY);
 			rs = st.executeQuery(sql);
 		} catch(Exception e) {
 			throwing(e);
