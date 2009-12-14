@@ -18,8 +18,6 @@
 package org.sloth.io.db;
 
 import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.sloth.data.*;
 import java.util.*;
 import static org.sloth.util.Log.*;
@@ -30,7 +28,20 @@ import static org.sloth.util.Configuration.get;
  * @author Christian Autermann
  */
 public class SQLBinding extends DBBinding {
+	private final String passwd = get("SQL_USERNAME");
+	private final String usr = get("SQL_PASSWORD");
+	private final String url = "jdbc:mysql://"
+							+ get("SQL_HOST") + ":"
+							+ get("SQL_PORT") + "/"
+							+ get("SQL_DB_NAME");
 
+	private final String tablePrefix = "sloth";
+	private final String userTableName = "users";
+	private final String observationTableName = "observations";
+	private final String[] observationTableDefinition = {"email", "name", "bla",
+														 "bla2"};
+
+	
 	/**
 	 * 
 	 */
@@ -47,12 +58,9 @@ public class SQLBinding extends DBBinding {
 		Statement st = null;
 		ResultSet rs = null;
 		try {
-			String url = "jdbc:mysql://" + get("SQL_HOST") + ":" + get(
-					"SQL_PORT") + "/" + get("SQL_DB_NAME");
-			cn = DriverManager.getConnection(url, get("SQL_USERNAME"),
-					get("SQL_PASSWORD"));
+			cn = DriverManager.getConnection(url, usr, passwd);
 			st = cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY);
+									ResultSet.CONCUR_UPDATABLE);
 			rs = st.executeQuery(sql);
 		} catch(Exception e) {
 			throwing(e);
@@ -67,9 +75,26 @@ public class SQLBinding extends DBBinding {
 		return rs;
 	}
 
+	private Collection<Observation> getObservations(ResultSet rs) {
+		Collection<Observation> result = new ArrayList<Observation>();
+		try {
+			while (rs.next()) {
+				result.add(new Observation(null, null, null, null, 0, null, null));
+			}
+		} catch(SQLException e) {
+			throwing(e);
+		}
+		return result;
+	}
+	
+	private Collection<User> getUser(ResultSet rs) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
 	@Override
 	public Collection<Observation> getObservations() {
-		throw new UnsupportedOperationException("Not supported yet.");
+		return getObservations(executeQuery("select * from " + tablePrefix
+											+ observationTableName));
 	}
 
 	@Override
