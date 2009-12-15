@@ -17,7 +17,15 @@
  */
 package org.sloth.io.db;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.sloth.data.*;
 import java.util.*;
 import static org.sloth.util.Log.*;
@@ -175,6 +183,31 @@ public class SQLBinding extends DBBinding {
 	public User getUserByEmail(
 			String mail) {
 		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	protected String readStatement(String name) {
+		BufferedReader reader = null;
+		StringBuffer sql = new StringBuffer();
+		try {
+			reader = new BufferedReader(new FileReader(name));
+			String s = null;
+			while ((s = reader.readLine()) != null) {
+				sql.append(s);
+			}
+		} catch(FileNotFoundException e) {
+			throwing(e);
+		} catch(IOException e) {
+			throwing(e);
+		} finally {
+			if (reader != null) {
+				try {
+					reader.close();
+				} catch(IOException e) {
+					throwing(e);
+				}
+			}
+		}
+		return sql.toString();
 	}
 
 }
