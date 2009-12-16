@@ -8,16 +8,26 @@
 		<!-- TODO: Noch den ganzen Metadatenkram reinpacken... -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link href="./styles/style.css" rel="stylesheet" type="text/css" />
-		<script type="text/javascript" src="./scripts/osm.js"></script>
-		<script type="text/javascript" src="./scripts/util.js"></script>
 		<script type="text/javascript" src="http://www.openlayers.org/api/OpenLayers.js"></script>
 		<script type="text/javascript" src="http://www.openstreetmap.org/openlayers/OpenStreetMap.js"></script>
-        <title>Sloth</title>
+		<script type="text/javascript" src="./scripts/osm.js"></script>
+		<script type="text/javascript" src="./scripts/GPX.js"></script>
+		<title>Sloth</title>
 		<script type="text/javascript">
+			var layer_markers = new OpenLayers.Layer.Markers("Observations", {
+				projection: new OpenLayers.Projection("EPSG:4326"),
+				visibility: true,
+				displayInLayerSwitcher: true
+			});
 			var map;
-			var lat = <%=Configuration.get("MAP_CENTER_LAT")%>;
-			var lon = <%=Configuration.get("MAP_CENTER_LON")%>;
-			var zoom = <%=Configuration.get("MAP_CENTER_ZOOM")%>;
+			function init(){
+				initMap();
+				map.addLayer(layer_markers);
+				add(7.63095,51.96313, "<b>Test Marker</b>");
+				goTo(<%=Configuration.get("MAP_CENTER_LON")%>, <%=Configuration.get("MAP_CENTER_LAT")%>, <%=Configuration.get("MAP_CENTER_ZOOM")%>);
+			}
+
+			function add(lon,lat,html) {addMarker(layer_markers, lon, lat, html,"./img/Ol_icon_blue_example.png",24,24,0,-24);}
 		</script>
 	</head>
     <body onload="init();">
