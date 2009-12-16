@@ -20,7 +20,9 @@ package org.sloth.data;
 /**
  *
  * @author Christian Autermann
+ * @deprecated 
  */
+@Deprecated
 public enum Rights {
 
 	/**

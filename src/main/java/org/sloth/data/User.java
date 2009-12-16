@@ -15,7 +15,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package org.sloth.data;
 
 import org.sloth.util.HashString;
@@ -25,12 +24,28 @@ import org.sloth.util.HashString;
  * @author Christian Autermann
  */
 public class User {
+	private String name = "Guest", familyName = "", eMail = "not@available.tld", passwort = "";
+	private int rights = GUEST_RIGHTS;
 	/**
-	 * 
+	 *
+	 */
+	public static final int GUEST_RIGHTS = 0;
+	/**
+	 *
+	 */
+	public static final int STANDARD_RIGHTS = 1;
+	/**
+	 *
+	 */
+	public static final int WFS_RIGHTS = 2;
+	/**
+	 *
+	 */
+	public static final int ADMIN_RIGHTS = 3;
+	/**
+	 *
 	 */
 	public static final User GUEST = new User();
-	private String name = "Guest", familyName = "", eMail = "not@available.tld", passwort = "";
-	private Rights rights = Rights.Guest;
 
 	/**
 	 * @return the name
@@ -91,17 +106,17 @@ public class User {
 	/**
 	 * @return the rights
 	 */
-	public Rights getRights() {
+	public int getRights() {
 		return rights;
 	}
 
 	/**
 	 * @param rights the rights to set
 	 */
-	public void setRights(Rights rights) {
+	public void setRights(int rights) {
 		this.rights = rights;
 	}
-	
+
 	/**
 	 * 
 	 * @param passwd
@@ -110,5 +125,4 @@ public class User {
 	public boolean testPassword(String passwd) {
 		return this.passwort.equals(HashString.hash(passwd));
 	}
-
 }

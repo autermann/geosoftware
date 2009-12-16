@@ -1,8 +1,15 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+<%@page contentType="text/html" pageEncoding="UTF-8"%><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 	"http://www.w3.org/TR/html4/loose.dtd">
-<%@page import="org.sloth.util.Configuration"%>
-<%@page import="org.sloth.util.Log"%>
+<%@page import="org.sloth.util.*"%>
+<%@page import="org.sloth.core.*"%>
+<%@page import="org.sloth.data.*"%>
+<%
+		ObservationManagement om = ObservationManagement.getInstance(session);
+		UserManagement um = UserManagement.getInstance(session);
+		int rights = ((User) session.getAttribute("user")).getRights();
+		boolean adminActions = rights >= User.ADMIN_RIGHTS;
+
+%>
 <html>
     <head>
 		<!-- TODO: Noch den ganzen Metadatenkram reinpacken... -->
@@ -14,6 +21,7 @@
 		<script type="text/javascript" src="./scripts/GPX.js"></script>
 		<title>Sloth</title>
 		<script type="text/javascript">
+			
 			var layer_markers = new OpenLayers.Layer.Markers("Observations", {
 				projection: new OpenLayers.Projection("EPSG:4326"),
 				visibility: true,
@@ -24,10 +32,13 @@
 				initMap();
 				map.addLayer(layer_markers);
 				add(7.63095,51.96313, "<b>Test Marker</b>");
-				goTo(<%=Configuration.get("MAP_CENTER_LON")%>, <%=Configuration.get("MAP_CENTER_LAT")%>, <%=Configuration.get("MAP_CENTER_ZOOM")%>);
+				goTo(
+					 <%=Configuration.get("MAP_CENTER_LON")%>,
+					 <%=Configuration.get("MAP_CENTER_LAT")%>,
+					 <%=Configuration.get("MAP_CENTER_ZOOM")%>);
 			}
 
-			function add(lon,lat,html) {addMarker(layer_markers, lon, lat, html,"./img/Ol_icon_blue_example.png",24,24,0,-24);}
+			
 		</script>
 	</head>
     <body onload="init();">

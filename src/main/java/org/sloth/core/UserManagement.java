@@ -17,11 +17,11 @@
  */
 package org.sloth.core;
 
-import org.sloth.data.Rights;
+import static org.sloth.data.User.*;
 import org.sloth.data.User;
 import org.sloth.exceptions.NotAuthorizedException;
-import org.sloth.frontend.Session;
 import java.util.Collection;
+import javax.servlet.http.HttpSession;
 import org.sloth.io.db.DBBinding;
 
 /**
@@ -30,32 +30,45 @@ import org.sloth.io.db.DBBinding;
  */
 public class UserManagement {
 
-	private Session session;
+	private HttpSession session;
 
 	/**
 	 * 
 	 * @param session
-	 * @return
+	 * @return 
 	 */
-	public static UserManagement getInstance(Session session) {
+	public static UserManagement getInstance(HttpSession session) {
 		if (session == null) {
 			throw new NullPointerException();
 		}
-		UserManagement um = new UserManagement();
-		um.setSession(session);
-		return um;
+		if (session.getAttribute("um") == null) {
+			UserManagement um = new UserManagement();
+			session.setAttribute("user", GUEST);
+			session.setAttribute("um", um);
+			um.setSession(session);
+		}
+		return (UserManagement) session.getAttribute("um");
 	}
 
 	private UserManagement() {
 	}
 
-	private void setSession(Session session) {
+	private void setSession(HttpSession session) {
 		this.session = session;
 	}
 
-	private Session getSession() {
+	private HttpSession getSession() {
 		return session;
 	}
+
+	private User getUser(){
+		return (User) getSession().getAttribute("user");
+	}
+
+	private void setUser(User u){
+		getSession().setAttribute("user", u);
+	}
+
 
 	/**
 	 * 
@@ -63,17 +76,17 @@ public class UserManagement {
 	 * @throws NotAuthorizedException
 	 */
 	public void deleteUser(User u) throws NotAuthorizedException {
-		boolean me = u.equals(getSession().getUser());
+		boolean me = u.equals(getUser());
 		if (me) {
-			if (!getSession().getUser().getRights().CAN_DELETE_HIMSELF) {
+			if (getUser().getRights() < STANDARD_RIGHTS) {
 				throw new NotAuthorizedException();
 			}
-		} else if (!getSession().getUser().getRights().CAN_DELETE_OTHER_USERS) {
+		} else if (getUser().getRights() < ADMIN_RIGHTS) {
 			throw new NotAuthorizedException();
 		}
 		DBBinding.getInstance().deleteUser(u);
 		if (me) {
-			getSession().setUser(User.GUEST);
+			setUser(User.GUEST);
 		}
 	}
 
@@ -84,12 +97,12 @@ public class UserManagement {
 	 * @throws NotAuthorizedException
 	 */
 	public void updateUser(User u) throws NotAuthorizedException {
-		boolean me = u.equals(getSession().getUser());
+		boolean me = u.equals(getUser());
 		if (me) {
-			if (!getSession().getUser().getRights().CAN_MODIFY_HIMSELF) {
+			if (getUser().getRights() < STANDARD_RIGHTS) {
 				throw new NotAuthorizedException();
 			}
-		} else if (!getSession().getUser().getRights().CAN_MODIFY_OTHER_USERS) {
+		} else if (getUser().getRights() < ADMIN_RIGHTS) {
 			throw new NotAuthorizedException();
 		}
 		DBBinding.getInstance().updateUser(u);
@@ -101,7 +114,7 @@ public class UserManagement {
 	 * @throws NotAuthorizedException
 	 */
 	public Collection<User> getUserList() throws NotAuthorizedException {
-		if (!getSession().getUser().getRights().CAN_LIST_USERS) {
+		if (getUser().getRights() < ADMIN_RIGHTS) {
 			throw new NotAuthorizedException();
 		}
 		return DBBinding.getInstance().getUserList();
@@ -113,15 +126,12 @@ public class UserManagement {
 	 * @param rights
 	 * @throws NotAuthorizedException
 	 */
-	public void changeRights(User u, Rights rights) throws
+	public void changeRights(User u, int rights) throws
 			NotAuthorizedException {
-		if (rights == null) {
-			throw new NullPointerException();
-		}
-		if (!getSession().getUser().getRights().CAN_MODIFY_RIGHTS) {
+		if (getUser().getRights() < ADMIN_RIGHTS) {
 			throw new NotAuthorizedException();
 		}
-		getSession().getUser().setRights(rights);
+		getUser().setRights(rights);
 		updateUser(u);
 	}
 
@@ -140,14 +150,14 @@ public class UserManagement {
 		if (!u.testPassword(passwd)) {
 			throw new NotAuthorizedException("wrong password");
 		}
-		getSession().setUser(u);
+		setUser(u);
 	}
 
 	/**
 	 *
 	 */
 	public void logOut() {
-		getSession().setUser(User.GUEST);
+		setUser(User.GUEST);
 	}
 
 	/**
@@ -158,9 +168,7 @@ public class UserManagement {
 	 * @param passwd
 	 * @throws Exception 
 	 */
-	public void registrateUser(String email, String name, String familyName,
-							   String passwd) throws Exception {
-
+	public void registrateUser(String email, String name, String familyName, String passwd) throws Exception {
 		if (DBBinding.getInstance().getUserByEmail(email) == null) {
 			User u = new User();
 			u.setFamilyName(familyName);
@@ -168,11 +176,9 @@ public class UserManagement {
 			u.seteMail(email);
 			u.setPasswort(passwd);
 			DBBinding.getInstance().addUser(u);
+			setUser(u);
 		} else {
 			throw new Exception("email not available");
 		}
-
-
 	}
-
 }

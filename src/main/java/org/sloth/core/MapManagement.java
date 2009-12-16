@@ -24,7 +24,9 @@ import org.sloth.data.Map;
 /**
  *
  * @author Christian Autermann
+ * @deprecated 
  */
+@Deprecated
 public class MapManagement {
 
 	/**

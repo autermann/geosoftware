@@ -18,14 +18,15 @@
 package org.sloth.core;
 import java.util.Calendar;
 import java.util.Collection;
+import javax.servlet.http.HttpSession;
 import org.sloth.data.BoundingBox;
 import org.sloth.data.Observation;
 import org.sloth.data.ObservationCategorie;
 import org.sloth.data.User;
 import org.sloth.data.Coordinate;
 import org.sloth.exceptions.NotAuthorizedException;
-import org.sloth.frontend.Session;
 import org.sloth.io.db.DBBinding;
+import static org.sloth.data.User.*;
 
 /**
  *
@@ -33,31 +34,38 @@ import org.sloth.io.db.DBBinding;
  */
 public class ObservationManagement {
 
-	private Session session;
+	private HttpSession session;
 
 	/**
 	 * 
 	 * @param session
-	 * @return
+	 * @return 
 	 */
-	public static ObservationManagement getInstance(Session session) {
+	public static ObservationManagement getInstance(HttpSession session) {
 		if (session == null) {
 			throw new NullPointerException();
 		}
-		ObservationManagement om = new ObservationManagement();
-		om.setSession(session);
-		return om;
+		if (session.getAttribute("om") == null) {
+			ObservationManagement om = new ObservationManagement();
+			om.setSession(session);
+			session.setAttribute("om", om);
+
+		}
+		return (ObservationManagement) session.getAttribute("om");
 	}
 
-	private ObservationManagement() {
-	}
+	private ObservationManagement() {}
 
-	private Session getSession() {
+	private HttpSession getSession() {
 		return session;
 	}
 
-	private void setSession(Session session) {
+	private void setSession(HttpSession session) {
 		this.session = session;
+	}
+
+	private User getUser(){
+		return (User) getSession().getAttribute("user");
 	}
 
 	/**
@@ -94,12 +102,15 @@ public class ObservationManagement {
 	 * @return
 	 * @throws NotAuthorizedException
 	 */
-	public Collection<Observation> getObservationsByUser(User u) throws
-			NotAuthorizedException {
-		if (!getSession().getUser().getRights().CAN_VIEW_OBSERVATIONS_BY_USER) {
+	public Collection<Observation> getObservationsByUser(User u) throws NotAuthorizedException {
+		if (getUser().getRights() < ADMIN_RIGHTS) {
 			throw new NotAuthorizedException();
 		}
 		return DBBinding.getInstance().getObservationsByUser(u);
+	}
+
+	private boolean isLoggedIn(){
+		return getSession().getAttribute("user") != null;
 	}
 
 	/**
@@ -108,8 +119,7 @@ public class ObservationManagement {
 	 * @param before
 	 * @return
 	 */
-	public Collection<Observation> getObservationsByDate(Calendar after,
-														 Calendar before) {
+	public Collection<Observation> getObservationsByDate(Calendar after, Calendar before) {
 		return DBBinding.getInstance().getObservationsByDate(after, before);
 	}
 
@@ -118,8 +128,7 @@ public class ObservationManagement {
 	 * @param coverage
 	 * @return
 	 */
-	public Collection<Observation> getObservationsByCoverage(
-			BoundingBox coverage) {
+	public Collection<Observation> getObservationsByCoverage(BoundingBox coverage) {
 		return DBBinding.getInstance().getObservationsByCoverage(coverage);
 	}
 
@@ -135,12 +144,11 @@ public class ObservationManagement {
 	public Observation addObservation(ObservationCategorie oc, String title,
 									  String description, Coordinate location)
 			throws NotAuthorizedException {
-		if (!getSession().getUser().getRights().CAN_CREATE_OBSERVATIONS) {
+		if (getUser().getRights() < STANDARD_RIGHTS) {
 			throw new NotAuthorizedException();
 		}
-		Observation o = new Observation(getSession().getUser(), title,
-										description, Calendar.getInstance(),
-										-1, location, oc);
+		Observation o = new Observation(getUser(), title, description,
+				Calendar.getInstance(),	-1, location, oc);
 		DBBinding.getInstance().addObservation(o);
 		return o;
 	}
@@ -153,7 +161,7 @@ public class ObservationManagement {
 	 */
 	public void reportObservation(Observation o, String reason) throws
 			NotAuthorizedException {
-		if (!getSession().getUser().getRights().CAN_REPORT_OBSERVATIONS) {
+		if (getUser().getRights() < STANDARD_RIGHTS) {
 			throw new NotAuthorizedException();
 		}
 		DBBinding.getInstance().reportObservation(o, reason);
@@ -165,11 +173,11 @@ public class ObservationManagement {
 	 * @throws NotAuthorizedException
 	 */
 	public void deleteObservation(Observation o) throws NotAuthorizedException {
-		if (o.getUser().equals(getSession().getUser())) {
-			if (!getSession().getUser().getRights().CAN_DELETE_OWN_OBSERVATIONS) {
+		if (o.getUser().equals(getUser())) {
+			if (getUser().getRights() < STANDARD_RIGHTS) {
 				throw new NotAuthorizedException();
 			}
-		} else if (!getSession().getUser().getRights().CAN_DELETE_OTHER_OBSERVATIONS) {
+		} else if (getUser().getRights() < ADMIN_RIGHTS) {
 			throw new NotAuthorizedException();
 		}
 		DBBinding.getInstance().deleteObservation(o);
@@ -181,11 +189,11 @@ public class ObservationManagement {
 	 * @throws NotAuthorizedException
 	 */
 	public void updateObservation(Observation o) throws NotAuthorizedException {
-		if (o.getUser().equals(getSession().getUser())) {
-			if (!getSession().getUser().getRights().CAN_MODIFY_OWN_OBSERVATIONS) {
+		if (o.getUser().equals(getUser())) {
+			if (getUser().getRights() < STANDARD_RIGHTS) {
 				throw new NotAuthorizedException();
 			}
-		} else if (!getSession().getUser().getRights().CAN_MODIFY_OTHER_OBSERVATIONS) {
+		} else if (getUser().getRights() < ADMIN_RIGHTS) {
 			throw new NotAuthorizedException();
 		}
 		DBBinding.getInstance().updateObservation(o);

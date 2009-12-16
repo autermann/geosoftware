@@ -25,10 +25,16 @@ import org.sloth.util.Configuration;
 /**
  *
  * @author Christian Autermann
+ * @deprecated 
  */
+@Deprecated
 public abstract class WMSBinding {
 	private static WMSBinding binding = null;
 
+	/**
+	 * 
+	 * @return
+	 */
 	public static WMSBinding getInstance() {
 		if (binding == null) {
 			try {

@@ -21,9 +21,14 @@ package org.sloth.io.wms;
 /**
  *
  * @author Christian Autermann
+ * @deprecated 
  */
+@Deprecated
 public class OSMBinding {
 
+	/**
+	 * 
+	 */
 	public OSMBinding(){
 		
 	}
