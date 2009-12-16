@@ -31,7 +31,7 @@ public final class HashString {
 	 * @param plain
 	 * @return
 	 */
-	public static String hash(String plain) {
+	public static synchronized String hash(String plain) {
 		MessageDigest md = null;
 		try {
 			md = MessageDigest.getInstance("SHA");
@@ -43,10 +43,4 @@ public final class HashString {
 	}
 
 	private HashString() {}
-	
-	public static void main(String[] args){
-		String[] strings = {"a","b","ab"};
-		for (String s : strings)
-			System.out.println(hash(s));
-	}
 }

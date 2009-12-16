@@ -1,41 +1,51 @@
 body {
 	background-color:white;
 	font-family:helvetica;
+	font-size: 1em;
 }
 
 #header{
-	margin:0;
 	color:white;
 	position:absolute;
-	height:2em;
 	top:0;
 	left:0;
-	width:100%;
-	background:gray;
+	right:0;
+	background:#00008B;
+	padding: .5em;
+	z-index: 1;
+}
+
+#welcome {
+	float: left;
+}
+
+#login {
+	float: right;
+}
+
+#list,#map {
+	position:absolute;
+	top:2em;
+	bottom:0;
 }
 
 #list{
-	padding-top:1em;
-	position:absolute;
-	top:2em;
-	left:0%;
-	width:30%;
-	bottom:0;
-	float:left;
+	padding: .5em;
+	left:0;
+	right:30%;
+}
+#searchBox {
+	width: 30%;
 }
 
 #map {
-	top:2em;
-	bottom:0;
 	left: 30%;
-	width: 70%;
-	border: 0px;
-	padding: 0px;
-	position: absolute;
+	right: 0;
+	z-index: 0;
 }
 
 .olPopupContent {
-	
+
 }
 .olPopup > *{
 	border: 1px solid black;
