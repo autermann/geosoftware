@@ -1,0 +1,293 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8DD76F6A0486A84900D96B5E /* Untitled.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859E8B029090EE04C91782 /* Untitled.1 */; };
+		CA65DFB210FA29CF009CD359 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA65DFB010FA29CF009CD359 /* main.cpp */; };
+		CADD52DF10FB547900B0BECD /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CADD52DE10FB547900B0BECD /* OpenGL.framework */; };
+		CADD52FC10FB552700B0BECD /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CADD52FB10FB552700B0BECD /* GLUT.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8DD76F690486A84900D96B5E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 8;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				8DD76F6A0486A84900D96B5E /* Untitled.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		8DD76F6C0486A84900D96B5E /* Untitled */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Untitled; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6859E8B029090EE04C91782 /* Untitled.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Untitled.1; sourceTree = "<group>"; };
+		CA4F393310FB28CD00BFBA6D /* primitives.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = primitives.h; sourceTree = "<group>"; };
+		CA65DFB010FA29CF009CD359 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		CA65DFB110FA29CF009CD359 /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
+		CA65DFDC10FA2ACE009CD359 /* cg_common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cg_common.h; sourceTree = "<group>"; };
+		CA65DFDD10FA2ACE009CD359 /* cg_common.pri */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cg_common.pri; sourceTree = "<group>"; };
+		CA65DFE210FA2ACE009CD359 /* glut.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glut.h; sourceTree = "<group>"; };
+		CA65DFE410FA2ACE009CD359 /* glut.def */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = glut.def; sourceTree = "<group>"; };
+		CA65DFE510FA2ACE009CD359 /* glut32.dll */ = {isa = PBXFileReference; lastKnownFileType = file; path = glut32.dll; sourceTree = "<group>"; };
+		CA65DFE610FA2ACE009CD359 /* glut32.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = glut32.lib; sourceTree = "<group>"; };
+		CA65DFE710FA2ACE009CD359 /* README-win32.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "README-win32.txt"; sourceTree = "<group>"; };
+		CADD52DE10FB547900B0BECD /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
+		CADD52FB10FB552700B0BECD /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = /System/Library/Frameworks/GLUT.framework; sourceTree = "<absolute>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8DD76F660486A84900D96B5E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CADD52DF10FB547900B0BECD /* OpenGL.framework in Frameworks */,
+				CADD52FC10FB552700B0BECD /* GLUT.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		08FB7794FE84155DC02AAC07 /* Untitled */ = {
+			isa = PBXGroup;
+			children = (
+				CA65DFDB10FA2ACE009CD359 /* common */,
+				08FB7795FE84155DC02AAC07 /* Source */,
+				C6859E8C029090F304C91782 /* Documentation */,
+				1AB674ADFE9D54B511CA2CBB /* Products */,
+				CADD52DE10FB547900B0BECD /* OpenGL.framework */,
+				CADD52FB10FB552700B0BECD /* GLUT.framework */,
+			);
+			name = Untitled;
+			sourceTree = "<group>";
+		};
+		08FB7795FE84155DC02AAC07 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				CA65DFB010FA29CF009CD359 /* main.cpp */,
+				CA65DFB110FA29CF009CD359 /* main.h */,
+				CA4F393310FB28CD00BFBA6D /* primitives.h */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8DD76F6C0486A84900D96B5E /* Untitled */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C6859E8C029090F304C91782 /* Documentation */ = {
+			isa = PBXGroup;
+			children = (
+				C6859E8B029090EE04C91782 /* Untitled.1 */,
+			);
+			name = Documentation;
+			sourceTree = "<group>";
+		};
+		CA65DFDB10FA2ACE009CD359 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				CA65DFDC10FA2ACE009CD359 /* cg_common.h */,
+				CA65DFDD10FA2ACE009CD359 /* cg_common.pri */,
+				CA65DFDE10FA2ACE009CD359 /* glut */,
+			);
+			path = common;
+			sourceTree = "<group>";
+		};
+		CA65DFDE10FA2ACE009CD359 /* glut */ = {
+			isa = PBXGroup;
+			children = (
+				CA65DFDF10FA2ACE009CD359 /* windows */,
+			);
+			path = glut;
+			sourceTree = "<group>";
+		};
+		CA65DFDF10FA2ACE009CD359 /* windows */ = {
+			isa = PBXGroup;
+			children = (
+				CA65DFE010FA2ACE009CD359 /* include */,
+				CA65DFE310FA2ACE009CD359 /* lib */,
+				CA65DFE710FA2ACE009CD359 /* README-win32.txt */,
+			);
+			path = windows;
+			sourceTree = "<group>";
+		};
+		CA65DFE010FA2ACE009CD359 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				CA65DFE110FA2ACE009CD359 /* GL */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		CA65DFE110FA2ACE009CD359 /* GL */ = {
+			isa = PBXGroup;
+			children = (
+				CA65DFE210FA2ACE009CD359 /* glut.h */,
+			);
+			path = GL;
+			sourceTree = "<group>";
+		};
+		CA65DFE310FA2ACE009CD359 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				CA65DFE410FA2ACE009CD359 /* glut.def */,
+				CA65DFE510FA2ACE009CD359 /* glut32.dll */,
+				CA65DFE610FA2ACE009CD359 /* glut32.lib */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8DD76F620486A84900D96B5E /* Untitled */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB923108733DC60010E9CD /* Build configuration list for PBXNativeTarget "Untitled" */;
+			buildPhases = (
+				8DD76F640486A84900D96B5E /* Sources */,
+				8DD76F660486A84900D96B5E /* Frameworks */,
+				8DD76F690486A84900D96B5E /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Untitled;
+			productInstallPath = "$(HOME)/bin";
+			productName = Untitled;
+			productReference = 8DD76F6C0486A84900D96B5E /* Untitled */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "Weihnachtsaufgabe" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 08FB7794FE84155DC02AAC07 /* Untitled */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8DD76F620486A84900D96B5E /* Untitled */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8DD76F640486A84900D96B5E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA65DFB210FA29CF009CD359 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB923208733DC60010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"_GLIBCXX_DEBUG=1",
+					"_GLIBCXX_DEBUG_PEDANTIC=1",
+				);
+				INSTALL_PATH = /usr/local/bin;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/glut/windows/lib\"",
+					"\"$(SRCROOT)/windows/lib\"",
+					"\"$(SRCROOT)/common/glut/windows/lib\"",
+				);
+				PRODUCT_NAME = Untitled;
+			};
+			name = Debug;
+		};
+		1DEB923308733DC60010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/glut/windows/lib\"",
+					"\"$(SRCROOT)/windows/lib\"",
+					"\"$(SRCROOT)/common/glut/windows/lib\"",
+				);
+				PRODUCT_NAME = Untitled;
+			};
+			name = Release;
+		};
+		1DEB923608733DC60010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.6;
+			};
+			name = Debug;
+		};
+		1DEB923708733DC60010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.6;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB923108733DC60010E9CD /* Build configuration list for PBXNativeTarget "Untitled" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB923208733DC60010E9CD /* Debug */,
+				1DEB923308733DC60010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "Weihnachtsaufgabe" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB923608733DC60010E9CD /* Debug */,
+				1DEB923708733DC60010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+}
