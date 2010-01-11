@@ -5,25 +5,30 @@
 #include "primitives.h"
 Vector eye;
 int solution[5];
-int choice[5][10], verifier[5][10];
+bool verifier[5][10];
+int choice[5][10];
 float arrow_x = -3.5, arrow_y, arrow_z;
-bool mvmt_arrow = true, p, g;
+int s = 0, r = 0;
+bool win = false, fail = false;
+bool mvmt_arrow = true;
+
+
 int main(int argc, char** argv) {
     glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_RGBA);
+    glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
     glutInitWindowSize(800, 600);
-    glutCreateWindow("Master Mind");
-	
+    glutCreateWindow("MindMaster");
 	glEnable(GL_DEPTH_TEST);
-	//glEnable(GL_LIGHTING);
 	glEnable(GL_LINE_SMOOTH);
-	
+	glDepthMask(GL_TRUE);
+    glDepthFunc(GL_LESS);
+	glShadeModel(GL_SMOOTH);
 	glClearColor(0, 0, 0, 1);
 	srand(time(0));
 	reset();
 	glutDisplayFunc(display);
     glutReshapeFunc(reshape);
-	//glutIdleFunc(idle);
+	glutIdleFunc(idle);
     glutKeyboardFunc(key);
     
 	glutMainLoop();
@@ -38,17 +43,17 @@ void display() {
 	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glMatrixMode (GL_MODELVIEW);
 	glLoadIdentity ();
-	gluLookAt (9 * sin(eye.x), eye.y,  9 * cos(eye.z), 0, 0, 0, 0, 10, 0);
+	gluLookAt(9 * sin(eye.x), eye.y,  9 * cos(eye.z), 0, 0, 0, 0, 10, 0);
+	isEnd();
 	showField();
 	showChoice();
-	if (g || p) showCode();
+	if (win || fail) 
+		showCode();
 	showVerification();
 	showArrow();
-	gagner();
-	perdu();
-	reset();
 	showKeys();
 	glutSwapBuffers();
+	print();
 }
 void key(unsigned char k,int,int) {
 	switch (k) {
@@ -86,32 +91,45 @@ void key(unsigned char k,int,int) {
 			display();
 			break;
 		default:
-			choose(k);
-			display();
+			if (!win && !fail){
+				choose(k);
+				display();
+			}
 			break;
 	}
 }
 void choose(int key) {
-	bool done = false;
-	for (int b = 0; b < 10 && !done; b++) {
-		for (int a = 0; a < 5 && !done; a++) {
-			if (choice[a][b] == 0) {
-				switch (key) {
-					case 'y': choice[a][b] = red;	 break;
-					case 'x': choice[a][b] = blue;	 break;
-					case 'c': choice[a][b] = green;	 break;
-					case 'v': choice[a][b] = yellow; break;
-					case 'b': choice[a][b] = violet; break;
-					case 'n': choice[a][b] = orange; break;
-					case 'm': choice[a][b] = brown;	 break;
-					default: break;
-				}
-				if (choice[a][b] == solution[a] && choice[a][b] != 0)
-					verifier[a][b] = 1;
-				done = true;
-			}
-		}
+	switch (key) {
+		case '1': choice[s][r] = red;		break;
+		case '2': choice[s][r] = blue;		break;
+		case '3': choice[s][r] = green;		break;
+		case '4': choice[s][r] = yellow;	break;
+		case '5': choice[s][r] = violet;	break;
+		case '6': choice[s][r] = orange;	break;
+		case '7': choice[s][r] = brown;		break;
+		default: break;
 	}
+	if (choice[s][r] != 0) {
+		if (choice[s][r] == solution[s])
+			verifier[s][r] = true;
+		s++;
+		s %= 5;
+		if (s == 0) 
+			r++;
+	}
+}
+
+void print(){
+	for (int j = 0; j < 10; j++) {
+		for (int i = 0; i < 5; i++) {
+			if (verifier[i][j])
+				cout << 1;
+			else 
+				cout << 0;
+		}
+		cout << endl;
+	}
+	cout << endl;
 }
 void reshape(int width, int height) {
 	glViewport(0, 0, width, height); 
@@ -121,12 +139,14 @@ void reshape(int width, int height) {
     display();
 }
 void reset() {
-	g = p = false;
+	fail = win = false;
+	s = r = 0;
 	for (int a = 0; a < 5; a++)
 		solution[a] = 1 + rand() % 7;
 	for (int b = 0; b < 5; b++) {
 		for (int c = 0; c < 10; c++) {
-			choice[b][c] = verifier[b][c] = 0;
+			choice[b][c] = 0;
+			verifier[b][c] = false;
 		}
 	}	
 }
@@ -138,6 +158,7 @@ void showField() {
 		glVertex3f(-3,-3,0);
 		glVertex3f(3,-3,0);
 	glEnd();	
+	
 	glColor4d(.95,.95,.95,1);
 	glBegin(GL_QUADS);
 		glVertex3f(3,3,-3);
@@ -181,30 +202,43 @@ void showChoice() {
 }
 void chooseColor(int c) {
 	switch (c){
-		case red:	glColor4d(1.00,0.00,0.00,1.00);	break;
-		case blue:	glColor4d(0.00,0.00,1.00,1.00);	break;
-		case green:	glColor4d(0.00,1.00,0.00,1.00);	break;
-		case yellow:glColor4d(1.00,1.00,0.00,1.00);	break;
-		case violet:glColor4d(1.00,0.00,1.00,1.00); break;
-		case orange:glColor4d(1.00,0.50,0.25,1.00);	break;
-		case brown:	glColor4d(0.50,0.25,0.00,1.00);	break;
+		case red:
+			glColor4d(1.00,0.00,0.00,1.00);
+			break;
+		case blue:	
+			glColor4d(0.00,0.00,1.00,1.00);	
+			break;
+		case green:	
+			glColor4d(0.00,1.00,0.00,1.00);	
+			break;
+		case yellow:
+			glColor4d(1.00,1.00,0.00,1.00);
+			break;
+		case violet:
+			glColor4d(1.00,0.00,1.00,1.00); 
+			break;
+		case orange:
+			glColor4d(1.00,0.50,0.25,1.00);	
+			break;
+		case brown:	
+			glColor4d(0.50,0.25,0.00,1.00);	
+			break;
 	}
+	
 }
 void showCode () {
 	for (int a = 0; a < 5; a++) {	
 		chooseColor(solution[a]);
-		if (solution[a] != 0) {
-			drawSphere(a/1.5 - 2.5, 2.777, -1.926, 10, 10, 0.2);
-		}
+		drawSphere(a/1.5 - 2.5, 2.777, -1.926, 10, 10, 0.2);
 	}
 	
 }
 void showVerification(){
 	for (int a = 0; a < 5; a++) {
 		for (int b = 0; b < 10; b++) {
-			if (verifier[a][b] == 1) {
+			if (verifier[a][b]) {
 				glColor4d (0,0,0,0);
-				drawSphere (a/3.1 + 1.2, b/1.99 - 2.75, -(b/1.99 - 2.75)/3 - 1, 10, 10, 0.1);
+				drawSphere(a/3.1 + 1.2, b/1.99 - 2.75, -(b/1.99 - 2.75)/3 - 1, 10, 10, 0.1);
 			}
 		}
 	}
@@ -234,36 +268,30 @@ void showArrow() {
 	}
 	drawArrow(arrow_x, arrow_y, arrow_z);
 }
-void gagner() {
-	for (int b = 0; b < 10; b++) {
-		for (int a = 0; a < 5; a++) {
-			if (verifier[a][b] != 1)
-				break;
-			if (a == 4)
-				g = true;
-		}
+
+
+using namespace std;
+
+void isEnd() {
+	for (int j = 0; j < 5; j++) {
+		if (!verifier[j][r-1]) break;
+		if (j == 4) win = true;
 	}
-	if (g) {
-		glColor4d(0,0,0,1);
-		drawText(250, 200, "gagner");
-	}
-}
-void perdu() {
-	if (choice[4][9] != 0)
-		p = true;
-	if (p) {
-		glColor4d(0,0,0,1);
-		drawText(250, 200, "perdu");
+	if (!win) {
+		if (choice[4][9] != 0)
+			fail = true;
 	}
 }
+
+
 void showKeys() {
-	glColor4d(1, 0, 0, 1);
+	glColor4d(1, 1, 1, 1);
 	drawText(120, -90, "'r' restart");
-	drawText(300, -90, "'F1' = red");
-	drawText(430, -90, "'F2' = blue");
-	drawText(560, -90, "'F3' = green");
-	drawText(690, -90, "'F4' = yellow");
-	drawText(300, -60, "'F5' = violet");
-	drawText(430, -60, "'F6' = orange");
-	drawText(560, -60, "'F7' = brown");
+	drawText(300, -90, "'1' = red");
+	drawText(430, -90, "'2' = blue");
+	drawText(560, -90, "'3' = green");
+	drawText(690, -90, "'4' = yellow");
+	drawText(300, -60, "'5' = violet");
+	drawText(430, -60, "'6' = orange");
+	drawText(560, -60, "'7' = brown");
 }

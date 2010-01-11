@@ -1,10 +1,10 @@
 TUntitled
 v7
 r0
-t284909129.006711
+t284919851.879216
 cCheck dependencies
-cCompileC build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/main.o "/Users/auti/Desktop/Computer Grafik/main.cpp" normal i386 c++ com.apple.compilers.gcc.4_2
-cLd "/Users/auti/Desktop/Computer Grafik/build/Debug/Untitled" normal i386
+cCompileC build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/main.o "/Users/auti/Desktop/trunk/Computer Grafik/main.cpp" normal i386 c++ com.apple.compilers.gcc.4_2
+cLd "/Users/auti/Desktop/trunk/Computer Grafik/build/Debug/Untitled" normal i386
 
 N/Developer/SDKs/MacOSX10.6.sdk
 c000000004ABBF0FD00000000000000EE
@@ -25,6 +25,11 @@ N/Developer/SDKs/MacOSX10.6.sdk/usr/include/math.h
 c000000004A5C14A000000000000004F1
 t1247548576
 s1265
+
+N/Developer/SDKs/MacOSX10.6.sdk/usr/include/stdio.h
+c000000004A5C14A70000000000004174
+t1247548583
+s16756
 
 N/System/Library/Frameworks/GLUT.framework/GLUT
 c000000004A12475500000000001A2920
@@ -86,9 +91,54 @@ c000000004B4AF18A0000000000000FAB
 t1263202698
 s4011
 
+N/Users/auti/Desktop/trunk/Computer Grafik/build/Debug/Untitled
+t1263227051
+s46344
+
+N/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/Untitled.LinkFileList
+c000000004B4B2A4A0000000000000078
+t1263217226
+s120
+
+N/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/main.o
+t1263227051
+s128508
+
+N/Users/auti/Desktop/trunk/Computer Grafik/common/cg_common.h
+c000000004B4B27B6000000000000028D
+t1263216566
+s653
+i<cmath>
+i<cstdlib>
+i<windows.h>
+i<OpenGL/gl.h>
+i<GLUT/glut.h>
+i<GL/gl.h>
+i<GL/glut.h>
+
+N/Users/auti/Desktop/trunk/Computer Grafik/main.cpp
+c000000004B4B4EEA00000000000017D9
+t1263226602
+s6105
+i<ctime>
+i<math.h>
+i"common/cg_common.h"
+i"main.h"
+i"primitives.h"
+
+N/Users/auti/Desktop/trunk/Computer Grafik/main.h
+c000000004B4B3A1D0000000000000360
+t1263221277
+s864
+
+N/Users/auti/Desktop/trunk/Computer Grafik/primitives.h
+c000000004B4B51AE0000000000000FA6
+t1263227310
+s4006
+
 CCheck dependencies
 r0
-lSLF07#2@18"Check dependencies284909128#284909128#0(0"0(0#1#0"4300885448#0"0#
+lSLF07#2@18"Check dependencies284919851#284919851#0(0"0(0#1#0"4300885448#0"0#
 
 CCompileC build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/main.o "/Users/auti/Desktop/Computer Grafik/main.cpp" normal i386 c++ com.apple.compilers.gcc.4_2
 s284909128.747479
@@ -103,6 +153,28 @@ xc++
 xcom.apple.compilers.gcc.4_2
 lSLF07#2@52"Compile /Users/auti/Desktop/Computer Grafik/main.cpp284909128#284909128#0(0"0(0#0#44"/Users/auti/Desktop/Computer Grafik/main.cpp4300885448#1402"    cd "/Users/auti/Desktop/Computer Grafik"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D_GLIBCXX_DEBUG=1 -D_GLIBCXX_DEBUG_PEDANTIC=1 -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -fvisibility-inlines-hidden -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/auti/Desktop/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-generated-files.hmap" "-I/Users/auti/Desktop/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-own-target-headers.hmap" "-I/Users/auti/Desktop/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-all-target-headers.hmap" -iquote "/Users/auti/Desktop/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-project-headers.hmap" "-F/Users/auti/Desktop/Computer Grafik/build/Debug" "-I/Users/auti/Desktop/Computer Grafik/build/Debug/include" "-I/Users/auti/Desktop/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/DerivedSources/i386" "-I/Users/auti/Desktop/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/DerivedSources" -c "/Users/auti/Desktop/Computer Grafik/main.cpp" -o "/Users/auti/Desktop/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/main.o"0#
 
+CCompileC build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/main.o "/Users/auti/Desktop/trunk/Computer Grafik/main.cpp" normal i386 c++ com.apple.compilers.gcc.4_2
+s284919851.270798
+e284919851.851389
+r1
+xCompileC
+xbuild/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/main.o
+x/Users/auti/Desktop/trunk/Computer Grafik/main.cpp
+xnormal
+xi386
+xc++
+xcom.apple.compilers.gcc.4_2
+o/Users/auti/Desktop/trunk/Computer Grafik/main.cpp: In function 'void showKeys()':
+o/Users/auti/Desktop/trunk/Computer Grafik/main.cpp:289: warning: deprecated conversion from string constant to 'char*'
+o/Users/auti/Desktop/trunk/Computer Grafik/main.cpp:290: warning: deprecated conversion from string constant to 'char*'
+o/Users/auti/Desktop/trunk/Computer Grafik/main.cpp:291: warning: deprecated conversion from string constant to 'char*'
+o/Users/auti/Desktop/trunk/Computer Grafik/main.cpp:292: warning: deprecated conversion from string constant to 'char*'
+o/Users/auti/Desktop/trunk/Computer Grafik/main.cpp:293: warning: deprecated conversion from string constant to 'char*'
+o/Users/auti/Desktop/trunk/Computer Grafik/main.cpp:294: warning: deprecated conversion from string constant to 'char*'
+o/Users/auti/Desktop/trunk/Computer Grafik/main.cpp:295: warning: deprecated conversion from string constant to 'char*'
+o/Users/auti/Desktop/trunk/Computer Grafik/main.cpp:296: warning: deprecated conversion from string constant to 'char*'
+lSLF07#2@58"Compile /Users/auti/Desktop/trunk/Computer Grafik/main.cpp284919851#284919851#0(1035"/Users/auti/Desktop/trunk/Computer Grafik/main.cpp: In function 'void showKeys()':/Users/auti/Desktop/trunk/Computer Grafik/main.cpp:289: warning: deprecated conversion from string constant to 'char*'/Users/auti/Desktop/trunk/Computer Grafik/main.cpp:290: warning: deprecated conversion from string constant to 'char*'/Users/auti/Desktop/trunk/Computer Grafik/main.cpp:291: warning: deprecated conversion from string constant to 'char*'/Users/auti/Desktop/trunk/Computer Grafik/main.cpp:292: warning: deprecated conversion from string constant to 'char*'/Users/auti/Desktop/trunk/Computer Grafik/main.cpp:293: warning: deprecated conversion from string constant to 'char*'/Users/auti/Desktop/trunk/Computer Grafik/main.cpp:294: warning: deprecated conversion from string constant to 'char*'/Users/auti/Desktop/trunk/Computer Grafik/main.cpp:295: warning: deprecated conversion from string constant to 'char*'/Users/auti/Desktop/trunk/Computer Grafik/main.cpp:296: warning: deprecated conversion from string constant to 'char*'8(22@53"Deprecated conversion from string constant to 'char*'284919851#83#119#0(6@50"/Users/auti/Desktop/trunk/Computer Grafik/main.cpp284919402#289#0#289#0#49"deprecated conversion from string constant to '*'0(22@53"Deprecated conversion from string constant to 'char*'284919851#202#119#0(6@50"/Users/auti/Desktop/trunk/Computer Grafik/main.cpp284919402#290#0#290#0#49"deprecated conversion from string constant to '*'0(22@53"Deprecated conversion from string constant to 'char*'284919851#321#119#0(6@50"/Users/auti/Desktop/trunk/Computer Grafik/main.cpp284919402#291#0#291#0#49"deprecated conversion from string constant to '*'0(22@53"Deprecated conversion from string constant to 'char*'284919851#440#119#0(6@50"/Users/auti/Desktop/trunk/Computer Grafik/main.cpp284919402#292#0#292#0#49"deprecated conversion from string constant to '*'0(22@53"Deprecated conversion from string constant to 'char*'284919851#559#119#0(6@50"/Users/auti/Desktop/trunk/Computer Grafik/main.cpp284919402#293#0#293#0#49"deprecated conversion from string constant to '*'0(22@53"Deprecated conversion from string constant to 'char*'284919851#678#119#0(6@50"/Users/auti/Desktop/trunk/Computer Grafik/main.cpp284919402#294#0#294#0#49"deprecated conversion from string constant to '*'0(22@53"Deprecated conversion from string constant to 'char*'284919851#797#119#0(6@50"/Users/auti/Desktop/trunk/Computer Grafik/main.cpp284919402#295#0#295#0#49"deprecated conversion from string constant to '*'0(22@53"Deprecated conversion from string constant to 'char*'284919851#916#119#0(6@50"/Users/auti/Desktop/trunk/Computer Grafik/main.cpp284919402#296#0#296#0#49"deprecated conversion from string constant to '*'0(0#0#50"/Users/auti/Desktop/trunk/Computer Grafik/main.cpp4300885448#1468"    cd "/Users/auti/Desktop/trunk/Computer Grafik"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D_GLIBCXX_DEBUG=1 -D_GLIBCXX_DEBUG_PEDANTIC=1 -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -fvisibility-inlines-hidden -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-generated-files.hmap" "-I/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-own-target-headers.hmap" "-I/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-all-target-headers.hmap" -iquote "/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-project-headers.hmap" "-F/Users/auti/Desktop/trunk/Computer Grafik/build/Debug" "-I/Users/auti/Desktop/trunk/Computer Grafik/build/Debug/include" "-I/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/DerivedSources/i386" "-I/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/DerivedSources" -c "/Users/auti/Desktop/trunk/Computer Grafik/main.cpp" -o "/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/main.o"0#
+
 CLd "/Users/auti/Desktop/Computer Grafik/build/Debug/Untitled" normal i386
 s284909128.955918
 e284909129.006658
@@ -112,4 +184,14 @@ x/Users/auti/Desktop/Computer Grafik/build/Debug/Untitled
 xnormal
 xi386
 lSLF07#2@61"Link /Users/auti/Desktop/Computer Grafik/build/Debug/Untitled284909128#284909129#0(0"0(0#0#0"4300885448#709"    cd "/Users/auti/Desktop/Computer Grafik"    setenv MACOSX_DEPLOYMENT_TARGET 10.6    /Developer/usr/bin/g++-4.2 -arch i386 -isysroot /Developer/SDKs/MacOSX10.6.sdk "-L/Users/auti/Desktop/Computer Grafik/build/Debug" "-L/Users/auti/Desktop/Computer Grafik/glut/windows/lib" "-L/Users/auti/Desktop/Computer Grafik/windows/lib" "-L/Users/auti/Desktop/Computer Grafik/common/glut/windows/lib" "-F/Users/auti/Desktop/Computer Grafik/build/Debug" -filelist "/Users/auti/Desktop/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/Untitled.LinkFileList" -mmacosx-version-min=10.6 -framework OpenGL -framework GLUT -o "/Users/auti/Desktop/Computer Grafik/build/Debug/Untitled"0#
+
+CLd "/Users/auti/Desktop/trunk/Computer Grafik/build/Debug/Untitled" normal i386
+s284919851.851503
+e284919851.879162
+r1
+xLd
+x/Users/auti/Desktop/trunk/Computer Grafik/build/Debug/Untitled
+xnormal
+xi386
+lSLF07#2@67"Link /Users/auti/Desktop/trunk/Computer Grafik/build/Debug/Untitled284919851#284919851#0(0"0(0#0#0"4300885448#757"    cd "/Users/auti/Desktop/trunk/Computer Grafik"    setenv MACOSX_DEPLOYMENT_TARGET 10.6    /Developer/usr/bin/g++-4.2 -arch i386 -isysroot /Developer/SDKs/MacOSX10.6.sdk "-L/Users/auti/Desktop/trunk/Computer Grafik/build/Debug" "-L/Users/auti/Desktop/trunk/Computer Grafik/glut/windows/lib" "-L/Users/auti/Desktop/trunk/Computer Grafik/windows/lib" "-L/Users/auti/Desktop/trunk/Computer Grafik/common/glut/windows/lib" "-F/Users/auti/Desktop/trunk/Computer Grafik/build/Debug" -filelist "/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/Untitled.LinkFileList" -mmacosx-version-min=10.6 -framework OpenGL -framework GLUT -o "/Users/auti/Desktop/trunk/Computer Grafik/build/Debug/Untitled"0#
 

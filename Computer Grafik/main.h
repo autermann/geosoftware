@@ -1,5 +1,7 @@
 #ifndef MAIN_H
 #define MAIN_H
+#include <cstdio>
+#include <iostream>
 
 #define red 1
 #define blue 2
@@ -9,6 +11,7 @@
 #define orange 6
 #define brown 7
 #define PI 3.14159265
+using namespace std;
 
 int main(int, char**);
 
@@ -33,11 +36,11 @@ void showVerification();
 
 /* util */
 void chooseColor(int);
+void print();
 
 /* game */
 void choose(int);
-void gagner();
-void perdu();
+void isEnd();
 void reset();
 void showKeys();
 
