@@ -37,6 +37,7 @@ void showVerification();
 /* util */
 void chooseColor(int);
 void print();
+int getColorFromKeyCode(int);
 
 /* game */
 void choose(int);

@@ -3,6 +3,7 @@
 #include "common/cg_common.h"
 #include "main.h"
 #include "primitives.h"
+
 Vector eye;
 int solution[5];
 bool verifier[5][10];
@@ -11,6 +12,42 @@ float arrow_x = -3.5, arrow_y, arrow_z;
 int s = 0, r = 0;
 bool win = false, fail = false;
 bool mvmt_arrow = true;
+
+void menu(int i){
+	switch (i) {
+		case 10:
+			reset();
+			display();
+			break;
+		case 11:
+			exit(0);
+			break;
+		default:
+			break;
+	}
+}
+
+void menuColor(int i){
+	choose(i);
+	display();
+}
+
+void createMenu(){
+	int submenu = glutCreateMenu(menuColor);
+	glutAddMenuEntry("Red\t\t\t1", red);
+	glutAddMenuEntry("Blue\t\t2", blue);
+	glutAddMenuEntry("Green\t\t3", green);
+	glutAddMenuEntry("Yellow\t\t4", yellow);
+	glutAddMenuEntry("Violet\t\t5", violet);
+	glutAddMenuEntry("Orange\t\t6", orange);
+	glutAddMenuEntry("Brown\t\t7", brown);
+	glutCreateMenu(menu);
+	glutAddMenuEntry("Restart\t\tR", 10);
+	glutAddMenuEntry("Exit\t\t\tESC", 11);	
+	glutAddSubMenu("Colors", submenu);
+	glutAttachMenu(GLUT_RIGHT_BUTTON);
+	
+}
 
 
 int main(int argc, char** argv) {
@@ -23,6 +60,7 @@ int main(int argc, char** argv) {
 	glDepthMask(GL_TRUE);
     glDepthFunc(GL_LESS);
 	glShadeModel(GL_SMOOTH);
+	createMenu();
 	glClearColor(0, 0, 0, 1);
 	srand(time(0));
 	reset();
@@ -30,12 +68,13 @@ int main(int argc, char** argv) {
     glutReshapeFunc(reshape);
 	glutIdleFunc(idle);
     glutKeyboardFunc(key);
-    
 	glutMainLoop();
 }
+
+
 int frame_count = 0;
 void idle(){
-	frame_count = ++frame_count % 200;
+	frame_count = ++frame_count % 300;
 	if (frame_count == 0)
 		display();
 }
@@ -44,14 +83,12 @@ void display() {
 	glMatrixMode (GL_MODELVIEW);
 	glLoadIdentity ();
 	gluLookAt(9 * sin(eye.x), eye.y,  9 * cos(eye.z), 0, 0, 0, 0, 10, 0);
-	isEnd();
 	showField();
 	showChoice();
 	if (win || fail) 
 		showCode();
 	showVerification();
 	showArrow();
-	showKeys();
 	glutSwapBuffers();
 	print();
 }
@@ -92,30 +129,38 @@ void key(unsigned char k,int,int) {
 			break;
 		default:
 			if (!win && !fail){
-				choose(k);
+				choose(getColorFromKeyCode(k));
+				isEnd();
 				display();
 			}
 			break;
 	}
 }
-void choose(int key) {
+
+int getColorFromKeyCode(int key){
 	switch (key) {
-		case '1': choice[s][r] = red;		break;
-		case '2': choice[s][r] = blue;		break;
-		case '3': choice[s][r] = green;		break;
-		case '4': choice[s][r] = yellow;	break;
-		case '5': choice[s][r] = violet;	break;
-		case '6': choice[s][r] = orange;	break;
-		case '7': choice[s][r] = brown;		break;
-		default: break;
+		case '1': return red;
+		case '2': return blue;
+		case '3': return green;
+		case '4': return yellow;
+		case '5': return violet;
+		case '6': return orange;
+		case '7': return brown;
+		default: return -1;
 	}
-	if (choice[s][r] != 0) {
-		if (choice[s][r] == solution[s])
-			verifier[s][r] = true;
-		s++;
-		s %= 5;
-		if (s == 0) 
-			r++;
+}
+
+void choose(int color) {
+	if (color != -1){
+		choice[s][r] = color;
+		if (choice[s][r] != 0) {
+			if (choice[s][r] == solution[s])
+				verifier[s][r] = true;
+			s++;	
+			s %= 5;
+			if (s == 0) 
+				r++;
+		}
 	}
 }
 
@@ -281,17 +326,4 @@ void isEnd() {
 		if (choice[4][9] != 0)
 			fail = true;
 	}
-}
-
-
-void showKeys() {
-	glColor4d(1, 1, 1, 1);
-	drawText(120, -90, "'r' restart");
-	drawText(300, -90, "'1' = red");
-	drawText(430, -90, "'2' = blue");
-	drawText(560, -90, "'3' = green");
-	drawText(690, -90, "'4' = yellow");
-	drawText(300, -60, "'5' = violet");
-	drawText(430, -60, "'6' = orange");
-	drawText(560, -60, "'7' = brown");
 }

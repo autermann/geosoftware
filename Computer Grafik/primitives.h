@@ -1,12 +1,6 @@
 #ifndef PRIMITIVES_H
 #define PRIMITIVES_H
 
-void drawText(int x, int y, char *str){
-	glRasterPos3i(x, y, 0);
-	char *c;
-    for (c = str; *c != '\0'; c++)
-        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *c);
-}
 void drawCube(double x, double y, double z, double size) {
 	size /= 2;
 	glPushMatrix();
@@ -38,6 +32,7 @@ void drawCube(double x, double y, double z, double size) {
 	glEnd();
 	glPopMatrix();
 }
+
 void drawSphere(double x, double y, double z, double paralleles, double meridiens, double radius) {
 	double DOUBLE_PI = 2 * PI, Theta, Theta2, Phi, Vx, Vy, Vz;
 	glPushMatrix ();
@@ -62,6 +57,7 @@ void drawSphere(double x, double y, double z, double paralleles, double meridien
 	}
 	glPopMatrix ();
 }
+
 void drawArrow(float x, float y, float z) {
 	float l = 0.15f, h = 0.15f, p = 0.45f;
 	glPushMatrix();
