@@ -296,7 +296,7 @@
 							<real>246</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>1 104 1280 673 0 0 1280 778 </string>
+						<string>0 105 1280 673 0 0 1280 778 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -326,10 +326,9 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>CA621B9F10FB97CC00C061A6</string>
+										<string>CAF4431110FC027C0086CDFB</string>
 										<key>history</key>
 										<array>
-											<string>CA16BC1210FA5E0400B6953E</string>
 											<string>CADD531410FB55A000B0BECD</string>
 											<string>CADD531510FB55A000B0BECD</string>
 											<string>CADD531610FB55A000B0BECD</string>
@@ -338,10 +337,9 @@
 											<string>CADD531C10FB55A000B0BECD</string>
 											<string>CADD531F10FB55A000B0BECD</string>
 											<string>CADD532010FB55A000B0BECD</string>
-											<string>CA621B1910FB8DAC00C061A6</string>
-											<string>CA621B9310FB979500C061A6</string>
-											<string>CA621B9C10FB97CC00C061A6</string>
-											<string>CA621B9D10FB97CC00C061A6</string>
+											<string>CAF442AA10FBFEA20086CDFB</string>
+											<string>CAF442F810FC00A80086CDFB</string>
+											<string>CAF442E710FBFFDB0086CDFB</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -353,14 +351,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {1012, 624}}</string>
+								<string>{{0, 0}, {1012, 391}}</string>
 								<key>RubberWindowFrame</key>
-								<string>1 104 1280 673 0 0 1280 778 </string>
+								<string>0 105 1280 673 0 0 1280 778 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>624pt</string>
+							<string>391pt</string>
 						</dict>
 						<dict>
 							<key>ContentConfiguration</key>
@@ -373,14 +371,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 629}, {1012, 3}}</string>
+								<string>{{0, 396}, {1012, 236}}</string>
 								<key>RubberWindowFrame</key>
-								<string>1 104 1280 673 0 0 1280 778 </string>
+								<string>0 105 1280 673 0 0 1280 778 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
 							<key>Proportion</key>
-							<string>3pt</string>
+							<string>236pt</string>
 						</dict>
 					</array>
 					<key>Proportion</key>
@@ -399,9 +397,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>CA621B9710FB979500C061A6</string>
+				<string>CAF4429C10FBFDF00086CDFB</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>CA621B9810FB979500C061A6</string>
+				<string>CAF4429D10FBFDF00086CDFB</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -539,15 +537,15 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>CA621B9A10FB979500C061A6</string>
-		<string>CA621B9B10FB979500C061A6</string>
+		<string>CAF4429E10FBFDF00086CDFB</string>
+		<string>CAF4429F10FBFDF00086CDFB</string>
 		<string>1C78EAAD065D492600B07095</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>CA65DFA810FA295F009CD359</string>
 		<string>/Users/auti/Desktop/trunk/Computer Grafik/Weihnachtsaufgabe.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>1 104 1280 673 0 0 1280 778 </string>
+	<string>0 105 1280 673 0 0 1280 778 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>
@@ -563,12 +561,14 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string></string>
+								<string>main.h</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -624,7 +624,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>CA65DFA810FA295F009CD359</string>
-				<string>CA621B6F10FB941000C061A6</string>
+				<string>CAF4427C10FBFC650086CDFB</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -746,13 +746,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>CA621B7010FB941000C061A6</string>
+				<string>CAF4427D10FBFC650086CDFB</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>CA621B7110FB941000C061A6</string>
-				<string>CA621B7210FB941000C061A6</string>
-				<string>CA621B7310FB941000C061A6</string>
-				<string>CA621B7410FB941000C061A6</string>
-				<string>CA621B7510FB941000C061A6</string>
+				<string>CAF4427E10FBFC650086CDFB</string>
+				<string>CAF4427F10FBFC650086CDFB</string>
+				<string>CAF4428010FBFC650086CDFB</string>
+				<string>CAF4428110FBFC650086CDFB</string>
+				<string>CAF4428210FBFC650086CDFB</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -871,8 +871,6 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -908,7 +906,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>CA621B7610FB941000C061A6</string>
+				<string>CAF4428310FBFC650086CDFB</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>

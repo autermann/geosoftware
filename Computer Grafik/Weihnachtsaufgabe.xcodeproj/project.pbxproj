@@ -29,7 +29,6 @@
 /* Begin PBXFileReference section */
 		8DD76F6C0486A84900D96B5E /* Untitled */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Untitled; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6859E8B029090EE04C91782 /* Untitled.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Untitled.1; sourceTree = "<group>"; };
-		CA4F393310FB28CD00BFBA6D /* primitives.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = primitives.h; sourceTree = "<group>"; };
 		CA65DFB010FA29CF009CD359 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		CA65DFB110FA29CF009CD359 /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
 		CA65DFDC10FA2ACE009CD359 /* cg_common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cg_common.h; sourceTree = "<group>"; };
@@ -74,7 +73,6 @@
 			children = (
 				CA65DFB010FA29CF009CD359 /* main.cpp */,
 				CA65DFB110FA29CF009CD359 /* main.h */,
-				CA4F393310FB28CD00BFBA6D /* primitives.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";
