@@ -1,138 +1,0 @@
-TUntitled
-v7
-r0
-t284906631.991382
-cCheck dependencies
-cCompileC build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/main.o "/Users/auti/Desktop/Computer Grafik/main.cpp" normal i386 c++ com.apple.compilers.gcc.4_2
-cLd "/Users/auti/Desktop/Computer Grafik/build/Debug/Untitled" normal i386
-
-N/Developer/SDKs/MacOSX10.6.sdk
-c000000004ABBF0FD00000000000000EE
-t1253830909
-s238
-
-N/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/GLUT.framework/Headers/glut.h
-c000000004A124745000000000000578C
-t1242711877
-s22412
-
-N/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/OpenGL.framework/Headers/gl.h
-c000000004AB9B2870000000000025B59
-t1253683847
-s154457
-
-N/Developer/SDKs/MacOSX10.6.sdk/usr/include/math.h
-c000000004A5C14A000000000000004F1
-t1247548576
-s1265
-
-N/System/Library/Frameworks/OpenGL.framework/OpenGL
-c000000004AF07C310000000000040130
-t1257274417
-s262448
-
-N/Users/auti/Desktop/Computer Grafik/build/Debug/Untitled
-t2
-s0
-
-N/Users/auti/Desktop/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/Untitled.LinkFileList
-c000000004B4B1D070000000000000072
-t1263213831
-s114
-
-N/Users/auti/Desktop/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/main.o
-t1263213831
-s38340
-
-N/Users/auti/Desktop/Computer Grafik/common/cg_common.h
-c000000004ADC90FC000000000000028D
-t1255969020
-s653
-i<cmath>
-i<cstdlib>
-i<windows.h>
-i<OpenGL/gl.h>
-i<GLUT/glut.h>
-i<GL/gl.h>
-i<GL/glut.h>
-
-N/Users/auti/Desktop/Computer Grafik/common/glut/windows/lib/glut32.lib
-c000000004AD38F7E0000000000007038
-t1255378814
-s28728
-
-N/Users/auti/Desktop/Computer Grafik/main.cpp
-c000000004B4B1CCE000000000000176C
-t1263213774
-s5996
-i<ctime>
-i<math.h>
-i"common/cg_common.h"
-i"main.h"
-i"primitives.h"
-
-N/Users/auti/Desktop/Computer Grafik/main.h
-c000000004B4AF5CE0000000000000326
-t1263203790
-s806
-
-N/Users/auti/Desktop/Computer Grafik/primitives.h
-c000000004B4AF18A0000000000000FAB
-t1263202698
-s4011
-
-CCheck dependencies
-r0
-lSLF07#2@18"Check dependencies284906631#284906631#0(0"0(0#1#0"27866456492998768#0"0#
-
-CCompileC build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/main.o "/Users/auti/Desktop/Computer Grafik/main.cpp" normal i386 c++ com.apple.compilers.gcc.4_2
-s284906631.479368
-e284906631.842329
-r1
-xCompileC
-xbuild/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/main.o
-x/Users/auti/Desktop/Computer Grafik/main.cpp
-xnormal
-xi386
-xc++
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@52"Compile /Users/auti/Desktop/Computer Grafik/main.cpp284906631#284906631#0(0"0(0#0#44"/Users/auti/Desktop/Computer Grafik/main.cpp7665776580704888832#1402"    cd "/Users/auti/Desktop/Computer Grafik"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D_GLIBCXX_DEBUG=1 -D_GLIBCXX_DEBUG_PEDANTIC=1 -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -fvisibility-inlines-hidden -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/auti/Desktop/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-generated-files.hmap" "-I/Users/auti/Desktop/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-own-target-headers.hmap" "-I/Users/auti/Desktop/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-all-target-headers.hmap" -iquote "/Users/auti/Desktop/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-project-headers.hmap" "-F/Users/auti/Desktop/Computer Grafik/build/Debug" "-I/Users/auti/Desktop/Computer Grafik/build/Debug/include" "-I/Users/auti/Desktop/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/DerivedSources/i386" "-I/Users/auti/Desktop/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/DerivedSources" -c "/Users/auti/Desktop/Computer Grafik/main.cpp" -o "/Users/auti/Desktop/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/main.o"0#
-
-CLd "/Users/auti/Desktop/Computer Grafik/build/Debug/Untitled" normal i386
-s284906631.842492
-e284906631.991267
-r0
-xLd
-x/Users/auti/Desktop/Computer Grafik/build/Debug/Untitled
-xnormal
-xi386
-old: warning: in /Users/auti/Desktop/Computer Grafik/common/glut/windows/lib/glut32.lib, file is not of required architecture
-oUndefined symbols:
-o  "_glutInitWindowSize", referenced from:
-o      _main in main.o
-o  "_glutBitmapCharacter", referenced from:
-o      drawText(int, int, char const*)in main.o
-o  "_glutDisplayFunc", referenced from:
-o      _main in main.o
-o  "_glutInitDisplayMode", referenced from:
-o      _main in main.o
-o  "_glutIdleFunc", referenced from:
-o      _main in main.o
-o  "_glutCreateWindow", referenced from:
-o      _main in main.o
-o  "_glutMainLoop", referenced from:
-o      _main in main.o
-o  "_glutReshapeFunc", referenced from:
-o      _main in main.o
-o  "_glutInit", referenced from:
-o      _main in main.o
-o  "_glutBitmap8By13", referenced from:
-o      _glutBitmap8By13$non_lazy_ptr in main.o
-o  "_glutKeyboardFunc", referenced from:
-o      _main in main.o
-o  "_glutSwapBuffers", referenced from:
-o      display()    in main.o
-old: symbol(s) not found
-ocollect2: ld returned 1 exit status
-lSLF07#2@61"Link /Users/auti/Desktop/Computer Grafik/build/Debug/Untitled284906631#284906631#0(992"ld: warning: in /Users/auti/Desktop/Computer Grafik/common/glut/windows/lib/glut32.lib, file is not of required architectureUndefined symbols:  "_glutInitWindowSize", referenced from:      _main in main.o  "_glutBitmapCharacter", referenced from:      drawText(int, int, char const*)in main.o  "_glutDisplayFunc", referenced from:      _main in main.o  "_glutInitDisplayMode", referenced from:      _main in main.o  "_glutIdleFunc", referenced from:      _main in main.o  "_glutCreateWindow", referenced from:      _main in main.o  "_glutMainLoop", referenced from:      _main in main.o  "_glutReshapeFunc", referenced from:      _main in main.o  "_glutInit", referenced from:      _main in main.o  "_glutBitmap8By13", referenced from:      _glutBitmap8By13$non_lazy_ptr in main.o  "_glutKeyboardFunc", referenced from:      _main in main.o  "_glutSwapBuffers", referenced from:      display()    in main.old: symbol(s) not foundcollect2: ld returned 1 exit status27(22@111"In /Users/auti/Desktop/Computer Grafik/common/glut/windows/lib/glut32.lib, file is not of required architecture284906631#0#125#0(6@0"284906631#0#0#0#0#0"0(4@39""_glutInitWindowSize", referenced from:284906631#144#42#0(6@0"284906631#0#0#0#0#0"0(13@15"_main in main.o284906631#186#22#0(6@0"284906631#0#0#0#0#0"0(4@40""_glutBitmapCharacter", referenced from:284906631#208#43#0(6@0"284906631#0#0#0#0#0"0(13@40"DrawText(int, int, char const*)in main.o284906631#251#47#0(6@0"284906631#0#0#0#0#0"0(4@36""_glutDisplayFunc", referenced from:284906631#298#39#0(6@0"284906631#0#0#0#0#0"0(13@15"_main in main.o284906631#337#22#0(6@0"284906631#0#0#0#0#0"0(4@40""_glutInitDisplayMode", referenced from:284906631#359#43#0(6@0"284906631#0#0#0#0#0"0(13@15"_main in main.o284906631#402#22#0(6@0"284906631#0#0#0#0#0"0(4@33""_glutIdleFunc", referenced from:284906631#424#36#0(6@0"284906631#0#0#0#0#0"0(13@15"_main in main.o284906631#460#22#0(6@0"284906631#0#0#0#0#0"0(4@37""_glutCreateWindow", referenced from:284906631#482#40#0(6@0"284906631#0#0#0#0#0"0(13@15"_main in main.o284906631#522#22#0(6@0"284906631#0#0#0#0#0"0(4@33""_glutMainLoop", referenced from:284906631#544#36#0(6@0"284906631#0#0#0#0#0"0(13@15"_main in main.o284906631#580#22#0(6@0"284906631#0#0#0#0#0"0(4@36""_glutReshapeFunc", referenced from:284906631#602#39#0(6@0"284906631#0#0#0#0#0"0(13@15"_main in main.o284906631#641#22#0(6@0"284906631#0#0#0#0#0"0(4@29""_glutInit", referenced from:284906631#663#32#0(6@0"284906631#0#0#0#0#0"0(13@15"_main in main.o284906631#695#22#0(6@0"284906631#0#0#0#0#0"0(4@36""_glutBitmap8By13", referenced from:284906631#717#39#0(6@0"284906631#0#0#0#0#0"0(13@39"_glutBitmap8By13$non_lazy_ptr in main.o284906631#756#46#0(6@0"284906631#0#0#0#0#0"0(4@37""_glutKeyboardFunc", referenced from:284906631#802#40#0(6@0"284906631#0#0#0#0#0"0(13@15"_main in main.o284906631#842#22#0(6@0"284906631#0#0#0#0#0"0(4@36""_glutSwapBuffers", referenced from:284906631#864#39#0(6@0"284906631#0#0#0#0#0"0(13@22"Display()    in main.o284906631#903#29#0(6@0"284906631#0#0#0#0#0"0(13@19"Symbol(s) not found284906631#932#24#0(6@0"284906631#0#0#0#0#0"0(13@35"Collect2: ld returned 1 exit status284906631#956#36#0(6@0"284906631#0#0#0#0#0"0(0#0#0"31525674140565612#766"    cd "/Users/auti/Desktop/Computer Grafik"    setenv MACOSX_DEPLOYMENT_TARGET 10.6    /Developer/usr/bin/g++-4.2 -arch i386 -isysroot /Developer/SDKs/MacOSX10.6.sdk "-L/Users/auti/Desktop/Computer Grafik/build/Debug" "-L/Users/auti/Desktop/Computer Grafik/glut/windows/lib" "-L/Users/auti/Desktop/Computer Grafik/windows/lib" "-L/Users/auti/Desktop/Computer Grafik/common/glut/windows/lib" "-F/Users/auti/Desktop/Computer Grafik/build/Debug" -filelist "/Users/auti/Desktop/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/Untitled.LinkFileList" -mmacosx-version-min=10.6 "/Users/auti/Desktop/Computer Grafik/common/glut/windows/lib/glut32.lib" -framework OpenGL -o "/Users/auti/Desktop/Computer Grafik/build/Debug/Untitled"1#
-

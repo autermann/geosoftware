@@ -1,434 +1,0 @@
-TUntitled
-v7
-r0
-t284996706.213172
-cCheck dependencies
-cCompileC build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/main.o "/Users/auti/Desktop/Google SVN/Computer Grafik/main.cpp" normal i386 c++ com.apple.compilers.gcc.4_2
-cLd "/Users/auti/Desktop/Google SVN/Computer Grafik/build/Debug/Untitled" normal i386
-
-N/Developer/SDKs/MacOSX10.6.sdk
-c000000004ABBF0FD00000000000000EE
-t1253830909
-s238
-
-N/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/GLUT.framework/Headers/glut.h
-c000000004A124745000000000000578C
-t1242711877
-s22412
-
-N/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/OpenGL.framework/Headers/gl.h
-c000000004AB9B2870000000000025B59
-t1253683847
-s154457
-
-N/Developer/SDKs/MacOSX10.6.sdk/usr/include/math.h
-c000000004A5C14A000000000000004F1
-t1247548576
-s1265
-
-N/Developer/SDKs/MacOSX10.6.sdk/usr/include/stdio.h
-c000000004A5C14A70000000000004174
-t1247548583
-s16756
-
-N/System/Library/Frameworks/GLUT.framework/GLUT
-c000000004A12475500000000001A2920
-t1242711893
-s1714464
-
-N/System/Library/Frameworks/OpenGL.framework/OpenGL
-c000000004AF07C310000000000040130
-t1257274417
-s262448
-
-N/Users/auti/Desktop/Computer Grafik/build/Debug/Untitled
-t1263216329
-s26184
-
-N/Users/auti/Desktop/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/Untitled.LinkFileList
-c000000004B4B1D070000000000000072
-t1263213831
-s114
-
-N/Users/auti/Desktop/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/main.o
-t1263216328
-s38652
-
-N/Users/auti/Desktop/Computer Grafik/common/cg_common.h
-c000000004ADC90FC000000000000028D
-t1255969020
-s653
-i<cmath>
-i<cstdlib>
-i<windows.h>
-i<OpenGL/gl.h>
-i<GLUT/glut.h>
-i<GL/gl.h>
-i<GL/glut.h>
-
-N/Users/auti/Desktop/Computer Grafik/common/glut/windows/lib/glut32.lib
-c000000004AD38F7E0000000000007038
-t1255378814
-s28728
-
-N/Users/auti/Desktop/Computer Grafik/main.cpp
-c000000004B4B26C60000000000001773
-t1263216326
-s6003
-i<ctime>
-i<math.h>
-i"common/cg_common.h"
-i"main.h"
-i"primitives.h"
-
-N/Users/auti/Desktop/Computer Grafik/main.h
-c000000004B4AF5CE0000000000000326
-t1263203790
-s806
-
-N/Users/auti/Desktop/Computer Grafik/primitives.h
-c000000004B4AF18A0000000000000FAB
-t1263202698
-s4011
-
-N/Users/auti/Desktop/Google SVN/Computer Grafik/build/Debug/Untitled
-t1263303241
-s32776
-
-N/Users/auti/Desktop/Google SVN/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/Untitled.LinkFileList
-c000000004B4C7A41000000000000007D
-t1263303233
-s125
-
-N/Users/auti/Desktop/Google SVN/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/main.o
-t1263303240
-s80596
-
-N/Users/auti/Desktop/Google SVN/Computer Grafik/common/cg_common.h
-c000000004B4B27B6000000000000028D
-t1263216566
-s653
-i<cmath>
-i<cstdlib>
-i<windows.h>
-i<OpenGL/gl.h>
-i<GLUT/glut.h>
-i<GL/gl.h>
-i<GL/glut.h>
-
-N/Users/auti/Desktop/Google SVN/Computer Grafik/main.cpp
-c000000004B4BCA0700000000000024F8
-t1263258119
-s9464
-i"main.h"
-
-N/Users/auti/Desktop/Google SVN/Computer Grafik/main.h
-c000000004B4C7A47000000000000035B
-t1263303239
-s859
-i<ctime>
-i<math.h>
-i<cstdio>
-i<iostream>
-i"common/cg_common.h"
-
-N/Users/auti/Desktop/trunk/Computer Grafik/build/Debug/Untitled
-t1263258122
-s32760
-
-N/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/Untitled.LinkFileList
-c000000004B4BC6F90000000000000078
-t1263257337
-s120
-
-N/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/callbacks.o
-t2
-s0
-
-N/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/game.o
-t2
-s0
-
-N/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/glfont.o
-t2
-s0
-
-N/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/main.o
-t1263258120
-s80588
-
-N/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/primitives.o
-t1263256935
-s59212
-
-N/Users/auti/Desktop/trunk/Computer Grafik/callbacks.cpp
-c000000004B4BC4C90000000000000434
-t1263256777
-s1076
-i"callbacks.h"
-
-N/Users/auti/Desktop/trunk/Computer Grafik/callbacks.h
-c000000004B4BC4B4000000000000009E
-t1263256756
-s158
-i"main.h"
-
-N/Users/auti/Desktop/trunk/Computer Grafik/common/cg_common.h
-c000000004B4B27B6000000000000028D
-t1263216566
-s653
-i<cmath>
-i<cstdlib>
-i<windows.h>
-i<OpenGL/gl.h>
-i<GLUT/glut.h>
-i<GL/gl.h>
-i<GL/glut.h>
-
-N/Users/auti/Desktop/trunk/Computer Grafik/game.cpp
-c000000004B4BC5A400000000000002CF
-t1263256996
-s719
-i"game.h"
-
-N/Users/auti/Desktop/trunk/Computer Grafik/game.h
-c000000004B4BC5F80000000000000069
-t1263257080
-s105
-i"main.h"
-
-N/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp
-c000000003CDBBDE00000000000001508
-t1021033952
-s5384
-i<stdio.h>
-i"glfont.h"
-
-N/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h
-c000000003CDBBA4E0000000000000548
-t1021033038
-s1352
-i<string>
-i<GL/gl.h>
-
-N/Users/auti/Desktop/trunk/Computer Grafik/main.cpp
-c000000004B4BCA0700000000000024F8
-t1263258119
-s9464
-i"main.h"
-
-N/Users/auti/Desktop/trunk/Computer Grafik/main.h
-c000000004B4BC8FB000000000000035B
-t1263257851
-s859
-i<ctime>
-i<math.h>
-i<cstdio>
-i<iostream>
-i"common/cg_common.h"
-
-N/Users/auti/Desktop/trunk/Computer Grafik/primitives.cpp
-c000000004B4BC31B0000000000000EE1
-t1263256347
-s3809
-i"primitives.h"
-
-N/Users/auti/Desktop/trunk/Computer Grafik/primitives.h
-c000000004B4BC36F00000000000000DC
-t1263256431
-s220
-i"main.h"
-
-CCheck dependencies
-r0
-lSLF07#2@18"Check dependencies284996706#284996706#0(0"0(0#1#0"27866456492998768#0"0#
-
-CCompileC build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/callbacks.o "/Users/auti/Desktop/trunk/Computer Grafik/callbacks.cpp" normal i386 c++ com.apple.compilers.gcc.4_2
-s284949872.184941
-e284949872.602038
-r0
-xCompileC
-xbuild/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/callbacks.o
-x/Users/auti/Desktop/trunk/Computer Grafik/callbacks.cpp
-xnormal
-xi386
-xc++
-xcom.apple.compilers.gcc.4_2
-oIn file included from /Users/auti/Desktop/trunk/Computer Grafik/main.h:11,
-o                 from /Users/auti/Desktop/trunk/Computer Grafik/callbacks.h:4,
-o                 from /Users/auti/Desktop/trunk/Computer Grafik/callbacks.cpp:2:
-o/Users/auti/Desktop/trunk/Computer Grafik/game.h:12: error: expected unqualified-id before '[' token
-o/Users/auti/Desktop/trunk/Computer Grafik/callbacks.cpp: In function 'void idle()':
-o/Users/auti/Desktop/trunk/Computer Grafik/callbacks.cpp:5: error: 'frame' was not declared in this scope
-o/Users/auti/Desktop/trunk/Computer Grafik/callbacks.cpp: In function 'void display()':
-o/Users/auti/Desktop/trunk/Computer Grafik/callbacks.cpp:21: error: 'eye' was not declared in this scope
-o/Users/auti/Desktop/trunk/Computer Grafik/callbacks.cpp:24: error: 'win' was not declared in this scope
-o/Users/auti/Desktop/trunk/Computer Grafik/callbacks.cpp:24: error: 'fail' was not declared in this scope
-o/Users/auti/Desktop/trunk/Computer Grafik/callbacks.cpp: In function 'void key(unsigned char, int, int)':
-o/Users/auti/Desktop/trunk/Computer Grafik/callbacks.cpp:33: error: 'eye' was not declared in this scope
-o/Users/auti/Desktop/trunk/Computer Grafik/callbacks.cpp:40: error: 'win' was not declared in this scope
-o/Users/auti/Desktop/trunk/Computer Grafik/callbacks.cpp:40: error: 'fail' was not declared in this scope
-lSLF07#2@63"Compile /Users/auti/Desktop/trunk/Computer Grafik/callbacks.cpp284949872#284949872#0(1344"In file included from /Users/auti/Desktop/trunk/Computer Grafik/main.h:11,                 from /Users/auti/Desktop/trunk/Computer Grafik/callbacks.h:4,                 from /Users/auti/Desktop/trunk/Computer Grafik/callbacks.cpp:2:/Users/auti/Desktop/trunk/Computer Grafik/game.h:12: error: expected unqualified-id before '[' token/Users/auti/Desktop/trunk/Computer Grafik/callbacks.cpp: In function 'void idle()':/Users/auti/Desktop/trunk/Computer Grafik/callbacks.cpp:5: error: 'frame' was not declared in this scope/Users/auti/Desktop/trunk/Computer Grafik/callbacks.cpp: In function 'void display()':/Users/auti/Desktop/trunk/Computer Grafik/callbacks.cpp:21: error: 'eye' was not declared in this scope/Users/auti/Desktop/trunk/Computer Grafik/callbacks.cpp:24: error: 'win' was not declared in this scope/Users/auti/Desktop/trunk/Computer Grafik/callbacks.cpp:24: error: 'fail' was not declared in this scope/Users/auti/Desktop/trunk/Computer Grafik/callbacks.cpp: In function 'void key(unsigned char, int, int)':/Users/auti/Desktop/trunk/Computer Grafik/callbacks.cpp:33: error: 'eye' was not declared in this scope/Users/auti/Desktop/trunk/Computer Grafik/callbacks.cpp:40: error: 'win' was not declared in this scope/Users/auti/Desktop/trunk/Computer Grafik/callbacks.cpp:40: error: 'fail' was not declared in this scope8(4@40"Expected unqualified-id before '[' token284949872#235#101#4(7@77"In file included from /Users/auti/Desktop/trunk/Computer Grafik/callbacks.cpp284949872#18446744073709551615#0#0(6@55"/Users/auti/Desktop/trunk/Computer Grafik/callbacks.cpp284949577#2#0#2#0#0"0(7@75"In file included from /Users/auti/Desktop/trunk/Computer Grafik/callbacks.h284949872#18446744073709551615#0#0(6@53"/Users/auti/Desktop/trunk/Computer Grafik/callbacks.h284949556#4#0#4#0#0"0(7@70"In file included from /Users/auti/Desktop/trunk/Computer Grafik/main.h284949872#18446744073709551615#0#0(6@48"/Users/auti/Desktop/trunk/Computer Grafik/main.h284949669#11#0#11#0#0"0(13@92"Expected unqualified-id before '[' token in /Users/auti/Desktop/trunk/Computer Grafik/game.h284949872#18446744073709551615#0#0(6@48"/Users/auti/Desktop/trunk/Computer Grafik/game.h284949870#12#0#12#0#0"0(6@48"/Users/auti/Desktop/trunk/Computer Grafik/game.h284949870#12#0#12#0#19"expected * before *0(4@38"'frame' was not declared in this scope284949872#420#105#0(6@55"/Users/auti/Desktop/trunk/Computer Grafik/callbacks.cpp284949577#5#0#5#0#34"'*' was not declared in this scope0(4@36"'eye' was not declared in this scope284949872#612#104#0(6@55"/Users/auti/Desktop/trunk/Computer Grafik/callbacks.cpp284949577#21#0#21#0#34"'*' was not declared in this scope0(4@36"'win' was not declared in this scope284949872#716#104#0(6@55"/Users/auti/Desktop/trunk/Computer Grafik/callbacks.cpp284949577#24#0#24#0#34"'*' was not declared in this scope0(4@37"'fail' was not declared in this scope284949872#820#105#0(6@55"/Users/auti/Desktop/trunk/Computer Grafik/callbacks.cpp284949577#24#0#24#0#34"'*' was not declared in this scope0(4@36"'eye' was not declared in this scope284949872#1031#104#0(6@55"/Users/auti/Desktop/trunk/Computer Grafik/callbacks.cpp284949577#33#0#33#0#34"'*' was not declared in this scope0(4@36"'win' was not declared in this scope284949872#1135#104#0(6@55"/Users/auti/Desktop/trunk/Computer Grafik/callbacks.cpp284949577#40#0#40#0#34"'*' was not declared in this scope0(4@37"'fail' was not declared in this scope284949872#1239#105#0(6@55"/Users/auti/Desktop/trunk/Computer Grafik/callbacks.cpp284949577#40#0#40#0#34"'*' was not declared in this scope0(0#0#55"/Users/auti/Desktop/trunk/Computer Grafik/callbacks.cpp4300885448#1478"    cd "/Users/auti/Desktop/trunk/Computer Grafik"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D_GLIBCXX_DEBUG=1 -D_GLIBCXX_DEBUG_PEDANTIC=1 -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -fvisibility-inlines-hidden -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-generated-files.hmap" "-I/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-own-target-headers.hmap" "-I/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-all-target-headers.hmap" -iquote "/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-project-headers.hmap" "-F/Users/auti/Desktop/trunk/Computer Grafik/build/Debug" "-I/Users/auti/Desktop/trunk/Computer Grafik/build/Debug/include" "-I/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/DerivedSources/i386" "-I/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/DerivedSources" -c "/Users/auti/Desktop/trunk/Computer Grafik/callbacks.cpp" -o "/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/callbacks.o"1#
-
-CCompileC build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/game.o "/Users/auti/Desktop/trunk/Computer Grafik/game.cpp" normal i386 c++ com.apple.compilers.gcc.4_2
-s284949871.701463
-e284949872.184839
-r0
-xCompileC
-xbuild/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/game.o
-x/Users/auti/Desktop/trunk/Computer Grafik/game.cpp
-xnormal
-xi386
-xc++
-xcom.apple.compilers.gcc.4_2
-oIn file included from /Users/auti/Desktop/trunk/Computer Grafik/game.cpp:2:
-o/Users/auti/Desktop/trunk/Computer Grafik/game.h:12: error: expected unqualified-id before '[' token
-o/Users/auti/Desktop/trunk/Computer Grafik/game.cpp:41: error: expected unqualified-id before '[' token
-lSLF07#2@58"Compile /Users/auti/Desktop/trunk/Computer Grafik/game.cpp284949871#284949872#0(280"In file included from /Users/auti/Desktop/trunk/Computer Grafik/game.cpp:2:/Users/auti/Desktop/trunk/Computer Grafik/game.h:12: error: expected unqualified-id before '[' token/Users/auti/Desktop/trunk/Computer Grafik/game.cpp:41: error: expected unqualified-id before '[' token2(4@40"Expected unqualified-id before '[' token284949872#76#101#2(7@72"In file included from /Users/auti/Desktop/trunk/Computer Grafik/game.cpp284949872#18446744073709551615#0#0(6@50"/Users/auti/Desktop/trunk/Computer Grafik/game.cpp284949796#2#0#2#0#0"0(13@92"Expected unqualified-id before '[' token in /Users/auti/Desktop/trunk/Computer Grafik/game.h284949872#18446744073709551615#0#0(6@48"/Users/auti/Desktop/trunk/Computer Grafik/game.h284949870#12#0#12#0#0"0(6@48"/Users/auti/Desktop/trunk/Computer Grafik/game.h284949870#12#0#12#0#19"expected * before *0(4@40"Expected unqualified-id before '[' token284949872#177#103#0(6@50"/Users/auti/Desktop/trunk/Computer Grafik/game.cpp284949796#41#0#41#0#19"expected * before *0(0#0#50"/Users/auti/Desktop/trunk/Computer Grafik/game.cpp4300885448#1468"    cd "/Users/auti/Desktop/trunk/Computer Grafik"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D_GLIBCXX_DEBUG=1 -D_GLIBCXX_DEBUG_PEDANTIC=1 -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -fvisibility-inlines-hidden -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-generated-files.hmap" "-I/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-own-target-headers.hmap" "-I/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-all-target-headers.hmap" -iquote "/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-project-headers.hmap" "-F/Users/auti/Desktop/trunk/Computer Grafik/build/Debug" "-I/Users/auti/Desktop/trunk/Computer Grafik/build/Debug/include" "-I/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/DerivedSources/i386" "-I/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/DerivedSources" -c "/Users/auti/Desktop/trunk/Computer Grafik/game.cpp" -o "/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/game.o"1#
-
-CCompileC build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/glfont.o "/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp" normal i386 c++ com.apple.compilers.gcc.4_2
-s284920787.388521
-e284920787.753188
-r0
-xCompileC
-xbuild/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/glfont.o
-x/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp
-xnormal
-xi386
-xc++
-xcom.apple.compilers.gcc.4_2
-oIn file included from /Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:10:
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h:21:19: error: GL/gl.h: No such file or directory
-oIn file included from /Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:10:
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h:35: error: expected ',' or '...' before '&' token
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h:35: error: ISO C++ forbids declaration of 'string' with no type
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h:68: error: expected ',' or '...' before '&' token
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h:68: error: ISO C++ forbids declaration of 'string' with no type
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h:69: error: 'string' has not been declared
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h:75: error: expected ',' or '...' before '&' token
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h:75: error: ISO C++ forbids declaration of 'string' with no type
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h:76: error: 'string' has not been declared
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:20: error: expected ',' or '...' before '&' token
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:20: error: ISO C++ forbids declaration of 'string' with no type
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp: In member function 'void GLFontBase::CreateImpl(int)':
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:28: error: 'Filename' was not declared in this scope
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:35: error: 'Tex' was not declared in this scope
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:58: error: 'GL_TEXTURE_2D' was not declared in this scope
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:58: error: 'glBindTexture' was not declared in this scope
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:59: error: 'GL_TEXTURE_WRAP_S' was not declared in this scope
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:59: error: 'GL_CLAMP' was not declared in this scope
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:59: error: 'glTexParameterf' was not declared in this scope
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:60: error: 'GL_TEXTURE_WRAP_T' was not declared in this scope
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:61: error: 'PixelPerfect' was not declared in this scope
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:63: error: 'GL_TEXTURE_MAG_FILTER' was not declared in this scope
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:63: error: 'GL_NEAREST' was not declared in this scope
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:64: error: 'GL_TEXTURE_MIN_FILTER' was not declared in this scope
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:68: error: 'GL_TEXTURE_MAG_FILTER' was not declared in this scope
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:68: error: 'GL_LINEAR' was not declared in this scope
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:69: error: 'GL_TEXTURE_MIN_FILTER' was not declared in this scope
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:71: error: 'GL_TEXTURE_ENV' was not declared in this scope
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:71: error: 'GL_TEXTURE_ENV_MODE' was not declared in this scope
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:71: error: 'GL_MODULATE' was not declared in this scope
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:71: error: 'glTexEnvf' was not declared in this scope
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:74: error: 'GL_LUMINANCE_ALPHA' was not declared in this scope
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:74: error: 'GL_UNSIGNED_BYTE' was not declared in this scope
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:74: error: 'glTexImage2D' was not declared in this scope
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp: In member function 'void GLFontBase::Begin()':
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:98: error: 'GL_TEXTURE_2D' was not declared in this scope
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:98: error: 'glBindTexture' was not declared in this scope
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp: At global scope:
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:114: error: expected ',' or '...' before '&' token
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:114: error: ISO C++ forbids declaration of 'string' with no type
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp: In member function 'void PixelPerfectGLFont::Create(int)':
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:116: error: 'Filename' was not declared in this scope
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:116: error: 'Tex' was not declared in this scope
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp: At global scope:
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:124: error: variable or field 'TextOut' declared void
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:124: error: 'string' was not declared in this scope
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:124: error: expected primary-expression before 'int'
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:124: error: expected primary-expression before 'int'
-o/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:124: error: expected primary-expression before 'int'
-lSLF07#2@67"Compile /Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp284920787#284920787#0(5781"In file included from /Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:10:/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h:21:19: error: GL/gl.h: No such file or directoryIn file included from /Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:10:/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h:35: error: expected ',' or '...' before '&' token/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h:35: error: ISO C++ forbids declaration of 'string' with no type/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h:68: error: expected ',' or '...' before '&' token/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h:68: error: ISO C++ forbids declaration of 'string' with no type/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h:69: error: 'string' has not been declared/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h:75: error: expected ',' or '...' before '&' token/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h:75: error: ISO C++ forbids declaration of 'string' with no type/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h:76: error: 'string' has not been declared/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:20: error: expected ',' or '...' before '&' token/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:20: error: ISO C++ forbids declaration of 'string' with no type/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp: In member function 'void GLFontBase::CreateImpl(int)':/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:28: error: 'Filename' was not declared in this scope/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:35: error: 'Tex' was not declared in this scope/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:58: error: 'GL_TEXTURE_2D' was not declared in this scope/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:58: error: 'glBindTexture' was not declared in this scope/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:59: error: 'GL_TEXTURE_WRAP_S' was not declared in this scope/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:59: error: 'GL_CLAMP' was not declared in this scope/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:59: error: 'glTexParameterf' was not declared in this scope/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:60: error: 'GL_TEXTURE_WRAP_T' was not declared in this scope/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:61: error: 'PixelPerfect' was not declared in this scope/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:63: error: 'GL_TEXTURE_MAG_FILTER' was not declared in this scope/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:63: error: 'GL_NEAREST' was not declared in this scope/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:64: error: 'GL_TEXTURE_MIN_FILTER' was not declared in this scope/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:68: error: 'GL_TEXTURE_MAG_FILTER' was not declared in this scope/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:68: error: 'GL_LINEAR' was not declared in this scope/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:69: error: 'GL_TEXTURE_MIN_FILTER' was not declared in this scope/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:71: error: 'GL_TEXTURE_ENV' was not declared in this scope/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:71: error: 'GL_TEXTURE_ENV_MODE' was not declared in this scope/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:71: error: 'GL_MODULATE' was not declared in this scope/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:71: error: 'glTexEnvf' was not declared in this scope/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:74: error: 'GL_LUMINANCE_ALPHA' was not declared in this scope/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:74: error: 'GL_UNSIGNED_BYTE' was not declared in this scope/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:74: error: 'glTexImage2D' was not declared in this scope/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp: In member function 'void GLFontBase::Begin()':/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:98: error: 'GL_TEXTURE_2D' was not declared in this scope/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:98: error: 'glBindTexture' was not declared in this scope/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp: At global scope:/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:114: error: expected ',' or '...' before '&' token/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:114: error: ISO C++ forbids declaration of 'string' with no type/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp: In member function 'void PixelPerfectGLFont::Create(int)':/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:116: error: 'Filename' was not declared in this scope/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:116: error: 'Tex' was not declared in this scope/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp: At global scope:/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:124: error: variable or field 'TextOut' declared void/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:124: error: 'string' was not declared in this scope/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:124: error: expected primary-expression before 'int'/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:124: error: expected primary-expression before 'int'/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp:124: error: expected primary-expression before 'int'46(4@34"GL/gl.h: No such file or directory284920787#86#107#2(7@81"In file included from /Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp284920787#18446744073709551615#0#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#10#0#10#0#0"0(13@95"GL/gl.h: No such file or directory in /Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h284920787#18446744073709551615#0#0(6@57"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h42725838#21#0#21#0#0"0(6@57"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h42725838#21#0#21#0#28"*: No such file or directory0(4@38"Expected ',' or '...' before '&' token284920787#279#108#2(7@81"In file included from /Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp284920787#18446744073709551615#0#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#10#0#10#0#0"0(13@99"Expected ',' or '...' before '&' token in /Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h284920787#18446744073709551615#0#0(6@57"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h42725838#35#0#35#0#0"0(6@57"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h42725838#35#0#35#0#19"expected * before *0(4@52"ISO C++ forbids declaration of 'string' with no type284920787#387#122#2(7@81"In file included from /Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp284920787#18446744073709551615#0#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#10#0#10#0#0"0(13@113"ISO C++ forbids declaration of 'string' with no type in /Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h284920787#18446744073709551615#0#0(6@57"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h42725838#35#0#35#0#0"0(6@57"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h42725838#35#0#35#0#47"ISO C++ forbids declaration of '*' with no type0(4@38"Expected ',' or '...' before '&' token284920787#509#108#2(7@81"In file included from /Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp284920787#18446744073709551615#0#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#10#0#10#0#0"0(13@99"Expected ',' or '...' before '&' token in /Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h284920787#18446744073709551615#0#0(6@57"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h42725838#68#0#68#0#0"0(6@57"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h42725838#68#0#68#0#19"expected * before *0(4@52"ISO C++ forbids declaration of 'string' with no type284920787#617#122#2(7@81"In file included from /Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp284920787#18446744073709551615#0#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#10#0#10#0#0"0(13@113"ISO C++ forbids declaration of 'string' with no type in /Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h284920787#18446744073709551615#0#0(6@57"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h42725838#68#0#68#0#0"0(6@57"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h42725838#68#0#68#0#47"ISO C++ forbids declaration of '*' with no type0(4@30"'string' has not been declared284920787#739#100#2(7@81"In file included from /Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp284920787#18446744073709551615#0#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#10#0#10#0#0"0(13@91"'string' has not been declared in /Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h284920787#18446744073709551615#0#0(6@57"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h42725838#69#0#69#0#0"0(6@57"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h42725838#69#0#69#0#25"'*' has not been declared0(4@38"Expected ',' or '...' before '&' token284920787#839#108#2(7@81"In file included from /Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp284920787#18446744073709551615#0#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#10#0#10#0#0"0(13@99"Expected ',' or '...' before '&' token in /Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h284920787#18446744073709551615#0#0(6@57"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h42725838#75#0#75#0#0"0(6@57"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h42725838#75#0#75#0#19"expected * before *0(4@52"ISO C++ forbids declaration of 'string' with no type284920787#947#122#2(7@81"In file included from /Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp284920787#18446744073709551615#0#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#10#0#10#0#0"0(13@113"ISO C++ forbids declaration of 'string' with no type in /Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h284920787#18446744073709551615#0#0(6@57"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h42725838#75#0#75#0#0"0(6@57"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h42725838#75#0#75#0#47"ISO C++ forbids declaration of '*' with no type0(4@30"'string' has not been declared284920787#1069#100#2(7@81"In file included from /Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp284920787#18446744073709551615#0#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#10#0#10#0#0"0(13@91"'string' has not been declared in /Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h284920787#18446744073709551615#0#0(6@57"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h42725838#76#0#76#0#0"0(6@57"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.h42725838#76#0#76#0#25"'*' has not been declared0(4@38"Expected ',' or '...' before '&' token284920787#1169#110#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#20#0#20#0#19"expected * before *0(4@52"ISO C++ forbids declaration of 'string' with no type284920787#1279#124#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#20#0#20#0#47"ISO C++ forbids declaration of '*' with no type0(4@41"'Filename' was not declared in this scope284920787#1519#113#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#28#0#28#0#34"'*' was not declared in this scope0(4@36"'Tex' was not declared in this scope284920787#1632#108#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#35#0#35#0#34"'*' was not declared in this scope0(4@46"'GL_TEXTURE_2D' was not declared in this scope284920787#1740#118#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#58#0#58#0#34"'*' was not declared in this scope0(4@46"'glBindTexture' was not declared in this scope284920787#1858#118#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#58#0#58#0#34"'*' was not declared in this scope0(4@50"'GL_TEXTURE_WRAP_S' was not declared in this scope284920787#1976#122#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#59#0#59#0#34"'*' was not declared in this scope0(4@41"'GL_CLAMP' was not declared in this scope284920787#2098#113#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#59#0#59#0#34"'*' was not declared in this scope0(4@48"'glTexParameterf' was not declared in this scope284920787#2211#120#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#59#0#59#0#34"'*' was not declared in this scope0(4@50"'GL_TEXTURE_WRAP_T' was not declared in this scope284920787#2331#122#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#60#0#60#0#34"'*' was not declared in this scope0(4@45"'PixelPerfect' was not declared in this scope284920787#2453#117#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#61#0#61#0#34"'*' was not declared in this scope0(4@54"'GL_TEXTURE_MAG_FILTER' was not declared in this scope284920787#2570#126#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#63#0#63#0#34"'*' was not declared in this scope0(4@43"'GL_NEAREST' was not declared in this scope284920787#2696#115#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#63#0#63#0#34"'*' was not declared in this scope0(4@54"'GL_TEXTURE_MIN_FILTER' was not declared in this scope284920787#2811#126#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#64#0#64#0#34"'*' was not declared in this scope0(4@54"'GL_TEXTURE_MAG_FILTER' was not declared in this scope284920787#2937#126#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#68#0#68#0#34"'*' was not declared in this scope0(4@42"'GL_LINEAR' was not declared in this scope284920787#3063#114#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#68#0#68#0#34"'*' was not declared in this scope0(4@54"'GL_TEXTURE_MIN_FILTER' was not declared in this scope284920787#3177#126#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#69#0#69#0#34"'*' was not declared in this scope0(4@47"'GL_TEXTURE_ENV' was not declared in this scope284920787#3303#119#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#71#0#71#0#34"'*' was not declared in this scope0(4@52"'GL_TEXTURE_ENV_MODE' was not declared in this scope284920787#3422#124#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#71#0#71#0#34"'*' was not declared in this scope0(4@44"'GL_MODULATE' was not declared in this scope284920787#3546#116#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#71#0#71#0#34"'*' was not declared in this scope0(4@42"'glTexEnvf' was not declared in this scope284920787#3662#114#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#71#0#71#0#34"'*' was not declared in this scope0(4@51"'GL_LUMINANCE_ALPHA' was not declared in this scope284920787#3776#123#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#74#0#74#0#34"'*' was not declared in this scope0(4@49"'GL_UNSIGNED_BYTE' was not declared in this scope284920787#3899#121#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#74#0#74#0#34"'*' was not declared in this scope0(4@45"'glTexImage2D' was not declared in this scope284920787#4020#117#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#74#0#74#0#34"'*' was not declared in this scope0(4@46"'GL_TEXTURE_2D' was not declared in this scope284920787#4245#118#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#98#0#98#0#34"'*' was not declared in this scope0(4@46"'glBindTexture' was not declared in this scope284920787#4363#118#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#98#0#98#0#34"'*' was not declared in this scope0(23@16"At global scope:284920787#4481#78#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#0#0#0#0#0"0(4@38"Expected ',' or '...' before '&' token284920787#4559#111#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#114#0#114#0#19"expected * before *0(4@52"ISO C++ forbids declaration of 'string' with no type284920787#4670#125#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#114#0#114#0#47"ISO C++ forbids declaration of '*' with no type0(4@41"'Filename' was not declared in this scope284920787#4915#114#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#116#0#116#0#34"'*' was not declared in this scope0(4@36"'Tex' was not declared in this scope284920787#5029#109#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#116#0#116#0#34"'*' was not declared in this scope0(23@16"At global scope:284920787#5138#78#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#0#0#0#0#0"0(4@41"Variable or field 'TextOut' declared void284920787#5216#114#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#124#0#124#0#0"0(4@39"'string' was not declared in this scope284920787#5330#112#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#124#0#124#0#34"'*' was not declared in this scope0(4@40"Expected primary-expression before 'int'284920787#5442#113#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#124#0#124#0#19"expected * before *0(4@40"Expected primary-expression before 'int'284920787#5555#113#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#124#0#124#0#19"expected * before *0(4@40"Expected primary-expression before 'int'284920787#5668#113#0(6@59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp42726752#124#0#124#0#19"expected * before *0(0#0#59"/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp4300885448#1479"    cd "/Users/auti/Desktop/trunk/Computer Grafik"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D_GLIBCXX_DEBUG=1 -D_GLIBCXX_DEBUG_PEDANTIC=1 -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -fvisibility-inlines-hidden -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-generated-files.hmap" "-I/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-own-target-headers.hmap" "-I/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-all-target-headers.hmap" -iquote "/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-project-headers.hmap" "-F/Users/auti/Desktop/trunk/Computer Grafik/build/Debug" "-I/Users/auti/Desktop/trunk/Computer Grafik/build/Debug/include" "-I/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/DerivedSources/i386" "-I/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/DerivedSources" -c "/Users/auti/Desktop/trunk/Computer Grafik/glfont/glfont.cpp" -o "/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/glfont.o"1#
-
-CCompileC build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/main.o "/Users/auti/Desktop/Computer Grafik/main.cpp" normal i386 c++ com.apple.compilers.gcc.4_2
-s284909128.747479
-e284909128.955817
-r1
-xCompileC
-xbuild/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/main.o
-x/Users/auti/Desktop/Computer Grafik/main.cpp
-xnormal
-xi386
-xc++
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@52"Compile /Users/auti/Desktop/Computer Grafik/main.cpp284909128#284909128#0(0"0(0#0#44"/Users/auti/Desktop/Computer Grafik/main.cpp4300885448#1402"    cd "/Users/auti/Desktop/Computer Grafik"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D_GLIBCXX_DEBUG=1 -D_GLIBCXX_DEBUG_PEDANTIC=1 -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -fvisibility-inlines-hidden -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/auti/Desktop/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-generated-files.hmap" "-I/Users/auti/Desktop/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-own-target-headers.hmap" "-I/Users/auti/Desktop/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-all-target-headers.hmap" -iquote "/Users/auti/Desktop/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-project-headers.hmap" "-F/Users/auti/Desktop/Computer Grafik/build/Debug" "-I/Users/auti/Desktop/Computer Grafik/build/Debug/include" "-I/Users/auti/Desktop/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/DerivedSources/i386" "-I/Users/auti/Desktop/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/DerivedSources" -c "/Users/auti/Desktop/Computer Grafik/main.cpp" -o "/Users/auti/Desktop/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/main.o"0#
-
-CCompileC build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/main.o "/Users/auti/Desktop/Google SVN/Computer Grafik/main.cpp" normal i386 c++ com.apple.compilers.gcc.4_2
-s284996039.963214
-e284996040.913203
-r1
-xCompileC
-xbuild/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/main.o
-x/Users/auti/Desktop/Google SVN/Computer Grafik/main.cpp
-xnormal
-xi386
-xc++
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@63"Compile /Users/auti/Desktop/Google SVN/Computer Grafik/main.cpp284996039#284996040#0(0"0(0#0#55"/Users/auti/Desktop/Google SVN/Computer Grafik/main.cpp4300885448#1523"    cd "/Users/auti/Desktop/Google SVN/Computer Grafik"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D_GLIBCXX_DEBUG=1 -D_GLIBCXX_DEBUG_PEDANTIC=1 -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -fvisibility-inlines-hidden -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/auti/Desktop/Google SVN/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-generated-files.hmap" "-I/Users/auti/Desktop/Google SVN/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-own-target-headers.hmap" "-I/Users/auti/Desktop/Google SVN/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-all-target-headers.hmap" -iquote "/Users/auti/Desktop/Google SVN/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-project-headers.hmap" "-F/Users/auti/Desktop/Google SVN/Computer Grafik/build/Debug" "-I/Users/auti/Desktop/Google SVN/Computer Grafik/build/Debug/include" "-I/Users/auti/Desktop/Google SVN/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/DerivedSources/i386" "-I/Users/auti/Desktop/Google SVN/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/DerivedSources" -c "/Users/auti/Desktop/Google SVN/Computer Grafik/main.cpp" -o "/Users/auti/Desktop/Google SVN/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/main.o"0#
-
-CCompileC build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/main.o "/Users/auti/Desktop/trunk/Computer Grafik/main.cpp" normal i386 c++ com.apple.compilers.gcc.4_2
-s284950922.114567
-e284950922.115776
-r1
-xCompileC
-xbuild/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/main.o
-x/Users/auti/Desktop/trunk/Computer Grafik/main.cpp
-xnormal
-xi386
-xc++
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@58"Compile /Users/auti/Desktop/trunk/Computer Grafik/main.cpp284950922#284950922#0(0"0(0#0#50"/Users/auti/Desktop/trunk/Computer Grafik/main.cpp4300885448#1468"    cd "/Users/auti/Desktop/trunk/Computer Grafik"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D_GLIBCXX_DEBUG=1 -D_GLIBCXX_DEBUG_PEDANTIC=1 -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -fvisibility-inlines-hidden -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-generated-files.hmap" "-I/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-own-target-headers.hmap" "-I/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-all-target-headers.hmap" -iquote "/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-project-headers.hmap" "-F/Users/auti/Desktop/trunk/Computer Grafik/build/Debug" "-I/Users/auti/Desktop/trunk/Computer Grafik/build/Debug/include" "-I/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/DerivedSources/i386" "-I/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/DerivedSources" -c "/Users/auti/Desktop/trunk/Computer Grafik/main.cpp" -o "/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/main.o"0#
-
-CCompileC build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/primitives.o "/Users/auti/Desktop/trunk/Computer Grafik/primitives.cpp" normal i386 c++ com.apple.compilers.gcc.4_2
-s284949734.927432
-e284949735.457135
-r1
-xCompileC
-xbuild/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/primitives.o
-x/Users/auti/Desktop/trunk/Computer Grafik/primitives.cpp
-xnormal
-xi386
-xc++
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@64"Compile /Users/auti/Desktop/trunk/Computer Grafik/primitives.cpp284949734#284949735#0(0"0(0#0#56"/Users/auti/Desktop/trunk/Computer Grafik/primitives.cpp4300885448#1480"    cd "/Users/auti/Desktop/trunk/Computer Grafik"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D_GLIBCXX_DEBUG=1 -D_GLIBCXX_DEBUG_PEDANTIC=1 -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -fvisibility-inlines-hidden -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-generated-files.hmap" "-I/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-own-target-headers.hmap" "-I/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-all-target-headers.hmap" -iquote "/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-project-headers.hmap" "-F/Users/auti/Desktop/trunk/Computer Grafik/build/Debug" "-I/Users/auti/Desktop/trunk/Computer Grafik/build/Debug/include" "-I/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/DerivedSources/i386" "-I/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/DerivedSources" -c "/Users/auti/Desktop/trunk/Computer Grafik/primitives.cpp" -o "/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/primitives.o"0#
-
-CLd "/Users/auti/Desktop/Computer Grafik/build/Debug/Untitled" normal i386
-s284909128.955918
-e284909129.006658
-r1
-xLd
-x/Users/auti/Desktop/Computer Grafik/build/Debug/Untitled
-xnormal
-xi386
-lSLF07#2@61"Link /Users/auti/Desktop/Computer Grafik/build/Debug/Untitled284909128#284909129#0(0"0(0#0#0"4300885448#709"    cd "/Users/auti/Desktop/Computer Grafik"    setenv MACOSX_DEPLOYMENT_TARGET 10.6    /Developer/usr/bin/g++-4.2 -arch i386 -isysroot /Developer/SDKs/MacOSX10.6.sdk "-L/Users/auti/Desktop/Computer Grafik/build/Debug" "-L/Users/auti/Desktop/Computer Grafik/glut/windows/lib" "-L/Users/auti/Desktop/Computer Grafik/windows/lib" "-L/Users/auti/Desktop/Computer Grafik/common/glut/windows/lib" "-F/Users/auti/Desktop/Computer Grafik/build/Debug" -filelist "/Users/auti/Desktop/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/Untitled.LinkFileList" -mmacosx-version-min=10.6 -framework OpenGL -framework GLUT -o "/Users/auti/Desktop/Computer Grafik/build/Debug/Untitled"0#
-
-CLd "/Users/auti/Desktop/Google SVN/Computer Grafik/build/Debug/Untitled" normal i386
-s284996040.913344
-e284996041.386206
-r1
-xLd
-x/Users/auti/Desktop/Google SVN/Computer Grafik/build/Debug/Untitled
-xnormal
-xi386
-lSLF07#2@72"Link /Users/auti/Desktop/Google SVN/Computer Grafik/build/Debug/Untitled284996040#284996041#0(0"0(0#0#0"4300885448#797"    cd "/Users/auti/Desktop/Google SVN/Computer Grafik"    setenv MACOSX_DEPLOYMENT_TARGET 10.6    /Developer/usr/bin/g++-4.2 -arch i386 -isysroot /Developer/SDKs/MacOSX10.6.sdk "-L/Users/auti/Desktop/Google SVN/Computer Grafik/build/Debug" "-L/Users/auti/Desktop/Google SVN/Computer Grafik/glut/windows/lib" "-L/Users/auti/Desktop/Google SVN/Computer Grafik/windows/lib" "-L/Users/auti/Desktop/Google SVN/Computer Grafik/common/glut/windows/lib" "-F/Users/auti/Desktop/Google SVN/Computer Grafik/build/Debug" -filelist "/Users/auti/Desktop/Google SVN/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/Untitled.LinkFileList" -mmacosx-version-min=10.6 -framework OpenGL -framework GLUT -o "/Users/auti/Desktop/Google SVN/Computer Grafik/build/Debug/Untitled"0#
-
-CLd "/Users/auti/Desktop/trunk/Computer Grafik/build/Debug/Untitled" normal i386
-s284950922.115845
-e284950922.142212
-r1
-xLd
-x/Users/auti/Desktop/trunk/Computer Grafik/build/Debug/Untitled
-xnormal
-xi386
-lSLF07#2@67"Link /Users/auti/Desktop/trunk/Computer Grafik/build/Debug/Untitled284950922#284950922#0(0"0(0#0#0"4300885448#757"    cd "/Users/auti/Desktop/trunk/Computer Grafik"    setenv MACOSX_DEPLOYMENT_TARGET 10.6    /Developer/usr/bin/g++-4.2 -arch i386 -isysroot /Developer/SDKs/MacOSX10.6.sdk "-L/Users/auti/Desktop/trunk/Computer Grafik/build/Debug" "-L/Users/auti/Desktop/trunk/Computer Grafik/glut/windows/lib" "-L/Users/auti/Desktop/trunk/Computer Grafik/windows/lib" "-L/Users/auti/Desktop/trunk/Computer Grafik/common/glut/windows/lib" "-F/Users/auti/Desktop/trunk/Computer Grafik/build/Debug" -filelist "/Users/auti/Desktop/trunk/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/Untitled.LinkFileList" -mmacosx-version-min=10.6 -framework OpenGL -framework GLUT -o "/Users/auti/Desktop/trunk/Computer Grafik/build/Debug/Untitled"0#
-
