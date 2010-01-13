@@ -1,10 +1,10 @@
 TUntitled
 v7
 r0
-t284950922.142263
+t284996706.213172
 cCheck dependencies
-cCompileC build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/main.o "/Users/auti/Desktop/trunk/Computer Grafik/main.cpp" normal i386 c++ com.apple.compilers.gcc.4_2
-cLd "/Users/auti/Desktop/trunk/Computer Grafik/build/Debug/Untitled" normal i386
+cCompileC build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/main.o "/Users/auti/Desktop/Google SVN/Computer Grafik/main.cpp" normal i386 c++ com.apple.compilers.gcc.4_2
+cLd "/Users/auti/Desktop/Google SVN/Computer Grafik/build/Debug/Untitled" normal i386
 
 N/Developer/SDKs/MacOSX10.6.sdk
 c000000004ABBF0FD00000000000000EE
@@ -90,6 +90,47 @@ N/Users/auti/Desktop/Computer Grafik/primitives.h
 c000000004B4AF18A0000000000000FAB
 t1263202698
 s4011
+
+N/Users/auti/Desktop/Google SVN/Computer Grafik/build/Debug/Untitled
+t1263303241
+s32776
+
+N/Users/auti/Desktop/Google SVN/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/Untitled.LinkFileList
+c000000004B4C7A41000000000000007D
+t1263303233
+s125
+
+N/Users/auti/Desktop/Google SVN/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/main.o
+t1263303240
+s80596
+
+N/Users/auti/Desktop/Google SVN/Computer Grafik/common/cg_common.h
+c000000004B4B27B6000000000000028D
+t1263216566
+s653
+i<cmath>
+i<cstdlib>
+i<windows.h>
+i<OpenGL/gl.h>
+i<GLUT/glut.h>
+i<GL/gl.h>
+i<GL/glut.h>
+
+N/Users/auti/Desktop/Google SVN/Computer Grafik/main.cpp
+c000000004B4BCA0700000000000024F8
+t1263258119
+s9464
+i"main.h"
+
+N/Users/auti/Desktop/Google SVN/Computer Grafik/main.h
+c000000004B4C7A47000000000000035B
+t1263303239
+s859
+i<ctime>
+i<math.h>
+i<cstdio>
+i<iostream>
+i"common/cg_common.h"
 
 N/Users/auti/Desktop/trunk/Computer Grafik/build/Debug/Untitled
 t1263258122
@@ -200,7 +241,7 @@ i"main.h"
 
 CCheck dependencies
 r0
-lSLF07#2@18"Check dependencies284950922#284950922#0(0"0(0#1#0"4300885448#0"0#
+lSLF07#2@18"Check dependencies284996706#284996706#0(0"0(0#1#0"27866456492998768#0"0#
 
 CCompileC build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/callbacks.o "/Users/auti/Desktop/trunk/Computer Grafik/callbacks.cpp" normal i386 c++ com.apple.compilers.gcc.4_2
 s284949872.184941
@@ -322,6 +363,19 @@ xc++
 xcom.apple.compilers.gcc.4_2
 lSLF07#2@52"Compile /Users/auti/Desktop/Computer Grafik/main.cpp284909128#284909128#0(0"0(0#0#44"/Users/auti/Desktop/Computer Grafik/main.cpp4300885448#1402"    cd "/Users/auti/Desktop/Computer Grafik"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D_GLIBCXX_DEBUG=1 -D_GLIBCXX_DEBUG_PEDANTIC=1 -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -fvisibility-inlines-hidden -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/auti/Desktop/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-generated-files.hmap" "-I/Users/auti/Desktop/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-own-target-headers.hmap" "-I/Users/auti/Desktop/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-all-target-headers.hmap" -iquote "/Users/auti/Desktop/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-project-headers.hmap" "-F/Users/auti/Desktop/Computer Grafik/build/Debug" "-I/Users/auti/Desktop/Computer Grafik/build/Debug/include" "-I/Users/auti/Desktop/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/DerivedSources/i386" "-I/Users/auti/Desktop/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/DerivedSources" -c "/Users/auti/Desktop/Computer Grafik/main.cpp" -o "/Users/auti/Desktop/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/main.o"0#
 
+CCompileC build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/main.o "/Users/auti/Desktop/Google SVN/Computer Grafik/main.cpp" normal i386 c++ com.apple.compilers.gcc.4_2
+s284996039.963214
+e284996040.913203
+r1
+xCompileC
+xbuild/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/main.o
+x/Users/auti/Desktop/Google SVN/Computer Grafik/main.cpp
+xnormal
+xi386
+xc++
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@63"Compile /Users/auti/Desktop/Google SVN/Computer Grafik/main.cpp284996039#284996040#0(0"0(0#0#55"/Users/auti/Desktop/Google SVN/Computer Grafik/main.cpp4300885448#1523"    cd "/Users/auti/Desktop/Google SVN/Computer Grafik"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch i386 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D_GLIBCXX_DEBUG=1 -D_GLIBCXX_DEBUG_PEDANTIC=1 -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -fvisibility-inlines-hidden -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/auti/Desktop/Google SVN/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-generated-files.hmap" "-I/Users/auti/Desktop/Google SVN/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-own-target-headers.hmap" "-I/Users/auti/Desktop/Google SVN/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-all-target-headers.hmap" -iquote "/Users/auti/Desktop/Google SVN/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Untitled-project-headers.hmap" "-F/Users/auti/Desktop/Google SVN/Computer Grafik/build/Debug" "-I/Users/auti/Desktop/Google SVN/Computer Grafik/build/Debug/include" "-I/Users/auti/Desktop/Google SVN/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/DerivedSources/i386" "-I/Users/auti/Desktop/Google SVN/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/DerivedSources" -c "/Users/auti/Desktop/Google SVN/Computer Grafik/main.cpp" -o "/Users/auti/Desktop/Google SVN/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/main.o"0#
+
 CCompileC build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/main.o "/Users/auti/Desktop/trunk/Computer Grafik/main.cpp" normal i386 c++ com.apple.compilers.gcc.4_2
 s284950922.114567
 e284950922.115776
@@ -357,6 +411,16 @@ x/Users/auti/Desktop/Computer Grafik/build/Debug/Untitled
 xnormal
 xi386
 lSLF07#2@61"Link /Users/auti/Desktop/Computer Grafik/build/Debug/Untitled284909128#284909129#0(0"0(0#0#0"4300885448#709"    cd "/Users/auti/Desktop/Computer Grafik"    setenv MACOSX_DEPLOYMENT_TARGET 10.6    /Developer/usr/bin/g++-4.2 -arch i386 -isysroot /Developer/SDKs/MacOSX10.6.sdk "-L/Users/auti/Desktop/Computer Grafik/build/Debug" "-L/Users/auti/Desktop/Computer Grafik/glut/windows/lib" "-L/Users/auti/Desktop/Computer Grafik/windows/lib" "-L/Users/auti/Desktop/Computer Grafik/common/glut/windows/lib" "-F/Users/auti/Desktop/Computer Grafik/build/Debug" -filelist "/Users/auti/Desktop/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/Untitled.LinkFileList" -mmacosx-version-min=10.6 -framework OpenGL -framework GLUT -o "/Users/auti/Desktop/Computer Grafik/build/Debug/Untitled"0#
+
+CLd "/Users/auti/Desktop/Google SVN/Computer Grafik/build/Debug/Untitled" normal i386
+s284996040.913344
+e284996041.386206
+r1
+xLd
+x/Users/auti/Desktop/Google SVN/Computer Grafik/build/Debug/Untitled
+xnormal
+xi386
+lSLF07#2@72"Link /Users/auti/Desktop/Google SVN/Computer Grafik/build/Debug/Untitled284996040#284996041#0(0"0(0#0#0"4300885448#797"    cd "/Users/auti/Desktop/Google SVN/Computer Grafik"    setenv MACOSX_DEPLOYMENT_TARGET 10.6    /Developer/usr/bin/g++-4.2 -arch i386 -isysroot /Developer/SDKs/MacOSX10.6.sdk "-L/Users/auti/Desktop/Google SVN/Computer Grafik/build/Debug" "-L/Users/auti/Desktop/Google SVN/Computer Grafik/glut/windows/lib" "-L/Users/auti/Desktop/Google SVN/Computer Grafik/windows/lib" "-L/Users/auti/Desktop/Google SVN/Computer Grafik/common/glut/windows/lib" "-F/Users/auti/Desktop/Google SVN/Computer Grafik/build/Debug" -filelist "/Users/auti/Desktop/Google SVN/Computer Grafik/build/Weihnachtsaufgabe.build/Debug/Untitled.build/Objects-normal/i386/Untitled.LinkFileList" -mmacosx-version-min=10.6 -framework OpenGL -framework GLUT -o "/Users/auti/Desktop/Google SVN/Computer Grafik/build/Debug/Untitled"0#
 
 CLd "/Users/auti/Desktop/trunk/Computer Grafik/build/Debug/Untitled" normal i386
 s284950922.115845
