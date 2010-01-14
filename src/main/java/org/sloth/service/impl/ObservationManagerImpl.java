@@ -21,35 +21,31 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
+import org.sloth.persistence.CoordinateDao;
 import org.sloth.persistence.ObservationDao;
 import org.sloth.model.Coordinate;
 import org.sloth.model.Observation;
 import org.sloth.model.ObservationCategorie;
 import org.sloth.model.User;
+import org.sloth.persistence.ObservationCategorieDao;
 import org.sloth.service.ObservationManager;
 import static java.lang.Character.toLowerCase;
 import static java.lang.Character.toUpperCase;
 
 public class ObservationManagerImpl implements ObservationManager {
 
-	private ObservationDao oDao;
-
-	private ObservationDao getDAO() {
-		return oDao;
-	}
-
-	public ObservationManagerImpl(ObservationDao oDao) {
-		this.oDao = oDao;
-	}
+	private ObservationDao observationDao;
+	private ObservationCategorieDao observationCategorieDao;
+	private CoordinateDao coordinateDao;
 
 	@Override
 	public Observation getObservation(int id) {
-		return getDAO().get(id);
+		return getObservationDao().get(id);
 	}
 
 	@Override
 	public Collection<Observation> getObservations() {
-		return getDAO().getAll();
+		return getObservationDao().getAll();
 	}
 
 	@Override
@@ -70,17 +66,17 @@ public class ObservationManagerImpl implements ObservationManager {
 
 	@Override
 	public void deleteObservation(int id) {
-		getDAO().delete(id);
+		getObservationDao().delete(id);
 	}
 
 	@Override
 	public void deleteObservation(Observation observation) {
-		getDAO().delete(observation);
+		getObservationDao().delete(observation);
 	}
 
 	@Override
 	public void updateObservation(Observation observation) {
-		getDAO().update(observation);
+		getObservationDao().update(observation);
 	}
 
 	@Override
@@ -92,7 +88,7 @@ public class ObservationManagerImpl implements ObservationManager {
 		o.setTitle(title);
 		o.setUser(user);
 		o.setTimestamp(Calendar.getInstance());
-		getDAO().save(o);
+		getObservationDao().save(o);
 	}
 
 	private String buildRegex(String keyword) {
@@ -117,6 +113,36 @@ public class ObservationManagerImpl implements ObservationManager {
 			}
 		}
 		return result;
+	}
+
+	@Override
+	public void setObservationDao(ObservationDao oDao) {
+		this.observationDao = oDao;
+	}
+
+	@Override
+	public void setObservationCategorieDao(ObservationCategorieDao ocDao) {
+		this.observationCategorieDao = ocDao;
+	}
+
+	@Override
+	public ObservationDao getObservationDao() {
+		return observationDao;
+	}
+
+	@Override
+	public ObservationCategorieDao getObservationCategorieDao() {
+		return observationCategorieDao;
+	}
+
+	@Override
+	public void setCoordinateDao(CoordinateDao cDao) {
+		this.coordinateDao = cDao;
+	}
+
+	@Override
+	public CoordinateDao getCoordinateDao() {
+		return coordinateDao;
 	}
 
 }

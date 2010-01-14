@@ -19,8 +19,13 @@ package org.sloth.service;
 
 import java.util.Collection;
 import org.sloth.model.User;
+import org.sloth.persistence.UserDao;
 
 public interface UserManager {
+
+	public void setUserDao(UserDao uDao);
+
+	public UserDao getUserDao();
 
 	public Collection<User> getUsers();
 

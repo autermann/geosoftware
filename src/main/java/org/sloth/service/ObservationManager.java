@@ -22,8 +22,23 @@ import org.sloth.model.Coordinate;
 import org.sloth.model.Observation;
 import org.sloth.model.ObservationCategorie;
 import org.sloth.model.User;
+import org.sloth.persistence.CoordinateDao;
+import org.sloth.persistence.ObservationCategorieDao;
+import org.sloth.persistence.ObservationDao;
 
 public interface ObservationManager {
+
+	public void setObservationDao(ObservationDao oDao);
+
+	public void setObservationCategorieDao(ObservationCategorieDao ocDao);
+
+	public void setCoordinateDao(CoordinateDao cDao);
+	
+	public CoordinateDao getCoordinateDao();
+
+	public ObservationDao getObservationDao();
+
+	public ObservationCategorieDao getObservationCategorieDao();
 
 	public Observation getObservation(int id);
 

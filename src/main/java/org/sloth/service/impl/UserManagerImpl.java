@@ -37,11 +37,6 @@ public class UserManagerImpl implements UserManager {
 		return pm;
 	}
 
-	public UserManagerImpl(UserDao uDao, PasswordManager pm){
-		this.uDao = uDao;
-		this.pm = pm;
-	}
-
 	@Override
 	public void registrateUser(String mail, String name, String familyName,
 							   String plainPassword) {
@@ -81,5 +76,15 @@ public class UserManagerImpl implements UserManager {
 	@Override
 	public void deleteUser(User user) {
 		getDAO().delete(user);
+	}
+
+	@Override
+	public void setUserDao(UserDao uDao) {
+		this.uDao = uDao;
+	}
+
+	@Override
+	public UserDao getUserDao() {
+		return uDao;
 	}
 }

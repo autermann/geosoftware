@@ -26,8 +26,10 @@ package org.sloth.model;
  */
 public class Coordinate {
 
+
 	private double latitude = -1;
-	private double longitude = -1;
+	private double longitude = -1;	
+	private long id;
 
 	/**
 	 * Creates a Coordinate with <code>-1</code> as value for
@@ -106,6 +108,14 @@ public class Coordinate {
 		buf.append(this.getLatitude());
 		buf.append(")");
 		return buf.toString();
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 }
