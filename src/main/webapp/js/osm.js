@@ -32,6 +32,7 @@ function checkForPermalink() {
 
 function init(){
 	OpenLayers.Lang.setCode('de');
+        //Create new Openlayers-Layer with ID 'map'
 	map = new OpenLayers.Map('map', {
 		controls: [],
 		maxExtent: new OpenLayers.Bounds(-20037508.34,-20037508.34,20037508.34,20037508.34),
