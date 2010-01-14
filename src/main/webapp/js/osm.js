@@ -12,7 +12,25 @@ Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth, Christoph
 	You should have received a copy of the GNU General Public License along with
 	this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-function initMap(){
+
+var map;
+var layer_markers = new OpenLayers.Layer.Markers("Observations", {
+	projection: new OpenLayers.Projection("EPSG:4326"),
+	visibility: true,
+	displayInLayerSwitcher: true
+});
+
+
+function checkForPermalink() {
+	var parameters = getParameters(),zoom,lon,lat;
+	if (parameters['zoom'] != null)zoom = parseInt(parameters['zoom']);
+	if (parameters['lat'] != null) lat = parseFloat(parameters['lat']);
+	if (parameters['lon'] != null) lon = parseFloat(parameters['lon']);
+	goTo(lon, lat, zoom);
+}
+
+
+function init(){
 	OpenLayers.Lang.setCode('de');
 	map = new OpenLayers.Map('map', {
 		controls: [],
@@ -23,7 +41,6 @@ function initMap(){
 		projection: new OpenLayers.Projection("EPSG:900913"),
 		displayProjection: new OpenLayers.Projection("EPSG:4326")
 	});
-	checkForPermalink();
 	map.addControl(new OpenLayers.Control.PanZoomBar());
 	map.addControl(new OpenLayers.Control.ScaleLine());
 	map.addControl(new OpenLayers.Control.MousePosition());
@@ -34,31 +51,39 @@ function initMap(){
 	var layer_tah = new OpenLayers.Layer.OSM.Osmarender("Tiles@Home");
 	var layer_mapnik = new OpenLayers.Layer.OSM.Mapnik("Mapnik");
 	var layer_cycle = new OpenLayers.Layer.OSM.CycleMap("Cycle");
-	map.addLayers([layer_mapnik,layer_tah,layer_cycle]);
+	map.addLayers([layer_mapnik,layer_tah,layer_cycle,layer_markers]);
 
-/*
-	var layer_gsat = new OpenLayers.Layer.Google("Google Sat", {
-		type: G_SATELLITE_MAP,
-		'sphericalMercator': true,
-		numZoomLevels:19
+
+	map.events.register('click', map, function(evt){
+		addMarker(
+			layer_markers,
+			map.getLonLatFromViewPortPx(new OpenLayers.Pixel(evt.xy.x, evt.xy.y)),
+			getCreationForm(),
+			null,
+			20,
+			34,
+			false);
 	});
-	map.addLayer(layer_gsat)
-	*/
 
-	/* reading markers from a file
-	var pois = new OpenLayers.Layer.Text( "My Points",
-	{
-		location:"./observations.jsp",
-		projection: map.displayProjection
-	});
-	map.addLayer(pois);
-	*/
-
-	/* reading a gps-track from a file
-	var grenze = new OpenLayers.Layer.GPX("Grenze", "grenze.gpx", "#00FF00");
-	map.addLayer(grenze);
-	*/
+	goTo(7.63095,51.96313,12);
+	checkForPermalink();
 }
+
+function getCreationForm() {
+	return '<form name="create" action="createObservation">'
+	+ '<input type="text" name="title" value="Titel" />'
+	+ '<label for="category">Kategorie: </label><select name="category">'
+	+ '<option value="ar">Abfall</option>'
+	+ '<option value="br">Vandalismus</option>'
+	+ '<option value="cl">was weiß ich</option>'
+	+ '<option value="dk">wtf?</option>'
+	+ '</select><br/>'
+	+ '<textarea name="description" cols="50" rows="10"></textarea><br/>'
+	+ '<input type="button" value="Abbrechen" />'
+	+ '<input type="submit" value="OK" />'
+	+ '</form>';
+}
+
 
 function Lon2Merc(lon) {
 	return 20037508.34 * lon / 180;
@@ -70,26 +95,28 @@ function Lat2Merc(lat) {
 	return 20037508.34 * lat / 180;
 }
 
-function addMarker(layer, lon, lat, content, iconPath, iconWidth, iconHeight, iconOffset) {
-	var ll = new OpenLayers.LonLat(Lon2Merc(lon), Lat2Merc(lat));
+function addMarker(layer, lon, lat, content, iconPath, iconWidth, iconHeight,open) {
+	addMarker(layer, new OpenLayers.LonLat(Lon2Merc(lon), Lat2Merc(lat)) , content, iconPath, iconWidth, iconHeight,open)
+}
+
+function addMarker(layer, ll, content, iconPath, iconWidth, iconHeight,open) {
 	var feature = new OpenLayers.Feature(layer, ll);
-    if (iconPath != null) {
-      var size = new OpenLayers.Size(iconWidth,iconHeight);
-      var offset = new OpenLayers.Pixel(-size.w/2, -size.h);
-      var icon = new OpenLayers.Icon(iconPath,size,offset);
-      feature.data.icon = icon;
-    }
+	if (iconPath != null) {
+		var size = new OpenLayers.Size(iconWidth,iconHeight);
+		var offset = new OpenLayers.Pixel(-size.w/2, -size.h);
+		var icon = new OpenLayers.Icon(iconPath,size,offset);
+		feature.data.icon = icon;
+	}
 	feature.closeBox = true;
 	feature.popupClass = OpenLayers.Class(OpenLayers.Popup.FramedCloud, {
 		panMapIfOutOfView: true,
 		autoSize: true,
 		minSize: new OpenLayers.Size(300, 180)
 	});
-
 	feature.data.popupContentHTML = content;
 	feature.data.overflow = "hidden";
 	var marker = feature.createMarker();
-	marker.events.register("mousedown", feature, function(evt) {
+	marker.events.register("click", feature, function(evt) {
 		if (this.popup == null) {
 			this.popup = this.createPopup(this.closeBox);
 			map.addPopup(this.popup);
@@ -98,12 +125,15 @@ function addMarker(layer, lon, lat, content, iconPath, iconWidth, iconHeight, ic
 			this.popup.toggle();
 		}
 		OpenLayers.Event.stop(evt);
-	});
+	});	
 	layer.addMarker(marker);
-}
-
-function add(lon,lat,html) {
-	addMarker(layer_markers, lon, lat, html,"./img/marker/blue_MarkerA.png",20,34,0,-34);
+	if (open){
+		if (feature.popup == null) {
+			feature.popup = feature.createPopup(feature.closeBox);
+			map.addPopup(feature.popup);
+			feature.popup.show();
+		} else { feature.popup.toggle(); }
+	}
 }
 
 function getCycleTileURL(bounds) {
@@ -140,16 +170,6 @@ function getParameters() {
 		parameterzeile = parameterzeile.substr(endpos+1);
 	}
 	return parameters;
-}
-
-function checkForPermalink() {
-	var parameters = getParameters();
-	if (parameters['zoom'] != null)
-		zoom = parseInt(parameters['zoom']);
-	if (parameters['lat'] != null)
-		lat = parseFloat(parameters['lat']);
-	if (parameters['lon'] != null)
-		lon = parseFloat(parameters['lon']);
 }
 
 function goTo(lon, lat, zoom) {

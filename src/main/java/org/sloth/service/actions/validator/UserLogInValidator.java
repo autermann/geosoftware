@@ -43,7 +43,7 @@ public class UserLogInValidator implements Validator {
 		UserLogIn login = (UserLogIn) o;
 		pm.test(um.getUser(login.getMail()).getHashedPassword(),
 				pm.hash(login.getPassword()));
-
+		
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 

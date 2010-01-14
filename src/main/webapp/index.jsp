@@ -26,33 +26,6 @@ Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth, Christoph
 		<script type="text/javascript" src="js/jquery.js"></script>
 		<script type="text/javascript" src="js/osm.js"></script>
 		<title>Sloth</title>
-		<script type="text/javascript">
-			var layer_markers = new OpenLayers.Layer.Markers("Observations", {
-				projection: new OpenLayers.Projection("EPSG:4326"),
-				visibility: true,
-				displayInLayerSwitcher: true
-			});
-			var map;
-			function init(){
-				initMap();
-				map.addLayer(layer_markers);
-				var s = '<form name="create" action="createObservation">'
-				s += '<input type="text" name="title" value="Titel" />';
-				s += '<label for="category">Kategorie: </label><select name="category">';
-				s += '<option value="ar">Argentinien</option>';
-				s += '<option value="br">Brasilien</option>';
-				s += '<option value="bg">Bulgarien</option>';
-				s += '<option value="cl">Chile</option>';
-				s += '<option value="dk">D&auml;nemark</option>';
-				s += '</select><br/>';
-				s += '<textarea name="description"  cols="50" rows="10"></textarea><br/>';
-				s += '<input type="button" value="Abbrechen" />';
-				s += '<input type="submit" value="OK" />';
-				s += '</form>';
-				add(7.63095,51.96313, s);
-				goTo(7.63095,51.96313,12);
-			}
-		</script>
 	</head>
 	<body onload="init()">
 		<div id="header"></div>
