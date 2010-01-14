@@ -56,4 +56,9 @@ public class PasswordManagerImpl implements PasswordManager {
 		}
 		return (new BASE64Encoder()).encode(md.digest());
 	}
+
+	@Override
+	public String getTest() {
+		return "hallooooo?";
+	}
 }

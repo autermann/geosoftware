@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package org.sloth.service.actions;
-import org.sloth.pojo.Coordinate;
+import org.sloth.model.Coordinate;
 
 public class ObservationCreation {
 	private String title;

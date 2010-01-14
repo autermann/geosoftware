@@ -17,6 +17,7 @@
  */
 package org.sloth.pojo;
 
+import org.sloth.model.Coordinate;
 import org.junit.Before;
 import static org.junit.Assert.*;
 import org.junit.Test;

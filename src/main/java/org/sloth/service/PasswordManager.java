@@ -30,4 +30,6 @@ public interface PasswordManager {
 
 	public String hash(String plain);
 
+	public String getTest();
+
 }

@@ -20,7 +20,7 @@ package org.sloth.service.impl;
 import java.util.Calendar;
 import java.util.Collection;
 import org.sloth.persistence.UserDao;
-import org.sloth.pojo.User;
+import org.sloth.model.User;
 import org.sloth.service.PasswordManager;
 import org.sloth.service.UserManager;
 

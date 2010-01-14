@@ -18,7 +18,7 @@
 package org.sloth.service;
 
 import java.util.Collection;
-import org.sloth.pojo.User;
+import org.sloth.model.User;
 
 public interface UserManager {
 

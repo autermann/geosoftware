@@ -25,9 +25,10 @@ import org.springframework.web.servlet.mvc.Controller;
 public class FrontController implements Controller {
 
 	@Override
-	public ModelAndView handleRequest(HttpServletRequest hsr, HttpServletResponse hsr1)
-			throws Exception {
-		throw new UnsupportedOperationException("Not supported yet.");
+	public ModelAndView handleRequest(HttpServletRequest hsr,
+									  HttpServletResponse hsr1)
+									  throws Exception {
+		return new ModelAndView();
 	}
 
 }

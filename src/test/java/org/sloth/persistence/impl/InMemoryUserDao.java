@@ -19,7 +19,7 @@ package org.sloth.persistence.impl;
 
 import java.util.Collection;
 import org.sloth.persistence.UserDao;
-import org.sloth.pojo.User;
+import org.sloth.model.User;
 
 public class InMemoryUserDao implements UserDao {
 

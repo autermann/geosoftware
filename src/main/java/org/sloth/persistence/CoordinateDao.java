@@ -17,7 +17,7 @@
  */
 package org.sloth.persistence;
 
-import org.sloth.pojo.Coordinate;
+import org.sloth.model.Coordinate;
 
 public interface CoordinateDao {
 

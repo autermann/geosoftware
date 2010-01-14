@@ -15,6 +15,8 @@ Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth, Christoph
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE xhtml PUBLIC "-//W3C//DTD XHTML 1.1//EN"
 	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -53,35 +55,8 @@ Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth, Christoph
 		</script>
 	</head>
 	<body onload="init()">
-		<div id="create" style="visibility: hidden;">
-			<form name="create" action="createObservation">
-				<input type="text" name="title" value="Titel" />
-				<label for="category">Kategorie: </label>
-				<select name="category">
-					<option value="ar">Argentinien</option>
-					<option value="br">Brasilien</option>
-					<option value="bg">Bulgarien</option>
-					<option value="cl">Chile</option>
-					<option value="dk">D&auml;nemark</option>
-				</select>
-				<br />
-				<textarea name="description" cols="50" rows="10"></textarea>
-				<br/>
-				<div style="">
-					<input type="button" value="Abbrechen" />
-					<input type="submit" value="OK" />
-				</div>
-			</form>
-
-		</div>
-		<div id="header">
-
-		</div>
-		<div id="list">
-
-		</div>
-		<div id="map">
-
-		</div>
+		<div id="header"></div>
+		<div id="list"></div>
+		<div id="map"></div>
 	</body>
 </html>

@@ -17,8 +17,25 @@
  */
 package org.sloth.persistence.impl;
 
+import java.util.Collection;
 import org.sloth.persistence.ObservationCategorieDao;
+import org.sloth.model.ObservationCategorie;
 
 public class InMemoryObservationCategorieDao implements
 		ObservationCategorieDao {
+
+	@Override
+	public Collection<ObservationCategorie> getAll() {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	@Override
+	public ObservationCategorie get(int id) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	@Override
+	public ObservationCategorie get(String keyword) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
 }

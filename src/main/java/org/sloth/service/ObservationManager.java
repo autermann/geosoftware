@@ -18,10 +18,10 @@
 package org.sloth.service;
 
 import java.util.Collection;
-import org.sloth.pojo.Coordinate;
-import org.sloth.pojo.Observation;
-import org.sloth.pojo.ObservationCategorie;
-import org.sloth.pojo.User;
+import org.sloth.model.Coordinate;
+import org.sloth.model.Observation;
+import org.sloth.model.ObservationCategorie;
+import org.sloth.model.User;
 
 public interface ObservationManager {
 

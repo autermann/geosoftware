@@ -13,8 +13,10 @@ Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth, Christoph
 	You should have received a copy of the GNU General Public License along with
 	this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+		                     http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<name>Geosoftware II Projekt der Gruppe IV</name>
 	<groupId>org.sloth</groupId>
@@ -142,11 +144,6 @@ Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth, Christoph
 		</dependency>
 	</dependencies>
 	<build>
-		<!--<resources>
-			<resource>src/main/resources</resource>
-			<filtering>true</filtering>
-		</resources>-->
-
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -214,10 +211,6 @@ Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth, Christoph
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.build.timestamp.format>dd. MMM yyyy HH:mm Z</maven.build.timestamp.format>
 		<spring.version>2.5.5</spring.version>
-		<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
-		<jdbc.url>jdbc:mysql://localhost:3306/sloth</jdbc.url>
-		<jdbc.username>dev_user</jdbc.username>
-		<jdbc.password>s3cr3tw0rd</jdbc.password>
 	 <netbeans.hint.deploy.server>Tomcat60</netbeans.hint.deploy.server>
 	</properties>
 </project>

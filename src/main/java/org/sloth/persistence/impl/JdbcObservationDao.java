@@ -19,7 +19,7 @@ package org.sloth.persistence.impl;
 
 import java.util.Collection;
 import org.sloth.persistence.ObservationDao;
-import org.sloth.pojo.Observation;
+import org.sloth.model.Observation;
 import org.springframework.jdbc.core.simple.SimpleJdbcDaoSupport;
 
 public class JdbcObservationDao extends SimpleJdbcDaoSupport implements

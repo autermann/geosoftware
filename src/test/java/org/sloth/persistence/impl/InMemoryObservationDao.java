@@ -19,7 +19,7 @@ package org.sloth.persistence.impl;
 
 import java.util.Collection;
 import org.sloth.persistence.ObservationDao;
-import org.sloth.pojo.Observation;
+import org.sloth.model.Observation;
 
 public class InMemoryObservationDao implements
 		ObservationDao {

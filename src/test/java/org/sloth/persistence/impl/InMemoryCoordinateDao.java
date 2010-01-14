@@ -19,7 +19,7 @@
 package org.sloth.persistence.impl;
 
 import org.sloth.persistence.CoordinateDao;
-import org.sloth.pojo.Coordinate;
+import org.sloth.model.Coordinate;
 
 /**
  *
@@ -39,6 +39,16 @@ public class InMemoryCoordinateDao implements CoordinateDao {
 
 	@Override
 	public void save(Coordinate o) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	@Override
+	public void delete(Coordinate c) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	@Override
+	public void delete(int id) {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 

@@ -18,7 +18,7 @@
 package org.sloth.persistence;
 
 import java.util.Collection;
-import org.sloth.pojo.ObservationCategorie;
+import org.sloth.model.ObservationCategorie;
 
 public interface ObservationCategorieDao {
 

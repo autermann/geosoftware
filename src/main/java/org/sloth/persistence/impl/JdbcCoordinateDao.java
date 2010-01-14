@@ -18,7 +18,7 @@
 package org.sloth.persistence.impl;
 
 import org.sloth.persistence.CoordinateDao;
-import org.sloth.pojo.Coordinate;
+import org.sloth.model.Coordinate;
 import org.springframework.jdbc.core.simple.SimpleJdbcDaoSupport;
 
 public class JdbcCoordinateDao extends SimpleJdbcDaoSupport implements

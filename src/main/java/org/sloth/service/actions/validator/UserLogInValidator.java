@@ -41,8 +41,8 @@ public class UserLogInValidator implements Validator {
 	@Override
 	public void validate(Object o, Errors errors) {
 		UserLogIn login = (UserLogIn) o;
-		//TODO
-		pm.test(null, pm.hash(login.getPassword()));
+		pm.test(um.getUser(login.getMail()).getHashedPassword(),
+				pm.hash(login.getPassword()));
 
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
