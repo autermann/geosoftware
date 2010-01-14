@@ -23,6 +23,7 @@
 	<bean id="userDao" class="org.sloth.persistence.impl.JdbcUserDao">
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
+
 	<bean id="coordinateDao" class="org.sloth.persistence.impl.JdbcCoordinateDao">
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
@@ -46,16 +47,7 @@
 		<property name="userDao"><ref bean="userDao" /></property>
 	</bean>
 
-
-
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource"><ref bean="dataSource"/></property>
 	</bean>
-
-
-
-
-
-
-
 </beans>

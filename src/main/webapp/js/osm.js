@@ -53,8 +53,6 @@ function init(){
 	var layer_mapnik = new OpenLayers.Layer.OSM.Mapnik("Mapnik");
 	var layer_cycle = new OpenLayers.Layer.OSM.CycleMap("Cycle");
 	map.addLayers([layer_mapnik,layer_tah,layer_cycle,layer_markers]);
-
-
 	map.events.register('click', map, function(evt){
 		addMarker(
 			layer_markers,

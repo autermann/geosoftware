@@ -30,6 +30,7 @@ public class UserRegistrationValidator implements Validator {
 
 	@Override
 	public void validate(Object o, Errors errors) {
+
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 

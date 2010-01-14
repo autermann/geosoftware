@@ -25,10 +25,10 @@ import org.springframework.web.servlet.mvc.Controller;
 public class FrontController implements Controller {
 
 	@Override
-	public ModelAndView handleRequest(HttpServletRequest hsr,
-									  HttpServletResponse hsr1)
-									  throws Exception {
-		return new ModelAndView();
+	public ModelAndView handleRequest(HttpServletRequest hsr, HttpServletResponse hsr1) throws Exception {
+		if (hsr.getContextPath().matches("search?.*"))
+			return new ModelAndView("search");
+		return null;
 	}
 
 }

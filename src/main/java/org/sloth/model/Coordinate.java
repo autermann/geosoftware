@@ -26,7 +26,6 @@ package org.sloth.model;
  */
 public class Coordinate {
 
-
 	private double latitude = -1;
 	private double longitude = -1;	
 	private long id;

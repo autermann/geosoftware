@@ -27,12 +27,13 @@ Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth, Christoph
 		<script type="text/javascript" src="js/osm.js"></script>
 		<title>Sloth</title>
 	</head>
+
 	<body onload="init()">
-                <!-- the header layer will be modified bei jsp-code-->
+        <!-- the header layer will be modified bei jsp-code-->
 		<div id="header"></div>
-                <!-- here the list layer can be written by jsp-code-->
+		<!-- here the list layer can be written by jsp-code-->
 		<div id="list"></div>
-                <!-- get openlayers layer with id 'map'-->
+		<!-- get openlayers layer with id 'map'-->
 		<div id="map"></div>
 	</body>
 </html>
