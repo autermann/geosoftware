@@ -1,18 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth, Christoph
-					Fendrich, Christian Paluschek
-	This program is free software: you can redistribute it and/or modify it
-	under the terms of the GNU General Public License as published by the Free
-	Software Foundation, either version 3 of the License, or (at your option)
-	any later version.
-	This program is distributed in the hope that it will be useful, but WITHOUT
-	ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-	FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-	more details.
-	You should have received a copy of the GNU General Public License along with
-	this program.  If not, see <http://www.gnu.org/licenses/>.
--->
 <beans xmlns="http://www.springframework.org/schema/beans"
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	   xmlns:aop="http://www.springframework.org/schema/aop"
@@ -21,40 +7,65 @@ Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth, Christoph
 	   http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
 	   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
 	   http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+	
 
-	<!-- DAO's -->
-	<bean id="userDao" class="org.sloth.persistence.impl.UserDaoImpl">
-		<property name="entityManager">
-			<bean factory-bean="entityManagerFactory"/>
-		</property>
-	</bean>
-	<bean id="coordinateDao" class="org.sloth.persistence.impl.CoordinateDaoImpl">
-		<property name="entityManager">
-			<bean factory-bean="entityManagerFactory"/>
-		</property>
-	</bean>
-	<bean id="observationDao" class="org.sloth.persistence.impl.ObservationDaoImpl">
-		<property name="entityManager" >
-			<value>
-				<bean factory-bean="entityManagerFactory"/>
-			</value>
-		</property>
-	</bean>
-	<bean id="observationCategorieDao" class="org.sloth.persistence.impl.ObservationCategorieDaoImpl">
-		<property name="entityManager">
-			<bean factory-bean="entityManagerFactory"/>
-		</property>
+	<!-- Binding Properties -->
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location"><value>WEB-INF/properties/jdbc.properties</value></property>
 	</bean>
 
-	<bean id="passwordManager" class="org.sloth.service.impl.PasswordManagerImpl" />
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="messages"/>
+	</bean>
+
+	<!-- Annotation Processors -->
+	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
+
+	<!-- EclipseLink JPA -->
+	<bean id="jpaAdapter" class="org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter">
+   		<property name="databasePlatform" value="org.eclipse.persistence.platform.database.MySQLPlatform" />
+   		<property name="showSql" value="true" />
+	</bean>
+
+	<!-- Hibernate JPA -->
+	<!--
+	<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+		<property name="database" value="MYSQL" />
+		<property name="showSql" value="true" />
+	</bean>
+	-->
+
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="jpaVendorAdapter" ref="jpaAdapter" />
+	</bean>
+
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName"><value>${jdbc.driverClassName}</value></property>
+		<property name="url"><value>${jdbc.url}</value></property>
+		<property name="username"><value>${jdbc.username}</value></property>
+		<property name="password"><value>${jdbc.password}</value></property>
+	</bean>
+
+	<!-- DAO's 	-->
+	<bean id="userDao" class="org.sloth.persistence.impl.UserDaoImpl" />
+	<bean id="coordinateDao" class="org.sloth.persistence.impl.CoordinateDaoImpl" />
+	<bean id="observationDao" class="org.sloth.persistence.impl.ObservationDaoImpl" />
+	<bean id="observationCategorieDao" class="org.sloth.persistence.impl.ObservationCategorieDaoImpl" />
+
+	<!-- Services -->
 	<bean id="observationManager" class="org.sloth.service.impl.ObservationManagerImpl">
-		<property name="observationDao" ref="observationDao"/>
-		<property name="coordinateDao" ref="coordinateDao"/>
+		<property name="observationDao" ref="observationDao" />
+		<property name="coordinateDao" ref="coordinateDao" />
 		<property name="observationCategorieDao" ref="observationCategorieDao" />
 	</bean>
 
 	<bean id="userManager" class="org.sloth.service.impl.UserManagerImpl">
 		<property name="userDao" ref="userDao" />
 	</bean>
+
+	<bean id="passwordManager" class="org.sloth.service.impl.PasswordManagerImpl" />
 
 </beans>

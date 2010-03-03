@@ -17,6 +17,7 @@
  */
 package org.sloth.pojo;
 
+import org.junit.After;
 import org.sloth.model.Coordinate;
 import org.junit.Before;
 import static org.junit.Assert.*;
@@ -84,5 +85,15 @@ public class CoordinateTests {
 	@Test
 	public void string() throws Exception {
 		assertEquals("("+lonA+","+latA+")",a.toString());
+	}
+
+	@After
+	public void bla(){
+		
+	}
+
+	@Test(expected=NullPointerException.class)
+	public void exc() throws Exception {
+		throw new NullPointerException();
 	}
 }

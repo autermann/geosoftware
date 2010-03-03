@@ -54,8 +54,6 @@ Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth, Christoph
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			/WEB-INF/context/properties.xml
-			/WEB-INF/context/persistence.xml
 			/WEB-INF/context/application.xml
 		</param-value>
 	</context-param>
