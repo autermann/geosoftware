@@ -18,44 +18,58 @@
 package org.sloth.persistence.impl;
 
 import java.util.Collection;
-import org.sloth.persistence.UserDao;
-import org.sloth.model.User;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import org.sloth.persistence.ObservationDao;
+import org.sloth.model.Observation;
 import org.springframework.jdbc.core.simple.SimpleJdbcDaoSupport;
+import org.springframework.transaction.annotation.Transactional;
 
-public class JdbcUserDao extends SimpleJdbcDaoSupport implements UserDao {
+@Transactional
+public class ObservationDaoImpl implements
+		ObservationDao {
 
-	@Override
-	public Collection<User> getAll() {
-		throw new UnsupportedOperationException("Not supported yet.");
+	EntityManager em;
+
+	@PersistenceContext
+	public void setEntityManager(EntityManager em) {
+		this.em = em;
+	}
+
+	private EntityManager getEntityManager() {
+		return em;
 	}
 
 	@Override
-	public User get(int id) {
-		throw new UnsupportedOperationException("Not supported yet.");
+	@SuppressWarnings("unchecked")
+	public Collection<Observation> getAll() {
+		return getEntityManager().createQuery(
+				"SELECT o FROM Observation o").getResultList();
 	}
 
 	@Override
-	public void save(User u) {
-		throw new UnsupportedOperationException("Not supported yet.");
+	public Observation get(long id) {
+		return getEntityManager().find(Observation.class, id);
 	}
 
 	@Override
-	public void update(User u) {
-		throw new UnsupportedOperationException("Not supported yet.");
+	public void save(Observation o) {
+		getEntityManager().persist(o);
 	}
 
 	@Override
-	public void delete(User u) {
-		throw new UnsupportedOperationException("Not supported yet.");
+	public void update(Observation o) {
+		getEntityManager().merge(o);
 	}
 
 	@Override
-	public void delete(int id) {
-		throw new UnsupportedOperationException("Not supported yet.");
+	public void delete(long id) {
+		delete(get(id));
 	}
 
 	@Override
-	public User get(String mail) {
-		throw new UnsupportedOperationException("Not supported yet.");
+	public void delete(Observation o) {
+		getEntityManager().remove(this);
 	}
+
 }

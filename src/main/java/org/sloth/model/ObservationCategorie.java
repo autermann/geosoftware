@@ -17,6 +17,10 @@
  */
 package org.sloth.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 /**
  * Represents an non hierachical categorie for observations.
  *
@@ -25,8 +29,12 @@ package org.sloth.model;
  * @version 1.0
  * @since 1.0
  */
+@Entity
 public class ObservationCategorie {
 
+	@Id
+	@GeneratedValue
+	private long id;
 	private String title = null;
 	private String description = null;
 
@@ -89,6 +97,20 @@ public class ObservationCategorie {
 	@Override
 	public String toString() {
 		return this.getTitle();
+	}
+
+	/**
+	 * @return the id
+	 */
+	public long getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(long id) {
+		this.id = id;
 	}
 
 

@@ -17,36 +17,48 @@
  */
 package org.sloth.persistence.impl;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import org.sloth.persistence.CoordinateDao;
 import org.sloth.model.Coordinate;
-import org.springframework.jdbc.core.simple.SimpleJdbcDaoSupport;
+import org.springframework.transaction.annotation.Transactional;
 
-public class JdbcCoordinateDao extends SimpleJdbcDaoSupport implements
-		CoordinateDao {
+@Transactional
+public class CoordinateDaoImpl implements CoordinateDao {
+	EntityManager em;
+
+	@PersistenceContext
+    public void setEntityManager(EntityManager em) {
+        this.em = em;
+    }
+	
+	private EntityManager getEntityManager() {
+        return em;
+    }
 
 	@Override
-	public void get(int id) {
-		throw new UnsupportedOperationException("Not supported yet.");
+	public Coordinate get(long id) {
+		return getEntityManager().find(Coordinate.class, id);
 	}
 
 	@Override
 	public void update(Coordinate o) {
-		throw new UnsupportedOperationException("Not supported yet.");
+		getEntityManager().merge(o);
 	}
 
 	@Override
 	public void save(Coordinate o) {
-		throw new UnsupportedOperationException("Not supported yet.");
+		getEntityManager().persist(o);
 	}
 
 	@Override
 	public void delete(Coordinate c) {
-		throw new UnsupportedOperationException("Not supported yet.");
+		getEntityManager().remove(c);
 	}
 
 	@Override
-	public void delete(int id) {
-		throw new UnsupportedOperationException("Not supported yet.");
+	public void delete(long id) {
+		delete(get(id));
 	}
 
 }

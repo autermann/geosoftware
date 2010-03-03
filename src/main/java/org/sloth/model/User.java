@@ -17,8 +17,14 @@
  */
 package org.sloth.model;
 
-import java.util.Calendar;
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import static javax.persistence.TemporalType.DATE;
+import javax.persistence.UniqueConstraint;
 /**
  * Representing a user. Every user has an unique ID, an eMail adress, a name, 
  * family name and a password. It stores also the date of creation and the
@@ -29,13 +35,18 @@ import java.util.Date;
  * @since 1.0
  * @version 1.0
  */
+@Entity
+@Table(uniqueConstraints=@UniqueConstraint(columnNames={"eMail"}))
 public class User {
 	private String eMail = null;
 	private String name = null;
 	private String familyName = null;
 	private String hashedPassword = null;
+	@Id
+	@GeneratedValue
 	private int id = -1;
-	private Calendar creationDate = null;
+	@Temporal(DATE)
+	private Date creationDate = null;
 
 	/**
 	 * Creates a new <code>User</code> with <code>-1</code> as <code>>id</code>
@@ -118,14 +129,14 @@ public class User {
 	/**
 	 * @return the creationDate
 	 */
-	public Calendar getCreationDate() {
+	public Date getCreationDate() {
 		return creationDate;
 	}
 
 	/**
 	 * @param creationDate the creationDate to set
 	 */
-	public void setCreationDate(Calendar creationDate) {
+	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	}
 

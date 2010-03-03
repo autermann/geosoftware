@@ -21,40 +21,6 @@ import java.util.Collection;
 import org.sloth.persistence.UserDao;
 import org.sloth.model.User;
 
-public class InMemoryUserDao implements UserDao {
+public abstract class InMemoryUserDao implements UserDao {
 
-	@Override
-	public Collection<User> getAll() {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
-
-	@Override
-	public User get(int id) {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
-
-	@Override
-	public User get(String mail) {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
-
-	@Override
-	public void delete(User u) {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
-
-	@Override
-	public void delete(int id) {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
-
-	@Override
-	public void save(User u) {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
-
-	@Override
-	public void update(User u) {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
 }

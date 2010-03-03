@@ -24,9 +24,9 @@ public interface ObservationDao {
 
 	public Collection<Observation> getAll();
 
-	public Observation get(int id);
+	public Observation get(long id);
 
-	public void delete(int id);
+	public void delete(long id);
 
 	public void delete(Observation o);
 

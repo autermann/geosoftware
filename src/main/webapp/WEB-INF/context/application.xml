@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth, Christoph
+					Fendrich, Christian Paluschek
+	This program is free software: you can redistribute it and/or modify it
+	under the terms of the GNU General Public License as published by the Free
+	Software Foundation, either version 3 of the License, or (at your option)
+	any later version.
+	This program is distributed in the hope that it will be useful, but WITHOUT
+	ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+	FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+	more details.
+	You should have received a copy of the GNU General Public License along with
+	this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xsi:schemaLocation="
+	   http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+	   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+	   http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+	<!-- DAO's -->
+	<bean id="userDao" class="org.sloth.persistence.impl.UserDaoImpl">
+		<property name="entityManager">
+			<bean factory-bean="entityManagerFactory"/>
+		</property>
+	</bean>
+	<bean id="coordinateDao" class="org.sloth.persistence.impl.CoordinateDaoImpl">
+		<property name="entityManager">
+			<bean factory-bean="entityManagerFactory"/>
+		</property>
+	</bean>
+	<bean id="observationDao" class="org.sloth.persistence.impl.ObservationDaoImpl">
+		<property name="entityManager" >
+			<value>
+				<bean factory-bean="entityManagerFactory"/>
+			</value>
+		</property>
+	</bean>
+	<bean id="observationCategorieDao" class="org.sloth.persistence.impl.ObservationCategorieDaoImpl">
+		<property name="entityManager">
+			<bean factory-bean="entityManagerFactory"/>
+		</property>
+	</bean>
+
+	<bean id="passwordManager" class="org.sloth.service.impl.PasswordManagerImpl" />
+	<bean id="observationManager" class="org.sloth.service.impl.ObservationManagerImpl">
+		<property name="observationDao" ref="observationDao"/>
+		<property name="coordinateDao" ref="coordinateDao"/>
+		<property name="observationCategorieDao" ref="observationCategorieDao" />
+	</bean>
+
+	<bean id="userManager" class="org.sloth.service.impl.UserManagerImpl">
+		<property name="userDao" ref="userDao" />
+	</bean>
+
+</beans>

@@ -17,7 +17,14 @@
  */
 package org.sloth.model;
 
-import java.util.Calendar;
+import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import static javax.persistence.TemporalType.DATE;
 
 /**
  * Represents an Observation, whic is defined by his
@@ -25,15 +32,22 @@ import java.util.Calendar;
  * @version 1.0
  * @since 1.0
  */
+@Entity
 public class Observation {
 
-	private int id = -1;
-	private String title = null;
-	private String description = null;
-	private User user = null;
-	private Calendar timestamp = null;
-	private ObservationCategorie observationCategorie = null;
-	private Coordinate coordinate = null;
+	@Id
+	@GeneratedValue
+	private long id;
+	private String title;
+	private String description;
+	@ManyToOne
+	private User user;
+	@Temporal(DATE)
+	private Date creationTime;
+	@OneToOne
+	private ObservationCategorie observationCategorie;
+	@OneToOne
+	private Coordinate coordinate;
 
 	/**
 	 * Creates a new observation. The ID is initialized with <code>-1</code> and
@@ -46,14 +60,14 @@ public class Observation {
 	/**
 	 * @return the id
 	 */
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -102,15 +116,15 @@ public class Observation {
 	/**
 	 * @return the timestamp
 	 */
-	public Calendar getTimestamp() {
-		return timestamp;
+	public Date getCreationTime() {
+		return creationTime;
 	}
 
 	/**
 	 * @param timestamp the timestamp to set
 	 */
-	public void setTimestamp(Calendar timestamp) {
-		this.timestamp = timestamp;
+	public void setCreationTime(Date creationTime) {
+		this.creationTime = creationTime;
 	}
 
 	/**
@@ -154,19 +168,17 @@ public class Observation {
 	@Override
 	public int hashCode() {
 		int hash = 7;
-		hash = 59 * hash + this.id;
-		hash = 59 * hash + (this.title != null ?
-			this.title.hashCode() : 0);
-		hash = 59 * hash + (this.description != null ?
-			this.description.hashCode() : 0);
-		hash = 59 * hash + (this.user != null ?
-			this.user.hashCode() : 0);
-		hash = 59 * hash + (this.timestamp != null ?
-			this.timestamp.hashCode() : 0);
-		hash = 59 * hash + (this.observationCategorie != null ?
-			this.observationCategorie.hashCode() : 0);
-		hash = 59 * hash + (this.coordinate != null ? 
-			this.coordinate.hashCode() : 0);
+		hash = (int) (59 * hash + this.id);
+		hash = 59 * hash + (this.title != null ? this.title.hashCode() : 0);
+		hash = 59 * hash + (this.description != null
+							? this.description.hashCode() : 0);
+		hash = 59 * hash + (this.user != null ? this.user.hashCode() : 0);
+		hash = 59 * hash + (this.creationTime != null ? this.creationTime.
+				hashCode() : 0);
+		hash = 59 * hash + (this.observationCategorie != null ? this.observationCategorie.
+				hashCode() : 0);
+		hash = 59 * hash + (this.coordinate != null ? this.coordinate.hashCode()
+							: 0);
 		return hash;
 	}
 
@@ -184,10 +196,11 @@ public class Observation {
 		buf.append(" @");
 		buf.append(getCoordinate());
 		buf.append("|");
-		buf.append(getTimestamp());
+		buf.append(getCreationTime());
 		buf.append(" in ");
 		buf.append(getObservationCategorie());
 		buf.append(")");
 		return buf.toString();
 	}
+
 }

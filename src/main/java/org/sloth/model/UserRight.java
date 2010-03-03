@@ -17,6 +17,7 @@
  */
 package org.sloth.model;
 
+
 /**
  * Representation of rigths of an user. As convention a UserRight with an higher
  * value means more rights. Additionaly rightA has in the scenario
@@ -32,10 +33,10 @@ package org.sloth.model;
  */
 public class UserRight {
 
+	private int value = -1;
 	public static final int AMDINISTRATOR_VALUE = 20;
 	public static final int USER_VALUE = 10;
 	public static final int GUEST_VALUE = 0;
-	private int value = -1;
 	private String title = null;
 	private String description = null;
 

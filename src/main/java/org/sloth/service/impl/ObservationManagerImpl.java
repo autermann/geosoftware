@@ -19,6 +19,7 @@ package org.sloth.service.impl;
 
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedList;
 import org.sloth.persistence.CoordinateDao;
@@ -87,7 +88,7 @@ public class ObservationManagerImpl implements ObservationManager {
 		o.setDescription(description);
 		o.setTitle(title);
 		o.setUser(user);
-		o.setTimestamp(Calendar.getInstance());
+		o.setCreationTime(new Date());
 		getObservationDao().save(o);
 	}
 

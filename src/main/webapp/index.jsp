@@ -12,28 +12,5 @@ Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth, Christoph
 	You should have received a copy of the GNU General Public License along with
 	this program.  If not, see <http://www.gnu.org/licenses/>.
 --%>
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE xhtml PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<link type="text/css" href="./css/style.css" rel="stylesheet" />
-		<script type="text/javascript" src="http://www.openlayers.org/api/OpenLayers.js"></script>
-		<script type="text/javascript" src="http://www.openstreetmap.org/openlayers/OpenStreetMap.js"></script>
-		<script type="text/javascript" src="js/jquery.js"></script>
-		<script type="text/javascript" src="js/osm.js"></script>
-		<title>Sloth</title>
-	</head>
-
-	<body onload="init()">
-        <!-- the header layer will be modified bei jsp-code-->
-		<div id="header"></div>
-		<!-- here the list layer can be written by jsp-code-->
-		<div id="list"></div>
-		<!-- get openlayers layer with id 'map'-->
-		<div id="map"></div>
-	</body>
-</html>
+<%@ include file="/WEB-INF/jsp/include.jsp" %>
+<c:redirect url="/map.xhtml"/>

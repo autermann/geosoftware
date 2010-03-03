@@ -21,7 +21,7 @@ import org.sloth.model.Coordinate;
 
 public interface CoordinateDao {
 
-	public void get(int id);
+	public Coordinate get(long id);
 
 	public void update(Coordinate c);
 
@@ -29,6 +29,6 @@ public interface CoordinateDao {
 
 	public void delete(Coordinate c);
 
-	public void delete(int id);
+	public void delete(long id);
 
 }

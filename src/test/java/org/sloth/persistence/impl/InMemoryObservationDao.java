@@ -21,36 +21,6 @@ import java.util.Collection;
 import org.sloth.persistence.ObservationDao;
 import org.sloth.model.Observation;
 
-public class InMemoryObservationDao implements
-		ObservationDao {
+public abstract class InMemoryObservationDao implements ObservationDao {
 
-	@Override
-	public Collection<Observation> getAll() {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
-
-	@Override
-	public Observation get(int id) {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
-
-	@Override
-	public void delete(int id) {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
-
-	@Override
-	public void delete(Observation o) {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
-
-	@Override
-	public void save(Observation o) {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
-
-	@Override
-	public void update(Observation o) {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
 }

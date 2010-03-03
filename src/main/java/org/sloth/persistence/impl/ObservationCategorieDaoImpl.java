@@ -18,25 +18,53 @@
 package org.sloth.persistence.impl;
 
 import java.util.Collection;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import org.sloth.persistence.ObservationCategorieDao;
 import org.sloth.model.ObservationCategorie;
 import org.springframework.jdbc.core.simple.SimpleJdbcDaoSupport;
+import org.springframework.transaction.annotation.Transactional;
 
-public class JdbcObservationCategorieDao extends SimpleJdbcDaoSupport implements
+@Transactional
+public class ObservationCategorieDaoImpl implements
 		ObservationCategorieDao {
 
+	EntityManager em;
+
+	@PersistenceContext
+	public void setEntityManager(EntityManager em) {
+		this.em = em;
+	}
+
+	private EntityManager getEntityManager() {
+		return em;
+	}
+
 	@Override
+	@SuppressWarnings("unchecked")
 	public Collection<ObservationCategorie> getAll() {
-		throw new UnsupportedOperationException("Not supported yet.");
+		return getEntityManager().createQuery(
+				"SELECT oc FROM ObservationCategorie oc").getResultList();
 	}
 
 	@Override
-	public ObservationCategorie get(int id) {
-		throw new UnsupportedOperationException("Not supported yet.");
+	public ObservationCategorie get(long id) {
+		return getEntityManager().find(ObservationCategorie.class, id);
 	}
 
 	@Override
-	public ObservationCategorie get(String keyword) {
-		throw new UnsupportedOperationException("Not supported yet.");
+	public void update(ObservationCategorie oc) {
+		getEntityManager().merge(oc);
 	}
+
+	@Override
+	public void delete(ObservationCategorie oc) {
+		getEntityManager().remove(oc);
+	}
+
+	@Override
+	public void save(ObservationCategorie oc) {
+		getEntityManager().persist(oc);
+	}
+
 }

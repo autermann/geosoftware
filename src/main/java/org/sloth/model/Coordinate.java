@@ -17,6 +17,11 @@
  */
 package org.sloth.model;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 /**
  * Represents a simple two valued coordinate.
  * 
@@ -24,10 +29,15 @@ package org.sloth.model;
  * @version 1.0
  * @since 1.0
  */
-public class Coordinate {
+@Entity
+public class Coordinate implements Serializable {
+
+	public static final long serialVersionUID = -1;
 
 	private double latitude = -1;
 	private double longitude = -1;	
+	@Id
+	@GeneratedValue
 	private long id;
 
 	/**

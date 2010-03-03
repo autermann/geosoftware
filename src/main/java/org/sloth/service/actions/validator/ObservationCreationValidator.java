@@ -20,6 +20,7 @@ package org.sloth.service.actions.validator;
 import org.sloth.service.actions.ObservationCreation;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
+import static org.springframework.validation.ValidationUtils.*;
 
 public class ObservationCreationValidator implements Validator {
 
@@ -30,17 +31,12 @@ public class ObservationCreationValidator implements Validator {
 
 	@Override
 	public void validate(Object o, Errors errors) {
+		rejectIfEmptyOrWhitespace(errors, "title", "title.empty");
+		rejectIfEmptyOrWhitespace(errors, "description", "description.empty");
 		ObservationCreation oc = (ObservationCreation) o;
-		if (oc.getTitle().trim().equals("")) {
-			errors.reject("empty title");
-		}
-		if (oc.getDescription().trim().equals("")) {
-			errors.reject("empty description");
-		}
 		if (oc.getUserId() > 0) {
-			errors.reject("invalid user id");
+			errors.rejectValue("userId","userId.negative");
 		}
-
 	}
 
 }

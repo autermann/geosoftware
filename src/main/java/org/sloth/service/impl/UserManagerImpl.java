@@ -17,8 +17,8 @@
  */
 package org.sloth.service.impl;
 
-import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import org.sloth.persistence.UserDao;
 import org.sloth.model.User;
 import org.sloth.service.PasswordManager;
@@ -41,7 +41,7 @@ public class UserManagerImpl implements UserManager {
 	public void registrateUser(String mail, String name, String familyName,
 							   String plainPassword) {
 		User u = new User();
-		u.setCreationDate(Calendar.getInstance());
+		u.setCreationDate(new Date());
 		u.setFamilyName(familyName);
 		u.seteMail(mail);
 		u.setName(name);
