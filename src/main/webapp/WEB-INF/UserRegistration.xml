@@ -1,9 +1,9 @@
 <bean id="regController" class="org.sloth.web.UserRegistrationFormController">
-<property name="formView"><value>login</value></property>
-<property name="successView"><value>Funktioniert</value></property>
-<property name="failedView"><value>fail</value></property>
-<property name="commandClass"><value>org.sloth.model.User</value></property>
-<property name="commandName"><value>login</value></property>
-<property name="loginservice"><ref bean="loginService"/></property>
-<property name="validator"><ref bean="UserRegistraionValidator"/></property>
+	<property name="formView"><value>login</value></property>
+	<property name="successView"><value>Funktioniert</value></property>
+	<property name="failedView"><value>fail</value></property>
+	<property name="commandClass"><value>org.sloth.model.User</value></property>
+	<property name="commandName"><value>login</value></property>
+	<property name="loginservice"><ref bean="loginService"/></property>
+	<property name="validator"><ref bean="UserRegistraionValidator"/></property>
 </bean>
