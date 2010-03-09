@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.sloth.pojo;
+package org.sloth.model;
 
 import org.sloth.model.UserRight;
 import org.junit.Test;
@@ -57,8 +57,8 @@ public class UserRightTests {
 	public void defaultValues(){
 		UserRight r4 = new UserRight();
 		assertTrue(r4.getDescription() == null);
-		assertTrue(r4.getTitle() == null);
-		assertTrue(r4.getValue() == -1);
+		assertTrue(r4.getName() == null);
+		assertTrue(r4.getValue() == 0);
 	}
 
 	@Test

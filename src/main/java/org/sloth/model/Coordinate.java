@@ -18,9 +18,9 @@
 package org.sloth.model;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+
 
 /**
  * Represents a simple two valued coordinate.
@@ -29,23 +29,15 @@ import javax.persistence.Id;
  * @version 1.0
  * @since 1.0
  */
-@Entity
+@Embeddable
 public class Coordinate implements Serializable {
 
-	public static final long serialVersionUID = -1;
+	@Column(nullable=false)
+	private double latitude;
+	@Column(nullable=false)
+	private double longitude;
 
-	private double latitude = -1;
-	private double longitude = -1;	
-	@Id
-	@GeneratedValue
-	private long id;
-
-	/**
-	 * Creates a Coordinate with <code>-1</code> as value for
-	 * <code>latitude</code> and <code>longitude</code>.
-	 */
 	public Coordinate() {
-		/* nothing to do here */
 	}
 
 	/**
@@ -100,11 +92,11 @@ public class Coordinate implements Serializable {
 	public int hashCode() {
 		int hash = 5;
 		hash = 47 * hash + (int) (Double.doubleToLongBits(this.getLatitude())
-								  ^ (Double.doubleToLongBits(this.getLatitude())
-									 >>> 32));
+				^ (Double.doubleToLongBits(this.getLatitude())
+				>>> 32));
 		hash = 47 * hash + (int) (Double.doubleToLongBits(this.getLongitude())
-								  ^ (Double.doubleToLongBits(this.getLongitude())
-									 >>> 32));
+				^ (Double.doubleToLongBits(this.getLongitude())
+				>>> 32));
 		return hash;
 	}
 
@@ -118,13 +110,4 @@ public class Coordinate implements Serializable {
 		buf.append(")");
 		return buf.toString();
 	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
 }

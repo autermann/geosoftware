@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSet>
+	<observation id="1" title="Observation 1" description="Description of Observation 1" user="1" creationTime="2010-03-07 19:40:00" observationCategorie="1" longitude="8.1" latitude="1.8" />
+	<observation id="2" title="Observation 2" description="Description of Observation 2" user="2" creationTime="2010-03-07 19:41:00" observationCategorie="2" longitude="7.2" latitude="2.7" />
+	<observation id="3" title="Observation 3" description="Description of Observation 3" user="3" creationTime="2010-03-07 19:42:00" observationCategorie="3" longitude="6.3" latitude="3.6" />
+	<observation id="4" title="Observation 4" description="Description of Observation 4" user="4" creationTime="2010-03-07 19:43:00" observationCategorie="1" longitude="5.4" latitude="4.5" />
+	<observation id="5" title="Observation 5" description="Description of Observation 5" user="5" creationTime="2010-03-07 19:44:00" observationCategorie="2" longitude="4.5" latitude="5.4" />
+	<observation id="6" title="Observation 6" description="Description of Observation 6" user="1" creationTime="2010-03-07 19:45:00" observationCategorie="3" longitude="3.6" latitude="6.3" />
+	<observation id="7" title="Observation 7" description="Description of Observation 7" user="2" creationTime="2010-03-07 19:46:00" observationCategorie="1" longitude="2.7" latitude="7.2" />
+	<observation id="8" title="Observation 8" description="Description of Observation 8" user="3" creationTime="2010-03-07 19:47:00" observationCategorie="2" longitude="1.8" latitude="8.1" />
+</dataSet>

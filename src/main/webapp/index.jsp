@@ -12,5 +12,13 @@ Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth, Christoph
 	You should have received a copy of the GNU General Public License along with
 	this program.  If not, see <http://www.gnu.org/licenses/>.
 --%>
-<%@ include file="/WEB-INF/jsp/include.jsp" %>
-<c:redirect url="/map.xhtml"/>
+<html>
+	<head>
+		<title>Sloth</title>
+	</head>
+	<body>
+		<div>
+			Hallo
+		</div>
+	</body>
+</html>

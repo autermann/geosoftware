@@ -17,12 +17,9 @@
  */
 package org.sloth.service.impl;
 
-import java.util.Calendar;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedList;
-import org.sloth.persistence.CoordinateDao;
 import org.sloth.persistence.ObservationDao;
 import org.sloth.model.Coordinate;
 import org.sloth.model.Observation;
@@ -37,8 +34,7 @@ public class ObservationManagerImpl implements ObservationManager {
 
 	private ObservationDao observationDao;
 	private ObservationCategorieDao observationCategorieDao;
-	private CoordinateDao coordinateDao;
-
+	
 	@Override
 	public Observation getObservation(int id) {
 		return getObservationDao().get(id);
@@ -88,7 +84,6 @@ public class ObservationManagerImpl implements ObservationManager {
 		o.setDescription(description);
 		o.setTitle(title);
 		o.setUser(user);
-		o.setCreationTime(new Date());
 		getObservationDao().save(o);
 	}
 
@@ -124,7 +119,12 @@ public class ObservationManagerImpl implements ObservationManager {
 	@Override
 	public void setObservationCategorieDao(ObservationCategorieDao ocDao) {
 		this.observationCategorieDao = ocDao;
-	}
+/*		ObservationCategorie oc = new ObservationCategorie();
+		oc.setDescription("ASHDASHDJLKSADJSA");
+		oc.setTitle("ksldjfalöksdjf");
+		ocDao.save(oc);
+		ocDao.flush();
+*/	}
 
 	@Override
 	public ObservationDao getObservationDao() {
@@ -135,15 +135,4 @@ public class ObservationManagerImpl implements ObservationManager {
 	public ObservationCategorieDao getObservationCategorieDao() {
 		return observationCategorieDao;
 	}
-
-	@Override
-	public void setCoordinateDao(CoordinateDao cDao) {
-		this.coordinateDao = cDao;
-	}
-
-	@Override
-	public CoordinateDao getCoordinateDao() {
-		return coordinateDao;
-	}
-
 }

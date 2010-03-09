@@ -26,12 +26,13 @@ public interface ObservationDao {
 
 	public Observation get(long id);
 
+	public void update(Observation t);
+
+	public void delete(Observation t);
+
+	public void save(Observation t);
+
+	public void flush();
+
 	public void delete(long id);
-
-	public void delete(Observation o);
-
-	public void save(Observation o);
-
-	public void update(Observation o);
-
 }

@@ -41,7 +41,6 @@ public class UserManagerImpl implements UserManager {
 	public void registrateUser(String mail, String name, String familyName,
 							   String plainPassword) {
 		User u = new User();
-		u.setCreationDate(new Date());
 		u.setFamilyName(familyName);
 		u.seteMail(mail);
 		u.setName(name);

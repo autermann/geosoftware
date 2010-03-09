@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+	<persistence-unit name="mainPU" transaction-type="RESOURCE_LOCAL">
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		<class>org.sloth.model.Observation</class>
+		<class>org.sloth.model.ObservationCategorie</class>
+		<class>org.sloth.model.User</class>
+		<class>org.sloth.model.Coordinate</class>
+		<class>org.sloth.model.UserRight</class>
+		<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://88.85.26.47/usr_web17_1"/>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+			<property name="javax.persistence.jdbc.user" value="web17"/>
+			<property name="javax.persistence.jdbc.password" value="slothgs"/>
+<!--
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/jpa"/>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+			<property name="javax.persistence.jdbc.user" value="jpa"/>
+			<property name="javax.persistence.jdbc.password" value="jpa"/>
+-->
+			<property name="eclipselink.logging.level" value="FINEST"/>
+			<property name="eclipselink.weaving" value="static"/>
+			<property name="eclipselink.ddl-generation" value="create-tables"/>
+			<property name="eclipselink.ddl-generation.output-mode" value="database"/>
+		</properties>
+	</persistence-unit>
+	<!--<persistence-unit name="testPU" transaction-type="RESOURCE_LOCAL">
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		<class>org.sloth.model.Observation</class>
+		<class>org.sloth.model.ObservationCategorie</class>
+		<class>org.sloth.model.Coordinate</class>
+		<class>org.sloth.model.UserRight</class>
+		<class>org.sloth.model.User</class>
+		<properties>
+			<property name="eclipselink.target-database" value="HSQLDB" />
+			<property name="eclipselink.jdbc.url" value="jdbc:hsqldb:mem:aname" />
+			<property name="eclipselink.jdbc.driver" value="org.hsqldb.JdbcDriver" />
+			<property name="eclipselink.jdbc.user" value="sa" />
+			<property name="eclipselink.jdbc.password" value="" />
+			<property name="eclipselink.ddl-generation" value="drop-and-create-tables" />
+			<property name="eclipselink.logging.level" value="SEVERE" />
+			<property name="eclipselink.platform.class.name" value="org.autermann.hsqldb.HsqlDbPlatform" />
+		</properties>
+	</persistence-unit>-->
+</persistence>

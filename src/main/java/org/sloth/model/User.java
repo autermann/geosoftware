@@ -17,14 +17,17 @@
  */
 package org.sloth.model;
 
-import java.util.Date;
+import java.io.Serializable;
+import java.util.Calendar;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
-import static javax.persistence.TemporalType.DATE;
-import javax.persistence.UniqueConstraint;
+import static javax.persistence.TemporalType.TIMESTAMP;
+
 /**
  * Representing a user. Every user has an unique ID, an eMail adress, a name, 
  * family name and a password. It stores also the date of creation and the
@@ -36,24 +39,33 @@ import javax.persistence.UniqueConstraint;
  * @version 1.0
  */
 @Entity
-@Table(uniqueConstraints=@UniqueConstraint(columnNames={"eMail"}))
-public class User {
-	private String eMail = null;
-	private String name = null;
-	private String familyName = null;
-	private String hashedPassword = null;
+public class User implements Serializable {
+
 	@Id
 	@GeneratedValue
-	private int id = -1;
-	@Temporal(DATE)
-	private Date creationDate = null;
+	@Column(name = "ID")
+	private long id;
+	@Column(nullable = false, unique = true, name = "MAIL_ADDRESS")
+	private String eMail;
+	@Column(nullable = false)
+	private String name;
+	@Column(nullable = false, name = "FAMILY_NAME")
+	private String familyName;
+	@Column(nullable = false, name = "HASHED_PASSWORD")
+	private String hashedPassword;
+	@Temporal(TIMESTAMP)
+	@Column(nullable = false, name = "CREATION_DATE")
+	private Calendar creationDate;
+	@ManyToOne
+	@JoinColumn(nullable = false, name = "USER_RIGHT_ID")
+	private UserRight userRight;
 
 	/**
 	 * Creates a new <code>User</code> with <code>-1</code> as <code>>id</code>
 	 * and <code>null</code> for all other members.
 	 */
 	public User() {
-		/* nothing to do here */
+		setCreationDate(Calendar.getInstance());
 	}
 
 	/**
@@ -115,28 +127,28 @@ public class User {
 	/**
 	 * @return the id
 	 */
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
 	/**
 	 * @return the creationDate
 	 */
-	public Date getCreationDate() {
+	public Calendar getCreationDate() {
 		return creationDate;
 	}
 
 	/**
 	 * @param creationDate the creationDate to set
 	 */
-	public void setCreationDate(Date creationDate) {
+	public void setCreationDate(Calendar creationDate) {
 		this.creationDate = creationDate;
 	}
 
@@ -153,17 +165,17 @@ public class User {
 	@Override
 	public int hashCode() {
 		int hash = 5;
-		hash = 37 * hash + this.id;
-		hash = 37 * hash + (this.geteMail() != null ?
-			this.geteMail().hashCode() : 0);
-		hash = 37 * hash + (this.getName() != null ?
-			this.getName().hashCode() : 0);
-		hash = 37 * hash + (this.getFamilyName() != null ?
-			this.getFamilyName().hashCode() : 0);
-		hash = 37 * hash + (this.getHashedPassword() != null ?
-			this.getHashedPassword().hashCode() : 0);
-		hash = 37 * hash + (this.getCreationDate() != null ?
-			this.getCreationDate().hashCode() : 0);
+		hash = 37 * hash + (int) this.id;
+		hash = 37 * hash + (this.geteMail() != null
+				? this.geteMail().hashCode() : 0);
+		hash = 37 * hash + (this.getName() != null
+				? this.getName().hashCode() : 0);
+		hash = 37 * hash + (this.getFamilyName() != null
+				? this.getFamilyName().hashCode() : 0);
+		hash = 37 * hash + (this.getHashedPassword() != null
+				? this.getHashedPassword().hashCode() : 0);
+		hash = 37 * hash + (this.getCreationDate() != null
+				? this.getCreationDate().hashCode() : 0);
 		return hash;
 	}
 
@@ -177,5 +189,19 @@ public class User {
 		buf.append(getId());
 		buf.append(")");
 		return buf.toString();
+	}
+
+	/**
+	 * @return the userRight
+	 */
+	public UserRight getUserRight() {
+		return userRight;
+	}
+
+	/**
+	 * @param userRight the userRight to set
+	 */
+	public void setUserRight(UserRight userRight) {
+		this.userRight = userRight;
 	}
 }

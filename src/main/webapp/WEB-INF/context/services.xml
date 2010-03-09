@@ -14,9 +14,15 @@
 	   http://www.springframework.org/schema/util		http://www.springframework.org/schema/util/spring-util.xsd
 	   http://www.springframework.org/schema/jee		http://www.springframework.org/schema/jee/spring-jee.xsd">
 
-	<import resource="persistence.xml" />
-	<import resource="daos.xml" />
-	<import resource="services.xml" />
+	<bean id="passwordManager" class="org.sloth.service.impl.PasswordManagerImpl"></bean>
 
+	<bean id="observationManager" class="org.sloth.service.impl.ObservationManagerImpl">
+		<property name="observationDao" ref="observationDao" />
+		<property name="observationCategorieDao" ref="observationCategorieDao" />
+	</bean>
+
+	<bean id="userManager" class="org.sloth.service.impl.UserManagerImpl">
+		<property name="userDao" ref="userDao"/>
+	</bean>
+	
 </beans>
-

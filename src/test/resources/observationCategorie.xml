@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSet>
+	<observationCategorie id="1" title="Categorie 1" description="Description of Categorie 1" />
+	<observationCategorie id="2" title="Categorie 1" description="Description of Categorie 1" />
+	<observationCategorie id="3" title="Categorie 1" description="Description of Categorie 1" />
+</dataSet>

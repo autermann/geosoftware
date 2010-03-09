@@ -17,6 +17,11 @@
  */
 package org.sloth.model;
 
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 
 /**
  * Representation of rigths of an user. As convention a UserRight with an higher
@@ -31,14 +36,22 @@ package org.sloth.model;
  * @version 1.0
  * @author Christian Autermann
  */
-public class UserRight {
+@Entity(name="USER_RIGHT")
+public class UserRight implements Serializable {
 
-	private int value = -1;
+	@Id
+	@Column(unique = true)
+	private int value;
+	@Column(nullable = false)
+	private String name;
+	@Column(length = 1000, nullable = false)
+	private String description;
+	@Transient
 	public static final int AMDINISTRATOR_VALUE = 20;
+	@Transient
 	public static final int USER_VALUE = 10;
+	@Transient
 	public static final int GUEST_VALUE = 0;
-	private String title = null;
-	private String description = null;
 
 	/**
 	 * Creates a new UserRight.
@@ -49,7 +62,7 @@ public class UserRight {
 	public UserRight(String title, String description, int value) {
 		setValue(value);
 		setDescription(description);
-		setTitle(title);
+		setName(title);
 	}
 
 	/**
@@ -77,15 +90,15 @@ public class UserRight {
 	/**
 	 * @return the title
 	 */
-	public String getTitle() {
-		return title;
+	public String getName() {
+		return name;
 	}
 
 	/**
-	 * @param title the title to set
+	 * @param name the title to set
 	 */
-	public void setTitle(String title) {
-		this.title = title;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	/**
@@ -116,11 +129,10 @@ public class UserRight {
 	public int hashCode() {
 		int hash = 7;
 		hash = 11 * hash + this.getValue();
-		hash = 11 * hash + (this.getTitle() != null ? 
-			this.getTitle().hashCode() : 0);
-		hash = 11 * hash + (this.getDescription() != null ?
-			this.getDescription().hashCode() : 0);
+		hash = 11 * hash + (this.getName() != null
+				? this.getName().hashCode() : 0);
+		hash = 11 * hash + (this.getDescription() != null
+				? this.getDescription().hashCode() : 0);
 		return hash;
 	}
-
 }

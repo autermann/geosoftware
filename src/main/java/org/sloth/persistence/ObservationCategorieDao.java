@@ -26,9 +26,11 @@ public interface ObservationCategorieDao {
 
 	public ObservationCategorie get(long id);
 
-	public void update(ObservationCategorie oc);
+	public void update(ObservationCategorie t);
 
-	public void delete(ObservationCategorie oc);
+	public void delete(ObservationCategorie t);
 
-	public void save(ObservationCategorie oc);
+	public void save(ObservationCategorie t);
+
+	public void flush();
 }

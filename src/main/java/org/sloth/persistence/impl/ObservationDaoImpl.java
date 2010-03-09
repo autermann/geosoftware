@@ -18,33 +18,14 @@
 package org.sloth.persistence.impl;
 
 import java.util.Collection;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import org.sloth.persistence.ObservationDao;
 import org.sloth.model.Observation;
-import org.springframework.jdbc.core.simple.SimpleJdbcDaoSupport;
-import org.springframework.transaction.annotation.Transactional;
 
-@Transactional
-public class ObservationDaoImpl implements
-		ObservationDao {
-
-	EntityManager em;
-
-	@PersistenceContext
-	public void setEntityManager(EntityManager em) {
-		this.em = em;
-	}
-
-	private EntityManager getEntityManager() {
-		return em;
-	}
+public class ObservationDaoImpl extends EntityManagerDao implements ObservationDao {
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public Collection<Observation> getAll() {
-		return getEntityManager().createQuery(
-				"SELECT o FROM Observation o").getResultList();
+		return getEntityManager().createQuery("SELECT o FROM OBSERVATION o").getResultList();
 	}
 
 	@Override
@@ -55,6 +36,7 @@ public class ObservationDaoImpl implements
 	@Override
 	public void save(Observation o) {
 		getEntityManager().persist(o);
+		getEntityManager().flush();
 	}
 
 	@Override
@@ -70,6 +52,11 @@ public class ObservationDaoImpl implements
 	@Override
 	public void delete(Observation o) {
 		getEntityManager().remove(this);
+	}
+
+	@Override
+	public void flush() {
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 }

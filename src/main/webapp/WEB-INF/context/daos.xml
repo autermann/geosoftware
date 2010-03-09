@@ -14,9 +14,9 @@
 	   http://www.springframework.org/schema/util		http://www.springframework.org/schema/util/spring-util.xsd
 	   http://www.springframework.org/schema/jee		http://www.springframework.org/schema/jee/spring-jee.xsd">
 
-	<import resource="persistence.xml" />
-	<import resource="daos.xml" />
-	<import resource="services.xml" />
+	<bean id="userDao" class="org.sloth.persistence.impl.UserDaoImpl" />
+	<bean id="observationDao" class="org.sloth.persistence.impl.ObservationDaoImpl" />
+	<bean id="observationCategorieDao" class="org.sloth.persistence.impl.ObservationCategorieDaoImpl" />
+
 
 </beans>
-

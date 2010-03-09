@@ -18,25 +18,12 @@
 package org.sloth.persistence.impl;
 
 import java.util.Collection;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import org.sloth.persistence.UserDao;
 import org.sloth.model.User;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
-public class UserDaoImpl implements UserDao {
-
-	EntityManager em;
-
-	@PersistenceContext
-	public void setEntityManager(EntityManager em) {
-		this.em = em;
-	}
-
-	private EntityManager getEntityManager() {
-		return em;
-	}
+public class UserDaoImpl extends EntityManagerDao implements UserDao {
 
 	@Override
 	@SuppressWarnings("unchecked")
@@ -73,5 +60,10 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public User get(String mail) {
 		return (User) getEntityManager().createQuery("SELECT u FROM User u WHERE eMail == "+mail).getSingleResult();
+	}
+
+	@Override
+	public void flush() {
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 }

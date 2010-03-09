@@ -15,20 +15,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.sloth.persistence;
+package org.sloth.model;
 
-import org.sloth.model.Coordinate;
+public class ObservationTests {
 
-public interface CoordinateDao {
-
-	public Coordinate get(long id);
-
-	public void update(Coordinate c);
-
-	public void save(Coordinate c);
-
-	public void delete(Coordinate c);
-
-	public void delete(long id);
-
+	/**
+	 * Test stub to prevent "no test found"-errors...
+	 */
+	@org.junit.Test(expected=UnsupportedOperationException.class)
+	public void stub(){
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
 }

@@ -19,52 +19,53 @@ package org.sloth.persistence.impl;
 
 import java.util.Collection;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import org.sloth.persistence.ObservationCategorieDao;
 import org.sloth.model.ObservationCategorie;
-import org.springframework.jdbc.core.simple.SimpleJdbcDaoSupport;
-import org.springframework.transaction.annotation.Transactional;
 
-@Transactional
-public class ObservationCategorieDaoImpl implements
-		ObservationCategorieDao {
-
-	EntityManager em;
-
-	@PersistenceContext
-	public void setEntityManager(EntityManager em) {
-		this.em = em;
-	}
-
-	private EntityManager getEntityManager() {
-		return em;
-	}
+public class ObservationCategorieDaoImpl extends EntityManagerDao implements ObservationCategorieDao {
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public Collection<ObservationCategorie> getAll() {
-		return getEntityManager().createQuery(
-				"SELECT oc FROM ObservationCategorie oc").getResultList();
+		Collection<ObservationCategorie> col = getEntityManager().createQuery("select o from OBSERVATION_CATEGORIE o").getResultList();
+		logger.info("Getting all ObservationCategories; Found: " + col.size());
+		return col;
 	}
 
 	@Override
 	public ObservationCategorie get(long id) {
-		return getEntityManager().find(ObservationCategorie.class, id);
+		logger.info("Searching for ObservationCategorie with Id: " + id);
+		ObservationCategorie oc = getEntityManager().find(ObservationCategorie.class, id);
+		if (oc != null) {
+			logger.info("Found ObservationCategorie with Id " + oc.getId() + "; Title: " + oc.getTitle() + "Description: " + oc.getTitle());
+		} else {
+			logger.info("Can't find ObservationCategorie with Id " + id);
+		}
+		return oc;
 	}
 
 	@Override
 	public void update(ObservationCategorie oc) {
+		logger.info("Updating ObservationCategorie with Id: " + oc.getId());
 		getEntityManager().merge(oc);
 	}
 
 	@Override
 	public void delete(ObservationCategorie oc) {
+		logger.info("Deleting ObservationCategorie with Id: " + oc.getId());
 		getEntityManager().remove(oc);
 	}
 
 	@Override
 	public void save(ObservationCategorie oc) {
-		getEntityManager().persist(oc);
+		EntityManager em = getEntityManager();
+		em.persist(oc);
+		em.flush();
+		logger.info("Persisting ObservationCategorie; Generated Id is: " + oc.getId());
 	}
 
+	@Override
+	public void flush() {
+		logger.info("Flushing Entitymanager");
+		getEntityManager().flush();
+	}
 }

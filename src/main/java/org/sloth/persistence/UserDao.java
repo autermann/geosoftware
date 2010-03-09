@@ -25,15 +25,16 @@ public interface UserDao {
 	public Collection<User> getAll();
 
 	public User get(long id);
-	
-	public User get(String mail);
 
-	public void delete(User u);
+	public void update(User t);
+
+	public void delete(User t);
+
+	public void save(User t);
+
+	public void flush();
 
 	public void delete(long id);
 
-	public void save(User u);
-
-	public void update(User u);
-
+	public User get(String mail);
 }

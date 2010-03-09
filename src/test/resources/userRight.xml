@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSet>
+	<USERRIGHT VALUE="0" TITLE="guest" DESCRIPTION="Description of Guests" />
+	<USERRIGHT VALUE="10" TITLE="user" DESCRIPTION="Description of Users" />
+	<USERRIGHT VALUE="20" TITLE="admin" DESCRIPTION="Description of Admins" />
+</dataSet>

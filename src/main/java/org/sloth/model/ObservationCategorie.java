@@ -17,6 +17,8 @@
  */
 package org.sloth.model;
 
+import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -29,19 +31,17 @@ import javax.persistence.Id;
  * @version 1.0
  * @since 1.0
  */
-@Entity
-public class ObservationCategorie {
+@Entity(name="OBSERVATION_CATEGORIE")
+public class ObservationCategorie implements Serializable {
 
 	@Id
 	@GeneratedValue
 	private long id;
-	private String title = null;
-	private String description = null;
+	@Column(nullable=false)
+	private String title;
+	@Column(length=1000, nullable=false)
+	private String description;
 
-	/**
-	 * Creates a new ObservationCategorie with <code>null</code> as default
-	 * values for <code>title</code> and <code>description</code>.
-	 */
 	public ObservationCategorie() {
 		/* nothing to do here */
 	}
@@ -87,10 +87,10 @@ public class ObservationCategorie {
 	@Override
 	public int hashCode() {
 		int hash = 7;
-		hash = 41 * hash + (this.getTitle() != null ?
-			this.getTitle().hashCode() : 0);
-		hash = 41 * hash + (this.getDescription() != null ?
-			this.getDescription().hashCode() : 0);
+		hash = 41 * hash + (this.getTitle() != null
+				? this.getTitle().hashCode() : 0);
+		hash = 41 * hash + (this.getDescription() != null
+				? this.getDescription().hashCode() : 0);
 		return hash;
 	}
 
@@ -112,6 +112,4 @@ public class ObservationCategorie {
 	public void setId(long id) {
 		this.id = id;
 	}
-
-
 }
