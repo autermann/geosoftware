@@ -14,9 +14,9 @@
 	   http://www.springframework.org/schema/util		http://www.springframework.org/schema/util/spring-util.xsd
 	   http://www.springframework.org/schema/jee		http://www.springframework.org/schema/jee/spring-jee.xsd">
 
-	<import resource="persistence.xml" />
-	<import resource="daos.xml" />
-	<import resource="services.xml" />
+	<import resource="context/applicationContext-persistence.xml" />
+	<import resource="context/applicationContext-dao.xml" />
+	<import resource="context/applicationContext-services.xml" />
 
 </beans>
 
