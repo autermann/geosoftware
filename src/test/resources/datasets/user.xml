@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dataSet PUBLIC '-//Sloth//DataBase Schema 1.0//EN' 'database.dtd'>
 <dataSet>
-	<user id="1" eMail="user1@exapmle.com" name="User" familyName="One" userRight="10" hashedPassword="eins" creationDate="2010-03-07 19:10:00" />
-	<user id="2" eMail="user2@exapmle.com" name="User" familyName="Two" userRight="10" hashedPassword="zwei" creationDate="2010-03-07 19:11:00" />
-	<user id="3" eMail="user3@exapmle.com" name="User" familyName="Three" userRight="10" hashedPassword="drei" creationDate="2010-03-07 19:12:00" />
-	<user id="4" eMail="user4@exapmle.com" name="User" familyName="Four" userRight="0" hashedPassword="vier" creationDate="2010-03-07 19:13:00" />
-	<user id="5" eMail="user5@exapmle.com" name="User" familyName="Five" userRight="20" hashedPassword="fuenf" creationDate="2010-03-07 19:14:00" />
+	<USER ID="1" MAIL_ADDRESS="USER1@exapmle.com" NAME="User" FAMILY_NAME="One" USER_RIGHT_ID="10" HASHED_PASSWORD="eins" CREATION_DATE="2010-03-07 19:10:00" />
+	<USER ID="2" MAIL_ADDRESS="USER2@exapmle.com" NAME="User" FAMILY_NAME="Two" USER_RIGHT_ID="10" HASHED_PASSWORD="zwei" CREATION_DATE="2010-03-07 19:11:00" />
+	<USER ID="3" MAIL_ADDRESS="USER3@exapmle.com" NAME="User" FAMILY_NAME="Three" USER_RIGHT_ID="10" HASHED_PASSWORD="drei" CREATION_DATE="2010-03-07 19:12:00" />
+	<USER ID="4" MAIL_ADDRESS="USER4@exapmle.com" NAME="User" FAMILY_NAME="Four" USER_RIGHT_ID="0" HASHED_PASSWORD="vier" CREATION_DATE="2010-03-07 19:13:00" />
+	<USER ID="5" MAIL_ADDRESS="USER5@exapmle.com" NAME="User" FAMILY_NAME="Five" USER_RIGHT_ID="20" HASHED_PASSWORD="fuenf" CREATION_DATE="2010-03-07 19:14:00" />
 </dataSet>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dataSet PUBLIC '-//Sloth//DataBase Schema 1.0//EN' 'database.dtd'>
 <dataSet>
-	<observationCategorie id="1" title="Categorie 1" description="Description of Categorie 1" />
-	<observationCategorie id="2" title="Categorie 1" description="Description of Categorie 1" />
-	<observationCategorie id="3" title="Categorie 1" description="Description of Categorie 1" />
+	<OBSERVATION_CATEGORIE ID="1" TITLE="Categorie 1" DESCRIPTION="Description of Categorie 1" />
+	<OBSERVATION_CATEGORIE ID="2" TITLE="Categorie 1" DESCRIPTION="Description of Categorie 1" />
+	<OBSERVATION_CATEGORIE ID="3" TITLE="Categorie 1" DESCRIPTION="Description of Categorie 1" />
 </dataSet>
