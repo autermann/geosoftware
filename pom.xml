@@ -91,6 +91,12 @@ Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth, Christoph
 			<artifactId>spring-aop</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+			<scope>test</scope>
+		</dependency>
 		<!--<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-instrument-tomcat</artifactId>
@@ -237,9 +243,9 @@ Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth, Christoph
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.build.timestamp.format>dd. MMM yyyy HH:mm Z</maven.build.timestamp.format>
 		<spring.version>3.0.1.RELEASE</spring.version>
-		<netbeans.hint.deploy.server>Tomcat60</netbeans.hint.deploy.server>
 	</properties>
 </project>
+
 
 
 

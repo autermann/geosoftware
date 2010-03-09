@@ -13,34 +13,42 @@
 	   http://www.springframework.org/schema/aop		http://www.springframework.org/schema/aop/spring-aop.xsd
 	   http://www.springframework.org/schema/util		http://www.springframework.org/schema/util/spring-util.xsd
 	   http://www.springframework.org/schema/jee		http://www.springframework.org/schema/jee/spring-jee.xsd">
-	
+
+
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="WEB-INF/classes/META-INF/jdbc.properties" />
+		<property name="ignoreResourceNotFound" value="false" />
+		<property name="ignoreUnresolvablePlaceholders" value="false" />
+		<property name="searchSystemEnvironment" value="false" />
+	</bean>
+
 	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 
 	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
-	<!--
+
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="${jdbc.driverClassName}" />
 		<property name="url" value="${jdbc.url}" />
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
 	</bean>
-	-->
+
 	<bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter">
 		<property name="databasePlatform" value="org.eclipse.persistence.platform.database.MySQLPlatform" />
 		<property name="generateDdl" value="true"/>
 		<property name="showSql" value="true" />
 	</bean>
 
-	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="persistenceUnitName" value="mainPU" />
-		<!--<property name="dataSource" ref="dataSource" />-->
+		<property name="dataSource" ref="dataSource" />
 		<property name="jpaVendorAdapter" ref="jpaVendorAdapter" />
 	</bean>
 
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
-	
+
 	<tx:annotation-driven transaction-manager="transactionManager" />
 </beans>
 

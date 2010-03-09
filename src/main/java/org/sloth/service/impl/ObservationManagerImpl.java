@@ -119,12 +119,12 @@ public class ObservationManagerImpl implements ObservationManager {
 	@Override
 	public void setObservationCategorieDao(ObservationCategorieDao ocDao) {
 		this.observationCategorieDao = ocDao;
-/*		ObservationCategorie oc = new ObservationCategorie();
+		ObservationCategorie oc = new ObservationCategorie();
 		oc.setDescription("ASHDASHDJLKSADJSA");
 		oc.setTitle("ksldjfalöksdjf");
 		ocDao.save(oc);
 		ocDao.flush();
-*/	}
+	}
 
 	@Override
 	public ObservationDao getObservationDao() {

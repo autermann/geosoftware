@@ -17,11 +17,8 @@
  */
 package org.sloth.persistence.impl;
 
-import java.util.Collection;
 import org.sloth.persistence.ObservationCategorieDao;
-import org.sloth.model.ObservationCategorie;
 
 public abstract class InMemoryObservationCategorieDao implements
 		ObservationCategorieDao {
-
 }
