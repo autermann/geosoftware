@@ -1,7 +1,0 @@
-Anwendungsfall: Benutzerlisteanzeigen
-Sequenzdiagramme: WFS
-Klassendiagramm : erledigt.
-Gant-Chart : erledigt.
-
-
-MANAGeMENT
