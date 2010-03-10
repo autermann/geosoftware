@@ -18,72 +18,115 @@
 package org.sloth.service.impl;
 
 import java.util.Collection;
-import java.util.Date;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.sloth.model.UserRight;
 import org.sloth.persistence.UserDao;
 import org.sloth.model.User;
+import org.sloth.persistence.UserRightDao;
 import org.sloth.service.PasswordManager;
 import org.sloth.service.UserManager;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class UserManagerImpl implements UserManager {
 
-	PasswordManager pm;
-	UserDao uDao;
+	protected static final Logger logger = LoggerFactory.getLogger(UserManagerImpl.class);
+	@Autowired
+	private PasswordManager pm;
+	@Autowired
+	private UserDao uDao;
+	@Autowired
+	private UserRightDao urDao;
 
-	private UserDao getDAO(){
+	protected UserDao getUserDao() {
 		return uDao;
 	}
 
-	private PasswordManager getPM(){
+	@Override
+	public void setUserDao(UserDao uDao) {
+		logger.info("Setting autowired UserDao");
+		this.uDao = uDao;
+	}
+
+	@Override
+	public void setUserRightDao(UserRightDao urDao) {
+		logger.info("Setting autowired UserRightDao");
+		this.urDao = urDao;
+	}
+
+	protected UserRightDao getUserRightDao() {
+		return this.urDao;
+	}
+
+	protected PasswordManager getPasswordManager() {
 		return pm;
 	}
 
 	@Override
 	public void registrateUser(String mail, String name, String familyName,
-							   String plainPassword) {
+			String plainPassword) {
 		User u = new User();
 		u.setFamilyName(familyName);
 		u.seteMail(mail);
 		u.setName(name);
-		u.setHashedPassword(getPM().hash(plainPassword));
-		getDAO().save(u);
+		u.setHashedPassword(getPasswordManager().hash(plainPassword));
+		getUserDao().save(u);
 	}
 
 	@Override
-	public void deleteUser(int id) {
-		getDAO().delete(id);
+	public void deleteUser(long id) {
+		getUserDao().delete(id);
 	}
 
 	@Override
 	public Collection<User> getUsers() {
-		return getDAO().getAll();
+		return getUserDao().getAll();
 	}
 
 	@Override
 	public User getUser(String mail) {
-		return getDAO().get(mail);
+		return getUserDao().get(mail);
 	}
 
 	@Override
-	public User getUser(int id) {
-		return getDAO().get(id);
+	public User getUser(long id) {
+		return getUserDao().get(id);
 	}
 
 	@Override
 	public void updateUser(User u) {
-		getDAO().update(u);	}
+		getUserDao().update(u);
+	}
 
 	@Override
 	public void deleteUser(User user) {
-		getDAO().delete(user);
+		getUserDao().delete(user);
 	}
 
 	@Override
-	public void setUserDao(UserDao uDao) {
-		this.uDao = uDao;
+	public UserRight getUserRight(int value) {
+		return urDao.get(value);
 	}
 
 	@Override
-	public UserDao getUserDao() {
-		return uDao;
+	public UserRight createUserRight(int value, String title, String description) {
+		UserRight ur = new UserRight(title, description, value);
+		getUserRightDao().save(ur);
+		return ur;
+	}
+
+	@Override
+	public void deleteUserRight(int value) {
+		getUserRightDao().delete(value);
+	}
+
+	@Override
+	public void deleteUserRight(UserRight ur) {
+		getUserRightDao().delete(ur);
+	}
+
+	@Override
+	public void updateUserRight(UserRight ur) {
+		getUserRightDao().update(ur);
 	}
 }

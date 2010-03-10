@@ -19,27 +19,25 @@ package org.sloth.service;
 
 import java.util.Collection;
 import org.sloth.model.User;
+import org.sloth.model.UserRight;
 import org.sloth.persistence.UserDao;
+import org.sloth.persistence.UserRightDao;
 
 public interface UserManager {
 
 	public void setUserDao(UserDao uDao);
-
-	public UserDao getUserDao();
-
+	public void setUserRightDao(UserRightDao uDao);
 	public Collection<User> getUsers();
-
 	public User getUser(String mail);
-
-	public User getUser(int id);
-
+	public User getUser(long id);
 	public void updateUser(User u);
-
-	public void deleteUser(int id);
-
+	public void deleteUser(long id);
 	public void deleteUser(User user);
-
 	public void registrateUser(String mail, String name, String familyName,
-							   String plainPassword);
-
+			String plainPassword);
+	public UserRight getUserRight(int value);
+	public UserRight createUserRight(int value, String title, String description);
+	public void deleteUserRight(int value);
+	public void deleteUserRight(UserRight ur);
+	public void updateUserRight(UserRight ur);
 }

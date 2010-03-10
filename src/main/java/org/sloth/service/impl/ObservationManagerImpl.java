@@ -20,6 +20,8 @@ package org.sloth.service.impl;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sloth.persistence.ObservationDao;
 import org.sloth.model.Coordinate;
 import org.sloth.model.Observation;
@@ -27,14 +29,18 @@ import org.sloth.model.ObservationCategorie;
 import org.sloth.model.User;
 import org.sloth.persistence.ObservationCategorieDao;
 import org.sloth.service.ObservationManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import static java.lang.Character.toLowerCase;
 import static java.lang.Character.toUpperCase;
 
 public class ObservationManagerImpl implements ObservationManager {
 
+	protected static final Logger logger = LoggerFactory.getLogger(ObservationManagerImpl.class);
+	@Autowired
 	private ObservationDao observationDao;
+	@Autowired
 	private ObservationCategorieDao observationCategorieDao;
-	
+
 	@Override
 	public Observation getObservation(int id) {
 		return getObservationDao().get(id);
@@ -52,9 +58,9 @@ public class ObservationManagerImpl implements ObservationManager {
 		for (Observation o : getObservations()) {
 			ObservationCategorie oc = o.getObservationCategorie();
 			if (o.getTitle().matches(regex)
-				|| o.getDescription().matches(regex)
-				|| oc.getTitle().matches(regex)
-				|| oc.getDescription().matches(regex)) {
+					|| o.getDescription().matches(regex)
+					|| oc.getTitle().matches(regex)
+					|| oc.getDescription().matches(regex)) {
 				result.add(o);
 			}
 		}
@@ -78,7 +84,7 @@ public class ObservationManagerImpl implements ObservationManager {
 
 	@Override
 	public void registrateObservation(String title, String description,
-									  User user, Coordinate coordinate) {
+			User user, Coordinate coordinate) {
 		Observation o = new Observation();
 		o.setCoordinate(coordinate);
 		o.setDescription(description);
@@ -113,26 +119,21 @@ public class ObservationManagerImpl implements ObservationManager {
 
 	@Override
 	public void setObservationDao(ObservationDao oDao) {
+		logger.info("Setting autowired ObservationDao");
 		this.observationDao = oDao;
 	}
 
 	@Override
 	public void setObservationCategorieDao(ObservationCategorieDao ocDao) {
+		logger.info("Setting autowired ObservationCategorieDao");
 		this.observationCategorieDao = ocDao;
-		ObservationCategorie oc = new ObservationCategorie();
-		oc.setDescription("ASHDASHDJLKSADJSA");
-		oc.setTitle("ksldjfalöksdjf");
-		ocDao.save(oc);
-		ocDao.flush();
 	}
 
-	@Override
-	public ObservationDao getObservationDao() {
+	protected ObservationDao getObservationDao() {
 		return observationDao;
 	}
 
-	@Override
-	public ObservationCategorieDao getObservationCategorieDao() {
+	protected ObservationCategorieDao getObservationCategorieDao() {
 		return observationCategorieDao;
 	}
 }

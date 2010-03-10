@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
-	<persistence-unit name="mainPU" transaction-type="RESOURCE_LOCAL">
-		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-		<class>org.sloth.model.Observation</class>
-		<class>org.sloth.model.ObservationCategorie</class>
-		<class>org.sloth.model.User</class>
-		<class>org.sloth.model.Coordinate</class>
-		<class>org.sloth.model.UserRight</class>
-		<properties>
-			<property name="eclipselink.logging.level" value="FINEST"/>
-			<property name="eclipselink.weaving" value="static"/>
-			<property name="eclipselink.ddl-generation" value="create-tables"/>
-			<property name="eclipselink.ddl-generation.output-mode" value="database"/>
-		</properties>
-	</persistence-unit>
+  <persistence-unit name="main" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>org.sloth.model.Observation</class>
+    <class>org.sloth.model.ObservationCategorie</class>
+    <class>org.sloth.model.User</class>
+    <class>org.sloth.model.Coordinate</class>
+    <class>org.sloth.model.UserRight</class>
+	<exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <properties>
+      <property name="eclipselink.logging.level" value="SEVERE"/>
+      <property name="eclipselink.weaving" value="static"/>
+      <property name="eclipselink.ddl-generation" value="create-tables"/>
+      <property name="eclipselink.ddl-generation.output-mode" value="database"/>
+    </properties>
+  </persistence-unit>
 </persistence>

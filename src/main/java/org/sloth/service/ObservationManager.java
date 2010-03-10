@@ -28,27 +28,14 @@ import org.sloth.persistence.ObservationDao;
 public interface ObservationManager {
 
 	public void setObservationDao(ObservationDao oDao);
-
 	public void setObservationCategorieDao(ObservationCategorieDao ocDao);
-
-	public ObservationDao getObservationDao();
-
-	public ObservationCategorieDao getObservationCategorieDao();
-
 	public Observation getObservation(int id);
-
 	public Collection<Observation> getObservations();
-
 	public Collection<Observation> getObservations(ObservationCategorie oc);
-
 	public Collection<Observation> getObservations(String keyword);
-
 	public void deleteObservation(int id);
-
 	public void deleteObservation(Observation observation);
-
 	public void updateObservation(Observation observation);
-
 	public void registrateObservation(String title, String description,
 									  User user, Coordinate coordinate);
 

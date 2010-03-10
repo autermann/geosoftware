@@ -35,7 +35,7 @@ import javax.persistence.Id;
 public class ObservationCategorie implements Serializable {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=javax.persistence.GenerationType.TABLE)
 	private long id;
 	@Column(nullable=false)
 	private String title;

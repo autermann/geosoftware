@@ -23,6 +23,7 @@ import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -34,7 +35,7 @@ import static javax.persistence.TemporalType.TIMESTAMP;
 public class Observation implements Serializable {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=javax.persistence.GenerationType.TABLE)
 	private long id;
 	@Column(nullable = false)
 	private String title;

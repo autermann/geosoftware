@@ -42,8 +42,7 @@ import static javax.persistence.TemporalType.TIMESTAMP;
 public class User implements Serializable {
 
 	@Id
-	@GeneratedValue
-	@Column(name = "ID")
+	@GeneratedValue(strategy=javax.persistence.GenerationType.TABLE)
 	private long id;
 	@Column(nullable = false, unique = true, name = "MAIL_ADDRESS")
 	private String eMail;

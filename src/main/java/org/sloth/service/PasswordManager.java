@@ -25,9 +25,7 @@ package org.sloth.service;
 public interface PasswordManager {
 
 	public boolean meetsRecommendation(String plain);
-
 	public boolean test(String one, String two);
-
 	public String hash(String plain);
 
 }

@@ -27,31 +27,31 @@ public class ObservationCategorieDaoImpl extends EntityManagerDao implements Obs
 	@Override
 	public Collection<ObservationCategorie> getAll() {
 		Collection<ObservationCategorie> col = getEntityManager().createQuery("select o from OBSERVATION_CATEGORIE o").getResultList();
-		logger.info("Getting all ObservationCategories; Found: " + col.size());
+		logger.info("Getting all ObservationCategories; Found: {}", col.size());
 		return col;
 	}
 
 	@Override
 	public ObservationCategorie get(long id) {
-		logger.info("Searching for ObservationCategorie with Id: " + id);
+		logger.info("Searching for ObservationCategorie with Id: {}", id);
 		ObservationCategorie oc = getEntityManager().find(ObservationCategorie.class, id);
 		if (oc != null) {
-			logger.info("Found ObservationCategorie with Id " + oc.getId() + "; Title: " + oc.getTitle() + "Description: " + oc.getTitle());
+			logger.info("Found ObservationCategorie with Id {}; Title: {}; Description: {}", new Object[]{oc.getId(), oc.getTitle(), oc.getDescription()});
 		} else {
-			logger.info("Can't find ObservationCategorie with Id " + id);
+			logger.info("Can't find ObservationCategorie with Id {}", id);
 		}
 		return oc;
 	}
 
 	@Override
 	public void update(ObservationCategorie oc) {
-		logger.info("Updating ObservationCategorie with Id: " + oc.getId());
+		logger.info("Updating ObservationCategorie with Id: {}", oc.getId());
 		getEntityManager().merge(oc);
 	}
 
 	@Override
 	public void delete(ObservationCategorie oc) {
-		logger.info("Deleting ObservationCategorie with Id: " + oc.getId());
+		logger.info("Deleting ObservationCategorie with Id: {}", oc.getId());
 		getEntityManager().remove(oc);
 	}
 
@@ -59,13 +59,12 @@ public class ObservationCategorieDaoImpl extends EntityManagerDao implements Obs
 	public void save(ObservationCategorie oc) {
 		EntityManager em = getEntityManager();
 		em.persist(oc);
-		em.flush();
-		logger.info("Persisting ObservationCategorie; Generated Id is: " + oc.getId());
+		logger.info("Persisting ObservationCategorie; Generated Id is: {}", oc.getId());
 	}
 
 	@Override
 	public void flush() {
-		logger.info("Flushing Entitymanager");
+		logger.info("Flushing EntityManager");
 		getEntityManager().flush();
 	}
 }

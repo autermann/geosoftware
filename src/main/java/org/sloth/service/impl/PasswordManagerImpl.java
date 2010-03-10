@@ -19,8 +19,8 @@
 package org.sloth.service.impl;
 
 import java.security.MessageDigest;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sloth.service.PasswordManager;
 import sun.misc.BASE64Encoder;
 
@@ -30,7 +30,7 @@ import sun.misc.BASE64Encoder;
  */
 public class PasswordManagerImpl implements PasswordManager {
 
-	private static final Log logger = LogFactory.getLog(PasswordManager.class);
+	private static final Logger logger = LoggerFactory.getLogger(PasswordManager.class);
 
 
 	@Override
@@ -52,7 +52,7 @@ public class PasswordManagerImpl implements PasswordManager {
 			md = MessageDigest.getInstance("SHA");
 			md.update(plain.getBytes("UTF-8"));
 		} catch (Exception e) {
-			logger.fatal("can not hash passwords", e);
+			logger.error("can not hash passwords", e);
 		}
 		return (new BASE64Encoder()).encode(md.digest());
 	}

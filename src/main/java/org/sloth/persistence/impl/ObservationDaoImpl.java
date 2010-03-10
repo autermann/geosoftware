@@ -25,22 +25,32 @@ public class ObservationDaoImpl extends EntityManagerDao implements ObservationD
 
 	@Override
 	public Collection<Observation> getAll() {
-		return getEntityManager().createQuery("SELECT o FROM OBSERVATION o").getResultList();
+		Collection<Observation> list = getEntityManager().createQuery("SELECT o FROM OBSERVATION o").getResultList();
+		logger.info("Getting all Observations; Found: {}", list.size());
+		return list;
 	}
 
 	@Override
 	public Observation get(long id) {
-		return getEntityManager().find(Observation.class, id);
+		logger.info("Searching for Observation with Id: {}", id);
+		Observation o = getEntityManager().find(Observation.class, id);
+		if (o != null) {
+			logger.info("Found Observation with Id {}; Title: {}; Description: {}", new Object[]{o.getId(), o.getTitle(), o.getDescription()});
+		} else {
+			logger.info("Can't find Observation with Id {}", id);
+		}
+		return o;
 	}
 
 	@Override
 	public void save(Observation o) {
 		getEntityManager().persist(o);
-		getEntityManager().flush();
+		logger.info("Persisting Observation; Generated Id is: {}", o.getId());
 	}
 
 	@Override
 	public void update(Observation o) {
+		logger.info("Updating Observation with Id: {}", o.getId());
 		getEntityManager().merge(o);
 	}
 
@@ -51,12 +61,13 @@ public class ObservationDaoImpl extends EntityManagerDao implements ObservationD
 
 	@Override
 	public void delete(Observation o) {
-		getEntityManager().remove(this);
+		logger.info("Deleting Observation with Id: {}", o.getId());
+		getEntityManager().remove(o);
 	}
 
 	@Override
 	public void flush() {
-		throw new UnsupportedOperationException("Not supported yet.");
+		logger.info("Flushing EntityManager");
+		getEntityManager().flush();
 	}
-
 }
