@@ -27,8 +27,8 @@
 							<td width="66%" align="left"><form:input path="eMail" /></td>
 						</tr>
 						<tr>
-							<td width="33%" align="right">Password: <form:errors cssStyle="color:red;" path="hashedPassword"/></td>
-							<td width="66%" align="left"><form:input path="hashedPassword" /></td>
+							<td width="33%" align="right"><form:label path="hashedPassword" />Password: <form:errors cssStyle="color:red;" path="hashedPassword"/></td>
+							<td width="66%" align="left"><form:password path="hashedPassword" showPassword="true"/></td>
 						</tr>
 						<tr>
 							<td align="center" colspan="2">
