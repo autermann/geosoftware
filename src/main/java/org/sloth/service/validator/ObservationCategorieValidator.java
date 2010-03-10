@@ -15,52 +15,25 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.sloth.service.actions;
+package org.sloth.service.validator;
 
-public class ObservationReport {
-	private String reason;
-	private int observationId;
-	private int userId;
+import org.sloth.model.ObservationCategorie;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
-	/**
-	 * @return the reason
-	 */
-	public String getReason() {
-		return reason;
+public class ObservationCategorieValidator implements Validator {
+
+	@Override
+	public boolean supports(Class type) {
+		return type.equals(ObservationCategorie.class);
 	}
 
-	/**
-	 * @param reason the reason to set
-	 */
-	public void setReason(String reason) {
-		this.reason = reason;
+	@Override
+	public void validate(Object obj, Errors errors) {
+		ObservationCategorie o = (ObservationCategorie) obj;
+		/**
+		 * TODO neues ObservationCategorie-Objekt ueberpruefen...
+		 */
 	}
 
-	/**
-	 * @return the observationId
-	 */
-	public int getObservationId() {
-		return observationId;
-	}
-
-	/**
-	 * @param observationId the observationId to set
-	 */
-	public void setObservationId(int observationId) {
-		this.observationId = observationId;
-	}
-
-	/**
-	 * @return the userId
-	 */
-	public int getUserId() {
-		return userId;
-	}
-
-	/**
-	 * @param userId the userId to set
-	 */
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
 }

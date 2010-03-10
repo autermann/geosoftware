@@ -15,8 +15,25 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-/**
- * This package contains the "plain old java objects" of the project. Simple
- * classes containing only the pure data.
- */
-package org.sloth.model;
+package org.sloth.service.validator;
+
+import org.sloth.model.Observation;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
+
+public class ObservationValidator implements Validator {
+
+	@Override
+	public boolean supports(Class type) {
+		return type.equals(Observation.class);
+	}
+
+	@Override
+	public void validate(Object obj, Errors errors) {
+		Observation o = (Observation) obj;
+		/*
+		 * TODO neues Observation-Objekt ueberpruefen...
+		 */
+	}
+
+}

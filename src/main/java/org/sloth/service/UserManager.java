@@ -33,8 +33,7 @@ public interface UserManager {
 	public void updateUser(User u);
 	public void deleteUser(long id);
 	public void deleteUser(User user);
-	public void registrateUser(String mail, String name, String familyName,
-			String plainPassword);
+	public void registrateUser(User u);
 	public UserRight getUserRight(int value);
 	public UserRight createUserRight(int value, String title, String description);
 	public void deleteUserRight(int value);

@@ -31,15 +31,15 @@ import javax.persistence.Id;
  * @version 1.0
  * @since 1.0
  */
-@Entity(name="OBSERVATION_CATEGORIE")
+@Entity(name = "OBSERVATION_CATEGORIE")
 public class ObservationCategorie implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy=javax.persistence.GenerationType.TABLE)
-	private long id;
-	@Column(nullable=false)
+	@GeneratedValue
+	private Long id;
+	@Column(nullable = false)
 	private String title;
-	@Column(length=1000, nullable=false)
+	@Column(length = 1000, nullable = false)
 	private String description;
 
 	public ObservationCategorie() {
@@ -87,10 +87,9 @@ public class ObservationCategorie implements Serializable {
 	@Override
 	public int hashCode() {
 		int hash = 7;
-		hash = 41 * hash + (this.getTitle() != null
-				? this.getTitle().hashCode() : 0);
-		hash = 41 * hash + (this.getDescription() != null
-				? this.getDescription().hashCode() : 0);
+		hash = 41 * hash + (int) this.getId();
+		hash = 41 * hash + (this.getTitle() != null ? this.getTitle().hashCode() : 0);
+		hash = 41 * hash + (this.getDescription() != null ? this.getDescription().hashCode() : 0);
 		return hash;
 	}
 
@@ -99,17 +98,15 @@ public class ObservationCategorie implements Serializable {
 		return this.getTitle();
 	}
 
-	/**
-	 * @return the id
-	 */
 	public long getId() {
-		return id;
+		return (this.id == null) ? 0 : this.id;
 	}
 
-	/**
-	 * @param id the id to set
-	 */
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public boolean isNew() {
+		return (this.id == null);
 	}
 }

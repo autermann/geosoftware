@@ -15,36 +15,38 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.sloth.service.actions.validator;
+package org.sloth.service.validator;
 
+import org.sloth.model.User;
 import org.sloth.service.PasswordManager;
-import org.sloth.service.UserManager;
-import org.sloth.service.actions.UserLogIn;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-public class UserLogInValidator implements Validator {
+public class UserValidator implements Validator {
 
-	UserManager um;
-	PasswordManager pm;
+	@Autowired
+	private PasswordManager passwordManager;
 
-	public UserLogInValidator(UserManager um, PasswordManager pm){
-		this.um = um;
-		this.pm = pm;
+	public void setPasswordManager(PasswordManager passwordManager){
+		this.passwordManager = passwordManager;
+	}
+
+	public PasswordManager getPasswordManager(){
+		return this.passwordManager;
 	}
 
 	@Override
 	public boolean supports(Class type) {
-		return type.equals(UserLogIn.class);
+		return type.equals(User.class);
 	}
 
 	@Override
-	public void validate(Object o, Errors errors) {
-		UserLogIn login = (UserLogIn) o;
-		pm.test(um.getUser(login.getMail()).getHashedPassword(),
-				pm.hash(login.getPassword()));
-		
-		throw new UnsupportedOperationException("Not supported yet.");
+	public void validate(Object obj, Errors errors) {
+		User u = (User) obj;
+		/**
+		 * TODO neues User-Objekt ueberpruefen...
+		 */
 	}
 
 }

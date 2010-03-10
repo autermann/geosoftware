@@ -63,13 +63,8 @@ public class UserManagerImpl implements UserManager {
 	}
 
 	@Override
-	public void registrateUser(String mail, String name, String familyName,
-			String plainPassword) {
-		User u = new User();
-		u.setFamilyName(familyName);
-		u.seteMail(mail);
-		u.setName(name);
-		u.setHashedPassword(getPasswordManager().hash(plainPassword));
+	public void registrateUser(User u) {
+		u.setUserRight(urDao.get(UserRight.USER_VALUE));
 		getUserDao().save(u);
 	}
 

@@ -23,7 +23,6 @@ import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -35,14 +34,14 @@ import static javax.persistence.TemporalType.TIMESTAMP;
 public class Observation implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy=javax.persistence.GenerationType.TABLE)
-	private long id;
+	@GeneratedValue
+	private Long id;
 	@Column(nullable = false)
 	private String title;
 	@Column(length = 1000, nullable = false)
 	private String description;
 	@ManyToOne
-	@JoinColumn(nullable = false, name="USER_ID")
+	@JoinColumn(nullable = false, name = "USER_ID")
 	private User user;
 	@Temporal(TIMESTAMP)
 	@Column(nullable = false, name = "CREATION_TIME")
@@ -56,20 +55,6 @@ public class Observation implements Serializable {
 
 	public Observation() {
 		setCreationTime(Calendar.getInstance());
-	}
-
-	/**
-	 * @return the id
-	 */
-	public long getId() {
-		return id;
-	}
-
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	/**
@@ -169,7 +154,7 @@ public class Observation implements Serializable {
 	@Override
 	public int hashCode() {
 		int hash = 7;
-		hash = (int) (59 * hash + this.id);
+		hash = 59 * hash + (int) this.getId();
 		hash = 59 * hash + (this.title != null ? this.title.hashCode() : 0);
 		hash = 59 * hash + (this.description != null
 				? this.description.hashCode() : 0);
@@ -200,5 +185,17 @@ public class Observation implements Serializable {
 		buf.append(getObservationCategorie());
 		buf.append(")");
 		return buf.toString();
+	}
+
+	public long getId() {
+		return (this.id == null) ? 0 : this.id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public boolean isNew() {
+		return (this.id == null);
 	}
 }

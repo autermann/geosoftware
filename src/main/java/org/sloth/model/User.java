@@ -42,8 +42,8 @@ import static javax.persistence.TemporalType.TIMESTAMP;
 public class User implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy=javax.persistence.GenerationType.TABLE)
-	private long id;
+	@GeneratedValue
+	private Long id;
 	@Column(nullable = false, unique = true, name = "MAIL_ADDRESS")
 	private String eMail;
 	@Column(nullable = false)
@@ -124,20 +124,6 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @return the id
-	 */
-	public long getId() {
-		return id;
-	}
-
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	/**
 	 * @return the creationDate
 	 */
 	public Calendar getCreationDate() {
@@ -164,17 +150,12 @@ public class User implements Serializable {
 	@Override
 	public int hashCode() {
 		int hash = 5;
-		hash = 37 * hash + (int) this.id;
-		hash = 37 * hash + (this.geteMail() != null
-				? this.geteMail().hashCode() : 0);
-		hash = 37 * hash + (this.getName() != null
-				? this.getName().hashCode() : 0);
-		hash = 37 * hash + (this.getFamilyName() != null
-				? this.getFamilyName().hashCode() : 0);
-		hash = 37 * hash + (this.getHashedPassword() != null
-				? this.getHashedPassword().hashCode() : 0);
-		hash = 37 * hash + (this.getCreationDate() != null
-				? this.getCreationDate().hashCode() : 0);
+		hash = 37 * hash + (int) this.getId();
+		hash = 37 * hash + (this.geteMail() != null ? this.geteMail().hashCode() : 0);
+		hash = 37 * hash + (this.getName() != null ? this.getName().hashCode() : 0);
+		hash = 37 * hash + (this.getFamilyName() != null ? this.getFamilyName().hashCode() : 0);
+		hash = 37 * hash + (this.getHashedPassword() != null ? this.getHashedPassword().hashCode() : 0);
+		hash = 37 * hash + (this.getCreationDate() != null ? this.getCreationDate().hashCode() : 0);
 		return hash;
 	}
 
@@ -202,5 +183,17 @@ public class User implements Serializable {
 	 */
 	public void setUserRight(UserRight userRight) {
 		this.userRight = userRight;
+	}
+
+	public long getId() {
+		return (this.id == null) ? 0 : this.id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public boolean isNew() {
+		return (this.id == null);
 	}
 }

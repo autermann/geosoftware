@@ -15,37 +15,25 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.sloth.service.actions;
+package org.sloth.service.validator;
 
-public class UserLogIn {
-	private String mail;
-	private String password;
+import org.sloth.model.UserRight;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
-	/**
-	 * @return the mail
-	 */
-	public String getMail() {
-		return mail;
+public class UserRightValidator implements Validator {
+
+	@Override
+	public boolean supports(Class type) {
+		return type.equals(UserRight.class);
 	}
 
-	/**
-	 * @param mail the mail to set
+	@Override
+	public void validate(Object obj, Errors errors) {
+		UserRight ur = (UserRight) obj;
+	/*
+	 * TODO neues UserRight-Objekt ueberpruefen...
 	 */
-	public void setMail(String mail) {
-		this.mail = mail;
 	}
 
-	/**
-	 * @return the password
-	 */
-	public String getPassword() {
-		return password;
-	}
-
-	/**
-	 * @param password the password to set
-	 */
-	public void setPassword(String password) {
-		this.password = password;
-	}
 }
