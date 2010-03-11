@@ -17,7 +17,7 @@
  */
 package org.sloth.service.impl;
 
-public class ObservationManagerImplTests {
+public class UserManagerImplTest {
 	/**
 	 * Test stub to prevent "no test found"-errors...
 	 */

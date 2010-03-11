@@ -29,7 +29,7 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 import static org.junit.Assert.*;
 
 @ContextConfiguration(locations = "JpaDaoTests-context.xml")
-public class JpaDaoTests extends AbstractTransactionalJUnit4SpringContextTests {
+public class JpaDaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 
 	@Test
 	public void selfTesting() {
