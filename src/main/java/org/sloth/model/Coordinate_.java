@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2009-2010  Stefan Arndt, Christian Autermann, Dustin Demuth,
- *                  Christoph Fendrich, Simon Ottenhues, Christian Paluschek
+ * Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth,
+ * 					 Christoph Fendrich, Christian Paluschek
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,24 +15,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.sloth.web;
+package org.sloth.model;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-/**
- * @todo
- * @author auti
- */
-@Controller
-@RequestMapping("/was/wer/wie/wo")
-public class SlothFrontController {
+import javax.persistence.metamodel.SingularAttribute;
+import javax.persistence.metamodel.StaticMetamodel;
 
-	/**
-	 * @todo
-	 * @return
-	 */
-	@RequestMapping
-	public String doWelcome(){
-		return "welcome";
-	}
+@StaticMetamodel(Coordinate.class)
+public class Coordinate_ {
+	public static volatile SingularAttribute<Coordinate, Double> longitude;
+	public static volatile SingularAttribute<Coordinate, Double> latitude;
 }

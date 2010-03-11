@@ -20,8 +20,10 @@ package org.sloth.persistence.impl;
 import java.util.Collection;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import org.sloth.persistence.UserDao;
 import org.sloth.model.User;
+import org.sloth.model.User_;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -110,9 +112,21 @@ public class UserDaoImpl extends EntityManagerDao implements UserDao {
 	public User get(String mail) {
 		CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
 		CriteriaQuery<User> cq = cb.createQuery(User.class);
-		cq.where(cb.equal(cq.from(User.class).get("MAIL_ADDRESS"), mail));
-		cq.select(cq.from(User.class));
-		return getEntityManager().createQuery(cq).getSingleResult();
+		Root<User> user = cq.from(User.class);
+		cq.select(user);
+		cq.where(cb.equal(user.get(User_.eMail), mail));
+		Collection<User> result = getEntityManager().createQuery(cq).
+				getResultList();
+		if (result.size() == 1) {
+			return result.iterator().next();
+		} else if (result.isEmpty()) {
+			logger.info("User with eMail {} not found", mail);
+			return null;
+		} else {
+			logger.error("{} results for eMail {}. Corrupt Database?", result.
+					size(), mail);
+			return null;
+		}
 
 	}
 
