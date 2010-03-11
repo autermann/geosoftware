@@ -98,23 +98,14 @@ public class ObservationTest {
 	 */
 	@Test
 	public void testGetDescription() {
-		System.out.println("getDescription NO Description");
+		System.out.println("getDescription");
 		String expResult = null;
 		String result = a.getDescription();
 		assertEquals(expResult, result);
-	}
-
-	/**
-	 * Test of setDescription method, of class Observation.
-	 */
-	@Test
-	public void testSetDescription() {
-		System.out.println("setDescription");
-		String description = "";
-		Observation instance = new Observation();
-		instance.setDescription(description);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		expResult = descriptionA;
+		a.setDescription(descriptionA);
+		result = a.getDescription();
+		assertEquals(expResult, result);
 	}
 
 	/**
@@ -150,12 +141,9 @@ public class ObservationTest {
 	@Test
 	public void testGetCreationDate() {
 		System.out.println("getCreationDate");
-		Observation instance = new Observation();
-		Date expResult = null;
-		Date result = instance.getCreationDate();
+		Date expResult = new Date();
+		Date result = a.getCreationDate();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -165,10 +153,8 @@ public class ObservationTest {
 	public void testSetCreationDate() {
 		System.out.println("setCreationDate");
 		Date creationDate = null;
-		Observation instance = new Observation();
-		instance.setCreationDate(creationDate);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		a.setCreationDate(creationDate);
+		assertEquals(a.getCreationDate(), creationDate);
 	}
 
 	/**
@@ -204,12 +190,14 @@ public class ObservationTest {
 	@Test
 	public void testGetCoordinate() {
 		System.out.println("getCoordinate");
-		Observation instance = new Observation();
 		Coordinate expResult = null;
-		Coordinate result = instance.getCoordinate();
+		Coordinate result = a.getCoordinate();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		expResult = coordA;
+		a.setCoordinate(coordA);
+		result = a.getCoordinate();
+		assertEquals(expResult, result);
+
 	}
 
 	/**
@@ -219,10 +207,8 @@ public class ObservationTest {
 	public void testSetCoordinate() {
 		System.out.println("setCoordinate");
 		Coordinate coordinate = null;
-		Observation instance = new Observation();
-		instance.setCoordinate(coordinate);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		a.setCoordinate(coordinate);
+		assertEquals(a.getCoordinate(), null);
 	}
 
 	/**
@@ -230,14 +216,16 @@ public class ObservationTest {
 	 */
 	@Test
 	public void testEquals() {
-		System.out.println("equals");
-		Object obj = null;
-		Observation instance = new Observation();
-		boolean expResult = false;
-		boolean result = instance.equals(obj);
-		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		System.out.println("testEquals");
+		a.setDescription(descriptionA);
+		b.setDescription(descriptionB);
+
+		assertTrue(a.equals(b));
+		assertTrue(b.equals(a));
+		assertTrue(!c.equals(a));
+		assertTrue(!c.equals(b));
+		assertTrue(!b.equals(c));
+		assertTrue(!a.equals(c));
 	}
 
 	/**
@@ -245,13 +233,12 @@ public class ObservationTest {
 	 */
 	@Test
 	public void testHashCode() {
-		System.out.println("hashCode");
-		Observation instance = new Observation();
-		int expResult = 0;
-		int result = instance.hashCode();
-		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		System.out.println("testHashCode");
+		assertTrue(c.hashCode() == a.hashCode());
+		a.setDescription(descriptionA);
+		System.out.println(c.hashCode());
+		System.out.println(a.hashCode());
+		assertTrue(c.hashCode() != a.hashCode());
 	}
 
 	/**
@@ -259,13 +246,12 @@ public class ObservationTest {
 	 */
 	@Test
 	public void testToString() {
-		System.out.println("toString");
-		Observation instance = new Observation();
-		String expResult = "";
-		String result = instance.toString();
-		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		a.setDescription(descriptionA);
+		a.setCoordinate(coordA);
+		a.setTitle(titleA);
+		Date k = new Date();
+		String ks = k.toString();
+		assertEquals(a.toString(), "["+a.getClass()+"]("+a.getId()+" - \""+titleA+"\" by "+a.getUser()+" @"+coordA.toString()+"|"+ks+" in "+a.getObservationCategorie()+")");
 	}
 
 	/**
