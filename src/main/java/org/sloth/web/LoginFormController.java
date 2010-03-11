@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2009-2010  Stefan Arndt, Christian Autermann, Dustin Demuth,
- *                  Christoph Fendrich, Simon Ottenhues, Christian Paluschek
+ * Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth,
+ * 					 Christoph Fendrich, Christian Paluschek
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,48 +18,38 @@
 package org.sloth.web;
 
 import org.sloth.model.User;
+import org.sloth.service.PasswordManager;
 import org.sloth.service.UserManager;
-import org.sloth.service.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import static org.springframework.web.bind.annotation.RequestMethod.*;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * @todo
  * @author auti
  */
 @Controller
-@RequestMapping("/users/new")
-@SessionAttributes(types = User.class)
-public class UserAddController {
+@RequestMapping("/")
+public class LoginFormController {
 
 	@Autowired
 	private UserManager userManager;
 	@Autowired
-	private UserValidator userValidator;
+	private PasswordManager passwordManager;
 
 	/**
 	 * @todo
-	 * @param userValidator
+	 * @param passwordManager
 	 */
-	public void setUserValidator(UserValidator userValidator) {
-		this.userValidator = userValidator;
-	}
-
-	/**
-	 * @todo
-	 * @return
-	 */
-	protected UserValidator getUserValidator() {
-		return this.userValidator;
+	public void setPasswordManager(PasswordManager passwordManager) {
+		this.passwordManager = passwordManager;
 	}
 
 	/**
@@ -72,10 +62,13 @@ public class UserAddController {
 
 	/**
 	 * @todo
+	 * @param model
 	 * @return
 	 */
-	protected UserManager getUserManager() {
-		return this.userManager;
+	@RequestMapping(method = RequestMethod.GET)
+	public String setupForm(Model model) {
+		model.addAttribute("user", new User());
+		return "welcome";
 	}
 
 	/**
@@ -84,41 +77,42 @@ public class UserAddController {
 	 */
 	@InitBinder
 	public void setAllowedFields(WebDataBinder dataBinder) {
-		dataBinder.setDisallowedFields("id", "creationDate", "userRight");
+		dataBinder.setAllowedFields("eMail", "hashedPassword");
 	}
 
-
 	/**
-	 * @param model 
-	 * @return
 	 * @todo
-	 * Beim Aufruf der Seite wird die GET-Methoder aufgerufen...
-	 */
-	@RequestMapping(method = GET)
-	public String setupForm(Model model) {
-		User user = new User();
-		model.addAttribute(user);
-		return "users/form";
-	}
-
-	/**
-	 * @param user 
+	 * @param model
+	 * @param user
 	 * @param result
-	 * @param status
-	 * @return 
-	 * @todo
-	 * Beim Absenden des Formulars die POST-Methode...
+	 * @return
 	 */
-	@RequestMapping(method = POST)
-	public String processSubmit(@ModelAttribute User user, BindingResult result,
-								SessionStatus status) {
-		getUserValidator().validate(user, result);
-		if (result.hasErrors()) {
-			return "users/form";
-		} else {
-			this.userManager.registrateUser(user);
-			status.setComplete();
-			return "redirect:/";
+	@RequestMapping(method = RequestMethod.POST)
+	public String processSubmit(Model model, @ModelAttribute User user,
+								BindingResult result) {
+		if (!StringUtils.hasText(user.getHashedPassword())) {
+			result.rejectValue("hashedPassword", "field.required");
 		}
+		if (!StringUtils.hasText(user.geteMail())) {
+			result.rejectValue("eMail", "field.required");
+		}
+		if (result.hasErrors()) {
+			return "welcome";
+		}
+		User dbUser = userManager.getUser(user.geteMail());
+		if (dbUser == null) {
+			result.rejectValue("eMail", "field.noRegistratedUser");
+		} else {
+			String hashedPassword = passwordManager.hash(user.getHashedPassword());
+			if (!passwordManager.test(hashedPassword, dbUser.getHashedPassword())) {
+				result.rejectValue("hashedPassword", "field.wrongPassword");
+			}
+		}
+		if (result.hasErrors()) {
+			return "welcome";
+		}
+		model.addAttribute("loginUser", dbUser);
+		return "welcome";
 	}
+
 }
