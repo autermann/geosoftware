@@ -26,6 +26,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
+import javax.persistence.Transient;
 import static javax.persistence.TemporalType.TIMESTAMP;
 
 /**
@@ -41,6 +42,11 @@ import static javax.persistence.TemporalType.TIMESTAMP;
 @Entity
 public class User implements Serializable {
 
+	/**
+	 * @todo
+	 */
+	@Transient
+	static final long serialVersionUID = -9018246759776935301L;
 	@Id
 	@GeneratedValue
 	private Long id;

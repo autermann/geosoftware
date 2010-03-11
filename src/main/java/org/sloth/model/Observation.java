@@ -28,6 +28,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
+import javax.persistence.Transient;
 import static javax.persistence.TemporalType.TIMESTAMP;
 
 /**
@@ -37,6 +38,11 @@ import static javax.persistence.TemporalType.TIMESTAMP;
 @Entity
 public class Observation implements Serializable {
 
+	/**
+	 * @todo
+	 */
+	@Transient
+	static final long serialVersionUID = -2729214423734969225L;
 	@Id
 	@GeneratedValue
 	private Long id;

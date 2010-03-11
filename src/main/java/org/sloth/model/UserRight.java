@@ -36,9 +36,14 @@ import javax.persistence.Transient;
  * @version 1.0
  * @author Christian Autermann
  */
-@Entity(name="USER_RIGHT")
+@Entity(name = "USER_RIGHT")
 public class UserRight implements Serializable {
 
+	/**
+	 * @todo
+	 */
+	@Transient
+	static final long serialVersionUID = -1104805199244827030L;
 	@Id
 	@Column(unique = true)
 	private int value;
@@ -139,9 +144,10 @@ public class UserRight implements Serializable {
 		int hash = 7;
 		hash = 11 * hash + this.getValue();
 		hash = 11 * hash + (this.getName() != null
-				? this.getName().hashCode() : 0);
+							? this.getName().hashCode() : 0);
 		hash = 11 * hash + (this.getDescription() != null
-				? this.getDescription().hashCode() : 0);
+							? this.getDescription().hashCode() : 0);
 		return hash;
 	}
+
 }

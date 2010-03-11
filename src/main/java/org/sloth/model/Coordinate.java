@@ -20,6 +20,7 @@ package org.sloth.model;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.Transient;
 
 /**
  * Represents a simple two valued coordinate.
@@ -31,6 +32,11 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Coordinate implements Serializable {
 
+	/**
+	 * @todo
+	 */
+	@Transient
+	static final long serialVersionUID = 6550470689926763724L;
 	@Column(nullable = false)
 	private double latitude;
 	@Column(nullable = false)

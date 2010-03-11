@@ -22,6 +22,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 /**
  * Represents an non hierachical categorie for observations.
@@ -34,6 +35,11 @@ import javax.persistence.Id;
 @Entity(name = "OBSERVATION_CATEGORIE")
 public class ObservationCategorie implements Serializable {
 
+	/**
+	 * @todo
+	 */
+	@Transient
+	static final long serialVersionUID = -3532326782916715208L;
 	@Id
 	@GeneratedValue
 	private Long id;
