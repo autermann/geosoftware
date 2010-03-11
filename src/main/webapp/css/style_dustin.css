@@ -82,7 +82,7 @@ span.login:hover {
 	color: white;
 	border: 1px solid black;
 	font-size: 8px;
-	width: 200px;
+	width: 400px;
 	-moz-border-radius: 10px;
 	-khtml-border-radius: 10px;
 	-webkit-border-radius: 10px;
@@ -102,11 +102,15 @@ span.login:hover {
 }
 .events li span.title {
 	font-weight: bold;
-	color: #222;
+	color: blue;
 }
 
 .events li span.loginform {
 	font-weight: bold;
 	color: black;
 	text-align: center;
+}
+td.login {
+	text-align: center;
+	
 }
