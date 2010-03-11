@@ -2,7 +2,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <link rel="stylesheet" href="<spring:url value="/static/css/style.css" htmlEscape="true" />" type="text/css"/>
-  <title>Sloth Geosoftware II Project</title>
+  <title><fmt:message key="title"/></title>
 </head>
 
 <body>

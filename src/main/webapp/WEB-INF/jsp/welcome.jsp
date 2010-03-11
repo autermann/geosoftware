@@ -3,7 +3,7 @@
 <div>
 	<h2><fmt:message key="welcome"/></h2>
 	<ul>
-		<li><a href="<spring:url value="/users/new" htmlEscape="true" />"><fmt:message key="createNewUser"/></a></li>
+		<li><a href="<spring:url value="/users" htmlEscape="true" />"><fmt:message key="userManagement"/></a></li>
 	</ul>
 </div>
 <%@ include file="/WEB-INF/jsp/footer.jsp" %>

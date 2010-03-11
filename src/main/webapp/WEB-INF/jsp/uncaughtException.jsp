@@ -1,8 +1,7 @@
 <%@ include file="/WEB-INF/jsp/includes.jsp" %>
 <%@ include file="/WEB-INF/jsp/header.jsp" %>
 
-<h2/>Internal error</h2>
-<p/>
+<h2><fmt:message key="internal.error"/></h2>
 <pre>
 <% 
 try {
@@ -42,8 +41,5 @@ try {
 }
 %>
 </pre>
-<p/>
 <br/>
-
-
 <%@ include file="/WEB-INF/jsp/footer.jsp" %>

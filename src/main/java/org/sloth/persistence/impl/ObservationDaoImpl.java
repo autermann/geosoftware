@@ -18,14 +18,20 @@
 package org.sloth.persistence.impl;
 
 import java.util.Collection;
+import javax.persistence.criteria.CriteriaQuery;
 import org.sloth.persistence.ObservationDao;
 import org.sloth.model.Observation;
 
-public class ObservationDaoImpl extends EntityManagerDao implements ObservationDao {
+public class ObservationDaoImpl extends EntityManagerDao implements
+		ObservationDao {
 
 	@Override
 	public Collection<Observation> getAll() {
-		Collection<Observation> list = getEntityManager().createQuery("SELECT o FROM OBSERVATION o").getResultList();
+		CriteriaQuery<Observation> cq = getEntityManager().getCriteriaBuilder().
+				createQuery(Observation.class);
+		cq.select(cq.from(Observation.class));
+		Collection<Observation> list = getEntityManager().createQuery(cq).
+				getResultList();
 		logger.info("Getting all Observations; Found: {}", list.size());
 		return list;
 	}
@@ -35,7 +41,9 @@ public class ObservationDaoImpl extends EntityManagerDao implements ObservationD
 		logger.info("Searching for Observation with Id: {}", id);
 		Observation o = getEntityManager().find(Observation.class, id);
 		if (o != null) {
-			logger.info("Found Observation with Id {}; Title: {}; Description: {}", new Object[]{o.getId(), o.getTitle(), o.getDescription()});
+			logger.info(
+					"Found Observation with Id {}; Title: {}; Description: {}", new Object[]{o.
+						getId(), o.getTitle(), o.getDescription()});
 		} else {
 			logger.info("Can't find Observation with Id {}", id);
 		}
@@ -70,4 +78,5 @@ public class ObservationDaoImpl extends EntityManagerDao implements ObservationD
 		logger.info("Flushing EntityManager");
 		getEntityManager().flush();
 	}
+
 }

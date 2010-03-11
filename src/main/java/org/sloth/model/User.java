@@ -18,7 +18,7 @@
 package org.sloth.model;
 
 import java.io.Serializable;
-import java.util.Calendar;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -54,7 +54,7 @@ public class User implements Serializable {
 	private String hashedPassword;
 	@Temporal(TIMESTAMP)
 	@Column(nullable = false, name = "CREATION_DATE")
-	private Calendar creationDate;
+	private Date creationDate;
 	@ManyToOne
 	@JoinColumn(nullable = false, name = "USER_RIGHT_ID")
 	private UserRight userRight;
@@ -64,7 +64,7 @@ public class User implements Serializable {
 	 * and <code>null</code> for all other members.
 	 */
 	public User() {
-		setCreationDate(Calendar.getInstance());
+		setCreationDate(new Date());
 	}
 
 	/**
@@ -126,14 +126,14 @@ public class User implements Serializable {
 	/**
 	 * @return the creationDate
 	 */
-	public Calendar getCreationDate() {
+	public Date getCreationDate() {
 		return creationDate;
 	}
 
 	/**
 	 * @param creationDate the creationDate to set
 	 */
-	public void setCreationDate(Calendar creationDate) {
+	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	}
 
@@ -151,11 +151,16 @@ public class User implements Serializable {
 	public int hashCode() {
 		int hash = 5;
 		hash = 37 * hash + (int) this.getId();
-		hash = 37 * hash + (this.geteMail() != null ? this.geteMail().hashCode() : 0);
-		hash = 37 * hash + (this.getName() != null ? this.getName().hashCode() : 0);
-		hash = 37 * hash + (this.getFamilyName() != null ? this.getFamilyName().hashCode() : 0);
-		hash = 37 * hash + (this.getHashedPassword() != null ? this.getHashedPassword().hashCode() : 0);
-		hash = 37 * hash + (this.getCreationDate() != null ? this.getCreationDate().hashCode() : 0);
+		hash = 37 * hash + (this.geteMail() != null ? this.geteMail().hashCode()
+							: 0);
+		hash = 37 * hash + (this.getName() != null ? this.getName().hashCode()
+							: 0);
+		hash = 37 * hash + (this.getFamilyName() != null ? this.getFamilyName().
+				hashCode() : 0);
+		hash = 37 * hash + (this.getHashedPassword() != null ? this.
+				getHashedPassword().hashCode() : 0);
+		hash = 37 * hash + (this.getCreationDate() != null ? this.
+				getCreationDate().hashCode() : 0);
 		return hash;
 	}
 
@@ -196,4 +201,5 @@ public class User implements Serializable {
 	public boolean isNew() {
 		return (this.id == null);
 	}
+
 }

@@ -8,27 +8,31 @@
 </c:choose>
 
 <div>
-	<h2><fmt:message key="createNewUser"/></h2>
+	<h2><fmt:message key="user.new"/></h2>
 	<form:form modelAttribute="user" method="${method}">
-		<table width="25%" border="1">
+		<table width="40%" border="1">
 			<tr>
 				<td>
 					<table border="0" width="100%">
 						<tr>
-							<td width="33%" align="right">Lastname: <form:errors cssStyle="color:red;" path="familyName"/></td>
-							<td width="66%" align="left"><form:input path="familyName"/></td>
+							<td width="20%" align="right"><fmt:message key="user.familyName"/>:</td>
+							<td width="40%" align="left"><form:input path="familyName"/></td>
+							<td width="40%" align="right"><form:errors cssStyle="color:red;" path="familyName"/></td>
 						</tr>
 						<tr>
-							<td width="33%" align="right">Name: <form:errors cssStyle="color:red;" path="name"/></td>
-							<td width="66%" align="left"><form:input path="name" /></td>
+							<td width="20%" align="right"><fmt:message key="user.name"/>:</td>
+							<td width="40%" align="left"><form:input path="name" /></td>
+							<td width="40%" align="right"><form:errors cssStyle="color:red;" path="name"/></td>
 						</tr>
 						<tr>
-							<td width="33%" align="right">E-Mail: <form:errors cssStyle="color:red;" path="eMail"/></td>
-							<td width="66%" align="left"><form:input path="eMail" /></td>
+							<td width="20%" align="right"><fmt:message key="user.eMail"/>:</td>
+							<td width="40%" align="left"><form:input path="eMail" /></td>
+							<td width="40%" align="right"><form:errors cssStyle="color:red;" path="eMail"/></td>
 						</tr>
 						<tr>
-							<td width="33%" align="right"><form:label path="hashedPassword" />Password: <form:errors cssStyle="color:red;" path="hashedPassword"/></td>
-							<td width="66%" align="left"><form:password path="hashedPassword" showPassword="true"/></td>
+							<td width="20%" align="right"><fmt:message key="user.password"/>:</td>
+							<td width="40%" align="left"><form:password path="hashedPassword" showPassword="true"/></td>
+							<td width="40%" align="right"><form:errors cssStyle="color:red;" path="hashedPassword"/></td>
 						</tr>
 						<tr>
 							<td align="center" colspan="2">

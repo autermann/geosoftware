@@ -18,7 +18,7 @@ import org.springframework.web.bind.support.SessionStatus;
 @Controller
 @RequestMapping("/users/new")
 @SessionAttributes(types = User.class)
-public class AddUserForm {
+public class UserAddController {
 
 	@Autowired
 	private UserManager userManager;

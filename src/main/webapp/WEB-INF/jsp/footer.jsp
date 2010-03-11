@@ -2,8 +2,8 @@
 <div>
 	<table class="footer">
 		<tr>
-			<td><a href="<spring:url value="/" htmlEscape="true" />">Home</a></td>
-			<td align="right">Copyright 2010 Sloth Inc.</td>
+			<td><a href="<spring:url value="/" htmlEscape="true" />"><fmt:message key="nav.home"/></a></td>
+			<td align="right"><fmt:message key="copyright"/></td>
 		</tr>
 	</table>
 

@@ -25,14 +25,16 @@ import org.springframework.validation.Validator;
 
 public class UserValidator implements Validator {
 
+	private final static String mailRegex =
+								"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$";
 	@Autowired
 	private PasswordManager passwordManager;
 
-	public void setPasswordManager(PasswordManager passwordManager){
+	public void setPasswordManager(PasswordManager passwordManager) {
 		this.passwordManager = passwordManager;
 	}
 
-	public PasswordManager getPasswordManager(){
+	public PasswordManager getPasswordManager() {
 		return this.passwordManager;
 	}
 
@@ -44,9 +46,28 @@ public class UserValidator implements Validator {
 	@Override
 	public void validate(Object obj, Errors errors) {
 		User u = (User) obj;
-		/**
-		 * TODO neues User-Objekt ueberpruefen...
-		 */
+		if (isNotWhiteSpaceOrNull(u.getFamilyName())) {
+			errors.rejectValue("familyName", "field.required");
+		}
+		if (isNotWhiteSpaceOrNull(u.getName())) {
+			errors.rejectValue("name", "field.required");
+		}
+		if (isNotWhiteSpaceOrNull(u.getHashedPassword())) {
+			errors.rejectValue("hashedPassword", "field.required");
+		}
+		if (isNotWhiteSpaceOrNull(u.geteMail())) {
+			errors.rejectValue("eMail", "field.required");
+		}
+		if (!getPasswordManager().meetsRecommendation(u.getHashedPassword())) {
+			errors.rejectValue("hashedPassword", "field.badpassword");
+		}
+		if (!u.geteMail().trim().matches(mailRegex)) {
+			errors.rejectValue("eMail", "field.invalidMailAddress");
+		}
+	}
+
+	boolean isNotWhiteSpaceOrNull(String s) {
+		return (s == null || s.trim().isEmpty());
 	}
 
 }

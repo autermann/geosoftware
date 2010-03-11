@@ -18,7 +18,7 @@
 package org.sloth.model;
 
 import java.io.Serializable;
-import java.util.Calendar;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -45,7 +45,7 @@ public class Observation implements Serializable {
 	private User user;
 	@Temporal(TIMESTAMP)
 	@Column(nullable = false, name = "CREATION_TIME")
-	private Calendar creationTime;
+	private Date creationDate;
 	@OneToOne
 	@JoinColumn(nullable = false, name = "OBSERVATION_CATEGORIE_ID")
 	private ObservationCategorie observationCategorie;
@@ -54,7 +54,7 @@ public class Observation implements Serializable {
 	private Coordinate coordinate;
 
 	public Observation() {
-		setCreationTime(Calendar.getInstance());
+		setCreationDate(new Date());
 	}
 
 	/**
@@ -102,15 +102,15 @@ public class Observation implements Serializable {
 	/**
 	 * @return the timestamp
 	 */
-	public Calendar getCreationTime() {
-		return creationTime;
+	public Date getCreationDate() {
+		return creationDate;
 	}
 
 	/**
 	 * @param timestamp the timestamp to set
 	 */
-	public void setCreationTime(Calendar creationTime) {
-		this.creationTime = creationTime;
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
 	}
 
 	/**
@@ -159,7 +159,7 @@ public class Observation implements Serializable {
 		hash = 59 * hash + (this.description != null
 				? this.description.hashCode() : 0);
 		hash = 59 * hash + (this.user != null ? this.user.hashCode() : 0);
-		hash = 59 * hash + (this.creationTime != null ? this.creationTime.hashCode() : 0);
+		hash = 59 * hash + (this.creationDate != null ? this.creationDate.hashCode() : 0);
 		hash = 59 * hash + (this.observationCategorie != null ? this.observationCategorie.hashCode() : 0);
 		hash = 59 * hash + (this.coordinate != null ? this.coordinate.hashCode()
 				: 0);
@@ -180,7 +180,7 @@ public class Observation implements Serializable {
 		buf.append(" @");
 		buf.append(getCoordinate());
 		buf.append("|");
-		buf.append(getCreationTime());
+		buf.append(getCreationDate());
 		buf.append(" in ");
 		buf.append(getObservationCategorie());
 		buf.append(")");

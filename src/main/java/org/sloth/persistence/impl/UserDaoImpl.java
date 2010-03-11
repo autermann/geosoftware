@@ -20,10 +20,6 @@ package org.sloth.persistence.impl;
 import java.util.Collection;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Expression;
-import javax.persistence.criteria.Root;
-import javax.persistence.metamodel.EntityType;
-import javax.persistence.metamodel.Metamodel;
 import org.sloth.persistence.UserDao;
 import org.sloth.model.User;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,7 +29,11 @@ public class UserDaoImpl extends EntityManagerDao implements UserDao {
 
 	@Override
 	public Collection<User> getAll() {
-		Collection<User> list = getEntityManager().createQuery("SELECT u FROM USER u").getResultList();
+		CriteriaQuery<User> cq = getEntityManager().getCriteriaBuilder().
+				createQuery(User.class);
+		cq.select(cq.from(User.class));
+		Collection<User> list =
+						 getEntityManager().createQuery(cq).getResultList();
 		logger.info("Getting all Users; Found: {}", list.size());
 		return list;
 	}
@@ -86,4 +86,5 @@ public class UserDaoImpl extends EntityManagerDao implements UserDao {
 	public void flush() {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
+
 }

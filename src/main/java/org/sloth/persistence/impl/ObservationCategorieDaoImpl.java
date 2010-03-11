@@ -19,24 +19,34 @@ package org.sloth.persistence.impl;
 
 import java.util.Collection;
 import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaQuery;
 import org.sloth.persistence.ObservationCategorieDao;
 import org.sloth.model.ObservationCategorie;
 
-public class ObservationCategorieDaoImpl extends EntityManagerDao implements ObservationCategorieDao {
+public class ObservationCategorieDaoImpl extends EntityManagerDao implements
+		ObservationCategorieDao {
 
 	@Override
 	public Collection<ObservationCategorie> getAll() {
-		Collection<ObservationCategorie> col = getEntityManager().createQuery("select o from OBSERVATION_CATEGORIE o").getResultList();
-		logger.info("Getting all ObservationCategories; Found: {}", col.size());
-		return col;
+		CriteriaQuery<ObservationCategorie> cq = getEntityManager().
+				getCriteriaBuilder().createQuery(ObservationCategorie.class);
+		cq.select(cq.from(ObservationCategorie.class));
+		Collection<ObservationCategorie> list = getEntityManager().createQuery(
+				cq).getResultList();
+		logger.info("Getting all ObservationCategories; Found: {}", list.size());
+		return list;
 	}
 
 	@Override
 	public ObservationCategorie get(long id) {
 		logger.info("Searching for ObservationCategorie with Id: {}", id);
-		ObservationCategorie oc = getEntityManager().find(ObservationCategorie.class, id);
+		ObservationCategorie oc = getEntityManager().find(
+				ObservationCategorie.class, id);
 		if (oc != null) {
-			logger.info("Found ObservationCategorie with Id {}; Title: {}; Description: {}", new Object[]{oc.getId(), oc.getTitle(), oc.getDescription()});
+			logger.info(
+					"Found ObservationCategorie with Id {}; Title: {}; Description: {}",
+						new Object[]{oc.getId(), oc.getTitle(), oc.
+						getDescription()});
 		} else {
 			logger.info("Can't find ObservationCategorie with Id {}", id);
 		}
@@ -59,7 +69,8 @@ public class ObservationCategorieDaoImpl extends EntityManagerDao implements Obs
 	public void save(ObservationCategorie oc) {
 		EntityManager em = getEntityManager();
 		em.persist(oc);
-		logger.info("Persisting ObservationCategorie; Generated Id is: {}", oc.getId());
+		logger.info("Persisting ObservationCategorie; Generated Id is: {}", oc.
+				getId());
 	}
 
 	@Override
@@ -67,4 +78,5 @@ public class ObservationCategorieDaoImpl extends EntityManagerDao implements Obs
 		logger.info("Flushing EntityManager");
 		getEntityManager().flush();
 	}
+
 }
