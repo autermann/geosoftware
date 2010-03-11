@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth,
- * 					 Christoph Fendrich, Christian Paluschek
+ * Copyright (C) 2009-2010  Stefan Arndt, Christian Autermann, Dustin Demuth,
+ *                  Christoph Fendrich, Simon Ottenhues, Christian Paluschek
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,5 +15,30 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package org.sloth.service.validator;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.validation.Errors;
+
+/**
+ * @todo
+ * @author auti
+ * @param <T>
+ */
+public abstract class Validator<T> {
+
+	/**
+	 * @todo
+	 */
+	protected static final Logger logger = LoggerFactory.getLogger(
+			Validator.class);
+
+	/**
+	 * @todo
+	 * @param t
+	 * @param errors
+	 */
+	public abstract void validate(T t, Errors errors);
+
+}

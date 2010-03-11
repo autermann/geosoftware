@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth,
- * 					 Christoph Fendrich, Christian Paluschek
+ * Copyright (C) 2009-2010  Stefan Arndt, Christian Autermann, Dustin Demuth,
+ *                  Christoph Fendrich, Simon Ottenhues, Christian Paluschek
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,17 +15,34 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package org.sloth.service;
 
 /**
- *
+ * @todo
  * @author Christian Autermann
  */
 public interface PasswordManager {
 
+	/**
+	 * @todo
+	 * @param plain
+	 * @return
+	 */
 	public boolean meetsRecommendation(String plain);
+
+	/**
+	 * @todo
+	 * @param one
+	 * @param two
+	 * @return
+	 */
 	public boolean test(String one, String two);
+
+	/**
+	 * @todo
+	 * @param plain
+	 * @return
+	 */
 	public String hash(String plain);
 
 }

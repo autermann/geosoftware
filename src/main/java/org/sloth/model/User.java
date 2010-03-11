@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth,
- * 					 Christoph Fendrich, Christian Paluschek
+ * Copyright (C) 2009-2010  Stefan Arndt, Christian Autermann, Dustin Demuth,
+ *                  Christoph Fendrich, Simon Ottenhues, Christian Paluschek
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -190,14 +190,26 @@ public class User implements Serializable {
 		this.userRight = userRight;
 	}
 
+	/**
+	 * @todo
+	 * @return
+	 */
 	public long getId() {
 		return (this.id == null) ? 0 : this.id;
 	}
 
+	/**
+	 * @todo
+	 * @param id
+	 */
 	public void setId(long id) {
 		this.id = id;
 	}
 
+	/**
+	 * @todo
+	 * @return
+	 */
 	public boolean isNew() {
 		return (this.id == null);
 	}

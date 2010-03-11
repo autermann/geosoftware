@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth,
- * 					 Christoph Fendrich, Christian Paluschek
+ * Copyright (C) 2009-2010  Stefan Arndt, Christian Autermann, Dustin Demuth,
+ *                  Christoph Fendrich, Simon Ottenhues, Christian Paluschek
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,7 +21,6 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-
 /**
  * Represents a simple two valued coordinate.
  * 
@@ -32,11 +31,14 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Coordinate implements Serializable {
 
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private double latitude;
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private double longitude;
 
+	/**
+	 * @todo
+	 */
 	public Coordinate() {
 	}
 
@@ -92,11 +94,11 @@ public class Coordinate implements Serializable {
 	public int hashCode() {
 		int hash = 5;
 		hash = 47 * hash + (int) (Double.doubleToLongBits(this.getLatitude())
-				^ (Double.doubleToLongBits(this.getLatitude())
-				>>> 32));
+								  ^ (Double.doubleToLongBits(this.getLatitude())
+									 >>> 32));
 		hash = 47 * hash + (int) (Double.doubleToLongBits(this.getLongitude())
-				^ (Double.doubleToLongBits(this.getLongitude())
-				>>> 32));
+								  ^ (Double.doubleToLongBits(this.getLongitude())
+									 >>> 32));
 		return hash;
 	}
 
@@ -110,4 +112,5 @@ public class Coordinate implements Serializable {
 		buf.append(")");
 		return buf.toString();
 	}
+
 }

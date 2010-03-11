@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth,
- * 					 Christoph Fendrich, Christian Paluschek
+ * Copyright (C) 2009-2010  Stefan Arndt, Christian Autermann, Dustin Demuth,
+ *                  Christoph Fendrich, Simon Ottenhues, Christian Paluschek
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,24 +33,46 @@ import org.springframework.beans.factory.annotation.Autowired;
 import static java.lang.Character.toLowerCase;
 import static java.lang.Character.toUpperCase;
 
+/**
+ * @todo
+ * @author auti
+ */
 public class ObservationManagerImpl implements ObservationManager {
 
-	protected static final Logger logger = LoggerFactory.getLogger(ObservationManagerImpl.class);
+	/**
+	 * @todo
+	 */
+	protected static final Logger logger = LoggerFactory.getLogger(
+			ObservationManagerImpl.class);
 	@Autowired
 	private ObservationDao observationDao;
 	@Autowired
 	private ObservationCategorieDao observationCategorieDao;
 
+	/**
+	 * @todo
+	 * @param id
+	 * @return
+	 */
 	@Override
 	public Observation getObservation(int id) {
 		return getObservationDao().get(id);
 	}
 
+	/**
+	 * @todo
+	 * @return
+	 */
 	@Override
 	public Collection<Observation> getObservations() {
 		return getObservationDao().getAll();
 	}
 
+	/**
+	 * @todo
+	 * @param keyword
+	 * @return
+	 */
 	@Override
 	public Collection<Observation> getObservations(String keyword) {
 		String regex = buildRegex(keyword);
@@ -58,33 +80,52 @@ public class ObservationManagerImpl implements ObservationManager {
 		for (Observation o : getObservations()) {
 			ObservationCategorie oc = o.getObservationCategorie();
 			if (o.getTitle().matches(regex)
-					|| o.getDescription().matches(regex)
-					|| oc.getTitle().matches(regex)
-					|| oc.getDescription().matches(regex)) {
+				|| o.getDescription().matches(regex)
+				|| oc.getTitle().matches(regex)
+				|| oc.getDescription().matches(regex)) {
 				result.add(o);
 			}
 		}
 		return result;
 	}
 
+	/**
+	 * @todo
+	 * @param id
+	 */
 	@Override
 	public void deleteObservation(int id) {
 		getObservationDao().delete(id);
 	}
 
+	/**
+	 * @todo
+	 * @param observation
+	 */
 	@Override
 	public void deleteObservation(Observation observation) {
 		getObservationDao().delete(observation);
 	}
 
+	/**
+	 * @todo
+	 * @param observation
+	 */
 	@Override
 	public void updateObservation(Observation observation) {
 		getObservationDao().update(observation);
 	}
 
+	/**
+	 * @todo
+	 * @param title
+	 * @param description
+	 * @param user
+	 * @param coordinate
+	 */
 	@Override
 	public void registrateObservation(String title, String description,
-			User user, Coordinate coordinate) {
+									  User user, Coordinate coordinate) {
 		Observation o = new Observation();
 		o.setCoordinate(coordinate);
 		o.setDescription(description);
@@ -93,7 +134,13 @@ public class ObservationManagerImpl implements ObservationManager {
 		getObservationDao().save(o);
 	}
 
+	/**
+	 * @todo
+	 * @param keyword
+	 * @return
+	 */
 	private String buildRegex(String keyword) {
+		//TODO geht besser
 		StringBuffer buffer = new StringBuffer(".*");
 		for (char c : keyword.toCharArray()) {
 			buffer.append("[");
@@ -106,6 +153,11 @@ public class ObservationManagerImpl implements ObservationManager {
 		return buffer.toString();
 	}
 
+	/**
+	 * @todo
+	 * @param oc
+	 * @return
+	 */
 	@Override
 	public Collection<Observation> getObservations(ObservationCategorie oc) {
 		Collection<Observation> result = new LinkedList<Observation>();
@@ -117,23 +169,40 @@ public class ObservationManagerImpl implements ObservationManager {
 		return result;
 	}
 
+	/**
+	 * @todo
+	 * @param oDao
+	 */
 	@Override
 	public void setObservationDao(ObservationDao oDao) {
 		logger.info("Setting autowired ObservationDao");
 		this.observationDao = oDao;
 	}
 
+	/**
+	 * @todo
+	 * @param ocDao
+	 */
 	@Override
 	public void setObservationCategorieDao(ObservationCategorieDao ocDao) {
 		logger.info("Setting autowired ObservationCategorieDao");
 		this.observationCategorieDao = ocDao;
 	}
 
+	/**
+	 * @todo
+	 * @return
+	 */
 	protected ObservationDao getObservationDao() {
 		return observationDao;
 	}
 
+	/**
+	 * @todo
+	 * @return
+	 */
 	protected ObservationCategorieDao getObservationCategorieDao() {
 		return observationCategorieDao;
 	}
+
 }

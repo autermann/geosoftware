@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth,
- * 					 Christoph Fendrich, Christian Paluschek
+ * Copyright (C) 2009-2010  Stefan Arndt, Christian Autermann, Dustin Demuth,
+ *                  Christoph Fendrich, Simon Ottenhues, Christian Paluschek
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,6 +30,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import static javax.persistence.TemporalType.TIMESTAMP;
 
+/**
+ * @todo
+ * @author auti
+ */
 @Entity
 public class Observation implements Serializable {
 
@@ -53,6 +57,9 @@ public class Observation implements Serializable {
 	@JoinColumn(nullable = false)
 	private Coordinate coordinate;
 
+	/**
+	 * @todo
+	 */
 	public Observation() {
 		setCreationDate(new Date());
 	}
@@ -107,7 +114,8 @@ public class Observation implements Serializable {
 	}
 
 	/**
-	 * @param timestamp the timestamp to set
+	 * @todo
+	 * @param creationDate
 	 */
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
@@ -121,7 +129,8 @@ public class Observation implements Serializable {
 	}
 
 	/**
-	 * @param observationCategorie the observationCategorie to set
+	 * @todo
+	 * @param oc
 	 */
 	public void setObservationCategorie(ObservationCategorie oc) {
 		this.observationCategorie = oc;
@@ -157,12 +166,14 @@ public class Observation implements Serializable {
 		hash = 59 * hash + (int) this.getId();
 		hash = 59 * hash + (this.title != null ? this.title.hashCode() : 0);
 		hash = 59 * hash + (this.description != null
-				? this.description.hashCode() : 0);
+							? this.description.hashCode() : 0);
 		hash = 59 * hash + (this.user != null ? this.user.hashCode() : 0);
-		hash = 59 * hash + (this.creationDate != null ? this.creationDate.hashCode() : 0);
-		hash = 59 * hash + (this.observationCategorie != null ? this.observationCategorie.hashCode() : 0);
+		hash = 59 * hash + (this.creationDate != null ? this.creationDate.
+				hashCode() : 0);
+		hash = 59 * hash + (this.observationCategorie != null ? this.observationCategorie.
+				hashCode() : 0);
 		hash = 59 * hash + (this.coordinate != null ? this.coordinate.hashCode()
-				: 0);
+							: 0);
 		return hash;
 	}
 
@@ -187,15 +198,28 @@ public class Observation implements Serializable {
 		return buf.toString();
 	}
 
+	/**
+	 * @todo
+	 * @return
+	 */
 	public long getId() {
 		return (this.id == null) ? 0 : this.id;
 	}
 
+	/**
+	 * @todo
+	 * @param id
+	 */
 	public void setId(long id) {
 		this.id = id;
 	}
 
+	/**
+	 * @todo
+	 * @return
+	 */
 	public boolean isNew() {
 		return (this.id == null);
 	}
+
 }

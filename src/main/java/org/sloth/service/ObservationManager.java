@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth,
- * 					 Christoph Fendrich, Christian Paluschek
+ * Copyright (C) 2009-2010  Stefan Arndt, Christian Autermann, Dustin Demuth,
+ *                  Christoph Fendrich, Simon Ottenhues, Christian Paluschek
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,17 +25,76 @@ import org.sloth.model.User;
 import org.sloth.persistence.ObservationCategorieDao;
 import org.sloth.persistence.ObservationDao;
 
+/**
+ * @todo
+ * @author auti
+ */
 public interface ObservationManager {
 
+	/**
+	 * @todo
+	 * @param oDao
+	 */
 	public void setObservationDao(ObservationDao oDao);
+
+	/**
+	 * @todo
+	 * @param ocDao
+	 */
 	public void setObservationCategorieDao(ObservationCategorieDao ocDao);
+
+	/**
+	 * @todo
+	 * @param id
+	 * @return
+	 */
 	public Observation getObservation(int id);
+
+	/**
+	 * @todo
+	 * @return
+	 */
 	public Collection<Observation> getObservations();
+
+	/**
+	 * @todo
+	 * @param oc
+	 * @return
+	 */
 	public Collection<Observation> getObservations(ObservationCategorie oc);
+
+	/**
+	 * 
+	 * @param keyword
+	 * @return
+	 */
 	public Collection<Observation> getObservations(String keyword);
+
+	/**
+	 * @todo
+	 * @param id
+	 */
 	public void deleteObservation(int id);
+
+	/**
+	 * @todo
+	 * @param observation
+	 */
 	public void deleteObservation(Observation observation);
+
+	/**
+	 * @todo
+	 * @param observation
+	 */
 	public void updateObservation(Observation observation);
+
+	/**
+	 * @todo
+	 * @param title
+	 * @param description
+	 * @param user
+	 * @param coordinate
+	 */
 	public void registrateObservation(String title, String description,
 									  User user, Coordinate coordinate);
 

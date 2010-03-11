@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth,
- * 					 Christoph Fendrich, Christian Paluschek
+ * Copyright (C) 2009-2010  Stefan Arndt, Christian Autermann, Dustin Demuth,
+ *                  Christoph Fendrich, Simon Ottenhues, Christian Paluschek
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,9 +24,17 @@ import org.sloth.persistence.UserDao;
 import org.sloth.model.User;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * @todo
+ * @author auti
+ */
 @Transactional
 public class UserDaoImpl extends EntityManagerDao implements UserDao {
 
+	/**
+	 * @todo
+	 * @return
+	 */
 	@Override
 	public Collection<User> getAll() {
 		CriteriaQuery<User> cq = getEntityManager().getCriteriaBuilder().
@@ -38,6 +46,11 @@ public class UserDaoImpl extends EntityManagerDao implements UserDao {
 		return list;
 	}
 
+	/**
+	 * @todo
+	 * @param id
+	 * @return
+	 */
 	@Override
 	public User get(long id) {
 		logger.info("Searching for Observation with Id: {}", id);
@@ -50,28 +63,49 @@ public class UserDaoImpl extends EntityManagerDao implements UserDao {
 		return u;
 	}
 
+	/**
+	 * @todo
+	 * @param u
+	 */
 	@Override
 	public void save(User u) {
 		getEntityManager().persist(u);
 		logger.info("Persisting User; Generated Id is: {}", u.getId());
 	}
 
+	/**
+	 * @todo
+	 * @param u
+	 */
 	@Override
 	public void update(User u) {
 		getEntityManager().merge(u);
 	}
 
+	/**
+	 * @todo
+	 * @param id
+	 */
 	@Override
 	public void delete(long id) {
 		delete(get(id));
 	}
 
+	/**
+	 * @todo
+	 * @param u
+	 */
 	@Override
 	public void delete(User u) {
 		logger.info("Deleting User with Id: {}", u.getId());
 		getEntityManager().remove(u);
 	}
 
+	/**
+	 * @todo
+	 * @param mail
+	 * @return
+	 */
 	@Override
 	public User get(String mail) {
 		CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
@@ -82,6 +116,9 @@ public class UserDaoImpl extends EntityManagerDao implements UserDao {
 
 	}
 
+	/**
+	 * @todo
+	 */
 	@Override
 	public void flush() {
 		throw new UnsupportedOperationException("Not supported yet.");

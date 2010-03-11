@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth,
- * 					 Christoph Fendrich, Christian Paluschek
+ * Copyright (C) 2009-2010  Stefan Arndt, Christian Autermann, Dustin Demuth,
+ *                  Christoph Fendrich, Simon Ottenhues, Christian Paluschek
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,17 +20,46 @@ package org.sloth.persistence;
 import java.util.Collection;
 import org.sloth.model.ObservationCategorie;
 
+/**
+ * @todo
+ * @author auti
+ */
 public interface ObservationCategorieDao {
 
+	/**
+	 * @todo
+	 * @return
+	 */
 	public Collection<ObservationCategorie> getAll();
 
+	/**
+	 * @todo
+	 * @param id
+	 * @return
+	 */
 	public ObservationCategorie get(long id);
 
+	/**
+	 * @todo
+	 * @param t
+	 */
 	public void update(ObservationCategorie t);
 
+	/**
+	 * @todo
+	 * @param t
+	 */
 	public void delete(ObservationCategorie t);
 
+	/**
+	 * @todo
+	 * @param t
+	 */
 	public void save(ObservationCategorie t);
 
+	/**
+	 * @todo
+	 */
 	public void flush();
+
 }

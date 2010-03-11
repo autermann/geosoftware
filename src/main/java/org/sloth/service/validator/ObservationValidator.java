@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth,
- * 					 Christoph Fendrich, Christian Paluschek
+ * Copyright (C) 2009-2010  Stefan Arndt, Christian Autermann, Dustin Demuth,
+ *                  Christoph Fendrich, Simon Ottenhues, Christian Paluschek
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,20 +19,22 @@ package org.sloth.service.validator;
 
 import org.sloth.model.Observation;
 import org.springframework.validation.Errors;
-import org.springframework.validation.Validator;
 
-public class ObservationValidator implements Validator {
+/**
+ * @todo
+ * @author auti
+ */
+public class ObservationValidator extends Validator<Observation> {
 
+	/**
+	 * @todo
+	 * @param obj
+	 * @param errors
+	 */
 	@Override
-	public boolean supports(Class type) {
-		return type.equals(Observation.class);
-	}
-
-	@Override
-	public void validate(Object obj, Errors errors) {
-		Observation o = (Observation) obj;
+	public void validate(Observation obj, Errors errors) {
 		/*
-		 * TODO neues Observation-Objekt ueberpruefen...
+		 * TODO missed method content
 		 */
 	}
 

@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth,
- * 					 Christoph Fendrich, Christian Paluschek
+ * Copyright (C) 2009-2010  Stefan Arndt, Christian Autermann, Dustin Demuth,
+ *                  Christoph Fendrich, Simon Ottenhues, Christian Paluschek
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,23 +27,44 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * @todo
+ * @author auti
+ */
 @Controller
 @RequestMapping("/users/{id}")
 public class UserDetailController {
 
+	/**
+	 * @todo
+	 */
 	protected static final Logger logger = LoggerFactory.getLogger(
 			UserDetailController.class);
 	@Autowired
 	private UserManager userManager;
 
+	/**
+	 * @todo
+	 * @param userManager
+	 */
 	public void setUserManager(UserManager userManager) {
 		this.userManager = userManager;
 	}
 
+	/**
+	 * @todo
+	 * @return
+	 */
 	protected UserManager getUserManager() {
 		return this.userManager;
 	}
 
+	/**
+	 * @todo
+	 * @param id
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping
 	public String setupForm(@PathVariable long id, Model model) {
 		User u = getUserManager().getUser(id);

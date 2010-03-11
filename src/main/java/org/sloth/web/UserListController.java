@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth,
- * 					 Christoph Fendrich, Christian Paluschek
+ * Copyright (C) 2009-2010  Stefan Arndt, Christian Autermann, Dustin Demuth,
+ *                  Christoph Fendrich, Simon Ottenhues, Christian Paluschek
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,25 +28,50 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
+/**
+ *
+ * @todo
+ * @author auti
+ */
 @Controller
 @RequestMapping("/users")
 public class UserListController {
 
+	/**
+	 *
+	 * @todo
+	 */
 	protected final static Logger logger = LoggerFactory.getLogger(
 			UserListController.class);
 	@Autowired
 	private UserManager userManager;
 
+	/**
+	 *
+	 * @todo
+	 * @param userManager
+	 */
 	public void setUserManager(UserManager userManager) {
 		this.userManager = userManager;
 	}
 
+	/**
+	 *
+	 * @todo
+	 * @return
+	 */
 	protected UserManager getUserManager() {
 		return this.userManager;
 	}
 
+	/**
+	 *
+	 * @todo
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(method = GET)
-	public String setupForm(Model model) {
+	public String setupList(Model model) {
 		Collection<User> users = getUserManager().getUsers();
 		logger.info("Request for User List; got {} entrys.", users.size());
 		model.addAttribute("users", users);

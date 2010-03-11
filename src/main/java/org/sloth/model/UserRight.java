@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth,
- * 					 Christoph Fendrich, Christian Paluschek
+ * Copyright (C) 2009-2010  Stefan Arndt, Christian Autermann, Dustin Demuth,
+ *                  Christoph Fendrich, Simon Ottenhues, Christian Paluschek
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -46,10 +46,19 @@ public class UserRight implements Serializable {
 	private String name;
 	@Column(length = 1000, nullable = false)
 	private String description;
+	/**
+	 * @todo
+	 */
 	@Transient
 	public static final int AMDINISTRATOR_VALUE = 20;
+	/**
+	 * @todo
+	 */
 	@Transient
 	public static final int USER_VALUE = 10;
+	/**
+	 * @todo
+	 */
 	@Transient
 	public static final int GUEST_VALUE = 0;
 
@@ -81,7 +90,7 @@ public class UserRight implements Serializable {
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param value the value to set
 	 */
 	public void setValue(int value) {
 		this.value = value;

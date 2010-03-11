@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth,
- * 					 Christoph Fendrich, Christian Paluschek
+ * Copyright (C) 2009-2010  Stefan Arndt, Christian Autermann, Dustin Demuth,
+ *                  Christoph Fendrich, Simon Ottenhues, Christian Paluschek
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,21 +20,59 @@ package org.sloth.persistence;
 import java.util.Collection;
 import org.sloth.model.User;
 
+/**
+ * @todo
+ * @author auti
+ */
 public interface UserDao {
 
+	/**
+	 * @todo
+	 * @return
+	 */
 	public Collection<User> getAll();
 
+	/**
+	 * @todo
+	 * @param id
+	 * @return
+	 */
 	public User get(long id);
 
+	/**
+	 * @todo
+	 * @param t
+	 */
 	public void update(User t);
 
+	/**
+	 * @todo
+	 * @param t
+	 */
 	public void delete(User t);
 
+	/**
+	 * @todo
+	 * @param t
+	 */
 	public void save(User t);
 
+	/**
+	 * @todo
+	 */
 	public void flush();
 
+	/**
+	 * @todo
+	 * @param id
+	 */
 	public void delete(long id);
 
+	/**
+	 * @todo
+	 * @param mail
+	 * @return
+	 */
 	public User get(String mail);
+
 }

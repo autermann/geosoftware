@@ -11,7 +11,7 @@
 	   http://www.springframework.org/schema/context
 	   http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<context:property-placeholder location="WEB-INF/classes/META-INF/jdbc.properties" />
+	<context:property-placeholder location="classpath:database.properties" />
 
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="${jdbc.driverClassName}" />
@@ -28,8 +28,8 @@
 
 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="persistenceUnitName" value="main" />
+		<property name="persistenceXmlLocation" value="META-INF/persistence.xml" />
 		<property name="dataSource" ref="dataSource"/>
-
 		<property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
 	</bean>
 

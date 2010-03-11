@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth,
- * 					 Christoph Fendrich, Christian Paluschek
+ * Copyright (C) 2009-2010  Stefan Arndt, Christian Autermann, Dustin Demuth,
+ *                  Christoph Fendrich, Simon Ottenhues, Christian Paluschek
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -42,6 +42,9 @@ public class ObservationCategorie implements Serializable {
 	@Column(length = 1000, nullable = false)
 	private String description;
 
+	/**
+	 * @todo
+	 */
 	public ObservationCategorie() {
 		/* nothing to do here */
 	}
@@ -88,8 +91,10 @@ public class ObservationCategorie implements Serializable {
 	public int hashCode() {
 		int hash = 7;
 		hash = 41 * hash + (int) this.getId();
-		hash = 41 * hash + (this.getTitle() != null ? this.getTitle().hashCode() : 0);
-		hash = 41 * hash + (this.getDescription() != null ? this.getDescription().hashCode() : 0);
+		hash = 41 * hash + (this.getTitle() != null ? this.getTitle().hashCode()
+							: 0);
+		hash = 41 * hash + (this.getDescription() != null ? this.getDescription().
+				hashCode() : 0);
 		return hash;
 	}
 
@@ -98,15 +103,28 @@ public class ObservationCategorie implements Serializable {
 		return this.getTitle();
 	}
 
+	/**
+	 * @todo
+	 * @return
+	 */
 	public long getId() {
 		return (this.id == null) ? 0 : this.id;
 	}
 
+	/**
+	 * @todo
+	 * @param id
+	 */
 	public void setId(long id) {
 		this.id = id;
 	}
 
+	/**
+	 * @todo
+	 * @return
+	 */
 	public boolean isNew() {
 		return (this.id == null);
 	}
+
 }

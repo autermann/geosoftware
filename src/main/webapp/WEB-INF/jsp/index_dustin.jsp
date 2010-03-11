@@ -11,29 +11,25 @@
 		// Beispiele wie man den http get / post auslesen kann
 		// http get: wird in der URL angezeigt (suche)
 		// http post: wird nicht in der url angezeigt (login)
-	String email = request.getParameter("loginform_email");
-	String passwd = request.getParameter("loginform_password");
-	
-	if (((email != null) & (passwd != null))){
-		if ((!email.isEmpty()) | (!passwd.isEmpty()) ){
+		String email = request.getParameter("loginform_email");
+		String passwd = request.getParameter("loginform_password");
 
-
-			// führe login operation durch.
-
-
-
+		if (((email != null) & (passwd != null))) {
+			if ((!email.isEmpty()) | (!passwd.isEmpty())) {
+				// führe login operation durch.
+			}
 		}
-	}
 
-	String searchBoxValue = request.getParameter("searchBox");
-	String searchBoxDefaultString = "Suchen...";
-		if ((searchBoxValue != null) && (!searchBoxValue.isEmpty()) && (!searchBoxValue.equalsIgnoreCase(searchBoxDefaultString))){
+		String searchBoxValue = request.getParameter("searchBox");
+		String searchBoxDefaultString = "Suchen...";
+		if ((searchBoxValue != null) && (!searchBoxValue.isEmpty()) && (!searchBoxValue.
+				equalsIgnoreCase(searchBoxDefaultString))) {
 
 
 			// Rufe die Suche auf.
 			searchBoxDefaultString = "danke für's suchen!";
 
-			}
+		}
 
 %>
 
@@ -75,9 +71,9 @@
 				Willkommen zum <b>Sloth</b>-Geosoftware-Projekt
 			</span>
 			<span id="login" class="login">
-				<b>Login</b>		
-					<div class="events">
-						<ul>
+				<b>Login</b>
+				<div class="events">
+					<ul>
 						<li>
 							<span class="title">Please Log In</span>
 							<span class="loginform">
@@ -94,14 +90,14 @@
 								</form>
 							</span>
 						</li>
-						</ul>
-					</div>
+					</ul>
+				</div>
 			</span>
 			<br>
 		</div>
 		<div id="list">
 			<form name="search" action="">
-				<input type="text" name="searchBox" value="<%=searchBoxDefaultString %>" id="searchBox" onfocus="searchBox.value=''" onblur="searchBox.value='<%=searchBoxDefaultString %>'"/>
+				<input type="text" name="searchBox" value="<%=searchBoxDefaultString%>" id="searchBox" onfocus="searchBox.value=''" onblur="searchBox.value='<%=searchBoxDefaultString%>'"/>
 				<input type="submit" value="Los geht's!"/>
 			</form>
 			<%-- Either JSP or JS... --%>

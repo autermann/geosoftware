@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth,
- * 					 Christoph Fendrich, Christian Paluschek
+ * Copyright (C) 2009-2010  Stefan Arndt, Christian Autermann, Dustin Demuth,
+ *                  Christoph Fendrich, Simon Ottenhues, Christian Paluschek
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,9 +22,17 @@ import javax.persistence.criteria.CriteriaQuery;
 import org.sloth.persistence.ObservationDao;
 import org.sloth.model.Observation;
 
+/**
+ * @todo
+ * @author auti
+ */
 public class ObservationDaoImpl extends EntityManagerDao implements
 		ObservationDao {
 
+	/**
+	 * @todo
+	 * @return
+	 */
 	@Override
 	public Collection<Observation> getAll() {
 		CriteriaQuery<Observation> cq = getEntityManager().getCriteriaBuilder().
@@ -36,6 +44,11 @@ public class ObservationDaoImpl extends EntityManagerDao implements
 		return list;
 	}
 
+	/**
+	 * @todo
+	 * @param id
+	 * @return
+	 */
 	@Override
 	public Observation get(long id) {
 		logger.info("Searching for Observation with Id: {}", id);
@@ -50,29 +63,48 @@ public class ObservationDaoImpl extends EntityManagerDao implements
 		return o;
 	}
 
+	/**
+	 * @todo
+	 * @param o
+	 */
 	@Override
 	public void save(Observation o) {
 		getEntityManager().persist(o);
 		logger.info("Persisting Observation; Generated Id is: {}", o.getId());
 	}
 
+	/**
+	 * @todo
+	 * @param o
+	 */
 	@Override
 	public void update(Observation o) {
 		logger.info("Updating Observation with Id: {}", o.getId());
 		getEntityManager().merge(o);
 	}
 
+	/**
+	 * @todo
+	 * @param id
+	 */
 	@Override
 	public void delete(long id) {
 		delete(get(id));
 	}
 
+	/**
+	 * @todo
+	 * @param o
+	 */
 	@Override
 	public void delete(Observation o) {
 		logger.info("Deleting Observation with Id: {}", o.getId());
 		getEntityManager().remove(o);
 	}
 
+	/**
+	 * @todo
+	 */
 	@Override
 	public void flush() {
 		logger.info("Flushing EntityManager");
