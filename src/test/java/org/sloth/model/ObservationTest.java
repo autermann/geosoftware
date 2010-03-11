@@ -30,7 +30,7 @@ public class ObservationTest {
 	private final String descriptionA = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
 	private final String descriptionB = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
 	private final String descriptionC = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod";
-//	private final User userA, userB, userC;
+	private final User userA = new User();
 
 //  Coordinate Values
 	private final double lonA = 231847D, latA = 1234423D;
@@ -114,12 +114,14 @@ public class ObservationTest {
 	@Test
 	public void testGetUser() {
 		System.out.println("getUser");
-		Observation instance = new Observation();
 		User expResult = null;
-		User result = instance.getUser();
+		User result = a.getUser();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+
+		a.setUser(userA);
+		expResult = userA;
+		result = a.getUser();
+		assertEquals(expResult, result);
 	}
 
 	/**
@@ -128,11 +130,9 @@ public class ObservationTest {
 	@Test
 	public void testSetUser() {
 		System.out.println("setUser");
-		User user = null;
-		Observation instance = new Observation();
-		instance.setUser(user);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		a.setUser(userA);
+		assertEquals(userA, a.getUser());
+
 	}
 
 	/**
@@ -163,12 +163,15 @@ public class ObservationTest {
 	@Test
 	public void testGetObservationCategorie() {
 		System.out.println("getObservationCategorie");
-		Observation instance = new Observation();
 		ObservationCategorie expResult = null;
-		ObservationCategorie result = instance.getObservationCategorie();
+		ObservationCategorie result = a.getObservationCategorie();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+
+		ObservationCategorie oc = new ObservationCategorie();
+		a.setObservationCategorie(oc);
+
+		assertEquals(a.getObservationCategorie(), oc);
+		
 	}
 
 	/**
@@ -177,11 +180,11 @@ public class ObservationTest {
 	@Test
 	public void testSetObservationCategorie() {
 		System.out.println("setObservationCategorie");
-		ObservationCategorie oc = null;
-		Observation instance = new Observation();
-		instance.setObservationCategorie(oc);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		
+		ObservationCategorie oc = new ObservationCategorie();
+		a.setObservationCategorie(oc);
+
+		assertEquals(a.getObservationCategorie(), oc);
 	}
 
 	/**
@@ -260,12 +263,10 @@ public class ObservationTest {
 	@Test
 	public void testGetId() {
 		System.out.println("getId");
-		Observation instance = new Observation();
 		long expResult = 0L;
-		long result = instance.getId();
+		long result = a.getId();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+
 	}
 
 	/**
@@ -274,11 +275,9 @@ public class ObservationTest {
 	@Test
 	public void testSetId() {
 		System.out.println("setId");
-		long id = 0L;
-		Observation instance = new Observation();
-		instance.setId(id);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		long id = 12345L;
+		a.setId(id);
+		assertEquals(a.getId(), id);
 	}
 
 	/**
@@ -287,11 +286,14 @@ public class ObservationTest {
 	@Test
 	public void testIsNew() {
 		System.out.println("isNew");
-		Observation instance = new Observation();
-		boolean expResult = false;
-		boolean result = instance.isNew();
+		boolean expResult = true;
+		boolean result = a.isNew();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+
+		a.setId(12345L);
+		expResult = false;
+		result = a.isNew();
+		assertEquals(expResult, result);
+
 	}
 }
