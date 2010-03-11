@@ -8,6 +8,7 @@ $(function () {
 		var distance = -200;
 		var time = 250;
 		var hideDelay = 500;
+		var boxsize = 400;
 
 		var hideDelayTimer = null;
 
@@ -32,14 +33,14 @@ $(function () {
 				// reset position of popup box
 				popup.css({
 					bottom: 20,
-					left: -200,
+					left:- boxsize,
 					display: 'block' // brings the popup back in to view
 				})
 
 				// (we're using chaining on the popup) now animate it's opacity and position
 				.animate({
 					bottom: '+=' + distance + 'px',
-					left: -200,
+					left: - boxsize,
 					opacity: 1
 				}, time, 'swing', function() {
 					// once the animation is complete, set the tracker variables
