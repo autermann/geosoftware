@@ -5,31 +5,31 @@
 	<table border="1">
 		<tr>
 			<td><fmt:message key="observation.id"/>:</td>
-			<td><c:out value="${observation.id}" default="-" /></td>
+			<td>${observation.id}</td>
 		</tr>
 		<tr>
 			<td><fmt:message key="observation.title"/>:</td>
-			<td><c:out value="${observation.title}" default="-" /></td>
+			<td>${observation.title}</td>
 		</tr>
 		<tr>
 			<td><fmt:message key="observation.description"/>:</td>
-			<td><c:out value="${observation.description}" default="-" /></td>
+			<td>${observation.description}</td>
 		<tr/>
 		<tr>
 			<td><fmt:message key="observation.user"/>:</td>
-			<td><c:out value="${observation.user}" default="-" /></td>
+			<td>${observation.user}</td>
 		<tr/>
 		<tr>
 			<td><fmt:message key="observation.creationDate"/>:</td>
-			<td><fmt:formatDate value="${observation.creationDate}"/></td>
+			<td><fmt:formatDate pattern="dd. MM. yyyy - HH:mm" value="${observation.creationDate}"/></td>
 		<tr/>
                 <tr>
 			<td><fmt:message key="observation.observationCategorie"/>:</td>
-			<td><fmt:formatDate value="${observation.observationCategorie}"/></td>
+			<td>${observation.observationCategorie}</td>
 		<tr/>
                     <tr>
 			<td><fmt:message key="observation.coordinate"/>:</td>
-			<td>&nbsp;</td>
+			<td><c:out value="${observation.coordinate}" default="-"/></td>
 		<tr/>
            
 	</table>
