@@ -20,8 +20,9 @@ package org.sloth.web;
 import java.util.Collection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sloth.model.User;
-import org.sloth.service.UserManager;
+import org.sloth.model.Observation;
+import org.sloth.model.ObservationCategorie;
+import org.sloth.service.ObservationManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,28 +32,28 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 /**
  *
  * @todo
- * @author auti
+ * @author arnie
  */
 @Controller
-@RequestMapping("/users")
-public class UserListController {
+@RequestMapping("/observations")
+public class ObservationListController {
 
 	/**
 	 *
 	 * @todo
 	 */
 	protected final static Logger logger = LoggerFactory.getLogger(
-			UserListController.class);
+			ObservationListController.class);
 	@Autowired
-	private UserManager userManager;
+	private ObservationManager observationManager;
 
 	/**
 	 *
 	 * @todo
-	 * @param userManager
+	 * @param observationManager
 	 */
-	public void setUserManager(UserManager userManager) {
-		this.userManager = userManager;
+	public void setobservationManager(ObservationManager observationManager) {
+		this.observationManager = observationManager;
 	}
 
 	/**
@@ -60,8 +61,8 @@ public class UserListController {
 	 * @todo
 	 * @return
 	 */
-	protected UserManager getUserManager() {
-		return this.userManager;
+	protected ObservationManager getObservationManager() {
+		return this.observationManager;
 	}
 
 	/**
@@ -72,12 +73,10 @@ public class UserListController {
 	 */
 	@RequestMapping(method = GET)
 	public String setupList(Model model) {
-		Collection<User> users = getUserManager().getUsers();
-		logger.info("Request for User List; got {} entrys.", users.size());
-		model.addAttribute("users", users);
-		return "users/list";
+		Collection<Observation> observations = getObservationManager().getObservations();
+		logger.info("Request for Observation List; got {} entrys.", observations.size());
+		model.addAttribute("observations", observations);
+		return "observations/list";
 	}
 
 }
-
-

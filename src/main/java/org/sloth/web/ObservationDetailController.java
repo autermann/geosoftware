@@ -17,67 +17,60 @@
  */
 package org.sloth.web;
 
-import java.util.Collection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sloth.model.User;
-import org.sloth.service.UserManager;
+import org.sloth.model.Observation;
+import org.sloth.service.ObservationManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 /**
- *
  * @todo
- * @author auti
+ * @author arnie ;-)
  */
 @Controller
-@RequestMapping("/users")
-public class UserListController {
+@RequestMapping("/observations/{id}")
+public class ObservationDetailController {
 
 	/**
-	 *
 	 * @todo
 	 */
-	protected final static Logger logger = LoggerFactory.getLogger(
-			UserListController.class);
+	protected static final Logger logger = LoggerFactory.getLogger(
+			ObservationDetailController.class);
 	@Autowired
-	private UserManager userManager;
+	private ObservationManager observationManager;
 
 	/**
-	 *
 	 * @todo
 	 * @param userManager
 	 */
-	public void setUserManager(UserManager userManager) {
-		this.userManager = userManager;
+	public void setObservationManager(ObservationManager observationManager) {
+		this.observationManager = observationManager;
 	}
 
 	/**
-	 *
 	 * @todo
 	 * @return
 	 */
-	protected UserManager getUserManager() {
-		return this.userManager;
+	protected ObservationManager getObservationManager() {
+		return this.observationManager;
 	}
 
 	/**
-	 *
 	 * @todo
+	 * @param id
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(method = GET)
-	public String setupList(Model model) {
-		Collection<User> users = getUserManager().getUsers();
-		logger.info("Request for User List; got {} entrys.", users.size());
-		model.addAttribute("users", users);
-		return "users/list";
+	@RequestMapping
+	public String setupForm(@PathVariable int id, Model model) {
+		Observation o = getObservationManager().getObservation(id);
+		logger.info("Request of Details for Observation No. {}", id);
+		model.addAttribute("observation", o);
+		return "observations/details";
 	}
 
 }
-
-
