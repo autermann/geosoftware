@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth,
- * 					 Christoph Fendrich, Christian Paluschek
+ * Copyright (C) 2009-2010  Stefan Arndt, Christian Autermann, Dustin Demuth,
+ *                  Christoph Fendrich, Simon Ottenhues, Christian Paluschek
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,15 +15,41 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.sloth.model;
+package org.sloth.service;
 
-import javax.persistence.metamodel.SingularAttribute;
-import javax.persistence.metamodel.StaticMetamodel;
+/**
+ * @todo
+ * @author auti
+ */
+public class Login {
 
-@StaticMetamodel(UserRight.class)
-public class UserRight_ {
+	private String password, mail;
 
-	public static volatile SingularAttribute<UserRight, Integer> value;
-	public static volatile SingularAttribute<UserRight, String> name;
-	public static volatile SingularAttribute<UserRight, String> description;
+	/**
+	 * @return the password
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * @param password the password to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	/**
+	 * @return the mail
+	 */
+	public String getMail() {
+		return mail;
+	}
+
+	/**
+	 * @param mail the mail to set
+	 */
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
 }

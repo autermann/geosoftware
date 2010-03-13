@@ -15,51 +15,18 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.sloth.persistence;
+package org.sloth.service.validator;
 
-import java.util.Collection;
-import org.sloth.model.ObservationCategorie;
+import org.sloth.service.Login;
+import org.springframework.validation.Errors;
+import static org.springframework.validation.ValidationUtils.rejectIfEmptyOrWhitespace;
+//TODO JavaDoc
+public class LoginValidator extends Validator<Login> {
 
-/**
- * @todo
- * @author auti
- */
-public interface ObservationCategorieDao {
-
-	/**
-	 * @todo
-	 * @return
-	 */
-	public Collection<ObservationCategorie> getAll();
-
-	/**
-	 * @todo
-	 * @param id
-	 * @return
-	 */
-	public ObservationCategorie get(long id);
-
-	/**
-	 * @todo
-	 * @param t
-	 */
-	public void update(ObservationCategorie t);
-
-	/**
-	 * @todo
-	 * @param t
-	 */
-	public void delete(ObservationCategorie t);
-
-	/**
-	 * @todo
-	 * @param t
-	 */
-	public void save(ObservationCategorie t);
-
-	/**
-	 * @todo
-	 */
-	public void flush();
+	@Override
+	public void validate(Login t, Errors errors) {
+		rejectIfEmptyOrWhitespace(errors, "password", "field.required");
+		rejectIfEmptyOrWhitespace(errors, "mail", "field.required");
+	}
 
 }

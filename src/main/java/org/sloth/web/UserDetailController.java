@@ -20,7 +20,7 @@ package org.sloth.web;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sloth.model.User;
-import org.sloth.service.UserManager;
+import org.sloth.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,13 +41,13 @@ public class UserDetailController {
 	protected static final Logger logger = LoggerFactory.getLogger(
 			UserDetailController.class);
 	@Autowired
-	private UserManager userManager;
+	private UserService userManager;
 
 	/**
 	 * @todo
 	 * @param userManager
 	 */
-	public void setUserManager(UserManager userManager) {
+	public void setUserManager(UserService userManager) {
 		this.userManager = userManager;
 	}
 
@@ -55,7 +55,7 @@ public class UserDetailController {
 	 * @todo
 	 * @return
 	 */
-	protected UserManager getUserManager() {
+	protected UserService getUserManager() {
 		return this.userManager;
 	}
 
@@ -67,7 +67,7 @@ public class UserDetailController {
 	 */
 	@RequestMapping
 	public String setupForm(@PathVariable long id, Model model) {
-		User u = getUserManager().getUser(id);
+		User u = getUserManager().get(id);
 		logger.info("Request of Details for User {}", id);
 		model.addAttribute("user", u);
 		return "users/details";

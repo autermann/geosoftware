@@ -25,14 +25,14 @@
 							<td width="40%" align="right"><form:errors cssStyle="color:red;" path="name"/></td>
 						</tr>
 						<tr>
-							<td width="20%" align="right"><fmt:message key="user.eMail"/>:</td>
-							<td width="40%" align="left"><form:input path="eMail" /></td>
-							<td width="40%" align="right"><form:errors cssStyle="color:red;" path="eMail"/></td>
+							<td width="20%" align="right"><fmt:message key="user.mail"/>:</td>
+							<td width="40%" align="left"><form:input path="mail" /></td>
+							<td width="40%" align="right"><form:errors cssStyle="color:red;" path="mail"/></td>
 						</tr>
 						<tr>
 							<td width="20%" align="right"><fmt:message key="user.password"/>:</td>
-							<td width="40%" align="left"><form:password path="hashedPassword" showPassword="true"/></td>
-							<td width="40%" align="right"><form:errors cssStyle="color:red;" path="hashedPassword"/></td>
+							<td width="40%" align="left"><form:password path="password" showPassword="true"/></td>
+							<td width="40%" align="right"><form:errors cssStyle="color:red;" path="password"/></td>
 						</tr>
 						<tr>
 							<td align="center" colspan="2">

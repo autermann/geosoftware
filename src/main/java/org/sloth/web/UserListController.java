@@ -21,7 +21,7 @@ import java.util.Collection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sloth.model.User;
-import org.sloth.service.UserManager;
+import org.sloth.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,14 +44,14 @@ public class UserListController {
 	protected final static Logger logger = LoggerFactory.getLogger(
 			UserListController.class);
 	@Autowired
-	private UserManager userManager;
+	private UserService userManager;
 
 	/**
 	 *
 	 * @todo
 	 * @param userManager
 	 */
-	public void setUserManager(UserManager userManager) {
+	public void setUserManager(UserService userManager) {
 		this.userManager = userManager;
 	}
 
@@ -60,7 +60,7 @@ public class UserListController {
 	 * @todo
 	 * @return
 	 */
-	protected UserManager getUserManager() {
+	protected UserService getUserManager() {
 		return this.userManager;
 	}
 

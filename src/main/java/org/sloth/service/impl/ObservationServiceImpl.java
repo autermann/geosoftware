@@ -25,60 +25,57 @@ import org.slf4j.LoggerFactory;
 import org.sloth.persistence.ObservationDao;
 import org.sloth.model.Coordinate;
 import org.sloth.model.Observation;
-import org.sloth.model.ObservationCategorie;
+import org.sloth.model.Categorie;
 import org.sloth.model.User;
-import org.sloth.persistence.ObservationCategorieDao;
-import org.sloth.service.ObservationManager;
+import org.sloth.persistence.CategorieDao;
+import org.sloth.service.ObservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import static java.lang.Character.toLowerCase;
 import static java.lang.Character.toUpperCase;
 
-/**
- * @todo
- * @author auti
- */
-public class ObservationManagerImpl implements ObservationManager {
+public class ObservationServiceImpl implements ObservationService {
 
-	/**
-	 * @todo
-	 */
 	protected static final Logger logger = LoggerFactory.getLogger(
-			ObservationManagerImpl.class);
+			ObservationServiceImpl.class);
 	@Autowired
 	private ObservationDao observationDao;
 	@Autowired
-	private ObservationCategorieDao observationCategorieDao;
+	private CategorieDao categorieDao;
 
-	/**
-	 * @todo
-	 * @param id
-	 * @return
-	 */
+	private ObservationDao getObservationDao() {
+		return observationDao;
+	}
+
+	private CategorieDao getCategorieDao() {
+		return categorieDao;
+	}
+
+	public void setObservationDao(ObservationDao oDao) {
+		logger.info("Setting autowired ObservationDao");
+		this.observationDao = oDao;
+	}
+
+	public void setCategorieDao(CategorieDao ocDao) {
+		logger.info("Setting autowired CategorieDao");
+		this.categorieDao = ocDao;
+	}
+
 	@Override
 	public Observation getObservation(int id) {
 		return getObservationDao().get(id);
 	}
 
-	/**
-	 * @todo
-	 * @return
-	 */
 	@Override
 	public Collection<Observation> getObservations() {
 		return getObservationDao().getAll();
 	}
 
-	/**
-	 * @todo
-	 * @param keyword
-	 * @return
-	 */
 	@Override
 	public Collection<Observation> getObservations(String keyword) {
 		String regex = buildRegex(keyword);
 		HashSet<Observation> result = new HashSet<Observation>();
 		for (Observation o : getObservations()) {
-			ObservationCategorie oc = o.getObservationCategorie();
+			Categorie oc = o.getCategorie();
 			if (o.getTitle().matches(regex)
 				|| o.getDescription().matches(regex)
 				|| oc.getTitle().matches(regex)
@@ -89,56 +86,26 @@ public class ObservationManagerImpl implements ObservationManager {
 		return result;
 	}
 
-	/**
-	 * @todo
-	 * @param id
-	 */
 	@Override
 	public void deleteObservation(int id) {
 		getObservationDao().delete(id);
 	}
 
-	/**
-	 * @todo
-	 * @param observation
-	 */
 	@Override
 	public void deleteObservation(Observation observation) {
 		getObservationDao().delete(observation);
 	}
 
-	/**
-	 * @todo
-	 * @param observation
-	 */
 	@Override
 	public void updateObservation(Observation observation) {
 		getObservationDao().update(observation);
 	}
 
-	/**
-	 * @todo
-	 * @param title
-	 * @param description
-	 * @param user
-	 * @param coordinate
-	 */
 	@Override
-	public void registrateObservation(String title, String description,
-									  User user, Coordinate coordinate) {
-		Observation o = new Observation();
-		o.setCoordinate(coordinate);
-		o.setDescription(description);
-		o.setTitle(title);
-		o.setUser(user);
-		getObservationDao().save(o);
+	public void registrate(Observation observation) {
+		getObservationDao().save(observation);
 	}
 
-	/**
-	 * @todo
-	 * @param keyword
-	 * @return
-	 */
 	private String buildRegex(String keyword) {
 		//TODO geht besser
 		StringBuffer buffer = new StringBuffer(".*");
@@ -153,56 +120,47 @@ public class ObservationManagerImpl implements ObservationManager {
 		return buffer.toString();
 	}
 
-	/**
-	 * @todo
-	 * @param oc
-	 * @return
-	 */
 	@Override
-	public Collection<Observation> getObservations(ObservationCategorie oc) {
+	public Collection<Observation> getObservations(Categorie oc) {
 		Collection<Observation> result = new LinkedList<Observation>();
 		for (Observation o : getObservations()) {
-			if (o.getObservationCategorie().equals(oc)) {
+			if (o.getCategorie().equals(oc)) {
 				result.add(o);
 			}
 		}
 		return result;
 	}
 
-	/**
-	 * @todo
-	 * @param oDao
-	 */
 	@Override
-	public void setObservationDao(ObservationDao oDao) {
-		logger.info("Setting autowired ObservationDao");
-		this.observationDao = oDao;
+	public Categorie getCategorie(int id) {
+		return null;
 	}
 
-	/**
-	 * @todo
-	 * @param ocDao
-	 */
 	@Override
-	public void setObservationCategorieDao(ObservationCategorieDao ocDao) {
-		logger.info("Setting autowired ObservationCategorieDao");
-		this.observationCategorieDao = ocDao;
+	public Collection<Categorie> getCategories() {
+		return getCategorieDao().getAll();
 	}
 
-	/**
-	 * @todo
-	 * @return
-	 */
-	protected ObservationDao getObservationDao() {
-		return observationDao;
+	@Override
+	public void deleteCategorie(Categorie categorie) {
+		getCategorieDao().delete(categorie);
 	}
 
-	/**
-	 * @todo
-	 * @return
-	 */
-	protected ObservationCategorieDao getObservationCategorieDao() {
-		return observationCategorieDao;
+	@Override
+	public void deleteCategorie(int id) {
+		getCategorieDao().delete(getCategorie(id));
 	}
+
+	@Override
+	public void updateCategorie(Categorie categorie) {
+		getCategorieDao().update(categorie);
+	}
+
+	@Override
+	public void registrate(Categorie categorie) {
+		getCategorieDao().save(categorie);
+	}
+
+
 
 }

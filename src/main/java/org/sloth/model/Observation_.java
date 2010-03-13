@@ -24,7 +24,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 @StaticMetamodel(Observation.class)
 public class Observation_ {
 	public static volatile SingularAttribute<Observation, Coordinate> coordinate;
-	public static volatile SingularAttribute<Observation, ObservationCategorie> observationCategorie;
+	public static volatile SingularAttribute<Observation, Categorie> categorie;
 	public static volatile SingularAttribute<Observation, Date> creationDate;
 	public static volatile SingularAttribute<Observation, String> description;
 	public static volatile SingularAttribute<Observation, String> title;

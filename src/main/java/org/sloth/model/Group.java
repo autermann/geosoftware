@@ -15,34 +15,51 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.sloth.service;
+package org.sloth.model;
 
 /**
  * @todo
- * @author Christian Autermann
+ * @author auti
  */
-public interface PasswordManager {
+public enum Group {
 
 	/**
 	 * @todo
-	 * @param plain
-	 * @return
 	 */
-	public boolean meetsRecommendation(String plain);
-
+	ADMIN(0),
 	/**
 	 * @todo
-	 * @param one
-	 * @param two
-	 * @return
 	 */
-	public boolean test(String one, String two);
-
+	USER(1),
 	/**
 	 * @todo
-	 * @param plain
+	 */
+	GUEST(2);
+	/**
+	 * @todo
+	 */
+	public final int ID;
+
+	private Group(int id) {
+		this.ID = id;
+	}
+
+	/**
+	 * 
+	 * @param id
 	 * @return
 	 */
-	public String hash(String plain);
+	public static Group fromInt(int id) {
+		switch(id) {
+			case 0:
+				return ADMIN;
+			case 1:
+				return USER;
+			case 2:
+				return GUEST;
+			default:
+				return null;
+		}
+	}
 
 }

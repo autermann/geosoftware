@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth,
- * 					 Christoph Fendrich, Christian Paluschek
+ * Copyright (C) 2009-2010  Stefan Arndt, Christian Autermann, Dustin Demuth,
+ *                  Christoph Fendrich, Simon Ottenhues, Christian Paluschek
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,14 +15,26 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.sloth.model;
+package org.sloth.service.validator;
 
-import javax.persistence.metamodel.SingularAttribute;
-import javax.persistence.metamodel.StaticMetamodel;
+import org.sloth.model.Categorie;
+import org.springframework.validation.Errors;
 
-@StaticMetamodel(ObservationCategorie.class)
-public class ObservationCategorie_ {
-	public static volatile SingularAttribute<ObservationCategorie, String> title;
-	public static volatile SingularAttribute<ObservationCategorie, String> description;
-	public static volatile SingularAttribute<ObservationCategorie, Long> id;
+/**
+ * @todo
+ * @author auti
+ */
+public class CategorieValidator {
+
+	/**
+	 * @todo
+	 * @param obj
+	 * @param errors
+	 */
+	public void validate(Categorie obj, Errors errors) {
+		/**
+		 * TODO neues Categorie-Objekt ueberpruefen...
+		 */
+	}
+
 }

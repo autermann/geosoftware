@@ -18,8 +18,10 @@
 package org.sloth.web;
 
 import org.sloth.model.User;
-import org.sloth.service.PasswordManager;
-import org.sloth.service.UserManager;
+import org.sloth.service.Login;
+import org.sloth.service.UserService;
+import org.sloth.service.validator.LoginValidator;
+import org.sloth.service.validator.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,24 +42,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class LoginFormController {
 
 	@Autowired
-	private UserManager userManager;
+	private UserService userManager;
+
 	@Autowired
-	private PasswordManager passwordManager;
+	private LoginValidator loginValidator;
 
 	/**
 	 * @todo
-	 * @param passwordManager
 	 */
-	public void setPasswordManager(PasswordManager passwordManager) {
-		this.passwordManager = passwordManager;
+	public void setUserManager(UserService userManager) {
+		this.userManager = userManager;
 	}
 
 	/**
 	 * @todo
-	 * @param userManager
 	 */
-	public void setUserManager(UserManager userManager) {
-		this.userManager = userManager;
+	public void setLoginValidator(LoginValidator loginValidator) {
+		this.loginValidator = loginValidator;
 	}
 
 	/**
@@ -67,7 +68,7 @@ public class LoginFormController {
 	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public String setupForm(Model model) {
-		model.addAttribute("user", new User());
+		model.addAttribute("login", new Login());
 		return "welcome";
 	}
 
@@ -82,37 +83,23 @@ public class LoginFormController {
 
 	/**
 	 * @todo
-	 * @param model
-	 * @param user
-	 * @param result
-	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.POST)
-	public String processSubmit(Model model, @ModelAttribute User user,
+	public String processSubmit(Model model,
+								@ModelAttribute Login login,
 								BindingResult result) {
-		if (!StringUtils.hasText(user.getHashedPassword())) {
-			result.rejectValue("hashedPassword", "field.required");
-		}
-		if (!StringUtils.hasText(user.geteMail())) {
-			result.rejectValue("eMail", "field.required");
-		}
+		loginValidator.validate(login, result);
 		if (result.hasErrors()) {
 			return "welcome";
-		}
-		User dbUser = userManager.getUser(user.geteMail());
-		if (dbUser == null) {
-			result.rejectValue("eMail", "field.noRegistratedUser");
 		} else {
-			String hashedPassword = passwordManager.hash(user.getHashedPassword());
-			if (!passwordManager.test(hashedPassword, dbUser.getHashedPassword())) {
-				result.rejectValue("hashedPassword", "field.wrongPassword");
+			User dbUser = userManager.login(login);
+			if (dbUser == null) {
+				result.reject("field.invalidLogin");
+			} else {
+				model.addAttribute("loginUser", dbUser);
 			}
-		}
-		if (result.hasErrors()) {
 			return "welcome";
 		}
-		model.addAttribute("loginUser", dbUser);
-		return "welcome";
 	}
 
 }

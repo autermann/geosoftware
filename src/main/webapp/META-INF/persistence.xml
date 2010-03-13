@@ -20,10 +20,10 @@
   <persistence-unit name="main" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>org.sloth.model.Observation</class>
-    <class>org.sloth.model.ObservationCategorie</class>
+    <class>org.sloth.model.Categorie</class>
     <class>org.sloth.model.User</class>
     <class>org.sloth.model.Coordinate</class>
-    <class>org.sloth.model.UserRight</class>
+    <class>org.sloth.model.Group</class>
 	<exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="eclipselink.logging.level" value="SEVERE"/>

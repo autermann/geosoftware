@@ -20,12 +20,12 @@ package org.sloth.service.validator;
 import java.io.IOException;
 import java.util.Properties;
 import org.sloth.model.User;
-import org.sloth.service.PasswordManager;
+import org.sloth.service.PasswordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.util.StringUtils;
-import static org.springframework.util.StringUtils.hasText;
 import org.springframework.validation.Errors;
+import static org.springframework.validation.ValidationUtils.rejectIfEmptyOrWhitespace;
 
 /**
  * @todo
@@ -39,7 +39,7 @@ public class UserValidator extends Validator<User> {
 	protected static String mailRegex =
 							"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$";
 	@Autowired
-	private PasswordManager passwordManager;
+	private PasswordService passwordManager;
 
 	/**
 	 * @todo
@@ -65,7 +65,7 @@ public class UserValidator extends Validator<User> {
 	 *
 	 * @param passwordManager
 	 */
-	public void setPasswordManager(PasswordManager passwordManager) {
+	public void setPasswordManager(PasswordService passwordManager) {
 		this.passwordManager = passwordManager;
 	}
 
@@ -74,7 +74,7 @@ public class UserValidator extends Validator<User> {
 	 * 
 	 * @return
 	 */
-	public PasswordManager getPasswordManager() {
+	public PasswordService getPasswordManager() {
 		return this.passwordManager;
 	}
 
@@ -87,22 +87,14 @@ public class UserValidator extends Validator<User> {
 	@Override
 	public void validate(User u, Errors errors) {
 		logger.info("Validating User: {}", u);
-		if (!hasText(u.getFamilyName())) {
-			errors.rejectValue("familyName", "field.required");
-		}
-		if (!hasText(u.getName())) {
-			errors.rejectValue("name", "field.required");
-		}
-		if (!hasText(u.getHashedPassword())) {
-			errors.rejectValue("hashedPassword", "field.required");
-		}
-		if (!hasText(u.geteMail())) {
-			errors.rejectValue("eMail", "field.required");
-		}
-		if (!getPasswordManager().meetsRecommendation(u.getHashedPassword())) {
+		rejectIfEmptyOrWhitespace(errors, "familyName", "field.required");
+		rejectIfEmptyOrWhitespace(errors, "name", "field.required");
+		rejectIfEmptyOrWhitespace(errors, "password", "field.required");
+		rejectIfEmptyOrWhitespace(errors, "mail", "field.required");
+		if (!getPasswordManager().meetsRecommendation(u.getPassword())) {
 			errors.rejectValue("hashedPassword", "field.badpassword");
 		}
-		if (!u.geteMail().trim().matches(mailRegex)) {
+		if (!u.getMail().trim().matches(mailRegex)) {
 			errors.rejectValue("eMail", "field.invalidMailAddress");
 		}
 	}

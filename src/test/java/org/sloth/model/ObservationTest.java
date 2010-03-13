@@ -158,33 +158,33 @@ public class ObservationTest {
 	}
 
 	/**
-	 * Test of getObservationCategorie method, of class Observation.
+	 * Test of getCategorie method, of class Observation.
 	 */
 	@Test
 	public void testGetObservationCategorie() {
 		System.out.println("getObservationCategorie");
-		ObservationCategorie expResult = null;
-		ObservationCategorie result = a.getObservationCategorie();
+		Categorie expResult = null;
+		Categorie result = a.getCategorie();
 		assertEquals(expResult, result);
 
-		ObservationCategorie oc = new ObservationCategorie();
-		a.setObservationCategorie(oc);
+		Categorie oc = new Categorie();
+		a.setCategorie(oc);
 
-		assertEquals(a.getObservationCategorie(), oc);
+		assertEquals(a.getCategorie(), oc);
 		
 	}
 
 	/**
-	 * Test of setObservationCategorie method, of class Observation.
+	 * Test of setCategorie method, of class Observation.
 	 */
 	@Test
 	public void testSetObservationCategorie() {
 		System.out.println("setObservationCategorie");
 		
-		ObservationCategorie oc = new ObservationCategorie();
-		a.setObservationCategorie(oc);
+		Categorie oc = new Categorie();
+		a.setCategorie(oc);
 
-		assertEquals(a.getObservationCategorie(), oc);
+		assertEquals(a.getCategorie(), oc);
 	}
 
 	/**
@@ -254,7 +254,7 @@ public class ObservationTest {
 		a.setTitle(titleA);
 		Date k = new Date();
 		String ks = k.toString();
-		assertEquals(a.toString(), "["+a.getClass()+"]("+a.getId()+" - \""+titleA+"\" by "+a.getUser()+" @"+coordA.toString()+"|"+ks+" in "+a.getObservationCategorie()+")");
+		assertEquals(a.toString(), "["+a.getClass()+"]("+a.getId()+" - \""+titleA+"\" by "+a.getUser()+" @"+coordA.toString()+"|"+ks+" in "+a.getCategorie()+")");
 	}
 
 	/**

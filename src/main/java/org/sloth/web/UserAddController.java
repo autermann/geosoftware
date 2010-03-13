@@ -17,8 +17,9 @@
  */
 package org.sloth.web;
 
+import org.sloth.model.Group;
 import org.sloth.model.User;
-import org.sloth.service.UserManager;
+import org.sloth.service.UserService;
 import org.sloth.service.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,7 +43,7 @@ import org.springframework.web.bind.support.SessionStatus;
 public class UserAddController {
 
 	@Autowired
-	private UserManager userManager;
+	private UserService userManager;
 	@Autowired
 	private UserValidator userValidator;
 
@@ -66,7 +67,7 @@ public class UserAddController {
 	 * @todo
 	 * @param userManager
 	 */
-	public void setUserManager(UserManager userManager) {
+	public void setUserManager(UserService userManager) {
 		this.userManager = userManager;
 	}
 
@@ -74,7 +75,7 @@ public class UserAddController {
 	 * @todo
 	 * @return
 	 */
-	protected UserManager getUserManager() {
+	protected UserService getUserManager() {
 		return this.userManager;
 	}
 
@@ -86,7 +87,6 @@ public class UserAddController {
 	public void setAllowedFields(WebDataBinder dataBinder) {
 		dataBinder.setDisallowedFields("id", "creationDate", "userRight");
 	}
-
 
 	/**
 	 * @param model 
@@ -116,9 +116,11 @@ public class UserAddController {
 		if (result.hasErrors()) {
 			return "users/form";
 		} else {
-			this.userManager.registrateUser(user);
+			user.setUserGroup(Group.USER);
+			this.userManager.registrate(user);
 			status.setComplete();
 			return "redirect:/";
 		}
 	}
+
 }

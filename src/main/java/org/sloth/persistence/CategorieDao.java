@@ -15,27 +15,51 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.sloth.service.validator;
+package org.sloth.persistence;
 
-import org.sloth.model.ObservationCategorie;
-import org.springframework.validation.Errors;
+import java.util.Collection;
+import org.sloth.model.Categorie;
 
 /**
  * @todo
  * @author auti
  */
-public class ObservationCategorieValidator extends Validator<ObservationCategorie> {
+public interface CategorieDao {
 
 	/**
 	 * @todo
-	 * @param obj
-	 * @param errors
+	 * @return
 	 */
-	@Override
-	public void validate(ObservationCategorie obj, Errors errors) {
-		/**
-		 * TODO neues ObservationCategorie-Objekt ueberpruefen...
-		 */
-	}
+	public Collection<Categorie> getAll();
+
+	/**
+	 * @todo
+	 * @param id
+	 * @return
+	 */
+	public Categorie get(long id);
+
+	/**
+	 * @todo
+	 * @param t
+	 */
+	public void update(Categorie t);
+
+	/**
+	 * @todo
+	 * @param t
+	 */
+	public void delete(Categorie t);
+
+	/**
+	 * @todo
+	 * @param t
+	 */
+	public void save(Categorie t);
+
+	/**
+	 * @todo
+	 */
+	public void flush();
 
 }

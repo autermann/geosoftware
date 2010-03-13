@@ -25,10 +25,10 @@ import javax.persistence.metamodel.StaticMetamodel;
 public class User_ {
 
 	public static volatile SingularAttribute<User, Long> id;
-	public static volatile SingularAttribute<User, String> eMail;
+	public static volatile SingularAttribute<User, String> mail;
 	public static volatile SingularAttribute<User, String> name;
 	public static volatile SingularAttribute<User, String> familyName;
-	public static volatile SingularAttribute<User, String> hashedPassword;
+	public static volatile SingularAttribute<User, String> password;
 	public static volatile SingularAttribute<User, Date> creationDate;
-	public static volatile SingularAttribute<User, UserRight> userRight;
+	public static volatile SingularAttribute<User, Group> userGroup;
 }

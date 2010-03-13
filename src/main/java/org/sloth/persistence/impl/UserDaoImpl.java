@@ -114,7 +114,7 @@ public class UserDaoImpl extends EntityManagerDao implements UserDao {
 		CriteriaQuery<User> cq = cb.createQuery(User.class);
 		Root<User> user = cq.from(User.class);
 		cq.select(user);
-		cq.where(cb.equal(user.get(User_.eMail), mail));
+		cq.where(cb.equal(user.get(User_.mail), mail));
 		Collection<User> result = getEntityManager().createQuery(cq).
 				getResultList();
 		if (result.size() == 1) {

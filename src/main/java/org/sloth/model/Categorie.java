@@ -32,8 +32,8 @@ import javax.persistence.Transient;
  * @version 1.0
  * @since 1.0
  */
-@Entity(name = "OBSERVATION_CATEGORIE")
-public class ObservationCategorie implements Serializable {
+@Entity
+public class Categorie implements Serializable {
 
 	/**
 	 * @todo
@@ -50,8 +50,18 @@ public class ObservationCategorie implements Serializable {
 
 	/**
 	 * @todo
+	 * @param title
+	 * @param description
 	 */
-	public ObservationCategorie() {
+	public Categorie(String title, String description){
+		setTitle(title);
+		setDescription(description);
+	}
+
+	/**
+	 * @todo
+	 */
+	public Categorie() {
 		/* nothing to do here */
 	}
 

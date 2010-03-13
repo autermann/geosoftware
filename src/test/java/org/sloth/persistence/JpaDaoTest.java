@@ -20,9 +20,9 @@ package org.sloth.persistence;
 import org.junit.*;
 import org.sloth.model.Coordinate;
 import org.sloth.model.Observation;
-import org.sloth.model.ObservationCategorie;
+import org.sloth.model.Categorie;
 import org.sloth.model.User;
-import org.sloth.model.UserRight;
+import org.sloth.model.Group;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
@@ -36,29 +36,26 @@ public class JpaDaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 		assertNotNull("ObservationDao is null", getObservationDao());
 		assertNotNull("ObservationCategorieDao is null", getObservationCategorieDao());
 		assertNotNull("UserDao is null", getUserDao());
-		assertNotNull("UserRightDao is null", getUserRightDao());
 	}
 
 	@Test
 	public void persistTests() {
-		ObservationCategorie oc = new ObservationCategorie();
+		Categorie oc = new Categorie();
 		oc.setDescription("DESC1");
 		oc.setTitle("TITLE!");
 		User u = new User();
 		u.setFamilyName("FamilyName");
-		u.setHashedPassword("password1");
+		u.setPassword("password1");
 		u.setName("Name");
-		u.seteMail("name@name.tld");
-		UserRight ur = new UserRight("User", "N User halt...", UserRight.USER_VALUE);
-		u.setUserRight(ur);
+		u.setMail("name@name.tld");
+		u.setUserGroup(Group.USER);
 		Observation o = new Observation();
 		o.setCoordinate(new Coordinate(1, 2));
 		o.setDescription("ne Observation halt");
-		o.setObservationCategorie(oc);
+		o.setCategorie(oc);
 		o.setTitle("Title");
 		o.setUser(u);
 		getObservationCategorieDao().save(oc);
-		getUserRightDao().save(ur);
 		getUserDao().save(u);
 		getObservationDao().save(o);
 		assertFalse(oc.getId() == 0);
@@ -80,19 +77,6 @@ public class JpaDaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 	}
 
 	@Autowired
-	private UserRightDao userRightDao;
-
-	/**@return the userRightDao*/
-	protected UserRightDao getUserRightDao() {
-		return userRightDao;
-	}
-
-	/**@param userRightDao the userRightDao to set*/
-	public void setUserRightDao(UserRightDao userRightDao) {
-		this.userRightDao = userRightDao;
-	}
-
-	@Autowired
 	private ObservationDao observationDao;
 
 	/**@return the observationDao*/
@@ -106,15 +90,15 @@ public class JpaDaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 	}
 
 	@Autowired
-	private ObservationCategorieDao observationCategorieDao;
+	private CategorieDao observationCategorieDao;
 
 	/**@param observationCategorieDao the observationCategorieDao to set*/
-	public void setObservationCategorieDao(ObservationCategorieDao observationCategorieDao) {
+	public void setObservationCategorieDao(CategorieDao observationCategorieDao) {
 		this.observationCategorieDao = observationCategorieDao;
 	}
 
 	/**@return the observationCategorieDao*/
-	protected ObservationCategorieDao getObservationCategorieDao() {
+	protected CategorieDao getObservationCategorieDao() {
 		return this.observationCategorieDao;
 	}
 }

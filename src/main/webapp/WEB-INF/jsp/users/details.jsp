@@ -8,8 +8,8 @@
 			<td><c:out value="${user.id}" default="-" /></td>
 		</tr>
 		<tr>
-			<td><fmt:message key="user.eMail"/>:</td>
-			<td><c:out value="${user.eMail}" default="-" /></td>
+			<td><fmt:message key="user.mail"/>:</td>
+			<td><c:out value="${user.mail}" default="-" /></td>
 		</tr>
 		<tr>
 			<td><fmt:message key="user.name"/>:</td>

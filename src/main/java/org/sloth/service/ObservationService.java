@@ -18,84 +18,38 @@
 package org.sloth.service;
 
 import java.util.Collection;
-import org.sloth.model.Coordinate;
 import org.sloth.model.Observation;
-import org.sloth.model.ObservationCategorie;
-import org.sloth.model.User;
-import org.sloth.persistence.ObservationCategorieDao;
-import org.sloth.persistence.ObservationDao;
+import org.sloth.model.Categorie;
 
-/**
- * @todo
- * @author auti
- */
-public interface ObservationManager {
+//TODO javadoc
+public interface ObservationService {
 
-	/**
-	 * @todo
-	 * @param oDao
-	 */
-	public void setObservationDao(ObservationDao oDao);
-
-	/**
-	 * @todo
-	 * @param ocDao
-	 */
-	public void setObservationCategorieDao(ObservationCategorieDao ocDao);
-
-	/**
-	 * @todo
-	 * @param id
-	 * @return
-	 */
 	public Observation getObservation(int id);
 
-	/**
-	 * @todo
-	 * @return
-	 */
+	public Categorie getCategorie(int id);
+
 	public Collection<Observation> getObservations();
 
-	/**
-	 * @todo
-	 * @param oc
-	 * @return
-	 */
-	public Collection<Observation> getObservations(ObservationCategorie oc);
+	public Collection<Observation> getObservations(Categorie oc);
 
-	/**
-	 * 
-	 * @param keyword
-	 * @return
-	 */
 	public Collection<Observation> getObservations(String keyword);
 
-	/**
-	 * @todo
-	 * @param id
-	 */
+	public Collection<Categorie> getCategories();
+
 	public void deleteObservation(int id);
 
-	/**
-	 * @todo
-	 * @param observation
-	 */
 	public void deleteObservation(Observation observation);
 
-	/**
-	 * @todo
-	 * @param observation
-	 */
+	public void deleteCategorie(Categorie categorie);
+
+	public void deleteCategorie(int id);
+
+	public void updateCategorie(Categorie categorie);
+
 	public void updateObservation(Observation observation);
 
-	/**
-	 * @todo
-	 * @param title
-	 * @param description
-	 * @param user
-	 * @param coordinate
-	 */
-	public void registrateObservation(String title, String description,
-									  User user, Coordinate coordinate);
+	public void registrate(Categorie categorie);
+
+	public void registrate(Observation observation);
 
 }

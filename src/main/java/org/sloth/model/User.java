@@ -19,14 +19,16 @@ package org.sloth.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.Transient;
+import org.eclipse.persistence.annotations.ConversionValue;
+import org.eclipse.persistence.annotations.Convert;
+import org.eclipse.persistence.annotations.ObjectTypeConverter;
 import static javax.persistence.TemporalType.TIMESTAMP;
 
 /**
@@ -51,19 +53,42 @@ public class User implements Serializable {
 	@GeneratedValue
 	private Long id;
 	@Column(nullable = false, unique = true, name = "MAIL_ADDRESS")
-	private String eMail;
+	private String mail;
 	@Column(nullable = false)
 	private String name;
 	@Column(nullable = false, name = "FAMILY_NAME")
 	private String familyName;
-	@Column(nullable = false, name = "HASHED_PASSWORD")
-	private String hashedPassword;
+	@Column(nullable = false)
+	private String password;
 	@Temporal(TIMESTAMP)
 	@Column(nullable = false, name = "CREATION_DATE")
 	private Date creationDate;
-	@ManyToOne
-	@JoinColumn(nullable = false, name = "USER_RIGHT_ID")
-	private UserRight userRight;
+	@ObjectTypeConverter(name = "group", objectType = Group.class, dataType = String.class, conversionValues = {
+		@ConversionValue(objectValue = "ADMIN", dataValue = "A"),
+		@ConversionValue(objectValue = "USER", dataValue = "U"),
+		@ConversionValue(objectValue = "GUEST", dataValue = "G")})
+	@Basic
+	@Convert("group")
+	@Column(name="USER_GROUP")
+	private Group userGroup;
+
+	/**
+	 * @todo
+	 * @param mail
+	 * @param name
+	 * @param familyName
+	 * @param password
+	 * @param group
+	 */
+	public User(String mail, String name, String familyName, String password,
+				Group group) {
+		setCreationDate(creationDate);
+		setMail(mail);
+		setName(name);
+		setPassword(password);
+		setFamilyName(familyName);
+		setUserGroup(group);
+	}
 
 	/**
 	 * Creates a new <code>User</code> with <code>-1</code> as <code>>id</code>
@@ -76,15 +101,15 @@ public class User implements Serializable {
 	/**
 	 * @return the eMail
 	 */
-	public String geteMail() {
-		return eMail;
+	public String getMail() {
+		return mail;
 	}
 
 	/**
-	 * @param eMail the eMail to set
+	 * @param mail the mail to set
 	 */
-	public void seteMail(String eMail) {
-		this.eMail = eMail;
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 
 	/**
@@ -118,15 +143,15 @@ public class User implements Serializable {
 	/**
 	 * @return the hashedPassword
 	 */
-	public String getHashedPassword() {
-		return hashedPassword;
+	public String getPassword() {
+		return password;
 	}
 
 	/**
 	 * @param hashedPassword the hashedPassword to set
 	 */
-	public void setHashedPassword(String hashedPassword) {
-		this.hashedPassword = hashedPassword;
+	public void setPassword(String hashedPassword) {
+		this.password = hashedPassword;
 	}
 
 	/**
@@ -157,14 +182,14 @@ public class User implements Serializable {
 	public int hashCode() {
 		int hash = 5;
 		hash = 37 * hash + (int) this.getId();
-		hash = 37 * hash + (this.geteMail() != null ? this.geteMail().hashCode()
+		hash = 37 * hash + (this.getMail() != null ? this.getMail().hashCode()
 							: 0);
 		hash = 37 * hash + (this.getName() != null ? this.getName().hashCode()
 							: 0);
 		hash = 37 * hash + (this.getFamilyName() != null ? this.getFamilyName().
 				hashCode() : 0);
-		hash = 37 * hash + (this.getHashedPassword() != null ? this.
-				getHashedPassword().hashCode() : 0);
+		hash = 37 * hash + (this.getPassword() != null ? this.getPassword().
+				hashCode() : 0);
 		hash = 37 * hash + (this.getCreationDate() != null ? this.
 				getCreationDate().hashCode() : 0);
 		return hash;
@@ -183,17 +208,17 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @return the userRight
+	 * @return the group
 	 */
-	public UserRight getUserRight() {
-		return userRight;
+	public Group getUserGroup() {
+		return userGroup;
 	}
 
 	/**
-	 * @param userRight the userRight to set
+	 * @param group the userRight to set
 	 */
-	public void setUserRight(UserRight userRight) {
-		this.userRight = userRight;
+	public void setUserGroup(Group group) {
+		this.userGroup = group;
 	}
 
 	/**

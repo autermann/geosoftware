@@ -30,7 +30,6 @@ public class UserTest {
 	private final String eMailA = "test1.User1@domain.tld";
 	private final String hPwdA = "qwertz";
 	private final Long idA = 12345L;
-	private final UserRight urA = new UserRight();
 
 	@Before
 	public void setUp() throws Exception {
@@ -41,13 +40,13 @@ public class UserTest {
 	 */
 	@Test
 	public void testGeteMail() {
-		System.out.println("geteMail");
+		System.out.println("getMail");
 		String expResult = null;
-		String result = aUser.geteMail();
+		String result = aUser.getMail();
 		assertEquals(expResult, result);
 
-		aUser.seteMail(eMailA);
-		assertEquals(eMailA, aUser.geteMail());
+		aUser.setMail(eMailA);
+		assertEquals(eMailA, aUser.getMail());
 
 	}
 
@@ -56,9 +55,9 @@ public class UserTest {
 	 */
 	@Test
 	public void testSeteMail() {
-		System.out.println("seteMail");
-		aUser.seteMail(eMailA);
-		assertEquals(eMailA, aUser.geteMail());
+		System.out.println("setMail");
+		aUser.setMail(eMailA);
+		assertEquals(eMailA, aUser.getMail());
 	}
 
 	/**
@@ -116,14 +115,14 @@ public class UserTest {
 	 * Test of getHashedPassword method, of class User.
 	 */
 	@Test
-	public void testGetHashedPassword() {
+	public void testGetPassword() {
 		System.out.println("getHashedPassword");
 		String expResult = null;
-		String result = aUser.getHashedPassword();
+		String result = aUser.getPassword();
 		assertEquals(expResult, result);
 
-		aUser.setHashedPassword(hPwdA);
-		assertEquals(hPwdA, aUser.getHashedPassword());
+		aUser.setPassword(hPwdA);
+		assertEquals(hPwdA, aUser.getPassword());
 
 	}
 
@@ -131,9 +130,9 @@ public class UserTest {
 	 * Test of setHashedPassword method, of class User.
 	 */
 	@Test
-	public void testSetHashedPassword() {
-		aUser.setHashedPassword(hPwdA);
-		assertEquals(hPwdA, aUser.getHashedPassword());
+	public void testSetPassword() {
+		aUser.setPassword(hPwdA);
+		assertEquals(hPwdA, aUser.getPassword());
 	}
 
 	/**
@@ -215,9 +214,9 @@ public class UserTest {
 	@Test
 	public void testGetUserRight() {
 		System.out.println("getUserRight");
-		assertEquals(aUser.getUserRight(), null);
-		aUser.setUserRight(urA);
-		assertEquals(aUser.getUserRight(), urA);
+		assertEquals(aUser.getUserGroup(), null);
+		aUser.setUserGroup(Group.USER);
+		assertEquals(aUser.getUserGroup(), Group.USER);
 
 	}
 
@@ -227,8 +226,8 @@ public class UserTest {
 	@Test
 	public void testSetUserRight() {
 		System.out.println("setUserRight");
-		aUser.setUserRight(urA);
-		assertEquals(aUser.getUserRight(), urA);
+		aUser.setUserGroup(Group.USER);
+		assertEquals(aUser.getUserGroup(), Group.USER);
 	}
 
 	/**

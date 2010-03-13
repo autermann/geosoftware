@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2009-2010  Stefan Arndt, Christian Autermann, Dustin Demuth,
- *                  Christoph Fendrich, Simon Ottenhues, Christian Paluschek
+ * Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth,
+ * 					 Christoph Fendrich, Christian Paluschek
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,27 +15,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.sloth.service.validator;
+package org.sloth.model;
 
-import org.sloth.model.UserRight;
-import org.springframework.validation.Errors;
+import javax.persistence.metamodel.SingularAttribute;
+import javax.persistence.metamodel.StaticMetamodel;
 
-/**
- * @todo
- * @author auti
- */
-public class UserRightValidator extends Validator<UserRight> {
-
-	/**
-	 * @todo
-	 * @param obj
-	 * @param errors
-	 */
-	@Override
-	public void validate(UserRight obj, Errors errors) {
-		/*
-		 * TODO neues UserRight-Objekt ueberpruefen...
-		 */
-	}
-
+@StaticMetamodel(Categorie.class)
+public class Categorie_ {
+	public static volatile SingularAttribute<Categorie, String> title;
+	public static volatile SingularAttribute<Categorie, String> description;
+	public static volatile SingularAttribute<Categorie, Long> id;
 }

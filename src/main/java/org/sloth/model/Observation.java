@@ -57,11 +57,29 @@ public class Observation implements Serializable {
 	@Column(nullable = false, name = "CREATION_TIME")
 	private Date creationDate;
 	@OneToOne
-	@JoinColumn(nullable = false, name = "OBSERVATION_CATEGORIE_ID")
-	private ObservationCategorie observationCategorie;
+	@JoinColumn(nullable = false, name = "CATEGORIE_ID")
+	private Categorie categorie;
 	@Embedded
 	@JoinColumn(nullable = false)
 	private Coordinate coordinate;
+
+	/**
+	 * @todo
+	 * @param title
+	 * @param description
+	 * @param user
+	 * @param categorie
+	 * @param coordinate
+	 */
+	public Observation(String title, String description, User user,
+					   Categorie categorie, Coordinate coordinate) {
+		setCreationDate(new Date());
+		setTitle(title);
+		setDescription(description);
+		setUser(user);
+		setCategorie(categorie);
+		setCoordinate(coordinate);
+	}
 
 	/**
 	 * @todo
@@ -130,16 +148,16 @@ public class Observation implements Serializable {
 	/**
 	 * @return the observationCategorie
 	 */
-	public ObservationCategorie getObservationCategorie() {
-		return observationCategorie;
+	public Categorie getCategorie() {
+		return categorie;
 	}
 
 	/**
 	 * @todo
 	 * @param oc
 	 */
-	public void setObservationCategorie(ObservationCategorie oc) {
-		this.observationCategorie = oc;
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
 	}
 
 	/**
@@ -170,16 +188,17 @@ public class Observation implements Serializable {
 	public int hashCode() {
 		int hash = 7;
 		hash = 59 * hash + (int) this.getId();
-		hash = 59 * hash + (this.title != null ? this.title.hashCode() : 0);
-		hash = 59 * hash + (this.description != null
-							? this.description.hashCode() : 0);
-		hash = 59 * hash + (this.user != null ? this.user.hashCode() : 0);
-		hash = 59 * hash + (this.creationDate != null ? this.creationDate.
+		hash = 59 * hash + (this.getTitle() != null ? this.title.hashCode() : 0);
+		hash = 59 * hash + (this.getDescription() != null ? this.getDescription().
 				hashCode() : 0);
-		hash = 59 * hash + (this.observationCategorie != null ? this.observationCategorie.
-				hashCode() : 0);
-		hash = 59 * hash + (this.coordinate != null ? this.coordinate.hashCode()
+		hash = 59 * hash + (this.getUser() != null ? this.getUser().hashCode()
 							: 0);
+		hash = 59 * hash + (this.getCreationDate() != null ? this.
+				getCreationDate().hashCode() : 0);
+		hash = 59 * hash + (this.getCategorie() != null ? this.getCategorie().
+				hashCode() : 0);
+		hash = 59 * hash + (this.getCoordinate() != null ? this.getCoordinate().
+				hashCode() : 0);
 		return hash;
 	}
 
@@ -199,7 +218,7 @@ public class Observation implements Serializable {
 		buf.append("|");
 		buf.append(getCreationDate());
 		buf.append(" in ");
-		buf.append(getObservationCategorie());
+		buf.append(getCategorie());
 		buf.append(")");
 		return buf.toString();
 	}

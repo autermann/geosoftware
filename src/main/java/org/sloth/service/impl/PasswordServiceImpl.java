@@ -22,31 +22,19 @@ import java.security.MessageDigest;
 import java.util.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sloth.service.PasswordManager;
+import org.sloth.service.PasswordService;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.util.StringUtils;
 import sun.misc.BASE64Encoder;
 
-/**
- *@todo
- * @author Christian Autermann
- */
-public class PasswordManagerImpl implements PasswordManager {
+//TODO JavaDoc
+public class PasswordServiceImpl implements PasswordService {
 
-	/**
-	 * @todo
-	 */
 	protected static final Logger logger = LoggerFactory.getLogger(
-			PasswordManager.class);
-	/**
-	 * @todo
-	 */
+			PasswordService.class);
 	protected static String passwordRegex =
 			"^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).*$";
 
-	/**
-	 * 
-	 */
 	static {
 		try {
 			Properties p = PropertiesLoaderUtils
@@ -62,11 +50,6 @@ public class PasswordManagerImpl implements PasswordManager {
 		}
 	}
 
-	/**
-	 * @todo
-	 * @param plain
-	 * @return
-	 */
 	@Override
 	public boolean meetsRecommendation(String plain) {
 		/* 8 characters or more; atleast one majuscule, minuscule,
@@ -74,22 +57,6 @@ public class PasswordManagerImpl implements PasswordManager {
 		return plain.matches(passwordRegex);
 	}
 
-	/**
-	 * @todo
-	 * @param one
-	 * @param two
-	 * @return
-	 */
-	@Override
-	public boolean test(String one, String two) {
-		return one.equals(two);
-	}
-
-	/**
-	 * @todo
-	 * @param plain
-	 * @return
-	 */
 	@Override
 	public String hash(String plain) {
 		MessageDigest md = null;

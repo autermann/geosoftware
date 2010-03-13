@@ -20,28 +20,28 @@ package org.sloth.persistence.impl;
 import java.util.Collection;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaQuery;
-import org.sloth.persistence.ObservationCategorieDao;
-import org.sloth.model.ObservationCategorie;
+import org.sloth.persistence.CategorieDao;
+import org.sloth.model.Categorie;
 
-public class ObservationCategorieDaoImpl extends EntityManagerDao implements
-		ObservationCategorieDao {
+public class CategorieDaoImpl extends EntityManagerDao implements
+		CategorieDao {
 
 	@Override
-	public Collection<ObservationCategorie> getAll() {
-		CriteriaQuery<ObservationCategorie> cq = getEntityManager().
-				getCriteriaBuilder().createQuery(ObservationCategorie.class);
-		cq.select(cq.from(ObservationCategorie.class));
-		Collection<ObservationCategorie> list = getEntityManager().createQuery(
+	public Collection<Categorie> getAll() {
+		CriteriaQuery<Categorie> cq = getEntityManager().
+				getCriteriaBuilder().createQuery(Categorie.class);
+		cq.select(cq.from(Categorie.class));
+		Collection<Categorie> list = getEntityManager().createQuery(
 				cq).getResultList();
 		logger.info("Getting all ObservationCategories; Found: {}", list.size());
 		return list;
 	}
 
 	@Override
-	public ObservationCategorie get(long id) {
+	public Categorie get(long id) {
 		logger.info("Searching for ObservationCategorie with Id: {}", id);
-		ObservationCategorie oc = getEntityManager().find(
-				ObservationCategorie.class, id);
+		Categorie oc = getEntityManager().find(
+				Categorie.class, id);
 		if (oc != null) {
 			logger.info(
 					"Found ObservationCategorie with Id {}; Title: {}; Description: {}",
@@ -54,19 +54,19 @@ public class ObservationCategorieDaoImpl extends EntityManagerDao implements
 	}
 
 	@Override
-	public void update(ObservationCategorie oc) {
+	public void update(Categorie oc) {
 		logger.info("Updating ObservationCategorie with Id: {}", oc.getId());
 		getEntityManager().merge(oc);
 	}
 
 	@Override
-	public void delete(ObservationCategorie oc) {
+	public void delete(Categorie oc) {
 		logger.info("Deleting ObservationCategorie with Id: {}", oc.getId());
 		getEntityManager().remove(oc);
 	}
 
 	@Override
-	public void save(ObservationCategorie oc) {
+	public void save(Categorie oc) {
 		EntityManager em = getEntityManager();
 		em.persist(oc);
 		logger.info("Persisting ObservationCategorie; Generated Id is: {}", oc.

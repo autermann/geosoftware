@@ -1,23 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	   xmlns:aop="http://www.springframework.org/schema/aop"
-	   xmlns:jee="http://www.springframework.org/schema/jee"
-	   xmlns:util="http://www.springframework.org/schema/util"
-	   xmlns:tx="http://www.springframework.org/schema/tx"
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	   xmlns:context="http://www.springframework.org/schema/context"
 	   xsi:schemaLocation="
-	   http://www.springframework.org/schema/beans		http://www.springframework.org/schema/beans/spring-beans.xsd
-	   http://www.springframework.org/schema/tx			http://www.springframework.org/schema/tx/spring-tx.xsd
-	   http://www.springframework.org/schema/context	http://www.springframework.org/schema/context/spring-context.xsd
-	   http://www.springframework.org/schema/aop		http://www.springframework.org/schema/aop/spring-aop.xsd
-	   http://www.springframework.org/schema/util		http://www.springframework.org/schema/util/spring-util.xsd
-	   http://www.springframework.org/schema/jee		http://www.springframework.org/schema/jee/spring-jee.xsd">
+	   http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans.xsd
+	   http://www.springframework.org/schema/context
+	   http://www.springframework.org/schema/context/spring-context.xsd">
 
 
-	<!-- Scan for annotated Controllers -->
 	<context:component-scan base-package="org.sloth.web"/>
-
 	<!--
 	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
 		<property name="webBindingInitializer">
@@ -25,8 +17,6 @@
 		</property>
 	</bean>
 	-->
-
-	<!-- mapping for error pages -->
 	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<property name="exceptionMappings">
 			<props>
@@ -36,73 +26,19 @@
 			</props>
 		</property>
 	</bean>
-
-
-
-	<!--
-		The BeanNameViewResolver is used to pick up the visits view name (below).
-		It has the order property set to 2, which means that this will
-		be the first view resolver to be used after the delegating content
-		negotiating view resolver.
-	 -->
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
 		<property name="order" value="1"/>
 	</bean>
-
-	<!--
-		mapp all view names to the corresponding jsp's in /WEB-INF/jsp:
-			/user -> /WEB-INF/user.jsp
-	-->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
 		<property name="order" value="2" />
 	</bean>
-
-	<!-- messages -->
 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
 		<property name="basename" value="messages" />
 	</bean>
 
-	<bean class="org.sloth.service.impl.PasswordManagerImpl" />
-	<bean class="org.sloth.service.impl.ObservationManagerImpl" />
-	<bean class="org.sloth.service.impl.UserManagerImpl" />
-
-	<bean class="org.sloth.service.validator.UserValidator"/>
-	<bean class="org.sloth.service.validator.ObservationValidator"/>
-	<bean class="org.sloth.service.validator.UserRightValidator"/>
-	<bean class="org.sloth.service.validator.ObservationCategorieValidator"/>
+	<import resource="sloth/services.xml"/>
+	<import resource="sloth/validators.xml"/>
 
 </beans>
-
-
-<!-- NO NEED FOR AN ATOM-FEED
-
-- This view resolver delegates to the InternalResourceViewResolver and BeanNameViewResolver,
-- and uses the requested media type to pick a matching view. When the media type is 'text/html',
-- it will delegate to the InternalResourceViewResolver's JstlView, otherwise to the
-- BeanNameViewResolver. Note the use of the expression language to refer to the contentType
-- property of the vets view bean, setting it to 'application/vnd.springsource.samples.petclinic+xml'.
-
-<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
-<property name="mediaTypes">
-<map>
-<entry key="xml" value="#{vets.contentType}"/>
-<entry key="atom" value="#{visits.contentType}"/>
-</map>
-</property>
-<property name="order" value="0"/>
-</bean>
-- The AtomView rendering a Atom feed of the visits
-
-<bean id="visits" class="org.springframework.samples.petclinic.web.VisitsAtomView"/>
-
-<bean id="vets" class="org.springframework.web.servlet.view.xml.MarshallingView">
-<property name="contentType" value="application/vnd.springsource.samples.petclinic+xml"/>
-<property name="marshaller" ref="marshaller"/>
-</bean>
-
-<oxm:jaxb2-marshaller id="marshaller">
-<oxm:class-to-be-bound name="org.springframework.samples.petclinic.Vets"/>
-</oxm:jaxb2-marshaller>
--->

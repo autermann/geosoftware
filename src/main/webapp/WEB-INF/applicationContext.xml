@@ -41,10 +41,6 @@
 
 	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
-
-	<bean class="org.sloth.persistence.impl.UserDaoImpl" />
-	<bean class="org.sloth.persistence.impl.UserRightDaoImpl" />
-	<bean class="org.sloth.persistence.impl.ObservationDaoImpl" />
-	<bean class="org.sloth.persistence.impl.ObservationCategorieDaoImpl" />
+	<import resource="sloth/daos.xml"/>
 </beans>
 

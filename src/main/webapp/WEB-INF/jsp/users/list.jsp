@@ -8,7 +8,7 @@
 				<fmt:message key="user.id"/>
 			</th>
 			<th>
-				<fmt:message key="user.eMail"/>
+				<fmt:message key="user.mail"/>
 			</th>
 		</tr>
 		<c:forEach var="user" items="${users}">
@@ -19,7 +19,7 @@
 					</a>
 				</td>
 				<td>
-					${user.eMail}
+					${user.mail}
 				</td>
 			</tr>
 		</c:forEach>

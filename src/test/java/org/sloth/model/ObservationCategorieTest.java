@@ -23,7 +23,7 @@ import org.junit.Test;
 
 public class ObservationCategorieTest {
 
-    private ObservationCategorie a, b, c;
+    private Categorie a, b, c;
     private final String titleA = "Title of A";
     private final String titleB = "Title of A";
     private final String titleC = "Title of C";
@@ -33,13 +33,13 @@ public class ObservationCategorieTest {
 
     @Before
     public void setUp() throws Exception {
-        a = new ObservationCategorie();
-        b = new ObservationCategorie();
-        c = new ObservationCategorie();
+        a = new Categorie();
+        b = new Categorie();
+        c = new Categorie();
     }
 
     /**
-     * Test of getTitle and setTitle method, of class ObservationCategorie.
+     * Test of getTitle and setTitle method, of class Categorie.
      */
     @Test
     public void testGetTitle() {
@@ -56,7 +56,7 @@ public class ObservationCategorieTest {
 
     /**
      * Test of getDescription and setDescription method,
-     * of class ObservationCategorie.
+     * of class Categorie.
      */
     @Test
     public void testGetDescription() {
@@ -72,7 +72,7 @@ public class ObservationCategorieTest {
     }
 
     /**
-     * Test of equals method, of class ObservationCategorie.
+     * Test of equals method, of class Categorie.
      */
     @Test
     public void testEquals() {
@@ -89,7 +89,7 @@ public class ObservationCategorieTest {
     }
 
     /**
-     * Test of hashCode method, of class ObservationCategorie.
+     * Test of hashCode method, of class Categorie.
      */
     @Test
     public void testHashCode() {
@@ -102,7 +102,7 @@ public class ObservationCategorieTest {
     }
 
     /**
-     * Test of toString method, of class ObservationCategorie.
+     * Test of toString method, of class Categorie.
      */
     @Test
     public void testToString() {
@@ -112,7 +112,7 @@ public class ObservationCategorieTest {
     }
 
     /**
-     * Test of getId method, of class ObservationCategorie.
+     * Test of getId method, of class Categorie.
      */
     @Test
     public void testGetId() {
@@ -124,7 +124,7 @@ public class ObservationCategorieTest {
     }
 
     /**
-     * Test of setId method, of class ObservationCategorie.
+     * Test of setId method, of class Categorie.
      */
     @Test
     public void testSetId() {
@@ -135,7 +135,7 @@ public class ObservationCategorieTest {
     }
 
     /**
-     * Test of isNew method, of class ObservationCategorie.
+     * Test of isNew method, of class Categorie.
      */
     @Test
     public void testIsNew() {

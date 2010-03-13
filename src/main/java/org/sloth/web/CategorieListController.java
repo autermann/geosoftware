@@ -21,8 +21,7 @@ import java.util.Collection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sloth.model.Observation;
-import org.sloth.model.ObservationCategorie;
-import org.sloth.service.ObservationManager;
+import org.sloth.service.ObservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,14 +44,14 @@ public class CategorieListController {
 	protected final static Logger logger = LoggerFactory.getLogger(
 			CategorieListController.class);
 	@Autowired
-	private ObservationManager observationManager;
+	private ObservationService observationManager;
 
 	/**
 	 *
 	 * @todo
 	 * @param userManager
 	 */
-	public void setobservationManager(ObservationManager observationManager) {
+	public void setobservationManager(ObservationService observationManager) {
 		this.observationManager = observationManager;
 	}
 
@@ -61,7 +60,7 @@ public class CategorieListController {
 	 * @todo
 	 * @return
 	 */
-	protected ObservationManager getObservationManager() {
+	protected ObservationService getObservationManager() {
 		return this.observationManager;
 	}
 

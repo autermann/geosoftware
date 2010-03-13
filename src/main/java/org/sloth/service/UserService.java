@@ -15,57 +15,27 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.sloth.persistence;
+package org.sloth.service;
 
 import java.util.Collection;
-import org.sloth.model.UserRight;
+import org.sloth.model.User;
 
-/**
- * @todo
- * @author auti
- */
-public interface UserRightDao {
+public interface UserService {
 
-	/**
-	 * @todo
-	 * @return
-	 */
-	public Collection<UserRight> getAll();
+	public Collection<User> getUsers();
 
-	/**
-	 * @todo
-	 * @param id
-	 * @return
-	 */
-	public UserRight get(int id);
+	public User get(String mail);
 
-	/**
-	 * @todo
-	 * @param t
-	 */
-	public void update(UserRight t);
+	public User get(long id);
 
-	/**
-	 * @todo
-	 * @param t
-	 */
-	public void delete(UserRight t);
+	public void update(User u);
 
-	/**
-	 * @todo
-	 * @param t
-	 */
-	public void save(UserRight t);
+	public void delete(long id);
 
-	/**
-	 * @todo
-	 */
-	public void flush();
+	public void delete(User user);
 
-	/**
-	 * @todo
-	 * @param id
-	 */
-	public void delete(int id);
+	public void registrate(User u);
+
+	public User login(Login login);
 
 }
