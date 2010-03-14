@@ -22,6 +22,8 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
@@ -32,20 +34,18 @@ import org.eclipse.persistence.annotations.ObjectTypeConverter;
 import static javax.persistence.TemporalType.TIMESTAMP;
 
 /**
- * Representing a user. Every user has an unique ID, an eMail adress, a name, 
+ * Representing a user. Every user has an unique ID, an mail adress, a name,
  * family name and a password. It stores also the date of creation and the
- * rights of the user.
+ * group of the user.
  * 
  * @author Christian Autermann
- * @see
- * @since 1.0
- * @version 1.0
+ * @see Group
  */
 @Entity
 public class User implements Serializable {
 
 	/**
-	 * @todo
+	 * @see Serializable
 	 */
 	@Transient
 	static final long serialVersionUID = -9018246759776935301L;
@@ -63,22 +63,24 @@ public class User implements Serializable {
 	@Temporal(TIMESTAMP)
 	@Column(nullable = false, name = "CREATION_DATE")
 	private Date creationDate;
-	@ObjectTypeConverter(name = "group", objectType = Group.class, dataType = String.class, conversionValues = {
+/*	@ObjectTypeConverter(name = "group", objectType = Group.class, dataType = String.class, conversionValues = {
 		@ConversionValue(objectValue = "ADMIN", dataValue = "A"),
 		@ConversionValue(objectValue = "USER", dataValue = "U"),
 		@ConversionValue(objectValue = "GUEST", dataValue = "G")})
 	@Basic
 	@Convert("group")
+*/
 	@Column(name="USER_GROUP")
+	@Enumerated(EnumType.STRING)
 	private Group userGroup;
 
 	/**
-	 * @todo
-	 * @param mail
-	 * @param name
-	 * @param familyName
-	 * @param password
-	 * @param group
+	 * Creates a new User, while setting the corresponfig values.
+	 * @param mail the mail address
+	 * @param name the name
+	 * @param familyName the family name
+	 * @param password the password
+	 * @param group the group
 	 */
 	public User(String mail, String name, String familyName, String password,
 				Group group) {
@@ -89,6 +91,7 @@ public class User implements Serializable {
 		setFamilyName(familyName);
 		setUserGroup(group);
 	}
+
 
 	/**
 	 * Creates a new <code>User</code> with <code>-1</code> as <code>>id</code>
@@ -141,17 +144,17 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @return the hashedPassword
+	 * @return the password
 	 */
 	public String getPassword() {
 		return password;
 	}
 
 	/**
-	 * @param hashedPassword the hashedPassword to set
+	 * @param password the password to set
 	 */
-	public void setPassword(String hashedPassword) {
-		this.password = hashedPassword;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	/**
@@ -181,17 +184,12 @@ public class User implements Serializable {
 	@Override
 	public int hashCode() {
 		int hash = 5;
-		hash = 37 * hash + (int) this.getId();
-		hash = 37 * hash + (this.getMail() != null ? this.getMail().hashCode()
-							: 0);
-		hash = 37 * hash + (this.getName() != null ? this.getName().hashCode()
-							: 0);
-		hash = 37 * hash + (this.getFamilyName() != null ? this.getFamilyName().
-				hashCode() : 0);
-		hash = 37 * hash + (this.getPassword() != null ? this.getPassword().
-				hashCode() : 0);
-		hash = 37 * hash + (this.getCreationDate() != null ? this.
-				getCreationDate().hashCode() : 0);
+		hash = 37 * hash + (int) getId();
+		hash = 37 * hash + (getMail() != null ? getMail().hashCode() : 0);
+		hash = 37 * hash + (getName() != null ? getName().hashCode() : 0);
+		hash = 37 * hash + (getFamilyName() != null ? getFamilyName().hashCode() : 0);
+		hash = 37 * hash + (getPassword() != null ?	getPassword().hashCode() : 0);
+		hash = 37 * hash + (getCreationDate() != null ? getCreationDate().hashCode() : 0);
 		return hash;
 	}
 
@@ -222,24 +220,25 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @todo
-	 * @return
+	 * Returns 0 if the id is <code>null</code> and the id otherwise
+	 * @return the id
 	 */
 	public long getId() {
 		return (this.id == null) ? 0 : this.id;
 	}
 
 	/**
-	 * @todo
-	 * @param id
+	 * @param id the id
 	 */
 	public void setId(long id) {
 		this.id = id;
 	}
 
 	/**
-	 * @todo
-	 * @return
+	 * Returns wether the User has an Id.
+	 * @return <code>true</code> if the id is
+	 * <code>null</code> and <code>false</code>
+	 * otherwise.
 	 */
 	public boolean isNew() {
 		return (this.id == null);

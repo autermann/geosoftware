@@ -73,8 +73,7 @@ public class CategorieDaoImpl extends EntityManagerDao implements
 				getId());
 	}
 
-	@Override
-	public void flush() {
+	private void flush() {
 		logger.info("Flushing EntityManager");
 		getEntityManager().flush();
 	}

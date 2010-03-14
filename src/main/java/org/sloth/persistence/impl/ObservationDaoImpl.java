@@ -18,9 +18,14 @@
 package org.sloth.persistence.impl;
 
 import java.util.Collection;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import org.sloth.model.Categorie;
+import org.sloth.model.User;
 import org.sloth.persistence.ObservationDao;
 import org.sloth.model.Observation;
+import org.sloth.model.Observation_;
 
 /**
  * @todo
@@ -29,10 +34,6 @@ import org.sloth.model.Observation;
 public class ObservationDaoImpl extends EntityManagerDao implements
 		ObservationDao {
 
-	/**
-	 * @todo
-	 * @return
-	 */
 	@Override
 	public Collection<Observation> getAll() {
 		CriteriaQuery<Observation> cq = getEntityManager().getCriteriaBuilder().
@@ -44,71 +45,82 @@ public class ObservationDaoImpl extends EntityManagerDao implements
 		return list;
 	}
 
-	/**
-	 * @todo
-	 * @param id
-	 * @return
-	 */
 	@Override
 	public Observation get(long id) {
 		logger.info("Searching for Observation with Id: {}", id);
 		Observation o = getEntityManager().find(Observation.class, id);
 		if (o != null) {
-			logger.info(
-					"Found Observation with Id {}; Title: {}; Description: {}", new Object[]{o.
-						getId(), o.getTitle(), o.getDescription()});
+			logger.info("Found Observation with Id {}; Title: {}; Description: {}",
+					new Object[]{o.getId(), o.getTitle(), o.getDescription()});
 		} else {
 			logger.info("Can't find Observation with Id {}", id);
 		}
 		return o;
 	}
 
-	/**
-	 * @todo
-	 * @param o
-	 */
 	@Override
 	public void save(Observation o) {
+		if (o == null)
+			throw new NullPointerException();
 		getEntityManager().persist(o);
 		logger.info("Persisting Observation; Generated Id is: {}", o.getId());
 	}
 
-	/**
-	 * @todo
-	 * @param o
-	 */
 	@Override
 	public void update(Observation o) {
+		if (o == null)
+			throw new NullPointerException();
+		if (o.isNew())
+			throw new IllegalArgumentException();
 		logger.info("Updating Observation with Id: {}", o.getId());
 		getEntityManager().merge(o);
 	}
 
-	/**
-	 * @todo
-	 * @param id
-	 */
-	@Override
-	public void delete(long id) {
-		delete(get(id));
-	}
-
-	/**
-	 * @todo
-	 * @param o
-	 */
 	@Override
 	public void delete(Observation o) {
+		if (o == null)
+			throw new NullPointerException();
 		logger.info("Deleting Observation with Id: {}", o.getId());
 		getEntityManager().remove(o);
 	}
 
-	/**
-	 * @todo
-	 */
 	@Override
-	public void flush() {
-		logger.info("Flushing EntityManager");
-		getEntityManager().flush();
+	public Collection<Observation> get(Categorie c) throws NullPointerException, IllegalArgumentException {
+		if (c == null)
+			throw new NullPointerException();
+		CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
+		CriteriaQuery<Observation> cq = cb.createQuery(Observation.class);
+		Root<Observation> o = cq.from(Observation.class);
+		cq.select(o);
+		cq.where(cb.equal(o.get(Observation_.categorie), c));
+		Collection<Observation> result = getEntityManager().createQuery(cq).
+				getResultList();
+		if (result.isEmpty()) {
+			logger.info("No Observations in Categorie {} found", c);
+		} else {
+			logger.info("{} Observations in Categorie {}.", result.size(), c);
+			return null;
+		}
+		return result;
 	}
 
+	@Override
+	public Collection<Observation> get(User u) throws NullPointerException, IllegalArgumentException {
+		if (u == null)
+			throw new NullPointerException();
+		CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
+		CriteriaQuery<Observation> cq = cb.createQuery(Observation.class);
+		Root<Observation> o = cq.from(Observation.class);
+		cq.select(o);
+		cq.where(cb.equal(o.get(Observation_.user), u));
+		Collection<Observation> result = getEntityManager().createQuery(cq).
+				getResultList();
+		if (result.isEmpty()) {
+			logger.info("No Observations by User {} found", u);
+		} else {
+			logger.info("{} Observations by User {}.", result.size(), u);
+			return null;
+		}
+		return result;
+	}
 }

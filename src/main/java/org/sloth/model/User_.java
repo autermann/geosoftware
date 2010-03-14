@@ -18,17 +18,58 @@
 package org.sloth.model;
 
 import java.util.Date;
+import javax.persistence.Entity;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
+/**
+ * Metamodel class for the {@link Entity} {@link User}
+ * @see User
+ * @author Christian Autermann
+ */
 @StaticMetamodel(User.class)
 public class User_ {
 
+	/**
+	 * Metamodel-Attribute for {@link User#id}
+	 * @see User#getId()
+	 * @see User#setId(long)
+	 */
 	public static volatile SingularAttribute<User, Long> id;
+	/**
+	 * Metamodel-Attribute for {@link User#mail}
+	 * @see User#getMail()
+	 * @see User#setMail(java.lang.String)
+	 */
 	public static volatile SingularAttribute<User, String> mail;
+	/**
+	 * Metamodel-Attribute for {@link User#name}
+	 * @see User#getName()
+	 * @see User#setName(java.lang.String)
+	 */
 	public static volatile SingularAttribute<User, String> name;
+	/**
+	 * Metamodel-Attribute for {@link User#familyName}
+	 * @see User#getFamilyName()
+	 * @see User#setFamilyName(java.lang.String)
+	 */
 	public static volatile SingularAttribute<User, String> familyName;
+	/**
+	 * Metamodel-Attribute for {@link User#password}
+	 * @see User#getPassword()
+	 * @see User#setPassword(java.lang.String)
+	 */
 	public static volatile SingularAttribute<User, String> password;
+	/**
+	 * Metamodel-Attribute for {@link User#creationDate}
+	 * @see User#getCreationDate()
+	 * @see User#setCreationDate(java.util.Date)
+	 */
 	public static volatile SingularAttribute<User, Date> creationDate;
+	/**
+	 * Metamodel-Attribute for {@link User#userGroup}
+	 * @see User#getUserGroup()
+	 * @see User#setUserGroup(org.sloth.model.Group) 
+	 */
 	public static volatile SingularAttribute<User, Group> userGroup;
 }

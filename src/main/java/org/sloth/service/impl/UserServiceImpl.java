@@ -76,7 +76,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void delete(long id) {
-		getUserDao().delete(id);
+		getUserDao().delete(getUserDao().get(id));
 	}
 
 	@Override
@@ -87,6 +87,14 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void registrate(User u) {
 		u.setPassword(getPasswordService().hash(u.getPassword()));
+		logger.info("Registrating User: ID: {}, Mail: {}, Name: {}, FamilyName: {}, Password: {}, Group: {}", new Object[]{
+			u.getId(),
+			u.getMail(),
+			u.getName(),
+			u.getFamilyName(),
+			u.getPassword(),
+			u.getUserGroup()
+		});
 		getUserDao().save(u);
 	}
 

@@ -33,7 +33,7 @@ import javax.persistence.Transient;
 public class Coordinate implements Serializable {
 
 	/**
-	 * @todo
+	 * @see Serializable
 	 */
 	@Transient
 	static final long serialVersionUID = 6550470689926763724L;
@@ -43,7 +43,8 @@ public class Coordinate implements Serializable {
 	private double longitude;
 
 	/**
-	 * @todo
+	 * Creates a new Coordinate with 0 as default value for logitude
+	 * and latitude.
 	 */
 	public Coordinate() {
 	}
@@ -100,11 +101,9 @@ public class Coordinate implements Serializable {
 	public int hashCode() {
 		int hash = 5;
 		hash = 47 * hash + (int) (Double.doubleToLongBits(this.getLatitude())
-								  ^ (Double.doubleToLongBits(this.getLatitude())
-									 >>> 32));
+			^ (Double.doubleToLongBits(this.getLatitude()) >>> 32));
 		hash = 47 * hash + (int) (Double.doubleToLongBits(this.getLongitude())
-								  ^ (Double.doubleToLongBits(this.getLongitude())
-									 >>> 32));
+			^ (Double.doubleToLongBits(this.getLongitude()) >>> 32));
 		return hash;
 	}
 

@@ -87,11 +87,6 @@ public class ObservationServiceImpl implements ObservationService {
 	}
 
 	@Override
-	public void deleteObservation(int id) {
-		getObservationDao().delete(id);
-	}
-
-	@Override
 	public void deleteObservation(Observation observation) {
 		getObservationDao().delete(observation);
 	}
@@ -159,6 +154,11 @@ public class ObservationServiceImpl implements ObservationService {
 	@Override
 	public void registrate(Categorie categorie) {
 		getCategorieDao().save(categorie);
+	}
+
+	@Override
+	public void deleteObservation(int id) {
+		deleteCategorie(getCategorieDao().get(id));
 	}
 
 

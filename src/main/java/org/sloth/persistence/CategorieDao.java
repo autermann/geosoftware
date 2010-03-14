@@ -21,45 +21,49 @@ import java.util.Collection;
 import org.sloth.model.Categorie;
 
 /**
- * @todo
- * @author auti
+ * Data Access Object for {@link Categorie}.
+ * 
+ * @author Christian Autermann
  */
 public interface CategorieDao {
 
 	/**
-	 * @todo
-	 * @return
+	 * Query for all {@code Categorie}s.
+	 * @return all {@code Categorie}s found
 	 */
 	public Collection<Categorie> getAll();
 
 	/**
-	 * @todo
-	 * @param id
-	 * @return
+	 * Query for a {@code Categorie} with a known {@code id}.
+	 * @param id the id
+	 * @return the {@code Categorie} with the specified id, if no
+	 * matching {@code Categorie} found {@code null} is returned.
 	 */
 	public Categorie get(long id);
 
 	/**
-	 * @todo
-	 * @param t
+	 * Update a {@code Categorie}. Invoking this method with an {@code Categorie} not known by
+	 * the database will cause an {@code IllegalArgumentException}.
+	 * @param t the {@code Categorie} to be updated
+	 * @throws NullPointerException if {@code t} is {@code null}
+	 * @throws IllegalArgumentException if {@code t} is not found in the database.
 	 */
-	public void update(Categorie t);
+	public void update(Categorie t) throws NullPointerException, IllegalArgumentException;
 
 	/**
-	 * @todo
-	 * @param t
+	 * Delete a {@code Categorie} from database. Invoking this method with an {@code Categorie}
+	 * not known by the database will cause an {@code IllegalArgumentException}.
+	 * @param t the {@code Categorie} to be deleted
+	 * @throws NullPointerException if {@code t} is {@code null}
+	 * @throws IllegalArgumentException if {@code t} is not found in the database.
 	 */
-	public void delete(Categorie t);
+	public void delete(Categorie t) throws NullPointerException, IllegalArgumentException;
 
 	/**
-	 * @todo
-	 * @param t
+	 * Save a categorie in the database. {@link Categorie#id} will be generated.
+	 * @param t the {@code Categorie} to be saved
+	 * @throws NullPointerException if {@code t} is {@code null}
 	 */
-	public void save(Categorie t);
-
-	/**
-	 * @todo
-	 */
-	public void flush();
+	public void save(Categorie t) throws NullPointerException;
 
 }

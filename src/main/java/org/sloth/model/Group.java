@@ -18,48 +18,37 @@
 package org.sloth.model;
 
 /**
- * @todo
- * @author auti
+ * Class to indicate which Rights a User has.
+ * @see User
+ * @author Christian Autermann
  */
 public enum Group {
 
 	/**
-	 * @todo
+	 * Group indicating, that the user has normal rights.
 	 */
-	ADMIN(0),
+	USER,
 	/**
-	 * @todo
+	 * group indicating, that the user has wfs rights.
 	 */
-	USER(1),
+	WFS,
 	/**
-	 * @todo
+	 * Group incicating, that the user has admin rights.
 	 */
-	GUEST(2);
-	/**
-	 * @todo
-	 */
-	public final int ID;
-
-	private Group(int id) {
-		this.ID = id;
-	}
-
-	/**
-	 * 
-	 * @param id
-	 * @return
-	 */
-	public static Group fromInt(int id) {
-		switch(id) {
-			case 0:
-				return ADMIN;
-			case 1:
-				return USER;
-			case 2:
-				return GUEST;
+	ADMIN;
+	
+	@Override
+	public String toString() {
+		switch (this) {
+			case USER:
+				return "USER";
+			case WFS:
+				return "USER";
+			case ADMIN:
+				return "USER";
 			default:
-				return null;
+				return "unknown";
 		}
-	}
 
+	}
 }

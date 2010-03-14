@@ -21,58 +21,70 @@ import java.util.Collection;
 import org.sloth.model.User;
 
 /**
- * @todo
- * @author auti
+ * Data Access Object for {@link User}.
+ *	
+ * @author Christian Autermann
  */
 public interface UserDao {
 
 	/**
-	 * @todo
-	 * @return
+	 * Query for all {@code User}s.
+	 * 
+	 * @return all {@code User}s found
 	 */
 	public Collection<User> getAll();
 
 	/**
-	 * @todo
-	 * @param id
-	 * @return
+	 * Query for a {@code User} with a known {@code id}.
+	 *
+	 * @param id the id
+	 * @return the {@code User} with the specified id, if no 
+	 * matching {@code User} found {@code null} is returned.
 	 */
 	public User get(long id);
 
 	/**
-	 * @todo
-	 * @param t
+	 * Update a {@code User}. Invoking this method with an
+	 * {@code User} not known by the database will cause an
+	 * {@code IllegalArgumentException}.
+	 *
+	 * @param t	the {@code User} to be updated
+	 * @throws NullPointerException	if {@code t} is {@code null}
+	 * @throws IllegalArgumentException	if {@code t} is not found in
+	 * the database.
 	 */
-	public void update(User t);
+	public void update(User t)throws NullPointerException,
+			IllegalArgumentException;
 
 	/**
-	 * @todo
-	 * @param t
+	 * Delete a {@code User} from database. Invoking this method with an
+	 * {@code User} not known by the database will cause an
+	 * {@code IllegalArgumentException}.
+	 *
+	 * @param t the {@code User} to be deleted
+	 * @throws NullPointerException if {@code t} is {@code null}
+	 * @throws IllegalArgumentException if {@code t} is not found in the
+	 * database.
 	 */
-	public void delete(User t);
+	public void delete(User t)throws NullPointerException,
+			IllegalArgumentException;
 
 	/**
-	 * @todo
-	 * @param t
+	 * Save a {@code User} in the database. {@link User#id} will
+	 * be generated.
+	 *
+	 * @param t the {@code User} to be saved
+	 * @throws NullPointerException if {@code t} is {@code null}
 	 */
-	public void save(User t);
+	public void save(User t) throws NullPointerException;
 
 	/**
-	 * @todo
-	 */
-	public void flush();
-
-	/**
-	 * @todo
-	 * @param id
-	 */
-	public void delete(long id);
-
-	/**
-	 * @todo
-	 * @param mail
-	 * @return
+	 * Query for a {@code User} with known mail address.
+	 *
+	 * @param mail the {@code mail}-address
+	 * @return the matching {@code User}, or {@code null} if not found
+	 * @throws NullPointerException if {@code mail} is {@code null}
+	 * @throws IllegalArgumentException if {@code u} is not in the database.
 	 */
 	public User get(String mail);
-
 }

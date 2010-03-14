@@ -33,26 +33,18 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class UserDaoImpl extends EntityManagerDao implements UserDao {
 
-	/**
-	 * @todo
-	 * @return
-	 */
 	@Override
 	public Collection<User> getAll() {
-		CriteriaQuery<User> cq = getEntityManager().getCriteriaBuilder().
-				createQuery(User.class);
+		CriteriaQuery<User> cq = getEntityManager()
+				.getCriteriaBuilder().createQuery(User.class);
 		cq.select(cq.from(User.class));
-		Collection<User> list =
-						 getEntityManager().createQuery(cq).getResultList();
+		Collection<User> list = getEntityManager()
+				.createQuery(cq).getResultList();
 		logger.info("Getting all Users; Found: {}", list.size());
 		return list;
 	}
 
-	/**
-	 * @todo
-	 * @param id
-	 * @return
-	 */
+
 	@Override
 	public User get(long id) {
 		logger.info("Searching for Observation with Id: {}", id);
@@ -65,51 +57,42 @@ public class UserDaoImpl extends EntityManagerDao implements UserDao {
 		return u;
 	}
 
-	/**
-	 * @todo
-	 * @param u
-	 */
 	@Override
 	public void save(User u) {
+		if (u == null)
+			throw new NullPointerException();
+		logger.info("Registrating User: ID: {}, Mail: {}, Name: {}, FamilyName: {}, Password: {}, Group: {}", new Object[]{
+			u.getId(),
+			u.getMail(),
+			u.getName(),
+			u.getFamilyName(),
+			u.getPassword(),
+			u.getUserGroup()
+		});
 		getEntityManager().persist(u);
 		logger.info("Persisting User; Generated Id is: {}", u.getId());
 	}
 
-	/**
-	 * @todo
-	 * @param u
-	 */
 	@Override
 	public void update(User u) {
+		if (u == null)
+			throw new NullPointerException();
+		logger.info("Updating {}", u);
 		getEntityManager().merge(u);
 	}
 
-	/**
-	 * @todo
-	 * @param id
-	 */
-	@Override
-	public void delete(long id) {
-		delete(get(id));
-	}
-
-	/**
-	 * @todo
-	 * @param u
-	 */
 	@Override
 	public void delete(User u) {
+		if (u == null)
+			throw new NullPointerException();
 		logger.info("Deleting User with Id: {}", u.getId());
 		getEntityManager().remove(u);
 	}
 
-	/**
-	 * @todo
-	 * @param mail
-	 * @return
-	 */
 	@Override
 	public User get(String mail) {
+		if (mail == null)
+			throw new NullPointerException();
 		CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
 		CriteriaQuery<User> cq = cb.createQuery(User.class);
 		Root<User> user = cq.from(User.class);
@@ -127,15 +110,5 @@ public class UserDaoImpl extends EntityManagerDao implements UserDao {
 					size(), mail);
 			return null;
 		}
-
 	}
-
-	/**
-	 * @todo
-	 */
-	@Override
-	public void flush() {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
-
 }

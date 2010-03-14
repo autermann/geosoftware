@@ -18,54 +18,88 @@
 package org.sloth.persistence;
 
 import java.util.Collection;
+import org.sloth.model.Categorie;
 import org.sloth.model.Observation;
+import org.sloth.model.User;
 
 /**
- * @todo
- * @author auti
+ * Data Access Object for {@link Observation}.
+ *
+ * @author Christian Autermann
  */
 public interface ObservationDao {
 
 	/**
-	 * @todo
-	 * @return
+	 * Query for all {@code Observation}s.
+	 *
+	 * @return all {@code Observation}s found
 	 */
 	public Collection<Observation> getAll();
 
 	/**
-	 * @todo
-	 * @param id
-	 * @return
+	 * Query for a {@code Observation} with a known {@code id}.
+	 *
+	 * @param id the id
+	 * @return the {@code Observation} with the specified id, if no
+	 * matching {@code Observation} found {@code null} is returned.
 	 */
 	public Observation get(long id);
 
 	/**
-	 * @todo
-	 * @param t
+	 * Update a {@code Observation}. Invoking this method with an 
+	 * {@code Observation} not known by the database will cause an
+	 * {@code IllegalArgumentException}.
+	 *
+	 * @param t the {@code Observation} to be updated
+	 * @throws NullPointerException if {@code t} is {@code null}
+	 * @throws IllegalArgumentException if {@code t} is not found in
+	 * the database.
 	 */
-	public void update(Observation t);
+	public void update(Observation t) throws NullPointerException,
+			IllegalArgumentException;
 
 	/**
-	 * @todo
-	 * @param t
+	 * Delete a {@code Observation} from database. Invoking this method with an 
+	 * {@code Observation} not known by the database will cause an
+	 * {@code IllegalArgumentException}.
+	 *
+	 * @param t the {@code Observation} to be deleted
+	 * @throws NullPointerException if {@code t} is {@code null}
+	 * @throws IllegalArgumentException if {@code t} is not found in the
+	 * database.
 	 */
-	public void delete(Observation t);
+	public void delete(Observation t) throws NullPointerException,
+			IllegalArgumentException;
+
 
 	/**
-	 * @todo
-	 * @param t
+	 * Save a {@code Observation} in the database. {@link Observation#id} will
+	 * be generated.
+	 *
+	 * @param t the {@code Observation} to be saved
+	 * @throws NullPointerException if {@code t} is {@code null}
 	 */
-	public void save(Observation t);
+	public void save(Observation t) throws NullPointerException;
 
 	/**
-	 * @todo
+	 * Query for all {@code Observation}s in a {@code Categorie}.
+	 *
+	 * @param c the {@code Categorie}
+	 * @return all {@code Observation}s in {@code c}
+	 * @throws NullPointerException if {@code c} is {@code null}
+	 * @throws IllegalArgumentException if {@code c} is not in the database.
 	 */
-	public void flush();
+	public Collection<Observation> get(Categorie c) throws NullPointerException,
+			IllegalArgumentException;
 
 	/**
-	 * @todo
-	 * @param id
+	 * Query for all {@code Observation}s created by a {@code User}.
+	 * 
+	 * @param u the {@code User}
+	 * @return all {@code Observation}s created by {@code u}
+	 * @throws NullPointerException if {@code u} is {@code null}
+	 * @throws IllegalArgumentException if {@code u} is not in the database.
 	 */
-	public void delete(long id);
-
+	public Collection<Observation> get(User u) throws NullPointerException,
+			IllegalArgumentException;
 }

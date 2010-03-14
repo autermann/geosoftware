@@ -22,37 +22,43 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * @todo
- * @author auti
+ * Abstract class for Data Acccess Objects using an {@code EntityManager}
+ * 
+ * @see EntityManager
+ * @author Christian Autermann
  */
 @Transactional
+@Repository()
 public abstract class EntityManagerDao {
 
 	/**
-	 * @todo
+	 * {@code Logger}-Facade for this class and subclasses.
 	 */
 	protected static final Logger logger = LoggerFactory.getLogger(
 			EntityManagerDao.class);
 	private EntityManager entityManager;
 
 	/**
-	 * @todo
-	 * @param em
+	 * Sets the {@code EntityManager} fpr this class. Will be autowired.
+	 *
+	 * @param em the {@code EntityManager}
 	 */
 	@PersistenceContext(type = PersistenceContextType.EXTENDED)
 	public void setEntityManager(EntityManager em) {
+		logger.info("Setting EntityManager");
 		this.entityManager = em;
 	}
 
 	/**
-	 * @todo
-	 * @return
+	 * Returns the {@code EntityManager}.
+	 * 
+	 * @return the {@code EntityManager}
 	 */
 	protected EntityManager getEntityManager() {
 		return this.entityManager;
 	}
-
 }

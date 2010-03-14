@@ -25,7 +25,7 @@ import javax.persistence.Id;
 import javax.persistence.Transient;
 
 /**
- * Represents an non hierachical categorie for observations.
+ * Represents an non hierachical <code>Categorie</code> for Observation.
  *
  * @see Observation
  * @author Christian Autermann
@@ -36,7 +36,7 @@ import javax.persistence.Transient;
 public class Categorie implements Serializable {
 
 	/**
-	 * @todo
+	 * @see Serializable
 	 */
 	@Transient
 	static final long serialVersionUID = -3532326782916715208L;
@@ -49,17 +49,17 @@ public class Categorie implements Serializable {
 	private String description;
 
 	/**
-	 * @todo
-	 * @param title
-	 * @param description
+	 * Creates a new <code>Categorie</code> with specified title and description
+	 * @param title the title
+	 * @param description the description
 	 */
-	public Categorie(String title, String description){
+	public Categorie(String title, String description) {
 		setTitle(title);
 		setDescription(description);
 	}
 
 	/**
-	 * @todo
+	 * Creates a new <code>Categorie</code> with <code>null</code> as default value.
 	 */
 	public Categorie() {
 		/* nothing to do here */
@@ -107,10 +107,10 @@ public class Categorie implements Serializable {
 	public int hashCode() {
 		int hash = 7;
 		hash = 41 * hash + (int) this.getId();
-		hash = 41 * hash + (this.getTitle() != null ? this.getTitle().hashCode()
-							: 0);
-		hash = 41 * hash + (this.getDescription() != null ? this.getDescription().
-				hashCode() : 0);
+		hash = 41 * hash + (this.getTitle() != null ?
+			this.getTitle().hashCode() : 0);
+		hash = 41 * hash + (this.getDescription() != null ?
+			this.getDescription().hashCode() : 0);
 		return hash;
 	}
 
@@ -120,27 +120,27 @@ public class Categorie implements Serializable {
 	}
 
 	/**
-	 * @todo
-	 * @return
+	 * Returns 0 if the id is <code>null</code> and the id otherwise
+	 * @return the id
 	 */
 	public long getId() {
 		return (this.id == null) ? 0 : this.id;
 	}
 
 	/**
-	 * @todo
-	 * @param id
+	 * @param id the id
 	 */
 	public void setId(long id) {
 		this.id = id;
 	}
 
 	/**
-	 * @todo
-	 * @return
+	 * Returns wether the Categorie has an Id.
+	 * @return <code>true</code> if the id is 
+	 * <code>null</code> and <code>false</code>
+	 * otherwise.
 	 */
 	public boolean isNew() {
 		return (this.id == null);
 	}
-
 }
