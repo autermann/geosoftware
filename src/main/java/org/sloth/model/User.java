@@ -63,13 +63,6 @@ public class User implements Serializable {
 	@Temporal(TIMESTAMP)
 	@Column(nullable = false, name = "CREATION_DATE")
 	private Date creationDate;
-/*	@ObjectTypeConverter(name = "group", objectType = Group.class, dataType = String.class, conversionValues = {
-		@ConversionValue(objectValue = "ADMIN", dataValue = "A"),
-		@ConversionValue(objectValue = "USER", dataValue = "U"),
-		@ConversionValue(objectValue = "GUEST", dataValue = "G")})
-	@Basic
-	@Convert("group")
-*/
 	@Column(name="USER_GROUP")
 	@Enumerated(EnumType.STRING)
 	private Group userGroup;
