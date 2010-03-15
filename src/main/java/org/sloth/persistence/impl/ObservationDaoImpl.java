@@ -64,6 +64,7 @@ public class ObservationDaoImpl extends EntityManagerDao implements
 			throw new NullPointerException();
 		getEntityManager().persist(o);
 		logger.info("Persisting Observation; Generated Id is: {}", o.getId());
+		getEntityManager().flush();
 	}
 
 	@Override
@@ -74,6 +75,8 @@ public class ObservationDaoImpl extends EntityManagerDao implements
 			throw new IllegalArgumentException();
 		logger.info("Updating Observation with Id: {}", o.getId());
 		getEntityManager().merge(o);
+		getEntityManager().flush();
+
 	}
 
 	@Override
@@ -82,6 +85,8 @@ public class ObservationDaoImpl extends EntityManagerDao implements
 			throw new NullPointerException();
 		logger.info("Deleting Observation with Id: {}", o.getId());
 		getEntityManager().remove(o);
+		getEntityManager().flush();
+
 	}
 
 	@Override

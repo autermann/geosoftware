@@ -57,12 +57,16 @@ public class CategorieDaoImpl extends EntityManagerDao implements
 	public void update(Categorie oc) {
 		logger.info("Updating ObservationCategorie with Id: {}", oc.getId());
 		getEntityManager().merge(oc);
+		getEntityManager().flush();
+
 	}
 
 	@Override
 	public void delete(Categorie oc) {
 		logger.info("Deleting ObservationCategorie with Id: {}", oc.getId());
 		getEntityManager().remove(oc);
+		getEntityManager().flush();
+
 	}
 
 	@Override
@@ -71,11 +75,7 @@ public class CategorieDaoImpl extends EntityManagerDao implements
 		em.persist(oc);
 		logger.info("Persisting ObservationCategorie; Generated Id is: {}", oc.
 				getId());
-	}
-
-	private void flush() {
-		logger.info("Flushing EntityManager");
 		getEntityManager().flush();
-	}
 
+	}
 }

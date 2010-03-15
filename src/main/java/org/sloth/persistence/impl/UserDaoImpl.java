@@ -35,11 +35,9 @@ public class UserDaoImpl extends EntityManagerDao implements UserDao {
 
 	@Override
 	public Collection<User> getAll() {
-		CriteriaQuery<User> cq = getEntityManager()
-				.getCriteriaBuilder().createQuery(User.class);
+		CriteriaQuery<User> cq = getEntityManager().getCriteriaBuilder().createQuery(User.class);
 		cq.select(cq.from(User.class));
-		Collection<User> list = getEntityManager()
-				.createQuery(cq).getResultList();
+		Collection<User> list = getEntityManager().createQuery(cq).getResultList();
 		logger.info("Getting all Users; Found: {}", list.size());
 		return list;
 	}
@@ -70,6 +68,7 @@ public class UserDaoImpl extends EntityManagerDao implements UserDao {
 			u.getUserGroup()
 		});
 		getEntityManager().persist(u);
+		getEntityManager().flush();
 		logger.info("Persisting User; Generated Id is: {}", u.getId());
 	}
 
@@ -79,6 +78,7 @@ public class UserDaoImpl extends EntityManagerDao implements UserDao {
 			throw new NullPointerException();
 		logger.info("Updating {}", u);
 		getEntityManager().merge(u);
+		getEntityManager().flush();
 	}
 
 	@Override
@@ -87,6 +87,7 @@ public class UserDaoImpl extends EntityManagerDao implements UserDao {
 			throw new NullPointerException();
 		logger.info("Deleting User with Id: {}", u.getId());
 		getEntityManager().remove(u);
+		getEntityManager().flush();
 	}
 
 	@Override
