@@ -22,8 +22,6 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -36,16 +34,13 @@ import static javax.persistence.TemporalType.TIMESTAMP;
  * @author auti
  */
 @Entity
-public class Observation implements Serializable {
+public class Observation extends BaseEntity implements Serializable {
 
 	/**
 	 * @todo
 	 */
 	@Transient
 	static final long serialVersionUID = -2729214423734969225L;
-	@Id
-	@GeneratedValue
-	private Long id;
 	@Column(nullable = false)
 	private String title;
 	@Column(length = 1000, nullable = false)
@@ -222,30 +217,4 @@ public class Observation implements Serializable {
 		buf.append(")");
 		return buf.toString();
 	}
-
-	/**
-	 * Returns 0 if the id is <code>null</code> and the id otherwise
-	 * @return the id
-	 */
-	public long getId() {
-		return (this.id == null) ? 0 : this.id;
-	}
-
-	/**
-	 * @param id the id
-	 */
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	/**
-	 * Returns wether the Observation has an Id.
-	 * @return <code>true</code> if the id is
-	 * <code>null</code> and <code>false</code>
-	 * otherwise.
-	 */
-	public boolean isNew() {
-		return (this.id == null);
-	}
-
 }

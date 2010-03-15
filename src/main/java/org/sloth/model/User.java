@@ -19,18 +19,12 @@ package org.sloth.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.Transient;
-import org.eclipse.persistence.annotations.ConversionValue;
-import org.eclipse.persistence.annotations.Convert;
-import org.eclipse.persistence.annotations.ObjectTypeConverter;
 import static javax.persistence.TemporalType.TIMESTAMP;
 
 /**
@@ -42,16 +36,15 @@ import static javax.persistence.TemporalType.TIMESTAMP;
  * @see Group
  */
 @Entity
-public class User implements Serializable {
+public class User extends BaseEntity implements Serializable {
 
+	@Transient
+	public final static User DEFAULT = new User("-", "-", "-", "-", Group.USER);
 	/**
 	 * @see Serializable
 	 */
 	@Transient
 	static final long serialVersionUID = -9018246759776935301L;
-	@Id
-	@GeneratedValue
-	private Long id;
 	@Column(nullable = false, unique = true, name = "MAIL_ADDRESS")
 	private String mail;
 	@Column(nullable = false)
@@ -63,7 +56,7 @@ public class User implements Serializable {
 	@Temporal(TIMESTAMP)
 	@Column(nullable = false, name = "CREATION_DATE")
 	private Date creationDate;
-	@Column(name="USER_GROUP")
+	@Column(name = "USER_GROUP")
 	@Enumerated(EnumType.STRING)
 	private Group userGroup;
 
@@ -76,7 +69,7 @@ public class User implements Serializable {
 	 * @param group the group
 	 */
 	public User(String mail, String name, String familyName, String password,
-				Group group) {
+			Group group) {
 		setCreationDate(creationDate);
 		setMail(mail);
 		setName(name);
@@ -84,7 +77,6 @@ public class User implements Serializable {
 		setFamilyName(familyName);
 		setUserGroup(group);
 	}
-
 
 	/**
 	 * Creates a new <code>User</code> with <code>-1</code> as <code>>id</code>
@@ -181,7 +173,7 @@ public class User implements Serializable {
 		hash = 37 * hash + (getMail() != null ? getMail().hashCode() : 0);
 		hash = 37 * hash + (getName() != null ? getName().hashCode() : 0);
 		hash = 37 * hash + (getFamilyName() != null ? getFamilyName().hashCode() : 0);
-		hash = 37 * hash + (getPassword() != null ?	getPassword().hashCode() : 0);
+		hash = 37 * hash + (getPassword() != null ? getPassword().hashCode() : 0);
 		hash = 37 * hash + (getCreationDate() != null ? getCreationDate().hashCode() : 0);
 		return hash;
 	}
@@ -211,30 +203,4 @@ public class User implements Serializable {
 	public void setUserGroup(Group group) {
 		this.userGroup = group;
 	}
-
-	/**
-	 * Returns 0 if the id is <code>null</code> and the id otherwise
-	 * @return the id
-	 */
-	public long getId() {
-		return (this.id == null) ? 0 : this.id;
-	}
-
-	/**
-	 * @param id the id
-	 */
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	/**
-	 * Returns wether the User has an Id.
-	 * @return <code>true</code> if the id is
-	 * <code>null</code> and <code>false</code>
-	 * otherwise.
-	 */
-	public boolean isNew() {
-		return (this.id == null);
-	}
-
 }

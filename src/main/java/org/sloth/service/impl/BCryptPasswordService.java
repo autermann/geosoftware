@@ -15,14 +15,32 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.sloth.service;
+package org.sloth.service.impl;
 
-//TODO JavaDoc
-public interface PasswordService {
+import org.sloth.util.BCrypt;
+import org.springframework.stereotype.Service;
+import static org.sloth.util.BCrypt.*;
 
-	public boolean meetsRecommendation(String plain);
+/**
+ * Realizes the password hashing with an OpenBSD-style Blowfish password hashing
+ * algorithm using the scheme described in "A Future-Adaptable Password Scheme"
+ * by Niels Provos and David Mazieres.
+ *
+ * @see BCrypt
+ * @author Christian Autermann
+ */
+@Service
+public class BCryptPasswordService extends AbstractPasswordService {
 
-	public String hash(String plain);
+	public BCryptPasswordService(){}
 
-	public boolean check(String hash, String plain);
+	@Override
+	public String hash(String plain) {
+		return hashpw(plain, gensalt());
+	}
+
+	@Override
+	public boolean check(String hash, String plain) {
+		return checkpw(plain, hash);
+	}
 }

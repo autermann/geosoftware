@@ -21,17 +21,17 @@ import org.sloth.model.User;
 import org.sloth.service.Login;
 import org.sloth.service.UserService;
 import org.sloth.service.validator.LoginValidator;
-import org.sloth.service.validator.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 /**
  * @todo
@@ -39,6 +39,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 @RequestMapping("/")
+@SessionAttributes(types = User.class)
 public class LoginFormController {
 
 	@Autowired
@@ -87,7 +88,8 @@ public class LoginFormController {
 	@RequestMapping(method = RequestMethod.POST)
 	public String processSubmit(Model model,
 								@ModelAttribute Login login,
-								BindingResult result) {
+								BindingResult result,
+								SessionStatus status) {
 		loginValidator.validate(login, result);
 		if (result.hasErrors()) {
 			return "welcome";
@@ -97,6 +99,7 @@ public class LoginFormController {
 				result.reject("field.invalidLogin");
 			} else {
 				model.addAttribute("loginUser", dbUser);
+				status.setComplete();
 			}
 			return "welcome";
 		}

@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.util.Properties;
 import org.sloth.model.User;
 import org.sloth.service.PasswordService;
+import org.sloth.util.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.util.StringUtils;
@@ -37,7 +38,7 @@ public class UserValidator extends Validator<User> {
 	 * @todo
 	 */
 	protected static String mailRegex =
-							"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$";
+			"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$";
 	@Autowired
 	private PasswordService passwordManager;
 
@@ -45,18 +46,13 @@ public class UserValidator extends Validator<User> {
 	 * @todo
 	 */
 	static {
-		try {
-			Properties p = PropertiesLoaderUtils.loadAllProperties(
-					"regex.properties");
-			String s = p.getProperty("regex.mail");
-			if (s != null && StringUtils.hasText(s)) {
-				mailRegex = s;
-				logger.info("Setting new regex: {}", s);
-			} else {
-				logger.info("Using default regex.");
-			}
-		} catch(IOException ex) {
-			logger.warn("Using default regex", ex);
+		String regex = Configuration.getPropertie("mail.regex");
+
+		if (regex != null && StringUtils.hasText(regex)) {
+			mailRegex = regex;
+			logger.info("Setting new regex: {}", regex);
+		} else {
+			logger.info("Using default regex.");
 		}
 	}
 
@@ -98,5 +94,4 @@ public class UserValidator extends Validator<User> {
 			errors.rejectValue("eMail", "field.invalidMailAddress");
 		}
 	}
-
 }

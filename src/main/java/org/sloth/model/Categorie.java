@@ -20,8 +20,8 @@ package org.sloth.model;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Transient;
 
 /**
@@ -33,16 +33,16 @@ import javax.persistence.Transient;
  * @since 1.0
  */
 @Entity
-public class Categorie implements Serializable {
+public class Categorie extends BaseEntity implements Serializable {
+
+	@Transient
+	public static final Categorie DEFAULT = new Categorie("UNKNOWN", "UNKNOWN");
 
 	/**
 	 * @see Serializable
 	 */
 	@Transient
 	static final long serialVersionUID = -3532326782916715208L;
-	@Id
-	@GeneratedValue
-	private Long id;
 	@Column(nullable = false)
 	private String title;
 	@Column(length = 1000, nullable = false)
@@ -119,28 +119,10 @@ public class Categorie implements Serializable {
 		return this.getTitle();
 	}
 
-	/**
-	 * Returns 0 if the id is <code>null</code> and the id otherwise
-	 * @return the id
-	 */
-	public long getId() {
-		return (this.id == null) ? 0 : this.id;
-	}
-
-	/**
-	 * @param id the id
-	 */
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	/**
-	 * Returns wether the Categorie has an Id.
-	 * @return <code>true</code> if the id is 
-	 * <code>null</code> and <code>false</code>
-	 * otherwise.
-	 */
-	public boolean isNew() {
-		return (this.id == null);
+	@PrePersist
+	@PreUpdate
+	public void validate(){
+		if (getDescription().length() > 1000)
+			setDescription(getDescription().subSequence(0, 999).toString());
 	}
 }

@@ -18,7 +18,6 @@
 package org.sloth.model;
 
 import org.junit.After;
-import org.sloth.model.Coordinate;
 import org.junit.Before;
 import static org.junit.Assert.*;
 import org.junit.Test;

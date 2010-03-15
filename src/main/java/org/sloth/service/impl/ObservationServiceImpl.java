@@ -23,16 +23,16 @@ import java.util.LinkedList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sloth.persistence.ObservationDao;
-import org.sloth.model.Coordinate;
 import org.sloth.model.Observation;
 import org.sloth.model.Categorie;
-import org.sloth.model.User;
 import org.sloth.persistence.CategorieDao;
 import org.sloth.service.ObservationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import static java.lang.Character.toLowerCase;
 import static java.lang.Character.toUpperCase;
 
+@Service
 public class ObservationServiceImpl implements ObservationService {
 
 	protected static final Logger logger = LoggerFactory.getLogger(

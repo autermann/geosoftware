@@ -19,7 +19,7 @@ import org.eclipse.persistence.platform.database.HSQLPlatform;
 public class HsqlDbPlatform extends HSQLPlatform {
 
 	/**
-	 * Workaround for  https://bugs.eclipse.org/bugs/show_bug.cgi?id=240618.
+	 * Workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=240618.
 	 *
 	 * @return <code>false</code>.
 	 */
@@ -29,7 +29,7 @@ public class HsqlDbPlatform extends HSQLPlatform {
 	}
 
 	/**
-	 * Workaround for  https://bugs.eclipse.org/bugs/show_bug.cgi?id=240618.
+	 * Workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=240618.
 	 * <br />
 	 * Does nothing.
 	 */

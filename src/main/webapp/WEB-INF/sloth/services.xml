@@ -4,7 +4,7 @@
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans
 	   http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
-	<bean class="org.sloth.service.impl.PasswordServiceImpl" />
+	<bean class="org.sloth.service.impl.MD5PasswordService" />
 	<bean class="org.sloth.service.impl.ObservationServiceImpl" />
 	<bean class="org.sloth.service.impl.UserServiceImpl" />
 

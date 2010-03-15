@@ -26,8 +26,9 @@ import org.sloth.service.Login;
 import org.sloth.service.PasswordService;
 import org.sloth.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-//TODO JavaDoc
+@Service
 public class UserServiceImpl implements UserService {
 
 	protected static final Logger logger = LoggerFactory.getLogger(
@@ -101,8 +102,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User login(Login login) {
 		User u = get(login.getMail());
-		if (getPasswordService().hash(login.getPassword()).equals(
-				u.getPassword())) {
+		if (getPasswordService().check(u.getPassword(), login.getPassword())) {
 			return u;
 		} else {
 			return null;
