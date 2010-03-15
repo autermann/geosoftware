@@ -47,7 +47,6 @@ public abstract class AbstractPasswordService implements PasswordService {
 		NON_ALPHA_NUM = (nonalphanum == null) ? false : Boolean.valueOf(nonalphanum);
 
 		StringBuilder builder = new StringBuilder("^(?=.{");
-		builder.append("^(?=.{");
 		builder.append(LENGTH);
 		builder.append(",})");
 		if (DIGIT) builder.append("(?=.*[0-9])");
