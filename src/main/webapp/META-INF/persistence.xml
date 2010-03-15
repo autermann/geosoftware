@@ -23,9 +23,8 @@
 		<class>org.sloth.model.Categorie</class>
 		<class>org.sloth.model.User</class>
 		<class>org.sloth.model.Coordinate</class>
-		<!--<class>org.sloth.model.Group</class>-->
-		<exclude-unlisted-classes>false</exclude-unlisted-classes>
-
+		<class>org.sloth.model.Group</class>
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>
 			<property name="eclipselink.logging.level" value="SEVERE"/>
 			<property name="eclipselink.weaving" value="static"/>

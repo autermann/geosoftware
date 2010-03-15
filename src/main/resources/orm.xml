@@ -9,7 +9,7 @@
 	<persistence-unit-metadata>
 		<xml-mapping-metadata-complete/>
 		<persistence-unit-defaults>
-			<access>PROPERTY</access>
+			<access>FIELD</access>
 		</persistence-unit-defaults>
 	</persistence-unit-metadata>
 	<package>org.sloth.model</package>
@@ -18,7 +18,6 @@
 			<id name="id">
 				<generated-value strategy="IDENTITY"/>
 			</id>
-			<transient name="new"/>
 		</attributes>
 	</mapped-superclass>
 	<entity class="Categorie">
@@ -28,9 +27,9 @@
 				<column name="TITLE" nullable="false" />
 			</basic>
 			<basic name="description">
-				<column name="DESC" nullable="false" length="1000" />
+				<column name="DESCRIPTION" nullable="false" length="1000" />
 			</basic>
-			<transient name="DEFAULT"/>
+			<transient name="DEFAULT" />
 			<transient name="serialVersionUID"/>
 		</attributes>
 	</entity>
@@ -41,7 +40,7 @@
 				<column name="TITLE" nullable="false" />
 			</basic>
 			<basic name="description">
-				<column name="DESC" nullable="false" length="1000" />
+				<column name="DESCRIPTION" nullable="false" length="1000" />
 			</basic>
 			<basic name="creationDate">
 				<column name="CREATION_DATE" nullable="false"/>
@@ -73,22 +72,22 @@
 				<column name="CREATION_DATE" nullable="false"/>
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<enumerated name="userGroup" enum-type="STRING">
-				<column name="USER_GROUP" nullable="false" />
-			</enumerated>
+				<enumerated name="userGroup" enum-type="STRING">
+					<column name="USER_GROUP" nullable="false" />
+				</enumerated>
 			<transient name="DEFAULT" />
 			<transient name="serialVersionUID" />
 		</attributes>
 	</entity>
-	<embaddable class="Coordinate">
+	<embeddable class="Coordinate">
 		<attributes>
 			<basic name="longitude">
-				<column name="LON" nullable="false" />
+				<column name="LONGITUDE" nullable="false" />
 			</basic>
 			<basic name="latitude">
-				<column name="LAT" nullable="false" />
+				<column name="LATITUDE" nullable="false" />
 			</basic>
 			<transient name="serialVersionUID"/>
 		</attributes>
-	</embaddable>
+	</embeddable>
 </entity-mappings>
