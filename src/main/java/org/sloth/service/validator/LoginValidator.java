@@ -24,6 +24,11 @@ public class LoginValidator extends Validator<Login> {
 
 	@Override
 	public void validate(Login t, Errors errors) {
+		if (t == null) {
+			throw new NullPointerException("Can't validate null.");
+		} else {
+			logger.info("Validating: {}", t);
+		}
 		if (t.getMail() == null || t.getMail().trim().isEmpty()) {
 			errors.rejectValue("mail", "field.required");
 		}
@@ -31,4 +36,5 @@ public class LoginValidator extends Validator<Login> {
 			errors.rejectValue("password", "field.required");
 		}
 	}
+
 }

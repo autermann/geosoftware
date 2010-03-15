@@ -17,6 +17,9 @@
  */
 package org.sloth.web;
 
+import javax.servlet.http.HttpSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sloth.model.User;
 import org.sloth.service.Login;
 import org.sloth.service.UserService;
@@ -32,73 +35,65 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
 
-/**
- * @todo
- * @author auti
- */
+//TODO JavaDoc
 @Controller
 @RequestMapping("/")
-@SessionAttributes(types = User.class)
+@SessionAttributes(types = Login.class)
 public class LoginFormController {
 
-	@Autowired
-	private UserService userManager;
+	private Logger logger = LoggerFactory.getLogger(LoginFormController.class);
+
+	private UserService um;
 
 	@Autowired
-	private LoginValidator loginValidator;
-
-	/**
-	 * @todo
-	 */
-	public void setUserManager(UserService userManager) {
-		this.userManager = userManager;
+	public void setUserManager(UserService um) {
+		this.um = um;
 	}
 
-	/**
-	 * @todo
-	 */
-	public void setLoginValidator(LoginValidator loginValidator) {
-		this.loginValidator = loginValidator;
+	private LoginValidator lv;
+
+	@Autowired
+	public void setLoginValidator(LoginValidator lv) {
+		this.lv = lv;
 	}
 
-	/**
-	 * @todo
-	 * @param model
-	 * @return
-	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public String setupForm(Model model) {
-		model.addAttribute("login", new Login());
+	public String get(Model model) {
+		if (model.containsAttribute("login")){
+			logger.info("Returning the welcome page; using old login item.");
+		} else {
+			model.addAttribute("login", new Login());
+			logger.info("Returning the welcome page; using new login item.");
+		}
+
 		return "welcome";
 	}
 
-	/**
-	 * @todo
-	 * @param dataBinder
-	 */
 	@InitBinder
 	public void setAllowedFields(WebDataBinder dataBinder) {
-		dataBinder.setAllowedFields("eMail", "hashedPassword");
+		dataBinder.setAllowedFields("mail", "password");
 	}
 
-	/**
-	 * @todo
-	 */
 	@RequestMapping(method = RequestMethod.POST)
-	public String processSubmit(Model model,
-								@ModelAttribute Login login,
-								BindingResult result,
-								SessionStatus status) {
-		loginValidator.validate(login, result);
+	public String submit(@ModelAttribute Login login,
+						 BindingResult result,
+						 SessionStatus status,
+						 HttpSession session) {
+		lv.validate(login, result);
 		if (result.hasErrors()) {
+			logger.info("Login item has errors.");
 			return "welcome";
 		} else {
-			User dbUser = userManager.login(login);
+			logger.info("Login item seem to be ok. Testing the credentials.");
+			User dbUser = um.login(login);
 			if (dbUser == null) {
+				logger.info("no matching user found or password was wrong.");
 				result.reject("field.invalidLogin");
 			} else {
-				model.addAttribute("loginUser", dbUser);
+				logger.info("Got valid user. Setting Session-Attribute.");
+				session.setAttribute("loginUser", dbUser);
 				status.setComplete();
 			}
 			return "welcome";

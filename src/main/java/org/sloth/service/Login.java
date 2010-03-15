@@ -19,7 +19,6 @@ package org.sloth.service;
 
 /**
  * @todo
- * @author auti
  */
 public class Login {
 
@@ -52,4 +51,10 @@ public class Login {
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
+
+	@Override
+	public String toString() {
+		return "(" + this.mail + ":" + this.password + ")";
+	}
+
 }

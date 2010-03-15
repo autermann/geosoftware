@@ -92,8 +92,7 @@ public class UserDaoImpl extends EntityManagerDao implements UserDao {
 
 	@Override
 	public User get(String mail) {
-		if (mail == null)
-			throw new NullPointerException();
+		if (mail == null) throw new NullPointerException();
 		CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
 		CriteriaQuery<User> cq = cb.createQuery(User.class);
 		Root<User> user = cq.from(User.class);

@@ -88,22 +88,23 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void registrate(User u) {
 		u.setPassword(getPasswordService().hash(u.getPassword()));
-		logger.info("Registrating User: ID: {}, Mail: {}, Name: {}, FamilyName: {}, Password: {}, Group: {}", new Object[]{
-			u.getId(),
-			u.getMail(),
-			u.getName(),
-			u.getFamilyName(),
-			u.getPassword(),
-			u.getUserGroup()
-		});
+		logger.info(
+				"Registrating User: ID: {}, Mail: {}, Name: {}, FamilyName: {}, Password: {}, Group: {}", new Object[]{
+					u.getId(),
+					u.getMail(),
+					u.getName(),
+					u.getFamilyName(),
+					u.getPassword(),
+					u.getUserGroup()
+				});
 		getUserDao().save(u);
 	}
 
 	@Override
 	public User login(Login login) {
 		User u = get(login.getMail());
-		if (getPasswordService().check(u.getPassword(), login.getPassword())) {
-			return u;
+		if (u != null && getPasswordService().check(u.getPassword(), login.getPassword())) {
+				return u;
 		} else {
 			return null;
 		}

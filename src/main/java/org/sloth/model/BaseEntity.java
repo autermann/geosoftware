@@ -20,7 +20,6 @@ package org.sloth.model;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
@@ -29,7 +28,7 @@ import javax.persistence.MappedSuperclass;
 public abstract class BaseEntity {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue
 	private Long id;
 
 	/**
