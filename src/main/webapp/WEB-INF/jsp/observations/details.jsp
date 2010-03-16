@@ -25,7 +25,7 @@
 		<tr/>
                 <tr>
 			<td><fmt:message key="observation.observationCategorie"/>:</td>
-			<td>${observation.observationCategorie}</td>
+			<td>${observation.categorie}</td>
 		<tr/>
                     <tr>
 			<td><fmt:message key="observation.coordinate"/>:</td>

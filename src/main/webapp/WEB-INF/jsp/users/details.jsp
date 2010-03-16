@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/jsp/header.jsp" %>
 <div>
 	<h2><fmt:message key="user.details.title"/> <c:out value="${user.id}"/></h2>
-	<table border="1">
+        <table border="1">
 		<tr>
 			<td><fmt:message key="user.id"/>:</td>
 			<td><c:out value="${user.id}" default="-" /></td>

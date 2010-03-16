@@ -10,6 +10,9 @@
 			<th>
 				<fmt:message key="user.mail"/>
 			</th>
+                        <th>
+				<fmt:message key="user.edit"/>
+			</th>
 		</tr>
 		<c:forEach var="user" items="${users}">
 			<tr>
@@ -21,6 +24,12 @@
 				<td>
 					${user.mail}
 				</td>
+                                <td>
+					<a href="<spring:url value="/users/edit/${user.id}"/>">
+						Edit
+					</a>
+				</td>
+
 			</tr>
 		</c:forEach>
 	</table>

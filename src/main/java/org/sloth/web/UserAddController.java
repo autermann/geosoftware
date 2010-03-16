@@ -89,7 +89,7 @@ public class UserAddController {
 	}
 
 	/**
-	 * @param model 
+	 * @param model
 	 * @return
 	 * @todo
 	 * Beim Aufruf der Seite wird die GET-Methoder aufgerufen...
@@ -102,10 +102,10 @@ public class UserAddController {
 	}
 
 	/**
-	 * @param user 
+	 * @param user
 	 * @param result
 	 * @param status
-	 * @return 
+	 * @return
 	 * @todo
 	 * Beim Absenden des Formulars die POST-Methode...
 	 */
