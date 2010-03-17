@@ -2,8 +2,8 @@
 <%@ include file="/WEB-INF/jsp/includes.jsp" %>
 <%@ include file="/WEB-INF/jsp/header.jsp" %>
 <%@page import = "java.util.*" session="true"%>
-<div>
-    <div align="right">
+
+<div align="right">
         <c:choose>
             <c:when test="${sessionScope.loginUser == null}">
                 <form:form modelAttribute="login" method="POST">
@@ -20,16 +20,22 @@
             <c:otherwise>
                 <b>${sessionScope.loginUser.mail}</b>
                 <input type="submit" onclick="window.location='<spring:url value="/session/logout"/>'" value="<fmt:message key="logout.button"/>" /> <br>
-                <fmt:message key="login.button"/>:<%= new Date(session.getCreationTime())%><br>
-                <fmt:message key="last.access"/>:<%=new Date(session.getLastAccessedTime())%>
+                <fmt:message key="login.button"/>: <%= new Date(session.getCreationTime())%><br>
+                
 
             </c:otherwise>
         </c:choose>
-    </div>
-    <h2><fmt:message key="welcome"/></h2>
-    <ul>
-        <li><a href="<spring:url value="/users" htmlEscape="true" />"><fmt:message key="userManagement"/></a></li>
-        <li><a href="<spring:url value="/observations" htmlEscape="true" />"><fmt:message key="observationManagement"/></a></li>
-    </ul>
-</div>
-<%@ include file="/WEB-INF/jsp/footer.jsp" %>
+    </div> 
+    <div>
+             <h2><fmt:message key="welcome"/></h2>
+                 <ul>
+                    <li><a href="<spring:url value="/users" htmlEscape="true" />"><fmt:message key="userManagement"/></a></li>
+                    <li><a href="<spring:url value="/observations" htmlEscape="true" />"><fmt:message key="observationManagement"/></a></li>
+                </ul>
+            
+    </div> 
+                <%@ include file="/WEB-INF/jsp/map.jsp" %>
+   
+                <%@ include file="/WEB-INF/jsp/footer.jsp" %>
+    
+
