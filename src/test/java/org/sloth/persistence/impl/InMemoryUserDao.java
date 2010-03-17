@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth,
- * 					 Christoph Fendrich, Christian Paluschek
+ * Copyright (C) 2009-2010  Stefan Arndt, Christian Autermann, Dustin Demuth,
+ *                  Christoph Fendrich, Simon Ottenhues, Christian Paluschek
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,14 +15,27 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.sloth.service.impl;
+package org.sloth.persistence.impl;
 
-public class ObservationManagerImplTest {
-	/**
-	 * Test stub to prevent "no test found"-errors...
-	 */
-	@org.junit.Test(expected=UnsupportedOperationException.class)
-	public void stub(){
-		throw new UnsupportedOperationException("Not supported yet.");
+import java.util.Map.Entry;
+import org.sloth.model.BaseEntity;
+import org.sloth.model.User;
+import org.sloth.persistence.UserDao;
+
+/**
+ *
+ * @author auti
+ */
+public class InMemoryUserDao extends InMemoryDao<User> implements UserDao{
+
+	@Override
+	public User get(String mail) {
+		for (Entry<Long,User> entry : getEntrySet()) {
+			if (entry.getValue().getMail().equalsIgnoreCase(mail)) {
+				return entry.getValue();
+			}
+		}
+		return null;
 	}
+
 }

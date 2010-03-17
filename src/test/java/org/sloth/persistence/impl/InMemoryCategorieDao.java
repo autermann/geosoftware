@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth,
- * 					 Christoph Fendrich, Christian Paluschek
+ * Copyright (C) 2009-2010  Stefan Arndt, Christian Autermann, Dustin Demuth,
+ *                  Christoph Fendrich, Simon Ottenhues, Christian Paluschek
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,14 +15,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.sloth.service.impl;
+package org.sloth.persistence.impl;
 
-public class UserManagerImplTest {
-	/**
-	 * Test stub to prevent "no test found"-errors...
-	 */
-	@org.junit.Test(expected=UnsupportedOperationException.class)
-	public void stub(){
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
-}
+import org.sloth.model.Categorie;
+import org.sloth.persistence.CategorieDao;
+
+public class InMemoryCategorieDao extends InMemoryDao<Categorie> implements CategorieDao {}
