@@ -18,12 +18,19 @@
 package org.sloth.persistence.impl;
 
 import java.util.Collection;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import org.sloth.model.Group;
+import org.sloth.model.Observation;
 import org.sloth.persistence.UserDao;
 import org.sloth.model.User;
 import org.sloth.model.User_;
+import org.sloth.persistence.ObservationDao;
+import org.sloth.util.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -33,15 +40,34 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class UserDaoImpl extends EntityManagerDao implements UserDao {
 
+	@Autowired
+	private ObservationDao observationDao;
+
+	/**
+	 * @return the oDao
+	 */
+	public ObservationDao getObservationDao() {
+		return observationDao;
+	}
+
+	/**
+	 * @param observationDao the observationDao to set
+	 */
+	public void setObservationDao(ObservationDao observationDao) {
+		logger.info("getting the observation dao");
+		this.observationDao = observationDao;
+	}
+
 	@Override
 	public Collection<User> getAll() {
-		CriteriaQuery<User> cq = getEntityManager().getCriteriaBuilder().createQuery(User.class);
+		CriteriaQuery<User> cq = getEntityManager().getCriteriaBuilder().
+				createQuery(User.class);
 		cq.select(cq.from(User.class));
-		Collection<User> list = getEntityManager().createQuery(cq).getResultList();
+		Collection<User> list =
+						 getEntityManager().createQuery(cq).getResultList();
 		logger.info("Getting all Users; Found: {}", list.size());
 		return list;
 	}
-
 
 	@Override
 	public User get(long id) {
@@ -50,23 +76,19 @@ public class UserDaoImpl extends EntityManagerDao implements UserDao {
 		if (u != null) {
 			logger.info("Found User with Id {}", u.getId());
 		} else {
-			logger.info("Can't find Observation with Id {}", id);
+			logger.info("Can't find User with Id {}", id);
 		}
 		return u;
 	}
 
 	@Override
 	public void save(User u) {
-		if (u == null)
+		if (u == null) {
 			throw new NullPointerException();
-		logger.info("Registrating User: ID: {}, Mail: {}, Name: {}, FamilyName: {}, Password: {}, Group: {}", new Object[]{
-			u.getId(),
-			u.getMail(),
-			u.getName(),
-			u.getFamilyName(),
-			u.getPassword(),
-			u.getUserGroup()
-		});
+		}
+		logger.info(
+				"Registrating User: ID: {}, Mail: {}, Name: {}, FamilyName: {}, Password: {}, Group: {}", 
+				new Object[]{u.getId(), u.getMail(), u.getName(), u.getFamilyName(), u.getUserGroup()});
 		getEntityManager().persist(u);
 		getEntityManager().flush();
 		logger.info("Persisting User; Generated Id is: {}", u.getId());
@@ -74,8 +96,9 @@ public class UserDaoImpl extends EntityManagerDao implements UserDao {
 
 	@Override
 	public void update(User u) {
-		if (u == null)
+		if (u == null) {
 			throw new NullPointerException();
+		}
 		logger.info("Updating {}", u);
 		getEntityManager().merge(u);
 		getEntityManager().flush();
@@ -83,8 +106,23 @@ public class UserDaoImpl extends EntityManagerDao implements UserDao {
 
 	@Override
 	public void delete(User u) {
-		if (u == null)
+		if (u == null) {
 			throw new NullPointerException();
+		}
+		User newUser = getDefaultUser();
+		ObservationDao oDao = getObservationDao();
+		/*
+			argh!
+		 */
+		if (oDao == null) {
+			throw new NullPointerException();
+		}
+		Collection<Observation> obs = oDao.get(u);
+		logger.info("Replacing {} with {} in {} Observations", new Object[]{u, newUser, obs.size()});
+		for (Observation o : obs) {
+			o.setUser(newUser);
+			getObservationDao().update(o);
+		}
 		logger.info("Deleting User with Id: {}", u.getId());
 		getEntityManager().remove(u);
 		getEntityManager().flush();
@@ -92,23 +130,44 @@ public class UserDaoImpl extends EntityManagerDao implements UserDao {
 
 	@Override
 	public User get(String mail) {
-		if (mail == null) throw new NullPointerException();
+		if (mail == null) {
+			throw new NullPointerException();
+		}
 		CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
 		CriteriaQuery<User> cq = cb.createQuery(User.class);
 		Root<User> user = cq.from(User.class);
 		cq.select(user);
 		cq.where(cb.equal(user.get(User_.mail), mail));
-		Collection<User> result = getEntityManager().createQuery(cq).
-				getResultList();
-		if (result.size() == 1) {
-			return result.iterator().next();
-		} else if (result.isEmpty()) {
-			logger.info("User with eMail {} not found", mail);
-			return null;
-		} else {
-			logger.error("{} results for eMail {}. Corrupt Database?", result.
-					size(), mail);
-			return null;
+		User result = null;
+		try{
+			result = getEntityManager().createQuery(cq).getSingleResult();
+		} catch (NoResultException e) {
+			logger.info("User with address {} not found", mail);
+		} catch (NonUniqueResultException e) {
+			logger.warn("Corrupt Database", e);
 		}
+		return result;
 	}
+
+	private User defaultUser;
+
+	private User getDefaultUser() {
+		if (defaultUser == null) {
+			String mail = Configuration.getPropertie("default.user.mail");
+			String name = Configuration.getPropertie("default.user.name");
+			String fami = Configuration.getPropertie("default.user.familyName");
+			User tmp = get(mail);
+			if (tmp == null) {
+				defaultUser = new User((mail == null) ? "UNKNOWN" : mail,
+									   (name == null) ? "UNKNOWN" : name,
+									   (fami == null) ? "UNKNOWN" : fami,
+									   "", Group.USER);
+				save(defaultUser);
+			} else {
+				defaultUser = tmp;
+			}
+		}
+		return defaultUser;
+	}
+
 }

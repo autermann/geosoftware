@@ -1,8 +1,5 @@
 <%@ include file="/WEB-INF/jsp/includes.jsp" %>
 <%@ include file="/WEB-INF/jsp/header.jsp" %>
-
-
-
 <div>
 	<h2><fmt:message key="user.edit.title"/>: #${user.id}</h2>
 	<form:form modelAttribute="user">
@@ -33,9 +30,9 @@
 						<tr>
 							<td align="center" colspan="2">
 								<input type="submit" value="Update" />
-                                                                <input type="button" value="Cancel" onclick="window.location.href='<spring:url value="/users/"></spring:url>'">
-                                                                <input type="button" value="Delete" onclick="window.location.href='<spring:url value="/users/delete/${user.id}"></spring:url>'">
-                                                        </td>
+								<input type="button" value="Cancel" onclick="window.location.href='<spring:url value="/users/"></spring:url>'">
+								<input type="button" value="Delete" onclick="window.location.href='<spring:url value="/users/delete/${user.id}"></spring:url>'">
+							</td>
 						</tr>
 					</table>
 				</td>

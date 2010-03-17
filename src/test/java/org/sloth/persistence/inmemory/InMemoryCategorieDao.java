@@ -15,40 +15,24 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.sloth.model;
+package org.sloth.persistence.inmemory;
 
-/**
- * Class to indicate which Rights a User has.
- * @see User
- * @author Christian Autermann
- */
-public enum Group {
+import java.util.Map.Entry;
+import org.sloth.model.Categorie;
+import org.sloth.persistence.CategorieDao;
 
-	/**
-	 * Group indicating, that the user has normal rights.
-	 */
-	USER,
-	/**
-	 * group indicating, that the user has wfs rights.
-	 */
-	WFS,
-	/**
-	 * Group incicating, that the user has admin rights.
-	 */
-	ADMIN;
-	
+public class InMemoryCategorieDao extends InMemoryDao<Categorie> implements CategorieDao {
+
 	@Override
-	public String toString() {
-		switch (this) {
-			case USER:
-				return "USER";
-			case WFS:
-				return "WFS";
-			case ADMIN:
-				return "ADMIN";
-			default:
-				return "unknown";
+	public Categorie get(String title) {
+		if (title == null) {
+			throw new NullPointerException();
 		}
-
+		for (Entry<Long, Categorie> entry : getEntrySet()){
+			if (entry.getValue().getTitle().equals(title)) {
+				return entry.getValue();
+			}
+		}
+		return null;
 	}
 }

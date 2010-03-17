@@ -106,6 +106,9 @@ public class UserDeleteController {
 	public String processSubmit(@ModelAttribute User user, BindingResult result,
 								SessionStatus status) {
 		getUserValidator().validate(user, result);
+		if (user == null) {
+			throw new NullPointerException();
+		}
 		if (result.hasErrors()) {
 			return "redirect:/users";
 		} else {

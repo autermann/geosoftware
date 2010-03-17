@@ -25,6 +25,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Temporal;
 import javax.persistence.Transient;
+import org.sloth.util.Configuration;
 import static javax.persistence.TemporalType.TIMESTAMP;
 
 /**
@@ -38,9 +39,7 @@ import static javax.persistence.TemporalType.TIMESTAMP;
 @Entity
 public class User extends BaseEntity implements Serializable {
 
-	@Transient
-	public final static User DEFAULT = new User("-", "-", "-", "-", Group.USER);
-	/**
+	/*
 	 * @see Serializable
 	 */
 	@Transient
@@ -69,8 +68,8 @@ public class User extends BaseEntity implements Serializable {
 	 * @param group the group
 	 */
 	public User(String mail, String name, String familyName, String password,
-			Group group) {
-		setCreationDate(creationDate);
+				Group group) {
+		this();
 		setMail(mail);
 		setName(name);
 		setPassword(password);
@@ -172,9 +171,12 @@ public class User extends BaseEntity implements Serializable {
 		hash = 37 * hash + (int) getId();
 		hash = 37 * hash + (getMail() != null ? getMail().hashCode() : 0);
 		hash = 37 * hash + (getName() != null ? getName().hashCode() : 0);
-		hash = 37 * hash + (getFamilyName() != null ? getFamilyName().hashCode() : 0);
-		hash = 37 * hash + (getPassword() != null ? getPassword().hashCode() : 0);
-		hash = 37 * hash + (getCreationDate() != null ? getCreationDate().hashCode() : 0);
+		hash = 37 * hash + (getFamilyName() != null ? getFamilyName().hashCode()
+							: 0);
+		hash = 37 * hash
+			   + (getPassword() != null ? getPassword().hashCode() : 0);
+		hash = 37 * hash + (getCreationDate() != null ? getCreationDate().
+				hashCode() : 0);
 		return hash;
 	}
 
@@ -203,4 +205,5 @@ public class User extends BaseEntity implements Serializable {
 	public void setUserGroup(Group group) {
 		this.userGroup = group;
 	}
+
 }

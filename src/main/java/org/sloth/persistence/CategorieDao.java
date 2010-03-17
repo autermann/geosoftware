@@ -28,6 +28,16 @@ import org.sloth.model.Categorie;
 public interface CategorieDao {
 
 	/**
+	 * Returns the {@code Categorie} with given {@code title}.
+	 * 
+	 * @param title the title
+	 * @return the matching {@code Catgeorie} or {@code null}
+	 * @throws NullPointerException if {@code title} is {@code null}
+	 *
+	 */
+	public Categorie get(String title) throws NullPointerException;
+
+	/**
 	 * Query for all {@code Categorie}s.
 	 * 
 	 * @return all {@code Categorie}s found

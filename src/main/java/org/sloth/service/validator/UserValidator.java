@@ -17,13 +17,10 @@
  */
 package org.sloth.service.validator;
 
-import java.io.IOException;
-import java.util.Properties;
 import org.sloth.model.User;
 import org.sloth.service.PasswordService;
 import org.sloth.util.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import static org.springframework.validation.ValidationUtils.rejectIfEmptyOrWhitespace;
@@ -88,7 +85,7 @@ public class UserValidator extends Validator<User> {
 		rejectIfEmptyOrWhitespace(errors, "password", "field.required");
 		rejectIfEmptyOrWhitespace(errors, "mail", "field.required");
 		if (!getPasswordManager().meetsRecommendation(u.getPassword())) {
-			errors.rejectValue("hashedPassword", "field.badpassword");
+			errors.rejectValue("password", "field.badpassword");
 		}
 		if (!u.getMail().trim().matches(mailRegex)) {
 			errors.rejectValue("eMail", "field.invalidMailAddress");

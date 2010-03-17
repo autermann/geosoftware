@@ -17,7 +17,29 @@
  */
 package org.sloth.persistence.impl;
 
-import org.sloth.model.Categorie;
-import org.sloth.persistence.CategorieDao;
+import static junit.framework.Assert.*;
+import org.junit.Test;
+import org.sloth.persistence.UserDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
 
-public class InMemoryCategorieDao extends InMemoryDao<Categorie> implements CategorieDao {}
+@ContextConfiguration("UserDaoImplTest-context.xml")
+public class UserDaoImplTest extends JpaDaoTest {
+
+	@Autowired
+	private UserDao userDao;
+
+	@Test
+	public void selfTest(){
+		assertNotNull(userDao);
+	}
+			
+	protected UserDao getUserDao() {
+		return userDao;
+	}
+
+	public void setUserDao(UserDao userDao) {
+		this.userDao = userDao;
+	}
+
+}

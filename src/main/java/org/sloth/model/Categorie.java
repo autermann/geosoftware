@@ -23,6 +23,7 @@ import javax.persistence.Entity;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Transient;
+import org.sloth.util.Configuration;
 
 /**
  * Represents an non hierachical <code>Categorie</code> for Observation.
@@ -35,15 +36,12 @@ import javax.persistence.Transient;
 @Entity
 public class Categorie extends BaseEntity implements Serializable {
 
-	@Transient
-	public static final Categorie DEFAULT = new Categorie("UNKNOWN", "UNKNOWN");
-
 	/**
 	 * @see Serializable
 	 */
 	@Transient
 	static final long serialVersionUID = -3532326782916715208L;
-	@Column(nullable = false)
+	@Column(nullable = false, unique=true)
 	private String title;
 	@Column(length = 1000, nullable = false)
 	private String description;
@@ -107,10 +105,10 @@ public class Categorie extends BaseEntity implements Serializable {
 	public int hashCode() {
 		int hash = 7;
 		hash = 41 * hash + (int) this.getId();
-		hash = 41 * hash + (this.getTitle() != null ?
-			this.getTitle().hashCode() : 0);
-		hash = 41 * hash + (this.getDescription() != null ?
-			this.getDescription().hashCode() : 0);
+		hash = 41 * hash + (this.getTitle() != null ? this.getTitle().hashCode()
+							: 0);
+		hash = 41 * hash + (this.getDescription() != null ? this.getDescription().
+				hashCode() : 0);
 		return hash;
 	}
 
@@ -121,8 +119,10 @@ public class Categorie extends BaseEntity implements Serializable {
 
 	@PrePersist
 	@PreUpdate
-	public void validate(){
-		if (getDescription().length() > 1000)
+	public void validate() {
+		if (getDescription().length() > 1000) {
 			setDescription(getDescription().subSequence(0, 999).toString());
+		}
 	}
+
 }

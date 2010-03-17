@@ -18,7 +18,6 @@
 package org.sloth.util;
 
 import java.io.IOException;
-import java.util.Map.Entry;
 import java.util.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,16 +34,19 @@ public class Configuration {
 	public static String getPropertie(String key) {
 		if (props == null) {
 			try {
-				props = PropertiesLoaderUtils.loadAllProperties("config.properties");
+				logger.info("Loading configuration.");
+				props = PropertiesLoaderUtils.loadAllProperties("configuration.properties");
 			} catch (IOException ex) {
 				logger.warn("Can not load configuration", ex);
 				return null;
 			}
 		}
-		logger.info("Loading Configuration:");
+/*
 		for (Entry<Object, Object> e : props.entrySet()) {
 			logger.info("{} : {}", e.getKey(), e.getValue());
 		}
+
+ */
 		return props.getProperty(key);
 	}
 }

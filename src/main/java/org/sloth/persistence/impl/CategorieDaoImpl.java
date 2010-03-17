@@ -19,12 +19,40 @@ package org.sloth.persistence.impl;
 
 import java.util.Collection;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import org.sloth.persistence.CategorieDao;
 import org.sloth.model.Categorie;
+import org.sloth.model.Categorie_;
+import org.sloth.model.Observation;
+import org.sloth.persistence.ObservationDao;
+import org.sloth.util.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class CategorieDaoImpl extends EntityManagerDao implements
 		CategorieDao {
+
+	@Autowired
+	private ObservationDao observationDao;
+	private Categorie defaultCategorie;
+
+
+	/**
+	 * @return the oDao
+	 */
+	public ObservationDao getObservationDao() {
+		return observationDao;
+	}
+
+	/**
+	 * @param observationDao the observationDao to set
+	 */
+	public void setObservationDao(ObservationDao observationDao) {
+		this.observationDao = observationDao;
+	}
 
 	@Override
 	public Collection<Categorie> getAll() {
@@ -38,15 +66,33 @@ public class CategorieDaoImpl extends EntityManagerDao implements
 	}
 
 	@Override
+	public Categorie get(String title) {
+		if (title == null) {
+			throw new NullPointerException();
+		}
+		CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
+		CriteriaQuery<Categorie> cq = cb.createQuery(Categorie.class);
+		Root<Categorie> categorie = cq.from(Categorie.class);
+		cq.select(categorie);
+		cq.where(cb.equal(categorie.get(Categorie_.title), title));
+		Categorie result = null;
+		try{
+			result = getEntityManager().createQuery(cq).getSingleResult();
+		} catch (NoResultException e) {
+			logger.info("Categorie with Title {} not found", title);
+		} catch (NonUniqueResultException e) {
+			logger.warn("Corrupt Database", e);
+		}
+		return result;
+	}
+
+	@Override
 	public Categorie get(long id) {
 		logger.info("Searching for ObservationCategorie with Id: {}", id);
-		Categorie oc = getEntityManager().find(
-				Categorie.class, id);
+		Categorie oc = getEntityManager().find(Categorie.class, id);
 		if (oc != null) {
-			logger.info(
-					"Found ObservationCategorie with Id {}; Title: {}; Description: {}",
-						new Object[]{oc.getId(), oc.getTitle(), oc.
-						getDescription()});
+			logger.info("Found ObservationCategorie with Id {}; Title: {}; Description: {}",
+					new Object[]{oc.getId(), oc.getTitle(), oc.getDescription()});
 		} else {
 			logger.info("Can't find ObservationCategorie with Id {}", id);
 		}
@@ -63,6 +109,12 @@ public class CategorieDaoImpl extends EntityManagerDao implements
 
 	@Override
 	public void delete(Categorie oc) {
+		Categorie newCategorie = getDefaultCategorie();
+		logger.info("Replacing Categorie {} with default one.", oc);
+		for (Observation o : getObservationDao().get(oc)) {
+			o.setCategorie(newCategorie);
+			getObservationDao().update(o);
+		}
 		logger.info("Deleting ObservationCategorie with Id: {}", oc.getId());
 		getEntityManager().remove(oc);
 		getEntityManager().flush();
@@ -78,4 +130,21 @@ public class CategorieDaoImpl extends EntityManagerDao implements
 		getEntityManager().flush();
 
 	}
+
+	private Categorie getDefaultCategorie() {
+		if (defaultCategorie == null) {
+			String title = Configuration.getPropertie("default.categorie.title");
+			String descr = Configuration.getPropertie("default.categorie.description");
+			Categorie tmp = get(title);
+			if (tmp == null) {
+				defaultCategorie = new Categorie((title == null) ? "UNKNOWN" : title,
+												 (descr == null) ? "UNKNOWN" : descr);
+				save(defaultCategorie);
+			} else {
+				defaultCategorie = tmp;
+			}
+		}
+		return defaultCategorie;
+	}
+
 }

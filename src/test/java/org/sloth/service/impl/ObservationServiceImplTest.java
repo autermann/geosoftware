@@ -18,9 +18,13 @@
 package org.sloth.service.impl;
 
 import org.junit.Before;
-import org.sloth.model.*;
-import org.sloth.persistence.*;
-import org.sloth.persistence.impl.*;
+import org.sloth.model.Categorie;
+import org.sloth.model.Group;
+import org.sloth.model.User;
+import org.sloth.persistence.CategorieDao;
+import org.sloth.persistence.ObservationDao;
+import org.sloth.persistence.inmemory.InMemoryCategorieDao;
+import org.sloth.persistence.inmemory.InMemoryObservationDao;
 
 public class ObservationServiceImplTest {
 

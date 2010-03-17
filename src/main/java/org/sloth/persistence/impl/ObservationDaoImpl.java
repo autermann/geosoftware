@@ -17,7 +17,10 @@
  */
 package org.sloth.persistence.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -50,8 +53,9 @@ public class ObservationDaoImpl extends EntityManagerDao implements
 		logger.info("Searching for Observation with Id: {}", id);
 		Observation o = getEntityManager().find(Observation.class, id);
 		if (o != null) {
-			logger.info("Found Observation with Id {}; Title: {}; Description: {}",
-					new Object[]{o.getId(), o.getTitle(), o.getDescription()});
+			logger.info(
+					"Found Observation with Id {}; Title: {}; Description: {}",
+						new Object[]{o.getId(), o.getTitle(), o.getDescription()});
 		} else {
 			logger.info("Can't find Observation with Id {}", id);
 		}
@@ -60,8 +64,9 @@ public class ObservationDaoImpl extends EntityManagerDao implements
 
 	@Override
 	public void save(Observation o) {
-		if (o == null)
+		if (o == null) {
 			throw new NullPointerException();
+		}
 		getEntityManager().persist(o);
 		logger.info("Persisting Observation; Generated Id is: {}", o.getId());
 		getEntityManager().flush();
@@ -69,10 +74,12 @@ public class ObservationDaoImpl extends EntityManagerDao implements
 
 	@Override
 	public void update(Observation o) {
-		if (o == null)
+		if (o == null) {
 			throw new NullPointerException();
-		if (o.isNew())
+		}
+		if (o.isNew()) {
 			throw new IllegalArgumentException();
+		}
 		logger.info("Updating Observation with Id: {}", o.getId());
 		getEntityManager().merge(o);
 		getEntityManager().flush();
@@ -81,8 +88,9 @@ public class ObservationDaoImpl extends EntityManagerDao implements
 
 	@Override
 	public void delete(Observation o) {
-		if (o == null)
+		if (o == null) {
 			throw new NullPointerException();
+		}
 		logger.info("Deleting Observation with Id: {}", o.getId());
 		getEntityManager().remove(o);
 		getEntityManager().flush();
@@ -90,9 +98,11 @@ public class ObservationDaoImpl extends EntityManagerDao implements
 	}
 
 	@Override
-	public Collection<Observation> get(Categorie c) throws NullPointerException, IllegalArgumentException {
-		if (c == null)
+	public Collection<Observation> get(Categorie c) throws NullPointerException,
+														   IllegalArgumentException {
+		if (c == null) {
 			throw new NullPointerException();
+		}
 		CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
 		CriteriaQuery<Observation> cq = cb.createQuery(Observation.class);
 		Root<Observation> o = cq.from(Observation.class);
@@ -100,32 +110,24 @@ public class ObservationDaoImpl extends EntityManagerDao implements
 		cq.where(cb.equal(o.get(Observation_.categorie), c));
 		Collection<Observation> result = getEntityManager().createQuery(cq).
 				getResultList();
-		if (result.isEmpty()) {
-			logger.info("No Observations in Categorie {} found", c);
-		} else {
-			logger.info("{} Observations in Categorie {}.", result.size(), c);
-			return null;
-		}
+		logger.info("{} Observations in Categorie {}.", result.size(), c);
 		return result;
 	}
 
 	@Override
-	public Collection<Observation> get(User u) throws NullPointerException, IllegalArgumentException {
-		if (u == null)
+	public Collection<Observation> get(User u) throws NullPointerException,
+													  IllegalArgumentException {
+		if (u == null) {
 			throw new NullPointerException();
+		}
 		CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
 		CriteriaQuery<Observation> cq = cb.createQuery(Observation.class);
 		Root<Observation> o = cq.from(Observation.class);
 		cq.select(o);
 		cq.where(cb.equal(o.get(Observation_.user), u));
-		Collection<Observation> result = getEntityManager().createQuery(cq).
-				getResultList();
-		if (result.isEmpty()) {
-			logger.info("No Observations by User {} found", u);
-		} else {
-			logger.info("{} Observations by User {}.", result.size(), u);
-			return null;
-		}
+		Collection<Observation> result = getEntityManager().createQuery(cq).getResultList();
+		logger.info("{} Observations by User {}.", result.size(), u);
 		return result;
 	}
+
 }

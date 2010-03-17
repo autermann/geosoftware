@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.sloth.persistence.impl;
+package org.sloth.persistence.inmemory;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,7 +27,7 @@ import org.sloth.model.BaseEntity;
 
 public class InMemoryDao<T extends BaseEntity> {
 
-	private long count = 0;
+	private long count = 100;
 	private Hashtable<Long, T> database = new Hashtable<Long, T>();
 
 	protected Set<Entry<Long,T>> getEntrySet(){

@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.sloth.persistence.impl;
+package org.sloth.persistence.inmemory;
 
 import java.util.Map.Entry;
 import org.sloth.model.BaseEntity;
