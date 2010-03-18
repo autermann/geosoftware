@@ -66,7 +66,7 @@ public class ObservationDetailController {
 	 * @return
 	 */
 	@RequestMapping
-	public String setupForm(@PathVariable int id, Model model) {
+	public String setupForm(@PathVariable Long id, Model model) {
 		Observation o = getObservationManager().getObservation(id);
 		logger.info("Request of Details for Observation No. {}", id);
 		model.addAttribute("observation", o);

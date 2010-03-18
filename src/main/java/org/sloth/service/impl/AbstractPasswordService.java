@@ -20,7 +20,7 @@ package org.sloth.service.impl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sloth.service.PasswordService;
-import static org.sloth.util.Configuration.getPropertie;
+import static org.sloth.util.Config.getProperty;
 
 public abstract class AbstractPasswordService implements PasswordService {
 
@@ -34,11 +34,11 @@ public abstract class AbstractPasswordService implements PasswordService {
 	protected String REGEX;
 
 	public AbstractPasswordService() {
-		String length = getPropertie("password.length");
-		String digit = getPropertie("password.digit");
-		String lowercase = getPropertie("password.lowercase");
-		String uppercase = getPropertie("password.uppercase");
-		String nonalphanum = getPropertie("password.nonalphanum");
+		String length = getProperty("password.length");
+		String digit = getProperty("password.digit");
+		String lowercase = getProperty("password.lowercase");
+		String uppercase = getProperty("password.uppercase");
+		String nonalphanum = getProperty("password.nonalphanum");
 
 		LENGTH = (length == null) ? 1 : Integer.valueOf(length);
 		DIGIT = (digit == null) ? false : Boolean.valueOf(digit);

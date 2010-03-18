@@ -20,8 +20,13 @@ package org.sloth.persistence.impl;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
+import javax.persistence.metamodel.EntityType;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+import org.sloth.model.BaseEntity;
+import org.sloth.model.User;
+import org.sloth.persistence.Dao;
+import org.springframework.orm.jpa.support.JpaDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,8 +37,8 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Christian Autermann
  */
 @Transactional
-@Repository()
-public abstract class EntityManagerDao {
+@Repository
+public abstract class EntityManagerDao<T extends BaseEntity> {
 
 	/**
 	 * {@code Logger}-Facade for this class and subclasses.
@@ -60,5 +65,15 @@ public abstract class EntityManagerDao {
 	 */
 	protected EntityManager getEntityManager() {
 		return this.entityManager;
+	}
+
+	protected void isAttached(T t) throws NullPointerException,
+			IllegalArgumentException {
+		if (t == null) {
+			throw new NullPointerException();
+		}
+		if (!getEntityManager().contains(t)) {
+			throw new IllegalArgumentException();
+		}
 	}
 }

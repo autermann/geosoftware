@@ -61,7 +61,7 @@ public class ObservationServiceImpl implements ObservationService {
 	}
 
 	@Override
-	public Observation getObservation(int id) {
+	public Observation getObservation(Long id) {
 		return getObservationDao().get(id);
 	}
 
@@ -127,7 +127,7 @@ public class ObservationServiceImpl implements ObservationService {
 	}
 
 	@Override
-	public Categorie getCategorie(int id) {
+	public Categorie getCategorie(Long id) {
 		return null;
 	}
 
@@ -142,7 +142,7 @@ public class ObservationServiceImpl implements ObservationService {
 	}
 
 	@Override
-	public void deleteCategorie(int id) {
+	public void deleteCategorie(Long id) {
 		getCategorieDao().delete(getCategorie(id));
 	}
 
@@ -157,7 +157,7 @@ public class ObservationServiceImpl implements ObservationService {
 	}
 
 	@Override
-	public void deleteObservation(int id) {
+	public void deleteObservation(Long id) {
 		deleteCategorie(getCategorieDao().get(id));
 	}
 

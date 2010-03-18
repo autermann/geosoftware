@@ -40,11 +40,9 @@ public class UserTest {
 	 */
 	@Test
 	public void testGeteMail() {
-		System.out.println("getMail");
 		String expResult = null;
 		String result = aUser.getMail();
 		assertEquals(expResult, result);
-
 		aUser.setMail(eMailA);
 		assertEquals(eMailA, aUser.getMail());
 
@@ -55,7 +53,6 @@ public class UserTest {
 	 */
 	@Test
 	public void testSeteMail() {
-		System.out.println("setMail");
 		aUser.setMail(eMailA);
 		assertEquals(eMailA, aUser.getMail());
 	}
@@ -65,7 +62,6 @@ public class UserTest {
 	 */
 	@Test
 	public void testGetName() {
-		System.out.println("getName");
 		String expResult = null;
 		String result = aUser.getName();
 		assertEquals(expResult, result);
@@ -81,8 +77,6 @@ public class UserTest {
 	 */
 	@Test
 	public void testSetName() {
-		System.out.println("setName");
-
 		aUser.setName(nameA);
 		assertEquals(nameA, aUser.getName());
 	}
@@ -92,7 +86,6 @@ public class UserTest {
 	 */
 	@Test
 	public void testGetFamilyName() {
-		System.out.println("getFamilyName");
 		String expResult = null;
 		String result = aUser.getFamilyName();
 		assertEquals(expResult, result);
@@ -106,7 +99,6 @@ public class UserTest {
 	 */
 	@Test
 	public void testSetFamilyName() {
-
 		aUser.setFamilyName(familyNameA);
 		assertEquals(familyNameA, aUser.getFamilyName());
 	}
@@ -116,7 +108,6 @@ public class UserTest {
 	 */
 	@Test
 	public void testGetPassword() {
-		System.out.println("getHashedPassword");
 		String expResult = null;
 		String result = aUser.getPassword();
 		assertEquals(expResult, result);
@@ -140,11 +131,7 @@ public class UserTest {
 	 */
 	@Test
 	public void testGetCreationDate() {
-		System.out.println("getCreationDate");
-		Date expResult = new Date();
-		Date result = aUser.getCreationDate();
-		assertEquals(expResult, result);
-
+		assertNotNull(aUser.getCreationDate());
 	}
 
 	/**
@@ -152,7 +139,6 @@ public class UserTest {
 	 */
 	@Test
 	public void testSetCreationDate() {
-		System.out.println("setCreationDate");
 		Date creationDate = new Date();
 		aUser.setCreationDate(creationDate);
 		assertEquals(creationDate, aUser.getCreationDate());
@@ -163,18 +149,14 @@ public class UserTest {
 	 */
 	@Test
 	public void testEquals() {
-		System.out.println("Equals");
 		User bUser = new User();
 		User cUser = new User();
 		aUser.setFamilyName(familyNameA);
 		aUser.setName(nameA);
-
 		bUser.setFamilyName(familyNameA);
 		bUser.setName(nameA);
-
+		bUser.setCreationDate(aUser.getCreationDate());
 		cUser.setFamilyName(familyNameA);
-		cUser.setName("child");
-
 		assertTrue(!cUser.equals(aUser));
 		assertTrue(bUser.equals(aUser));
 
@@ -185,7 +167,6 @@ public class UserTest {
 	 */
 	@Test
 	public void testHashCode() {
-		System.out.println("HashCode");
 		User bUser = new User();
 		aUser.setFamilyName(familyNameA);
 		aUser.setName(nameA);
@@ -198,7 +179,6 @@ public class UserTest {
 	 */
 	@Test
 	public void testToString() {
-		System.out.println("toString");
 		aUser.setFamilyName(familyNameA);
 		aUser.setName(nameA);
 		aUser.setId(idA);
@@ -213,7 +193,6 @@ public class UserTest {
 	 */
 	@Test
 	public void testGetUserRight() {
-		System.out.println("getUserRight");
 		assertEquals(aUser.getUserGroup(), null);
 		aUser.setUserGroup(Group.USER);
 		assertEquals(aUser.getUserGroup(), Group.USER);
@@ -225,7 +204,6 @@ public class UserTest {
 	 */
 	@Test
 	public void testSetUserRight() {
-		System.out.println("setUserRight");
 		aUser.setUserGroup(Group.USER);
 		assertEquals(aUser.getUserGroup(), Group.USER);
 	}
@@ -235,9 +213,8 @@ public class UserTest {
 	 */
 	@Test
 	public void testGetId() {
-		System.out.println("getId");
-		long expResult = 0L;
-		long result = aUser.getId();
+		Long expResult = null;
+		Long result = aUser.getId();
 		assertEquals(expResult, result);
 
 		aUser.setId(idA);
@@ -252,7 +229,6 @@ public class UserTest {
 	 */
 	@Test
 	public void testSetId() {
-		System.out.println("setId");
 		aUser.setId(idA);
 		Long expResult = idA;
 		Long result = aUser.getId();
@@ -264,7 +240,6 @@ public class UserTest {
 	 */
 	@Test
 	public void testIsNew() {
-		System.out.println("isNew");
 		assertTrue(aUser.isNew());
 		aUser.setId(idA);
 		assertFalse(aUser.isNew());

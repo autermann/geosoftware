@@ -27,7 +27,7 @@ import org.sloth.model.BaseEntity;
 
 public class InMemoryDao<T extends BaseEntity> {
 
-	private long count = 100;
+	private Long count = 100L;
 	private Hashtable<Long, T> database = new Hashtable<Long, T>();
 
 	protected Set<Entry<Long,T>> getEntrySet(){
@@ -43,7 +43,7 @@ public class InMemoryDao<T extends BaseEntity> {
 		return col;
 	}
 
-	public T get(long id) {
+	public T get(Long id) {
 		return database.get(id);
 	}
 
@@ -52,7 +52,7 @@ public class InMemoryDao<T extends BaseEntity> {
 		if (t == null) {
 			throw new NullPointerException();
 		}
-		if (!database.containsKey(t.getId())) {
+		if (t.isNew() || !database.containsKey(t.getId())) {
 			throw new IllegalArgumentException();
 		}
 
@@ -65,7 +65,7 @@ public class InMemoryDao<T extends BaseEntity> {
 		if (t == null) {
 			throw new NullPointerException();
 		}
-		if (!database.containsKey(t.getId())) {
+		if (t.isNew() || !database.containsKey(t.getId())) {
 			throw new IllegalArgumentException();
 		}
 		database.remove(t.getId());
@@ -75,7 +75,7 @@ public class InMemoryDao<T extends BaseEntity> {
 		if (t == null) {
 			throw new NullPointerException();
 		}
-		if (database.containsKey(t.getId())) {
+		if (!t.isNew() && database.containsKey(t.getId())) {
 			throw new IllegalArgumentException();
 		}
 		t.setId(count++);

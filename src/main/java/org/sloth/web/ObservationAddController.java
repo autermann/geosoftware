@@ -18,7 +18,6 @@
 package org.sloth.web;
 
 
-// import org.sloth.model.Categorie;
 import org.sloth.model.Observation;
 import org.sloth.service.ObservationService;
 import org.sloth.service.validator.ObservationValidator;

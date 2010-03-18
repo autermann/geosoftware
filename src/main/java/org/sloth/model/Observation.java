@@ -182,8 +182,8 @@ public class Observation extends BaseEntity implements Serializable {
 	@Override
 	public int hashCode() {
 		int hash = 7;
-		hash = 59 * hash + (int) this.getId();
-		hash = 59 * hash + (this.getTitle() != null ? this.title.hashCode() : 0);
+		hash = 59 * hash + (this.getId() != null ? this.getId().hashCode() :0);
+		hash = 59 * hash + (this.getTitle() != null ? this.getTitle().hashCode() : 0);
 		hash = 59 * hash + (this.getDescription() != null ? this.getDescription().
 				hashCode() : 0);
 		hash = 59 * hash + (this.getUser() != null ? this.getUser().hashCode()

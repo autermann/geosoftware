@@ -29,27 +29,20 @@ import org.sloth.model.Categorie;
 import org.sloth.model.Categorie_;
 import org.sloth.model.Observation;
 import org.sloth.persistence.ObservationDao;
-import org.sloth.util.Configuration;
+import org.sloth.util.Config;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class CategorieDaoImpl extends EntityManagerDao implements
+public class CategorieDaoImpl extends EntityManagerDao<Categorie> implements
 		CategorieDao {
 
-	@Autowired
+	
 	private ObservationDao observationDao;
 	private Categorie defaultCategorie;
-
-
-	/**
-	 * @return the oDao
-	 */
-	public ObservationDao getObservationDao() {
-		return observationDao;
-	}
 
 	/**
 	 * @param observationDao the observationDao to set
 	 */
+	@Autowired
 	public void setObservationDao(ObservationDao observationDao) {
 		this.observationDao = observationDao;
 	}
@@ -87,7 +80,7 @@ public class CategorieDaoImpl extends EntityManagerDao implements
 	}
 
 	@Override
-	public Categorie get(long id) {
+	public Categorie get(Long id) {
 		logger.info("Searching for ObservationCategorie with Id: {}", id);
 		Categorie oc = getEntityManager().find(Categorie.class, id);
 		if (oc != null) {
@@ -101,6 +94,7 @@ public class CategorieDaoImpl extends EntityManagerDao implements
 
 	@Override
 	public void update(Categorie oc) {
+		isAttached(oc);
 		logger.info("Updating ObservationCategorie with Id: {}", oc.getId());
 		getEntityManager().merge(oc);
 		getEntityManager().flush();
@@ -109,11 +103,12 @@ public class CategorieDaoImpl extends EntityManagerDao implements
 
 	@Override
 	public void delete(Categorie oc) {
+		isAttached(oc);
 		Categorie newCategorie = getDefaultCategorie();
 		logger.info("Replacing Categorie {} with default one.", oc);
-		for (Observation o : getObservationDao().get(oc)) {
+		for (Observation o : observationDao.get(oc)) {
 			o.setCategorie(newCategorie);
-			getObservationDao().update(o);
+			observationDao.update(o);
 		}
 		logger.info("Deleting ObservationCategorie with Id: {}", oc.getId());
 		getEntityManager().remove(oc);
@@ -133,8 +128,8 @@ public class CategorieDaoImpl extends EntityManagerDao implements
 
 	private Categorie getDefaultCategorie() {
 		if (defaultCategorie == null) {
-			String title = Configuration.getPropertie("default.categorie.title");
-			String descr = Configuration.getPropertie("default.categorie.description");
+			String title = Config.getProperty("default.categorie.title");
+			String descr = Config.getProperty("default.categorie.description");
 			Categorie tmp = get(title);
 			if (tmp == null) {
 				defaultCategorie = new Categorie((title == null) ? "UNKNOWN" : title,

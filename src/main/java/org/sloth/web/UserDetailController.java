@@ -66,7 +66,7 @@ public class UserDetailController {
 	 * @return
 	 */
 	@RequestMapping
-	public String setupForm(@PathVariable long id, Model model) {
+	public String setupForm(@PathVariable Long id, Model model) {
 		User u = getUserManager().get(id);
 		logger.info("Request of Details for User {}", id);
 		model.addAttribute("user", u);

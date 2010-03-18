@@ -27,59 +27,7 @@ import org.sloth.model.User;
  *
  * @author Christian Autermann
  */
-public interface ObservationDao {
-
-	/**
-	 * Query for all {@code Observation}s.
-	 *
-	 * @return all {@code Observation}s found
-	 */
-	public Collection<Observation> getAll();
-
-	/**
-	 * Query for a {@code Observation} with a known {@code id}.
-	 *
-	 * @param id the id
-	 * @return the {@code Observation} with the specified id, if no
-	 * matching {@code Observation} found {@code null} is returned.
-	 */
-	public Observation get(long id);
-
-	/**
-	 * Update a {@code Observation}. Invoking this method with an 
-	 * {@code Observation} not known by the database will cause an
-	 * {@code IllegalArgumentException}.
-	 *
-	 * @param t the {@code Observation} to be updated
-	 * @throws NullPointerException if {@code t} is {@code null}
-	 * @throws IllegalArgumentException if {@code t} is not found in
-	 * the database.
-	 */
-	public void update(Observation t) throws NullPointerException,
-			IllegalArgumentException;
-
-	/**
-	 * Delete a {@code Observation} from database. Invoking this method with an 
-	 * {@code Observation} not known by the database will cause an
-	 * {@code IllegalArgumentException}.
-	 *
-	 * @param t the {@code Observation} to be deleted
-	 * @throws NullPointerException if {@code t} is {@code null}
-	 * @throws IllegalArgumentException if {@code t} is not found in the
-	 * database.
-	 */
-	public void delete(Observation t) throws NullPointerException,
-			IllegalArgumentException;
-
-
-	/**
-	 * Save a {@code Observation} in the database. {@link Observation#id} will
-	 * be generated.
-	 *
-	 * @param t the {@code Observation} to be saved
-	 * @throws NullPointerException if {@code t} is {@code null}
-	 */
-	public void save(Observation t) throws NullPointerException;
+public interface ObservationDao extends Dao<Observation> {
 
 	/**
 	 * Query for all {@code Observation}s in a {@code Categorie}.

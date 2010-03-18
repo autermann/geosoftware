@@ -56,4 +56,22 @@ public abstract class EntityFactory {
 		return c;
 	}
 
+	public static User getUser(Long id, Group g) {
+		User u = getUser(g);
+		u.setId(id);
+		return u;
+	}
+
+	public static Observation getObservation(Long id, Categorie c, User u) {
+		Observation o = getObservation(c, u);
+		o.setId(id);
+		return o;
+	}
+
+	public static Categorie getCategorie(Long id) {
+		Categorie c = getCategorie();
+		c.setId(id);
+		return c;
+	}
+
 }

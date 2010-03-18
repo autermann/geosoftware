@@ -17,7 +17,6 @@
  */
 package org.sloth.web;
 
-import org.sloth.model.Categorie;
 import org.sloth.model.Observation;
 import org.sloth.service.ObservationService;
 import org.sloth.service.validator.ObservationValidator;
@@ -100,7 +99,7 @@ public class ObservationEditController {
 	 * Beim Aufruf der Seite wird die GET-Methoder aufgerufen...
 	 */
 	@RequestMapping(method = GET)
-	public String setupForm(@PathVariable int id, Model model) {
+	public String setupForm(@PathVariable Long id, Model model) {
                 Observation observation = getObservationManager().getObservation(id);
                 logger.info("Edit of Details for Observation {}", id);
 		model.addAttribute("observation", observation);

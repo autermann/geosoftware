@@ -18,6 +18,7 @@
 package org.sloth.service.impl;
 
 import org.junit.Before;
+import org.junit.Test;
 import org.sloth.model.Categorie;
 import org.sloth.model.Group;
 import org.sloth.model.User;
@@ -65,9 +66,7 @@ public class ObservationServiceImplTest {
 	/**
 	 * Test stub to prevent "no test found"-errors...
 	 */
-	@org.junit.Test(expected = UnsupportedOperationException.class)
-	public void stub() {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
+	@Test
+	public void stub() {}
 
 }

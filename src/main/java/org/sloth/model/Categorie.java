@@ -23,7 +23,7 @@ import javax.persistence.Entity;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Transient;
-import org.sloth.util.Configuration;
+import org.sloth.util.Config;
 
 /**
  * Represents an non hierachical <code>Categorie</code> for Observation.
@@ -104,7 +104,7 @@ public class Categorie extends BaseEntity implements Serializable {
 	@Override
 	public int hashCode() {
 		int hash = 7;
-		hash = 41 * hash + (int) this.getId();
+		hash = 41 * hash + (this.getId() != null ? this.getId().hashCode() :0);
 		hash = 41 * hash + (this.getTitle() != null ? this.getTitle().hashCode()
 							: 0);
 		hash = 41 * hash + (this.getDescription() != null ? this.getDescription().

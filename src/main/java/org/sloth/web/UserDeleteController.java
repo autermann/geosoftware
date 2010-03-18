@@ -91,7 +91,7 @@ public class UserDeleteController {
 	}
 
         @RequestMapping(method = GET)
-	public String setupForm(@PathVariable long id, Model model) {
+	public String setupForm(@PathVariable Long id, Model model) {
                 User user = getUserManager().get(id);
                 logger.info("Edit of Details for User {}", id);
 		model.addAttribute("user", user);

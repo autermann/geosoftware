@@ -24,9 +24,9 @@ import org.sloth.model.Categorie;
 //TODO javadoc
 public interface ObservationService {
 
-	public Observation getObservation(int id);
+	public Observation getObservation(Long id);
 
-	public Categorie getCategorie(int id);
+	public Categorie getCategorie(Long id);
 
 	public Collection<Observation> getObservations();
 
@@ -36,13 +36,13 @@ public interface ObservationService {
 
 	public Collection<Categorie> getCategories();
 
-	public void deleteObservation(int id);
+	public void deleteObservation(Long id);
 
 	public void deleteObservation(Observation observation);
 
 	public void deleteCategorie(Categorie categorie);
 
-	public void deleteCategorie(int id);
+	public void deleteCategorie(Long id);
 
 	public void updateCategorie(Categorie categorie);
 

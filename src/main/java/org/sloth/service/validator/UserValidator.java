@@ -19,7 +19,7 @@ package org.sloth.service.validator;
 
 import org.sloth.model.User;
 import org.sloth.service.PasswordService;
-import org.sloth.util.Configuration;
+import org.sloth.util.Config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
@@ -43,7 +43,7 @@ public class UserValidator extends Validator<User> {
 	 * @todo
 	 */
 	static {
-		String regex = Configuration.getPropertie("mail.regex");
+		String regex = Config.getProperty("mail.regex");
 
 		if (regex != null && StringUtils.hasText(regex)) {
 			mailRegex = regex;
@@ -88,7 +88,7 @@ public class UserValidator extends Validator<User> {
 			errors.rejectValue("password", "field.badpassword");
 		}
 		if (!u.getMail().trim().matches(mailRegex)) {
-			errors.rejectValue("eMail", "field.invalidMailAddress");
+			errors.rejectValue("mail", "field.invalidMailAddress");
 		}
 	}
 }

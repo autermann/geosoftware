@@ -72,9 +72,9 @@
 				<column name="CREATION_DATE" nullable="false"/>
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-				<enumerated name="userGroup" enum-type="STRING">
-					<column name="USER_GROUP" nullable="false" />
-				</enumerated>
+			<enumerated name="userGroup" enum-type="STRING">
+				<column name="USER_GROUP" nullable="false" />
+			</enumerated>
 			<transient name="DEFAULT" />
 			<transient name="serialVersionUID" />
 		</attributes>

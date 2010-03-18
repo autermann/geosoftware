@@ -23,9 +23,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.Transient;
-import org.sloth.util.Configuration;
+import javax.persistence.UniqueConstraint;
 import static javax.persistence.TemporalType.TIMESTAMP;
 
 /**
@@ -37,6 +38,7 @@ import static javax.persistence.TemporalType.TIMESTAMP;
  * @see Group
  */
 @Entity
+@Table(uniqueConstraints=@UniqueConstraint(columnNames="MAIL_ADDRESS"))
 public class User extends BaseEntity implements Serializable {
 
 	/*
@@ -168,7 +170,7 @@ public class User extends BaseEntity implements Serializable {
 	@Override
 	public int hashCode() {
 		int hash = 5;
-		hash = 37 * hash + (int) getId();
+		hash = 37 * hash + (this.getId() != null ? this.getId().hashCode() :0);
 		hash = 37 * hash + (getMail() != null ? getMail().hashCode() : 0);
 		hash = 37 * hash + (getName() != null ? getName().hashCode() : 0);
 		hash = 37 * hash + (getFamilyName() != null ? getFamilyName().hashCode()

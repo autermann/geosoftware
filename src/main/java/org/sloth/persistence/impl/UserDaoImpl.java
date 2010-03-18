@@ -29,7 +29,7 @@ import org.sloth.persistence.UserDao;
 import org.sloth.model.User;
 import org.sloth.model.User_;
 import org.sloth.persistence.ObservationDao;
-import org.sloth.util.Configuration;
+import org.sloth.util.Config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,21 +38,14 @@ import org.springframework.transaction.annotation.Transactional;
  * @author auti
  */
 @Transactional
-public class UserDaoImpl extends EntityManagerDao implements UserDao {
+public class UserDaoImpl extends EntityManagerDao<User> implements UserDao {
 
-	@Autowired
 	private ObservationDao observationDao;
-
-	/**
-	 * @return the oDao
-	 */
-	public ObservationDao getObservationDao() {
-		return observationDao;
-	}
 
 	/**
 	 * @param observationDao the observationDao to set
 	 */
+	@Autowired
 	public void setObservationDao(ObservationDao observationDao) {
 		logger.info("getting the observation dao");
 		this.observationDao = observationDao;
@@ -70,7 +63,7 @@ public class UserDaoImpl extends EntityManagerDao implements UserDao {
 	}
 
 	@Override
-	public User get(long id) {
+	public User get(Long id) {
 		logger.info("Searching for Observation with Id: {}", id);
 		User u = getEntityManager().find(User.class, id);
 		if (u != null) {
@@ -83,12 +76,10 @@ public class UserDaoImpl extends EntityManagerDao implements UserDao {
 
 	@Override
 	public void save(User u) {
-		if (u == null) {
-			throw new NullPointerException();
-		}
 		logger.info(
 				"Registrating User: ID: {}, Mail: {}, Name: {}, FamilyName: {}, Password: {}, Group: {}", 
-				new Object[]{u.getId(), u.getMail(), u.getName(), u.getFamilyName(), u.getUserGroup()});
+				new Object[]{u.getId(), u.getMail(), u.getName(),
+				u.getFamilyName(), u.getUserGroup()});
 		getEntityManager().persist(u);
 		getEntityManager().flush();
 		logger.info("Persisting User; Generated Id is: {}", u.getId());
@@ -96,9 +87,7 @@ public class UserDaoImpl extends EntityManagerDao implements UserDao {
 
 	@Override
 	public void update(User u) {
-		if (u == null) {
-			throw new NullPointerException();
-		}
+		isAttached(u);
 		logger.info("Updating {}", u);
 		getEntityManager().merge(u);
 		getEntityManager().flush();
@@ -106,22 +95,14 @@ public class UserDaoImpl extends EntityManagerDao implements UserDao {
 
 	@Override
 	public void delete(User u) {
-		if (u == null) {
-			throw new NullPointerException();
-		}
+		isAttached(u);
 		User newUser = getDefaultUser();
-		ObservationDao oDao = getObservationDao();
-		/*
-			argh!
-		 */
-		if (oDao == null) {
-			throw new NullPointerException();
-		}
-		Collection<Observation> obs = oDao.get(u);
-		logger.info("Replacing {} with {} in {} Observations", new Object[]{u, newUser, obs.size()});
+		Collection<Observation> obs = observationDao.get(u);
+		logger.info("Replacing {} with {} in {} Observations",
+				new Object[]{u, newUser, obs.size()});
 		for (Observation o : obs) {
 			o.setUser(newUser);
-			getObservationDao().update(o);
+			observationDao.update(o);
 		}
 		logger.info("Deleting User with Id: {}", u.getId());
 		getEntityManager().remove(u);
@@ -153,9 +134,9 @@ public class UserDaoImpl extends EntityManagerDao implements UserDao {
 
 	private User getDefaultUser() {
 		if (defaultUser == null) {
-			String mail = Configuration.getPropertie("default.user.mail");
-			String name = Configuration.getPropertie("default.user.name");
-			String fami = Configuration.getPropertie("default.user.familyName");
+			String mail = Config.getProperty("default.user.mail");
+			String name = Config.getProperty("default.user.name");
+			String fami = Config.getProperty("default.user.familyName");
 			User tmp = get(mail);
 			if (tmp == null) {
 				defaultUser = new User((mail == null) ? "UNKNOWN" : mail,

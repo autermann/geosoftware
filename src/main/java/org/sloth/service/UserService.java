@@ -26,11 +26,11 @@ public interface UserService {
 
 	public User get(String mail);
 
-	public User get(long id);
+	public User get(Long id);
 
 	public void update(User u);
 
-	public void delete(long id);
+	public void delete(Long id);
 
 	public void delete(User user);
 

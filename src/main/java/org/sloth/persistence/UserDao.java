@@ -17,7 +17,6 @@
  */
 package org.sloth.persistence;
 
-import java.util.Collection;
 import org.sloth.model.User;
 
 /**
@@ -25,58 +24,7 @@ import org.sloth.model.User;
  *	
  * @author Christian Autermann
  */
-public interface UserDao {
-
-	/**
-	 * Query for all {@code User}s.
-	 * 
-	 * @return all {@code User}s found
-	 */
-	public Collection<User> getAll();
-
-	/**
-	 * Query for a {@code User} with a known {@code id}.
-	 *
-	 * @param id the id
-	 * @return the {@code User} with the specified id, if no 
-	 * matching {@code User} found {@code null} is returned.
-	 */
-	public User get(long id);
-
-	/**
-	 * Update a {@code User}. Invoking this method with an
-	 * {@code User} not known by the database will cause an
-	 * {@code IllegalArgumentException}.
-	 *
-	 * @param t	the {@code User} to be updated
-	 * @throws NullPointerException	if {@code t} is {@code null}
-	 * @throws IllegalArgumentException	if {@code t} is not found in
-	 * the database.
-	 */
-	public void update(User t)throws NullPointerException,
-			IllegalArgumentException;
-
-	/**
-	 * Delete a {@code User} from database. Invoking this method with an
-	 * {@code User} not known by the database will cause an
-	 * {@code IllegalArgumentException}.
-	 *
-	 * @param t the {@code User} to be deleted
-	 * @throws NullPointerException if {@code t} is {@code null}
-	 * @throws IllegalArgumentException if {@code t} is not found in the
-	 * database.
-	 */
-	public void delete(User t)throws NullPointerException,
-			IllegalArgumentException;
-
-	/**
-	 * Save a {@code User} in the database. {@link User#id} will
-	 * be generated.
-	 *
-	 * @param t the {@code User} to be saved
-	 * @throws NullPointerException if {@code t} is {@code null}
-	 */
-	public void save(User t) throws NullPointerException;
+public interface UserDao extends Dao<User>{
 
 	/**
 	 * Query for a {@code User} with known mail address.

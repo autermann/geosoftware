@@ -21,7 +21,7 @@ import org.junit.Before;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-public class ObservationCategorieTest {
+public class CategorieTest {
 
     private Categorie a, b, c;
     private final String titleA = "Title of A";
@@ -43,11 +43,9 @@ public class ObservationCategorieTest {
      */
     @Test
     public void testGetTitle() {
-        System.out.println("getTitel");
         String expResult = null;
         String result = a.getTitle();
         assertEquals(expResult, result);
-        System.out.println("setTitel");
         expResult = titleA;
         a.setTitle(titleA);
         result = a.getTitle();
@@ -60,11 +58,9 @@ public class ObservationCategorieTest {
      */
     @Test
     public void testGetDescription() {
-        System.out.println("getDescription");
         String expResult = null;
         String result = a.getDescription();
         assertEquals(expResult, result);
-        System.out.println("setDescription");
         expResult = descriptionA;
         a.setDescription(descriptionA);
         result = a.getDescription();
@@ -76,7 +72,6 @@ public class ObservationCategorieTest {
      */
     @Test
     public void testEquals() {
-        System.out.println("testEquals");
         a.setDescription(descriptionA);
         b.setDescription(descriptionB);
 
@@ -93,11 +88,8 @@ public class ObservationCategorieTest {
      */
     @Test
     public void testHashCode() {
-        System.out.println("testHashCode");
         assertTrue(c.hashCode() == a.hashCode());
         a.setDescription(descriptionA);
-        System.out.println(c.hashCode());
-        System.out.println(a.hashCode());
         assertTrue(c.hashCode() != a.hashCode());
     }
 
@@ -116,9 +108,8 @@ public class ObservationCategorieTest {
      */
     @Test
     public void testGetId() {
-        System.out.println("getId");
-        long expResult = 0L;
-        long result = a.getId();
+        Long expResult = null;
+        Long result = a.getId();
         assertEquals(expResult, result);
 
     }
@@ -128,8 +119,7 @@ public class ObservationCategorieTest {
      */
     @Test
     public void testSetId() {
-        System.out.println("setId");
-        long id = 12345L;
+        Long id = 12345L;
         a.setId(id);
         assertEquals(a.getId(), id);
     }
@@ -139,7 +129,6 @@ public class ObservationCategorieTest {
      */
     @Test
     public void testIsNew() {
-        System.out.println("isNew");
         boolean expResult = true;
         boolean result = a.isNew();
         assertEquals(expResult, result);

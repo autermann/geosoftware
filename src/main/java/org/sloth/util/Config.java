@@ -23,30 +23,23 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 
-public class Configuration {
+public class Config {
 
+	private static final Logger logger = LoggerFactory.getLogger(Config.class);
 	private static Properties props;
-	private static final Logger logger = LoggerFactory.getLogger(Configuration.class);
 
-	private Configuration() {
-	}
+	private Config() {}
 
-	public static String getPropertie(String key) {
+	public static String getProperty(String key) {
 		if (props == null) {
 			try {
 				logger.info("Loading configuration.");
-				props = PropertiesLoaderUtils.loadAllProperties("configuration.properties");
+				props = PropertiesLoaderUtils.loadAllProperties("config.properties");
 			} catch (IOException ex) {
 				logger.warn("Can not load configuration", ex);
 				return null;
 			}
 		}
-/*
-		for (Entry<Object, Object> e : props.entrySet()) {
-			logger.info("{} : {}", e.getKey(), e.getValue());
-		}
-
- */
 		return props.getProperty(key);
 	}
 }

@@ -11,7 +11,7 @@
 	   http://www.springframework.org/schema/context
 	   http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<context:property-placeholder location="classpath:database.properties" />
+	<context:property-placeholder location="classpath:database-test.properties" />
 
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="${jdbc.driverClassName}" />
@@ -31,7 +31,6 @@
 		<property name="persistenceXmlLocation" value="META-INF/persistence.xml" />
 		<property name="dataSource" ref="dataSource"/>
 		<property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
-		<property name="persistenceProviderClass" value="org.eclipse.persistence.jpa.PersistenceProvider"/>
 		<property name="jpaPropertyMap">
 			<map>
 				<entry key="eclipselink.logging.level" value="${eclipselink.logging.level}"/>
@@ -41,7 +40,7 @@
 			</map>
 		</property>
 	</bean>
-	
+
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
@@ -51,6 +50,14 @@
 	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 
-	<import resource="sloth/daos.xml"/>
-</beans>
+	<bean id="observationDao" class="org.sloth.persistence.impl.ObservationDaoImpl" />
 
+	<bean id="userDao" class="org.sloth.persistence.impl.UserDaoImpl">
+		<property name="observationDao" ref="observationDao" />
+	</bean>
+
+	<bean id="categorieDao" class="org.sloth.persistence.impl.CategorieDaoImpl">
+		<property name="observationDao" ref="observationDao" />
+	</bean>
+
+</beans>

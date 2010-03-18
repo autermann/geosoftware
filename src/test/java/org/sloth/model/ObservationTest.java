@@ -62,7 +62,6 @@ public class ObservationTest {
 	 */
 	@Test
 	public void testGetTitleNoTitle() {
-		System.out.println("getTitle NO Title");
 		// No Title Is Set:
 		String expResult = null;
 		String result = a.getTitle();
@@ -74,7 +73,6 @@ public class ObservationTest {
 	 */
 	@Test
 	public void testSetTitle() {
-		System.out.println("setTitle");
 		String title = titleA;
 		a.setTitle(title);
 		assertEquals(titleA, a.getTitle());
@@ -82,8 +80,6 @@ public class ObservationTest {
 	
 	@Test
 	public void testGetTitleWithTitle() {
-		System.out.println("getTitle WITH Title");
-		System.out.println("setTitle");
 		String title = titleA;
 		a.setTitle(title);
 		String expResult = titleA;
@@ -98,7 +94,6 @@ public class ObservationTest {
 	 */
 	@Test
 	public void testGetDescription() {
-		System.out.println("getDescription");
 		String expResult = null;
 		String result = a.getDescription();
 		assertEquals(expResult, result);
@@ -113,7 +108,6 @@ public class ObservationTest {
 	 */
 	@Test
 	public void testGetUser() {
-		System.out.println("getUser");
 		User expResult = null;
 		User result = a.getUser();
 		assertEquals(expResult, result);
@@ -129,7 +123,6 @@ public class ObservationTest {
 	 */
 	@Test
 	public void testSetUser() {
-		System.out.println("setUser");
 		a.setUser(userA);
 		assertEquals(userA, a.getUser());
 
@@ -140,8 +133,8 @@ public class ObservationTest {
 	 */
 	@Test
 	public void testGetCreationDate() {
-		System.out.println("getCreationDate");
 		Date expResult = new Date();
+		a.setCreationDate(expResult);
 		Date result = a.getCreationDate();
 		assertEquals(expResult, result);
 	}
@@ -151,7 +144,6 @@ public class ObservationTest {
 	 */
 	@Test
 	public void testSetCreationDate() {
-		System.out.println("setCreationDate");
 		Date creationDate = null;
 		a.setCreationDate(creationDate);
 		assertEquals(a.getCreationDate(), creationDate);
@@ -162,7 +154,6 @@ public class ObservationTest {
 	 */
 	@Test
 	public void testGetObservationCategorie() {
-		System.out.println("getObservationCategorie");
 		Categorie expResult = null;
 		Categorie result = a.getCategorie();
 		assertEquals(expResult, result);
@@ -179,11 +170,8 @@ public class ObservationTest {
 	 */
 	@Test
 	public void testSetObservationCategorie() {
-		System.out.println("setObservationCategorie");
-		
 		Categorie oc = new Categorie();
 		a.setCategorie(oc);
-
 		assertEquals(a.getCategorie(), oc);
 	}
 
@@ -192,7 +180,6 @@ public class ObservationTest {
 	 */
 	@Test
 	public void testGetCoordinate() {
-		System.out.println("getCoordinate");
 		Coordinate expResult = null;
 		Coordinate result = a.getCoordinate();
 		assertEquals(expResult, result);
@@ -208,7 +195,6 @@ public class ObservationTest {
 	 */
 	@Test
 	public void testSetCoordinate() {
-		System.out.println("setCoordinate");
 		Coordinate coordinate = null;
 		a.setCoordinate(coordinate);
 		assertEquals(a.getCoordinate(), null);
@@ -219,7 +205,6 @@ public class ObservationTest {
 	 */
 	@Test
 	public void testEquals() {
-		System.out.println("testEquals");
 		a.setDescription(descriptionA);
 		b.setDescription(descriptionB);
 
@@ -236,11 +221,8 @@ public class ObservationTest {
 	 */
 	@Test
 	public void testHashCode() {
-		System.out.println("testHashCode");
 		assertTrue(c.hashCode() == a.hashCode());
 		a.setDescription(descriptionA);
-		System.out.println(c.hashCode());
-		System.out.println(a.hashCode());
 		assertTrue(c.hashCode() != a.hashCode());
 	}
 
@@ -262,9 +244,8 @@ public class ObservationTest {
 	 */
 	@Test
 	public void testGetId() {
-		System.out.println("getId");
-		long expResult = 0L;
-		long result = a.getId();
+		Long expResult = null;
+		Long result = a.getId();
 		assertEquals(expResult, result);
 
 	}
@@ -274,8 +255,7 @@ public class ObservationTest {
 	 */
 	@Test
 	public void testSetId() {
-		System.out.println("setId");
-		long id = 12345L;
+		Long id = 12345L;
 		a.setId(id);
 		assertEquals(a.getId(), id);
 	}
@@ -285,7 +265,6 @@ public class ObservationTest {
 	 */
 	@Test
 	public void testIsNew() {
-		System.out.println("isNew");
 		boolean expResult = true;
 		boolean result = a.isNew();
 		assertEquals(expResult, result);

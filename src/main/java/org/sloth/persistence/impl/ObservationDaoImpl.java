@@ -17,10 +17,7 @@
  */
 package org.sloth.persistence.impl;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -34,8 +31,8 @@ import org.sloth.model.Observation_;
  * @todo
  * @author auti
  */
-public class ObservationDaoImpl extends EntityManagerDao implements
-		ObservationDao {
+public class ObservationDaoImpl extends EntityManagerDao<Observation> 
+		implements ObservationDao{
 
 	@Override
 	public Collection<Observation> getAll() {
@@ -49,7 +46,7 @@ public class ObservationDaoImpl extends EntityManagerDao implements
 	}
 
 	@Override
-	public Observation get(long id) {
+	public Observation get(Long id) {
 		logger.info("Searching for Observation with Id: {}", id);
 		Observation o = getEntityManager().find(Observation.class, id);
 		if (o != null) {
@@ -74,23 +71,15 @@ public class ObservationDaoImpl extends EntityManagerDao implements
 
 	@Override
 	public void update(Observation o) {
-		if (o == null) {
-			throw new NullPointerException();
-		}
-		if (o.isNew()) {
-			throw new IllegalArgumentException();
-		}
+		isAttached(o);
 		logger.info("Updating Observation with Id: {}", o.getId());
 		getEntityManager().merge(o);
 		getEntityManager().flush();
-
 	}
 
 	@Override
 	public void delete(Observation o) {
-		if (o == null) {
-			throw new NullPointerException();
-		}
+		isAttached(o);
 		logger.info("Deleting Observation with Id: {}", o.getId());
 		getEntityManager().remove(o);
 		getEntityManager().flush();
