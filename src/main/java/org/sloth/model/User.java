@@ -38,14 +38,10 @@ import static javax.persistence.TemporalType.TIMESTAMP;
  * @see Group
  */
 @Entity
-@Table(uniqueConstraints=@UniqueConstraint(columnNames="MAIL_ADDRESS"))
 public class User extends BaseEntity implements Serializable {
 
-	/*
-	 * @see Serializable
-	 */
 	@Transient
-	static final long serialVersionUID = -9018246759776935301L;
+	private static final long serialVersionUID = -9018246759776935301L;
 	@Column(nullable = false, unique = true, name = "MAIL_ADDRESS")
 	private String mail;
 	@Column(nullable = false)

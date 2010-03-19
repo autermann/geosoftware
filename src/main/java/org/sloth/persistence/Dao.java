@@ -9,7 +9,8 @@ import java.util.Collection;
 import org.sloth.model.BaseEntity;
 
 /**
- *
+ * @todo
+ * @param <T>
  * @author auti
  */
 public interface Dao<T extends BaseEntity> {

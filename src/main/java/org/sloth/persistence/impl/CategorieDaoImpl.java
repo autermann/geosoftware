@@ -32,6 +32,10 @@ import org.sloth.persistence.ObservationDao;
 import org.sloth.util.Config;
 import org.springframework.beans.factory.annotation.Autowired;
 
+/**
+ * @todo
+ * @author auti
+ */
 public class CategorieDaoImpl extends EntityManagerDao<Categorie> implements
 		CategorieDao {
 

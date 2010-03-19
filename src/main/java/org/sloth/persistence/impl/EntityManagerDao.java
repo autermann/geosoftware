@@ -33,6 +33,7 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * Abstract class for Data Acccess Objects using an {@code EntityManager}
  * 
+ * @param <T> TODO
  * @see EntityManager
  * @author Christian Autermann
  */
@@ -67,6 +68,12 @@ public abstract class EntityManagerDao<T extends BaseEntity> {
 		return this.entityManager;
 	}
 
+	/**
+	 * @todo
+	 * @param t
+	 * @throws NullPointerException
+	 * @throws IllegalArgumentException
+	 */
 	protected void isAttached(T t) throws NullPointerException,
 			IllegalArgumentException {
 		if (t == null) {

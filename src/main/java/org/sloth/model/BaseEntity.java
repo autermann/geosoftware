@@ -24,6 +24,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+/**
+ * Represtents an Entity with a {@code Long} as Id.
+ *
+ * @author Christian Autermann
+ */
 @MappedSuperclass
 @Access(AccessType.FIELD)
 public abstract class BaseEntity {
@@ -49,11 +54,10 @@ public abstract class BaseEntity {
 
 	/**
 	 * Returns wether this {@code BaseEntity} has an Id.
+	 *
 	 * @return <code>true</code> if the id is
 	 * <code>null</code> and <code>false</code>
 	 * otherwise.
-	 *
-	 * @return if this {@code Categorie} is new
 	 */
 	public boolean isNew() {
 		return (this.id == null);

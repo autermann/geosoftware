@@ -149,7 +149,7 @@ public class Observation extends BaseEntity implements Serializable {
 
 	/**
 	 * @todo
-	 * @param oc
+	 * @param categorie
 	 */
 	public void setCategorie(Categorie categorie) {
 		this.categorie = categorie;

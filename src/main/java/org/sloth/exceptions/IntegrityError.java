@@ -15,25 +15,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.sloth.model;
+package org.sloth.exceptions;
 
-/**
- * Class to indicate which Rights a User has.
- * @see User
- * @author Christian Autermann
- */
-public enum Group {
-
-	/**
-	 * Group indicating, that the user has normal rights.
-	 */
-	USER,
-	/**
-	 * group indicating, that the user has wfs rights.
-	 */
-	WFS,
-	/**
-	 * Group incicating, that the user has admin rights.
-	 */
-	ADMIN;
+public class IntegrityError extends Error {
+	//XXX serial
+	private static final long serialVersionUID = 1L;
 }

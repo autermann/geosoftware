@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
 				 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-				 xsi:schemaLocation="
-				 http://java.sun.com/xml/ns/persistence/orm
-				 http://java.sun.com/xml/ns/persistence/orm_2_0.xsd"
-				 version="2.0">
+				 version="2.0"
+				 xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd">
 
 	<persistence-unit-metadata>
 		<xml-mapping-metadata-complete/>
@@ -72,9 +70,11 @@
 				<column name="CREATION_DATE" nullable="false"/>
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<enumerated name="userGroup" enum-type="STRING">
+
+			<basic name="userGroup" >
 				<column name="USER_GROUP" nullable="false" />
-			</enumerated>
+				<enumerated>STRING</enumerated>
+			</basic>
 			<transient name="DEFAULT" />
 			<transient name="serialVersionUID" />
 		</attributes>

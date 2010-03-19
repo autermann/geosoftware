@@ -20,10 +20,7 @@ package org.sloth.model;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 import javax.persistence.Transient;
-import org.sloth.util.Config;
 
 /**
  * Represents an non hierachical <code>Categorie</code> for Observation.
@@ -36,11 +33,8 @@ import org.sloth.util.Config;
 @Entity
 public class Categorie extends BaseEntity implements Serializable {
 
-	/**
-	 * @see Serializable
-	 */
 	@Transient
-	static final long serialVersionUID = -3532326782916715208L;
+	private static final long serialVersionUID = -3532326782916715208L;
 	@Column(nullable = false, unique=true)
 	private String title;
 	@Column(length = 1000, nullable = false)
@@ -116,13 +110,4 @@ public class Categorie extends BaseEntity implements Serializable {
 	public String toString() {
 		return this.getTitle();
 	}
-
-	@PrePersist
-	@PreUpdate
-	public void validate() {
-		if (getDescription().length() > 1000) {
-			setDescription(getDescription().subSequence(0, 999).toString());
-		}
-	}
-
 }

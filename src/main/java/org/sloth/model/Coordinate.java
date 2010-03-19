@@ -32,11 +32,8 @@ import javax.persistence.Transient;
 @Embeddable
 public class Coordinate implements Serializable {
 
-	/**
-	 * @see Serializable
-	 */
 	@Transient
-	static final long serialVersionUID = 6550470689926763724L;
+	private static final long serialVersionUID = 6550470689926763724L;
 	@Column(nullable = false)
 	private double latitude;
 	@Column(nullable = false)
