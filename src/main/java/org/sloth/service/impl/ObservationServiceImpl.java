@@ -22,6 +22,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sloth.exceptions.ConstraintViolationException;
 import org.sloth.persistence.ObservationDao;
 import org.sloth.model.Observation;
 import org.sloth.model.Categorie;
@@ -50,19 +51,39 @@ public class ObservationServiceImpl implements ObservationService {
 		return categorieDao;
 	}
 
-	public void setObservationDao(ObservationDao oDao) {
+	/**
+	 * @todo
+	 * @param oDao
+	 * @throws NullPointerException
+	 */
+	public void setObservationDao(ObservationDao oDao) throws
+			NullPointerException {
+		if (oDao == null) {
+			throw new NullPointerException();
+		}
 		logger.info("Setting autowired ObservationDao");
 		this.observationDao = oDao;
 	}
 
-	public void setCategorieDao(CategorieDao ocDao) {
+	/**
+	 * @todo
+	 * @param ocDao
+	 * @throws NullPointerException 
+	 */
+	public void setCategorieDao(CategorieDao ocDao) throws NullPointerException {
+		if (ocDao == null) {
+			throw new NullPointerException();
+		}
 		logger.info("Setting autowired CategorieDao");
 		this.categorieDao = ocDao;
 	}
 
 	@Override
-	public Observation getObservation(Long id) {
-		return getObservationDao().get(id);
+	public Observation getObservation(Long id) throws NullPointerException {
+		if (id == null) {
+			throw new NullPointerException();
+		}
+		return getObservationDao().getById(id);
 	}
 
 	@Override
@@ -71,7 +92,11 @@ public class ObservationServiceImpl implements ObservationService {
 	}
 
 	@Override
-	public Collection<Observation> getObservations(String keyword) {
+	public Collection<Observation> getObservations(String keyword) throws
+			NullPointerException {
+		if (keyword == null) {
+			throw new NullPointerException();
+		}
 		String regex = buildRegex(keyword);
 		HashSet<Observation> result = new HashSet<Observation>();
 		for (Observation o : getObservations()) {
@@ -87,17 +112,31 @@ public class ObservationServiceImpl implements ObservationService {
 	}
 
 	@Override
-	public void deleteObservation(Observation observation) {
+	public void deleteObservation(Observation observation) throws
+			NullPointerException, IllegalArgumentException {
+		if (observation == null) {
+			throw new NullPointerException();
+		}
 		getObservationDao().delete(observation);
 	}
 
 	@Override
-	public void updateObservation(Observation observation) {
+	public void updateObservation(Observation observation) throws
+			NullPointerException, ConstraintViolationException,
+			IllegalArgumentException {
+		if (observation == null) {
+			throw new NullPointerException();
+		}
 		getObservationDao().update(observation);
 	}
 
 	@Override
-	public void registrate(Observation observation) {
+	public void registrate(Observation observation) throws NullPointerException,
+														   ConstraintViolationException,
+														   IllegalArgumentException {
+		if (observation == null) {
+			throw new NullPointerException();
+		}
 		getObservationDao().save(observation);
 	}
 
@@ -116,7 +155,11 @@ public class ObservationServiceImpl implements ObservationService {
 	}
 
 	@Override
-	public Collection<Observation> getObservations(Categorie oc) {
+	public Collection<Observation> getObservations(Categorie oc) throws
+			NullPointerException, IllegalArgumentException {
+		if (oc == null) {
+			throw new NullPointerException();
+		}
 		Collection<Observation> result = new LinkedList<Observation>();
 		for (Observation o : getObservations()) {
 			if (o.getCategorie().equals(oc)) {
@@ -127,7 +170,10 @@ public class ObservationServiceImpl implements ObservationService {
 	}
 
 	@Override
-	public Categorie getCategorie(Long id) {
+	public Categorie getCategorie(Long id) throws NullPointerException {
+		if (id == null) {
+			throw new NullPointerException();
+		}
 		return null;
 	}
 
@@ -137,30 +183,49 @@ public class ObservationServiceImpl implements ObservationService {
 	}
 
 	@Override
-	public void deleteCategorie(Categorie categorie) {
+	public void deleteCategorie(Categorie categorie) throws NullPointerException,
+															IllegalArgumentException {
+		if (categorie == null) {
+			throw new NullPointerException();
+		}
 		getCategorieDao().delete(categorie);
 	}
 
 	@Override
-	public void deleteCategorie(Long id) {
+	public void deleteCategorie(Long id) throws NullPointerException,
+												IllegalArgumentException {
+		if (id == null) {
+			throw new NullPointerException();
+		}
 		getCategorieDao().delete(getCategorie(id));
 	}
 
 	@Override
-	public void updateCategorie(Categorie categorie) {
+	public void updateCategorie(Categorie categorie) throws NullPointerException,
+															ConstraintViolationException,
+															IllegalArgumentException {
+		if (categorie == null) {
+			throw new NullPointerException();
+		}
 		getCategorieDao().update(categorie);
 	}
 
 	@Override
-	public void registrate(Categorie categorie) {
+	public void registrate(Categorie categorie) throws
+			ConstraintViolationException, NullPointerException {
+		if (categorie == null) {
+			throw new NullPointerException();
+		}
 		getCategorieDao().save(categorie);
 	}
 
 	@Override
-	public void deleteObservation(Long id) {
-		deleteCategorie(getCategorieDao().get(id));
+	public void deleteObservation(Long id) throws NullPointerException,
+												  IllegalArgumentException {
+		if (id == null) {
+			throw new NullPointerException();
+		}
+		deleteCategorie(getCategorieDao().getById(id));
 	}
-
-
 
 }

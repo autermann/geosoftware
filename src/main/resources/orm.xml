@@ -3,39 +3,71 @@
 				 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 				 version="2.0"
 				 xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd">
-
 	<persistence-unit-metadata>
 		<xml-mapping-metadata-complete/>
 		<persistence-unit-defaults>
 			<access>FIELD</access>
 		</persistence-unit-defaults>
 	</persistence-unit-metadata>
+
 	<package>org.sloth.model</package>
+
 	<mapped-superclass class="BaseEntity">
 		<attributes>
 			<id name="id">
+				<column name="ID" />
 				<generated-value strategy="IDENTITY"/>
 			</id>
 		</attributes>
+		<pre-update method-name="validate" />
+		<pre-persist method-name="validate" />
 	</mapped-superclass>
+
 	<entity class="Categorie">
 		<table name="CATEGORIES"/>
 		<attributes>
 			<basic name="title">
-				<column name="TITLE" nullable="false" />
+				<column name="TITLE" nullable="false" length="255" unique="true"/>
 			</basic>
 			<basic name="description">
 				<column name="DESCRIPTION" nullable="false" length="1000" />
 			</basic>
-			<transient name="DEFAULT" />
 			<transient name="serialVersionUID"/>
 		</attributes>
 	</entity>
+
+	<entity class="User">
+		<table name="USER" />
+		<attributes>
+			<basic name="name">
+				<column name="FIRST_NAME" nullable="false" length="255"/>
+			</basic>
+			<basic name="familyName">
+				<column name="LAST_NAME" nullable="false" length="255"/>
+			</basic>
+			<basic name="password">
+				<column name="PASSWORD" nullable="false" length="255"/>
+			</basic>
+			<basic name="mail" >
+				<column name="MAIL_ADDRESS" nullable="false" unique="true" length="255"/>
+			</basic>
+			<basic name="creationDate">
+				<column name="CREATION_DATE" nullable="false"/>
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="userGroup" >
+				<column name="USER_GROUP" nullable="false" />
+				<enumerated>STRING</enumerated>
+			</basic>
+			<transient name="serialVersionUID" />
+		</attributes>
+	</entity>
+
 	<entity class="Observation">
 		<table name="OBSERVATIONS"/>
 		<attributes>
 			<basic name="title">
-				<column name="TITLE" nullable="false" />
+				<column name="TITLE" nullable="false" length="255"/>
 			</basic>
 			<basic name="description">
 				<column name="DESCRIPTION" nullable="false" length="1000" />
@@ -44,49 +76,25 @@
 				<column name="CREATION_DATE" nullable="false"/>
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<many-to-one name="user" target-entity="User" fetch="EAGER">
+			<many-to-one name="user" target-entity="User">
 				<join-column name="USER_ID" nullable="false" />
+			</many-to-one>
+			<many-to-one name="categorie" target-entity="Categorie">
+				<join-column name="CATEGORIE_ID" nullable="false" />
 			</many-to-one>
 			<embedded name="coordinate" />
 			<transient name="serialVersionUID"/>
 		</attributes>
 	</entity>
-	<entity class="User">
-		<table name="USER" />
-		<attributes>
-			<basic name="name">
-				<column name="NAME" nullable="false" />
-			</basic>
-			<basic name="familyName">
-				<column name="FAMILY_NAME" nullable="false" />
-			</basic>
-			<basic name="password">
-				<column name="PASSWORD" nullable="false" />
-			</basic>
-			<basic name="mail" >
-				<column name="MAIL_ADDRESS" nullable="false" unique="true" />
-			</basic>
-			<basic name="creationDate">
-				<column name="CREATION_DATE" nullable="false"/>
-				<temporal>TIMESTAMP</temporal>
-			</basic>
 
-			<basic name="userGroup" >
-				<column name="USER_GROUP" nullable="false" />
-				<enumerated>STRING</enumerated>
-			</basic>
-			<transient name="DEFAULT" />
-			<transient name="serialVersionUID" />
-		</attributes>
-	</entity>
 	<embeddable class="Coordinate">
 		<attributes>
 			<basic name="longitude">
 				<column name="LONGITUDE" nullable="false" />
-			</basic>
+				</basic>
 			<basic name="latitude">
 				<column name="LATITUDE" nullable="false" />
-			</basic>
+				</basic>
 			<transient name="serialVersionUID"/>
 		</attributes>
 	</embeddable>

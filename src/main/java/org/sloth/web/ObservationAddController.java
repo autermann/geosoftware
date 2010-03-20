@@ -17,7 +17,9 @@
  */
 package org.sloth.web;
 
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.sloth.exceptions.ConstraintViolationException;
 import org.sloth.model.Observation;
 import org.sloth.service.ObservationService;
 import org.sloth.service.validator.ObservationValidator;
@@ -42,17 +44,20 @@ import org.springframework.web.bind.support.SessionStatus;
 @SessionAttributes(types = Observation.class)
 public class ObservationAddController {
 
+	private Logger logger = LoggerFactory.getLogger(
+			ObservationAddController.class);
 	@Autowired
-	private ObservationService ObservationManager;
+	private ObservationService observationManager;
 	@Autowired
-	private ObservationValidator ObservationValidator;
+	private ObservationValidator observationValidator;
 
 	/**
+	 * @param observationValidator 
 	 * @todo
-	 * @param userValidator
 	 */
-	public void setObservationValidator(ObservationValidator observationValidator) {
-		this.ObservationValidator = observationValidator;
+	public void setObservationValidator(
+			ObservationValidator observationValidator) {
+		this.observationValidator = observationValidator;
 	}
 
 	/**
@@ -60,15 +65,15 @@ public class ObservationAddController {
 	 * @return
 	 */
 	protected ObservationValidator getObservationValidator() {
-		return this.ObservationValidator;
+		return this.observationValidator;
 	}
 
 	/**
 	 * @todo
-	 * @param userManager
+	 * @param observationManager
 	 */
 	public void setObservationManager(ObservationService observationManager) {
-		this.ObservationManager = observationManager;
+		this.observationManager = observationManager;
 	}
 
 	/**
@@ -76,7 +81,7 @@ public class ObservationAddController {
 	 * @return
 	 */
 	protected ObservationService getObservationManager() {
-		return this.ObservationManager;
+		return this.observationManager;
 	}
 
 	/**
@@ -102,7 +107,7 @@ public class ObservationAddController {
 	}
 
 	/**
-	 * @param user
+	 * @param observation 
 	 * @param result
 	 * @param status
 	 * @return
@@ -110,13 +115,22 @@ public class ObservationAddController {
 	 * Beim Absenden des Formulars die POST-Methode...
 	 */
 	@RequestMapping(method = POST)
-	public String processSubmit(@ModelAttribute Observation observation, BindingResult result,
+	public String processSubmit(@ModelAttribute Observation observation,
+								BindingResult result,
 								SessionStatus status) {
 		getObservationValidator().validate(observation, result);
 		if (result.hasErrors()) {
 			return "observations/form";
 		} else {
-			this.ObservationManager.registrate(observation);
+			try {
+				this.observationManager.registrate(observation);
+			} catch(NullPointerException e) {
+				logger.warn("Binding fail. No Observation Model Attribut.", e);
+			} catch(IllegalArgumentException e) {
+				logger.warn("Model-Attribute observation is already known...", e);
+			} catch(ConstraintViolationException e) {
+				//TODO
+			}
 			status.setComplete();
 			return "redirect:/";
 		}

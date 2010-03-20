@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.sloth.persistence.inmemory;
+package org.sloth.test.inmemory;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -43,7 +43,7 @@ public class InMemoryDao<T extends BaseEntity> {
 		return col;
 	}
 
-	public T get(Long id) {
+	public T getById(Long id) {
 		return database.get(id);
 	}
 

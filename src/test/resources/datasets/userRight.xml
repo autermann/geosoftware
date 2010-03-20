@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE dataSet PUBLIC '-//Sloth//DataBase Schema 1.0//EN' 'database.dtd'>
-<dataSet>
-	<USER_RIGHT VALUE="0" NAME="guest" DESCRIPTION="Description of Guests" />
-	<USER_RIGHT VALUE="10" NAME="USER" DESCRIPTION="Description of Users" />
-	<USER_RIGHT VALUE="20" NAME="admin" DESCRIPTION="Description of Admins" />
-</dataSet>

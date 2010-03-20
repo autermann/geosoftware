@@ -17,15 +17,15 @@
  */
 package org.sloth.service.impl;
 
+import static org.sloth.test.EntityFactory.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.sloth.model.Categorie;
-import org.sloth.model.Group;
 import org.sloth.model.User;
 import org.sloth.persistence.CategorieDao;
 import org.sloth.persistence.ObservationDao;
-import org.sloth.persistence.inmemory.InMemoryCategorieDao;
-import org.sloth.persistence.inmemory.InMemoryObservationDao;
+import org.sloth.test.inmemory.InMemoryCategorieDao;
+import org.sloth.test.inmemory.InMemoryObservationDao;
 
 public class ObservationServiceImplTest {
 
@@ -44,23 +44,23 @@ public class ObservationServiceImplTest {
 	}
 
 	private void populateWithTestData() {
-		Categorie c1 = EntityFactory.getCategorie();
-		Categorie c2 = EntityFactory.getCategorie();
-		Categorie c3 = EntityFactory.getCategorie();
-		User u1 = EntityFactory.getUser(Group.USER);
-		User u2 = EntityFactory.getUser(Group.USER);
-		User u3 = EntityFactory.getUser(Group.USER);
-		User u4 = EntityFactory.getUser(Group.USER);
+		Categorie c1 = getCategorie();
+		Categorie c2 = getCategorie();
+		Categorie c3 = getCategorie();
+		User u1 = getUser();
+		User u2 = getUser();
+		User u3 = getUser();
+		User u4 = getUser();
 		cDao.save(c1);
 		cDao.save(c2);
 		cDao.save(c3);
-		oDao.save(EntityFactory.getObservation(c1, u1));
-		oDao.save(EntityFactory.getObservation(c2, u2));
-		oDao.save(EntityFactory.getObservation(c3, u3));
-		oDao.save(EntityFactory.getObservation(c1, u4));
-		oDao.save(EntityFactory.getObservation(c2, u1));
-		oDao.save(EntityFactory.getObservation(c3, u2));
-		oDao.save(EntityFactory.getObservation(c1, u3));
+		oDao.save(getObservation(c1, u1));
+		oDao.save(getObservation(c2, u2));
+		oDao.save(getObservation(c3, u3));
+		oDao.save(getObservation(c1, u4));
+		oDao.save(getObservation(c2, u1));
+		oDao.save(getObservation(c3, u2));
+		oDao.save(getObservation(c1, u3));
 	}
 
 	/**

@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.sloth.service.impl;
+package org.sloth.test;
 
 import org.sloth.model.Categorie;
 import org.sloth.model.Coordinate;
@@ -29,13 +29,44 @@ public abstract class EntityFactory {
 	private static long categorieCount = 0;
 	private static long observationCount = 0;
 
-	public static User getUser(Group g) {
+	private static User getUser(Group g) {
 		User u = new User();
 		u.setFamilyName("Family Name of User " + userCount);
 		u.setName("Name of User " + userCount);
 		u.setMail("user" + userCount + "@users.de");
 		u.setPassword("password" + userCount);
 		u.setUserGroup(g);
+		userCount++;
+		return u;
+	}
+
+	public static User getUser() {
+		return getUser(Group.USER);
+	}
+
+	public static User getAdminUser() {
+		return getUser(Group.ADMIN);
+	}
+
+	public static User getWFSUSer() {
+		return getUser(Group.WFS);
+	}
+
+	public static User getUser(Long id) {
+		return getUser(id, Group.USER);
+	}
+
+	public static User getAdminUser(Long id) {
+		return getUser(id, Group.ADMIN);
+	}
+
+	public static User getWFSUSer(Long id) {
+		return getUser(id, Group.WFS);
+	}
+
+	private static User getUser(Long id, Group g) {
+		User u = getUser(g);
+		u.setId(id);
 		return u;
 	}
 
@@ -46,6 +77,7 @@ public abstract class EntityFactory {
 		o.setDescription("Description of Observation " + observationCount);
 		o.setTitle("Title of Observation " + observationCount);
 		o.setUser(u);
+		observationCount++;
 		return o;
 	}
 
@@ -53,13 +85,8 @@ public abstract class EntityFactory {
 		Categorie c = new Categorie();
 		c.setDescription("Description of Categorie " + categorieCount);
 		c.setTitle("Title of Categorie " + categorieCount);
+		categorieCount++;
 		return c;
-	}
-
-	public static User getUser(Long id, Group g) {
-		User u = getUser(g);
-		u.setId(id);
-		return u;
 	}
 
 	public static Observation getObservation(Long id, Categorie c, User u) {
@@ -72,6 +99,10 @@ public abstract class EntityFactory {
 		Categorie c = getCategorie();
 		c.setId(id);
 		return c;
+	}
+
+	public static void reset() {
+		categorieCount = observationCount = userCount = 0;
 	}
 
 }

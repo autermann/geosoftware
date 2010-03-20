@@ -15,24 +15,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.sloth.persistence.inmemory;
+package org.sloth.exceptions;
 
-import java.util.Map.Entry;
-import org.sloth.model.Categorie;
-import org.sloth.persistence.CategorieDao;
-
-public class InMemoryCategorieDao extends InMemoryDao<Categorie> implements CategorieDao {
-
-	@Override
-	public Categorie get(String title) {
-		if (title == null) {
-			throw new NullPointerException();
-		}
-		for (Entry<Long, Categorie> entry : getEntrySet()){
-			if (entry.getValue().getTitle().equals(title)) {
-				return entry.getValue();
-			}
-		}
-		return null;
-	}
+public class EntityAlreadyKnownException extends IllegalArgumentException {
+	//XXX serial
+	private static final long serialVersionUID = 1L;
 }

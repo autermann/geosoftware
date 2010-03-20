@@ -29,7 +29,7 @@ public interface Dao<T extends BaseEntity> {
 	 * @return the @code Entity with the specified id, if no
 	 * matching Entity found {@code null} is returned.
 	 */
-	public T get(Long id);
+	public T getById(Long id);
 
 	/**
 	 * Update a Entity. Invoking this method with an

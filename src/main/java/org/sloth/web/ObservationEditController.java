@@ -34,28 +34,27 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sloth.exceptions.ConstraintViolationException;
 import org.springframework.web.bind.annotation.PathVariable;
-
-
 
 @Controller
 @RequestMapping("/observations/edit/{id}")
 @SessionAttributes(types = Observation.class)
 public class ObservationEditController {
 
-    protected static final Logger logger = LoggerFactory.getLogger(
+	protected static final Logger logger = LoggerFactory.getLogger(
 			ObservationEditController.class);
-
 	@Autowired
 	private ObservationService observationManager;
 	@Autowired
 	private ObservationValidator observationValidator;
 
 	/**
+	 * @param observationValidator
 	 * @todo
-	 * @param userValidator
 	 */
-	public void setObservationValidator(ObservationValidator observationValidator) {
+	public void setObservationValidator(
+			ObservationValidator observationValidator) {
 		this.observationValidator = observationValidator;
 	}
 
@@ -68,8 +67,8 @@ public class ObservationEditController {
 	}
 
 	/**
+	 * @param observationManager
 	 * @todo
-	 * @param userManager
 	 */
 	public void setObservationManager(ObservationService observationManager) {
 		this.observationManager = observationManager;
@@ -93,6 +92,7 @@ public class ObservationEditController {
 	}
 
 	/**
+	 * @param id 
 	 * @param model
 	 * @return
 	 * @todo
@@ -100,16 +100,14 @@ public class ObservationEditController {
 	 */
 	@RequestMapping(method = GET)
 	public String setupForm(@PathVariable Long id, Model model) {
-                Observation observation = getObservationManager().getObservation(id);
-                logger.info("Edit of Details for Observation {}", id);
+		Observation observation = getObservationManager().getObservation(id);
+		logger.info("Edit of Details for Observation {}", id);
 		model.addAttribute("observation", observation);
 		return "observations/edit";
 	}
 
-
-
 	/**
-	 * @param user
+	 * @param observation 
 	 * @param result
 	 * @param status
 	 * @return
@@ -117,13 +115,22 @@ public class ObservationEditController {
 	 * Beim Absenden des Formulars die POST-Methode...
 	 */
 	@RequestMapping(method = POST)
-	public String processSubmit(@ModelAttribute Observation observation, BindingResult result,
+	public String processSubmit(@ModelAttribute Observation observation,
+								BindingResult result,
 								SessionStatus status) {
 		getObservationValidator().validate(observation, result);
 		if (result.hasErrors()) {
 			return "observations/";
 		} else {
-			this.observationManager.updateObservation(observation);
+			try {
+				this.observationManager.updateObservation(observation);
+			} catch(NullPointerException e) {
+				logger.error("Binding fail. No observation model attribut.", e);
+			} catch(IllegalArgumentException e) {
+				logger.error("Model-Attribute observation is not known.", e);
+			} catch(ConstraintViolationException e) {
+				//TODO
+			}
 			status.setComplete();
 			return "observations";
 		}

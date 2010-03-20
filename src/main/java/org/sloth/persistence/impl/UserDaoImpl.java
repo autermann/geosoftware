@@ -23,6 +23,8 @@ import javax.persistence.NonUniqueResultException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import org.sloth.exceptions.EntityAlreadyKnownException;
+import org.sloth.exceptions.EntityNotKnownException;
 import org.sloth.model.Group;
 import org.sloth.model.Observation;
 import org.sloth.persistence.UserDao;
@@ -63,7 +65,10 @@ public class UserDaoImpl extends EntityManagerDao<User> implements UserDao {
 	}
 
 	@Override
-	public User get(Long id) {
+	public User getById(Long id) {
+		if (id == null) {
+			throw new NullPointerException();
+		}
 		logger.info("Searching for Observation with Id: {}", id);
 		User u = getEntityManager().find(User.class, id);
 		if (u != null) {
@@ -76,10 +81,16 @@ public class UserDaoImpl extends EntityManagerDao<User> implements UserDao {
 
 	@Override
 	public void save(User u) {
+		if (u == null) {
+			throw new NullPointerException();
+		}
+		if (isAttached(u)) {
+			throw new EntityAlreadyKnownException();
+		}
 		logger.info(
-				"Registrating User: ID: {}, Mail: {}, Name: {}, FamilyName: {}, Password: {}, Group: {}", 
+				"Registrating User: ID: {}, Mail: {}, Name: {}, FamilyName: {}, Password: {}, Group: {}",
 				new Object[]{u.getId(), u.getMail(), u.getName(),
-				u.getFamilyName(), u.getUserGroup()});
+							 u.getFamilyName(), u.getUserGroup()});
 		getEntityManager().persist(u);
 		getEntityManager().flush();
 		logger.info("Persisting User; Generated Id is: {}", u.getId());
@@ -87,7 +98,9 @@ public class UserDaoImpl extends EntityManagerDao<User> implements UserDao {
 
 	@Override
 	public void update(User u) {
-		isAttached(u);
+		if (!isAttached(u)) {
+			throw new EntityNotKnownException();
+		}
 		logger.info("Updating {}", u);
 		getEntityManager().merge(u);
 		getEntityManager().flush();
@@ -95,11 +108,13 @@ public class UserDaoImpl extends EntityManagerDao<User> implements UserDao {
 
 	@Override
 	public void delete(User u) {
-		isAttached(u);
+		if (!isAttached(u)) {
+			throw new EntityNotKnownException();
+		}
 		User newUser = getDefaultUser();
-		Collection<Observation> obs = observationDao.get(u);
+		Collection<Observation> obs = observationDao.getByUser(u);
 		logger.info("Replacing {} with {} in {} Observations",
-				new Object[]{u, newUser, obs.size()});
+					new Object[]{u, newUser, obs.size()});
 		for (Observation o : obs) {
 			o.setUser(newUser);
 			observationDao.update(o);
@@ -110,7 +125,7 @@ public class UserDaoImpl extends EntityManagerDao<User> implements UserDao {
 	}
 
 	@Override
-	public User get(String mail) {
+	public User getByMail(String mail) {
 		if (mail == null) {
 			throw new NullPointerException();
 		}
@@ -120,11 +135,11 @@ public class UserDaoImpl extends EntityManagerDao<User> implements UserDao {
 		cq.select(user);
 		cq.where(cb.equal(user.get(User_.mail), mail));
 		User result = null;
-		try{
+		try {
 			result = getEntityManager().createQuery(cq).getSingleResult();
-		} catch (NoResultException e) {
+		} catch(NoResultException e) {
 			logger.info("User with address {} not found", mail);
-		} catch (NonUniqueResultException e) {
+		} catch(NonUniqueResultException e) {
 			logger.warn("Corrupt Database", e);
 		}
 		return result;
@@ -137,7 +152,7 @@ public class UserDaoImpl extends EntityManagerDao<User> implements UserDao {
 			String mail = Config.getProperty("default.user.mail");
 			String name = Config.getProperty("default.user.name");
 			String fami = Config.getProperty("default.user.familyName");
-			User tmp = get(mail);
+			User tmp = getByMail(mail);
 			if (tmp == null) {
 				defaultUser = new User((mail == null) ? "UNKNOWN" : mail,
 									   (name == null) ? "UNKNOWN" : name,

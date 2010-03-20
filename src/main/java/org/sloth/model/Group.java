@@ -19,21 +19,16 @@ package org.sloth.model;
 
 /**
  * Class to indicate which Rights a User has.
+ * 
  * @see User
  * @author Christian Autermann
  */
 public enum Group {
 
-	/**
-	 * Group indicating, that the user has normal rights.
-	 */
+	/** Group indicating, that the user has normal rights. */
 	USER,
-	/**
-	 * group indicating, that the user has wfs rights.
-	 */
+	/** Group indicating, that the user has wfs rights. */
 	WFS,
-	/**
-	 * Group incicating, that the user has admin rights.
-	 */
+	/** Group incicating, that the user has admin rights. */
 	ADMIN;
 }

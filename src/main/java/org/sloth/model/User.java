@@ -21,13 +21,14 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.Transient;
-import javax.persistence.UniqueConstraint;
-import static javax.persistence.TemporalType.TIMESTAMP;
+import static javax.persistence.EnumType.*;
+import static javax.persistence.TemporalType.*;
+import org.sloth.exceptions.ConstraintViolationException;
+import org.sloth.exceptions.FieldLengthConstraintViolationException;
+import org.sloth.exceptions.NotNullConstraintViolationException;
 
 /**
  * Representing a user. Every user has an unique ID, an mail adress, a name,
@@ -37,24 +38,24 @@ import static javax.persistence.TemporalType.TIMESTAMP;
  * @author Christian Autermann
  * @see Group
  */
-@Entity
+@Entity(name="USERS")
 public class User extends BaseEntity implements Serializable {
 
 	@Transient
 	private static final long serialVersionUID = -9018246759776935301L;
-	@Column(nullable = false, unique = true, name = "MAIL_ADDRESS")
+	@Column(unique = true, nullable = false, name="MAIL_ADDRESS")
 	private String mail;
 	@Column(nullable = false)
 	private String name;
-	@Column(nullable = false, name = "FAMILY_NAME")
+	@Column(nullable = false, name="FAMILY_NAME")
 	private String familyName;
 	@Column(nullable = false)
 	private String password;
 	@Temporal(TIMESTAMP)
-	@Column(nullable = false, name = "CREATION_DATE")
+	@Column(nullable = false, name="CREATION_DATE")
 	private Date creationDate;
-	@Column(name = "USER_GROUP")
-	@Enumerated(EnumType.STRING)
+	@Enumerated(STRING)
+	@Column(nullable = false, name = "USER_GROUP")
 	private Group userGroup;
 
 	/**
@@ -166,7 +167,7 @@ public class User extends BaseEntity implements Serializable {
 	@Override
 	public int hashCode() {
 		int hash = 5;
-		hash = 37 * hash + (this.getId() != null ? this.getId().hashCode() :0);
+		hash = 37 * hash + (this.getId() != null ? this.getId().hashCode() : 0);
 		hash = 37 * hash + (getMail() != null ? getMail().hashCode() : 0);
 		hash = 37 * hash + (getName() != null ? getName().hashCode() : 0);
 		hash = 37 * hash + (getFamilyName() != null ? getFamilyName().hashCode()
@@ -202,6 +203,27 @@ public class User extends BaseEntity implements Serializable {
 	 */
 	public void setUserGroup(Group group) {
 		this.userGroup = group;
+	}
+
+	@Override
+	public void validate() throws ConstraintViolationException {
+		if (getCreationDate() == null
+			|| getFamilyName() == null
+			|| getName() == null
+			|| getMail() == null
+			|| getPassword() == null
+			|| getUserGroup() == null
+			|| getName().isEmpty()
+			|| getFamilyName().isEmpty()
+			|| getMail().isEmpty()) {
+			throw new NotNullConstraintViolationException();
+		}
+		if (getFamilyName().length() > 255
+			|| getName().length() > 255
+			|| getPassword().length() > 255
+			|| getName().length() > 255) {
+			throw new FieldLengthConstraintViolationException();
+		}
 	}
 
 }

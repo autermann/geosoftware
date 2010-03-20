@@ -15,27 +15,24 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.sloth.persistence.inmemory;
+package org.sloth.test.inmemory;
 
 import java.util.Map.Entry;
-import org.sloth.model.BaseEntity;
-import org.sloth.model.User;
-import org.sloth.persistence.UserDao;
+import org.sloth.model.Categorie;
+import org.sloth.persistence.CategorieDao;
 
-/**
- *
- * @author auti
- */
-public class InMemoryUserDao extends InMemoryDao<User> implements UserDao{
+public class InMemoryCategorieDao extends InMemoryDao<Categorie> implements CategorieDao {
 
 	@Override
-	public User get(String mail) {
-		for (Entry<Long,User> entry : getEntrySet()) {
-			if (entry.getValue().getMail().equalsIgnoreCase(mail)) {
+	public Categorie getByTitle(String title) {
+		if (title == null) {
+			throw new NullPointerException();
+		}
+		for (Entry<Long, Categorie> entry : getEntrySet()){
+			if (entry.getValue().getTitle().equals(title)) {
 				return entry.getValue();
 			}
 		}
 		return null;
 	}
-
 }

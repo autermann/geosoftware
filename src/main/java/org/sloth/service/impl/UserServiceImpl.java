@@ -20,6 +20,7 @@ package org.sloth.service.impl;
 import java.util.Collection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sloth.exceptions.ConstraintViolationException;
 import org.sloth.model.User;
 import org.sloth.persistence.UserDao;
 import org.sloth.service.Login;
@@ -38,9 +39,31 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDao userDao;
 
-	public void setUserDao(UserDao userDao) {
+	/**
+	 * @todo
+	 * @param userDao
+	 * @throws NullPointerException
+	 */
+	public void setUserDao(UserDao userDao) throws NullPointerException {
 		logger.info("Setting autowired UserDao");
+		if (userDao == null) {
+			throw new NullPointerException();
+		}
 		this.userDao = userDao;
+	}
+
+	/**
+	 * @todo
+	 * @param passwordService
+	 * @throws NullPointerException
+	 */
+	public void setPasswordService(PasswordService passwordService) throws
+			NullPointerException {
+		logger.info("Setting autowired PasswordService");
+		if (passwordService == null) {
+			throw new NullPointerException();
+		}
+		this.passwordService = passwordService;
 	}
 
 	private PasswordService getPasswordService() {
@@ -51,60 +74,80 @@ public class UserServiceImpl implements UserService {
 		return userDao;
 	}
 
-	public void setPasswordService(PasswordService passwordService) {
-		this.passwordService = passwordService;
-	}
-
 	@Override
 	public Collection<User> getUsers() {
 		return getUserDao().getAll();
 	}
 
 	@Override
-	public User get(String mail) {
-		return getUserDao().get(mail);
+	public User get(String mail) throws NullPointerException {
+		if (mail == null) {
+			throw new NullPointerException();
+		}
+		return getUserDao().getByMail(mail);
 	}
 
 	@Override
-	public User get(Long id) {
-		return getUserDao().get(id);
+	public User get(Long id) throws NullPointerException {
+		return getUserDao().getById(id);
 	}
 
 	@Override
-	public void update(User u) {
+	public void update(User u) throws NullPointerException,
+									  IllegalArgumentException,
+									  ConstraintViolationException {
+		if (u == null) {
+			throw new NullPointerException();
+		}
 		getUserDao().update(u);
 	}
 
 	@Override
-	public void delete(Long id) {
-		getUserDao().delete(getUserDao().get(id));
+	public void delete(Long id) throws NullPointerException,
+									   IllegalArgumentException {
+		if (id == null) {
+			throw new NullPointerException();
+		}
+		getUserDao().delete(getUserDao().getById(id));
 	}
 
 	@Override
-	public void delete(User user) {
+	public void delete(User user) throws NullPointerException,
+										 IllegalArgumentException {
+		if (user == null) {
+			throw new NullPointerException();
+		}
 		getUserDao().delete(user);
 	}
 
 	@Override
-	public void registrate(User u) {
-		u.setPassword(getPasswordService().hash(u.getPassword()));
+	public void registrate(User user) throws NullPointerException,
+											 ConstraintViolationException {
+		if (user == null) {
+			throw new NullPointerException();
+		}
+		user.setPassword(getPasswordService().hash(user.getPassword()));
 		logger.info(
 				"Registrating User: ID: {}, Mail: {}, Name: {}, FamilyName: {}, Password: {}, Group: {}", new Object[]{
-					u.getId(),
-					u.getMail(),
-					u.getName(),
-					u.getFamilyName(),
-					u.getPassword(),
-					u.getUserGroup()
+					user.getId(),
+					user.getMail(),
+					user.getName(),
+					user.getFamilyName(),
+					user.getPassword(),
+					user.getUserGroup()
 				});
-		getUserDao().save(u);
+		getUserDao().save(user);
 	}
 
 	@Override
-	public User login(Login login) {
+	public User login(Login login) throws NullPointerException {
+		if (login == null) {
+			throw new NullPointerException();
+		}
 		User u = get(login.getMail());
-		if (u != null && getPasswordService().check(u.getPassword(), login.getPassword())) {
-				return u;
+		if (u != null && getPasswordService().check(u.getPassword(), login.
+				getPassword())) {
+			return u;
 		} else {
 			return null;
 		}

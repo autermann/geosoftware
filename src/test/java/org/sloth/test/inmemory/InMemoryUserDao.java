@@ -15,9 +15,27 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.sloth.exceptions;
+package org.sloth.test.inmemory;
 
-public class ConstraintViolationException extends Error {
-	//XXX serial
-	private static final long serialVersionUID = 1L;
+import java.util.Map.Entry;
+import org.sloth.model.BaseEntity;
+import org.sloth.model.User;
+import org.sloth.persistence.UserDao;
+
+/**
+ *
+ * @author auti
+ */
+public class InMemoryUserDao extends InMemoryDao<User> implements UserDao{
+
+	@Override
+	public User getByMail(String mail) {
+		for (Entry<Long,User> entry : getEntrySet()) {
+			if (entry.getValue().getMail().equalsIgnoreCase(mail)) {
+				return entry.getValue();
+			}
+		}
+		return null;
+	}
+
 }

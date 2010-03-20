@@ -34,7 +34,7 @@ public interface CategorieDao extends Dao<Categorie>{
 	 * @throws NullPointerException if {@code title} is {@code null}
 	 *
 	 */
-	public Categorie get(String title) throws NullPointerException;
+	public Categorie getByTitle(String title) throws NullPointerException;
 
 	
 

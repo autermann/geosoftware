@@ -24,34 +24,33 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.Transient;
+import org.sloth.exceptions.ConstraintViolationException;
+import org.sloth.exceptions.FieldLengthConstraintViolationException;
+import org.sloth.exceptions.NotNullConstraintViolationException;
 import static javax.persistence.TemporalType.TIMESTAMP;
 
 /**
  * @todo
  * @author auti
  */
-@Entity
+@Entity(name="OBSERVATIONS")
 public class Observation extends BaseEntity implements Serializable {
 
-	/**
-	 * @todo
-	 */
 	@Transient
-	static final long serialVersionUID = -2729214423734969225L;
+	private static final long serialVersionUID = -2729214423734969225L;
 	@Column(nullable = false)
 	private String title;
-	@Column(length = 1000, nullable = false)
+	@Column(nullable = false, length = 1000)
 	private String description;
+	@Temporal(TIMESTAMP)
+	@Column(nullable = false, name = "CREATION_DATE")
+	private Date creationDate;
 	@ManyToOne
 	@JoinColumn(nullable = false, name = "USER_ID")
 	private User user;
-	@Temporal(TIMESTAMP)
-	@Column(nullable = false, name = "CREATION_TIME")
-	private Date creationDate;
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(nullable = false, name = "CATEGORIE_ID")
 	private Categorie categorie;
 	@Embedded
@@ -182,8 +181,9 @@ public class Observation extends BaseEntity implements Serializable {
 	@Override
 	public int hashCode() {
 		int hash = 7;
-		hash = 59 * hash + (this.getId() != null ? this.getId().hashCode() :0);
-		hash = 59 * hash + (this.getTitle() != null ? this.getTitle().hashCode() : 0);
+		hash = 59 * hash + (this.getId() != null ? this.getId().hashCode() : 0);
+		hash = 59 * hash + (this.getTitle() != null ? this.getTitle().hashCode()
+							: 0);
 		hash = 59 * hash + (this.getDescription() != null ? this.getDescription().
 				hashCode() : 0);
 		hash = 59 * hash + (this.getUser() != null ? this.getUser().hashCode()
@@ -217,4 +217,19 @@ public class Observation extends BaseEntity implements Serializable {
 		buf.append(")");
 		return buf.toString();
 	}
+
+	@Override
+	public void validate() throws ConstraintViolationException {
+		if (getCoordinate() == null || getCreationDate() == null
+			|| getDescription() == null || getTitle() == null
+			|| getUser() == null || getDescription().isEmpty()
+			|| getTitle().isEmpty()) {
+			throw new NotNullConstraintViolationException();
+		}
+		if (getTitle().length() > 255 || getDescription().length() > 1000) {
+			throw new FieldLengthConstraintViolationException();
+		}
+		getUser().validate();
+	}
+
 }

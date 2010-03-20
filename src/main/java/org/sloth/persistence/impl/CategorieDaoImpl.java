@@ -18,12 +18,13 @@
 package org.sloth.persistence.impl;
 
 import java.util.Collection;
-import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import org.sloth.exceptions.EntityAlreadyKnownException;
+import org.sloth.exceptions.EntityNotKnownException;
 import org.sloth.persistence.CategorieDao;
 import org.sloth.model.Categorie;
 import org.sloth.model.Categorie_;
@@ -63,7 +64,7 @@ public class CategorieDaoImpl extends EntityManagerDao<Categorie> implements
 	}
 
 	@Override
-	public Categorie get(String title) {
+	public Categorie getByTitle(String title) {
 		if (title == null) {
 			throw new NullPointerException();
 		}
@@ -84,7 +85,10 @@ public class CategorieDaoImpl extends EntityManagerDao<Categorie> implements
 	}
 
 	@Override
-	public Categorie get(Long id) {
+	public Categorie getById(Long id) {
+		if (id == null) {
+			throw new NullPointerException();
+		}
 		logger.info("Searching for ObservationCategorie with Id: {}", id);
 		Categorie oc = getEntityManager().find(Categorie.class, id);
 		if (oc != null) {
@@ -98,7 +102,9 @@ public class CategorieDaoImpl extends EntityManagerDao<Categorie> implements
 
 	@Override
 	public void update(Categorie oc) {
-		isAttached(oc);
+		if (!isAttached(oc)) {
+			throw new EntityNotKnownException();
+		}
 		logger.info("Updating ObservationCategorie with Id: {}", oc.getId());
 		getEntityManager().merge(oc);
 		getEntityManager().flush();
@@ -107,10 +113,12 @@ public class CategorieDaoImpl extends EntityManagerDao<Categorie> implements
 
 	@Override
 	public void delete(Categorie oc) {
-		isAttached(oc);
+		if (!isAttached(oc)) {
+			throw new EntityNotKnownException();
+		}
 		Categorie newCategorie = getDefaultCategorie();
 		logger.info("Replacing Categorie {} with default one.", oc);
-		for (Observation o : observationDao.get(oc)) {
+		for (Observation o : observationDao.getByCategorie(oc)) {
 			o.setCategorie(newCategorie);
 			observationDao.update(o);
 		}
@@ -122,10 +130,11 @@ public class CategorieDaoImpl extends EntityManagerDao<Categorie> implements
 
 	@Override
 	public void save(Categorie oc) {
-		EntityManager em = getEntityManager();
-		em.persist(oc);
-		logger.info("Persisting ObservationCategorie; Generated Id is: {}", oc.
-				getId());
+		if (isAttached(oc)) {
+			throw new EntityAlreadyKnownException();
+		}
+		getEntityManager().persist(oc);
+		logger.info("Persisting ObservationCategorie; Generated Id is: {}", oc.getId());
 		getEntityManager().flush();
 
 	}
@@ -134,7 +143,7 @@ public class CategorieDaoImpl extends EntityManagerDao<Categorie> implements
 		if (defaultCategorie == null) {
 			String title = Config.getProperty("default.categorie.title");
 			String descr = Config.getProperty("default.categorie.description");
-			Categorie tmp = get(title);
+			Categorie tmp = getByTitle(title);
 			if (tmp == null) {
 				defaultCategorie = new Categorie((title == null) ? "UNKNOWN" : title,
 												 (descr == null) ? "UNKNOWN" : descr);

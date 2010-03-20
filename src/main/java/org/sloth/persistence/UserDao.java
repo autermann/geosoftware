@@ -34,5 +34,5 @@ public interface UserDao extends Dao<User>{
 	 * @throws NullPointerException if {@code mail} is {@code null}
 	 * @throws IllegalArgumentException if {@code u} is not in the database.
 	 */
-	public User get(String mail);
+	public User getByMail(String mail);
 }

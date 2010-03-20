@@ -27,8 +27,8 @@
 	</bean>
 
 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		<property name="persistenceUnitName" value="sloth" />
-		<property name="persistenceXmlLocation" value="META-INF/persistence.xml" />
+		<property name="persistenceUnitName" value="test" />
+		<property name="persistenceXmlLocation" value="META-INF/persistence-test.xml" />
 		<property name="dataSource" ref="dataSource"/>
 		<property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
 		<property name="jpaPropertyMap">

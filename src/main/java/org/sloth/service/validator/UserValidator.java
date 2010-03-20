@@ -31,25 +31,20 @@ import static org.springframework.validation.ValidationUtils.rejectIfEmptyOrWhit
  */
 public class UserValidator extends Validator<User> {
 
+	@Autowired
+	private PasswordService passwordManager;
 	/**
 	 * @todo
 	 */
-	protected static String mailRegex =
-			"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$";
-	@Autowired
-	private PasswordService passwordManager;
+	protected static String mailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$";
 
 	/**
 	 * @todo
 	 */
 	static {
 		String regex = Config.getProperty("mail.regex");
-
 		if (regex != null && StringUtils.hasText(regex)) {
 			mailRegex = regex;
-			logger.info("Setting new regex: {}", regex);
-		} else {
-			logger.info("Using default regex.");
 		}
 	}
 

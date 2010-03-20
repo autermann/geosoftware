@@ -35,6 +35,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sloth.exceptions.ConstraintViolationException;
 import org.springframework.web.bind.annotation.PathVariable;
 
 
@@ -124,7 +125,15 @@ public class UserEditController {
 		if (result.hasErrors()) {
 			return "users/list";
 		} else {
-			this.userManager.update(user);
+			try {
+				this.userManager.update(user);
+			} catch(NullPointerException e) {
+				logger.warn("Binding fail. no user model attribute.", e);
+			} catch(IllegalArgumentException e) {
+				logger.warn("Model-Attribute user is not known.", e);
+			} catch(ConstraintViolationException e) {
+				//TODO
+			}
 			status.setComplete();
 			return "redirect:/users";
 		}

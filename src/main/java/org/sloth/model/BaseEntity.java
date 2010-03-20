@@ -17,12 +17,13 @@
  */
 package org.sloth.model;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+import org.sloth.exceptions.ConstraintViolationException;
 
 /**
  * Represtents an Entity with a {@code Long} as Id.
@@ -30,9 +31,7 @@ import javax.persistence.MappedSuperclass;
  * @author Christian Autermann
  */
 @MappedSuperclass
-@Access(AccessType.FIELD)
 public abstract class BaseEntity {
-
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
@@ -62,4 +61,15 @@ public abstract class BaseEntity {
 	public boolean isNew() {
 		return (this.id == null);
 	}
+
+	/**
+	 * Validates this Entity.
+	 * 
+	 * @throws ConstraintViolationException if a database constraint is
+	 * violated.
+	 */
+	@PrePersist
+	@PreUpdate
+	public abstract void validate() throws ConstraintViolationException;
+
 }

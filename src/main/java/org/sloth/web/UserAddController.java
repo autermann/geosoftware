@@ -17,6 +17,9 @@
  */
 package org.sloth.web;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.sloth.exceptions.ConstraintViolationException;
 import org.sloth.model.Group;
 import org.sloth.model.User;
 import org.sloth.service.UserService;
@@ -42,6 +45,7 @@ import org.springframework.web.bind.support.SessionStatus;
 @SessionAttributes(types = User.class)
 public class UserAddController {
 
+	private Logger logger = LoggerFactory.getLogger(UserAddController.class);
 	@Autowired
 	private UserService userManager;
 	@Autowired
@@ -117,7 +121,15 @@ public class UserAddController {
 			return "users/form";
 		} else {
 			user.setUserGroup(Group.USER);
-			this.userManager.registrate(user);
+			try {
+				this.userManager.registrate(user);
+			} catch(NullPointerException e) {
+				logger.warn("Binding fail. no user model attribute.", e);
+			} catch(IllegalArgumentException e) {
+				logger.warn("Model-Attribute user is already known.", e);
+			} catch(ConstraintViolationException e) {
+				//TODO
+			}
 			status.setComplete();
 			return "redirect:/";
 		}

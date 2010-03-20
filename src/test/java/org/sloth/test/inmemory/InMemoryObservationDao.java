@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.sloth.persistence.inmemory;
+package org.sloth.test.inmemory;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,7 +29,7 @@ public class InMemoryObservationDao extends InMemoryDao<Observation> implements
 		ObservationDao {
 
 	@Override
-	public Collection<Observation> get(Categorie c) {
+	public Collection<Observation> getByCategorie(Categorie c) {
 		if (c == null) {
 			throw new NullPointerException();
 		}
@@ -43,7 +43,7 @@ public class InMemoryObservationDao extends InMemoryDao<Observation> implements
 	}
 
 	@Override
-	public Collection<Observation> get(User u) throws NullPointerException {
+	public Collection<Observation> getByUser(User u) throws NullPointerException {
 		if (u == null) {
 			throw new NullPointerException();
 		}

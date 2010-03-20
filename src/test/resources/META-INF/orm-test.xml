@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" version="2.0"
+				 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				 xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd">
+	<package>org.sloth.model</package>
+	<entity class="Categorie">
+		<table name="CATEGORIES_TEST"/>
+	</entity>
+	<entity class="User">
+		<table name="USERS_TEST"/>
+	</entity>
+	<entity class="Observation">
+		<table name="OBSERVATIONS_TEST"/>
+	</entity>
+</entity-mappings>

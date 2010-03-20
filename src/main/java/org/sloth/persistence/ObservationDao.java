@@ -37,7 +37,7 @@ public interface ObservationDao extends Dao<Observation> {
 	 * @throws NullPointerException if {@code c} is {@code null}
 	 * @throws IllegalArgumentException if {@code c} is not in the database.
 	 */
-	public Collection<Observation> get(Categorie c) throws NullPointerException,
+	public Collection<Observation> getByCategorie(Categorie c) throws NullPointerException,
 			IllegalArgumentException;
 
 	/**
@@ -48,6 +48,6 @@ public interface ObservationDao extends Dao<Observation> {
 	 * @throws NullPointerException if {@code u} is {@code null}
 	 * @throws IllegalArgumentException if {@code u} is not in the database.
 	 */
-	public Collection<Observation> get(User u) throws NullPointerException,
+	public Collection<Observation> getByUser(User u) throws NullPointerException,
 			IllegalArgumentException;
 }

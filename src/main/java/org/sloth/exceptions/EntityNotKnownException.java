@@ -17,7 +17,8 @@
  */
 package org.sloth.exceptions;
 
-public class ConstraintViolationException extends Error {
+public class EntityNotKnownException extends IllegalArgumentException {
 	//XXX serial
 	private static final long serialVersionUID = 1L;
+
 }
