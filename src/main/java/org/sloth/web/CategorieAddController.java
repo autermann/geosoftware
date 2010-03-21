@@ -17,6 +17,10 @@
  */
 package org.sloth.web;
 
+import java.io.IOException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sloth.exceptions.ConstraintViolationException;
@@ -103,7 +107,10 @@ public class CategorieAddController {
 	 * Beim Aufruf der Seite wird die GET-Methoder aufgerufen...
 	 */
 	@RequestMapping(method = GET)
-	public String setupForm(Model model) {
+	public String setupForm(Model model, HttpSession session, HttpServletResponse r) throws IOException {
+		if (session.getAttribute("loginUser") == null) {
+			r.sendError(HttpServletResponse.SC_FORBIDDEN);
+		}
 		Categorie categorie = new Categorie();
 		model.addAttribute(categorie);
 		return "categories/new";
@@ -118,24 +125,26 @@ public class CategorieAddController {
 	 * Beim Absenden des Formulars die POST-Methode...
 	 */
 	@RequestMapping(method = POST)
-            public String processSubmit(@ModelAttribute Categorie categorie, BindingResult result,
-								SessionStatus status) {
+	public String processSubmit(@ModelAttribute Categorie categorie, BindingResult result,
+			SessionStatus status, HttpSession session, HttpServletResponse r) throws IOException {
+		if (session.getAttribute("loginUser") == null) {
+			r.sendError(HttpServletResponse.SC_FORBIDDEN);
+		}
 		getCategorieValidator().validate(categorie, result);
 		if (result.hasErrors()) {
 			return "redirect:/";
 		} else {
 			try {
 				this.observationManager.registrate(categorie);
-			} catch(NullPointerException e) {
+			} catch (NullPointerException e) {
 				logger.warn("Binding fail. no user model attribute.", e);
-			} catch(IllegalArgumentException e) {
+			} catch (IllegalArgumentException e) {
 				logger.warn("Model-Attribute user is already known.", e);
-			} catch(ConstraintViolationException e) {
+			} catch (ConstraintViolationException e) {
 				logger.warn("Exception: ", e);
 			}
 			status.setComplete();
 			return "redirect:/categories";
 		}
 	}
-
 }

@@ -51,5 +51,5 @@ public class Categorie_ {
 	 * @see Categorie#getIconFileName()
 	 * @see Categorie#setIconFileName(long)
 	 */
-	public static volatile SingularAttribute<Categorie, Long> iconFileName;
+	public static volatile SingularAttribute<Categorie, String> iconFileName;
 }
