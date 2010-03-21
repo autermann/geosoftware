@@ -22,6 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sloth.model.User;
 import org.sloth.service.Login;
+import org.sloth.service.ObservationService;
 import org.sloth.service.UserService;
 import org.sloth.service.validator.LoginValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,27 +40,31 @@ import org.springframework.web.servlet.ModelAndView;
 
 //TODO JavaDoc
 @Controller
-@RequestMapping("/")
 @SessionAttributes(types = Login.class)
 public class LoginFormController {
 
 	private Logger logger = LoggerFactory.getLogger(LoginFormController.class);
 
 	private UserService um;
+	private ObservationService os;
+	private LoginValidator lv;
 
 	@Autowired
-	public void setUserManager(UserService um) {
+	public void setUserService(UserService um) {
 		this.um = um;
 	}
-
-	private LoginValidator lv;
+	
+	@Autowired
+	public void setObservationService(ObservationService os) {
+		this.os = os;
+	}
 
 	@Autowired
 	public void setLoginValidator(LoginValidator lv) {
 		this.lv = lv;
 	}
 
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value="/", method = RequestMethod.GET)
 	public String get(Model model) {
 		if (model.containsAttribute("login")){
 			logger.info("Returning the welcome page; using old login item.");
@@ -67,7 +72,7 @@ public class LoginFormController {
 			model.addAttribute("login", new Login());
 			logger.info("Returning the welcome page; using new login item.");
 		}
-
+		model.addAttribute("map",os.getObservationsByCategories());
 		return "welcome";
 	}
 
@@ -76,7 +81,7 @@ public class LoginFormController {
 		dataBinder.setAllowedFields("mail", "password");
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(value="/", method = RequestMethod.POST)
 	public String submit(@ModelAttribute Login login,
 						 BindingResult result,
 						 SessionStatus status,
@@ -99,5 +104,6 @@ public class LoginFormController {
 			return "welcome";
 		}
 	}
+
 
 }
