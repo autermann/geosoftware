@@ -17,9 +17,12 @@
  */
 package org.sloth.web;
 
+import java.util.Collection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sloth.exceptions.ConstraintViolationException;
+import org.sloth.model.Categorie;
+import org.sloth.model.Coordinate;
 import org.sloth.model.Observation;
 import org.sloth.service.ObservationService;
 import org.sloth.service.validator.ObservationValidator;
@@ -90,7 +93,9 @@ public class ObservationAddController {
 	 */
 	@InitBinder
 	public void setAllowedFields(WebDataBinder dataBinder) {
-		dataBinder.setDisallowedFields("id", "creationDate");
+		CategorieEditor c = new CategorieEditor();
+		c.setObservationService(observationManager);
+		dataBinder.registerCustomEditor(Categorie.class, c);
 	}
 
 	/**
@@ -103,6 +108,8 @@ public class ObservationAddController {
 	public String setupForm(Model model) {
 		Observation observation = new Observation();
 		model.addAttribute(observation);
+		Collection<Categorie> categories = observationManager.getCategories();
+		model.addAttribute("categories", categories);
 		return "observations/form";
 	}
 
@@ -124,16 +131,15 @@ public class ObservationAddController {
 		} else {
 			try {
 				this.observationManager.registrate(observation);
-			} catch(NullPointerException e) {
+			} catch (NullPointerException e) {
 				logger.warn("Binding fail. No Observation Model Attribut.", e);
-			} catch(IllegalArgumentException e) {
+			} catch (IllegalArgumentException e) {
 				logger.warn("Model-Attribute observation is already known...", e);
-			} catch(ConstraintViolationException e) {
-				//TODO
+			} catch (ConstraintViolationException e) {
+				logger.warn("Die hier fliegt: ",e);
 			}
 			status.setComplete();
 			return "redirect:/";
 		}
 	}
-
 }

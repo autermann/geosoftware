@@ -197,4 +197,7 @@ public interface ObservationService {
 	 * @return
 	 */
 	public Map<Categorie, Collection<Observation>> getObservationsByCategories();
+
+
+	public Categorie getCategorieByTitle(String title);
 }

@@ -22,7 +22,6 @@ import java.util.Date;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.sloth.exceptions.EntityAlreadyKnownException;
@@ -397,6 +396,14 @@ public class DaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 			return;
 		}
 		fail();
+	}
+
+
+	@Test
+	public void getCategorieByTitle(){
+		Categorie c = getCategorie();
+		categorieDao.save(c);
+		assertEquals(c, categorieDao.getByTitle(c.getTitle()));
 	}
 
 }

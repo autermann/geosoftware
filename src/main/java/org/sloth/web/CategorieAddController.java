@@ -93,7 +93,7 @@ public class CategorieAddController {
 	 */
 	@InitBinder
 	public void setAllowedFields(WebDataBinder dataBinder) {
-		dataBinder.setDisallowedFields("id", "creationDate", "userRight");
+		dataBinder.setAllowedFields("title", "description", "iconFileName");
 	}
 
 	/**
@@ -131,7 +131,7 @@ public class CategorieAddController {
 			} catch(IllegalArgumentException e) {
 				logger.warn("Model-Attribute user is already known.", e);
 			} catch(ConstraintViolationException e) {
-				//TODO
+				logger.warn("Exception: ", e);
 			}
 			status.setComplete();
 			return "redirect:/categories";

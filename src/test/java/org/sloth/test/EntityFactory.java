@@ -85,6 +85,7 @@ public abstract class EntityFactory {
 		Categorie c = new Categorie();
 		c.setDescription("Description of Categorie " + categorieCount);
 		c.setTitle("Title of Categorie " + categorieCount);
+		c.setIconFileName("File"+categorieCount+".png");
 		categorieCount++;
 		return c;
 	}

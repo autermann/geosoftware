@@ -176,7 +176,7 @@ public class ObservationServiceImpl implements ObservationService {
 		if (id == null) {
 			throw new NullPointerException();
 		}
-		return null;
+		return getCategorieDao().getById(id);
 	}
 
 	@Override
@@ -238,5 +238,12 @@ public class ObservationServiceImpl implements ObservationService {
 			map.put(c, observationDao.getByCategorie(c));
 		}
 		return map;
+	}
+
+	@Override
+	public Categorie getCategorieByTitle(String title) {
+		if (title == null)
+			throw new NullPointerException();
+		return categorieDao.getByTitle(title);
 	}
 }

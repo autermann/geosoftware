@@ -19,21 +19,27 @@
 							<td width="40%" align="left"><form:input path="title"/></td>
 							<td width="40%" align="right"><form:errors cssStyle="color:red;" path="title"/></td>
 						</tr>
-                                                <tr>
+						<tr>
 							<td width="20%" align="right"><fmt:message key="observation.description"/>:</td>
 							<td width="40%" align="left"><form:textarea path="description"/></td>
 							<td width="40%" align="right"><form:errors cssStyle="color:red;" path="description"/></td>
 						</tr>
-                                                <tr>
+						<tr>
 							<td width="20%" align="right"><fmt:message key="observation.categorie"/>:</td>
+
 							<td width="40%" align="left">
-                                                           
-                                                        </td>
+								<form:select path="categorie">
+									<form:options items="${categories}" itemLabel="title" itemValue="id"/>
+								</form:select>
+							</td>
 							<td width="40%" align="right"><form:errors cssStyle="color:red;" path="categorie"/></td>
 						</tr>
-                                                   <tr>
+						<tr>
 							<td width="20%" align="right"><fmt:message key="observation.coordinate"/>:</td>
-							<td width="40%" align="left"><form:input path="coordinate"/></td>
+							<td width="40%" align="left">
+								Lon:<form:input path="coordinate.longitude"/><br/>
+								Lat:<form:input path="coordinate.latitude"/>
+							</td>
 							<td width="40%" align="right"><form:errors cssStyle="color:red;" path="coordinate"/></td>
 						</tr>
 						<tr>
