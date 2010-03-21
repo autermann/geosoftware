@@ -101,9 +101,9 @@ public class ObservationDaoImpl extends EntityManagerDao<Observation>
 		if (c == null) {
 			throw new NullPointerException();
 		}
-		if (!getEntityManager().contains(c)) {
-			throw new EntityNotKnownException();
-		}
+	//	if (!getEntityManager().contains(c)) {
+	//		throw new EntityNotKnownException();
+	//	}
 		CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
 		CriteriaQuery<Observation> cq = cb.createQuery(Observation.class);
 		Root<Observation> o = cq.from(Observation.class);

@@ -46,4 +46,10 @@ public class Categorie_ {
 	 * @see Categorie#setId(long) 
 	 */
 	public static volatile SingularAttribute<Categorie, Long> id;
+	/**
+	 * Metamodel-Attribute for {@link Categorie#iconFileName}
+	 * @see Categorie#getIconFileName()
+	 * @see Categorie#setIconFileName(long)
+	 */
+	public static volatile SingularAttribute<Categorie, Long> iconFileName;
 }

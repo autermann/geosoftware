@@ -17,6 +17,7 @@
  */
 package org.sloth.web;
 
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 /**
@@ -24,15 +25,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author auti
  */
 @Controller
-@RequestMapping("/session/logout")
 public class SessionController {
 
-	/**
-	 * @todo
-	 * @return
-	 */
-	@RequestMapping
-	public String doWelcome(){
-		return "session/logout";
+	@RequestMapping("/session/logout")
+	public String doWelcome(HttpSession session){
+		session.invalidate();
+		return "redirect:/";
 	}
 }

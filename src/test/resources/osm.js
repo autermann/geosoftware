@@ -1,38 +1,13 @@
-/*
-Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth, Christoph 
-					Fendrich, Christian Paluschek
-	This program is free software: you can redistribute it and/or modify it 
-	under the terms of the GNU General Public License as published by the Free 
-	Software Foundation, either version 3 of the License, or (at your option) 
-	any later version.
-	This program is distributed in the hope that it will be useful, but WITHOUT 
-	ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
-	FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for 
-	more details. 
-	You should have received a copy of the GNU General Public License along with
-	this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
 var map;
-var layer_markers = new OpenLayers.Layer.Markers("Observations", {
-	projection: new OpenLayers.Projection("EPSG:4326"),
-	visibility: true,
-	displayInLayerSwitcher: true
-});
-
-
-function checkForPermalink() {
-	var parameters = getParameters(),zoom,lon,lat;
-	if (parameters['zoom'] != null)zoom = parseInt(parameters['zoom']);
-	if (parameters['lat'] != null) lat = parseFloat(parameters['lat']);
-	if (parameters['lon'] != null) lon = parseFloat(parameters['lon']);
-	goTo(lon, lat, zoom);
-}
-
 
 function init(){
+	layer_markers = new OpenLayers.Layer.Markers("Observations", {
+		projection: new OpenLayers.Projection("EPSG:4326"),
+		visibility: true,
+		displayInLayerSwitcher: true
+	});
 	OpenLayers.Lang.setCode('de');
-        //Create new Openlayers-Layer with ID 'map'
+	//Create new Openlayers-Layer with ID 'map'
 	map = new OpenLayers.Map('map', {
 		controls: [],
 		maxExtent: new OpenLayers.Bounds(-20037508.34,-20037508.34,20037508.34,20037508.34),
@@ -124,14 +99,16 @@ function addMarker(layer, ll, content, iconPath, iconWidth, iconHeight,open) {
 			this.popup.toggle();
 		}
 		OpenLayers.Event.stop(evt);
-	});	
+	});
 	layer.addMarker(marker);
 	if (open){
 		if (feature.popup == null) {
 			feature.popup = feature.createPopup(feature.closeBox);
 			map.addPopup(feature.popup);
 			feature.popup.show();
-		} else { feature.popup.toggle(); }
+		} else {
+			feature.popup.toggle();
+		}
 	}
 }
 
@@ -173,4 +150,12 @@ function getParameters() {
 
 function goTo(lon, lat, zoom) {
 	map.setCenter(new OpenLayers.LonLat(Lon2Merc(lon), Lat2Merc(lat)), zoom);
+}
+
+function checkForPermalink() {
+	var parameters = getParameters(),zoom,lon,lat;
+	if (parameters['zoom'] != null)zoom = parseInt(parameters['zoom']);
+	if (parameters['lat'] != null) lat = parseFloat(parameters['lat']);
+	if (parameters['lon'] != null) lon = parseFloat(parameters['lon']);
+	goTo(lon, lat, zoom);
 }
