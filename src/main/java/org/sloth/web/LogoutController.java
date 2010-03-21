@@ -24,11 +24,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @todo
  * @author auti
  */
-@Controller
-public class SessionController {
+@Controller("/logout")
+public class LogoutController {
 
-	@RequestMapping("/session/logout")
-	public String doWelcome(HttpSession session){
+	@RequestMapping
+	public String logout(HttpSession session){
 		session.invalidate();
 		return "redirect:/";
 	}

@@ -40,11 +40,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 //TODO JavaDoc
 @Controller
+@RequestMapping("/login")
 @SessionAttributes(types = Login.class)
-public class LoginFormController {
+public class LoginController {
 
-	private Logger logger = LoggerFactory.getLogger(LoginFormController.class);
-
+	private Logger logger = LoggerFactory.getLogger(LoginController.class);
 	private UserService um;
 	private ObservationService os;
 	private LoginValidator lv;
@@ -53,7 +53,7 @@ public class LoginFormController {
 	public void setUserService(UserService um) {
 		this.um = um;
 	}
-	
+
 	@Autowired
 	public void setObservationService(ObservationService os) {
 		this.os = os;
@@ -64,24 +64,17 @@ public class LoginFormController {
 		this.lv = lv;
 	}
 
-	@RequestMapping(value="/", method = RequestMethod.GET)
-	public String get(Model model) {
-		if (model.containsAttribute("login")){
-			logger.info("Returning the welcome page; using old login item.");
-		} else {
-			model.addAttribute("login", new Login());
-			logger.info("Returning the welcome page; using new login item.");
-		}
-		model.addAttribute("map",os.getObservationsByCategories());
-		return "welcome";
-	}
-
 	@InitBinder
 	public void setAllowedFields(WebDataBinder dataBinder) {
 		dataBinder.setAllowedFields("mail", "password");
 	}
 
-	@RequestMapping(value="/", method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.GET)
+	public ModelAndView get(Model model) {
+		return new ModelAndView("login", "login", new Login());
+	}
+
+	@RequestMapping(method = RequestMethod.POST)
 	public String submit(@ModelAttribute Login login,
 						 BindingResult result,
 						 SessionStatus status,
@@ -89,21 +82,20 @@ public class LoginFormController {
 		lv.validate(login, result);
 		if (result.hasErrors()) {
 			logger.info("Login item has errors.");
-			return "welcome";
+			return "login";
 		} else {
 			logger.info("Login item seem to be ok. Testing the credentials.");
 			User dbUser = um.login(login);
 			if (dbUser == null) {
 				logger.info("no matching user found or password was wrong.");
 				result.reject("field.invalidLogin");
+				return "login";
 			} else {
 				logger.info("Got valid user. Setting Session-Attribute.");
 				session.setAttribute("loginUser", dbUser);
 				status.setComplete();
 			}
-			return "welcome";
+			return "redirect:/";
 		}
 	}
-
-
 }
