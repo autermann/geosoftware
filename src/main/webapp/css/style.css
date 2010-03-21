@@ -31,3 +31,19 @@ body {
 	right:0;
 	bottom:50px;
 }
+
+#login{
+    font-family: Verdana;
+}
+
+
+input[type="button"], input[type="submit"]
+   {
+      font-size: 12px;
+      font-weight: normal;
+      text-align: center;
+      color: #222222;
+      border: 1px solid #AAAAAA;
+      background: #CCCCCC;
+
+        }
