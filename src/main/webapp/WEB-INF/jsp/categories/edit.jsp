@@ -26,7 +26,7 @@
 							<td align="center" colspan="2">
 								<input type="submit" value="Update" />
 								<input type="button" value="Cancel" onclick="window.location.href='<spring:url value="/categories/"></spring:url>'">
-								<input type="button" value="Delete" onclick="window.location.href='<spring:url value="/categories/edit/${categorie.id}"></spring:url>'">
+								<input type="button" value="Delete" onclick="window.location.href='<spring:url value="/categories/delete/${categorie.id}"></spring:url>'">
 							</td>
 						</tr>
 					</table>

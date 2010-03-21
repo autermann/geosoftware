@@ -35,6 +35,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -45,7 +46,7 @@ import org.springframework.web.bind.support.SessionStatus;
  * @author auti
  */
 @Controller
-@RequestMapping("/categories/delete")
+@RequestMapping("/categories/delete/{id}")
 @SessionAttributes(types = Categorie.class)
 public class CategorieDeleteController {
 
@@ -103,10 +104,11 @@ public class CategorieDeleteController {
 	 * Beim Aufruf der Seite wird die GET-Methoder aufgerufen...
 	 */
 	@RequestMapping(method = GET)
-	public String setupForm(Model model) {
-		Categorie categorie = new Categorie();
-		model.addAttribute(categorie);
-		return "categories/edit";
+	public String setupForm(@PathVariable Long id, Model model) {
+		Categorie categorie = getObservationManager().getCategorie(id);
+                logger.info("Delete of Categorie {}", id);
+		model.addAttribute("categorie", categorie);
+		return "categories/delete";
 	}
 
 	/**
@@ -125,7 +127,7 @@ public class CategorieDeleteController {
 			return "redirect:/";
 		} else {
 			try {
-				this.observationManager.updateCategorie(categorie);
+				this.observationManager.deleteCategorie(categorie);
 			} catch(NullPointerException e) {
 				logger.warn("Binding fail. no user model attribute.", e);
 			} catch(IllegalArgumentException e) {
