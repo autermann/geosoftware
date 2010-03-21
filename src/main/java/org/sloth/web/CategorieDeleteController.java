@@ -45,11 +45,11 @@ import org.springframework.web.bind.support.SessionStatus;
  * @author auti
  */
 @Controller
-@RequestMapping("/categories/new")
+@RequestMapping("/categories/delete")
 @SessionAttributes(types = Categorie.class)
-public class CategorieAddController {
+public class CategorieDeleteController {
 
-	private Logger logger = LoggerFactory.getLogger(CategorieAddController.class);
+	private Logger logger = LoggerFactory.getLogger(CategorieDeleteController.class);
 	@Autowired
 	private ObservationService observationManager;
 	@Autowired
@@ -106,7 +106,7 @@ public class CategorieAddController {
 	public String setupForm(Model model) {
 		Categorie categorie = new Categorie();
 		model.addAttribute(categorie);
-		return "categories/new";
+		return "categories/edit";
 	}
 
 	/**
@@ -125,13 +125,13 @@ public class CategorieAddController {
 			return "redirect:/";
 		} else {
 			try {
-				this.observationManager.registrate(categorie);
+				this.observationManager.updateCategorie(categorie);
 			} catch(NullPointerException e) {
 				logger.warn("Binding fail. no user model attribute.", e);
 			} catch(IllegalArgumentException e) {
 				logger.warn("Model-Attribute user is already known.", e);
 			} catch(ConstraintViolationException e) {
-				logger.warn("Exception: ", e);
+				//TODO
 			}
 			status.setComplete();
 			return "redirect:/categories";

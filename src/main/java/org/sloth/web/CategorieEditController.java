@@ -35,6 +35,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -45,11 +46,11 @@ import org.springframework.web.bind.support.SessionStatus;
  * @author auti
  */
 @Controller
-@RequestMapping("/categories/new")
+@RequestMapping("/categories/edit/{id}")
 @SessionAttributes(types = Categorie.class)
-public class CategorieAddController {
+public class CategorieEditController {
 
-	private Logger logger = LoggerFactory.getLogger(CategorieAddController.class);
+	private Logger logger = LoggerFactory.getLogger(CategorieEditController.class);
 	@Autowired
 	private ObservationService observationManager;
 	@Autowired
@@ -103,11 +104,13 @@ public class CategorieAddController {
 	 * Beim Aufruf der Seite wird die GET-Methoder aufgerufen...
 	 */
 	@RequestMapping(method = GET)
-	public String setupForm(Model model) {
-		Categorie categorie = new Categorie();
-		model.addAttribute(categorie);
-		return "categories/new";
+	public String setupForm(@PathVariable Long id, Model model) {
+		Categorie categorie = getObservationManager().getCategorie(id);
+                logger.info("Edit of Details for Categorie {}", id);
+		model.addAttribute("categorie", categorie);
+		return "categories/edit";
 	}
+        
 
 	/**
 	 * @param user
@@ -125,13 +128,13 @@ public class CategorieAddController {
 			return "redirect:/";
 		} else {
 			try {
-				this.observationManager.registrate(categorie);
+				this.observationManager.updateCategorie(categorie);
 			} catch(NullPointerException e) {
 				logger.warn("Binding fail. no user model attribute.", e);
 			} catch(IllegalArgumentException e) {
 				logger.warn("Model-Attribute user is already known.", e);
 			} catch(ConstraintViolationException e) {
-				logger.warn("Exception: ", e);
+				//TODO
 			}
 			status.setComplete();
 			return "redirect:/categories";

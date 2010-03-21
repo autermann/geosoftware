@@ -11,11 +11,20 @@
 		<tr>
 			<th><fmt:message key="categorie.title"/></th>
 			<th><fmt:message key="categorie.description"/></th>
+                        <th><fmt:message key="categorie.iconFileName" /></th>
+                        <th><fmt:message key="categorie.edit" /></th>
+
                 </tr>
 		<c:forEach var="categorie" items="${categories}">
 			<tr>
 				<td>${categorie.title}</td>
 				<td>${categorie.description}</td>
+                                <td>${categorie.iconFileName}</td>
+                                <td>
+					<a href="<spring:url value="/categories/edit/${categorie.id}"/>">
+						Edit
+					</a>
+				</td>
                         </tr>
 		</c:forEach>
 	</table>
