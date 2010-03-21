@@ -33,7 +33,7 @@ import org.sloth.exceptions.NotNullConstraintViolationException;
  * @version 1.0
  * @since 1.0
  */
-@Entity(name="CATEGORIES")
+@Entity(name = "CATEGORIES")
 public class Categorie extends BaseEntity implements Serializable {
 
 	@Transient
@@ -42,6 +42,8 @@ public class Categorie extends BaseEntity implements Serializable {
 	private String title;
 	@Column(nullable = false, length = 1000)
 	private String description;
+	@Column(nullable = false)
+	private String iconFileName;
 
 	/**
 	 * Creates a new <code>Categorie</code> with specified title and description
@@ -102,10 +104,9 @@ public class Categorie extends BaseEntity implements Serializable {
 	public int hashCode() {
 		int hash = 7;
 		hash = 41 * hash + (this.getId() != null ? this.getId().hashCode() : 0);
-		hash = 41 * hash + (this.getTitle() != null ? this.getTitle().hashCode()
-							: 0);
-		hash = 41 * hash + (this.getDescription() != null ? this.getDescription().
-				hashCode() : 0);
+		hash = 41 * hash + (this.getIconFileName() != null ? this.getIconFileName().hashCode() : 0);
+		hash = 41 * hash + (this.getTitle() != null ? this.getTitle().hashCode() : 0);
+		hash = 41 * hash + (this.getDescription() != null ? this.getDescription().hashCode() : 0);
 		return hash;
 	}
 
@@ -117,15 +118,31 @@ public class Categorie extends BaseEntity implements Serializable {
 	@Override
 	public void validate() throws ConstraintViolationException {
 		if (this.getDescription() == null
-			|| this.getTitle() == null
-			|| this.getDescription().isEmpty()
-			|| this.getTitle().isEmpty()) {
+				|| this.getTitle() == null
+				|| this.getIconFileName() == null
+				|| this.getIconFileName().isEmpty()
+				|| this.getDescription().isEmpty()
+				|| this.getTitle().isEmpty()) {
 			throw new NotNullConstraintViolationException();
 		}
 		if (this.getDescription().length() > 1000
-			|| this.getTitle().length() > 255) {
+				|| this.getTitle().length() > 255
+				|| this.getIconFileName().length() > 255) {
 			throw new FieldLengthConstraintViolationException();
 		}
 	}
 
+	/**
+	 * @return the iconFileName
+	 */
+	public String getIconFileName() {
+		return iconFileName;
+	}
+
+	/**
+	 * @param iconFileName the iconFileName to set
+	 */
+	public void setIconFileName(String iconFileName) {
+		this.iconFileName = iconFileName;
+	}
 }

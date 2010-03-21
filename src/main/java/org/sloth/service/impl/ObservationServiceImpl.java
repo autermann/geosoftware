@@ -18,8 +18,10 @@
 package org.sloth.service.impl;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sloth.exceptions.ConstraintViolationException;
@@ -102,9 +104,9 @@ public class ObservationServiceImpl implements ObservationService {
 		for (Observation o : getObservations()) {
 			Categorie oc = o.getCategorie();
 			if (o.getTitle().matches(regex)
-				|| o.getDescription().matches(regex)
-				|| oc.getTitle().matches(regex)
-				|| oc.getDescription().matches(regex)) {
+					|| o.getDescription().matches(regex)
+					|| oc.getTitle().matches(regex)
+					|| oc.getDescription().matches(regex)) {
 				result.add(o);
 			}
 		}
@@ -132,8 +134,8 @@ public class ObservationServiceImpl implements ObservationService {
 
 	@Override
 	public void registrate(Observation observation) throws NullPointerException,
-														   ConstraintViolationException,
-														   IllegalArgumentException {
+			ConstraintViolationException,
+			IllegalArgumentException {
 		if (observation == null) {
 			throw new NullPointerException();
 		}
@@ -184,7 +186,7 @@ public class ObservationServiceImpl implements ObservationService {
 
 	@Override
 	public void deleteCategorie(Categorie categorie) throws NullPointerException,
-															IllegalArgumentException {
+			IllegalArgumentException {
 		if (categorie == null) {
 			throw new NullPointerException();
 		}
@@ -193,7 +195,7 @@ public class ObservationServiceImpl implements ObservationService {
 
 	@Override
 	public void deleteCategorie(Long id) throws NullPointerException,
-												IllegalArgumentException {
+			IllegalArgumentException {
 		if (id == null) {
 			throw new NullPointerException();
 		}
@@ -202,8 +204,8 @@ public class ObservationServiceImpl implements ObservationService {
 
 	@Override
 	public void updateCategorie(Categorie categorie) throws NullPointerException,
-															ConstraintViolationException,
-															IllegalArgumentException {
+			ConstraintViolationException,
+			IllegalArgumentException {
 		if (categorie == null) {
 			throw new NullPointerException();
 		}
@@ -221,11 +223,20 @@ public class ObservationServiceImpl implements ObservationService {
 
 	@Override
 	public void deleteObservation(Long id) throws NullPointerException,
-												  IllegalArgumentException {
+			IllegalArgumentException {
 		if (id == null) {
 			throw new NullPointerException();
 		}
 		deleteCategorie(getCategorieDao().getById(id));
 	}
 
+	@Override
+	public Map<Categorie, Collection<Observation>> getObservationsByCategories() {
+		HashMap<Categorie, Collection<Observation>> map
+				= new HashMap<Categorie, Collection<Observation>>();
+		for (Categorie c : categorieDao.getAll()) {
+			map.put(c, observationDao.getByCategorie(c));
+		}
+		return map;
+	}
 }

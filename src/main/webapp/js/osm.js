@@ -69,18 +69,18 @@ function init(){
 }
 
 function getCreationForm() {
-	return '<form name="create" action="createObservation">'
-	+ '<input type="text" name="title" value="Titel" />'
-	+ '<label for="category">Kategorie: </label><select name="category">'
-	+ '<option value="ar">Abfall</option>'
-	+ '<option value="br">Vandalismus</option>'
-	+ '<option value="cl">was weiß ich</option>'
-	+ '<option value="dk">wtf?</option>'
-	+ '</select><br/>'
-	+ '<textarea name="description" cols="50" rows="10"></textarea><br/>'
-	+ '<input type="button" value="Abbrechen" />'
-	+ '<input type="submit" value="OK" />'
-	+ '</form>';
+	return '<form name="create" action="createObservation"> \
+	<input type="text" name="title" value="Titel" /> \
+	<label for="category">Kategorie: </label><select name="category"> \
+	<option value="ar">Abfall</option> \
+	<option value="br">Vandalismus</option> \
+	<option value="cl">was weiß ich</option> \
+	<option value="dk">wtf?</option> \
+	</select><br/> \
+	<textarea name="description" cols="50" rows="10"></textarea><br/> \
+	<input type="button" value="Abbrechen" /> \
+	<input type="submit" value="OK" /> \
+	</form>';
 }
 
 

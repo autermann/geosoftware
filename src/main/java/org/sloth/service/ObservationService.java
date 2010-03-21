@@ -18,6 +18,7 @@
 package org.sloth.service;
 
 import java.util.Collection;
+import java.util.Map;
 import org.sloth.exceptions.ConstraintViolationException;
 import org.sloth.model.Observation;
 import org.sloth.model.Categorie;
@@ -191,4 +192,9 @@ public interface ObservationService {
 														   IllegalArgumentException,
 														   ConstraintViolationException;
 
+	/**
+	 * @todo
+	 * @return
+	 */
+	public Map<Categorie, Collection<Observation>> getObservationsByCategories();
 }
