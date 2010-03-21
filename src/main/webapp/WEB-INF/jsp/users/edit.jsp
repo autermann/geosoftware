@@ -27,6 +27,11 @@
 							<td width="40%" align="left"><form:password path="password" showPassword="true"/></td>
 							<td width="40%" align="right"><form:errors cssStyle="color:red;" path="password"/></td>
 						</tr>
+                                                <tr>
+                                                        <td width="20%" align="right"><fmt:message key="user.userGroup"/>:</td>
+							<td width="40%" align="left"><form:input path="userGroup"/></td>
+							<td width="40%" align="right"><form:errors cssStyle="color:red;" path="userGroup"/></td>
+                                                </tr>
 						<tr>
 							<td align="center" colspan="2">
 								<input type="submit" value="Update" />

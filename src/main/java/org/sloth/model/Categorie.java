@@ -145,4 +145,5 @@ public class Categorie extends BaseEntity implements Serializable {
 	public void setIconFileName(String iconFileName) {
 		this.iconFileName = iconFileName;
 	}
+
 }

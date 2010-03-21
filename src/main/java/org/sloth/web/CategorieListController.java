@@ -20,6 +20,7 @@ package org.sloth.web;
 import java.util.Collection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sloth.model.Categorie;
 import org.sloth.model.Observation;
 import org.sloth.service.ObservationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,7 +74,7 @@ public class CategorieListController {
 	@RequestMapping(method = GET)
 	public String setupList(Model model) {
 
-		Collection<Observation> categories = getObservationManager().getObservations();
+		Collection<Categorie> categories = getObservationManager().getCategories();
 		logger.info("Request for Categories List; got {} entrys.", categories.size());
 		model.addAttribute("categories", categories);
 		return "categories/list";

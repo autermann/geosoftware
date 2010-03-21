@@ -23,6 +23,10 @@
 			<td><fmt:message key="user.creationDate"/>:</td>
 			<td><fmt:formatDate value="${user.creationDate}"/></td>
 		<tr/>
+                <tr>
+			<td><fmt:message key="user.userGroup"/>:</td>
+                        <td><c:out value="${user.userGroup}" default="-"/></td>
+		<tr/>
 	</table>
 	<p>
 		<a href="<spring:url value="/users"/>"><fmt:message key="nav.back"/></a>
