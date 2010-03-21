@@ -177,7 +177,7 @@ alert("No Attribute map found");
 						String icon = entry.getKey().getIconFileName();
 						for (Observation o : entry.getValue()) {
 	%>
-			addMarker(layer_markers, new OpenLayers.LonLat(Lon2Merc(<%=o.getCoordinate().getLongitude()%>),  Lat2Merc(<%=o.getCoordinate().getLatitude()%>)),"<b><%=o.getTitle()%></b>","/sloth/static/img/<%=icon%>", 48, 48, false);
+			addMarker(layer_markers, new OpenLayers.LonLat(Lon2Merc(<%=o.getCoordinate().getLongitude()%>),  Lat2Merc(<%=o.getCoordinate().getLatitude()%>)),"<b><%=o.getTitle()%></b>","/sloth/static/img/<%=icon%>", 24, 24, false);
 	<%
 					}
 				}
