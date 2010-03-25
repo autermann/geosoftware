@@ -18,18 +18,18 @@
 package org.sloth.service.impl;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sloth.exceptions.ConstraintViolationException;
+import org.sloth.model.Report;
 import org.sloth.model.User;
 import org.sloth.persistence.ObservationDao;
 import org.sloth.model.Observation;
 import org.sloth.model.Categorie;
 import org.sloth.persistence.CategorieDao;
+import org.sloth.persistence.ReportDao;
 import org.sloth.service.ObservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,6 +42,7 @@ public class ObservationServiceImpl implements ObservationService {
 	protected static final Logger logger = LoggerFactory.getLogger(ObservationServiceImpl.class);
 	private ObservationDao observationDao;
 	private CategorieDao categorieDao;
+	private ReportDao reportDao;
 
 	private ObservationDao getObservationDao() {
 		return observationDao;
@@ -51,12 +52,15 @@ public class ObservationServiceImpl implements ObservationService {
 		return categorieDao;
 	}
 
+	private ReportDao getReportDao() {
+		return reportDao;
+	}
+
 	@Autowired
 	public void setObservationDao(ObservationDao oDao) throws
 			NullPointerException {
 		if (oDao == null)
 			throw new NullPointerException();
-		logger.info("Setting autowired ObservationDao");
 		this.observationDao = oDao;
 	}
 
@@ -64,8 +68,14 @@ public class ObservationServiceImpl implements ObservationService {
 	public void setCategorieDao(CategorieDao ocDao) throws NullPointerException {
 		if (ocDao == null)
 			throw new NullPointerException();
-		logger.info("Setting autowired CategorieDao");
 		this.categorieDao = ocDao;
+	}
+
+	@Autowired
+	public void setReportDao(ReportDao rDao) throws NullPointerException {
+		if (rDao == null)
+			throw new NullPointerException();
+		this.reportDao = rDao;
 	}
 
 	@Override
@@ -216,5 +226,66 @@ public class ObservationServiceImpl implements ObservationService {
 			throw new NullPointerException();
 		else
 			return getObservationDao().getByUser(u);
+	}
+
+	@Override
+	public Collection<Report> getReports() {
+		return getReportDao().getAll();
+	}
+
+	@Override
+	public Collection<Report> getReportsByUser(User u) throws
+			NullPointerException,
+			IllegalArgumentException {
+		if (u == null)
+			throw new NullPointerException();
+		return getReportDao().getByUser(u);
+	}
+
+	@Override
+	public Collection<Report> getReportsByObservation(Observation o) throws
+			NullPointerException,
+			IllegalArgumentException {
+		if (o == null)
+			throw new NullPointerException();
+		return getReportDao().getByObservation(o);
+	}
+
+	@Override
+	public Collection<Report> getReportsByProcessedState(boolean processed) {
+		return (processed) ? getReportDao().getProcessed() : getReportDao().getUnprocessed();
+	}
+
+	@Override
+	public void deleteReport(Report r) throws NullPointerException,
+											  IllegalArgumentException {
+		if (r == null)
+			throw new NullPointerException();
+		getReportDao().delete(r);
+	}
+
+	@Override
+	public void registrate(Report r) throws NullPointerException,
+											IllegalArgumentException,
+											ConstraintViolationException {
+		if (r == null)
+			throw new NullPointerException();
+		getReportDao().save(r);
+	}
+
+	@Override
+	public Report getReport(Long id) throws NullPointerException {
+		if (id == null)
+			throw new NullPointerException();
+		return getReportDao().getById(id);
+	}
+
+	@Override
+	public void updateReport(Report r) throws NullPointerException,
+											  IllegalArgumentException,
+											  ConstraintViolationException {
+		if (r == null)
+			throw new NullPointerException();
+		getReportDao().update(r);
 	}
 }

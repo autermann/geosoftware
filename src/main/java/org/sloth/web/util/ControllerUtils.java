@@ -24,6 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sloth.model.Group;
 import org.sloth.model.Observation;
+import org.sloth.model.Report;
 import org.sloth.model.User;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -34,14 +35,6 @@ public class ControllerUtils {
 	private static final String UNAUTHORIZED_VIEW = "error/unauthorized";
 	private static final String NOT_FOUND_VIEW = "error/notfound";
 	private static final String UNEXPECTED_ERROR_VIEW = "error/unexpected";
-
-	public static ModelAndView unexpectedErrorView(Throwable t) {
-		return new ModelAndView(UNEXPECTED_ERROR_VIEW, "throwable", t);
-	}
-
-	public static ModelAndView unexpectedErrorView() {
-		return new ModelAndView(UNEXPECTED_ERROR_VIEW);
-	}
 
 	private ControllerUtils() {
 	}
@@ -86,7 +79,27 @@ public class ControllerUtils {
 
 	public static boolean isOwnObservation(HttpSession s,
 										   Observation o) {
-		return o.getUser().equals(getUser(s));
+		User u = getUser(s);
+		if (u != null)
+			return u.getId().equals(o.getUser().getId());
+		return false;
+	}
+
+	public static boolean isSameId(HttpSession s,
+								   Long id) {
+		User u = getUser(s);
+		if (u != null)
+			return id.equals(u.getId());
+		else
+			return false;
+	}
+
+	public static boolean isOwnReport(HttpSession s,
+									  Report r) {
+		User u = getUser(s);
+		if (u != null)
+			return u.getId().equals(r.getAuthor().getId());
+		return false;
 	}
 
 	public static ModelAndView forbiddenMAV(HttpServletResponse r) throws

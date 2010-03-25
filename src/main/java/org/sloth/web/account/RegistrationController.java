@@ -44,7 +44,7 @@ import static org.sloth.web.util.ControllerUtils.*;
 @SessionAttributes(types = User.class)
 public class RegistrationController {
 
-	private static final String view = "users/form";
+	private static final String view = "users/registration";
 	private static final String modelAttribute = "user";
 	private Logger logger = LoggerFactory.getLogger(RegistrationController.class);
 	private UserService userManager;

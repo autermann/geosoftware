@@ -31,4 +31,8 @@ public enum Group {
 	WFS,
 	/** Group incicating, that the user has admin rights. */
 	ADMIN;
+
+	public Group[] getValues() {
+		return values();
+	}
 }

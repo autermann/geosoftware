@@ -24,10 +24,10 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sloth.model.Categorie;
+import org.sloth.model.Group;
 import org.sloth.model.Observation;
 import org.sloth.service.ObservationService;
 import org.sloth.service.validator.ObservationValidator;
-import org.sloth.service.validator.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -42,7 +42,7 @@ import org.springframework.web.servlet.ModelAndView;
 import static org.sloth.web.util.ControllerUtils.*;
 
 @Controller
-@RequestMapping("/admin/observations/new")
+@RequestMapping("/o/new")
 @SessionAttributes(types = Observation.class)
 @Deprecated
 public class ObservationAddController {

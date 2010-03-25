@@ -82,7 +82,7 @@ public class FrontPageController {
 					this.os.registrate(observation);
 				} catch (Exception e) {
 					logger.warn("Unexpected Exception", e);
-					return unexpectedErrorView(e);
+					return internalErrorMAV(r);
 				}
 				status.setComplete();
 				return mav.addObject("observation", new Observation());

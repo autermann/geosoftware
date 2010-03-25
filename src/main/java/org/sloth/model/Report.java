@@ -5,10 +5,13 @@
 package org.sloth.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import org.sloth.exceptions.ConstraintViolationException;
@@ -30,6 +33,17 @@ public class Report extends BaseEntity implements Serializable {
 	private String description;
 	@Column(name = "PROCESSED", nullable = false)
 	private boolean processed = false;
+	@Column(name = "CREATION_DATE", nullable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date creationDate;
+	@Column(name = "LAST_UPDATE_DATE", nullable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date lastUpdateDate;
+
+	public Report() {
+		setCreationDate(new Date());
+		setLastUpdateDate(getCreationDate());
+	}
 
 	@Override
 	public void validate() throws ConstraintViolationException {
@@ -94,5 +108,33 @@ public class Report extends BaseEntity implements Serializable {
 	 */
 	public void setProcessed(boolean processed) {
 		this.processed = processed;
+	}
+
+	/**
+	 * @return the creationDate
+	 */
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	/**
+	 * @param creationDate the creationDate to set
+	 */
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
+
+	/**
+	 * @return the lastUpdateDate
+	 */
+	public Date getLastUpdateDate() {
+		return lastUpdateDate;
+	}
+
+	/**
+	 * @param lastUpdateDate the lastUpdateDate to set
+	 */
+	public void setLastUpdateDate(Date lastUpdateDate) {
+		this.lastUpdateDate = lastUpdateDate;
 	}
 }

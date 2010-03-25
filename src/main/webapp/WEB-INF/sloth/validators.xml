@@ -8,5 +8,6 @@
 	<bean class="org.sloth.service.validator.LoginValidator"/>
 	<bean class="org.sloth.service.validator.ObservationValidator"/>
 	<bean class="org.sloth.service.validator.CategorieValidator"/>
+	<bean class="org.sloth.service.validator.ReportValidator"/>
 
 </beans>

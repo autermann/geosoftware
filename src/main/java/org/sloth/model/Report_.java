@@ -1,5 +1,6 @@
 package org.sloth.model;
 
+import java.util.Date;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
@@ -41,4 +42,16 @@ public class Report_ {
 	 * @see Report#setProcessed(boolean)
 	 */
 	public static volatile SingularAttribute<Report, Boolean> processed;
+	/**
+	 * Metamodel-Attribute for {@link Report#creationDate}
+	 * @see Report#getCreationDate()
+	 * @see Report#setCreationDate(java.util.Date)
+	 */
+	public static volatile SingularAttribute<Report, Date> creationDate;
+	/**
+	 * Metamodel-Attribute for {@link Report#lastUpdateDate}
+	 * @see Report#getLastUpdateDate()
+	 * @see Report#setLastUpdateDate(java.util.Date)
+	 */
+	public static volatile SingularAttribute<Report, Date> lastUpdateDate;
 }

@@ -11,11 +11,11 @@
 		</tr>
 		<c:forEach var="observation" items="${observations}">
 			<tr>
-				<td><a href="<spring:url value="/o/${observation.id}"/>">${observation.id}</a></td>
+				<td>${observation.id}</td>
 				<td>${observation.title}</td>
 				<td>${observation.description}</td>
 				<td>
-					<c:if test="${sessionScope['loginUser'].id == observation.user.id || sessionScope['loginUser'].userGroup == ADMIN}">
+					<c:if test="${sessionScope.loginUser.id eq observation.user.id || sessionScope.loginUser.userGroup eq 'ADMIN'}">
 						<a href="<spring:url value="/o/edit/${observation.id}"/>">Edit</a>
 						<a href="<spring:url value="/o/del/${observation.id}"/>">Delete</a>
 					</c:if>

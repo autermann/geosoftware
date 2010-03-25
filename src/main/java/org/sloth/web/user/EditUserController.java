@@ -41,11 +41,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/u/edit/{id}")
-@SessionAttributes(types = User.class)
+@SessionAttributes(types = UserEditFormAction.class)
 public class EditUserController {
 
-	private static final String modelAttribute = "user";
-	private static final String view = "users/form";
+	private static final String userAttribute = "userEditAction";
+	private static final String view = "users/edit";
 	protected static final Logger logger = LoggerFactory.getLogger(EditUserController.class);
 	private UserService userService;
 	private UserValidator validator;
@@ -62,42 +62,43 @@ public class EditUserController {
 
 	@InitBinder
 	public void setAllowedFields(WebDataBinder dataBinder) {
-		dataBinder.setDisallowedFields("id", "creationDate");
+		dataBinder.setAllowedFields("newName", "newFamilyName", "newPassword", "newPasswordRepeat", "newMail", "actualPassword");
 	}
 
 	@RequestMapping(method = GET)
 	public ModelAndView setupForm(@PathVariable Long id,
 								  HttpSession s,
 								  HttpServletResponse r) throws IOException {
-		if (isAuth(s))
-			if (getUser(s).getId().equals(id))
-				return new ModelAndView(view, modelAttribute, getUser(s));
-			else if (isAdmin(s)) {
+		if (isAuth(s)) {
+			if (isSameId(s, id))
+				return new ModelAndView(view, userAttribute, new UserEditFormAction(getUser(s)));
+			if (isAdmin(s)) {
 				User u = userService.get(id);
 				if (u == null)
 					return notFountMAV(r);
 				else
-					return new ModelAndView(view, modelAttribute, u);
+					return new ModelAndView(view, userAttribute, new UserEditFormAction(u));
 			}
+		}
 		return forbiddenMAV(r);
 	}
 
 	@RequestMapping(method = POST)
-	public String processSubmit(@ModelAttribute User u,
-								BindingResult result,
-								SessionStatus status,
-								HttpSession s,
-								HttpServletResponse r) throws IOException {
-		if (isAuth(s)) {
-			boolean self = getUser(s).getId().equals(u.getId());
-			if (self || isAdmin(s)) {
-				validator.validate(u, result);
+	public String processSubmit(
+			@ModelAttribute(userAttribute) UserEditFormAction action,
+			BindingResult result,
+			SessionStatus status,
+			HttpSession s,
+			HttpServletResponse r) throws IOException {
+		if (isAuth(s))
+			if (isSameId(s, action.getId()) || isAdmin(s)) {
+				User u = validator.validate(action, result, getUser(s));
 				if (result.hasErrors())
 					return view;
 				try {
 					userService.update(u);
 					status.setComplete();
-					if (self)
+					if (isSameId(s, action.getId()))
 						return "redirect:/acc";
 					else
 						return "redirect:/u";
@@ -107,7 +108,6 @@ public class EditUserController {
 				}
 
 			}
-		}
 		return forbiddenView(r);
 	}
 }

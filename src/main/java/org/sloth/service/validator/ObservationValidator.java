@@ -24,14 +24,13 @@ import org.springframework.validation.Errors;
  * @todo
  * @author auti
  */
-public class ObservationValidator extends Validator<Observation> {
+public class ObservationValidator {
 
 	/**
 	 * @todo
 	 * @param obj
 	 * @param errors
 	 */
-	@Override
 	public void validate(Observation obj,
 						 Errors errors) {
 		/*

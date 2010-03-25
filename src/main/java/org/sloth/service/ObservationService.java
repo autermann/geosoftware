@@ -22,6 +22,7 @@ import java.util.Map;
 import org.sloth.exceptions.ConstraintViolationException;
 import org.sloth.model.Observation;
 import org.sloth.model.Categorie;
+import org.sloth.model.Report;
 import org.sloth.model.User;
 
 /**
@@ -196,4 +197,27 @@ public interface ObservationService {
 	public Categorie getCategorieByTitle(String title);
 
 	public Collection<Observation> getObservationsByUser(User u);
+
+	public Collection<Report> getReports();
+
+	public Collection<Report> getReportsByUser(User u) throws
+			NullPointerException, IllegalArgumentException;
+
+	public Collection<Report> getReportsByObservation(Observation o) throws
+			NullPointerException, IllegalArgumentException;
+
+	public Collection<Report> getReportsByProcessedState(boolean processed);
+
+	public void deleteReport(Report r) throws NullPointerException,
+											  IllegalArgumentException;
+
+	public void registrate(Report r) throws NullPointerException,
+											IllegalArgumentException,
+											ConstraintViolationException;
+
+	public Report getReport(Long id) throws NullPointerException;
+
+	public void updateReport(Report r) throws NullPointerException,
+											  IllegalArgumentException,
+											  ConstraintViolationException;
 }

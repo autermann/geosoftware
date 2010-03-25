@@ -17,18 +17,22 @@
  */
 package org.sloth.service.validator;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sloth.service.Login;
 import org.springframework.validation.Errors;
 //TODO JavaDoc
-public class LoginValidator extends Validator<Login> {
+public class LoginValidator {
 
-	@Override
+	private static final Logger logger = LoggerFactory.getLogger(LoginValidator.class);
+
 	public void validate(Login t,
 						 Errors errors) {
 		if (t == null)
 			throw new NullPointerException("Can't validate null.");
 		else
 			logger.info("Validating: {}", t);
+		t.setPassword(t.getPassword().trim().toLowerCase());
 		if (t.getMail() == null || t.getMail().trim().isEmpty())
 			errors.rejectValue("mail", "field.required");
 		if (t.getPassword() == null || t.getPassword().trim().isEmpty())

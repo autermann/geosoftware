@@ -4,12 +4,14 @@
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans
 	   http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+	<bean id="observationDao" class="org.sloth.persistence.impl.ObservationDaoImpl"/>
+
+	<bean id="reportDao" class="org.sloth.persistence.impl.ReportDaoImpl"/>
+
 	<bean id="userDao" class="org.sloth.persistence.impl.UserDaoImpl">
 		<property name="observationDao" ref="observationDao" />
 	</bean>
-	<bean id="observationDao" class="org.sloth.persistence.impl.ObservationDaoImpl">
 
-	</bean>
 	<bean id="categorieDao" class="org.sloth.persistence.impl.CategorieDaoImpl">
 		<property name="observationDao" ref="observationDao" />
 	</bean>
