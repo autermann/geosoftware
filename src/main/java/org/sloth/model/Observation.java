@@ -35,7 +35,7 @@ import static javax.persistence.TemporalType.TIMESTAMP;
  * @todo
  * @author auti
  */
-@Entity(name="OBSERVATIONS")
+@Entity(name = "OBSERVATIONS")
 public class Observation extends BaseEntity implements Serializable {
 
 	@Transient
@@ -65,8 +65,11 @@ public class Observation extends BaseEntity implements Serializable {
 	 * @param categorie
 	 * @param coordinate
 	 */
-	public Observation(String title, String description, User user,
-					   Categorie categorie, Coordinate coordinate) {
+	public Observation(String title,
+					   String description,
+					   User user,
+					   Categorie categorie,
+					   Coordinate coordinate) {
 		setCreationDate(new Date());
 		setTitle(title);
 		setDescription(description);
@@ -171,11 +174,10 @@ public class Observation extends BaseEntity implements Serializable {
 	@Override
 	@SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (obj == null)
 			return false;
-		} else {
+		else
 			return this.hashCode() == obj.hashCode();
-		}
 	}
 
 	@Override
@@ -188,8 +190,8 @@ public class Observation extends BaseEntity implements Serializable {
 				hashCode() : 0);
 		hash = 59 * hash + (this.getUser() != null ? this.getUser().hashCode()
 							: 0);
-		hash = 59 * hash + (this.getCreationDate() != null ? this.
-				getCreationDate().hashCode() : 0);
+		hash = 59 * hash
+			   + (this.getCreationDate() != null ? this.getCreationDate().hashCode() : 0);
 		hash = 59 * hash + (this.getCategorie() != null ? this.getCategorie().
 				hashCode() : 0);
 		hash = 59 * hash + (this.getCoordinate() != null ? this.getCoordinate().
@@ -223,13 +225,10 @@ public class Observation extends BaseEntity implements Serializable {
 		if (getCoordinate() == null || getCreationDate() == null
 			|| getDescription() == null || getTitle() == null
 			|| getUser() == null || getDescription().isEmpty()
-			|| getTitle().isEmpty()) {
+			|| getTitle().isEmpty())
 			throw new NotNullConstraintViolationException();
-		}
-		if (getTitle().length() > 255 || getDescription().length() > 1000) {
+		if (getTitle().length() > 255 || getDescription().length() > 1000)
 			throw new FieldLengthConstraintViolationException();
-		}
 		getUser().validate();
 	}
-
 }

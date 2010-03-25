@@ -31,11 +31,9 @@ public class ObservationTest {
 	private final String descriptionB = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
 	private final String descriptionC = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod";
 	private final User userA = new User();
-
 //  Coordinate Values
 	private final double lonA = 231847D, latA = 1234423D;
 	private final double lonB = -12347D, latB = -1231234134423D;
-
 	private final Coordinate coordA = new Coordinate(lonA, latA);
 	private final Coordinate coordB = new Coordinate(lonA, latA);
 	private final Coordinate coordC = new Coordinate(lonB, latB);
@@ -56,7 +54,6 @@ public class ObservationTest {
 //	public void stub(){
 //		throw new UnsupportedOperationException("Not supported yet.");
 //	}
-
 	/**
 	 * Test of getTitle method, of class Observation.
 	 */
@@ -77,7 +74,7 @@ public class ObservationTest {
 		a.setTitle(title);
 		assertEquals(titleA, a.getTitle());
 	}
-	
+
 	@Test
 	public void testGetTitleWithTitle() {
 		String title = titleA;
@@ -86,8 +83,6 @@ public class ObservationTest {
 		String result = a.getTitle();
 		assertEquals(expResult, result);
 	}
-
-
 
 	/**
 	 * Test of getDescription method, of class Observation.
@@ -162,7 +157,7 @@ public class ObservationTest {
 		a.setCategorie(oc);
 
 		assertEquals(a.getCategorie(), oc);
-		
+
 	}
 
 	/**
@@ -236,7 +231,10 @@ public class ObservationTest {
 		a.setTitle(titleA);
 		Date k = new Date();
 		String ks = k.toString();
-		assertEquals(a.toString(), "["+a.getClass()+"]("+a.getId()+" - \""+titleA+"\" by "+a.getUser()+" @"+coordA.toString()+"|"+ks+" in "+a.getCategorie()+")");
+		assertEquals(a.toString(), "[" + a.getClass() + "](" + a.getId()
+								   + " - \"" + titleA + "\" by " + a.getUser()
+								   + " @" + coordA.toString() + "|" + ks
+								   + " in " + a.getCategorie() + ")");
 	}
 
 	/**

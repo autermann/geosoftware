@@ -48,8 +48,8 @@ public class MD5PasswordService extends AbstractPasswordService {
 	}
 
 	@Override
-	public boolean check(String hash, String plain) {
+	public boolean check(String hash,
+						 String plain) {
 		return hash(plain).equals(hash);
 	}
-
 }

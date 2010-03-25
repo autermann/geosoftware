@@ -38,21 +38,21 @@ import org.sloth.exceptions.NotNullConstraintViolationException;
  * @author Christian Autermann
  * @see Group
  */
-@Entity(name="USERS")
+@Entity(name = "USERS")
 public class User extends BaseEntity implements Serializable {
 
 	@Transient
 	private static final long serialVersionUID = -9018246759776935301L;
-	@Column(unique = true, nullable = false, name="MAIL_ADDRESS")
+	@Column(unique = true, nullable = false, name = "MAIL_ADDRESS")
 	private String mail;
 	@Column(nullable = false)
 	private String name;
-	@Column(nullable = false, name="FAMILY_NAME")
+	@Column(nullable = false, name = "FAMILY_NAME")
 	private String familyName;
 	@Column(nullable = false)
 	private String password;
 	@Temporal(TIMESTAMP)
-	@Column(nullable = false, name="CREATION_DATE")
+	@Column(nullable = false, name = "CREATION_DATE")
 	private Date creationDate;
 	@Enumerated(STRING)
 	@Column(nullable = false, name = "USER_GROUP")
@@ -60,13 +60,17 @@ public class User extends BaseEntity implements Serializable {
 
 	/**
 	 * Creates a new User, while setting the corresponfig values.
+	 * 
 	 * @param mail the mail address
 	 * @param name the name
 	 * @param familyName the family name
 	 * @param password the password
 	 * @param group the group
 	 */
-	public User(String mail, String name, String familyName, String password,
+	public User(String mail,
+				String name,
+				String familyName,
+				String password,
 				Group group) {
 		this();
 		setMail(mail);
@@ -155,13 +159,11 @@ public class User extends BaseEntity implements Serializable {
 	}
 
 	@Override
-	@SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (obj == null)
 			return false;
-		} else {
-			return obj.hashCode() == this.hashCode();
-		}
+		else
+			return (obj instanceof User) && obj.hashCode() == this.hashCode();
 	}
 
 	@Override
@@ -170,12 +172,12 @@ public class User extends BaseEntity implements Serializable {
 		hash = 37 * hash + (this.getId() != null ? this.getId().hashCode() : 0);
 		hash = 37 * hash + (getMail() != null ? getMail().hashCode() : 0);
 		hash = 37 * hash + (getName() != null ? getName().hashCode() : 0);
-		hash = 37 * hash + (getFamilyName() != null ? getFamilyName().hashCode()
-							: 0);
+		hash = 37 * hash
+			   + (getFamilyName() != null ? getFamilyName().hashCode() : 0);
 		hash = 37 * hash
 			   + (getPassword() != null ? getPassword().hashCode() : 0);
-		hash = 37 * hash + (getCreationDate() != null ? getCreationDate().
-				hashCode() : 0);
+		hash = 37 * hash
+			   + (getCreationDate() != null ? getCreationDate().hashCode() : 0);
 		return hash;
 	}
 
@@ -215,15 +217,12 @@ public class User extends BaseEntity implements Serializable {
 			|| getUserGroup() == null
 			|| getName().isEmpty()
 			|| getFamilyName().isEmpty()
-			|| getMail().isEmpty()) {
+			|| getMail().isEmpty())
 			throw new NotNullConstraintViolationException();
-		}
 		if (getFamilyName().length() > 255
 			|| getName().length() > 255
 			|| getPassword().length() > 255
-			|| getName().length() > 255) {
+			|| getName().length() > 255)
 			throw new FieldLengthConstraintViolationException();
-		}
 	}
-
 }

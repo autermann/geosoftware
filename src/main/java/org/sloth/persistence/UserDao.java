@@ -24,7 +24,7 @@ import org.sloth.model.User;
  *	
  * @author Christian Autermann
  */
-public interface UserDao extends Dao<User>{
+public interface UserDao extends BaseEntityDao<User> {
 
 	/**
 	 * Query for a {@code User} with known mail address.

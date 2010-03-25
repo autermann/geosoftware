@@ -71,9 +71,8 @@ public abstract class EntityManagerDao<T extends BaseEntity> {
 	 * @throws NullPointerException
 	 */
 	protected boolean isAttached(T t) throws NullPointerException {
-		if (t == null) {
+		if (t == null)
 			throw new NullPointerException();
-		}
 		return getEntityManager().contains(t);
 	}
 }

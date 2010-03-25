@@ -1,4 +1,3 @@
-
 <div>
 	<table class="footer">
 		<tr>

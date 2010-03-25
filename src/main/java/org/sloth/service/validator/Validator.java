@@ -39,6 +39,6 @@ public abstract class Validator<T> {
 	 * @param t
 	 * @param errors
 	 */
-	public abstract void validate(T t, Errors errors);
-
+	public abstract void validate(T t,
+								  Errors errors);
 }

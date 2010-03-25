@@ -12,4 +12,7 @@
 	<entity class="Observation">
 		<table name="OBSERVATIONS_TEST"/>
 	</entity>
+	<entity class="Report">
+		<table name="REPORTS_TEST"/>
+	</entity>
 </entity-mappings>

@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/jsp/includes.jsp" %>
 <%@ include file="/WEB-INF/jsp/header.jsp" %>
 <div>
-	<h2><fmt:message key="categorie.edit.title"/>: #${categorie.title}</h2>
+	<h2><fmt:message key="categorie.edit.title"/>: ${categorie.title}</h2>
 	<form:form modelAttribute="categorie">
 		<table width="40%" border="1">
 			<tr>
@@ -24,9 +24,9 @@
 						</tr>
 						<tr>
 							<td align="center" colspan="2">
-								<input type="submit" value="Update" />
-								<input type="button" value="Cancel" onclick="window.location.href='<spring:url value="/categories/"></spring:url>'">
-								<input type="button" value="Delete" onclick="window.location.href='<spring:url value="/categories/delete/${categorie.id}"></spring:url>'">
+								<input type="submit" value="<fmt:message key="update"/>" />
+								<input type="button" value="<fmt:message key="cancel"/>" onclick="window.location.href='<spring:url value="/admin/categories/"></spring:url>'">
+								<input type="button" value="<fmt:message key="delete"/>" onclick="window.location.href='<spring:url value="/admin/categories/delete/${categorie.id}"></spring:url>'">
 							</td>
 						</tr>
 					</table>

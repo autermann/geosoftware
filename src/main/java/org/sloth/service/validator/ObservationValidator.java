@@ -32,10 +32,10 @@ public class ObservationValidator extends Validator<Observation> {
 	 * @param errors
 	 */
 	@Override
-	public void validate(Observation obj, Errors errors) {
+	public void validate(Observation obj,
+						 Errors errors) {
 		/*
 		 * TODO missed method content
 		 */
 	}
-
 }

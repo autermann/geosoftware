@@ -59,34 +59,30 @@ public class UserDaoImpl extends EntityManagerDao<User> implements UserDao {
 				createQuery(User.class);
 		cq.select(cq.from(User.class));
 		Collection<User> list =
-						 getEntityManager().createQuery(cq).getResultList();
+				getEntityManager().createQuery(cq).getResultList();
 		logger.info("Getting all Users; Found: {}", list.size());
 		return list;
 	}
 
 	@Override
 	public User getById(Long id) {
-		if (id == null) {
+		if (id == null)
 			throw new NullPointerException();
-		}
 		logger.info("Searching for Observation with Id: {}", id);
 		User u = getEntityManager().find(User.class, id);
-		if (u != null) {
+		if (u != null)
 			logger.info("Found User with Id {}", u.getId());
-		} else {
+		else
 			logger.info("Can't find User with Id {}", id);
-		}
 		return u;
 	}
 
 	@Override
 	public void save(User u) {
-		if (u == null) {
+		if (u == null)
 			throw new NullPointerException();
-		}
-		if (isAttached(u)) {
+		if (isAttached(u))
 			throw new EntityAlreadyKnownException();
-		}
 		logger.info(
 				"Registrating User: ID: {}, Mail: {}, Name: {}, FamilyName: {}, Password: {}, Group: {}",
 				new Object[]{u.getId(), u.getMail(), u.getName(),
@@ -98,9 +94,8 @@ public class UserDaoImpl extends EntityManagerDao<User> implements UserDao {
 
 	@Override
 	public void update(User u) {
-		if (!isAttached(u)) {
+		if (!isAttached(u))
 			throw new EntityNotKnownException();
-		}
 		logger.info("Updating {}", u);
 		getEntityManager().merge(u);
 		getEntityManager().flush();
@@ -108,13 +103,12 @@ public class UserDaoImpl extends EntityManagerDao<User> implements UserDao {
 
 	@Override
 	public void delete(User u) {
-		if (!isAttached(u)) {
+		if (!isAttached(u))
 			throw new EntityNotKnownException();
-		}
 		User newUser = getDefaultUser();
 		Collection<Observation> obs = observationDao.getByUser(u);
 		logger.info("Replacing {} with {} in {} Observations",
-					new Object[]{u, newUser, obs.size()});
+				new Object[]{u, newUser, obs.size()});
 		for (Observation o : obs) {
 			o.setUser(newUser);
 			observationDao.update(o);
@@ -126,9 +120,8 @@ public class UserDaoImpl extends EntityManagerDao<User> implements UserDao {
 
 	@Override
 	public User getByMail(String mail) {
-		if (mail == null) {
+		if (mail == null)
 			throw new NullPointerException();
-		}
 		CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
 		CriteriaQuery<User> cq = cb.createQuery(User.class);
 		Root<User> user = cq.from(User.class);
@@ -137,14 +130,13 @@ public class UserDaoImpl extends EntityManagerDao<User> implements UserDao {
 		User result = null;
 		try {
 			result = getEntityManager().createQuery(cq).getSingleResult();
-		} catch(NoResultException e) {
+		} catch (NoResultException e) {
 			logger.info("User with address {} not found", mail);
-		} catch(NonUniqueResultException e) {
+		} catch (NonUniqueResultException e) {
 			logger.warn("Corrupt Database", e);
 		}
 		return result;
 	}
-
 	private User defaultUser;
 
 	private User getDefaultUser() {
@@ -155,15 +147,13 @@ public class UserDaoImpl extends EntityManagerDao<User> implements UserDao {
 			User tmp = getByMail(mail);
 			if (tmp == null) {
 				defaultUser = new User((mail == null) ? "UNKNOWN" : mail,
-									   (name == null) ? "UNKNOWN" : name,
-									   (fami == null) ? "UNKNOWN" : fami,
-									   "", Group.USER);
+						(name == null) ? "UNKNOWN" : name,
+						(fami == null) ? "UNKNOWN" : fami,
+						"", Group.USER);
 				save(defaultUser);
-			} else {
+			} else
 				defaultUser = tmp;
-			}
 		}
 		return defaultUser;
 	}
-
 }

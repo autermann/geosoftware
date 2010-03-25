@@ -11,7 +11,7 @@
 	   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
 	   http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
 	   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
-	
+
 	<context:property-placeholder location="classpath:database.properties" />
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="${jdbc.driverClassName}" />
@@ -45,7 +45,7 @@
 	</bean>
 
 	<tx:annotation-driven/>
-	
+
 	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 

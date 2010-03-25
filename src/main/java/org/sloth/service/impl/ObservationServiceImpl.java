@@ -25,6 +25,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sloth.exceptions.ConstraintViolationException;
+import org.sloth.model.User;
 import org.sloth.persistence.ObservationDao;
 import org.sloth.model.Observation;
 import org.sloth.model.Categorie;
@@ -38,11 +39,8 @@ import static java.lang.Character.toUpperCase;
 @Service
 public class ObservationServiceImpl implements ObservationService {
 
-	protected static final Logger logger = LoggerFactory.getLogger(
-			ObservationServiceImpl.class);
-	@Autowired
+	protected static final Logger logger = LoggerFactory.getLogger(ObservationServiceImpl.class);
 	private ObservationDao observationDao;
-	@Autowired
 	private CategorieDao categorieDao;
 
 	private ObservationDao getObservationDao() {
@@ -53,38 +51,27 @@ public class ObservationServiceImpl implements ObservationService {
 		return categorieDao;
 	}
 
-	/**
-	 * @todo
-	 * @param oDao
-	 * @throws NullPointerException
-	 */
+	@Autowired
 	public void setObservationDao(ObservationDao oDao) throws
 			NullPointerException {
-		if (oDao == null) {
+		if (oDao == null)
 			throw new NullPointerException();
-		}
 		logger.info("Setting autowired ObservationDao");
 		this.observationDao = oDao;
 	}
 
-	/**
-	 * @todo
-	 * @param ocDao
-	 * @throws NullPointerException 
-	 */
+	@Autowired
 	public void setCategorieDao(CategorieDao ocDao) throws NullPointerException {
-		if (ocDao == null) {
+		if (ocDao == null)
 			throw new NullPointerException();
-		}
 		logger.info("Setting autowired CategorieDao");
 		this.categorieDao = ocDao;
 	}
 
 	@Override
 	public Observation getObservation(Long id) throws NullPointerException {
-		if (id == null) {
+		if (id == null)
 			throw new NullPointerException();
-		}
 		return getObservationDao().getById(id);
 	}
 
@@ -96,19 +83,17 @@ public class ObservationServiceImpl implements ObservationService {
 	@Override
 	public Collection<Observation> getObservations(String keyword) throws
 			NullPointerException {
-		if (keyword == null) {
+		if (keyword == null)
 			throw new NullPointerException();
-		}
 		String regex = buildRegex(keyword);
 		HashSet<Observation> result = new HashSet<Observation>();
 		for (Observation o : getObservations()) {
 			Categorie oc = o.getCategorie();
 			if (o.getTitle().matches(regex)
-					|| o.getDescription().matches(regex)
-					|| oc.getTitle().matches(regex)
-					|| oc.getDescription().matches(regex)) {
+				|| o.getDescription().matches(regex)
+				|| oc.getTitle().matches(regex)
+				|| oc.getDescription().matches(regex))
 				result.add(o);
-			}
 		}
 		return result;
 	}
@@ -116,9 +101,8 @@ public class ObservationServiceImpl implements ObservationService {
 	@Override
 	public void deleteObservation(Observation observation) throws
 			NullPointerException, IllegalArgumentException {
-		if (observation == null) {
+		if (observation == null)
 			throw new NullPointerException();
-		}
 		getObservationDao().delete(observation);
 	}
 
@@ -126,19 +110,17 @@ public class ObservationServiceImpl implements ObservationService {
 	public void updateObservation(Observation observation) throws
 			NullPointerException, ConstraintViolationException,
 			IllegalArgumentException {
-		if (observation == null) {
+		if (observation == null)
 			throw new NullPointerException();
-		}
 		getObservationDao().update(observation);
 	}
 
 	@Override
 	public void registrate(Observation observation) throws NullPointerException,
-			ConstraintViolationException,
-			IllegalArgumentException {
-		if (observation == null) {
+														   ConstraintViolationException,
+														   IllegalArgumentException {
+		if (observation == null)
 			throw new NullPointerException();
-		}
 		getObservationDao().save(observation);
 	}
 
@@ -159,23 +141,19 @@ public class ObservationServiceImpl implements ObservationService {
 	@Override
 	public Collection<Observation> getObservations(Categorie oc) throws
 			NullPointerException, IllegalArgumentException {
-		if (oc == null) {
+		if (oc == null)
 			throw new NullPointerException();
-		}
 		Collection<Observation> result = new LinkedList<Observation>();
-		for (Observation o : getObservations()) {
-			if (o.getCategorie().equals(oc)) {
+		for (Observation o : getObservations())
+			if (o.getCategorie().equals(oc))
 				result.add(o);
-			}
-		}
 		return result;
 	}
 
 	@Override
 	public Categorie getCategorie(Long id) throws NullPointerException {
-		if (id == null) {
+		if (id == null)
 			throw new NullPointerException();
-		}
 		return getCategorieDao().getById(id);
 	}
 
@@ -186,58 +164,43 @@ public class ObservationServiceImpl implements ObservationService {
 
 	@Override
 	public void deleteCategorie(Categorie categorie) throws NullPointerException,
-			IllegalArgumentException {
-		if (categorie == null) {
+															IllegalArgumentException {
+		if (categorie == null)
 			throw new NullPointerException();
-		}
 		getCategorieDao().delete(categorie);
 	}
 
 	@Override
 	public void deleteCategorie(Long id) throws NullPointerException,
-			IllegalArgumentException {
-		if (id == null) {
+												IllegalArgumentException {
+		if (id == null)
 			throw new NullPointerException();
-		}
 		getCategorieDao().delete(getCategorie(id));
 	}
 
 	@Override
 	public void updateCategorie(Categorie categorie) throws NullPointerException,
-			ConstraintViolationException,
-			IllegalArgumentException {
-		if (categorie == null) {
+															ConstraintViolationException,
+															IllegalArgumentException {
+		if (categorie == null)
 			throw new NullPointerException();
-		}
 		getCategorieDao().update(categorie);
 	}
 
 	@Override
 	public void registrate(Categorie categorie) throws
 			ConstraintViolationException, NullPointerException {
-		if (categorie == null) {
+		if (categorie == null)
 			throw new NullPointerException();
-		}
 		getCategorieDao().save(categorie);
 	}
 
 	@Override
 	public void deleteObservation(Long id) throws NullPointerException,
-			IllegalArgumentException {
-		if (id == null) {
+												  IllegalArgumentException {
+		if (id == null)
 			throw new NullPointerException();
-		}
 		deleteCategorie(getCategorieDao().getById(id));
-	}
-
-	@Override
-	public Map<Categorie, Collection<Observation>> getObservationsByCategories() {
-		HashMap<Categorie, Collection<Observation>> map
-				= new HashMap<Categorie, Collection<Observation>>();
-		for (Categorie c : categorieDao.getAll()) {
-			map.put(c, observationDao.getByCategorie(c));
-		}
-		return map;
 	}
 
 	@Override
@@ -245,5 +208,13 @@ public class ObservationServiceImpl implements ObservationService {
 		if (title == null)
 			throw new NullPointerException();
 		return categorieDao.getByTitle(title);
+	}
+
+	@Override
+	public Collection<Observation> getObservationsByUser(User u) {
+		if (u == null)
+			throw new NullPointerException();
+		else
+			return getObservationDao().getByUser(u);
 	}
 }

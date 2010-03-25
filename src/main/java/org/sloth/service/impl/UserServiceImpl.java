@@ -46,9 +46,8 @@ public class UserServiceImpl implements UserService {
 	 */
 	public void setUserDao(UserDao userDao) throws NullPointerException {
 		logger.info("Setting autowired UserDao");
-		if (userDao == null) {
+		if (userDao == null)
 			throw new NullPointerException();
-		}
 		this.userDao = userDao;
 	}
 
@@ -60,9 +59,8 @@ public class UserServiceImpl implements UserService {
 	public void setPasswordService(PasswordService passwordService) throws
 			NullPointerException {
 		logger.info("Setting autowired PasswordService");
-		if (passwordService == null) {
+		if (passwordService == null)
 			throw new NullPointerException();
-		}
 		this.passwordService = passwordService;
 	}
 
@@ -81,9 +79,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User get(String mail) throws NullPointerException {
-		if (mail == null) {
+		if (mail == null)
 			throw new NullPointerException();
-		}
 		return getUserDao().getByMail(mail);
 	}
 
@@ -96,36 +93,32 @@ public class UserServiceImpl implements UserService {
 	public void update(User u) throws NullPointerException,
 									  IllegalArgumentException,
 									  ConstraintViolationException {
-		if (u == null) {
+		if (u == null)
 			throw new NullPointerException();
-		}
 		getUserDao().update(u);
 	}
 
 	@Override
 	public void delete(Long id) throws NullPointerException,
 									   IllegalArgumentException {
-		if (id == null) {
+		if (id == null)
 			throw new NullPointerException();
-		}
 		getUserDao().delete(getUserDao().getById(id));
 	}
 
 	@Override
 	public void delete(User user) throws NullPointerException,
 										 IllegalArgumentException {
-		if (user == null) {
+		if (user == null)
 			throw new NullPointerException();
-		}
 		getUserDao().delete(user);
 	}
 
 	@Override
 	public void registrate(User user) throws NullPointerException,
 											 ConstraintViolationException {
-		if (user == null) {
+		if (user == null)
 			throw new NullPointerException();
-		}
 		user.setPassword(getPasswordService().hash(user.getPassword()));
 		logger.info(
 				"Registrating User: ID: {}, Mail: {}, Name: {}, FamilyName: {}, Password: {}, Group: {}", new Object[]{
@@ -141,16 +134,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User login(Login login) throws NullPointerException {
-		if (login == null) {
+		if (login == null)
 			throw new NullPointerException();
-		}
 		User u = get(login.getMail());
-		if (u != null && getPasswordService().check(u.getPassword(), login.
-				getPassword())) {
+		if (u != null
+			&& getPasswordService().check(u.getPassword(), login.getPassword()))
 			return u;
-		} else {
+		else
 			return null;
-		}
 	}
-
 }

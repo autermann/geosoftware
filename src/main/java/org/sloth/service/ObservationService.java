@@ -22,6 +22,7 @@ import java.util.Map;
 import org.sloth.exceptions.ConstraintViolationException;
 import org.sloth.model.Observation;
 import org.sloth.model.Categorie;
+import org.sloth.model.User;
 
 /**
  * Service interface to handle {@code Observations} and {@code Categorie}s.
@@ -192,12 +193,7 @@ public interface ObservationService {
 														   IllegalArgumentException,
 														   ConstraintViolationException;
 
-	/**
-	 * @todo
-	 * @return
-	 */
-	public Map<Categorie, Collection<Observation>> getObservationsByCategories();
-
-
 	public Categorie getCategorieByTitle(String title);
+
+	public Collection<Observation> getObservationsByUser(User u);
 }

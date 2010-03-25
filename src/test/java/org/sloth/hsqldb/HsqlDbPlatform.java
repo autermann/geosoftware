@@ -34,7 +34,9 @@ public class HsqlDbPlatform extends HSQLPlatform {
 	 * Does nothing.
 	 */
 	@Override
-	public void printFieldUnique(Writer writer, boolean shouldPrintFieldIdentityClause) throws IOException {
+	public void printFieldUnique(Writer writer,
+								 boolean shouldPrintFieldIdentityClause) throws
+			IOException {
 		// Do nothing.
 	}
 }

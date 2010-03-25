@@ -49,7 +49,7 @@ public class Categorie_ {
 	/**
 	 * Metamodel-Attribute for {@link Categorie#iconFileName}
 	 * @see Categorie#getIconFileName()
-	 * @see Categorie#setIconFileName(long)
+	 * @see Categorie#setIconFileName(java.lang.String)
 	 */
 	public static volatile SingularAttribute<Categorie, String> iconFileName;
 }

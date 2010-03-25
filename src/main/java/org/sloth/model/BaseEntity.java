@@ -32,8 +32,9 @@ import org.sloth.exceptions.ConstraintViolationException;
  */
 @MappedSuperclass
 public abstract class BaseEntity {
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	/**
@@ -71,5 +72,4 @@ public abstract class BaseEntity {
 	@PrePersist
 	@PreUpdate
 	public abstract void validate() throws ConstraintViolationException;
-
 }

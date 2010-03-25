@@ -24,7 +24,7 @@ import org.sloth.model.Categorie;
  * 
  * @author Christian Autermann
  */
-public interface CategorieDao extends Dao<Categorie>{
+public interface CategorieDao extends BaseEntityDao<Categorie> {
 
 	/**
 	 * Returns the {@code Categorie} with given {@code title}.
@@ -35,7 +35,4 @@ public interface CategorieDao extends Dao<Categorie>{
 	 *
 	 */
 	public Categorie getByTitle(String title) throws NullPointerException;
-
-	
-
 }

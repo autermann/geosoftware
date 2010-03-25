@@ -18,6 +18,7 @@
 package org.sloth.persistence;
 
 import java.util.Collection;
+import java.util.List;
 import org.sloth.model.Categorie;
 import org.sloth.model.Observation;
 import org.sloth.model.User;
@@ -27,7 +28,7 @@ import org.sloth.model.User;
  *
  * @author Christian Autermann
  */
-public interface ObservationDao extends Dao<Observation> {
+public interface ObservationDao extends BaseEntityDao<Observation> {
 
 	/**
 	 * Query for all {@code Observation}s in a {@code Categorie}.
@@ -37,8 +38,8 @@ public interface ObservationDao extends Dao<Observation> {
 	 * @throws NullPointerException if {@code c} is {@code null}
 	 * @throws IllegalArgumentException if {@code c} is not in the database.
 	 */
-	public Collection<Observation> getByCategorie(Categorie c) throws NullPointerException,
-			IllegalArgumentException;
+	public Collection<Observation> getByCategorie(Categorie c) throws
+			NullPointerException, IllegalArgumentException;
 
 	/**
 	 * Query for all {@code Observation}s created by a {@code User}.
@@ -49,5 +50,18 @@ public interface ObservationDao extends Dao<Observation> {
 	 * @throws IllegalArgumentException if {@code u} is not in the database.
 	 */
 	public Collection<Observation> getByUser(User u) throws NullPointerException,
-			IllegalArgumentException;
+															IllegalArgumentException;
+
+	/**
+	 * Query for the newest {@code Observation}s. If less then {@code count}
+	 * {@code Observation}s are available all {@code Observation}s will be
+	 * returned.
+	 *
+	 * @param count specifies how many {@code Observation}s will be returned.
+	 * @return {@code count} or less {@code Observation}s; orderd by their 
+	 *		   {@code creationDate}
+	 * @see Observation#getCreationDate()
+	 *
+	 */
+	public List<Observation> getNewestObservations(int count);
 }

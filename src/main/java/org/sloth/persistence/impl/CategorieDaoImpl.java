@@ -40,7 +40,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class CategorieDaoImpl extends EntityManagerDao<Categorie> implements
 		CategorieDao {
 
-	
 	private ObservationDao observationDao;
 	private Categorie defaultCategorie;
 
@@ -59,22 +58,21 @@ public class CategorieDaoImpl extends EntityManagerDao<Categorie> implements
 		cq.select(cq.from(Categorie.class));
 		Collection<Categorie> list = getEntityManager().createQuery(
 				cq).getResultList();
-		logger.info("Getting all ObservationCategories; Found: {}", list.size());
+		logger.info("Getting all Categories; Found: {}", list.size());
 		return list;
 	}
 
 	@Override
 	public Categorie getByTitle(String title) {
-		if (title == null) {
+		if (title == null)
 			throw new NullPointerException();
-		}
 		CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
 		CriteriaQuery<Categorie> cq = cb.createQuery(Categorie.class);
 		Root<Categorie> categorie = cq.from(Categorie.class);
 		cq.select(categorie);
 		cq.where(cb.equal(categorie.get(Categorie_.title), title));
 		Categorie result = null;
-		try{
+		try {
 			result = getEntityManager().createQuery(cq).getSingleResult();
 		} catch (NoResultException e) {
 			logger.info("Categorie with Title {} not found", title);
@@ -86,26 +84,23 @@ public class CategorieDaoImpl extends EntityManagerDao<Categorie> implements
 
 	@Override
 	public Categorie getById(Long id) {
-		if (id == null) {
+		if (id == null)
 			throw new NullPointerException();
-		}
-		logger.info("Searching for ObservationCategorie with Id: {}", id);
+		logger.info("Searching for Categorie with Id: {}", id);
 		Categorie oc = getEntityManager().find(Categorie.class, id);
-		if (oc != null) {
-			logger.info("Found ObservationCategorie with Id {}; Title: {}; Description: {}",
+		if (oc != null)
+			logger.info("Found Categorie with Id {}; Title: {}; Description: {}",
 					new Object[]{oc.getId(), oc.getTitle(), oc.getDescription()});
-		} else {
-			logger.info("Can't find ObservationCategorie with Id {}", id);
-		}
+		else
+			logger.info("Can't find Categorie with Id {}", id);
 		return oc;
 	}
 
 	@Override
 	public void update(Categorie oc) {
-		if (!isAttached(oc)) {
+		if (!isAttached(oc))
 			throw new EntityNotKnownException();
-		}
-		logger.info("Updating ObservationCategorie with Id: {}", oc.getId());
+		logger.info("Updating Categorie with Id: {}", oc.getId());
 		getEntityManager().merge(oc);
 		getEntityManager().flush();
 
@@ -113,16 +108,15 @@ public class CategorieDaoImpl extends EntityManagerDao<Categorie> implements
 
 	@Override
 	public void delete(Categorie oc) {
-		if (!isAttached(oc)) {
+		if (!isAttached(oc))
 			throw new EntityNotKnownException();
-		}
 		Categorie newCategorie = getDefaultCategorie();
 		logger.info("Replacing Categorie {} with default one.", oc);
 		for (Observation o : observationDao.getByCategorie(oc)) {
 			o.setCategorie(newCategorie);
 			observationDao.update(o);
 		}
-		logger.info("Deleting ObservationCategorie with Id: {}", oc.getId());
+		logger.info("Deleting Categorie with Id: {}", oc.getId());
 		getEntityManager().remove(oc);
 		getEntityManager().flush();
 
@@ -130,11 +124,10 @@ public class CategorieDaoImpl extends EntityManagerDao<Categorie> implements
 
 	@Override
 	public void save(Categorie oc) {
-		if (isAttached(oc)) {
+		if (isAttached(oc))
 			throw new EntityAlreadyKnownException();
-		}
 		getEntityManager().persist(oc);
-		logger.info("Persisting ObservationCategorie; Generated Id is: {}", oc.getId());
+		logger.info("Persisting Categorie; Generated Id is: {}", oc.getId());
 		getEntityManager().flush();
 
 	}
@@ -146,13 +139,11 @@ public class CategorieDaoImpl extends EntityManagerDao<Categorie> implements
 			Categorie tmp = getByTitle(title);
 			if (tmp == null) {
 				defaultCategorie = new Categorie((title == null) ? "UNKNOWN" : title,
-												 (descr == null) ? "UNKNOWN" : descr);
+						(descr == null) ? "UNKNOWN" : descr);
 				save(defaultCategorie);
-			} else {
+			} else
 				defaultCategorie = tmp;
-			}
 		}
 		return defaultCategorie;
 	}
-
 }

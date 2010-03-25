@@ -19,6 +19,7 @@ package org.sloth.service.validator;
 
 import org.sloth.model.User;
 import org.sloth.service.PasswordService;
+import org.sloth.service.UserService;
 import org.sloth.util.Config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
@@ -31,59 +32,41 @@ import static org.springframework.validation.ValidationUtils.rejectIfEmptyOrWhit
  */
 public class UserValidator extends Validator<User> {
 
-	@Autowired
-	private PasswordService passwordManager;
-	/**
-	 * @todo
-	 */
-	protected static String mailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$";
+	private PasswordService passwordService;
+	private UserService userService;
+	private static String mailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$";
 
-	/**
-	 * @todo
-	 */
 	static {
 		String regex = Config.getProperty("mail.regex");
-		if (regex != null && StringUtils.hasText(regex)) {
+		if (regex != null && StringUtils.hasText(regex))
 			mailRegex = regex;
-		}
 	}
 
-	/**
-	 * @todo
-	 *
-	 * @param passwordManager
-	 */
+	@Autowired
 	public void setPasswordManager(PasswordService passwordManager) {
-		this.passwordManager = passwordManager;
+		this.passwordService = passwordManager;
 	}
 
-	/**
-	 * @todo JavaDoc
-	 * 
-	 * @return
-	 */
-	public PasswordService getPasswordManager() {
-		return this.passwordManager;
+	@Autowired
+	public void setUserService(UserService userService) {
+		this.userService = userService;
 	}
 
-	/**
-	 * @todo JavaDoc
-	 *
-	 * @param u
-	 * @param errors
-	 */
 	@Override
-	public void validate(User u, Errors errors) {
+	public void validate(User u,
+						 Errors errors) {
 		logger.info("Validating User: {}", u);
 		rejectIfEmptyOrWhitespace(errors, "familyName", "field.required");
 		rejectIfEmptyOrWhitespace(errors, "name", "field.required");
 		rejectIfEmptyOrWhitespace(errors, "password", "field.required");
 		rejectIfEmptyOrWhitespace(errors, "mail", "field.required");
-		if (!getPasswordManager().meetsRecommendation(u.getPassword())) {
+		if (!passwordService.meetsRecommendation(u.getPassword()))
 			errors.rejectValue("password", "field.badpassword");
-		}
-		if (!u.getMail().trim().matches(mailRegex)) {
+		if (!u.getMail().trim().matches(mailRegex))
 			errors.rejectValue("mail", "field.invalidMailAddress");
+		if (userService.get(u.getMail()) != null) {
+			errors.rejectValue("mail", "field.mail.notunique");
+			logger.info("Duplicate Mail Address");
 		}
 	}
 }

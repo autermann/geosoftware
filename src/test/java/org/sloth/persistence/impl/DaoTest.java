@@ -34,7 +34,7 @@ import org.sloth.model.Group;
 import org.sloth.persistence.CategorieDao;
 import org.sloth.persistence.ObservationDao;
 import org.sloth.persistence.UserDao;
-import static org.sloth.test.EntityFactory.*;
+import static org.sloth.EntityFactory.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.orm.jpa.JpaSystemException;
@@ -90,11 +90,11 @@ public class DaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 
 	private void testRows() {
 		assertEquals(userDao.getAll().size(),
-					 countRowsInTable("USERS_TEST"));
+				countRowsInTable("USERS_TEST"));
 		assertEquals(categorieDao.getAll().size(),
-					 countRowsInTable("CATEGORIES_TEST"));
+				countRowsInTable("CATEGORIES_TEST"));
 		assertEquals(observationDao.getAll().size(),
-					 countRowsInTable("OBSERVATIONS_TEST"));
+				countRowsInTable("OBSERVATIONS_TEST"));
 	}
 
 	@Test
@@ -122,7 +122,7 @@ public class DaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 		u.setMail("default@example.tld");
 		try {
 			userDao.save(u);
-		} catch(JpaSystemException e) {
+		} catch (JpaSystemException e) {
 			assertTrue(e.contains(
 					MySQLIntegrityConstraintViolationException.class));
 			return;
@@ -342,7 +342,7 @@ public class DaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 		observationDao.save(o);
 		try {
 			observationDao.save(o);
-		} catch(InvalidDataAccessApiUsageException e) {
+		} catch (InvalidDataAccessApiUsageException e) {
 			assertTrue(e.contains(EntityAlreadyKnownException.class));
 			return;
 		}
@@ -355,7 +355,7 @@ public class DaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 		userDao.save(u);
 		try {
 			userDao.save(u);
-		} catch(InvalidDataAccessApiUsageException e) {
+		} catch (InvalidDataAccessApiUsageException e) {
 			assertTrue(e.contains(EntityAlreadyKnownException.class));
 			return;
 		}
@@ -368,7 +368,7 @@ public class DaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 		categorieDao.save(c);
 		try {
 			categorieDao.save(c);
-		} catch(InvalidDataAccessApiUsageException e) {
+		} catch (InvalidDataAccessApiUsageException e) {
 			assertTrue(e.contains(EntityAlreadyKnownException.class));
 			return;
 		}
@@ -381,9 +381,8 @@ public class DaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 	@Test
 	public void tooLongName() {
 		StringBuffer buf = new StringBuffer();
-		for (int i = 0; i < 255; i++) {
+		for (int i = 0; i < 255; i++)
 			buf.append("a");
-		}
 		assertEquals(buf.toString().length(), 255);
 		User uNormal = getUser();
 		uNormal.setName(buf.toString());
@@ -392,19 +391,17 @@ public class DaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 		userDao.save(uNormal);
 		try {
 			userDao.save(uAbNormal);
-		} catch(FieldLengthConstraintViolationException e) {
+		} catch (FieldLengthConstraintViolationException e) {
 			return;
 		}
 		fail();
 	}
 
-
 	@Test
-	public void getCategorieByTitle(){
+	public void getCategorieByTitle() {
 		Categorie c = getCategorie();
 		categorieDao.save(c);
 		assertEquals(c, categorieDao.getByTitle(c.getTitle()));
 	}
-
 }
 

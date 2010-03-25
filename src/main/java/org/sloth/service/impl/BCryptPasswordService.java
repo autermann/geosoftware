@@ -32,7 +32,8 @@ import static org.sloth.util.BCrypt.*;
 @Service
 public class BCryptPasswordService extends AbstractPasswordService {
 
-	public BCryptPasswordService(){}
+	public BCryptPasswordService() {
+	}
 
 	@Override
 	public String hash(String plain) {
@@ -40,7 +41,8 @@ public class BCryptPasswordService extends AbstractPasswordService {
 	}
 
 	@Override
-	public boolean check(String hash, String plain) {
+	public boolean check(String hash,
+						 String plain) {
 		return checkpw(plain, hash);
 	}
 }

@@ -17,7 +17,8 @@
  */
 package org.sloth.exceptions;
 
-public class NotNullConstraintViolationException extends ConstraintViolationException{
+public class NotNullConstraintViolationException extends ConstraintViolationException {
 	//XXX serial
+
 	private static final long serialVersionUID = 1L;
 }

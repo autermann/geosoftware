@@ -19,6 +19,6 @@ package org.sloth.exceptions;
 
 public class UniqueConstraintViolationException extends ConstraintViolationException {
 	//XXX serial
-	private static final long serialVersionUID = 1L;
 
+	private static final long serialVersionUID = 1L;
 }

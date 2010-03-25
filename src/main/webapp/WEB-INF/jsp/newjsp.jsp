@@ -1,0 +1,20 @@
+/				-- org.sloth.web.FrontPageController
+/login			-- org.sloth.web.account.LoginController						-- "login"
+/logout			-- org.sloth.web.account.LogOutController						-- none --
+/signup			-- org.sloth.web.account.RegistrationController					-- "users/form"
+/acc			-- org.sloth.web.account.AccountController						-- "account/user", "account/admin"
+/c				-- org.sloth.web.categorie.ListCategorieController				-- "categories/list"
+/c/new			-- org.sloth.web.categorie.CreateCategorieController			-- "categories/new"
+/c/del/{id}		-- org.sloth.web.categorie.DeleteCategorieController			-- "categories/delete"
+/c/edit/{id}	-- org.sloth.web.categorie.EditCategorieController				-- "categories/edit"
+/o				-- org.sloth.web.observation.ListObservationController			-- "observations/list"
+/o/own			-- org.sloth.web.observation.ListOwnObservationController		-- "observations/list"
+/o/del/{id}		-- org.sloth.web.observation.DeleteObservationController		-- "observations/delete"
+/o/edit/{id}	-- org.sloth.web.observation.EditObservationController			-- "observations/edit"
+/u				-- org.sloth.web.user.ListUserController						-- "users/list"
+/u/{id}			-- org.sloth.web.user.UserDetailController						-- "users/details"
+/u/del/{id}		-- org.sloth.web.user.DeleteUserController						-- "users/delete"
+/u/edit/{id}	-- org.sloth.web.user.EditUserController						-- "users/form"
+/u/del			-- org.sloth.web.user.SelfRedirectController					-- "users/delete"
+/u/edit			-- org.sloth.web.user.SelfRedirectController					-- "users/form"
+/o/report/{id}	-- TODO: org.sloth.web.observation.ReportObservationController

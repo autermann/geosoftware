@@ -28,10 +28,11 @@ public class Config {
 	private static final Logger logger = LoggerFactory.getLogger(Config.class);
 	private static Properties props;
 
-	private Config() {}
+	private Config() {
+	}
 
 	public static String getProperty(String key) {
-		if (props == null) {
+		if (props == null)
 			try {
 				logger.info("Loading configuration.");
 				props = PropertiesLoaderUtils.loadAllProperties("config.properties");
@@ -39,7 +40,6 @@ public class Config {
 				logger.warn("Can not load configuration", ex);
 				return null;
 			}
-		}
 		return props.getProperty(key);
 	}
 }

@@ -49,10 +49,14 @@ public abstract class AbstractPasswordService implements PasswordService {
 		StringBuilder builder = new StringBuilder("^(?=.{");
 		builder.append(LENGTH);
 		builder.append(",})");
-		if (DIGIT) builder.append("(?=.*[0-9])");
-		if (LOWER_CASE) builder.append("(?=.*[a-z])");
-		if (UPPER_CASE) builder.append("(?=.*[A-Z])");
-		if (NON_ALPHA_NUM) builder.append("(?=.*[^A-Za-z0-9])");
+		if (DIGIT)
+			builder.append("(?=.*[0-9])");
+		if (LOWER_CASE)
+			builder.append("(?=.*[a-z])");
+		if (UPPER_CASE)
+			builder.append("(?=.*[A-Z])");
+		if (NON_ALPHA_NUM)
+			builder.append("(?=.*[^A-Za-z0-9])");
 		builder.append(".*$");
 
 		REGEX = builder.toString();

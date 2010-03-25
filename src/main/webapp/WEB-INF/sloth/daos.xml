@@ -8,7 +8,7 @@
 		<property name="observationDao" ref="observationDao" />
 	</bean>
 	<bean id="observationDao" class="org.sloth.persistence.impl.ObservationDaoImpl">
-		
+
 	</bean>
 	<bean id="categorieDao" class="org.sloth.persistence.impl.CategorieDaoImpl">
 		<property name="observationDao" ref="observationDao" />

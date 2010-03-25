@@ -116,5 +116,4 @@ public interface UserService {
 	 * @throws NullPointerException if {@code login} is {@code null}
 	 */
 	public User login(Login login) throws NullPointerException;
-
 }

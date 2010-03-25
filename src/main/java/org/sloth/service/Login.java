@@ -56,5 +56,4 @@ public class Login {
 	public String toString() {
 		return "(" + this.mail + ":" + this.password + ")";
 	}
-
 }

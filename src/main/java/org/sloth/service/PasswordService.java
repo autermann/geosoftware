@@ -58,7 +58,6 @@ public interface PasswordService {
 	 * @return {@code true} if the hash of the plain password is equal to the
 	 * hashed password, otherwise {@code false}
 	 */
-	public boolean check(String hash, String plain);
-
-
+	public boolean check(String hash,
+						 String plain);
 }

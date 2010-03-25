@@ -3,7 +3,7 @@
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans
 	   http://www.springframework.org/schema/beans/spring-beans.xsd">
-	
+
 	<bean class="org.sloth.service.impl.BCryptPasswordService" />
 	<bean class="org.sloth.service.impl.ObservationServiceImpl" />
 	<bean class="org.sloth.service.impl.UserServiceImpl" />

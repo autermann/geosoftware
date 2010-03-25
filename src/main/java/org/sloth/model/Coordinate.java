@@ -51,7 +51,8 @@ public class Coordinate implements Serializable {
 	 * @param lon the longitude
 	 * @param lat the latitude
 	 */
-	public Coordinate(double lon, double lat) {
+	public Coordinate(double lon,
+					  double lat) {
 		this.setLatitude(lat);
 		this.setLongitude(lon);
 	}
@@ -87,11 +88,10 @@ public class Coordinate implements Serializable {
 	@Override
 	@SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
 	public boolean equals(Object obj) {
-		if (obj != null) {
+		if (obj != null)
 			return this.hashCode() == obj.hashCode();
-		} else {
+		else
 			return false;
-		}
 	}
 
 	@Override
@@ -116,5 +116,4 @@ public class Coordinate implements Serializable {
 		buf.append(")");
 		return buf.toString();
 	}
-
 }

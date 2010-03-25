@@ -23,18 +23,16 @@
 			<td><fmt:message key="observation.creationDate"/>:</td>
 			<td><fmt:formatDate pattern="dd. MM. yyyy - HH:mm" value="${observation.creationDate}"/></td>
 		<tr/>
-                <tr>
+		<tr>
 			<td><fmt:message key="observation.observationCategorie"/>:</td>
 			<td>${observation.categorie}</td>
 		<tr/>
-                    <tr>
+		<tr>
 			<td><fmt:message key="observation.coordinate"/>:</td>
-			<td><c:out value="${observation.coordinate}" default="-"/></td>
+			<td><c:out value="${observation.coordinate}" /></td>
 		<tr/>
-           
+
 	</table>
-	<p>
-		<a href="<spring:url value="/observations"/>"><fmt:message key="nav.back"/></a>
-	</p>
+	<p><a href="<spring:url value="/observations"/>"><fmt:message key="nav.back"/></a></p>
 </div>
 <%@ include file="/WEB-INF/jsp/footer.jsp" %>

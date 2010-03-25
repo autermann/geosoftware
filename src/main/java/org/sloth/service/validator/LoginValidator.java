@@ -23,18 +23,15 @@ import org.springframework.validation.Errors;
 public class LoginValidator extends Validator<Login> {
 
 	@Override
-	public void validate(Login t, Errors errors) {
-		if (t == null) {
+	public void validate(Login t,
+						 Errors errors) {
+		if (t == null)
 			throw new NullPointerException("Can't validate null.");
-		} else {
+		else
 			logger.info("Validating: {}", t);
-		}
-		if (t.getMail() == null || t.getMail().trim().isEmpty()) {
+		if (t.getMail() == null || t.getMail().trim().isEmpty())
 			errors.rejectValue("mail", "field.required");
-		}
-		if (t.getPassword() == null || t.getPassword().trim().isEmpty()) {
+		if (t.getPassword() == null || t.getPassword().trim().isEmpty())
 			errors.rejectValue("password", "field.required");
-		}
 	}
-
 }

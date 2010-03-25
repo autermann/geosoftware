@@ -18,6 +18,7 @@
 package org.sloth.persistence.impl;
 
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -29,12 +30,8 @@ import org.sloth.persistence.ObservationDao;
 import org.sloth.model.Observation;
 import org.sloth.model.Observation_;
 
-/**
- * @todo
- * @author auti
- */
-public class ObservationDaoImpl extends EntityManagerDao<Observation> 
-		implements ObservationDao{
+public class ObservationDaoImpl extends EntityManagerDao<Observation>
+		implements ObservationDao {
 
 	@Override
 	public Collection<Observation> getAll() {
@@ -49,26 +46,23 @@ public class ObservationDaoImpl extends EntityManagerDao<Observation>
 
 	@Override
 	public Observation getById(Long id) {
-		if (id == null) {
+		if (id == null)
 			throw new NullPointerException();
-		}
 		logger.info("Searching for Observation with Id: {}", id);
 		Observation o = getEntityManager().find(Observation.class, id);
-		if (o != null) {
+		if (o != null)
 			logger.info(
 					"Found Observation with Id {}; Title: {}; Description: {}",
-						new Object[]{o.getId(), o.getTitle(), o.getDescription()});
-		} else {
+					new Object[]{o.getId(), o.getTitle(), o.getDescription()});
+		else
 			logger.info("Can't find Observation with Id {}", id);
-		}
 		return o;
 	}
 
 	@Override
 	public void save(Observation o) {
-		if (isAttached(o)) {
+		if (isAttached(o))
 			throw new EntityAlreadyKnownException();
-		}
 		getEntityManager().persist(o);
 		logger.info("Persisting Observation; Generated Id is: {}", o.getId());
 		getEntityManager().flush();
@@ -76,9 +70,8 @@ public class ObservationDaoImpl extends EntityManagerDao<Observation>
 
 	@Override
 	public void update(Observation o) {
-		if (!isAttached(o)) {
+		if (!isAttached(o))
 			throw new EntityNotKnownException();
-		}
 		logger.info("Updating Observation with Id: {}", o.getId());
 		getEntityManager().merge(o);
 		getEntityManager().flush();
@@ -86,9 +79,8 @@ public class ObservationDaoImpl extends EntityManagerDao<Observation>
 
 	@Override
 	public void delete(Observation o) {
-		if (!isAttached(o)) {
+		if (!isAttached(o))
 			throw new EntityNotKnownException();
-		}
 		logger.info("Deleting Observation with Id: {}", o.getId());
 		getEntityManager().remove(o);
 		getEntityManager().flush();
@@ -96,14 +88,13 @@ public class ObservationDaoImpl extends EntityManagerDao<Observation>
 	}
 
 	@Override
-	public Collection<Observation> getByCategorie(Categorie c) throws NullPointerException,
-														   IllegalArgumentException {
-		if (c == null) {
+	public Collection<Observation> getByCategorie(Categorie c) throws
+			NullPointerException,
+			IllegalArgumentException {
+		if (c == null)
 			throw new NullPointerException();
-		}
-	//	if (!getEntityManager().contains(c)) {
-	//		throw new EntityNotKnownException();
-	//	}
+		if (c.isNew())
+			throw new IllegalArgumentException();
 		CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
 		CriteriaQuery<Observation> cq = cb.createQuery(Observation.class);
 		Root<Observation> o = cq.from(Observation.class);
@@ -117,13 +108,11 @@ public class ObservationDaoImpl extends EntityManagerDao<Observation>
 
 	@Override
 	public Collection<Observation> getByUser(User u) throws NullPointerException,
-													  IllegalArgumentException {
-		if (u == null) {
+															IllegalArgumentException {
+		if (u == null)
 			throw new NullPointerException();
-		}
-		if (!getEntityManager().contains(u)) {
+		if (u.isNew())
 			throw new EntityNotKnownException();
-		}
 		CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
 		CriteriaQuery<Observation> cq = cb.createQuery(Observation.class);
 		Root<Observation> o = cq.from(Observation.class);
@@ -134,4 +123,18 @@ public class ObservationDaoImpl extends EntityManagerDao<Observation>
 		return result;
 	}
 
+	@Override
+	public List<Observation> getNewestObservations(int count) {
+		CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
+		CriteriaQuery<Observation> cq = cb.createQuery(Observation.class);
+		Root<Observation> o = cq.from(Observation.class);
+		cq.select(o);
+		cq.orderBy(cb.asc(o.get(Observation_.creationDate)));
+		List<Observation> obs = getEntityManager().createQuery(cq).getResultList();
+		if (!obs.isEmpty())
+			return obs.subList(0, ((obs.size() < count) ? obs.size() : count)
+								  - 1);
+		else
+			return obs;
+	}
 }

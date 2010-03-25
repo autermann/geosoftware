@@ -20,21 +20,12 @@ package org.sloth.service.validator;
 import org.sloth.model.Categorie;
 import org.springframework.validation.Errors;
 
-/**
- * @todo
- * @author auti
- */
 public class CategorieValidator {
 
-	/**
-	 * @todo
-	 * @param obj
-	 * @param errors
-	 */
-	public void validate(Categorie obj, Errors errors) {
+	public void validate(Categorie obj,
+						 Errors errors) {
 		/**
 		 * TODO neues Categorie-Objekt ueberpruefen...
 		 */
 	}
-
 }

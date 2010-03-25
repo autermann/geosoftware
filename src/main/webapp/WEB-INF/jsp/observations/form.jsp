@@ -1,15 +1,8 @@
 <%@ include file="/WEB-INF/jsp/includes.jsp" %>
 <%@ include file="/WEB-INF/jsp/header.jsp" %>
-
-<%-- form for creating and altering users --%>
-<c:choose>
-	<c:when test="${observation.new}"><c:set var="method" value="post"/></c:when>
-	<c:otherwise><c:set var="method" value="put"/></c:otherwise>
-</c:choose>
-
 <div>
 	<h2><fmt:message key="observation.new"/></h2>
-	<form:form modelAttribute="observation" method="${method}">
+	<form:form modelAttribute="observation" method="POST">
 		<table width="40%" border="1">
 			<tr>
 				<td>
