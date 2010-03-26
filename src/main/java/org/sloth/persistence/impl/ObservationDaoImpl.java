@@ -22,7 +22,6 @@ import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
-import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.sloth.exceptions.EntityAlreadyKnownException;
 import org.sloth.exceptions.EntityNotKnownException;
@@ -119,7 +118,7 @@ public class ObservationDaoImpl extends EntityManagerDao<Observation>
 		CriteriaQuery<Observation> cq = cb.createQuery(Observation.class);
 		Root<Observation> o = cq.from(Observation.class);
 		cq.select(o);
-		cq.orderBy(cb.asc(o.get(Observation_.creationDate)));
+		cq.orderBy(cb.desc(o.get(Observation_.creationDate)));
 		List<Observation> obs = getEntityManager().createQuery(cq).getResultList();
 		if (!obs.isEmpty())
 			return obs.subList(0, ((obs.size() < count) ? obs.size() : count) - 1);

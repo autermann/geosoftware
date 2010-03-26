@@ -69,4 +69,21 @@ public class InMemoryObservationDao extends InMemoryDao<Observation> implements
 		else
 			return obs;
 	}
+
+	@Override
+	public Collection<Observation> getByKeyWord(String keyword) throws
+			NullPointerException {
+		Collection<Observation> result = new ArrayList<Observation>();
+		for (Observation o : getAll())
+			if (matches(keyword, o.getTitle())
+				|| matches(keyword, o.getDescription())
+				|| matches(keyword, o.getCategorie().getTitle())
+				|| matches(keyword, o.getCategorie().getDescription()))
+				result.add(o);
+		return result;
+	}
+
+	private static boolean matches(String ex, String test) {
+		return test.toUpperCase().contains(ex.trim().toUpperCase());
+	}
 }

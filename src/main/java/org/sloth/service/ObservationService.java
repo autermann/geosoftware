@@ -18,6 +18,7 @@
 package org.sloth.service;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import org.sloth.exceptions.ConstraintViolationException;
 import org.sloth.model.Observation;
@@ -197,6 +198,8 @@ public interface ObservationService {
 	public Categorie getCategorieByTitle(String title);
 
 	public Collection<Observation> getObservationsByUser(User u);
+
+	public List<Observation> getNewestObservations(int u);
 
 	public Collection<Report> getReports();
 

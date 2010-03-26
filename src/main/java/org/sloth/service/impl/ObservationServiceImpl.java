@@ -18,8 +18,8 @@
 package org.sloth.service.impl;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sloth.exceptions.ConstraintViolationException;
@@ -277,5 +277,10 @@ public class ObservationServiceImpl implements ObservationService {
 		if (r == null)
 			throw new NullPointerException();
 		getReportDao().update(r);
+	}
+
+	@Override
+	public List<Observation> getNewestObservations(int u) {
+		return getObservationDao().getNewestObservations(u);
 	}
 }

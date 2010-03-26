@@ -13,10 +13,10 @@
 						<form:form name="login" modelAttribute="login" method="POST" cssStyle="padding-top: 12%">
 							<b><fmt:message key="login.button" /></b>
 							<br/><br/>
-							<form:input path="mail" value="E-mail" onfocus="this.value=''"/>
+							<form:input path="mail" value="E-mail" />
 							<form:errors cssStyle="color: red;" path="mail" />
 							<br/>
-							<form:password path="password" showPassword="true" value="password" onfocus="this.value=''"/>
+							<form:password path="password" onfocus="this.value=''"/>
 							<form:errors cssStyle="color: red;" path="password"/>
 							<br/>
 							<form:errors cssStyle="color: red;"/>
