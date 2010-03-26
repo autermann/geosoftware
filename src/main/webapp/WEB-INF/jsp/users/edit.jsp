@@ -24,7 +24,7 @@
 							<td width="40%" align="right"><form:errors cssStyle="color:red;" path="newMail"/></td>
 						</tr>
 						<%-- we need only enter our password editing ourself --%>
-						<c:if test="${sessionScope.loginUser.id == userEditAction.id}">
+						<c:if test="${sessionScope.LOGIN.id == userEditAction.id}">
 							<tr>
 								<td width="20%" align="right"><fmt:message key="user.actualPassword"/>:</td>
 								<td width="40%" align="left"><form:password path="actualPassword" /></td>
@@ -42,7 +42,7 @@
 							<td width="40%" align="right"><form:errors cssStyle="color:red;" path="newPasswordRepeat"/></td>
 						</tr>
 						<%-- only Admins can change the group, except for themself --%>
-						<c:if test="${sessionScope.loginUser.userGroup == 'ADMIN' && sessionScope.loginUser.id != userEditAction.id}">
+						<c:if test="${sessionScope.LOGIN.userGroup == 'ADMIN' && sessionScope.LOGIN.id != userEditAction.id}">
 							<tr>
 								<td width="20%" align="right"><fmt:message key="user.userGroup"/>:</td>
 								<td width="40%" align="left">

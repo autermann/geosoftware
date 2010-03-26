@@ -35,7 +35,9 @@ import org.springframework.web.bind.support.SessionStatus;
 import static org.sloth.web.util.ControllerUtils.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sloth.model.Categorie;
 import org.sloth.service.validator.ObservationValidator;
+import org.sloth.web.util.CategorieEditor;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -64,6 +66,9 @@ public class EditObservationController {
 
 	@InitBinder
 	public void setAllowedFields(WebDataBinder dataBinder) {
+		CategorieEditor c = new CategorieEditor();
+		c.setObservationService(observationService);
+		dataBinder.registerCustomEditor(Categorie.class, c);
 		dataBinder.setDisallowedFields("id", "creationDate", "user");
 	}
 
@@ -74,7 +79,7 @@ public class EditObservationController {
 		if (isAuth(s)) {
 			Observation o = observationService.getObservation(id);
 			if (o == null)
-				return notFountMAV(r);
+				return notFoundMAV(r);
 			if (isAdmin(s) || isOwnObservation(s, o)) {
 				ModelAndView mav = new ModelAndView(view);
 				mav.addObject(observationAttribute, o);

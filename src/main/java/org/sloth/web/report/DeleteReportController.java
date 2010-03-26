@@ -48,7 +48,7 @@ public class DeleteReportController {
 		if (isAuth(s)) {
 			Report report = observationService.getReport(id);
 			if (report == null)
-				return notFountMAV(r);
+				return notFoundMAV(r);
 			if (isAdmin(s) || isOwnReport(s, report))
 				return new ModelAndView(view, attibute, report);
 		}

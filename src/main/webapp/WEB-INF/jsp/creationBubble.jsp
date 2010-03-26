@@ -1,6 +1,6 @@
 <%@ include file="/WEB-INF/jsp/includes.jsp" %>
 <c:choose>
-	<c:when test="${sessionScope.loginUser != null}">
+	<c:when test="${sessionScope.LOGIN != null}">
 		<form:form modelAttribute="observation" method="POST">
 			<table width="40%" border="0">
 				<tr>

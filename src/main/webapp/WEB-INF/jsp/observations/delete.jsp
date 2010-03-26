@@ -6,7 +6,7 @@
 		<table border="1">
 			<tr>
 				<td><fmt:message key="observation.id"/>:</td>
-				<td>${observation.id}"</td>
+				<td>${observation.id}</td>
 			</tr>
 			<tr>
 				<td><fmt:message key="observation.title"/>:</td>

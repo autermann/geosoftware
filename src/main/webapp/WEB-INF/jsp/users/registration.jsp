@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/jsp/includes.jsp" %>
 <%@ include file="/WEB-INF/jsp/header.jsp" %>
 <div>
-	<h2><fmt:message key="user.is"/></h2>
+	<h2><fmt:message key="registration"/></h2>
 	<form:form modelAttribute="user" method="POST">
 		<table width="40%" border="1">
 			<tr>

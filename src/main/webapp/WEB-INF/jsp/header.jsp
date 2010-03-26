@@ -10,8 +10,8 @@
 	<body>
 		<div align="right">
 			<c:choose>
-				<c:when test="${sessionScope.loginUser != null}">
-					<a href="<spring:url value="/acc" />"><b>${sessionScope.loginUser.mail}</b></a>
+				<c:when test="${sessionScope.LOGIN != null}">
+					<a href="<spring:url value="/acc" />"><b>${sessionScope.LOGIN.mail}</b></a>
 					<input type="submit" onclick="window.location='<spring:url value="/logout"/>'" value="<fmt:message key="logout.button"/>" /> <br/>
 					<fmt:message key="login.button"/>: <%= new Date(session.getCreationTime())%><br/>
 				</c:when>

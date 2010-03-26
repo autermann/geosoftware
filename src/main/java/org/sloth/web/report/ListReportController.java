@@ -58,7 +58,7 @@ public class ListReportController {
 		if (isAdmin(s)) {
 			Observation o = observationService.getObservation(id);
 			if (o == null)
-				return notFountMAV(r);
+				return notFoundMAV(r);
 			return new ModelAndView(view, modelName, observationService.getReportsByObservation(o));
 		}
 		return forbiddenMAV(r);
@@ -74,7 +74,7 @@ public class ListReportController {
 		if (isAdmin(s)) {
 			User u = userService.get(id);
 			if (u == null)
-				return notFountMAV(r);
+				return notFoundMAV(r);
 			return new ModelAndView(view, modelName, observationService.getReportsByUser(u));
 		}
 		return forbiddenMAV(r);

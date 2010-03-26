@@ -66,8 +66,7 @@ public class EditUserController {
 	}
 
 	@RequestMapping(method = GET)
-	public ModelAndView setupForm(@PathVariable Long id,
-								  HttpSession s,
+	public ModelAndView setupForm(@PathVariable Long id, HttpSession s,
 								  HttpServletResponse r) throws IOException {
 		if (isAuth(s)) {
 			if (isSameId(s, id))
@@ -75,7 +74,7 @@ public class EditUserController {
 			if (isAdmin(s)) {
 				User u = userService.get(id);
 				if (u == null)
-					return notFountMAV(r);
+					return notFoundMAV(r);
 				else
 					return new ModelAndView(view, userAttribute, new UserEditFormAction(u));
 			}
@@ -84,29 +83,23 @@ public class EditUserController {
 	}
 
 	@RequestMapping(method = POST)
-	public String processSubmit(
-			@ModelAttribute(userAttribute) UserEditFormAction action,
-			BindingResult result,
-			SessionStatus status,
-			HttpSession s,
-			HttpServletResponse r) throws IOException {
+	public String processSubmit(@ModelAttribute(userAttribute) UserEditFormAction action,
+			BindingResult result, SessionStatus status,	HttpSession s, HttpServletResponse r)
+			throws IOException {
 		if (isAuth(s))
 			if (isSameId(s, action.getId()) || isAdmin(s)) {
 				User u = validator.validate(action, result, getUser(s));
-				if (result.hasErrors())
-					return view;
+				if (result.hasErrors()) return view;
 				try {
 					userService.update(u);
 					status.setComplete();
 					if (isSameId(s, action.getId()))
 						return "redirect:/acc";
-					else
-						return "redirect:/u";
+					else return "redirect:/u";
 				} catch (Exception e) {
 					logger.warn("Unexpected Exception", e);
 					return internalErrorView(r);
 				}
-
 			}
 		return forbiddenView(r);
 	}

@@ -10,13 +10,17 @@
 			<table align="center" style="border: 1px solid #CCE5FF;" >
                 <tr>
 					<td bgcolor="#CCE5FF" width="40%" align="center">
-						<form:form modelAttribute="login" method="POST" cssStyle="padding-top: 12%">
-							<b><fmt:message key="login.button" /></b><br /><br />
-							<form:input path="mail" value="E-mail" /><br />
+						<form:form name="login" modelAttribute="login" method="POST" cssStyle="padding-top: 12%">
+							<b><fmt:message key="login.button" /></b>
+							<br/><br/>
+							<form:input path="mail" value="E-mail" onfocus="this.value=''"/>
 							<form:errors cssStyle="color: red;" path="mail" />
-							<form:password path="password" showPassword="true" value="password"/><br /><br />
+							<br/>
+							<form:password path="password" showPassword="true" value="password" onfocus="this.value=''"/>
 							<form:errors cssStyle="color: red;" path="password"/>
+							<br/>
 							<form:errors cssStyle="color: red;"/>
+							<br/><br/>
 							<input type="submit" value="<fmt:message key="login.button" />"/>
 							<input type="button" onClick="window.location='<spring:url value="/signup"/>'" value="<fmt:message key="reg.button"/>" />
 						</form:form>

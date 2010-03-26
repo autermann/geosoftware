@@ -63,7 +63,7 @@ public class DeleteUserController {
 			else if (isAdmin(s)) {
 				User u = userManager.get(id);
 				if (u == null)
-					return notFountMAV(r);
+					return notFoundMAV(r);
 				else
 					return new ModelAndView(view, modelAttribute, u);
 			}

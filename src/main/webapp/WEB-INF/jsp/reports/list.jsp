@@ -25,7 +25,7 @@
 				</td>
 				<td>
 					<a href="<spring:url value="/r/edit/${report.id}"/>"><fmt:message key="report.edit"/></a>
-					<a href="<spring:url value="/r/del/${observation.id}"/>"><fmt:message key="report.delete"/></a>
+					<a href="<spring:url value="/r/del/${report.id}"/>"><fmt:message key="report.delete"/></a>
 				</td>
 			</tr>
 		</c:forEach>

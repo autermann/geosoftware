@@ -63,7 +63,7 @@ public class DeleteObservationController {
 		if (isAuth(s)) {
 			Observation o = observationService.getObservation(id);
 			if (o == null)
-				return notFountMAV(r);
+				return notFoundMAV(r);
 			if (isAdmin(s) || isOwnObservation(s, o))
 				return new ModelAndView(view, modelAttribute, o);
 		}

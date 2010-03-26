@@ -88,6 +88,7 @@ public class LoginController {
 			} else {
 				logger.debug("Got valid user. Setting Session-Attribute.");
 				auth(s, u);
+				status.setComplete();
 				return "redirect:/";
 			}
 		}

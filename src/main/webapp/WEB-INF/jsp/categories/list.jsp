@@ -22,8 +22,8 @@
 				<td>${categorie.description}</td>
 				<td>${categorie.iconFileName}</td>
 				<td>
-					<a href="<spring:url value="/admin/categories/edit/${categorie.id}"/>"><fmt:message key="categorie.edit" /></a>
-					<a href="<spring:url value="/admin/categories/delete/${categorie.id}"/>"><fmt:message key="categorie.delete" /></a>
+					<a href="<spring:url value="/c/edit/${categorie.id}"/>"><fmt:message key="categorie.edit" /></a>
+					<a href="<spring:url value="/c/del/${categorie.id}"/>"><fmt:message key="categorie.delete" /></a>
 				</td>
 			</tr>
 		</c:forEach>

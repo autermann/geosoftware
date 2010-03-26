@@ -31,7 +31,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class ControllerUtils {
 
 	protected static Logger logger = LoggerFactory.getLogger(ControllerUtils.class);
-	private static final String sessionAttribute = "loginUser";
+	private static final String sessionAttribute = "LOGIN";
 	private static final String UNAUTHORIZED_VIEW = "error/unauthorized";
 	private static final String NOT_FOUND_VIEW = "error/notfound";
 	private static final String UNEXPECTED_ERROR_VIEW = "error/unexpected";
@@ -119,7 +119,7 @@ public class ControllerUtils {
 		return NOT_FOUND_VIEW;
 	}
 
-	public static ModelAndView notFountMAV(HttpServletResponse r) throws
+	public static ModelAndView notFoundMAV(HttpServletResponse r) throws
 			IOException {
 		return new ModelAndView(notFoundView(r));
 	}

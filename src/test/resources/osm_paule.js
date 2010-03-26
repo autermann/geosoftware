@@ -1,55 +1,43 @@
 var map, wfs;
 
+var DeleteFeature = OpenLayers.Class(OpenLayers.Control, {
+	initialize: function(layer, options) {
+		OpenLayers.Control.prototype.initialize.apply(this, [options]);
+		this.layer = layer;
+		this.handler = new OpenLayers.Handler.Feature(
+			this, layer, {
+				click: this.clickFeature
+			}
+			);
+	},
 
-
-
-
- var DeleteFeature = OpenLayers.Class(OpenLayers.Control, {
-            initialize: function(layer, options) {
-                OpenLayers.Control.prototype.initialize.apply(this, [options]);
-                this.layer = layer;
-                this.handler = new OpenLayers.Handler.Feature(
-                    this, layer, {click: this.clickFeature}
-                );
-            },
-
-            clickFeature: function(feature) {
-                // if feature doesn't have a fid, destroy it
-                if(feature.fid == undefined) {
-                    this.layer.destroyFeatures([feature]);
-                } else {
-                    feature.state = OpenLayers.State.DELETE;
-                    this.layer.events.triggerEvent("afterfeaturemodified",
-                                                   {feature: feature});
-                    feature.renderIntent = "select";
-                    this.layer.drawFeature(feature);
-                }
-            }
-			,
-            setMap: function(map) {
-                this.handler.setMap(map);
-                OpenLayers.Control.prototype.setMap.apply(this, arguments);
-            },
-            CLASS_NAME: "OpenLayers.Control.DeleteFeature"
-        });
-
-
-
-
-
-
-
-
-
-
-
+	clickFeature: function(feature) {
+		// if feature doesn't have a fid, destroy it
+		if(feature.fid == undefined) {
+			this.layer.destroyFeatures([feature]);
+		} else {
+			feature.state = OpenLayers.State.DELETE;
+			this.layer.events.triggerEvent("afterfeaturemodified",
+			{
+				feature: feature
+			});
+			feature.renderIntent = "select";
+			this.layer.drawFeature(feature);
+		}
+	}
+	,
+	setMap: function(map) {
+		this.handler.setMap(map);
+		OpenLayers.Control.prototype.setMap.apply(this, arguments);
+	},
+	CLASS_NAME: "OpenLayers.Control.DeleteFeature"
+});
 
 var layer_markers = new OpenLayers.Layer.Markers("Observations", {
 	projection: new OpenLayers.Projection("EPSG:4326"),
 	visibility: true,
 	displayInLayerSwitcher: true
 });
-
 
 function checkForPermalink() {
 	var parameters = getParameters(),zoom,lon,lat;
@@ -59,10 +47,9 @@ function checkForPermalink() {
 	goTo(lon, lat, zoom);
 }
 
-
 function init(){
 	OpenLayers.Lang.setCode('de');
-        //Create new Openlayers-Layer with ID 'map'
+	//Create new Openlayers-Layer with ID 'map'
 	map = new OpenLayers.Map('map', {
 		controls: [],
 		maxExtent: new OpenLayers.Bounds(-20037508.34,-20037508.34,20037508.34,20037508.34),
@@ -83,80 +70,68 @@ function init(){
 	var layer_mapnik = new OpenLayers.Layer.OSM.Mapnik("Mapnik");
 	var layer_cycle = new OpenLayers.Layer.OSM.CycleMap("Cycle");
 
+	//die styles werden hier definiert!!
+	var styles = new OpenLayers.StyleMap({
+		"default": new OpenLayers.Style(null, {
+			rules: [
+			new OpenLayers.Rule({
+				symbolizer: {
+					"Point": {
+						pointRadius: 8,
+						graphicName: "circle",
+						fillColor: "#ffff00",
+						fillOpacity: 0.25,
+						strokeWidth: 2,
+						strokeOpacity: 1,
+						strokeColor: "#ff0000"
+					}
+				}
+			})
+			]
+		}),
+		"select": new OpenLayers.Style({
+			strokeColor: "#0000ff",
+			strokeWidth: 4
+		}),
+		"temporary": new OpenLayers.Style(null, {
+			rules: [
+			new OpenLayers.Rule({
+				symbolizer: {
+					"Point": {
+						pointRadius: 6,
+						graphicName: "circle",
+						fillColor: "#ff0000",
+						fillOpacity: 0.25,
+						strokeWidth: 2,
+						strokeOpacity: 1,
+						strokeColor: "#ff0000"
+					}
 
+				}
+			})
+			]
+		})
+	});
 
-//die styles werden hier definiert!!
-        var styles = new OpenLayers.StyleMap({
-                "default": new OpenLayers.Style(null, {
-                    rules: [
-                        new OpenLayers.Rule({
-                            symbolizer: {
-                                "Point": {
-                                    pointRadius: 8,
-                                    graphicName: "circle",
-                                    fillColor: "#ffff00",
-                                    fillOpacity: 0.25,
-                                    strokeWidth: 2,
-                                    strokeOpacity: 1,
-                                    strokeColor: "#ff0000"
-                                }
-                            }
-                        })
-                    ]
-                }),
-                "select": new OpenLayers.Style({
-                    strokeColor: "#0000ff",
-                    strokeWidth: 4
-                }),
-                "temporary": new OpenLayers.Style(null, {
-                    rules: [
-                        new OpenLayers.Rule({
-                            symbolizer: {
-                                "Point": {
-                                    pointRadius: 6,
-                                    graphicName: "circle",
-                                    fillColor: "#ff0000",
-                                    fillOpacity: 0.25,
-                                    strokeWidth: 2,
-                                    strokeOpacity: 1,
-                                    strokeColor: "#ff0000"
-                                }
+	//editierbare features
+	var saveStrategy = new OpenLayers.Strategy.Save();
+	wfs = new OpenLayers.Layer.Vector("Editable Features", {
+		strategies: [new OpenLayers.Strategy.BBOX(), saveStrategy],
+		projection: new OpenLayers.Projection("EPSG:4326"),
+		styleMap: styles,
+		protocol: new OpenLayers.Protocol.WFS({
+			version: "1.1.0",
+			srsName: "EPSG:4326",
+			url: "http://demo.opengeo.org/geoserver/wfs",
+			featureNS :  "http://opengeo.org",
+			featureType: "roads",
+			geometryName: "the_geom",
+			schema: "http://demo.opengeo.org/geoserver/wfs/DescribeFeatureType?version=1.1.0&typename=og:roads"
+		})
+	});
+	//wfs eingebunden
 
-                            }
-                        })
-                    ]
-                })
-            });
-
-       //editierbare features
-            var saveStrategy = new OpenLayers.Strategy.Save();
-            wfs = new OpenLayers.Layer.Vector("Editable Features", {
-                strategies: [new OpenLayers.Strategy.BBOX(), saveStrategy],
-                projection: new OpenLayers.Projection("EPSG:4326"),
-                styleMap: styles,
-                protocol: new OpenLayers.Protocol.WFS({
-                    version: "1.1.0",
-                    srsName: "EPSG:4326",
-                    url: "http://demo.opengeo.org/geoserver/wfs",
-                    featureNS :  "http://opengeo.org",
-                    featureType: "roads",
-                    geometryName: "the_geom",
-                    schema: "http://demo.opengeo.org/geoserver/wfs/DescribeFeatureType?version=1.1.0&typename=og:roads"
-                })
-            });
-
-
-
-
-
-
-
-
-
-
-//wfs eingebunden
-
-        map.addLayers([layer_mapnik,layer_tah,layer_cycle,wfs,layer_markers]);
+	map.addLayers([layer_mapnik,layer_tah,layer_cycle,wfs,layer_markers]);
 	map.events.register('click', map, function(evt){
 		addMarker(
 			layer_markers,
@@ -171,48 +146,49 @@ function init(){
 	goTo(7.63095,51.96313,12);
 	checkForPermalink();
 
+	// Tools hinzufügen oder per marker machen
+	var panel = new OpenLayers.Control.Panel(
+	{
+		displayClass: '../css/style/Beispieltoolbar'
+	}
+	);
+	var draw = new OpenLayers.Control.DrawFeature(
+		wfs, OpenLayers.Handler.Point,
+		{
+			title: "Draw Feature",
+			displayClass: "../css/style/BeispieltoolbarDrawFeaturePoint",
+			handlerOptions: {
+				multi: true
+			}
+		}
+		);
+	modify = new OpenLayers.Control.ModifyFeature(
+		wfs, {
+			displayClass: "../css/style/BeispieltoolbarModifyFeature"
+		}
+		);
+	var del = new DeleteFeature(wfs, {
+		title: "Delete Feature"
+	});
 
-        // Tools hinzufügen oder per marker machen
-            var panel = new OpenLayers.Control.Panel(
-                {displayClass: '../css/style/Beispieltoolbar'}
-            );
-            var draw = new OpenLayers.Control.DrawFeature(
-                wfs, OpenLayers.Handler.Point,
-                {
-                    title: "Draw Feature",
-                    displayClass: "../css/style/BeispieltoolbarDrawFeaturePoint",
-                    handlerOptions: {multi: true}
-                }
-            );
-            modify = new OpenLayers.Control.ModifyFeature(
-                wfs, {displayClass: "../css/style/BeispieltoolbarModifyFeature"}
-            );
-            var del = new DeleteFeature(wfs, {title: "Delete Feature"});
+	var save = new OpenLayers.Control.Button({
+		title: "Save Changes",
+		trigger: function() {
+			if(modify.feature) {
+				modify.selectControl.unselectAll();
+			}
+			saveStrategy.save();
+		},
+		displayClass: "../css/style/BeispieltoolbarSaveFeatures"
+	});
 
-            var save = new OpenLayers.Control.Button({
-                title: "Save Changes",
-                trigger: function() {
-                    if(modify.feature) {
-                        modify.selectControl.unselectAll();
-                    }
-                    saveStrategy.save();
-                },
-                displayClass: "../css/style/BeispieltoolbarSaveFeatures"
-            });
+	panel.addControls([
+		new OpenLayers.Control.Navigation(),
+		save, del, modify, draw
+		]);
 
-            panel.addControls([
-                new OpenLayers.Control.Navigation(),
-              save, del, modify, draw
-            ]);
-
-            panel.defaultControl = panel.controls[0];
-            map.addControl(panel);
-
-
-
-
-
-
+	panel.defaultControl = panel.controls[0];
+	map.addControl(panel);
 }
 
 function getCreationForm() {
@@ -278,7 +254,9 @@ function addMarker(layer, ll, content, iconPath, iconWidth, iconHeight,open) {
 			feature.popup = feature.createPopup(feature.closeBox);
 			map.addPopup(feature.popup);
 			feature.popup.show();
-		} else { feature.popup.toggle(); }
+		} else {
+			feature.popup.toggle();
+		}
 	}
 }
 

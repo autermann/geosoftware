@@ -24,7 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import static org.sloth.web.util.ControllerUtils.*;
 
 @Controller
-@RequestMapping("/r/{id}")
+@RequestMapping("/r/edit/{id}")
 @SessionAttributes(types = {Report.class, Boolean.class})
 public class EditReportController {
 
@@ -46,6 +46,7 @@ public class EditReportController {
 	/**
 	 * @param reportValidator the reportValidator to set
 	 */
+	@Autowired
 	public void setReportValidator(ReportValidator reportValidator) {
 		this.reportValidator = reportValidator;
 	}
@@ -62,7 +63,7 @@ public class EditReportController {
 		if (isAuth(s)) {
 			Report report = observationService.getReport(id);
 			if (report == null)
-				return notFountMAV(r);
+				return notFoundMAV(r);
 
 
 
@@ -80,8 +81,8 @@ public class EditReportController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String handlePost(@PathVariable Long id,
-							 @ModelAttribute Boolean processed,
-							 @ModelAttribute Report report,
+							 @ModelAttribute(attibuteP) Boolean processed,
+							 @ModelAttribute(attibuteR) Report report,
 							 BindingResult result,
 							 SessionStatus status,
 							 HttpSession s,

@@ -7,9 +7,11 @@ package org.sloth.web.user;
 import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.sloth.model.User;
 import org.sloth.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import static org.sloth.web.util.ControllerUtils.*;
@@ -28,11 +30,17 @@ public class UserDetailController {
 	}
 
 	@RequestMapping
-	public ModelAndView handle(HttpSession s,
+	public ModelAndView handle(@PathVariable Long id,
+							   HttpSession s,
 							   HttpServletResponse r) throws IOException {
-		if (isAdmin(s))
-			return new ModelAndView(view, modelAttribute, userService.getUsers());
-		else
+
+		if (isAdmin(s)) {
+			User u = userService.get(id);
+			if (u == null)
+				return notFoundMAV(r);
+			else
+				return new ModelAndView(view, modelAttribute, u);
+		} else
 			return forbiddenMAV(r);
 	}
 }

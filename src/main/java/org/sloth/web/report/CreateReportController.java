@@ -55,7 +55,7 @@ public class CreateReportController {
 		if (isAuth(s)) {
 			Observation o = observationService.getObservation(id);
 			if (o == null)
-				return notFountMAV(r);
+				return notFoundMAV(r);
 			return new ModelAndView(view, modelName, new Report());
 		}
 		return forbiddenMAV(r);

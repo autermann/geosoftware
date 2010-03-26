@@ -1,10 +1,6 @@
 body {
 	/*background-color: #00008b;*/
-	font-family: Verdana, sans-serif;
-	font-size: 1em;
-	height:100%;
-    margin:0;
-    padding:0;
+	font: normal 13px/100% Verdana, Tahoma, sans-serif;
 }
 
 
@@ -31,6 +27,8 @@ body {
 	right:0;
 	bottom:50px;
 }
+
+/* Unter jedem Nicht-Win Betriebssystem sehen die Standard-Buttons besser aus^^ */
 /*
 input[type="button"], input[type="submit"] {
 	font-size: 12px;
@@ -40,3 +38,4 @@ input[type="button"], input[type="submit"] {
 	border: 1px solid #AAAAAA;
 	background: #CCCCCC;
 }*/
+

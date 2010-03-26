@@ -15,9 +15,9 @@ public class AccountController {
 
 	@RequestMapping("/acc")
 	public String handle(HttpSession s,
-						 HttpServletResponse response) throws IOException {
+						 HttpServletResponse r) throws IOException {
 		if (!isAuth(s))
-			response.sendError(HttpServletResponse.SC_NOT_FOUND	);
+			return forbiddenView(r);
 		if (isAdmin(s))
 			return adminView;
 		else

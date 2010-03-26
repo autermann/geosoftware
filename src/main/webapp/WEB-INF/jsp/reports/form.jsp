@@ -21,7 +21,7 @@
 					<form:textarea  path="description"/>
 				</td>
 			</tr>
-			<c:if test="${sessionScope.loginUser.userGroup == 'ADMIN'}">
+			<c:if test="${sessionScope.LOGIN.userGroup == 'ADMIN'}">
 				<tr>
 					<td>
 						<fmt:message key="report.processed"/>
