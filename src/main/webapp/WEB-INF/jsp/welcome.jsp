@@ -9,21 +9,46 @@
 		<script type="text/javascript" src="http://www.openstreetmap.org/openlayers/OpenStreetMap.js"></script>
 		<script type="text/javascript" src="<spring:url value="/static/js/jquery-1.4.2.min.js" htmlEscape="true" />"></script>
 		<script type="text/javascript" src="<spring:url value="/static/js/map.js" htmlEscape="true" />"></script>
+		<%-- Add already existing features to the map --%>
 		<script type="text/javascript">
 			function fillMap(){
-			<c:forEach var="o" items="${observations}">
-				addMarker(${o.coordinate.longitude}, ${o.coordinate.latitude},"<b>${o.title}</b><br/>${o.description}", "<spring:url value="/static/img/${o.categorie.iconFileName}"/>");</c:forEach>
-			}
-			<%-- TODO
-				setEditingFeature(lon, lat, description, selectedCategorieId, categories, title, action, lang, errors)
-			--%>
-			</script>
-		</head>
-		<body onload="init();">
-			<div align="left">
-				<a href="#" onclick="goTo(7.62889,51.96080,10);">7.62889,51.96080</a>
-			</div>
-			<div align="right">
+				<c:forEach var="o" items="${observations}">
+					addMarker(${o.coordinate.longitude}, ${o.coordinate.latitude},"<b>${o.title}</b><br/>${o.description}<br/>Lon: ${o.coordinate.longitude}<br/>Lat: ${o.coordinate.latitude}", "<spring:url value="/static/img/${o.categorie.iconFileName}"/>");</c:forEach>
+				}
+		</script>
+		<c:if test="${sessionScope.LOGIN != null}"><script type="text/javascript">
+			<%-- add formular data --%>
+			setEditingFeature({
+				lon:					<c:out value="${observation.coordinate.longitude}" default="0"/>,
+				lat:					<c:out value="${observation.coordinate.latitude}" default="0"/>,
+				selectedCategorieId:	<c:out value="${observation.categorie.id}" default="-1"/>,
+				description:			"${observation.description}",
+				title:					"${observation.title}",
+				action:					"<spring:url value="/"/>",
+				categories:	[
+					<c:forEach var="categorie" items="${categories}">
+						[${categorie.id}, "${categorie.title}"],
+					</c:forEach>
+						[-1,"<fmt:message key="categorie.choose"/>"]
+				],
+				lang:{
+					title:				"<fmt:message key="observation.title"/>",
+					description:		"<fmt:message key="observation.description"/>",
+					categorie:			"<fmt:message key="observation.categorie"/>"
+				},
+				errors:{
+					description: "<form:errors path="description"/>",
+					title: "<form:errors path="title"/>",
+					categorie: "<form:errors path="categorie"/>"
+				}
+			});
+		</script></c:if>
+	</head>
+	<body onload="init();">
+		<div align="left">
+			<a href="#" onclick="goTo(7.62889,51.96080,10);">7.62889,51.96080</a>
+		</div>
+		<div align="right">
 			<c:choose>
 				<c:when test="${sessionScope.LOGIN != null}">
 					<a href="<spring:url value="/acc" />"><b>${sessionScope.LOGIN.mail}</b></a>
@@ -39,9 +64,9 @@
 			<h2><fmt:message key="welcome"/></h2>
 		</div>
 		<div>
-			<div id="form">
-				<form action="search" method="GET">
-					<input id="searchBox" type="text" name="q" value="Search..."/>
+			<div>
+				<form action="<spring:url value="/"/>" method="GET">
+					<input type="text" name="q" value="Search..." onfocus="this.value=''"/>
 					<input type="submit" value="Search"/>
 				</form>
 			</div>
@@ -64,10 +89,6 @@
 			</div>
 		</div>
 		<div id="map"></div>
-
-		<div id="observationCreationBubble">
-			<%@include file="creationBubble.jsp" %>
-		</div>
 		<div>
 			<table class="footer">
 				<tr>

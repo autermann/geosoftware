@@ -95,17 +95,7 @@ public class ObservationServiceImpl implements ObservationService {
 			NullPointerException {
 		if (keyword == null)
 			throw new NullPointerException();
-		String regex = buildRegex(keyword);
-		HashSet<Observation> result = new HashSet<Observation>();
-		for (Observation o : getObservations()) {
-			Categorie oc = o.getCategorie();
-			if (o.getTitle().matches(regex)
-				|| o.getDescription().matches(regex)
-				|| oc.getTitle().matches(regex)
-				|| oc.getDescription().matches(regex))
-				result.add(o);
-		}
-		return result;
+		return getObservationDao().getByKeyWord(keyword);
 	}
 
 	@Override

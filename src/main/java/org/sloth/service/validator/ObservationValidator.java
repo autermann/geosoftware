@@ -20,21 +20,29 @@ package org.sloth.service.validator;
 import org.sloth.model.Observation;
 import org.springframework.validation.Errors;
 
-/**
- * @todo
- * @author auti
- */
 public class ObservationValidator {
 
-	/**
-	 * @todo
-	 * @param obj
-	 * @param errors
-	 */
 	public void validate(Observation obj,
 						 Errors errors) {
-		/*
-		 * TODO missed method content
-		 */
+		if (obj.getCategorie() == null)
+			errors.rejectValue("categorie", "field.needed");
+		if (obj.getCoordinate() == null)
+			errors.rejectValue("coordinate", "field.needed");
+		if (obj.getCreationDate() == null)
+			errors.rejectValue("creationDate", "field.needed");
+		if (obj.getUser() == null)
+			errors.rejectValue("user", "field.needed");
+		if (obj.getTitle() == null)
+			errors.rejectValue("title", "field.needed");
+		else if (obj.getTitle().trim().isEmpty())
+			errors.rejectValue("title", "field.needed");
+		else if (obj.getDescription().length() > 1000)
+			errors.rejectValue("title", "field.tooLong");
+		if (obj.getDescription() == null)
+			errors.rejectValue("description", "field.needed");
+		else if (obj.getDescription().trim().isEmpty())
+			errors.rejectValue("description", "field.needed");
+		else if (obj.getDescription().length() > 1000)
+			errors.rejectValue("description", "field.tooLong");
 	}
 }

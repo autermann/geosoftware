@@ -54,6 +54,6 @@ public class Login {
 
 	@Override
 	public String toString() {
-		return "(" + this.mail + ":" + this.password + ")";
+		return this.mail;
 	}
 }

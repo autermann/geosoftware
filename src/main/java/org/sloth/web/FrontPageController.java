@@ -19,12 +19,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import static org.sloth.web.util.ControllerUtils.*;
 
 @Controller
 @RequestMapping("/")
+@SessionAttributes({"observations", "observation", "categories"})
 public class FrontPageController {
 
 	private ObservationService os;
@@ -56,55 +58,38 @@ public class FrontPageController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView fillMap(HttpSession s,
 								@RequestParam(value = searchParam, required = false) String q) {
-		return fillModel(q, s, new ModelAndView(view));
+		ModelAndView mav = new ModelAndView(view);
+		if (isAuth(s)) {
+			mav.addObject(newObservationAttribute, new Observation());
+			mav.addObject(categoriesAttribute, os.getCategories());
+		}
+		return mav.addObject(mapContent, (q == null || q.trim().isEmpty()) ?
+			os.getObservations() : os.getObservations(q));
+
 
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView saveObservation(
-			@ModelAttribute(newObservationAttribute) Observation observation,
-			BindingResult result,
-			SessionStatus status,
-			HttpSession s,
-			HttpServletResponse r,
-			@RequestParam(value = searchParam, required = false) String q) throws
-			IOException {
+	public String saveObservation(HttpSession s,
+								  HttpServletResponse r,
+								  @ModelAttribute(newObservationAttribute) Observation observation,
+								  BindingResult result,
+								  SessionStatus status) throws IOException {
 		if (isAuth(s)) {
 			observation.setUser(getUser(s));
 			validator.validate(observation, result);
-			ModelAndView mav = new ModelAndView(view);
-			fillModel(q, s, mav);
-			if (result.hasErrors()) {
-				mav.addObject(newObservationAttribute, observation);
-				return mav;
-			} else {
+			if (result.hasErrors())
+				return view;
+			else
 				try {
+					status.setComplete();
 					this.os.registrate(observation);
+					return "redirect:/";
 				} catch (Exception e) {
 					logger.warn("Unexpected Exception", e);
-					return internalErrorMAV(r);
+					return internalErrorView(r);
 				}
-				status.setComplete();
-				return mav.addObject("observation", new Observation());
-			}
 		} else
-			return forbiddenMAV(r);
-	}
-
-	private ModelAndView fillModel(String q,
-								   HttpSession s,
-								   ModelAndView mav) {
-
-		logger.warn("Search Key: {}; Session: {}; Service: {}", new Object[]{q,
-																			 s,
-																			 os});
-		if (isAuth(s)) {
-			/* Only needed for creating a new Observation */
-			mav.addObject(newObservationAttribute, new Observation());
-			mav.addObject(categoriesAttribute, os.getCategories());
-		}
-		return mav.addObject(mapContent,
-				(q == null) ? os.getObservations() : os.getObservations(q));
-
+			return forbiddenView(r);
 	}
 }

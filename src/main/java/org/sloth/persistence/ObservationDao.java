@@ -64,4 +64,7 @@ public interface ObservationDao extends BaseEntityDao<Observation> {
 	 *
 	 */
 	public List<Observation> getNewestObservations(int count);
+
+	public Collection<Observation> getByKeyWord(String keyword) throws
+			NullPointerException;
 }
