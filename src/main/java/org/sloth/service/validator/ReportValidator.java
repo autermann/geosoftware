@@ -5,8 +5,7 @@ import org.springframework.validation.Errors;
 
 public class ReportValidator {
 
-	public void validate(Report t,
-						 Errors errors) {
-		//TODO
+	public void validate(Report t, Errors errors) {
+		// TODO
 	}
 }

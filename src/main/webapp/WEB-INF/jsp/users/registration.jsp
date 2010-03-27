@@ -8,14 +8,14 @@
 				<td>
 					<table border="0" width="100%">
 						<tr>
+							<td width="20%" align="right"><fmt:message key="user.name"/>:</td>
+							<td width="40%" align="left"><form:input path="name"/></td>
+							<td width="40%" align="right"><form:errors cssStyle="color:red;" path="name"/></td>
+						</tr>
+						<tr>
 							<td width="20%" align="right"><fmt:message key="user.familyName"/>:</td>
 							<td width="40%" align="left"><form:input path="familyName"/></td>
 							<td width="40%" align="right"><form:errors cssStyle="color:red;" path="familyName"/></td>
-						</tr>
-						<tr>
-							<td width="20%" align="right"><fmt:message key="user.name"/>:</td>
-							<td width="40%" align="left"><form:input path="name" /></td>
-							<td width="40%" align="right"><form:errors cssStyle="color:red;" path="name"/></td>
 						</tr>
 						<tr>
 							<td width="20%" align="right"><fmt:message key="user.mail"/>:</td>
@@ -23,9 +23,19 @@
 							<td width="40%" align="right"><form:errors cssStyle="color:red;" path="mail"/></td>
 						</tr>
 						<tr>
+							<td width="20%" align="right"><fmt:message key="user.mailRepeat"/>:</td>
+							<td width="40%" align="left"><form:input path="mailRepeat" /></td>
+							<td width="40%" align="right"><form:errors cssStyle="color:red;" path="mailRepeat"/></td>
+						</tr>
+						<tr>
 							<td width="20%" align="right"><fmt:message key="user.password"/>:</td>
-							<td width="40%" align="left"><form:password path="password" showPassword="true"/></td>
+							<td width="40%" align="left"><form:password path="password"/></td>
 							<td width="40%" align="right"><form:errors cssStyle="color:red;" path="password"/></td>
+						</tr>
+						<tr>
+							<td width="20%" align="right"><fmt:message key="user.passwordRepeat"/>:</td>
+							<td width="40%" align="left"><form:password path="passwordRepeat"/></td>
+							<td width="40%" align="right"><form:errors cssStyle="color:red;" path="passwordRepeat"/></td>
 						</tr>
 						<tr>
 							<td align="center" colspan="2">

@@ -40,7 +40,8 @@ public class DeleteUserController {
 
 	private static final String view = "users/delete";
 	private static final String modelAttribute = "user";
-	protected static final Logger logger = LoggerFactory.getLogger(DeleteUserController.class);
+	protected static final Logger logger = LoggerFactory
+			.getLogger(DeleteUserController.class);
 	private UserService userManager;
 
 	@Autowired
@@ -54,9 +55,8 @@ public class DeleteUserController {
 	}
 
 	@RequestMapping(method = GET)
-	public ModelAndView setupForm(@PathVariable Long id,
-								  HttpSession s,
-								  HttpServletResponse r) throws IOException {
+	public ModelAndView setupForm(@PathVariable Long id, HttpSession s,
+			HttpServletResponse r) throws IOException {
 		if (isAuth(s))
 			if (getUser(s).getId().equals(id))
 				return new ModelAndView(view, modelAttribute, getUser(s));
@@ -72,9 +72,8 @@ public class DeleteUserController {
 	}
 
 	@RequestMapping(method = POST)
-	public String processSubmit(@PathVariable Long id,
-								HttpSession s,
-								HttpServletResponse r) throws IOException {
+	public String processSubmit(@PathVariable Long id, HttpSession s,
+			HttpServletResponse r) throws IOException {
 		if (isAuth(s)) {
 			boolean self = getUser(s).getId().equals(id);
 			if (self || isAdmin(s))
@@ -87,7 +86,6 @@ public class DeleteUserController {
 						userManager.delete(id);
 						return "redirect:/u";
 					}
-
 
 				} catch (Exception e) {
 					logger.warn("Unexpected Exception", e);

@@ -53,8 +53,7 @@ public class CategorieTest {
 	}
 
 	/**
-	 * Test of getDescription and setDescription method,
-	 * of class Categorie.
+	 * Test of getDescription and setDescription method, of class Categorie.
 	 */
 	@Test
 	public void testGetDescription() {

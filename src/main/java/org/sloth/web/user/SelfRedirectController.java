@@ -12,8 +12,8 @@ import static org.sloth.web.util.ControllerUtils.*;
 public class SelfRedirectController {
 
 	@RequestMapping("/u/edit")
-	public String handleEditRequest(HttpSession s,
-									HttpServletResponse r) throws IOException {
+	public String handleEditRequest(HttpSession s, HttpServletResponse r)
+			throws IOException {
 		if (isAuth(s))
 			return "redirect:/u/edit/" + getUser(s).getId();
 		else
@@ -21,8 +21,8 @@ public class SelfRedirectController {
 	}
 
 	@RequestMapping("/u/del")
-	public String handleDeleteRequest(HttpSession s,
-									  HttpServletResponse r) throws IOException {
+	public String handleDeleteRequest(HttpSession s, HttpServletResponse r)
+			throws IOException {
 		if (isAuth(s))
 			return "redirect:/u/del/" + getUser(s).getId();
 		else

@@ -48,7 +48,8 @@ public class Report extends BaseEntity implements Serializable {
 	@Override
 	public void validate() throws ConstraintViolationException {
 		if (getAuthor() == null || getObservation() == null
-			|| getDescription() == null || getDescription().trim().isEmpty())
+				|| getDescription() == null
+				|| getDescription().trim().isEmpty())
 			throw new NotNullConstraintViolationException();
 		if (getDescription().length() > 1000)
 			throw new FieldLengthConstraintViolationException();
@@ -62,7 +63,8 @@ public class Report extends BaseEntity implements Serializable {
 	}
 
 	/**
-	 * @param observation the observation to set
+	 * @param observation
+	 *            the observation to set
 	 */
 	public void setObservation(Observation observation) {
 		this.observation = observation;
@@ -76,7 +78,8 @@ public class Report extends BaseEntity implements Serializable {
 	}
 
 	/**
-	 * @param author the author to set
+	 * @param author
+	 *            the author to set
 	 */
 	public void setAuthor(User author) {
 		this.author = author;
@@ -90,7 +93,8 @@ public class Report extends BaseEntity implements Serializable {
 	}
 
 	/**
-	 * @param description the description to set
+	 * @param description
+	 *            the description to set
 	 */
 	public void setDescription(String description) {
 		this.description = description;
@@ -104,7 +108,8 @@ public class Report extends BaseEntity implements Serializable {
 	}
 
 	/**
-	 * @param processed the processed to set
+	 * @param processed
+	 *            the processed to set
 	 */
 	public void setProcessed(boolean processed) {
 		this.processed = processed;
@@ -118,7 +123,8 @@ public class Report extends BaseEntity implements Serializable {
 	}
 
 	/**
-	 * @param creationDate the creationDate to set
+	 * @param creationDate
+	 *            the creationDate to set
 	 */
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
@@ -132,7 +138,8 @@ public class Report extends BaseEntity implements Serializable {
 	}
 
 	/**
-	 * @param lastUpdateDate the lastUpdateDate to set
+	 * @param lastUpdateDate
+	 *            the lastUpdateDate to set
 	 */
 	public void setLastUpdateDate(Date lastUpdateDate) {
 		this.lastUpdateDate = lastUpdateDate;

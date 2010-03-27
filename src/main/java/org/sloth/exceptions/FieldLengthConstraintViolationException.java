@@ -17,8 +17,9 @@
  */
 package org.sloth.exceptions;
 
-public class FieldLengthConstraintViolationException extends ConstraintViolationException {
-	//XXX serial
+public class FieldLengthConstraintViolationException extends
+		ConstraintViolationException {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1903058169168541242L;
+
 }

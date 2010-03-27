@@ -34,8 +34,8 @@ import org.sloth.model.Observation_;
 import org.sloth.persistence.ReportDao;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class ObservationDaoImpl extends EntityManagerDao<Observation>
-		implements ObservationDao {
+public class ObservationDaoImpl extends EntityManagerDao<Observation> implements
+		ObservationDao {
 
 	private ReportDao reportDao;
 
@@ -46,9 +46,11 @@ public class ObservationDaoImpl extends EntityManagerDao<Observation>
 
 	@Override
 	public Collection<Observation> getAll() {
-		CriteriaQuery<Observation> cq = getEntityManager().getCriteriaBuilder().createQuery(Observation.class);
+		CriteriaQuery<Observation> cq = getEntityManager().getCriteriaBuilder()
+				.createQuery(Observation.class);
 		cq.select(cq.from(Observation.class));
-		Collection<Observation> list = getEntityManager().createQuery(cq).getResultList();
+		Collection<Observation> list = getEntityManager().createQuery(cq)
+				.getResultList();
 		logger.info("Getting all Observations; Found: {}", list.size());
 		return list;
 	}
@@ -60,8 +62,11 @@ public class ObservationDaoImpl extends EntityManagerDao<Observation>
 		logger.info("Searching for Observation with Id: {}", id);
 		Observation o = getEntityManager().find(Observation.class, id);
 		if (o != null)
-			logger.info("Found Observation with Id {}; Title: {}; Description: {}",
-					new Object[]{o.getId(), o.getTitle(), o.getDescription()});
+			logger
+					.info(
+							"Found Observation with Id {}; Title: {}; Description: {}",
+							new Object[] { o.getId(), o.getTitle(),
+									o.getDescription() });
 		else
 			logger.info("Can't find Observation with Id {}", id);
 		return o;
@@ -96,8 +101,8 @@ public class ObservationDaoImpl extends EntityManagerDao<Observation>
 	}
 
 	@Override
-	public Collection<Observation> getByCategorie(Categorie c) throws
-			NullPointerException, IllegalArgumentException {
+	public Collection<Observation> getByCategorie(Categorie c)
+			throws NullPointerException, IllegalArgumentException {
 		if (c == null)
 			throw new NullPointerException();
 		if (c.isNew())
@@ -107,15 +112,15 @@ public class ObservationDaoImpl extends EntityManagerDao<Observation>
 		Root<Observation> o = cq.from(Observation.class);
 		cq.select(o);
 		cq.where(cb.equal(o.get(Observation_.categorie), c));
-		Collection<Observation> result = getEntityManager().createQuery(cq).
-				getResultList();
+		Collection<Observation> result = getEntityManager().createQuery(cq)
+				.getResultList();
 		logger.info("{} Observations in Categorie {}.", result.size(), c);
 		return result;
 	}
 
 	@Override
-	public Collection<Observation> getByUser(User u) throws NullPointerException,
-															IllegalArgumentException {
+	public Collection<Observation> getByUser(User u)
+			throws NullPointerException, IllegalArgumentException {
 		if (u == null)
 			throw new NullPointerException();
 		if (u.isNew())
@@ -125,7 +130,8 @@ public class ObservationDaoImpl extends EntityManagerDao<Observation>
 		Root<Observation> o = cq.from(Observation.class);
 		cq.select(o);
 		cq.where(cb.equal(o.get(Observation_.user), u));
-		Collection<Observation> result = getEntityManager().createQuery(cq).getResultList();
+		Collection<Observation> result = getEntityManager().createQuery(cq)
+				.getResultList();
 		logger.info("{} Observations by User {}.", result.size(), u);
 		return result;
 	}
@@ -137,17 +143,18 @@ public class ObservationDaoImpl extends EntityManagerDao<Observation>
 		Root<Observation> o = cq.from(Observation.class);
 		cq.select(o);
 		cq.orderBy(cb.desc(o.get(Observation_.creationDate)));
-		List<Observation> obs = getEntityManager().createQuery(cq).getResultList();
+		List<Observation> obs = getEntityManager().createQuery(cq)
+				.getResultList();
 		if (!obs.isEmpty())
-			return obs.subList(0, ((obs.size() < count) ? obs.size() : count)
-								  - 1);
+			return obs.subList(0,
+					((obs.size() < count) ? obs.size() : count) - 1);
 		else
 			return obs;
 	}
 
 	@Override
-	public Collection<Observation> getByKeyWord(String key) throws
-			NullPointerException {
+	public Collection<Observation> getByKeyWord(String key)
+			throws NullPointerException {
 		if (key == null)
 			throw new NullPointerException();
 		key = "%" + key.trim().toUpperCase() + "%";
@@ -155,19 +162,22 @@ public class ObservationDaoImpl extends EntityManagerDao<Observation>
 		CriteriaQuery<Observation> q = b.createQuery(Observation.class);
 		Root<Observation> o = q.from(Observation.class);
 		Join<Observation, Categorie> j = o.join(Observation_.categorie);
-		Collection<Observation> result = getEntityManager().createQuery(q.select(o).distinct(true).where(
-				b.or(
-				b.like(b.upper(j.get(Categorie_.description)), key),
-				b.like(b.upper(j.get(Categorie_.description)), key),
-				b.like(b.upper(o.get(Observation_.title)), key),
-				b.like(b.upper(o.get(Observation_.description)), key)))).getResultList();
+		Collection<Observation> result = getEntityManager().createQuery(
+				q.select(o).distinct(true).where(
+						b.or(b
+								.like(b.upper(j.get(Categorie_.description)),
+										key), b.like(b.upper(j
+								.get(Categorie_.description)), key), b.like(b
+								.upper(o.get(Observation_.title)), key), b
+								.like(b.upper(o.get(Observation_.description)),
+										key)))).getResultList();
 		logger.info("Searched for {}. Got {} Results.", key, result.size());
 		return result;
 	}
 
 	@Override
 	public void delete(Collection<Observation> t) throws NullPointerException,
-														 IllegalArgumentException {
+			IllegalArgumentException {
 		for (Observation o : t) {
 			if (!isAttached(o))
 				throw new EntityNotKnownException();

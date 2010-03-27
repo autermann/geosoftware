@@ -22,8 +22,7 @@ import org.springframework.validation.Errors;
 
 public class ObservationValidator {
 
-	public void validate(Observation obj,
-						 Errors errors) {
+	public void validate(Observation obj, Errors errors) {
 		if (obj.getCategorie() == null)
 			errors.rejectValue("categorie", "field.needed");
 		if (obj.getCoordinate() == null)

@@ -64,15 +64,13 @@ public abstract class EntityFactory {
 		return getUser(id, Group.WFS);
 	}
 
-	private static User getUser(Long id,
-								Group g) {
+	private static User getUser(Long id, Group g) {
 		User u = getUser(g);
 		u.setId(id);
 		return u;
 	}
 
-	public static Observation getObservation(Categorie c,
-											 User u) {
+	public static Observation getObservation(Categorie c, User u) {
 		Observation o = new Observation();
 		o.setCategorie(c);
 		o.setCoordinate(new Coordinate(observationCount, observationCount));
@@ -92,9 +90,7 @@ public abstract class EntityFactory {
 		return c;
 	}
 
-	public static Observation getObservation(Long id,
-											 Categorie c,
-											 User u) {
+	public static Observation getObservation(Long id, Categorie c, User u) {
 		Observation o = getObservation(c, u);
 		o.setId(id);
 		return o;

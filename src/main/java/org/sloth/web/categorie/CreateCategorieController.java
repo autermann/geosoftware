@@ -46,7 +46,8 @@ public class CreateCategorieController {
 
 	private static final String modelAttributeName = "categorie";
 	private static final String view = "categories/new";
-	private static final Logger logger = LoggerFactory.getLogger(CreateCategorieController.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(CreateCategorieController.class);
 	private ObservationService observationService;
 	private CategorieValidator categorieValidator;
 
@@ -66,8 +67,8 @@ public class CreateCategorieController {
 	}
 
 	@RequestMapping(method = GET)
-	public ModelAndView setup(HttpSession session,
-							  HttpServletResponse response) throws IOException {
+	public ModelAndView setup(HttpSession session, HttpServletResponse response)
+			throws IOException {
 		if (isAdmin(session))
 			return new ModelAndView(view, modelAttributeName, new Categorie());
 		else
@@ -75,11 +76,10 @@ public class CreateCategorieController {
 	}
 
 	@RequestMapping(method = POST)
-	public String submit(@ModelAttribute(modelAttributeName) Categorie categorie,
-						 BindingResult result,
-						 SessionStatus status,
-						 HttpSession s,
-						 HttpServletResponse r) throws IOException {
+	public String submit(
+			@ModelAttribute(modelAttributeName) Categorie categorie,
+			BindingResult result, SessionStatus status, HttpSession s,
+			HttpServletResponse r) throws IOException {
 		if (isAdmin(s)) {
 			categorieValidator.validate(categorie, result);
 			if (result.hasErrors())

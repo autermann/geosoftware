@@ -35,7 +35,8 @@ public class Config {
 		if (props == null)
 			try {
 				logger.info("Loading configuration.");
-				props = PropertiesLoaderUtils.loadAllProperties("config.properties");
+				props = PropertiesLoaderUtils
+						.loadAllProperties("config.properties");
 			} catch (IOException ex) {
 				logger.warn("Can not load configuration", ex);
 				return null;

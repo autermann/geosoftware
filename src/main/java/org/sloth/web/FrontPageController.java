@@ -27,12 +27,13 @@ import static org.sloth.web.util.ControllerUtils.*;
 
 @Controller
 @RequestMapping("/")
-@SessionAttributes({"observations", "observation", "categories"})
+@SessionAttributes( { "observations", "observation", "categories" })
 public class FrontPageController {
 
 	private ObservationService os;
 	private ObservationValidator validator;
-	private static final Logger logger = LoggerFactory.getLogger(FrontPageController.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(FrontPageController.class);
 	private static final String VIEW = "index";
 	private static final String MAP_CONTENT = "observations";
 	private static final String NEW_OBSERVATION_ATTRIBUTE = "observation";
@@ -46,7 +47,10 @@ public class FrontPageController {
 		try {
 			i = Integer.valueOf(Config.getProperty("lastObservationsCount"));
 		} catch (NumberFormatException e) {
-			logger.warn("Invalid or null value for property 'lastObservationsCount'.", e);
+			logger
+					.warn(
+							"Invalid or null value for property 'lastObservationsCount'.",
+							e);
 		}
 		if (i == null)
 			VISIBLE_OBSERVATIONS = VISIBLE_OBSERVATIONS_DEFAULT;
@@ -73,24 +77,23 @@ public class FrontPageController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView fillMap(HttpSession s,
-								@RequestParam(value = SEARCH_PARAM, required = false) String q) {
+			@RequestParam(value = SEARCH_PARAM, required = false) String q) {
 		ModelAndView mav = new ModelAndView(VIEW);
 		if (isAuth(s)) {
 			mav.addObject(NEW_OBSERVATION_ATTRIBUTE, new Observation());
 			mav.addObject(CATEGORIE_ATTRIBUTE, os.getCategories());
 		}
-		return mav.addObject(MAP_CONTENT, (q == null || q.trim().isEmpty())
-			? os.getNewestObservations(VISIBLE_OBSERVATIONS) : os.getObservations(q));
-
+		return mav.addObject(MAP_CONTENT,
+				(q == null || q.trim().isEmpty()) ? os
+						.getNewestObservations(VISIBLE_OBSERVATIONS) : os
+						.getObservations(q));
 
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String saveObservation(HttpSession s,
-								  HttpServletResponse r,
-								  @ModelAttribute(NEW_OBSERVATION_ATTRIBUTE) Observation observation,
-								  BindingResult result,
-								  SessionStatus status) throws IOException {
+	public String saveObservation(HttpSession s, HttpServletResponse r,
+			@ModelAttribute(NEW_OBSERVATION_ATTRIBUTE) Observation observation,
+			BindingResult result, SessionStatus status) throws IOException {
 		if (isAuth(s)) {
 			observation.setUser(getUser(s));
 			validator.validate(observation, result);

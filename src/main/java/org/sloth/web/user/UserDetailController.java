@@ -30,9 +30,8 @@ public class UserDetailController {
 	}
 
 	@RequestMapping
-	public ModelAndView handle(@PathVariable Long id,
-							   HttpSession s,
-							   HttpServletResponse r) throws IOException {
+	public ModelAndView handle(@PathVariable Long id, HttpSession s,
+			HttpServletResponse r) throws IOException {
 
 		if (isAdmin(s)) {
 			User u = userService.get(id);

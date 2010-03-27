@@ -46,7 +46,8 @@ public class EditUserController {
 
 	private static final String userAttribute = "userEditAction";
 	private static final String view = "users/edit";
-	protected static final Logger logger = LoggerFactory.getLogger(EditUserController.class);
+	protected static final Logger logger = LoggerFactory
+			.getLogger(EditUserController.class);
 	private UserService userService;
 	private UserValidator validator;
 
@@ -62,40 +63,46 @@ public class EditUserController {
 
 	@InitBinder
 	public void setAllowedFields(WebDataBinder dataBinder) {
-		dataBinder.setAllowedFields("newName", "newFamilyName", "newPassword", "newPasswordRepeat", "newMail", "actualPassword");
+		dataBinder.setAllowedFields("newName", "newFamilyName", "newPassword",
+				"newPasswordRepeat", "newMail", "actualPassword");
 	}
 
 	@RequestMapping(method = GET)
 	public ModelAndView setupForm(@PathVariable Long id, HttpSession s,
-								  HttpServletResponse r) throws IOException {
+			HttpServletResponse r) throws IOException {
 		if (isAuth(s)) {
 			if (isSameId(s, id))
-				return new ModelAndView(view, userAttribute, new UserEditFormAction(getUser(s)));
+				return new ModelAndView(view, userAttribute,
+						new UserEditFormAction(getUser(s)));
 			if (isAdmin(s)) {
 				User u = userService.get(id);
 				if (u == null)
 					return notFoundMAV(r);
 				else
-					return new ModelAndView(view, userAttribute, new UserEditFormAction(u));
+					return new ModelAndView(view, userAttribute,
+							new UserEditFormAction(u));
 			}
 		}
 		return forbiddenMAV(r);
 	}
 
 	@RequestMapping(method = POST)
-	public String processSubmit(@ModelAttribute(userAttribute) UserEditFormAction action,
-			BindingResult result, SessionStatus status,	HttpSession s, HttpServletResponse r)
-			throws IOException {
+	public String processSubmit(
+			@ModelAttribute(userAttribute) UserEditFormAction action,
+			BindingResult result, SessionStatus status, HttpSession s,
+			HttpServletResponse r) throws IOException {
 		if (isAuth(s))
 			if (isSameId(s, action.getId()) || isAdmin(s)) {
 				User u = validator.validate(action, result, getUser(s));
-				if (result.hasErrors()) return view;
+				if (result.hasErrors())
+					return view;
 				try {
 					userService.update(u);
 					status.setComplete();
 					if (isSameId(s, action.getId()))
 						return "redirect:/acc";
-					else return "redirect:/u";
+					else
+						return "redirect:/u";
 				} catch (Exception e) {
 					logger.warn("Unexpected Exception", e);
 					return internalErrorView(r);

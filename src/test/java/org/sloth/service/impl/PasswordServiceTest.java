@@ -34,7 +34,8 @@ public class PasswordServiceTest extends AbstractJUnit4SpringContextTests {
 		int length = passwordService.hash(buffer.toString()).length();
 		for (int i = 0; i < 100; i++) {
 			buffer.append("a");
-			assertEquals(length, passwordService.hash(buffer.toString()).length());
+			assertEquals(length, passwordService.hash(buffer.toString())
+					.length());
 		}
 	}
 

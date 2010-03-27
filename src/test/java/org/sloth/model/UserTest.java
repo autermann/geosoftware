@@ -69,7 +69,6 @@ public class UserTest {
 		aUser.setName(nameA);
 		assertEquals(nameA, aUser.getName());
 
-
 	}
 
 	/**
@@ -183,7 +182,7 @@ public class UserTest {
 		aUser.setName(nameA);
 		aUser.setId(idA);
 		String expresult = familyNameA + ", " + nameA + " (" + idA.toString()
-						   + ")";
+				+ ")";
 
 		assertEquals(expresult, aUser.toString());
 

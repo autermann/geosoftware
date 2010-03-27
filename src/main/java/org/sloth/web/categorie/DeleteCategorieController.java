@@ -40,7 +40,8 @@ public class DeleteCategorieController {
 
 	private static final String modelAttribute = "categorie";
 	private static final String view = "categories/delete";
-	private static final Logger logger = LoggerFactory.getLogger(DeleteCategorieController.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(DeleteCategorieController.class);
 	private ObservationService observationService;
 
 	@Autowired
@@ -54,10 +55,8 @@ public class DeleteCategorieController {
 	}
 
 	@RequestMapping(method = GET)
-	public String setupForm(@PathVariable("id") Long id,
-							Model model,
-							HttpSession s,
-							HttpServletResponse r) throws IOException {
+	public String setupForm(@PathVariable("id") Long id, Model model,
+			HttpSession s, HttpServletResponse r) throws IOException {
 		if (isAdmin(s)) {
 			Categorie categorie = observationService.getCategorie(id);
 			if (categorie == null)
@@ -69,9 +68,8 @@ public class DeleteCategorieController {
 	}
 
 	@RequestMapping(method = POST)
-	public String processSubmit(@PathVariable("id") Long id,
-								HttpSession s,
-								HttpServletResponse r) throws IOException {
+	public String processSubmit(@PathVariable("id") Long id, HttpSession s,
+			HttpServletResponse r) throws IOException {
 		if (isAdmin(s)) {
 			try {
 				this.observationService.deleteCategorie(id);

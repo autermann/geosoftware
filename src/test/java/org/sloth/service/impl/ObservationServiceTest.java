@@ -49,8 +49,8 @@ public class ObservationServiceTest {
 		}
 		for (int o = 0, u = 0, c = 0; o < 50; o++) {
 			Observation ob = getObservation(categorieList.get(c++
-															  % categorieList.size()),
-					userList.get(u++ % userList.size()));
+					% categorieList.size()), userList
+					.get(u++ % userList.size()));
 			observationList.add(ob);
 			observationDao.save(ob);
 		}
@@ -65,7 +65,8 @@ public class ObservationServiceTest {
 
 	@Test
 	public void testGetObservations_0args() {
-		assertEquals(observationService.getObservations().size(), observationList.size());
+		assertEquals(observationService.getObservations().size(),
+				observationList.size());
 	}
 
 	@Test
@@ -94,7 +95,8 @@ public class ObservationServiceTest {
 
 	@Test
 	public void testGetCategories() {
-		assertEquals(observationService.getCategories().size(), categorieList.size());
+		assertEquals(observationService.getCategories().size(), categorieList
+				.size());
 	}
 
 	@Test

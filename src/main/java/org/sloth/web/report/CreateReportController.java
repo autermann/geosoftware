@@ -29,7 +29,8 @@ public class CreateReportController {
 
 	private static final String view = "reports/form";
 	private static final String modelName = "report";
-	private static final Logger logger = LoggerFactory.getLogger(CreateReportController.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(CreateReportController.class);
 	private ObservationService observationService;
 	private ReportValidator reportValidator;
 
@@ -49,9 +50,8 @@ public class CreateReportController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView handleGet(@PathVariable Long id,
-								  HttpSession s,
-								  HttpServletResponse r) throws IOException {
+	public ModelAndView handleGet(@PathVariable Long id, HttpSession s,
+			HttpServletResponse r) throws IOException {
 		if (isAuth(s)) {
 			Observation o = observationService.getObservation(id);
 			if (o == null)
@@ -63,11 +63,8 @@ public class CreateReportController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String handlePost(@ModelAttribute Report report,
-							 BindingResult result,
-							 @PathVariable Long id,
-							 SessionStatus status,
-							 HttpSession s,
-							 HttpServletResponse r) throws IOException {
+			BindingResult result, @PathVariable Long id, SessionStatus status,
+			HttpSession s, HttpServletResponse r) throws IOException {
 		if (isAuth(s))
 			try {
 

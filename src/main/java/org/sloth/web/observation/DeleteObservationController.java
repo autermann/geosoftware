@@ -43,7 +43,8 @@ public class DeleteObservationController {
 
 	private static final String view = "observations/delete";
 	private static final String modelAttribute = "observation";
-	protected static final Logger logger = LoggerFactory.getLogger(DeleteObservationController.class);
+	protected static final Logger logger = LoggerFactory
+			.getLogger(DeleteObservationController.class);
 	private ObservationService observationService;
 
 	@Autowired
@@ -57,9 +58,8 @@ public class DeleteObservationController {
 	}
 
 	@RequestMapping(method = GET)
-	public ModelAndView setupForm(@PathVariable Long id,
-								  HttpSession s,
-								  HttpServletResponse r) throws IOException {
+	public ModelAndView setupForm(@PathVariable Long id, HttpSession s,
+			HttpServletResponse r) throws IOException {
 		if (isAuth(s)) {
 			Observation o = observationService.getObservation(id);
 			if (o == null)
@@ -71,9 +71,8 @@ public class DeleteObservationController {
 	}
 
 	@RequestMapping(method = POST)
-	public String processSubmit(@PathVariable Long id,
-								HttpSession s,
-								HttpServletResponse r) throws IOException {
+	public String processSubmit(@PathVariable Long id, HttpSession s,
+			HttpServletResponse r) throws IOException {
 		if (isAuth(s)) {
 			Observation o = observationService.getObservation(id);
 			if (o == null)

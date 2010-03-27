@@ -23,7 +23,8 @@ public class ViewObservationController {
 
 	private static final String view = "observations/details";
 	private static final String observationAttribute = "observation";
-	protected static final Logger logger = LoggerFactory.getLogger(EditObservationController.class);
+	protected static final Logger logger = LoggerFactory
+			.getLogger(EditObservationController.class);
 	private ObservationService observationService;
 
 	@Autowired
@@ -32,9 +33,8 @@ public class ViewObservationController {
 	}
 
 	@RequestMapping(method = GET)
-	public ModelAndView setupForm(@PathVariable Long id,
-								  HttpSession s,
-								  HttpServletResponse r) throws IOException {
+	public ModelAndView setupForm(@PathVariable Long id, HttpSession s,
+			HttpServletResponse r) throws IOException {
 		if (isAuth(s)) {
 			Observation o = observationService.getObservation(id);
 			if (o == null)

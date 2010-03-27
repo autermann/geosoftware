@@ -65,11 +65,8 @@ public class Observation extends BaseEntity implements Serializable {
 	 * @param categorie
 	 * @param coordinate
 	 */
-	public Observation(String title,
-					   String description,
-					   User user,
-					   Categorie categorie,
-					   Coordinate coordinate) {
+	public Observation(String title, String description, User user,
+			Categorie categorie, Coordinate coordinate) {
 		setCreationDate(new Date());
 		setTitle(title);
 		setDescription(description);
@@ -93,7 +90,8 @@ public class Observation extends BaseEntity implements Serializable {
 	}
 
 	/**
-	 * @param title the title to set
+	 * @param title
+	 *            the title to set
 	 */
 	public void setTitle(String title) {
 		this.title = title;
@@ -107,7 +105,8 @@ public class Observation extends BaseEntity implements Serializable {
 	}
 
 	/**
-	 * @param description the description to set
+	 * @param description
+	 *            the description to set
 	 */
 	public void setDescription(String description) {
 		this.description = description;
@@ -121,7 +120,8 @@ public class Observation extends BaseEntity implements Serializable {
 	}
 
 	/**
-	 * @param user the user to set
+	 * @param user
+	 *            the user to set
 	 */
 	public void setUser(User user) {
 		this.user = user;
@@ -165,7 +165,8 @@ public class Observation extends BaseEntity implements Serializable {
 	}
 
 	/**
-	 * @param coordinate the coordinate to set
+	 * @param coordinate
+	 *            the coordinate to set
 	 */
 	public void setCoordinate(Coordinate coordinate) {
 		this.coordinate = coordinate;
@@ -184,18 +185,26 @@ public class Observation extends BaseEntity implements Serializable {
 	public int hashCode() {
 		int hash = 7;
 		hash = 59 * hash + (this.getId() != null ? this.getId().hashCode() : 0);
-		hash = 59 * hash + (this.getTitle() != null ? this.getTitle().hashCode()
-							: 0);
-		hash = 59 * hash + (this.getDescription() != null ? this.getDescription().
-				hashCode() : 0);
-		hash = 59 * hash + (this.getUser() != null ? this.getUser().hashCode()
-							: 0);
 		hash = 59 * hash
-			   + (this.getCreationDate() != null ? this.getCreationDate().hashCode() : 0);
-		hash = 59 * hash + (this.getCategorie() != null ? this.getCategorie().
-				hashCode() : 0);
-		hash = 59 * hash + (this.getCoordinate() != null ? this.getCoordinate().
-				hashCode() : 0);
+				+ (this.getTitle() != null ? this.getTitle().hashCode() : 0);
+		hash = 59
+				* hash
+				+ (this.getDescription() != null ? this.getDescription()
+						.hashCode() : 0);
+		hash = 59 * hash
+				+ (this.getUser() != null ? this.getUser().hashCode() : 0);
+		hash = 59
+				* hash
+				+ (this.getCreationDate() != null ? this.getCreationDate()
+						.hashCode() : 0);
+		hash = 59
+				* hash
+				+ (this.getCategorie() != null ? this.getCategorie().hashCode()
+						: 0);
+		hash = 59
+				* hash
+				+ (this.getCoordinate() != null ? this.getCoordinate()
+						.hashCode() : 0);
 		return hash;
 	}
 
@@ -223,9 +232,9 @@ public class Observation extends BaseEntity implements Serializable {
 	@Override
 	public void validate() throws ConstraintViolationException {
 		if (getCoordinate() == null || getCreationDate() == null
-			|| getDescription() == null || getTitle() == null
-			|| getUser() == null || getDescription().isEmpty()
-			|| getTitle().isEmpty())
+				|| getDescription() == null || getTitle() == null
+				|| getUser() == null || getDescription().isEmpty()
+				|| getTitle().isEmpty())
 			throw new NotNullConstraintViolationException();
 		if (getTitle().length() > 255 || getDescription().length() > 1000)
 			throw new FieldLengthConstraintViolationException();

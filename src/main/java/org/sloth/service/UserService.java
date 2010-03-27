@@ -23,7 +23,7 @@ import org.sloth.model.User;
 
 /**
  * Service interface for handling {@code User}s.
- *
+ * 
  * @see User
  * @author Christian Autermann
  */
@@ -38,82 +38,94 @@ public interface UserService {
 	public Collection<User> getUsers();
 
 	/**
-	 * Returns the {@code User} with the specified mail address. If no
-	 * {@code User} is found {@code null} will be returned.
+	 * Returns the {@code User} with the specified mail address. If no {@code
+	 * User} is found {@code null} will be returned.
 	 * 
-	 * @param mail the mail address
+	 * @param mail
+	 *            the mail address
 	 * @return the {@code User} or {@code null}
-	 * @throws NullPointerException if {@code mail} is {@code null}
+	 * @throws NullPointerException
+	 *             if {@code mail} is {@code null}
 	 */
 	public User get(String mail) throws NullPointerException;
 
 	/**
-	 * Returns the {@code User} with the specified id. If no
-	 * {@code User} is found {@code null} will be returned.
-	 *
-	 * @param id the id
+	 * Returns the {@code User} with the specified id. If no {@code User} is
+	 * found {@code null} will be returned.
+	 * 
+	 * @param id
+	 *            the id
 	 * @return the {@code User} or {@code null}
-	 * @throws NullPointerException if {@code id} is {@code null}
+	 * @throws NullPointerException
+	 *             if {@code id} is {@code null}
 	 */
 	public User get(Long id) throws NullPointerException;
 
 	/**
 	 * Deletes the {@code User} with the specified id.
 	 * 
-	 * @param id the id
-	 * @throws NullPointerException if {@code id} is {@code null}
-	 * @throws IllegalArgumentException if no matching {@code User} exists in
-	 * the system
+	 * @param id
+	 *            the id
+	 * @throws NullPointerException
+	 *             if {@code id} is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if no matching {@code User} exists in the system
 	 */
 	public void delete(Long id) throws NullPointerException,
-									   IllegalArgumentException;
+			IllegalArgumentException;
 
 	/**
 	 * Deletes a {@code User}.
-	 *
-	 * @param user the {@code User}
-	 * @throws NullPointerException if {@code user} is {@code null}
-	 * @throws IllegalArgumentException if {@code user} is not know by the
-	 * system.
+	 * 
+	 * @param user
+	 *            the {@code User}
+	 * @throws NullPointerException
+	 *             if {@code user} is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if {@code user} is not know by the system.
 	 */
 	public void delete(User user) throws NullPointerException,
-										 IllegalArgumentException;
+			IllegalArgumentException;
 
 	/**
 	 * Adds a new {@code User} to the system.
-	 *
-	 * @param u the {@code User}
-	 * @throws NullPointerException if {@code u} is {@code null}
-	 * @throws IllegalArgumentException if {@code u} is already known by the
-	 * system
-	 * @throws ConstraintViolationException if {@code u} violates a
-	 * system constraint
+	 * 
+	 * @param u
+	 *            the {@code User}
+	 * @throws NullPointerException
+	 *             if {@code u} is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if {@code u} is already known by the system
+	 * @throws ConstraintViolationException
+	 *             if {@code u} violates a system constraint
 	 */
 	public void registrate(User u) throws NullPointerException,
-										  IllegalArgumentException,
-										  ConstraintViolationException;
+			IllegalArgumentException, ConstraintViolationException;
 
 	/**
 	 * Merges the changes made to {@code u} into the system.
 	 * 
-	 * @param u the {@code User}
-	 * @throws NullPointerException if {@code u} is {@code null}
-	 * @throws IllegalArgumentException if {@code u} is not known by the system
-	 * @throws ConstraintViolationException if {@code u} violates a system
-	 * constraint
+	 * @param u
+	 *            the {@code User}
+	 * @throws NullPointerException
+	 *             if {@code u} is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if {@code u} is not known by the system
+	 * @throws ConstraintViolationException
+	 *             if {@code u} violates a system constraint
 	 */
 	public void update(User u) throws NullPointerException,
-									  IllegalArgumentException,
-									  ConstraintViolationException;
+			IllegalArgumentException, ConstraintViolationException;
 
 	/**
-	 * Tests if a matching {@code User} exists in the system and return the 
+	 * Tests if a matching {@code User} exists in the system and return the
 	 * found {@code User}. If no {@code User} found, {@code null} will be
 	 * returned.
 	 * 
 	 * @param login
 	 * @return the {@code User} or {@code null}
-	 * @throws NullPointerException if {@code login} is {@code null}
+	 * @throws NullPointerException
+	 *             if {@code login} is {@code null}
 	 */
 	public User login(Login login) throws NullPointerException;
 }

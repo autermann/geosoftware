@@ -18,7 +18,7 @@
 package org.sloth.exceptions;
 
 public class IntegrityError extends Error {
-	//XXX serial
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1618349163319560015L;
+
 }

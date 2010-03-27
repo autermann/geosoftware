@@ -50,7 +50,8 @@ public class ObservationAddController {
 	private static final String view = "observations/form";
 	private static final String observationAttribute = "observation";
 	private static final String categorieCollectionAttribute = "categories";
-	private Logger logger = LoggerFactory.getLogger(ObservationAddController.class);
+	private Logger logger = LoggerFactory
+			.getLogger(ObservationAddController.class);
 	private ObservationService observationManager;
 	private ObservationValidator validator;
 
@@ -73,12 +74,13 @@ public class ObservationAddController {
 	}
 
 	@RequestMapping(method = GET)
-	public ModelAndView setupForm(HttpSession s,
-								  HttpServletResponse r) throws IOException {
+	public ModelAndView setupForm(HttpSession s, HttpServletResponse r)
+			throws IOException {
 		if (isAuth(s)) {
 			ModelAndView mav = new ModelAndView(view);
 			mav.addObject(observationAttribute, new Observation());
-			mav.addObject(categorieCollectionAttribute, observationManager.getCategories());
+			mav.addObject(categorieCollectionAttribute, observationManager
+					.getCategories());
 			return mav;
 		} else
 			return forbiddenMAV(r);
@@ -87,9 +89,7 @@ public class ObservationAddController {
 	@RequestMapping(method = POST)
 	public String processSubmit(
 			@ModelAttribute(observationAttribute) Observation observation,
-			BindingResult result,
-			SessionStatus status,
-			HttpSession session,
+			BindingResult result, SessionStatus status, HttpSession session,
 			HttpServletResponse r) throws IOException {
 		if (isAuth(session)) {
 			observation.setUser(getUser(session));

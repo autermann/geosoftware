@@ -49,7 +49,7 @@ function checkForPermalink() {
 
 function init(){
 	OpenLayers.Lang.setCode('de');
-	//Create new Openlayers-Layer with ID 'map'
+	// Create new Openlayers-Layer with ID 'map'
 	map = new OpenLayers.Map('map', {
 		controls: [],
 		maxExtent: new OpenLayers.Bounds(-20037508.34,-20037508.34,20037508.34,20037508.34),
@@ -70,7 +70,7 @@ function init(){
 	var layer_mapnik = new OpenLayers.Layer.OSM.Mapnik("Mapnik");
 	var layer_cycle = new OpenLayers.Layer.OSM.CycleMap("Cycle");
 
-	//die styles werden hier definiert!!
+	// die styles werden hier definiert!!
 	var styles = new OpenLayers.StyleMap({
 		"default": new OpenLayers.Style(null, {
 			rules: [
@@ -113,7 +113,7 @@ function init(){
 		})
 	});
 
-	//editierbare features
+	// editierbare features
 	var saveStrategy = new OpenLayers.Strategy.Save();
 	wfs = new OpenLayers.Layer.Vector("Editable Features", {
 		strategies: [new OpenLayers.Strategy.BBOX(), saveStrategy],
@@ -129,7 +129,7 @@ function init(){
 			schema: "http://demo.opengeo.org/geoserver/wfs/DescribeFeatureType?version=1.1.0&typename=og:roads"
 		})
 	});
-	//wfs eingebunden
+	// wfs eingebunden
 
 	map.addLayers([layer_mapnik,layer_tah,layer_cycle,wfs,layer_markers]);
 	map.events.register('click', map, function(evt){
@@ -248,7 +248,7 @@ function addMarker(layer, ll, content, iconPath, iconWidth, iconHeight,open) {
 		}
 		OpenLayers.Event.stop(evt);
 	});
-	//layer.addMarker(marker);
+	// layer.addMarker(marker);
 	if (open){
 		if (feature.popup == null) {
 			feature.popup = feature.createPopup(feature.closeBox);

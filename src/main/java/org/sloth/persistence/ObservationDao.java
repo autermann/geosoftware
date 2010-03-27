@@ -25,46 +25,53 @@ import org.sloth.model.User;
 
 /**
  * Data Access Object for {@link Observation}.
- *
+ * 
  * @author Christian Autermann
  */
 public interface ObservationDao extends BaseEntityDao<Observation> {
 
 	/**
 	 * Query for all {@code Observation}s in a {@code Categorie}.
-	 *
-	 * @param c the {@code Categorie}
+	 * 
+	 * @param c
+	 *            the {@code Categorie}
 	 * @return all {@code Observation}s in {@code c}
-	 * @throws NullPointerException if {@code c} is {@code null}
-	 * @throws IllegalArgumentException if {@code c} is not in the database.
+	 * @throws NullPointerException
+	 *             if {@code c} is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if {@code c} is not in the database.
 	 */
-	public Collection<Observation> getByCategorie(Categorie c) throws
-			NullPointerException, IllegalArgumentException;
+	public Collection<Observation> getByCategorie(Categorie c)
+			throws NullPointerException, IllegalArgumentException;
 
 	/**
 	 * Query for all {@code Observation}s created by a {@code User}.
 	 * 
-	 * @param u the {@code User}
+	 * @param u
+	 *            the {@code User}
 	 * @return all {@code Observation}s created by {@code u}
-	 * @throws NullPointerException if {@code u} is {@code null}
-	 * @throws IllegalArgumentException if {@code u} is not in the database.
+	 * @throws NullPointerException
+	 *             if {@code u} is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if {@code u} is not in the database.
 	 */
-	public Collection<Observation> getByUser(User u) throws NullPointerException,
-															IllegalArgumentException;
+	public Collection<Observation> getByUser(User u)
+			throws NullPointerException, IllegalArgumentException;
 
 	/**
 	 * Query for the newest {@code Observation}s. If less then {@code count}
 	 * {@code Observation}s are available all {@code Observation}s will be
 	 * returned.
-	 *
-	 * @param count specifies how many {@code Observation}s will be returned.
-	 * @return {@code count} or less {@code Observation}s; orderd by their 
-	 *		   {@code creationDate}
+	 * 
+	 * @param count
+	 *            specifies how many {@code Observation}s will be returned.
+	 * @return {@code count} or less {@code Observation}s; orderd by their
+	 *         {@code creationDate}
 	 * @see Observation#getCreationDate()
-	 *
+	 * 
 	 */
 	public List<Observation> getNewestObservations(int count);
 
-	public Collection<Observation> getByKeyWord(String keyword) throws
-			NullPointerException;
+	public Collection<Observation> getByKeyWord(String keyword)
+			throws NullPointerException;
 }

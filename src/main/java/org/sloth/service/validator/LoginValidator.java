@@ -21,13 +21,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sloth.service.Login;
 import org.springframework.validation.Errors;
+
 //TODO JavaDoc
 public class LoginValidator {
 
-	private static final Logger logger = LoggerFactory.getLogger(LoginValidator.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(LoginValidator.class);
 
-	public void validate(Login t,
-						 Errors errors) {
+	public void validate(Login t, Errors errors) {
 		if (t == null)
 			throw new NullPointerException("Can't validate null.");
 		else

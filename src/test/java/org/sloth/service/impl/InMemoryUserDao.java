@@ -22,7 +22,7 @@ import org.sloth.model.User;
 import org.sloth.persistence.UserDao;
 
 /**
- *
+ * 
  * @author auti
  */
 public class InMemoryUserDao extends InMemoryDao<User> implements UserDao {
@@ -37,7 +37,7 @@ public class InMemoryUserDao extends InMemoryDao<User> implements UserDao {
 
 	@Override
 	public void delete(Collection<User> t) throws NullPointerException,
-												  IllegalArgumentException {
+			IllegalArgumentException {
 		this.deleteAll(t);
 	}
 }

@@ -24,8 +24,8 @@ import static org.sloth.util.Config.getProperty;
 
 public abstract class AbstractPasswordService implements PasswordService {
 
-	protected static final Logger logger = LoggerFactory.getLogger(
-			AbstractPasswordService.class);
+	protected static final Logger logger = LoggerFactory
+			.getLogger(AbstractPasswordService.class);
 	protected final int LENGTH;
 	protected final boolean DIGIT;
 	protected final boolean LOWER_CASE;
@@ -44,7 +44,8 @@ public abstract class AbstractPasswordService implements PasswordService {
 		DIGIT = (digit == null) ? false : Boolean.valueOf(digit);
 		LOWER_CASE = (lowercase == null) ? false : Boolean.valueOf(lowercase);
 		UPPER_CASE = (uppercase == null) ? false : Boolean.valueOf(uppercase);
-		NON_ALPHA_NUM = (nonalphanum == null) ? false : Boolean.valueOf(nonalphanum);
+		NON_ALPHA_NUM = (nonalphanum == null) ? false : Boolean
+				.valueOf(nonalphanum);
 
 		StringBuilder builder = new StringBuilder("^(?=.{");
 		builder.append(LENGTH);

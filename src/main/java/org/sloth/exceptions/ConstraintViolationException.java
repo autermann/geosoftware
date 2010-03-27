@@ -18,7 +18,7 @@
 package org.sloth.exceptions;
 
 public class ConstraintViolationException extends Error {
-	//XXX serial
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -5899819351115968894L;
+
 }

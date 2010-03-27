@@ -18,7 +18,7 @@
 package org.sloth.exceptions;
 
 public class EntityAlreadyKnownException extends IllegalArgumentException {
-	//XXX serial
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -1558670202310618862L;
+
 }

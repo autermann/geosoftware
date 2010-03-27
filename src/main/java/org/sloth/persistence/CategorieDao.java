@@ -29,10 +29,12 @@ public interface CategorieDao extends BaseEntityDao<Categorie> {
 	/**
 	 * Returns the {@code Categorie} with given {@code title}.
 	 * 
-	 * @param title the title
+	 * @param title
+	 *            the title
 	 * @return the matching {@code Catgeorie} or {@code null}
-	 * @throws NullPointerException if {@code title} is {@code null}
-	 *
+	 * @throws NullPointerException
+	 *             if {@code title} is {@code null}
+	 * 
 	 */
 	public Categorie getByTitle(String title) throws NullPointerException;
 }

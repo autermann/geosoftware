@@ -46,7 +46,8 @@ public class EditCategorieController {
 
 	private static final String view = "categories/edit";
 	private static final String modelAttributeName = "categorie";
-	private Logger logger = LoggerFactory.getLogger(EditCategorieController.class);
+	private Logger logger = LoggerFactory
+			.getLogger(EditCategorieController.class);
 	private ObservationService observationManager;
 	private CategorieValidator categorieValidator;
 
@@ -66,10 +67,8 @@ public class EditCategorieController {
 	}
 
 	@RequestMapping(method = GET)
-	public String setupForm(@PathVariable Long id,
-							Model model,
-							HttpSession s,
-							HttpServletResponse r) throws IOException {
+	public String setupForm(@PathVariable Long id, Model model, HttpSession s,
+			HttpServletResponse r) throws IOException {
 		if (isAdmin(s)) {
 			Categorie c = observationManager.getCategorie(id);
 			if (c == null)
@@ -84,9 +83,7 @@ public class EditCategorieController {
 	@RequestMapping(method = POST)
 	public String processSubmit(
 			@ModelAttribute(modelAttributeName) Categorie categorie,
-			BindingResult result,
-			SessionStatus status,
-			HttpSession s,
+			BindingResult result, SessionStatus status, HttpSession s,
 			HttpServletResponse r) throws IOException {
 		if (isAdmin(s)) {
 			categorieValidator.validate(categorie, result);

@@ -25,7 +25,7 @@ import static org.sloth.web.util.ControllerUtils.*;
 
 @Controller
 @RequestMapping("/r/edit/{id}")
-@SessionAttributes(types = {Report.class, Boolean.class})
+@SessionAttributes(types = { Report.class, Boolean.class })
 public class EditReportController {
 
 	private ObservationService observationService;
@@ -33,10 +33,12 @@ public class EditReportController {
 	private static final String view = "reports/form";
 	private static final String attibuteR = "report";
 	private static final String attibuteP = "processed";
-	private static final Logger logger = LoggerFactory.getLogger(EditReportController.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(EditReportController.class);
 
 	/**
-	 * @param observationService the observationService to set
+	 * @param observationService
+	 *            the observationService to set
 	 */
 	@Autowired
 	public void setObservationService(ObservationService observationService) {
@@ -44,7 +46,8 @@ public class EditReportController {
 	}
 
 	/**
-	 * @param reportValidator the reportValidator to set
+	 * @param reportValidator
+	 *            the reportValidator to set
 	 */
 	@Autowired
 	public void setReportValidator(ReportValidator reportValidator) {
@@ -57,15 +60,12 @@ public class EditReportController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView handleGet(@PathVariable Long id,
-								  HttpSession s,
-								  HttpServletResponse r) throws IOException {
+	public ModelAndView handleGet(@PathVariable Long id, HttpSession s,
+			HttpServletResponse r) throws IOException {
 		if (isAuth(s)) {
 			Report report = observationService.getReport(id);
 			if (report == null)
 				return notFoundMAV(r);
-
-
 
 			if (isAdmin(s) || isOwnReport(s, report)) {
 				ModelAndView mav = new ModelAndView(view);
@@ -74,24 +74,21 @@ public class EditReportController {
 				return mav;
 			}
 
-
 		}
 		return forbiddenMAV(r);
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String handlePost(@PathVariable Long id,
-							 @ModelAttribute(attibuteP) Boolean processed,
-							 @ModelAttribute(attibuteR) Report report,
-							 BindingResult result,
-							 SessionStatus status,
-							 HttpSession s,
-							 HttpServletResponse r) throws IOException {
+			@ModelAttribute(attibuteP) Boolean processed,
+			@ModelAttribute(attibuteR) Report report, BindingResult result,
+			SessionStatus status, HttpSession s, HttpServletResponse r)
+			throws IOException {
 		if (isAuth(s)) {
 			if (report == null)
 				return notFoundView(r);
 			if (!isAdmin(s)
-				&& !processed.equals(Boolean.valueOf(report.isProcessed())))
+					&& !processed.equals(Boolean.valueOf(report.isProcessed())))
 				return forbiddenView(r);
 			if (isAdmin(s) || isOwnReport(s, report)) {
 				reportValidator.validate(report, result);

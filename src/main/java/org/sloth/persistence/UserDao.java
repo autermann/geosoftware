@@ -21,18 +21,21 @@ import org.sloth.model.User;
 
 /**
  * Data Access Object for {@link User}.
- *	
+ * 
  * @author Christian Autermann
  */
 public interface UserDao extends BaseEntityDao<User> {
 
 	/**
 	 * Query for a {@code User} with known mail address.
-	 *
-	 * @param mail the {@code mail}-address
+	 * 
+	 * @param mail
+	 *            the {@code mail}-address
 	 * @return the matching {@code User}, or {@code null} if not found
-	 * @throws NullPointerException if {@code mail} is {@code null}
-	 * @throws IllegalArgumentException if {@code u} is not in the database.
+	 * @throws NullPointerException
+	 *             if {@code mail} is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if {@code u} is not in the database.
 	 */
 	public User getByMail(String mail);
 }

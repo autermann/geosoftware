@@ -1,35 +1,32 @@
-body {
-	/*background-color: #00008b;*/
-	font: normal 13px/100% Verdana, Tahoma, sans-serif;
+body { /*background-color: #00008b;*/
+	font: normal 13px/ 100% Verdana, Tahoma, sans-serif;
 }
 
-
-#map{
+#map {
 	position: absolute;
-	left:30%;
-	right:0;
+	left: 30%;
+	right: 0;
 	bottom: 0;
-	top:50px;
+	top: 50px;
 }
 
-#list{
+#list {
 	position: absolute;
 	left: 0;
 	width: 30%;
-	top:50px;
+	top: 50px;
 	bottom: 0;
 }
 
-#header{
+#header {
 	position: absolute;
-	left:0;
-	top:0;
-	right:0;
-	bottom:50px;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 50px;
 }
-
 /* Unter jedem Nicht-Win Betriebssystem sehen die Standard-Buttons besser aus^^ */
-/*
+	/*
 input[type="button"], input[type="submit"] {
 	font-size: 12px;
 	font-weight: normal;
@@ -38,4 +35,3 @@ input[type="button"], input[type="submit"] {
 	border: 1px solid #AAAAAA;
 	background: #CCCCCC;
 }*/
-

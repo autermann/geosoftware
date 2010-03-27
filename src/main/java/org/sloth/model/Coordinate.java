@@ -40,19 +40,21 @@ public class Coordinate implements Serializable {
 	private double longitude;
 
 	/**
-	 * Creates a new Coordinate with 0 as default value for logitude
-	 * and latitude.
+	 * Creates a new Coordinate with 0 as default value for logitude and
+	 * latitude.
 	 */
 	public Coordinate() {
 	}
 
 	/**
 	 * Creates a new Coordinate.
-	 * @param lon the longitude
-	 * @param lat the latitude
+	 * 
+	 * @param lon
+	 *            the longitude
+	 * @param lat
+	 *            the latitude
 	 */
-	public Coordinate(double lon,
-					  double lat) {
+	public Coordinate(double lon, double lat) {
 		this.setLatitude(lat);
 		this.setLongitude(lon);
 	}
@@ -65,7 +67,8 @@ public class Coordinate implements Serializable {
 	}
 
 	/**
-	 * @param latitude the latitude to set
+	 * @param latitude
+	 *            the latitude to set
 	 */
 	public void setLatitude(double latitude) {
 		this.latitude = latitude;
@@ -79,7 +82,8 @@ public class Coordinate implements Serializable {
 	}
 
 	/**
-	 * @param longitude the longitude to set
+	 * @param longitude
+	 *            the longitude to set
 	 */
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
@@ -97,12 +101,14 @@ public class Coordinate implements Serializable {
 	@Override
 	public int hashCode() {
 		int hash = 5;
-		hash = 47 * hash + (int) (Double.doubleToLongBits(this.getLatitude())
-								  ^ (Double.doubleToLongBits(this.getLatitude())
-									 >>> 32));
-		hash = 47 * hash + (int) (Double.doubleToLongBits(this.getLongitude())
-								  ^ (Double.doubleToLongBits(this.getLongitude())
-									 >>> 32));
+		hash = 47
+				* hash
+				+ (int) (Double.doubleToLongBits(this.getLatitude()) ^ (Double
+						.doubleToLongBits(this.getLatitude()) >>> 32));
+		hash = 47
+				* hash
+				+ (int) (Double.doubleToLongBits(this.getLongitude()) ^ (Double
+						.doubleToLongBits(this.getLongitude()) >>> 32));
 		return hash;
 	}
 

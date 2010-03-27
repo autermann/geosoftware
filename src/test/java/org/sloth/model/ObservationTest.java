@@ -25,13 +25,14 @@ import org.junit.Test;
 public class ObservationTest {
 
 	private Observation a, b, c;
-//	private final Long idA, idB, idC;
-	private final String titleA = "Title of A", titleB = "Title of A", titleC = "Title of C";
+	// private final Long idA, idB, idC;
+	private final String titleA = "Title of A", titleB = "Title of A",
+			titleC = "Title of C";
 	private final String descriptionA = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
 	private final String descriptionB = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
 	private final String descriptionC = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod";
 	private final User userA = new User();
-//  Coordinate Values
+	// Coordinate Values
 	private final double lonA = 231847D, latA = 1234423D;
 	private final double lonB = -12347D, latB = -1231234134423D;
 	private final Coordinate coordA = new Coordinate(lonA, latA);
@@ -47,13 +48,13 @@ public class ObservationTest {
 
 	}
 
-//	/**
-//	 * Test stub to prevent "no test found"-errors...
-//	 */
-//	@org.junit.Test(expected=UnsupportedOperationException.class)
-//	public void stub(){
-//		throw new UnsupportedOperationException("Not supported yet.");
-//	}
+	// /**
+	// * Test stub to prevent "no test found"-errors...
+	// */
+	// @org.junit.Test(expected=UnsupportedOperationException.class)
+	// public void stub(){
+	// throw new UnsupportedOperationException("Not supported yet.");
+	// }
 	/**
 	 * Test of getTitle method, of class Observation.
 	 */
@@ -232,9 +233,9 @@ public class ObservationTest {
 		Date k = new Date();
 		String ks = k.toString();
 		assertEquals(a.toString(), "[" + a.getClass() + "](" + a.getId()
-								   + " - \"" + titleA + "\" by " + a.getUser()
-								   + " @" + coordA.toString() + "|" + ks
-								   + " in " + a.getCategorie() + ")");
+				+ " - \"" + titleA + "\" by " + a.getUser() + " @"
+				+ coordA.toString() + "|" + ks + " in " + a.getCategorie()
+				+ ")");
 	}
 
 	/**

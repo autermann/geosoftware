@@ -24,7 +24,7 @@ import org.sloth.model.User;
  * 
  * @see User#setPassword(java.lang.String)
  * @see User#getPassword()
- *
+ * 
  * @author Christian Autermann
  */
 public interface PasswordService {
@@ -32,32 +32,40 @@ public interface PasswordService {
 	/**
 	 * Tests the strength of a plain text password.
 	 * 
-	 * @param plain the password
+	 * @param plain
+	 *            the password
 	 * @return {@code true} if it is strong enough, {@code false} otherwise
 	 */
 	public boolean meetsRecommendation(String plain);
 
 	/**
-	 * Hashs a plain text password.<p>Invoking this method on the same plain 
-	 * {@code String} will allways return the same hash value. This method
-	 * ensures this even in different VM sessions.</p> <p>Conflicts (two
-	 * different plain {@code String}s have the same hash value) shall be
-	 * avoided because of security concerns.</p>
+	 * Hashs a plain text password.
+	 * <p>
+	 * Invoking this method on the same plain {@code String} will allways return
+	 * the same hash value. This method ensures this even in different VM
+	 * sessions.
+	 * </p>
+	 * <p>
+	 * Conflicts (two different plain {@code String}s have the same hash value)
+	 * shall be avoided because of security concerns.
+	 * </p>
 	 * 
-	 * @param plain the password
-	 * @return the password hash or {@code null} if {@code} password
-	 * was {@code null}
+	 * @param plain
+	 *            the password
+	 * @return the password hash or {@code null} if {@code} password was {@code
+	 *         null}
 	 */
 	public String hash(String plain);
 
 	/**
 	 * Checks wether the given password are the same.
-	 *
-	 * @param hash the hashed password
-	 * @param plain the plain password
+	 * 
+	 * @param hash
+	 *            the hashed password
+	 * @param plain
+	 *            the plain password
 	 * @return {@code true} if the hash of the plain password is equal to the
-	 * hashed password, otherwise {@code false}
+	 *         hashed password, otherwise {@code false}
 	 */
-	public boolean check(String hash,
-						 String plain);
+	public boolean check(String hash, String plain);
 }

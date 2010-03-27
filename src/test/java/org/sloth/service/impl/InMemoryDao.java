@@ -37,7 +37,7 @@ public class InMemoryDao<T extends BaseEntity> {
 	}
 
 	public void update(T t) throws NullPointerException,
-								   IllegalArgumentException {
+			IllegalArgumentException {
 		if (t == null)
 			throw new NullPointerException();
 		if (t.isNew() || !database.containsKey(t.getId()))
@@ -48,7 +48,7 @@ public class InMemoryDao<T extends BaseEntity> {
 	}
 
 	public void delete(T t) throws NullPointerException,
-								   IllegalArgumentException {
+			IllegalArgumentException {
 		if (t == null)
 			throw new NullPointerException();
 		if (t.isNew() || !database.containsKey(t.getId()))

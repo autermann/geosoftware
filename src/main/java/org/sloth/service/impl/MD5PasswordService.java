@@ -25,6 +25,7 @@ import org.springframework.stereotype.Service;
 /**
  * Realizes password hashing through MD5-Hashing. Due security vulnerabilities
  * deprecepated.
+ * 
  * @deprecated not future safe.
  * @see BCryptPasswordService
  * @author Christian Autermann
@@ -48,8 +49,7 @@ public class MD5PasswordService extends AbstractPasswordService {
 	}
 
 	@Override
-	public boolean check(String hash,
-						 String plain) {
+	public boolean check(String hash, String plain) {
 		return hash(plain).equals(hash);
 	}
 }

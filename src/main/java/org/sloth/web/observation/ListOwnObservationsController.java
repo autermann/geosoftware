@@ -28,10 +28,11 @@ public class ListOwnObservationsController {
 	}
 
 	@RequestMapping
-	public ModelAndView setupList(HttpSession s,
-								  HttpServletResponse r) throws IOException {
+	public ModelAndView setupList(HttpSession s, HttpServletResponse r)
+			throws IOException {
 		if (isAuth(s))
-			return new ModelAndView(view, modelAttribute, observationService.getObservationsByUser(getUser(s)));
+			return new ModelAndView(view, modelAttribute, observationService
+					.getObservationsByUser(getUser(s)));
 		else
 			return forbiddenMAV(r);
 	}

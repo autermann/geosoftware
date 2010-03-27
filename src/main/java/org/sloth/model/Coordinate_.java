@@ -23,6 +23,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 
 /**
  * Metamodel class for the {@link Embeddable} {@link Coordinate}
+ * 
  * @see Coordinate
  * @author Christian Autermann
  */
@@ -31,14 +32,16 @@ public class Coordinate_ {
 
 	/**
 	 * Metamodel-Attribute for {@link Coordinate#longitude}
+	 * 
 	 * @see Coordinate#getLongitude()
 	 * @see Coordinate#setLongitude(double)
 	 */
 	public static volatile SingularAttribute<Coordinate, Double> longitude;
 	/**
 	 * Metamodel-Attribute for {@link Coordinate#latitude}
-	 * @see Coordinate#getLatitude() 
-	 * @see Coordinate#setLatitude(double) 
+	 * 
+	 * @see Coordinate#getLatitude()
+	 * @see Coordinate#setLatitude(double)
 	 */
 	public static volatile SingularAttribute<Coordinate, Double> latitude;
 }

@@ -17,7 +17,6 @@
  */
 package org.sloth.service.validator;
 
-import javax.naming.spi.DirStateFactory.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sloth.model.Group;
@@ -25,6 +24,7 @@ import org.sloth.model.User;
 import org.sloth.service.PasswordService;
 import org.sloth.service.UserService;
 import org.sloth.util.Config;
+import org.sloth.web.account.RegistrationFormAction;
 import org.sloth.web.user.UserEditFormAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
@@ -40,7 +40,8 @@ public class UserValidator {
 	private PasswordService passwordService;
 	private UserService userService;
 	private static String mailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$";
-	private static final Logger logger = LoggerFactory.getLogger(UserValidator.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(UserValidator.class);
 
 	static {
 		String regex = Config.getProperty("mail.regex");
@@ -58,8 +59,7 @@ public class UserValidator {
 		this.userService = userService;
 	}
 
-	public void validate(User u,
-						 Errors errors) {
+	public void validate(User u, Errors errors) {
 		logger.info("Validating User: {}", u);
 		rejectIfEmptyOrWhitespace(errors, "familyName", "field.required");
 		rejectIfEmptyOrWhitespace(errors, "name", "field.required");
@@ -78,15 +78,12 @@ public class UserValidator {
 		}
 	}
 
-	private boolean notNullNotTooLongAndNotEmpty(String test,
-												 int maxLength) {
-		return test != null && !test.trim().isEmpty() && (test.trim().length()
-														   <= maxLength);
+	private boolean notNullNotTooLongAndNotEmpty(String test, int maxLength) {
+		return test != null && !test.trim().isEmpty()
+				&& (test.trim().length() <= maxLength);
 	}
 
-	public User validate(UserEditFormAction a,
-						 Errors errors,
-						 User editingUser) {
+	public User validate(UserEditFormAction a, Errors errors, User editingUser) {
 		String newPasswordHash = null;
 		String newMailAddress = null;
 		String newFamilyName = null;
@@ -98,7 +95,8 @@ public class UserValidator {
 			// users or admin editing himself
 			if (a.getActualPassword().trim().isEmpty())
 				errors.reject("password.needed");
-			else if (passwordService.check(a.getOldUser().getPassword(), a.getActualPassword()))
+			else if (passwordService.check(a.getOldUser().getPassword(), a
+					.getActualPassword()))
 				isAuthorized = true;
 			else
 				errors.reject("field.wrongPassword");
@@ -113,7 +111,8 @@ public class UserValidator {
 				if (a.getNewPassword().equals(a.getNewPasswordRepeat()))
 					// repeat was right
 					newPasswordHash = passwordService.hash(a.getNewPassword());
-				else // repeat was false
+				else
+					// repeat was false
 					errors.rejectValue("newPassword", "password.badrepeat");
 			// check if the mail address has changes
 			if (!a.getNewMail().equals(u.getMail()))
@@ -153,5 +152,45 @@ public class UserValidator {
 				u.setUserGroup(newGroup);
 			return u;
 		}
+	}
+
+	public User validate(RegistrationFormAction a, Errors errors) {
+
+		rejectIfEmptyOrWhitespace(errors, "familyName", "field.required");
+		rejectIfEmptyOrWhitespace(errors, "name", "field.required");
+		rejectIfEmptyOrWhitespace(errors, "passwordRepeat", "field.required");
+		rejectIfEmptyOrWhitespace(errors, "mailRepeat", "field.required");
+		rejectIfEmptyOrWhitespace(errors, "password", "field.required");
+		rejectIfEmptyOrWhitespace(errors, "mail", "field.required");
+
+		if (a.getName().length() > 255)
+			errors.reject("name", "field.tooLong");
+		if (a.getFamilyName().length() > 255)
+			errors.reject("familyName", "field.tooLong");
+		if (a.getMail().length() > 255)
+			errors.reject("mail", "field.tooLong");
+		if (a.getPassword().equals(a.getPasswordRepeat())) {
+			if (!passwordService.meetsRecommendation(a.getPassword()))
+				errors.rejectValue("password", "field.badpassword");
+		} else
+			errors.rejectValue("password", "password.badrepeat");
+		if (a.getMail().equals(a.getMailRepeat())) {
+			if (!a.getMail().matches(mailRegex)) {
+				errors.rejectValue("mail", "field.invalidMailAddress");
+				if (userService.get(a.getMail()) != null)
+					errors.rejectValue("mail", "field.mail.notunique");
+			}
+		} else
+			errors.rejectValue("mail", "mail.badrepeat");
+		if (!errors.hasErrors()) {
+			User u = new User();
+			u.setUserGroup(Group.USER);
+			u.setName(a.getName());
+			u.setFamilyName(a.getFamilyName());
+			u.setMail(a.getMail());
+			u.setPassword(a.getPassword());
+			return u;
+		} else
+			return null;
 	}
 }

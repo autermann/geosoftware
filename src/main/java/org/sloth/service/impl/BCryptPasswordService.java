@@ -25,7 +25,7 @@ import static org.sloth.util.BCrypt.*;
  * Realizes the password hashing with an OpenBSD-style Blowfish password hashing
  * algorithm using the scheme described in "A Future-Adaptable Password Scheme"
  * by Niels Provos and David Mazieres.
- *
+ * 
  * @see BCrypt
  * @author Christian Autermann
  */
@@ -41,8 +41,7 @@ public class BCryptPasswordService extends AbstractPasswordService {
 	}
 
 	@Override
-	public boolean check(String hash,
-						 String plain) {
+	public boolean check(String hash, String plain) {
 		return checkpw(plain, hash);
 	}
 }

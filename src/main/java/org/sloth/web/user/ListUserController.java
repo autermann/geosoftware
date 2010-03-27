@@ -36,7 +36,8 @@ public class ListUserController {
 
 	private static final String view = "users/list";
 	private static final String modelAttribute = "users";
-	protected final static Logger logger = LoggerFactory.getLogger(ListUserController.class);
+	protected final static Logger logger = LoggerFactory
+			.getLogger(ListUserController.class);
 	private UserService userManager;
 
 	@Autowired
@@ -45,13 +46,12 @@ public class ListUserController {
 	}
 
 	@RequestMapping(method = GET)
-	public ModelAndView setupList(HttpSession s,
-								  HttpServletResponse r) throws IOException {
+	public ModelAndView setupList(HttpSession s, HttpServletResponse r)
+			throws IOException {
 		if (isAdmin(s))
-			return new ModelAndView(view, modelAttribute, userManager.getUsers());
+			return new ModelAndView(view, modelAttribute, userManager
+					.getUsers());
 		else
 			return forbiddenMAV(r);
 	}
 }
-
-

@@ -22,6 +22,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 
 /**
  * Metamodel class for the {@link Entity} {@link Categorie}
+ * 
  * @see Categorie
  * @author Christian Autermann
  */
@@ -30,24 +31,28 @@ public class Categorie_ {
 
 	/**
 	 * Metamodel-Attribute for {@link Categorie#title}
+	 * 
 	 * @see Categorie#getTitle()
 	 * @see Categorie#setTitle(java.lang.String)
 	 */
 	public static volatile SingularAttribute<Categorie, String> title;
 	/**
 	 * Metamodel-Attribute for {@link Categorie#description}
+	 * 
 	 * @see Categorie#getDescription()
-	 * @see Categorie#setDescription(java.lang.String) 
+	 * @see Categorie#setDescription(java.lang.String)
 	 */
 	public static volatile SingularAttribute<Categorie, String> description;
 	/**
 	 * Metamodel-Attribute for {@link Categorie#id}
+	 * 
 	 * @see Categorie#getId()
-	 * @see Categorie#setId(long) 
+	 * @see Categorie#setId(long)
 	 */
 	public static volatile SingularAttribute<Categorie, Long> id;
 	/**
 	 * Metamodel-Attribute for {@link Categorie#iconFileName}
+	 * 
 	 * @see Categorie#getIconFileName()
 	 * @see Categorie#setIconFileName(java.lang.String)
 	 */

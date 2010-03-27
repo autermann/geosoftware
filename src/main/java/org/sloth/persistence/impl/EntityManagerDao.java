@@ -29,7 +29,8 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * Abstract class for Data Acccess Objects using an {@code EntityManager}
  * 
- * @param <T> TODO
+ * @param <T>
+ *            TODO
  * @see EntityManager
  * @author Christian Autermann
  */
@@ -40,14 +41,15 @@ public abstract class EntityManagerDao<T extends BaseEntity> {
 	/**
 	 * {@code Logger}-Facade for this class and subclasses.
 	 */
-	protected static final Logger logger = LoggerFactory.getLogger(
-			EntityManagerDao.class);
+	protected static final Logger logger = LoggerFactory
+			.getLogger(EntityManagerDao.class);
 	private EntityManager entityManager;
 
 	/**
 	 * Sets the {@code EntityManager} fpr this class. Will be autowired.
-	 *
-	 * @param em the {@code EntityManager}
+	 * 
+	 * @param em
+	 *            the {@code EntityManager}
 	 */
 	@PersistenceContext(type = PersistenceContextType.EXTENDED)
 	public void setEntityManager(EntityManager em) {
@@ -67,7 +69,7 @@ public abstract class EntityManagerDao<T extends BaseEntity> {
 	/**
 	 * @todo
 	 * @param t
-	 * @return 
+	 * @return
 	 * @throws NullPointerException
 	 */
 	protected boolean isAttached(T t) throws NullPointerException {

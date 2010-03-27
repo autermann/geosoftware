@@ -49,7 +49,8 @@ public class EditObservationController {
 	private static final String view = "observations/edit";
 	private static final String observationAttribute = "observation";
 	private static final String categorieAttribute = "categories";
-	protected static final Logger logger = LoggerFactory.getLogger(EditObservationController.class);
+	protected static final Logger logger = LoggerFactory
+			.getLogger(EditObservationController.class);
 	private ObservationService observationService;
 	private ObservationValidator observationValidator;
 
@@ -73,9 +74,8 @@ public class EditObservationController {
 	}
 
 	@RequestMapping(method = GET)
-	public ModelAndView setupForm(@PathVariable Long id,
-								  HttpSession s,
-								  HttpServletResponse r) throws IOException {
+	public ModelAndView setupForm(@PathVariable Long id, HttpSession s,
+			HttpServletResponse r) throws IOException {
 		if (isAuth(s)) {
 			Observation o = observationService.getObservation(id);
 			if (o == null)
@@ -83,7 +83,8 @@ public class EditObservationController {
 			if (isAdmin(s) || isOwnObservation(s, o)) {
 				ModelAndView mav = new ModelAndView(view);
 				mav.addObject(observationAttribute, o);
-				mav.addObject(categorieAttribute, observationService.getCategories());
+				mav.addObject(categorieAttribute, observationService
+						.getCategories());
 				return mav;
 			}
 		}
@@ -92,10 +93,8 @@ public class EditObservationController {
 
 	@RequestMapping(method = POST)
 	public String processSubmit(@ModelAttribute Observation o,
-								BindingResult result,
-								SessionStatus status,
-								HttpSession s,
-								HttpServletResponse r) throws IOException {
+			BindingResult result, SessionStatus status, HttpSession s,
+			HttpServletResponse r) throws IOException {
 		if (isAdmin(s) || isOwnObservation(s, o)) {
 			observationValidator.validate(o, result);
 			if (result.hasErrors())

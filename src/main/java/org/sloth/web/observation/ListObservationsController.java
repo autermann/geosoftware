@@ -38,6 +38,7 @@ public class ListObservationsController {
 
 	@RequestMapping
 	public ModelAndView setupList() {
-		return new ModelAndView(view, modelAttribute, observationService.getObservations());
+		return new ModelAndView(view, modelAttribute, observationService
+				.getObservations());
 	}
 }

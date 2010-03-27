@@ -32,8 +32,8 @@ import org.sloth.exceptions.NotNullConstraintViolationException;
 
 /**
  * Representing a user. Every user has an unique ID, an mail adress, a name,
- * family name and a password. It stores also the date of creation and the
- * group of the user.
+ * family name and a password. It stores also the date of creation and the group
+ * of the user.
  * 
  * @author Christian Autermann
  * @see Group
@@ -61,17 +61,19 @@ public class User extends BaseEntity implements Serializable {
 	/**
 	 * Creates a new User, while setting the corresponfig values.
 	 * 
-	 * @param mail the mail address
-	 * @param name the name
-	 * @param familyName the family name
-	 * @param password the password
-	 * @param group the group
+	 * @param mail
+	 *            the mail address
+	 * @param name
+	 *            the name
+	 * @param familyName
+	 *            the family name
+	 * @param password
+	 *            the password
+	 * @param group
+	 *            the group
 	 */
-	public User(String mail,
-				String name,
-				String familyName,
-				String password,
-				Group group) {
+	public User(String mail, String name, String familyName, String password,
+			Group group) {
 		this();
 		setMail(mail);
 		setName(name);
@@ -96,7 +98,8 @@ public class User extends BaseEntity implements Serializable {
 	}
 
 	/**
-	 * @param mail the mail to set
+	 * @param mail
+	 *            the mail to set
 	 */
 	public void setMail(String mail) {
 		this.mail = mail;
@@ -110,7 +113,8 @@ public class User extends BaseEntity implements Serializable {
 	}
 
 	/**
-	 * @param name the name to set
+	 * @param name
+	 *            the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -124,7 +128,8 @@ public class User extends BaseEntity implements Serializable {
 	}
 
 	/**
-	 * @param familyName the familyName to set
+	 * @param familyName
+	 *            the familyName to set
 	 */
 	public void setFamilyName(String familyName) {
 		this.familyName = familyName;
@@ -138,7 +143,8 @@ public class User extends BaseEntity implements Serializable {
 	}
 
 	/**
-	 * @param password the password to set
+	 * @param password
+	 *            the password to set
 	 */
 	public void setPassword(String password) {
 		this.password = password;
@@ -152,7 +158,8 @@ public class User extends BaseEntity implements Serializable {
 	}
 
 	/**
-	 * @param creationDate the creationDate to set
+	 * @param creationDate
+	 *            the creationDate to set
 	 */
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
@@ -173,11 +180,12 @@ public class User extends BaseEntity implements Serializable {
 		hash = 37 * hash + (getMail() != null ? getMail().hashCode() : 0);
 		hash = 37 * hash + (getName() != null ? getName().hashCode() : 0);
 		hash = 37 * hash
-			   + (getFamilyName() != null ? getFamilyName().hashCode() : 0);
+				+ (getFamilyName() != null ? getFamilyName().hashCode() : 0);
 		hash = 37 * hash
-			   + (getPassword() != null ? getPassword().hashCode() : 0);
-		hash = 37 * hash
-			   + (getCreationDate() != null ? getCreationDate().hashCode() : 0);
+				+ (getPassword() != null ? getPassword().hashCode() : 0);
+		hash = 37
+				* hash
+				+ (getCreationDate() != null ? getCreationDate().hashCode() : 0);
 		return hash;
 	}
 
@@ -201,7 +209,8 @@ public class User extends BaseEntity implements Serializable {
 	}
 
 	/**
-	 * @param group the userRight to set
+	 * @param group
+	 *            the userRight to set
 	 */
 	public void setUserGroup(Group group) {
 		this.userGroup = group;
@@ -209,20 +218,14 @@ public class User extends BaseEntity implements Serializable {
 
 	@Override
 	public void validate() throws ConstraintViolationException {
-		if (getCreationDate() == null
-			|| getFamilyName() == null
-			|| getName() == null
-			|| getMail() == null
-			|| getPassword() == null
-			|| getUserGroup() == null
-			|| getName().isEmpty()
-			|| getFamilyName().isEmpty()
-			|| getMail().isEmpty())
+		if (getCreationDate() == null || getFamilyName() == null
+				|| getName() == null || getMail() == null
+				|| getPassword() == null || getUserGroup() == null
+				|| getName().isEmpty() || getFamilyName().isEmpty()
+				|| getMail().isEmpty())
 			throw new NotNullConstraintViolationException();
-		if (getFamilyName().length() > 255
-			|| getName().length() > 255
-			|| getPassword().length() > 255
-			|| getName().length() > 255)
+		if (getFamilyName().length() > 255 || getName().length() > 255
+				|| getPassword().length() > 255 || getName().length() > 255)
 			throw new FieldLengthConstraintViolationException();
 	}
 }

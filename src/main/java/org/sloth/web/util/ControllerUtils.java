@@ -30,7 +30,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 public class ControllerUtils {
 
-	protected static Logger logger = LoggerFactory.getLogger(ControllerUtils.class);
+	protected static Logger logger = LoggerFactory
+			.getLogger(ControllerUtils.class);
 	private static final String sessionAttribute = "LOGIN";
 	private static final String UNAUTHORIZED_VIEW = "error/unauthorized";
 	private static final String NOT_FOUND_VIEW = "error/notfound";
@@ -55,8 +56,7 @@ public class ControllerUtils {
 			return null;
 	}
 
-	public static void auth(HttpSession s,
-							User u) {
+	public static void auth(HttpSession s, User u) {
 		if (u == null)
 			throw new NullPointerException("User must not be null.");
 		s.setAttribute(sessionAttribute, u);
@@ -65,7 +65,8 @@ public class ControllerUtils {
 	public static void deAuth(HttpSession s) {
 		User u = getUser(s);
 		if (u != null)
-			logger.debug("Unbinding User {} from Session {}", u.getId(), s.getId());
+			logger.debug("Unbinding User {} from Session {}", u.getId(), s
+					.getId());
 		s.invalidate();
 	}
 
@@ -77,16 +78,14 @@ public class ControllerUtils {
 		return Group.ADMIN.equals(getGroup(s));
 	}
 
-	public static boolean isOwnObservation(HttpSession s,
-										   Observation o) {
+	public static boolean isOwnObservation(HttpSession s, Observation o) {
 		User u = getUser(s);
 		if (u != null)
 			return u.getId().equals(o.getUser().getId());
 		return false;
 	}
 
-	public static boolean isSameId(HttpSession s,
-								   Long id) {
+	public static boolean isSameId(HttpSession s, Long id) {
 		User u = getUser(s);
 		if (u != null)
 			return id.equals(u.getId());
@@ -94,43 +93,41 @@ public class ControllerUtils {
 			return false;
 	}
 
-	public static boolean isOwnReport(HttpSession s,
-									  Report r) {
+	public static boolean isOwnReport(HttpSession s, Report r) {
 		User u = getUser(s);
 		if (u != null)
 			return u.getId().equals(r.getAuthor().getId());
 		return false;
 	}
 
-	public static ModelAndView forbiddenMAV(HttpServletResponse r) throws
-			IOException {
+	public static ModelAndView forbiddenMAV(HttpServletResponse r)
+			throws IOException {
 		return new ModelAndView(forbiddenView(r));
 	}
 
-	public static String forbiddenView(HttpServletResponse r) throws
-			IOException {
+	public static String forbiddenView(HttpServletResponse r)
+			throws IOException {
 		r.sendError(HttpServletResponse.SC_FORBIDDEN);
 		return UNAUTHORIZED_VIEW;
 	}
 
-	public static String notFoundView(HttpServletResponse r) throws
-			IOException {
+	public static String notFoundView(HttpServletResponse r) throws IOException {
 		r.sendError(HttpServletResponse.SC_NOT_FOUND);
 		return NOT_FOUND_VIEW;
 	}
 
-	public static ModelAndView notFoundMAV(HttpServletResponse r) throws
-			IOException {
+	public static ModelAndView notFoundMAV(HttpServletResponse r)
+			throws IOException {
 		return new ModelAndView(notFoundView(r));
 	}
 
-	public static ModelAndView internalErrorMAV(HttpServletResponse r) throws
-			IOException {
+	public static ModelAndView internalErrorMAV(HttpServletResponse r)
+			throws IOException {
 		return new ModelAndView(internalErrorView(r));
 	}
 
-	public static String internalErrorView(HttpServletResponse r) throws
-			IOException {
+	public static String internalErrorView(HttpServletResponse r)
+			throws IOException {
 		r.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 		return UNEXPECTED_ERROR_VIEW;
 	}

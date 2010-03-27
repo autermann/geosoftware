@@ -39,7 +39,8 @@ import static java.lang.Character.toUpperCase;
 @Service
 public class ObservationServiceImpl implements ObservationService {
 
-	protected static final Logger logger = LoggerFactory.getLogger(ObservationServiceImpl.class);
+	protected static final Logger logger = LoggerFactory
+			.getLogger(ObservationServiceImpl.class);
 	private ObservationDao observationDao;
 	private CategorieDao categorieDao;
 	private ReportDao reportDao;
@@ -57,8 +58,8 @@ public class ObservationServiceImpl implements ObservationService {
 	}
 
 	@Autowired
-	public void setObservationDao(ObservationDao oDao) throws
-			NullPointerException {
+	public void setObservationDao(ObservationDao oDao)
+			throws NullPointerException {
 		if (oDao == null)
 			throw new NullPointerException();
 		this.observationDao = oDao;
@@ -91,24 +92,24 @@ public class ObservationServiceImpl implements ObservationService {
 	}
 
 	@Override
-	public Collection<Observation> getObservations(String keyword) throws
-			NullPointerException {
+	public Collection<Observation> getObservations(String keyword)
+			throws NullPointerException {
 		if (keyword == null)
 			throw new NullPointerException();
 		return getObservationDao().getByKeyWord(keyword);
 	}
 
 	@Override
-	public void deleteObservation(Observation observation) throws
-			NullPointerException, IllegalArgumentException {
+	public void deleteObservation(Observation observation)
+			throws NullPointerException, IllegalArgumentException {
 		if (observation == null)
 			throw new NullPointerException();
 		getObservationDao().delete(observation);
 	}
 
 	@Override
-	public void updateObservation(Observation observation) throws
-			NullPointerException, ConstraintViolationException,
+	public void updateObservation(Observation observation)
+			throws NullPointerException, ConstraintViolationException,
 			IllegalArgumentException {
 		if (observation == null)
 			throw new NullPointerException();
@@ -116,16 +117,16 @@ public class ObservationServiceImpl implements ObservationService {
 	}
 
 	@Override
-	public void registrate(Observation observation) throws NullPointerException,
-														   ConstraintViolationException,
-														   IllegalArgumentException {
+	public void registrate(Observation observation)
+			throws NullPointerException, ConstraintViolationException,
+			IllegalArgumentException {
 		if (observation == null)
 			throw new NullPointerException();
 		getObservationDao().save(observation);
 	}
 
 	private String buildRegex(String keyword) {
-		//TODO geht besser
+		// TODO geht besser
 		StringBuffer buffer = new StringBuffer(".*");
 		for (char c : keyword.toCharArray()) {
 			buffer.append("[");
@@ -139,8 +140,8 @@ public class ObservationServiceImpl implements ObservationService {
 	}
 
 	@Override
-	public Collection<Observation> getObservations(Categorie oc) throws
-			NullPointerException, IllegalArgumentException {
+	public Collection<Observation> getObservations(Categorie oc)
+			throws NullPointerException, IllegalArgumentException {
 		if (oc == null)
 			throw new NullPointerException();
 		Collection<Observation> result = new LinkedList<Observation>();
@@ -163,8 +164,8 @@ public class ObservationServiceImpl implements ObservationService {
 	}
 
 	@Override
-	public void deleteCategorie(Categorie categorie) throws NullPointerException,
-															IllegalArgumentException {
+	public void deleteCategorie(Categorie categorie)
+			throws NullPointerException, IllegalArgumentException {
 		if (categorie == null)
 			throw new NullPointerException();
 		getCategorieDao().delete(categorie);
@@ -172,24 +173,24 @@ public class ObservationServiceImpl implements ObservationService {
 
 	@Override
 	public void deleteCategorie(Long id) throws NullPointerException,
-												IllegalArgumentException {
+			IllegalArgumentException {
 		if (id == null)
 			throw new NullPointerException();
 		getCategorieDao().delete(getCategorie(id));
 	}
 
 	@Override
-	public void updateCategorie(Categorie categorie) throws NullPointerException,
-															ConstraintViolationException,
-															IllegalArgumentException {
+	public void updateCategorie(Categorie categorie)
+			throws NullPointerException, ConstraintViolationException,
+			IllegalArgumentException {
 		if (categorie == null)
 			throw new NullPointerException();
 		getCategorieDao().update(categorie);
 	}
 
 	@Override
-	public void registrate(Categorie categorie) throws
-			ConstraintViolationException, NullPointerException {
+	public void registrate(Categorie categorie)
+			throws ConstraintViolationException, NullPointerException {
 		if (categorie == null)
 			throw new NullPointerException();
 		getCategorieDao().save(categorie);
@@ -197,7 +198,7 @@ public class ObservationServiceImpl implements ObservationService {
 
 	@Override
 	public void deleteObservation(Long id) throws NullPointerException,
-												  IllegalArgumentException {
+			IllegalArgumentException {
 		if (id == null)
 			throw new NullPointerException();
 		deleteCategorie(getCategorieDao().getById(id));
@@ -224,18 +225,16 @@ public class ObservationServiceImpl implements ObservationService {
 	}
 
 	@Override
-	public Collection<Report> getReportsByUser(User u) throws
-			NullPointerException,
-			IllegalArgumentException {
+	public Collection<Report> getReportsByUser(User u)
+			throws NullPointerException, IllegalArgumentException {
 		if (u == null)
 			throw new NullPointerException();
 		return getReportDao().getByUser(u);
 	}
 
 	@Override
-	public Collection<Report> getReportsByObservation(Observation o) throws
-			NullPointerException,
-			IllegalArgumentException {
+	public Collection<Report> getReportsByObservation(Observation o)
+			throws NullPointerException, IllegalArgumentException {
 		if (o == null)
 			throw new NullPointerException();
 		return getReportDao().getByObservation(o);
@@ -243,12 +242,13 @@ public class ObservationServiceImpl implements ObservationService {
 
 	@Override
 	public Collection<Report> getReportsByProcessedState(boolean processed) {
-		return (processed) ? getReportDao().getProcessed() : getReportDao().getUnprocessed();
+		return (processed) ? getReportDao().getProcessed() : getReportDao()
+				.getUnprocessed();
 	}
 
 	@Override
 	public void deleteReport(Report r) throws NullPointerException,
-											  IllegalArgumentException {
+			IllegalArgumentException {
 		if (r == null)
 			throw new NullPointerException();
 		getReportDao().delete(r);
@@ -256,8 +256,7 @@ public class ObservationServiceImpl implements ObservationService {
 
 	@Override
 	public void registrate(Report r) throws NullPointerException,
-											IllegalArgumentException,
-											ConstraintViolationException {
+			IllegalArgumentException, ConstraintViolationException {
 		if (r == null)
 			throw new NullPointerException();
 		getReportDao().save(r);
@@ -272,8 +271,7 @@ public class ObservationServiceImpl implements ObservationService {
 
 	@Override
 	public void updateReport(Report r) throws NullPointerException,
-											  IllegalArgumentException,
-											  ConstraintViolationException {
+			IllegalArgumentException, ConstraintViolationException {
 		if (r == null)
 			throw new NullPointerException();
 		getReportDao().update(r);

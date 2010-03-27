@@ -41,12 +41,13 @@ import static org.sloth.web.util.ControllerUtils.*;
 
 @Controller
 @RequestMapping("/signup")
-@SessionAttributes(types = User.class)
+@SessionAttributes(types = RegistrationFormAction.class)
 public class RegistrationController {
 
 	private static final String view = "users/registration";
 	private static final String modelAttribute = "user";
-	private Logger logger = LoggerFactory.getLogger(RegistrationController.class);
+	private Logger logger = LoggerFactory
+			.getLogger(RegistrationController.class);
 	private UserService userManager;
 	private UserValidator userValidator;
 
@@ -67,23 +68,23 @@ public class RegistrationController {
 
 	@RequestMapping(method = GET)
 	public ModelAndView prepare() {
-		return new ModelAndView(view, modelAttribute, new User());
+		return new ModelAndView(view, modelAttribute,
+				new RegistrationFormAction());
 	}
 
 	@RequestMapping(method = POST)
-	public String submit(@ModelAttribute(modelAttribute) User user,
-						 BindingResult result,
-						 SessionStatus status,
-						 HttpSession s,
-						 HttpServletResponse r) throws IOException {
-		userValidator.validate(user, result);
+	public String submit(
+			@ModelAttribute(modelAttribute) RegistrationFormAction action,
+			BindingResult result, SessionStatus status, HttpSession s,
+			HttpServletResponse r) throws IOException {
+		User u = userValidator.validate(action, result);
 		if (result.hasErrors())
 			return view;
 		else {
-			user.setUserGroup(Group.USER);
 			try {
-				userManager.registrate(user);
-				auth(s, user);
+
+				userManager.registrate(u);
+				auth(s, u);
 				status.setComplete();
 				return "redirect:/";
 			} catch (Exception e) {

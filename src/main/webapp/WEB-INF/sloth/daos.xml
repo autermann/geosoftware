@@ -1,21 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	   http://www.springframework.org/schema/beans/spring-beans.xsd">
-
-	<bean id="reportDao" class="org.sloth.persistence.impl.ReportDaoImpl"/>
-
+	<bean id="reportDao" class="org.sloth.persistence.impl.ReportDaoImpl" />
 	<bean id="observationDao" class="org.sloth.persistence.impl.ObservationDaoImpl">
 		<property name="reportDao" ref="reportDao" />
 	</bean>
-
 	<bean id="userDao" class="org.sloth.persistence.impl.UserDaoImpl">
 		<property name="observationDao" ref="observationDao" />
 	</bean>
-
 	<bean id="categorieDao" class="org.sloth.persistence.impl.CategorieDaoImpl">
 		<property name="observationDao" ref="observationDao" />
 	</bean>
-
 </beans>

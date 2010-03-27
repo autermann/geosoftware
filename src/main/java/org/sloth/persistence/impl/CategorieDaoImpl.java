@@ -41,7 +41,8 @@ public class CategorieDaoImpl extends EntityManagerDao<Categorie> implements
 	private ObservationDao observationDao;
 
 	/**
-	 * @param observationDao the observationDao to set
+	 * @param observationDao
+	 *            the observationDao to set
 	 */
 	@Autowired
 	public void setObservationDao(ObservationDao observationDao) {
@@ -50,11 +51,11 @@ public class CategorieDaoImpl extends EntityManagerDao<Categorie> implements
 
 	@Override
 	public Collection<Categorie> getAll() {
-		CriteriaQuery<Categorie> cq = getEntityManager().
-				getCriteriaBuilder().createQuery(Categorie.class);
+		CriteriaQuery<Categorie> cq = getEntityManager().getCriteriaBuilder()
+				.createQuery(Categorie.class);
 		cq.select(cq.from(Categorie.class));
-		Collection<Categorie> list = getEntityManager().createQuery(
-				cq).getResultList();
+		Collection<Categorie> list = getEntityManager().createQuery(cq)
+				.getResultList();
 		logger.info("Getting all Categories; Found: {}", list.size());
 		return list;
 	}
@@ -86,8 +87,10 @@ public class CategorieDaoImpl extends EntityManagerDao<Categorie> implements
 		logger.info("Searching for Categorie with Id: {}", id);
 		Categorie oc = getEntityManager().find(Categorie.class, id);
 		if (oc != null)
-			logger.info("Found Categorie with Id {}; Title: {}; Description: {}",
-					new Object[]{oc.getId(), oc.getTitle(), oc.getDescription()});
+			logger.info(
+					"Found Categorie with Id {}; Title: {}; Description: {}",
+					new Object[] { oc.getId(), oc.getTitle(),
+							oc.getDescription() });
 		else
 			logger.info("Can't find Categorie with Id {}", id);
 		return oc;
@@ -126,7 +129,7 @@ public class CategorieDaoImpl extends EntityManagerDao<Categorie> implements
 
 	@Override
 	public void delete(Collection<Categorie> t) throws NullPointerException,
-													   IllegalArgumentException {
+			IllegalArgumentException {
 		for (Categorie c : t) {
 			if (!isAttached(c))
 				throw new EntityNotKnownException();

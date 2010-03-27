@@ -45,7 +45,8 @@ public class UserDaoImpl extends EntityManagerDao<User> implements UserDao {
 	private ObservationDao observationDao;
 
 	/**
-	 * @param observationDao the observationDao to set
+	 * @param observationDao
+	 *            the observationDao to set
 	 */
 	@Autowired
 	public void setObservationDao(ObservationDao observationDao) {
@@ -55,11 +56,11 @@ public class UserDaoImpl extends EntityManagerDao<User> implements UserDao {
 
 	@Override
 	public Collection<User> getAll() {
-		CriteriaQuery<User> cq = getEntityManager().getCriteriaBuilder().
-				createQuery(User.class);
+		CriteriaQuery<User> cq = getEntityManager().getCriteriaBuilder()
+				.createQuery(User.class);
 		cq.select(cq.from(User.class));
-		Collection<User> list =
-				getEntityManager().createQuery(cq).getResultList();
+		Collection<User> list = getEntityManager().createQuery(cq)
+				.getResultList();
 		logger.info("Getting all Users; Found: {}", list.size());
 		return list;
 	}
@@ -83,10 +84,11 @@ public class UserDaoImpl extends EntityManagerDao<User> implements UserDao {
 			throw new NullPointerException();
 		if (isAttached(u))
 			throw new EntityAlreadyKnownException();
-		logger.info(
-				"Registrating User: ID: {}, Mail: {}, Name: {}, FamilyName: {}, Password: {}, Group: {}",
-				new Object[]{u.getId(), u.getMail(), u.getName(),
-							 u.getFamilyName(), u.getUserGroup()});
+		logger
+				.info(
+						"Registrating User: ID: {}, Mail: {}, Name: {}, FamilyName: {}, Password: {}, Group: {}",
+						new Object[] { u.getId(), u.getMail(), u.getName(),
+								u.getFamilyName(), u.getUserGroup() });
 		getEntityManager().persist(u);
 		getEntityManager().flush();
 		logger.info("Persisting User; Generated Id is: {}", u.getId());
@@ -133,7 +135,7 @@ public class UserDaoImpl extends EntityManagerDao<User> implements UserDao {
 
 	@Override
 	public void delete(Collection<User> t) throws NullPointerException,
-												  IllegalArgumentException {
+			IllegalArgumentException {
 		for (User u : t) {
 			if (!isAttached(u))
 				throw new EntityNotKnownException();

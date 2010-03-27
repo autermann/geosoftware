@@ -42,7 +42,8 @@ public class UserEditFormAction {
 	}
 
 	/**
-	 * @param actualPassword the actualPassword to set
+	 * @param actualPassword
+	 *            the actualPassword to set
 	 */
 	public void setActualPassword(String actualPassword) {
 		this.actualPassword = actualPassword;
@@ -56,7 +57,8 @@ public class UserEditFormAction {
 	}
 
 	/**
-	 * @param newPassword the newPassword to set
+	 * @param newPassword
+	 *            the newPassword to set
 	 */
 	public void setNewPassword(String newPassword) {
 		this.newPassword = newPassword;
@@ -70,7 +72,8 @@ public class UserEditFormAction {
 	}
 
 	/**
-	 * @param newPasswordRepeat the newPasswordRepeat to set
+	 * @param newPasswordRepeat
+	 *            the newPasswordRepeat to set
 	 */
 	public void setNewPasswordRepeat(String newPasswordRepeat) {
 		this.newPasswordRepeat = newPasswordRepeat;
@@ -84,7 +87,8 @@ public class UserEditFormAction {
 	}
 
 	/**
-	 * @param newMail the newMail to set
+	 * @param newMail
+	 *            the newMail to set
 	 */
 	public void setNewMail(String newMail) {
 		this.newMail = newMail;
@@ -98,7 +102,8 @@ public class UserEditFormAction {
 	}
 
 	/**
-	 * @param newName the newName to set
+	 * @param newName
+	 *            the newName to set
 	 */
 	public void setNewName(String newName) {
 		this.newName = newName;
@@ -112,7 +117,8 @@ public class UserEditFormAction {
 	}
 
 	/**
-	 * @param newFamilyName the newFamilyName to set
+	 * @param newFamilyName
+	 *            the newFamilyName to set
 	 */
 	public void setNewFamilyName(String newFamilyName) {
 		this.newFamilyName = newFamilyName;
@@ -126,7 +132,8 @@ public class UserEditFormAction {
 	}
 
 	/**
-	 * @param newGroup the newGroup to set
+	 * @param newGroup
+	 *            the newGroup to set
 	 */
 	public void setNewGroup(Group newGroup) {
 		this.newGroup = newGroup;
@@ -140,7 +147,8 @@ public class UserEditFormAction {
 	}
 
 	/**
-	 * @param newPasswordHash the newPasswordHash to set
+	 * @param newPasswordHash
+	 *            the newPasswordHash to set
 	 */
 	public void setNewPasswordHash(String newPasswordHash) {
 		this.newPasswordHash = newPasswordHash;

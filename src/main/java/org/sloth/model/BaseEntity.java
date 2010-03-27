@@ -27,7 +27,7 @@ import org.sloth.exceptions.ConstraintViolationException;
 
 /**
  * Represtents an Entity with a {@code Long} as Id.
- *
+ * 
  * @author Christian Autermann
  */
 @MappedSuperclass
@@ -39,6 +39,7 @@ public abstract class BaseEntity {
 
 	/**
 	 * Returns 0 if the id is <code>null</code> and the id otherwise
+	 * 
 	 * @return the id
 	 */
 	public Long getId() {
@@ -46,7 +47,8 @@ public abstract class BaseEntity {
 	}
 
 	/**
-	 * @param id the id
+	 * @param id
+	 *            the id
 	 */
 	public void setId(Long id) {
 		this.id = id;
@@ -54,10 +56,9 @@ public abstract class BaseEntity {
 
 	/**
 	 * Returns wether this {@code BaseEntity} has an Id.
-	 *
-	 * @return <code>true</code> if the id is
-	 * <code>null</code> and <code>false</code>
-	 * otherwise.
+	 * 
+	 * @return <code>true</code> if the id is <code>null</code> and
+	 *         <code>false</code> otherwise.
 	 */
 	public boolean isNew() {
 		return (this.id == null);
@@ -66,8 +67,8 @@ public abstract class BaseEntity {
 	/**
 	 * Validates this Entity.
 	 * 
-	 * @throws ConstraintViolationException if a database constraint is
-	 * violated.
+	 * @throws ConstraintViolationException
+	 *             if a database constraint is violated.
 	 */
 	@PrePersist
 	@PreUpdate

@@ -42,7 +42,8 @@ public class InMemoryObservationDao extends InMemoryDao<Observation> implements
 	}
 
 	@Override
-	public Collection<Observation> getByUser(User u) throws NullPointerException {
+	public Collection<Observation> getByUser(User u)
+			throws NullPointerException {
 		if (u == null)
 			throw new NullPointerException();
 		Collection<Observation> result = new ArrayList<Observation>();
@@ -58,39 +59,37 @@ public class InMemoryObservationDao extends InMemoryDao<Observation> implements
 		Collections.sort(obs, new Comparator<Observation>() {
 
 			@Override
-			public int compare(Observation o1,
-							   Observation o2) {
+			public int compare(Observation o1, Observation o2) {
 				return o1.getCreationDate().compareTo(o2.getCreationDate());
 			}
 		});
 		if (!obs.isEmpty())
-			return obs.subList(0, ((obs.size() < count) ? obs.size() : count)
-								  - 1);
+			return obs.subList(0,
+					((obs.size() < count) ? obs.size() : count) - 1);
 		else
 			return obs;
 	}
 
 	@Override
-	public Collection<Observation> getByKeyWord(String keyword) throws
-			NullPointerException {
+	public Collection<Observation> getByKeyWord(String keyword)
+			throws NullPointerException {
 		Collection<Observation> result = new ArrayList<Observation>();
 		for (Observation o : getAll())
 			if (matches(keyword, o.getTitle())
-				|| matches(keyword, o.getDescription())
-				|| matches(keyword, o.getCategorie().getTitle())
-				|| matches(keyword, o.getCategorie().getDescription()))
+					|| matches(keyword, o.getDescription())
+					|| matches(keyword, o.getCategorie().getTitle())
+					|| matches(keyword, o.getCategorie().getDescription()))
 				result.add(o);
 		return result;
 	}
 
-	private static boolean matches(String ex,
-								   String test) {
+	private static boolean matches(String ex, String test) {
 		return test.toUpperCase().contains(ex.trim().toUpperCase());
 	}
 
 	@Override
 	public void delete(Collection<Observation> t) throws NullPointerException,
-														 IllegalArgumentException {
+			IllegalArgumentException {
 		this.deleteAll(t);
 	}
 }

@@ -27,7 +27,7 @@ import org.sloth.exceptions.NotNullConstraintViolationException;
 
 /**
  * Represents an non hierachical <code>Categorie</code> for Observation.
- *
+ * 
  * @see Observation
  * @author Christian Autermann
  * @version 1.0
@@ -47,17 +47,20 @@ public class Categorie extends BaseEntity implements Serializable {
 
 	/**
 	 * Creates a new <code>Categorie</code> with specified title and description
-	 * @param title the title
-	 * @param description the description
+	 * 
+	 * @param title
+	 *            the title
+	 * @param description
+	 *            the description
 	 */
-	public Categorie(String title,
-					 String description) {
+	public Categorie(String title, String description) {
 		setTitle(title);
 		setDescription(description);
 	}
 
 	/**
-	 * Creates a new <code>Categorie</code> with <code>null</code> as default value.
+	 * Creates a new <code>Categorie</code> with <code>null</code> as default
+	 * value.
 	 */
 	public Categorie() {
 		/* nothing to do here */
@@ -71,7 +74,8 @@ public class Categorie extends BaseEntity implements Serializable {
 	}
 
 	/**
-	 * @param title the title to set
+	 * @param title
+	 *            the title to set
 	 */
 	public void setTitle(String title) {
 		this.title = title;
@@ -85,7 +89,8 @@ public class Categorie extends BaseEntity implements Serializable {
 	}
 
 	/**
-	 * @param description the description to set
+	 * @param description
+	 *            the description to set
 	 */
 	public void setDescription(String description) {
 		this.description = description;
@@ -104,12 +109,16 @@ public class Categorie extends BaseEntity implements Serializable {
 	public int hashCode() {
 		int hash = 7;
 		hash = 41 * hash + (this.getId() != null ? this.getId().hashCode() : 0);
+		hash = 41
+				* hash
+				+ (this.getIconFileName() != null ? this.getIconFileName()
+						.hashCode() : 0);
 		hash = 41 * hash
-			   + (this.getIconFileName() != null ? this.getIconFileName().hashCode() : 0);
-		hash = 41 * hash
-			   + (this.getTitle() != null ? this.getTitle().hashCode() : 0);
-		hash = 41 * hash
-			   + (this.getDescription() != null ? this.getDescription().hashCode() : 0);
+				+ (this.getTitle() != null ? this.getTitle().hashCode() : 0);
+		hash = 41
+				* hash
+				+ (this.getDescription() != null ? this.getDescription()
+						.hashCode() : 0);
 		return hash;
 	}
 
@@ -120,16 +129,14 @@ public class Categorie extends BaseEntity implements Serializable {
 
 	@Override
 	public void validate() throws ConstraintViolationException {
-		if (this.getDescription() == null
-			|| this.getTitle() == null
-			|| this.getIconFileName() == null
-			|| this.getIconFileName().isEmpty()
-			|| this.getDescription().isEmpty()
-			|| this.getTitle().isEmpty())
+		if (this.getDescription() == null || this.getTitle() == null
+				|| this.getIconFileName() == null
+				|| this.getIconFileName().isEmpty()
+				|| this.getDescription().isEmpty() || this.getTitle().isEmpty())
 			throw new NotNullConstraintViolationException();
 		if (this.getDescription().length() > 1000
-			|| this.getTitle().length() > 255
-			|| this.getIconFileName().length() > 255)
+				|| this.getTitle().length() > 255
+				|| this.getIconFileName().length() > 255)
 			throw new FieldLengthConstraintViolationException();
 	}
 
@@ -141,7 +148,8 @@ public class Categorie extends BaseEntity implements Serializable {
 	}
 
 	/**
-	 * @param iconFileName the iconFileName to set
+	 * @param iconFileName
+	 *            the iconFileName to set
 	 */
 	public void setIconFileName(String iconFileName) {
 		this.iconFileName = iconFileName;

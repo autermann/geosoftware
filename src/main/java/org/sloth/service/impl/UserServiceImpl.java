@@ -32,8 +32,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService {
 
-	protected static final Logger logger = LoggerFactory.getLogger(
-			UserServiceImpl.class);
+	protected static final Logger logger = LoggerFactory
+			.getLogger(UserServiceImpl.class);
 	@Autowired
 	private PasswordService passwordService;
 	@Autowired
@@ -56,8 +56,8 @@ public class UserServiceImpl implements UserService {
 	 * @param passwordService
 	 * @throws NullPointerException
 	 */
-	public void setPasswordService(PasswordService passwordService) throws
-			NullPointerException {
+	public void setPasswordService(PasswordService passwordService)
+			throws NullPointerException {
 		logger.info("Setting autowired PasswordService");
 		if (passwordService == null)
 			throw new NullPointerException();
@@ -91,8 +91,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void update(User u) throws NullPointerException,
-									  IllegalArgumentException,
-									  ConstraintViolationException {
+			IllegalArgumentException, ConstraintViolationException {
 		if (u == null)
 			throw new NullPointerException();
 		getUserDao().update(u);
@@ -100,7 +99,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void delete(Long id) throws NullPointerException,
-									   IllegalArgumentException {
+			IllegalArgumentException {
 		if (id == null)
 			throw new NullPointerException();
 		getUserDao().delete(getUserDao().getById(id));
@@ -108,7 +107,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void delete(User user) throws NullPointerException,
-										 IllegalArgumentException {
+			IllegalArgumentException {
 		if (user == null)
 			throw new NullPointerException();
 		getUserDao().delete(user);
@@ -116,19 +115,16 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void registrate(User user) throws NullPointerException,
-											 ConstraintViolationException {
+			ConstraintViolationException {
 		if (user == null)
 			throw new NullPointerException();
 		user.setPassword(getPasswordService().hash(user.getPassword()));
-		logger.info(
-				"Registrating User: ID: {}, Mail: {}, Name: {}, FamilyName: {}, Password: {}, Group: {}", new Object[]{
-					user.getId(),
-					user.getMail(),
-					user.getName(),
-					user.getFamilyName(),
-					user.getPassword(),
-					user.getUserGroup()
-				});
+		logger
+				.info(
+						"Registrating User: ID: {}, Mail: {}, Name: {}, FamilyName: {}, Password: {}, Group: {}",
+						new Object[] { user.getId(), user.getMail(),
+								user.getName(), user.getFamilyName(),
+								user.getPassword(), user.getUserGroup() });
 		getUserDao().save(user);
 	}
 
@@ -138,7 +134,8 @@ public class UserServiceImpl implements UserService {
 			throw new NullPointerException();
 		User u = get(login.getMail());
 		if (u != null
-			&& getPasswordService().check(u.getPassword(), login.getPassword()))
+				&& getPasswordService().check(u.getPassword(),
+						login.getPassword()))
 			return u;
 		else
 			return null;

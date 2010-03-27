@@ -44,7 +44,8 @@ public class LoginController {
 
 	private static final String view = "login";
 	private static final String modelAttribute = "login";
-	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(LoginController.class);
 	private UserService userService;
 	private LoginValidator validator;
 
@@ -72,9 +73,7 @@ public class LoginController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String login(@ModelAttribute(modelAttribute) Login login,
-						BindingResult result,
-						SessionStatus status,
-						HttpSession s) {
+			BindingResult result, SessionStatus status, HttpSession s) {
 		if (isAuth(s))
 			return "redirect:/";
 		validator.validate(login, result);

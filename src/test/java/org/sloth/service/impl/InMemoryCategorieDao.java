@@ -36,7 +36,7 @@ public class InMemoryCategorieDao extends InMemoryDao<Categorie> implements
 
 	@Override
 	public void delete(Collection<Categorie> t) throws NullPointerException,
-													   IllegalArgumentException {
+			IllegalArgumentException {
 		this.deleteAll(t);
 	}
 }

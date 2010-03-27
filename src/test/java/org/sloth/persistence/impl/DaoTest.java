@@ -89,8 +89,7 @@ public class DaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 	}
 
 	private void testRows() {
-		assertEquals(userDao.getAll().size(),
-				countRowsInTable("USERS_TEST"));
+		assertEquals(userDao.getAll().size(), countRowsInTable("USERS_TEST"));
 		assertEquals(categorieDao.getAll().size(),
 				countRowsInTable("CATEGORIES_TEST"));
 		assertEquals(observationDao.getAll().size(),
@@ -108,23 +107,24 @@ public class DaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 	}
 
 	/**
-	 * Will fail if executed on HSQLDB...
-	 * known bug in EclipseLink/HSQLDB...
+	 * Will fail if executed on HSQLDB... known bug in EclipseLink/HSQLDB...
 	 */
 	@Test
 	public void duplicateMailAddress() {
 		/* ugly workaround to getById in another transaction... */
-		this.simpleJdbcTemplate.update(
-				"INSERT INTO USERS_TEST (ID, MAIL_ADDRESS, CREATION_DATE, NAME, USER_GROUP, FAMILY_NAME, PASSWORD)"
-				+ " VALUES (?, ?, ?, ?, ?, ?, ?)", 999L, "default@example.tld",
-				new Date(), "TEST", Group.USER.toString(), "TEST", "password");
+		this.simpleJdbcTemplate
+				.update(
+						"INSERT INTO USERS_TEST (ID, MAIL_ADDRESS, CREATION_DATE, NAME, USER_GROUP, FAMILY_NAME, PASSWORD)"
+								+ " VALUES (?, ?, ?, ?, ?, ?, ?)", 999L,
+						"default@example.tld", new Date(), "TEST", Group.USER
+								.toString(), "TEST", "password");
 		User u = getUser();
 		u.setMail("default@example.tld");
 		try {
 			userDao.save(u);
 		} catch (JpaSystemException e) {
-			assertTrue(e.contains(
-					MySQLIntegrityConstraintViolationException.class));
+			assertTrue(e
+					.contains(MySQLIntegrityConstraintViolationException.class));
 			return;
 		}
 		fail("no exception");
@@ -253,7 +253,6 @@ public class DaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 		observationDao.save(null);
 	}
 
-
 	@Test(expected = NullPointerException.class)
 	public void getObservationByNullCategorie() {
 		observationDao.getByCategorie(null);
@@ -282,7 +281,6 @@ public class DaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 		categorieDao.save(null);
 	}
 
-
 	@Test(expected = NullPointerException.class)
 	public void getCategorieByNullTitle() {
 		categorieDao.getByTitle(null);
@@ -305,7 +303,6 @@ public class DaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 	public void saveNullUser() {
 		userDao.save(null);
 	}
-
 
 	@Test(expected = NullPointerException.class)
 	public void getUserByNullMail() {
@@ -392,4 +389,3 @@ public class DaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 		assertEquals(c, categorieDao.getByTitle(c.getTitle()));
 	}
 }
-

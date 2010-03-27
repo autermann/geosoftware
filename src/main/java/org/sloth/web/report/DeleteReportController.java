@@ -26,10 +26,12 @@ public class DeleteReportController {
 	private ObservationService observationService;
 	private static final String view = "reports/details";
 	private static final String attibute = "report";
-	private static final Logger logger = LoggerFactory.getLogger(DeleteReportController.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(DeleteReportController.class);
 
 	/**
-	 * @param observationService the observationService to set
+	 * @param observationService
+	 *            the observationService to set
 	 */
 	@Autowired
 	public void setObservationService(ObservationService observationService) {
@@ -42,9 +44,8 @@ public class DeleteReportController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView handleGet(@PathVariable Long id,
-								  HttpSession s,
-								  HttpServletResponse r) throws IOException {
+	public ModelAndView handleGet(@PathVariable Long id, HttpSession s,
+			HttpServletResponse r) throws IOException {
 		if (isAuth(s)) {
 			Report report = observationService.getReport(id);
 			if (report == null)
@@ -57,9 +58,8 @@ public class DeleteReportController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String handlePost(@ModelAttribute Report report,
-							 SessionStatus status,
-							 HttpSession s,
-							 HttpServletResponse r) throws IOException {
+			SessionStatus status, HttpSession s, HttpServletResponse r)
+			throws IOException {
 		status.setComplete();
 		if (isAdmin(s) || isOwnReport(s, report))
 			try {

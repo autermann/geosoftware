@@ -14,8 +14,8 @@ public class AccountController {
 	private final static String adminView = "account/admin";
 
 	@RequestMapping("/acc")
-	public String handle(HttpSession s,
-						 HttpServletResponse r) throws IOException {
+	public String handle(HttpSession s, HttpServletResponse r)
+			throws IOException {
 		if (!isAuth(s))
 			return forbiddenView(r);
 		if (isAdmin(s))

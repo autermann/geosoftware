@@ -41,9 +41,11 @@ public class CoordinateTest {
 	@Test
 	public void latitude() throws Exception {
 		Coordinate u = new Coordinate();
-		assertEquals("checking default value of latitude", u.getLatitude(), 0, 0);
+		assertEquals("checking default value of latitude", u.getLatitude(), 0,
+				0);
 		u.setLatitude(latA);
-		assertEquals("checking correct setting of latitude", u.getLatitude(), latA, 0);
+		assertEquals("checking correct setting of latitude", u.getLatitude(),
+				latA, 0);
 
 	}
 

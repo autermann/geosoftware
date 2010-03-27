@@ -15,11 +15,10 @@ import org.sloth.model.User;
 public interface ReportDao extends BaseEntityDao<Report> {
 
 	public Collection<Report> getByUser(User u) throws NullPointerException,
-													   IllegalArgumentException;
-
-	public Collection<Report> getByObservation(Observation o) throws
-			NullPointerException,
 			IllegalArgumentException;
+
+	public Collection<Report> getByObservation(Observation o)
+			throws NullPointerException, IllegalArgumentException;
 
 	public Collection<Report> getUnprocessed();
 

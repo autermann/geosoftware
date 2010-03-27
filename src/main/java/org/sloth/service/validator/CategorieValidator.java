@@ -22,8 +22,7 @@ import org.springframework.validation.Errors;
 
 public class CategorieValidator {
 
-	public void validate(Categorie obj,
-						 Errors errors) {
+	public void validate(Categorie obj, Errors errors) {
 		/**
 		 * TODO neues Categorie-Objekt ueberpruefen...
 		 */
