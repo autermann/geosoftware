@@ -35,3 +35,12 @@ input[type="button"], input[type="submit"] {
 	border: 1px solid #AAAAAA;
 	background: #CCCCCC;
 }*/
+
+a:link, a:visited, a:active {
+    text-decoration: none;
+   }
+
+
+img{
+    border-width:0;
+}

@@ -16,8 +16,8 @@
 				<td>${observation.description}</td>
 				<td>
 					<c:if test="${sessionScope.LOGIN.id eq observation.user.id || sessionScope.LOGIN.userGroup eq 'ADMIN'}">
-						<a href="<s:url value="/o/edit/${observation.id}"/>">Edit</a>
-						<a href="<s:url value="/o/del/${observation.id}"/>">Delete</a>
+						<a href="<s:url value="/o/edit/${observation.id}"/>"><img src="<s:url value="/static/img/edit.png" htmlEscape="true" />" alt="<fmt:message key="observation.edit" />"></a>
+						<a href="<s:url value="/o/del/${observation.id}"/>"><img src="<s:url value="/static/img/delete.png" htmlEscape="true" />" alt="<fmt:message key="observation.delete" />"></a>
 					</c:if>
 				</td>
 			</tr>

@@ -24,8 +24,8 @@
 					</c:choose>
 				</td>
 				<td>
-					<a href="<s:url value="/r/edit/${report.id}"/>"><fmt:message key="report.edit"/></a>
-					<a href="<s:url value="/r/del/${report.id}"/>"><fmt:message key="report.delete"/></a>
+					<a href="<s:url value="/r/edit/${report.id}"/>"><img src="<s:url value="/static/img/edit.png" htmlEscape="true" />" alt="<fmt:message key="report.edit"/>"></a>
+					<a href="<s:url value="/r/del/${report.id}"/>"><img src="<s:url value="/static/img/delete.png" htmlEscape="true" />" alt="<fmt:message key="report.delete"/>"></a>
 				</td>
 			</tr>
 		</c:forEach>

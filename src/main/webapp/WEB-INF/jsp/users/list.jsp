@@ -12,7 +12,7 @@
 			<tr>
 				<td><a href="<s:url value="/u/${user.id}"/>">${user.id}</a></td>
 				<td>${user.mail}</td>
-				<td><a href="<s:url value="/u/edit/${user.id}"/>">Edit</a></td>
+				<td><a href="<s:url value="/u/edit/${user.id}"/>"><img src="<s:url value="/static/img/edit.png" htmlEscape="true" />" alt="<fmt:message key="user.edit"/>"></a></td>
 			</tr>
 		</c:forEach>
 	</table>

@@ -22,8 +22,8 @@
 				<td>${categorie.description}</td>
 				<td>${categorie.iconFileName}</td>
 				<td>
-					<a href="<s:url value="/c/edit/${categorie.id}"/>"><fmt:message key="categorie.edit" /></a>
-					<a href="<s:url value="/c/del/${categorie.id}"/>"><fmt:message key="categorie.delete" /></a>
+                                    <a href="<s:url value="/c/edit/${categorie.id}"/>"><img src="<s:url value="/static/img/edit.png" htmlEscape="true" />" alt="<fmt:message key="categorie.edit" />"></a>
+					<a href="<s:url value="/c/del/${categorie.id}"/>"><img src="<s:url value="/static/img/delete.png" htmlEscape="true" />" alt="<fmt:message key="categorie.delete" />"></a>
 				</td>
 			</tr>
 		</c:forEach>
