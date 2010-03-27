@@ -15,7 +15,7 @@
 		<script type="text/javascript">
 			function fillMap(){
 				<c:forEach var="o" items="${observations}">
-						addMarker(${o.coordinate.longitude}, ${o.coordinate.latitude},"<b>${o.title}</b><br/>${o.description}<br/>Lon: ${o.coordinate.longitude}<br/>Lat: ${o.coordinate.latitude}", "<s:url value="/static/img/${o.categorie.iconFileName}"/>");</c:forEach>
+						addMarker(${o.coordinate.longitude}, ${o.coordinate.latitude},"<b><s:escapeBody htmlEscape="true" javaScriptEscape="true">${o.title}</s:escapeBody></b><br/><s:escapeBody htmlEscape="true" javaScriptEscape="true">${o.description}</s:escapeBody><br/>Lon: ${o.coordinate.longitude}<br/>Lat: ${o.coordinate.latitude}", "<s:url value="/static/img/${o.categorie.iconFileName}"/>");</c:forEach>
 					}
 			</script>
 		<c:if test="${sessionScope.LOGIN != null}"><script type="text/javascript">
@@ -25,8 +25,8 @@
 						lon: <c:out value="${observation.coordinate.longitude}" default="0"/>,
 						lat: <c:out value="${observation.coordinate.latitude}" default="0"/>,
 						selectedCategorieId: "<c:out value="${observation.categorie.id}"/>",
-						description: "<c:out value="${observation.description}"/>",
-						title: "<c:out value="${observation.title}"/>",
+						description: "<s:escapeBody htmlEscape="true" javaScriptEscape="true"><c:out value="${fn:escapeXml(observation.description)}"/></s:escapeBody>",
+						title: "<s:escapeBody htmlEscape="true" javaScriptEscape="true">${observation.title}</s:escapeBody>",
 						action: "<s:url value="/"/>",
 						lang: {
 							title:"<fmt:message key="observation.title"/>",
@@ -40,7 +40,7 @@
 						},
 						categories:	[
 							<c:forEach varStatus="status" var="categorie" items="${categories}">
-								[${categorie.id}, "<s:escapeBody javaScriptEscape="true">${categorie.title}</s:escapeBody>"]
+								[${categorie.id}, "<s:escapeBody htmlEscape="true" javaScriptEscape="true">${categorie.title}</s:escapeBody>"]
 								<c:if test="${!status.last}">,</c:if>
 							</c:forEach>
 						]
