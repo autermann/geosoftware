@@ -76,7 +76,7 @@
 									<span style="font-weight: bold;" class="observationTitle" id="obTitle${o.id}" ><s:escapeBody>${o.title}</s:escapeBody></span>
 									<br/>
 									<p id="obDesc${o.id}"><s:escapeBody>${o.description}</s:escapeBody></p>
-									<a href="#" onclick="goTo(${o.coordinate.longitude}, ${o.coordinate.longitude}, 12);" class="goto"><fmt:message key="observation.viewInMap"/></a>
+									<a href="#" onclick="goTo(${o.coordinate.longitude}, ${o.coordinate.latitude}, 16);" class="goto"><fmt:message key="observation.viewInMap"/></a>
 									<c:if test="${sessionScope.LOGIN != null}">
 										<a href="<s:url value="/r/o/${o.id}/new"/>"><fmt:message key="observation.report"/></a>
 										<c:if test="${sessionScope.LOGIN.userGroup == 'ADMIN' || o.user.id == sessionScope.LOGIN.id}">
