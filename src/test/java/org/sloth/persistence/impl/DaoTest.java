@@ -253,10 +253,6 @@ public class DaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 		observationDao.save(null);
 	}
 
-	@Test(expected = NullPointerException.class)
-	public void deleteNullObservation() {
-		observationDao.delete(null);
-	}
 
 	@Test(expected = NullPointerException.class)
 	public void getObservationByNullCategorie() {
@@ -286,10 +282,6 @@ public class DaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 		categorieDao.save(null);
 	}
 
-	@Test(expected = NullPointerException.class)
-	public void deleteNullCategorie() {
-		categorieDao.delete(null);
-	}
 
 	@Test(expected = NullPointerException.class)
 	public void getCategorieByNullTitle() {
@@ -314,10 +306,6 @@ public class DaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 		userDao.save(null);
 	}
 
-	@Test(expected = NullPointerException.class)
-	public void deleteNullUser() {
-		userDao.delete(null);
-	}
 
 	@Test(expected = NullPointerException.class)
 	public void getUserByNullMail() {

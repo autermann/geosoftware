@@ -57,8 +57,8 @@
 						<tr>
 							<td align="center" colspan="2">
 								<input type="submit" value="Update" />
-								<input type="button" value="Cancel" onclick="window.location.href='<spring:url value="/u"></spring:url>'">
-								<input type="button" value="Delete" onclick="window.location.href='<spring:url value="/u/del/${user.id}"></spring:url>'">
+								<input type="button" value="Cancel" onclick="window.location.href='<s:url value="/u"></s:url>'">
+								<input type="button" value="Delete" onclick="window.location.href='<s:url value="/u/del/${user.id}"></s:url>'">
 							</td>
 						</tr>
 					</table>

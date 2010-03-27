@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 		<title>404 - Not Found</title>
-		<link href="<spring:url value="/static/css/style.css" htmlEscape="true" />" rel="stylesheet" type="text/css" />
+		<link href="<s:url value="/static/css/style.css" htmlEscape="true" />" rel="stylesheet" type="text/css" />
 	</head>
 	<body>
 		<div id="login" style="padding-top: 15%">
@@ -16,7 +16,7 @@
 							<br/>
 							<br/>
 							<br/>
-							<input type="button" onclick="window.location=<spring:url value="/"/>" value="Go Back" />
+							<input type="button" onclick="window.location=<s:url value="/"/>" value="Go Back" />
 						</div>
 						<br/>
 					</td>

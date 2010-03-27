@@ -14,8 +14,8 @@
 		<c:forEach var="report" items="${reports}">
 			<tr>
 				<td>${report.id}</td>
-				<td><a href="<spring:url value="/u/${report.author.id}"/>">${report.author.id}</a></td>
-				<td><a href="<spring:url value="/o/${report.observation.id}"/>">${report.observation.id}</a></td>
+				<td><a href="<s:url value="/u/${report.author.id}"/>">${report.author.id}</a></td>
+				<td><a href="<s:url value="/o/${report.observation.id}"/>">${report.observation.id}</a></td>
 				<td>${report.description}</td>
 				<td>
 					<c:choose>
@@ -24,8 +24,8 @@
 					</c:choose>
 				</td>
 				<td>
-					<a href="<spring:url value="/r/edit/${report.id}"/>"><fmt:message key="report.edit"/></a>
-					<a href="<spring:url value="/r/del/${report.id}"/>"><fmt:message key="report.delete"/></a>
+					<a href="<s:url value="/r/edit/${report.id}"/>"><fmt:message key="report.edit"/></a>
+					<a href="<s:url value="/r/del/${report.id}"/>"><fmt:message key="report.delete"/></a>
 				</td>
 			</tr>
 		</c:forEach>

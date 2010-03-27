@@ -16,8 +16,8 @@
 				<td>${observation.description}</td>
 				<td>
 					<c:if test="${sessionScope.LOGIN.id eq observation.user.id || sessionScope.LOGIN.userGroup eq 'ADMIN'}">
-						<a href="<spring:url value="/o/edit/${observation.id}"/>">Edit</a>
-						<a href="<spring:url value="/o/del/${observation.id}"/>">Delete</a>
+						<a href="<s:url value="/o/edit/${observation.id}"/>">Edit</a>
+						<a href="<s:url value="/o/del/${observation.id}"/>">Delete</a>
 					</c:if>
 				</td>
 			</tr>

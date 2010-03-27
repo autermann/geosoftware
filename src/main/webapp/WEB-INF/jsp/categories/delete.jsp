@@ -19,7 +19,7 @@
 			<tr>
 				<td align="center" colspan="2">
 					<input type="submit" value="Delete" />
-					<input type="button" value="Cancel" onclick="window.location.href='<spring:url value="/admin/categories"></spring:url>'">
+					<input type="button" value="Cancel" onclick="window.location.href='<s:url value="/admin/categories"></s:url>'">
 				</td>
 			</tr>
 		</table>

@@ -28,6 +28,6 @@
 			<td><c:out value="${user.userGroup}" default="-"/></td>
 		<tr/>
 	</table>
-	<p><a href="<spring:url value="/u"/>"><fmt:message key="nav.back"/></a></p>
+	<p><a href="<s:url value="/u"/>"><fmt:message key="nav.back"/></a></p>
 </div>
 <%@ include file="/WEB-INF/jsp/footer.jsp" %>

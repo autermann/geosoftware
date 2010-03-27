@@ -26,7 +26,7 @@
 			<tr/>
 			<td align="center" colspan="2">
 				<input type="submit" value="Submit" />
-				<input type="button" value="Cancel" onclick="window.location.href='<spring:url value="/acc"></spring:url>'">
+				<input type="button" value="Cancel" onclick="window.location.href='<s:url value="/acc"></s:url>'">
 			</td>
 		</table>
 	</form:form>

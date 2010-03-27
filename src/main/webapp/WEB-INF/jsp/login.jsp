@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 		<title><fmt:message key="title"/></title>
-		<link href="<spring:url value="/static/css/style.css" htmlEscape="true" />" rel="stylesheet" type="text/css" />
+		<link href="<s:url value="/static/css/style.css" htmlEscape="true" />" rel="stylesheet" type="text/css" />
 	</head>
 	<body>
 		<div id="login" style="padding-top: 15%">
@@ -22,7 +22,7 @@
 							<form:errors cssStyle="color: red;"/>
 							<br/><br/>
 							<input type="submit" value="<fmt:message key="login.button" />"/>
-							<input type="button" onClick="window.location='<spring:url value="/signup"/>'" value="<fmt:message key="reg.button"/>" />
+							<input type="button" onClick="window.location='<s:url value="/signup"/>'" value="<fmt:message key="reg.button"/>" />
 						</form:form>
 						<br/>
 						<br/>
@@ -32,7 +32,7 @@
 			<div>
 				<table class="footer" align="center" style="padding-top: 10%">
 					<tr>
-						<td><a href="<spring:url value="/" htmlEscape="true" />"><fmt:message key="nav.home"/></a></td>
+						<td><a href="<s:url value="/" htmlEscape="true" />"><fmt:message key="nav.home"/></a></td>
 						<td align="right"><fmt:message key="copyright"/></td>
 					</tr>
 				</table>

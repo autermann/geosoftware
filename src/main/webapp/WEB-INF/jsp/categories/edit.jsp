@@ -25,8 +25,8 @@
 						<tr>
 							<td align="center" colspan="2">
 								<input type="submit" value="<fmt:message key="update"/>" />
-								<input type="button" value="<fmt:message key="cancel"/>" onclick="window.location.href='<spring:url value="/admin/categories/"></spring:url>'">
-								<input type="button" value="<fmt:message key="delete"/>" onclick="window.location.href='<spring:url value="/admin/categories/delete/${categorie.id}"></spring:url>'">
+								<input type="button" value="<fmt:message key="cancel"/>" onclick="window.location.href='<s:url value="/admin/categories/"></s:url>'">
+								<input type="button" value="<fmt:message key="delete"/>" onclick="window.location.href='<s:url value="/admin/categories/delete/${categorie.id}"></s:url>'">
 							</td>
 						</tr>
 					</table>

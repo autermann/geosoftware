@@ -33,6 +33,6 @@
 		<tr/>
 
 	</table>
-	<p><a href="<spring:url value="/observations"/>"><fmt:message key="nav.back"/></a></p>
+	<p><a href="<s:url value="/observations"/>"><fmt:message key="nav.back"/></a></p>
 </div>
 <%@ include file="/WEB-INF/jsp/footer.jsp" %>

@@ -33,7 +33,7 @@ public class FrontPageController {
 	private ObservationService os;
 	private ObservationValidator validator;
 	private static final Logger logger = LoggerFactory.getLogger(FrontPageController.class);
-	private static final String VIEW = "welcome";
+	private static final String VIEW = "index";
 	private static final String MAP_CONTENT = "observations";
 	private static final String NEW_OBSERVATION_ATTRIBUTE = "observation";
 	private static final String CATEGORIE_ATTRIBUTE = "categories";

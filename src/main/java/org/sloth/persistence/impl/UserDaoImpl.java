@@ -105,14 +105,7 @@ public class UserDaoImpl extends EntityManagerDao<User> implements UserDao {
 	public void delete(User u) {
 		if (!isAttached(u))
 			throw new EntityNotKnownException();
-		User newUser = getDefaultUser();
-		Collection<Observation> obs = observationDao.getByUser(u);
-		logger.info("Replacing {} with {} in {} Observations",
-				new Object[]{u, newUser, obs.size()});
-		for (Observation o : obs) {
-			o.setUser(newUser);
-			observationDao.update(o);
-		}
+		observationDao.delete(observationDao.getByUser(u));
 		logger.info("Deleting User with Id: {}", u.getId());
 		getEntityManager().remove(u);
 		getEntityManager().flush();
@@ -137,23 +130,17 @@ public class UserDaoImpl extends EntityManagerDao<User> implements UserDao {
 		}
 		return result;
 	}
-	private User defaultUser;
 
-	private User getDefaultUser() {
-		if (defaultUser == null) {
-			String mail = Config.getProperty("default.user.mail");
-			String name = Config.getProperty("default.user.name");
-			String fami = Config.getProperty("default.user.familyName");
-			User tmp = getByMail(mail);
-			if (tmp == null) {
-				defaultUser = new User((mail == null) ? "UNKNOWN" : mail,
-						(name == null) ? "UNKNOWN" : name,
-						(fami == null) ? "UNKNOWN" : fami,
-						"", Group.USER);
-				save(defaultUser);
-			} else
-				defaultUser = tmp;
+	@Override
+	public void delete(Collection<User> t) throws NullPointerException,
+												  IllegalArgumentException {
+		for (User u : t) {
+			if (!isAttached(u))
+				throw new EntityNotKnownException();
+			observationDao.delete(observationDao.getByUser(u));
+			logger.info("Deleting User with Id: {}", u.getId());
+			getEntityManager().remove(u);
 		}
-		return defaultUser;
+		getEntityManager().flush();
 	}
 }

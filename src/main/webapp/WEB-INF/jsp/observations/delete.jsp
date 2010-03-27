@@ -26,10 +26,10 @@
 			<tr/>
 			<td align="center" colspan="2">
 				<input type="submit" value="Submit" />
-				<input type="button" value="Cancel" onclick="window.location.href='<spring:url value="/o"></spring:url>'">
+				<input type="button" value="Cancel" onclick="window.location.href='<s:url value="/o"></s:url>'">
 			</td>
 		</table>
 	</form:form>
-	<p><a href="<spring:url value="/o"/>"><fmt:message key="nav.back"/></a></p>
+	<p><a href="<s:url value="/o"/>"><fmt:message key="nav.back"/></a></p>
 </div>
 <%@ include file="/WEB-INF/jsp/footer.jsp" %>

@@ -40,6 +40,6 @@ h<%@ include file="/WEB-INF/jsp/includes.jsp" %>
 		<input type="submit" value="Submit" />
 
 	</form:form>
-	<p><a href="<spring:url value="/r"/>"><fmt:message key="nav.back"/></a></p>
+	<p><a href="<s:url value="/r"/>"><fmt:message key="nav.back"/></a></p>
 </div>
 <%@ include file="/WEB-INF/jsp/footer.jsp" %>

@@ -57,6 +57,20 @@ public interface BaseEntityDao<T extends BaseEntity> {
 								   IllegalArgumentException;
 
 	/**
+	 * Delete Entities from database. Invoking this method with
+	 * Entities not known by the database will cause an
+	 * {@code IllegalArgumentException}.
+	 *
+	 * @param t the Entities to be deleted
+	 * @throws NullPointerException if {@code t} or {@code t}'s content
+	 * is {@code null}
+	 * @throws IllegalArgumentException if Entities are not found in the
+	 * database.
+	 */
+	public void delete(Collection<T> t) throws NullPointerException,
+								   IllegalArgumentException;
+
+	/**
 	 * Save a categorie in the database. {@link Categorie#id} will be
 	 * generated.
 	 *

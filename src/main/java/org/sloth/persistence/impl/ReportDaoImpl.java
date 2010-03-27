@@ -36,7 +36,7 @@ public class ReportDaoImpl extends EntityManagerDao<Report> implements ReportDao
 		CriteriaQuery<Report> cq = cb.createQuery(Report.class);
 		Root<Report> r = cq.from(Report.class);
 		cq.select(r);
-		cq.where(cb.equal(r.get(Report_.observation), r));
+		cq.where(cb.equal(r.get(Report_.observation), o));
 		Collection<Report> result = getEntityManager().createQuery(cq).
 				getResultList();
 		logger.info("{} Reports for Observation {}.", result.size(), o);
@@ -119,5 +119,17 @@ public class ReportDaoImpl extends EntityManagerDao<Report> implements ReportDao
 		Collection<Report> result = getEntityManager().createQuery(cq).getResultList();
 		logger.info("{} {} Reports.", (processed) ? "processed" : "unprocessed", result.size());
 		return result;
+	}
+
+	@Override
+	public void delete(Collection<Report> t) throws NullPointerException,
+													IllegalArgumentException {
+		for (Report r : t) {
+			if (!isAttached(r))
+				throw new EntityNotKnownException();
+			logger.info("Deleting Report with Id: {}", r.getId());
+			getEntityManager().remove(r);
+		}
+		getEntityManager().flush();
 	}
 }

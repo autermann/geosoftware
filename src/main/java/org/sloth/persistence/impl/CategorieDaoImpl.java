@@ -28,9 +28,7 @@ import org.sloth.exceptions.EntityNotKnownException;
 import org.sloth.persistence.CategorieDao;
 import org.sloth.model.Categorie;
 import org.sloth.model.Categorie_;
-import org.sloth.model.Observation;
 import org.sloth.persistence.ObservationDao;
-import org.sloth.util.Config;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -41,7 +39,6 @@ public class CategorieDaoImpl extends EntityManagerDao<Categorie> implements
 		CategorieDao {
 
 	private ObservationDao observationDao;
-	private Categorie defaultCategorie;
 
 	/**
 	 * @param observationDao the observationDao to set
@@ -110,12 +107,7 @@ public class CategorieDaoImpl extends EntityManagerDao<Categorie> implements
 	public void delete(Categorie oc) {
 		if (!isAttached(oc))
 			throw new EntityNotKnownException();
-		Categorie newCategorie = getDefaultCategorie();
-		logger.info("Replacing Categorie {} with default one.", oc);
-		for (Observation o : observationDao.getByCategorie(oc)) {
-			o.setCategorie(newCategorie);
-			observationDao.update(o);
-		}
+		observationDao.delete(observationDao.getByCategorie(oc));
 		logger.info("Deleting Categorie with Id: {}", oc.getId());
 		getEntityManager().remove(oc);
 		getEntityManager().flush();
@@ -132,18 +124,16 @@ public class CategorieDaoImpl extends EntityManagerDao<Categorie> implements
 
 	}
 
-	private Categorie getDefaultCategorie() {
-		if (defaultCategorie == null) {
-			String title = Config.getProperty("default.categorie.title");
-			String descr = Config.getProperty("default.categorie.description");
-			Categorie tmp = getByTitle(title);
-			if (tmp == null) {
-				defaultCategorie = new Categorie((title == null) ? "UNKNOWN" : title,
-						(descr == null) ? "UNKNOWN" : descr);
-				save(defaultCategorie);
-			} else
-				defaultCategorie = tmp;
+	@Override
+	public void delete(Collection<Categorie> t) throws NullPointerException,
+													   IllegalArgumentException {
+		for (Categorie c : t) {
+			if (!isAttached(c))
+				throw new EntityNotKnownException();
+			observationDao.delete(observationDao.getByCategorie(c));
+			logger.info("Deleting Categorie with Id: {}", c.getId());
+			getEntityManager().remove(c);
 		}
-		return defaultCategorie;
+		getEntityManager().flush();
 	}
 }

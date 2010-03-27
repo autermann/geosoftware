@@ -17,6 +17,7 @@
  */
 package org.sloth.service.impl;
 
+import java.util.Collection;
 import org.sloth.model.User;
 import org.sloth.persistence.UserDao;
 
@@ -32,5 +33,11 @@ public class InMemoryUserDao extends InMemoryDao<User> implements UserDao {
 			if (u.getMail().equalsIgnoreCase(mail))
 				return u;
 		return null;
+	}
+
+	@Override
+	public void delete(Collection<User> t) throws NullPointerException,
+												  IllegalArgumentException {
+		this.deleteAll(t);
 	}
 }

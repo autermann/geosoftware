@@ -14,6 +14,6 @@
 
 <p/>
 <br/>
-<a href="<spring:url value="/" htmlEscape="true" />">Home</a>
+<a href="<s:url value="/" htmlEscape="true" />">Home</a>
 
 <%@ include file="/WEB-INF/jsp/footer.jsp" %>

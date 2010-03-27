@@ -17,6 +17,7 @@
  */
 package org.sloth.service.impl;
 
+import java.util.Collection;
 import org.sloth.model.Categorie;
 import org.sloth.persistence.CategorieDao;
 
@@ -31,5 +32,11 @@ public class InMemoryCategorieDao extends InMemoryDao<Categorie> implements
 			if (c.getTitle().equals(title))
 				return c;
 		return null;
+	}
+
+	@Override
+	public void delete(Collection<Categorie> t) throws NullPointerException,
+													   IllegalArgumentException {
+		this.deleteAll(t);
 	}
 }

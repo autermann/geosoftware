@@ -71,17 +71,22 @@ public class DeleteObservationController {
 	}
 
 	@RequestMapping(method = POST)
-	public String processSubmit(@ModelAttribute(modelAttribute) Observation o,
+	public String processSubmit(@PathVariable Long id,
 								HttpSession s,
 								HttpServletResponse r) throws IOException {
-		if (isAdmin(s) || isOwnObservation(s, o))
-			try {
-				observationService.deleteObservation(o);
-				return "redirect:/o";
-			} catch (Exception e) {
-				logger.warn("Unexpected Exception.", e);
-				return internalErrorView(r);
-			}
+		if (isAuth(s)) {
+			Observation o = observationService.getObservation(id);
+			if (o == null)
+				return notFoundView(r);
+			if (isAdmin(s) || isOwnObservation(s, o))
+				try {
+					observationService.deleteObservation(o);
+					return "redirect:/o";
+				} catch (Exception e) {
+					logger.warn("Unexpected Exception.", e);
+					return internalErrorView(r);
+				}
+		}
 		return forbiddenView(r);
 	}
 }

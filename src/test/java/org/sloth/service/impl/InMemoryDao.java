@@ -17,6 +17,7 @@
  */
 package org.sloth.service.impl;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Hashtable;
 import java.util.List;
@@ -62,5 +63,10 @@ public class InMemoryDao<T extends BaseEntity> {
 			throw new IllegalArgumentException();
 		t.setId(count++);
 		database.put(t.getId(), t);
+	}
+
+	protected void deleteAll(Collection<T> c) {
+		for (T t : c)
+			this.delete(t);
 	}
 }

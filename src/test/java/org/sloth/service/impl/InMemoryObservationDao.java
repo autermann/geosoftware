@@ -83,7 +83,14 @@ public class InMemoryObservationDao extends InMemoryDao<Observation> implements
 		return result;
 	}
 
-	private static boolean matches(String ex, String test) {
+	private static boolean matches(String ex,
+								   String test) {
 		return test.toUpperCase().contains(ex.trim().toUpperCase());
+	}
+
+	@Override
+	public void delete(Collection<Observation> t) throws NullPointerException,
+														 IllegalArgumentException {
+		this.deleteAll(t);
 	}
 }

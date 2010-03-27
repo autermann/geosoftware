@@ -3,7 +3,7 @@
 <div>
 	<h2><fmt:message key="categorie.list"/></h2>
 	<p>
-		<a href="<spring:url value="/categories/new"/>">
+		<a href="<s:url value="/categories/new"/>">
 			<fmt:message key="categorie.new"/>
 		</a>
 	</p>
@@ -22,8 +22,8 @@
 				<td>${categorie.description}</td>
 				<td>${categorie.iconFileName}</td>
 				<td>
-					<a href="<spring:url value="/c/edit/${categorie.id}"/>"><fmt:message key="categorie.edit" /></a>
-					<a href="<spring:url value="/c/del/${categorie.id}"/>"><fmt:message key="categorie.delete" /></a>
+					<a href="<s:url value="/c/edit/${categorie.id}"/>"><fmt:message key="categorie.edit" /></a>
+					<a href="<s:url value="/c/del/${categorie.id}"/>"><fmt:message key="categorie.delete" /></a>
 				</td>
 			</tr>
 		</c:forEach>
