@@ -15,7 +15,7 @@
 		<script type="text/javascript">
 			function fillMap(){
 				<c:forEach var="o" items="${observations}">
-						addMarker(${o.coordinate.longitude}, ${o.coordinate.latitude},"<b><s:escapeBody htmlEscape="true" javaScriptEscape="true">${o.title}</s:escapeBody></b><br/><s:escapeBody htmlEscape="true" javaScriptEscape="true">${o.description}</s:escapeBody><br/>Lon: ${o.coordinate.longitude}<br/>Lat: ${o.coordinate.latitude}", "<s:url value="/static/img/${o.categorie.iconFileName}"/>");</c:forEach>
+						addMarker(${o.coordinate.longitude}, ${o.coordinate.latitude},"<b><s:escapeBody htmlEscape="true" javaScriptEscape="true">${o.title}</s:escapeBody></b><br/><br /><s:escapeBody htmlEscape="true" javaScriptEscape="true">${o.description}</s:escapeBody><br/><br/>Koordinaten:<br/><small>Lon: ${o.coordinate.longitude} | Lat: ${o.coordinate.latitude} </small>", "<s:url value="/static/img/${o.categorie.iconFileName}"/>");</c:forEach>
 					}
 			</script>
 		<c:if test="${sessionScope.LOGIN != null}"><script type="text/javascript">
@@ -75,7 +75,7 @@
 						
                                                     
 
-                                <hr color="#AAAADD"></hr>
+                                <hr color="#CCCCEE"></hr>
                                             
 
                                 <table width="30%"><tr><td>
