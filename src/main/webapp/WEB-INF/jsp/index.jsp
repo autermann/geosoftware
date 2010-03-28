@@ -46,10 +46,10 @@
 						]
 					});
 						</script></c:if>
-					</head>
-					<body onload="init();">
+			</head>
+			<body onload="init();">
 
-                                            
+                            <img src="<s:url value="/static/img/logo.png" htmlEscape="true"/>" align="left" width="160" alt="Logo" ></img>
                                             <div align="right">
 			
 
@@ -64,8 +64,8 @@
                                                             </c:otherwise>
                                                         </c:choose>
                                                     <form action="<s:url value="/"/>" method="GET" style="display:inline">
-                                                             | <input type="text" name="q" style="background: #EEEEEE; border: 1px solid silver;" value="Search..." onfocus="this.value=''"/>
-                                                            <input type="submit" value="Search" style="font-size: 12px; font-weight: normal; background: #EEEEEE; border: 1px solid silver;"/>
+                                                             | <input type="text" name="q" value="Search..." class="search" onfocus="this.value=''"/>
+                                                             <input type="image" src="<s:url value="/static/img/search.png" htmlEscape="true" />" alt="Search" class="searchbutton"/>
 
 							                                                
                                                      </form>
@@ -74,11 +74,11 @@
                                                    
 						
                                                     
-
-                                <hr color="#CCCCEE"></hr>
-                                            
-
-                                <table width="30%"><tr><td>
+                                  
+                                <hr style="border:solid #DDDDEE 1px"/><br/>
+                                 
+                                    <br />
+                                <table width="28%"><tr><td>
 						<h3><fmt:message key="welcome"/></h3>
                                                 <h4><fmt:message key="begruessung"/></h4>
                                         </td></tr>
@@ -102,7 +102,7 @@
                                                                             
                                                                             </td>
                                                                             <td width="30%">
-                                                                                <a href="#" onclick="goTo(${o.coordinate.longitude}, ${o.coordinate.latitude}, 16);" class="goto"><img src="<s:url value="/static/img/show.png" htmlEscape="true" />" alt="<fmt:message key="observation.viewInMap"/>"></a>
+                                                                                <a href="#" onclick="goTo(${o.coordinate.longitude}, ${o.coordinate.latitude}, 16);"><img src="<s:url value="/static/img/show.png" htmlEscape="true" />" alt="<fmt:message key="observation.viewInMap"/>"></a>
                                                                                     <c:if test="${sessionScope.LOGIN != null}">
                                                                                         <a href="<s:url value="/r/o/${o.id}/new"/>"><img src="<s:url value="/static/img/report.png" htmlEscape="true" />" alt="<fmt:message key="observation.report"/>"></a>
                                                                                     <c:if test="${sessionScope.LOGIN.userGroup == 'ADMIN' || o.user.id == sessionScope.LOGIN.id}">
@@ -118,7 +118,7 @@
 						</div>
                             </table>
 					</div>
-					<div id="map"></div>
+                                        <div id="map" class="map"></div>
 					<div align="center">
                                             <br />
 						<table class="footer">
