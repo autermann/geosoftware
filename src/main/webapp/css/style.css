@@ -47,11 +47,21 @@ img{
     border-width:0px;
 }
 
+table.observationlist {
+    margin: 1px 1px 1px 1px;
+    border-collapse: separate;
+}
 
 td.observationlist_title  {
         font: normal 12px/ 100% Verdana, Tahoma, sans-serif;
         background-color: #EEEEEE;
+        padding: 5px;
+              
          }
+
+b.obsTitle {
+    vertical-align: 6px;
+}
 
 
 p.observationlist_description {
@@ -59,17 +69,28 @@ p.observationlist_description {
          font: normal 12px/ 100% Verdana, Tahoma, sans-serif;
          color:  #555555;
          background-color: #EEEEEE;
-}
+       }
+
+/* Nicht mehr notwendig
+td.observationlist_icons  {
+        font: normal 12px/ 100% Verdana, Tahoma, sans-serif;
+        background-color: #EEEEEE;       
+      } */
 
 
 h4 {
     font: normal 12px/ 100% Verdana, Tahoma, sans-serif;
-         color:  #555555;
+    color:  #555555;
+    
+}
+
+h3 {
+    line-height: 9pt;
 }
 
 table.footer {
     font: normal 14px/ 100% Verdana, Tahoma, sans-serif;
-         color:  #222222;
+    color:  #222222;
 }
 
 input.search {

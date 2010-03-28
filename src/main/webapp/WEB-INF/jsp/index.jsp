@@ -81,36 +81,35 @@
                                 <table width="28%"><tr><td>
 						<h3><fmt:message key="welcome"/></h3>
                                                 <h4><fmt:message key="begruessung"/></h4>
+                                               
                                         </td></tr>
 					</table>
 					<div>
 						
 
 
-                             <table width="30%" cellspacing="5" cellpadding="4">
+                             <table width="29%" class="observationlist">
 				<div id="results">
 							<c:forEach var="o" items="${observations}">
 								
                                                                     
                                                                     <tr>
                                                                         <td width="70%" class="observationlist_title">
-                                                                                <img src="<s:url value="/static/img/${o.categorie.iconFileName}" htmlEscape="true" />" width="14px" height="14px" alt="${o.categorie.title}">
-                                                                        <b><s:escapeBody>${o.title}</s:escapeBody></b><br />
-                                                                            
-                                                                            
-                                                                       <p class="observationlist_description"><s:escapeBody>${o.description}</s:escapeBody></p>
-                                                                            
-                                                                            </td>
-                                                                            <td width="30%">
-                                                                                <a href="#" onclick="goTo(${o.coordinate.longitude}, ${o.coordinate.latitude}, 16);"><img src="<s:url value="/static/img/show.png" htmlEscape="true" />" alt="<fmt:message key="observation.viewInMap"/>"></a>
+                                                                                <img src="<s:url value="/static/img/${o.categorie.iconFileName}" htmlEscape="true" />" width="20px" height="20px" alt="${o.categorie.title}"></img>
+                                                                        <b class="obsTitle"><s:escapeBody>${o.title}</s:escapeBody></b>
+
+
+                                                                                 <a href="#" onclick="goTo(${o.coordinate.longitude}, ${o.coordinate.latitude}, 16);"><img src="<s:url value="/static/img/show.png" htmlEscape="true" />" alt="<fmt:message key="observation.viewInMap"/>" align="right" height="20px"></img></a>
                                                                                     <c:if test="${sessionScope.LOGIN != null}">
-                                                                                        <a href="<s:url value="/r/o/${o.id}/new"/>"><img src="<s:url value="/static/img/report.png" htmlEscape="true" />" alt="<fmt:message key="observation.report"/>"></a>
+                                                                                        <a href="<s:url value="/r/o/${o.id}/new"/>"><img src="<s:url value="/static/img/report.png" htmlEscape="true" />" alt="<fmt:message key="observation.report"/>" align="right" height="20px"></img></a>
                                                                                     <c:if test="${sessionScope.LOGIN.userGroup == 'ADMIN' || o.user.id == sessionScope.LOGIN.id}">
-											<a href="<s:url value="/o/edit/${o.id}"/>"><img src="<s:url value="/static/img/edit.png" htmlEscape="true" />" alt="<fmt:message key="observation.edit"/>"></a>
+											<a href="<s:url value="/o/edit/${o.id}"/>"><img src="<s:url value="/static/img/edit.png" htmlEscape="true" />" alt="<fmt:message key="observation.edit"/>" align="right" height="20px"></img></a>
                                                                                     </c:if>
                                                                                     </c:if>
-                                                                                 <br /><br />
+
+                                                                                <p class="observationlist_description"><s:escapeBody>${o.description}</s:escapeBody></p>
                                                                             </td>
+                                                                           
                                                                     </tr>
 								
 								
