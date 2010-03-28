@@ -73,9 +73,10 @@
 				<div id="results">
 							<c:forEach var="o" items="${observations}">
 								<div class="observation">
-									<span style="font-weight: bold;" class="observationTitle" id="obTitle${o.id}" ><s:escapeBody>${o.title}</s:escapeBody></span>
+									<img src="<s:url value="/static/img/${o.categorie.iconFileName}" htmlEscape="true" />" alt="${o.categorie.title}">
+                                                                        <span style="font-weight: bold;" class="observationTitle" id="obTitle${o.id}" ><s:escapeBody>${o.title}</s:escapeBody></span>
 									<br/>
-									<p id="obDesc${o.id}"><s:escapeBody>${o.description}</s:escapeBody></p>
+									<p id="${o.id}"><s:escapeBody>${o.description}</s:escapeBody></p>
                                                                         <a href="#" onclick="goTo(${o.coordinate.longitude}, ${o.coordinate.latitude}, 16);" class="goto"><img src="<s:url value="/static/img/show.png" htmlEscape="true" />" alt="<fmt:message key="observation.viewInMap"/>"></a>
 									<c:if test="${sessionScope.LOGIN != null}">
 										<a href="<s:url value="/r/o/${o.id}/new"/>"><img src="<s:url value="/static/img/report.png" htmlEscape="true" />" alt="<fmt:message key="observation.report"/>"></a>
