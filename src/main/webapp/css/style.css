@@ -42,10 +42,10 @@ a:link, a:visited, a:active {
 
 
 img{
-    border-width:0;
+    border-width:0px;
 }
 
 
 td.description  {
-        font: normal 11px/ 100% Verdana, Tahoma, sans-serif;
+        font: normal 12px/ 100% Verdana, Tahoma, sans-serif;
          }

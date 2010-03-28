@@ -53,7 +53,7 @@
 							<c:when test="${sessionScope.LOGIN != null}">
 								<a href="<s:url value="/acc" />"><b>${sessionScope.LOGIN.mail}</b></a>
 								<input type="submit" onclick="window.location='<s:url value="/logout"/>'" value="<fmt:message key="logout.button"/>" /> <br/>
-								<fmt:message key="login.button"/>: <%= new Date(session.getCreationTime())%><br/>
+								<fmt:message key="login"/>: <%= new Date(session.getCreationTime())%><br/>
 							</c:when>
 							<c:otherwise>
 								<input type="submit" onclick="window.location='<s:url value="/login"/>'" value="<fmt:message key="login.button"/>" /> <br/>
@@ -104,7 +104,7 @@
                             </table>
 					</div>
 					<div id="map"></div>
-					<div>
+					<div align="center">
                                             <br />
 						<table class="footer">
 							<tr>
