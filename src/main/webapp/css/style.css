@@ -44,3 +44,8 @@ a:link, a:visited, a:active {
 img{
     border-width:0;
 }
+
+
+td.description  {
+        font: normal 11px/ 100% Verdana, Tahoma, sans-serif;
+         }
