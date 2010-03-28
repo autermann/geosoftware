@@ -1,5 +1,6 @@
 body { /*background-color: #00008b;*/
 	font: normal 13px/ 100% Verdana, Tahoma, sans-serif;
+        background-color: #CCCCFF;
 }
 
 #map {
@@ -26,18 +27,19 @@ body { /*background-color: #00008b;*/
 	bottom: 50px;
 }
 /* Unter jedem Nicht-Win Betriebssystem sehen die Standard-Buttons besser aus^^ */
-	/*
+/*
 input[type="button"], input[type="submit"] {
 	font-size: 12px;
 	font-weight: normal;
 	text-align: center;
 	color: #222222;
-	border: 1px solid #AAAAAA;
-	background: #CCCCCC;
-}*/
+	border: 1px solid silver;
+	background: #EEEEEE;
+   } */
 
 a:link, a:visited, a:active {
     text-decoration: none;
+    color: #333333;
    }
 
 
@@ -46,6 +48,24 @@ img{
 }
 
 
-td.description  {
+td.observationlist_title  {
         font: normal 12px/ 100% Verdana, Tahoma, sans-serif;
          }
+
+
+p.observationlist_description {
+
+         font: normal 12px/ 100% Verdana, Tahoma, sans-serif;
+         color:  #555555;
+
+}
+
+h4 {
+    font: normal 12px/ 100% Verdana, Tahoma, sans-serif;
+         color:  #555555;
+}
+
+table.footer {
+    font: normal 14px/ 100% Verdana, Tahoma, sans-serif;
+         color:  #222222;
+}

@@ -48,42 +48,57 @@
 						</script></c:if>
 					</head>
 					<body onload="init();">
-						<div align="right">
-						<c:choose>
-							<c:when test="${sessionScope.LOGIN != null}">
-								<a href="<s:url value="/acc" />"><b>${sessionScope.LOGIN.mail}</b></a>
-								<input type="submit" onclick="window.location='<s:url value="/logout"/>'" value="<fmt:message key="logout.button"/>" /> <br/>
-								<fmt:message key="login"/>: <%= new Date(session.getCreationTime())%><br/>
-							</c:when>
-							<c:otherwise>
-								<input type="submit" onclick="window.location='<s:url value="/login"/>'" value="<fmt:message key="login.button"/>" /> <br/>
-							</c:otherwise>
-						</c:choose>
-					</div>
+
+                                            
+                                            <div align="right">
+			
+
+                                                             <c:choose>
+                                                            <c:when test="${sessionScope.LOGIN != null}">
+								<a href="<s:url value="/acc" />"><b>${sessionScope.LOGIN.mail}</b></a> | 
+								<a href="<s:url value="/logout"/>"><fmt:message key="logout.button"/></a>
+								
+                                                            </c:when>
+                                                            <c:otherwise>
+								<a href="<s:url value="/login"/>"> <fmt:message key="login.button"/></a>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    <form action="<s:url value="/"/>" method="GET" style="display:inline">
+                                                             | <input type="text" name="q" style="background: #EEEEEE; border: 1px solid silver;" value="Search..." onfocus="this.value=''"/>
+                                                            <input type="submit" value="Search" style="font-size: 12px; font-weight: normal; background: #EEEEEE; border: 1px solid silver;"/>
+
+							                                                
+                                                     </form>
+                                        </div>
+
+                                                   
+						
+                                                    
+
+                                <hr color="#AAAADD"></hr>
+                                            
+
+                                <table width="30%"><tr><td>
+						<h3><fmt:message key="welcome"/></h3>
+                                                <h4><fmt:message key="begruessung"/></h4>
+                                        </td></tr>
+					</table>
 					<div>
-						<h2><fmt:message key="welcome"/></h2>
-					</div>
-					<div>
-						<div>
-							<form action="<s:url value="/"/>" method="GET">
-								<input type="text" name="q" value="Search..." onfocus="this.value=''"/>
-								<input type="submit" value="Search"/>
-							</form>
-						</div>
+						
 
 
-                             <table width="30%" cellspacing="2" cellpadding="4">
+                             <table width="30%" cellspacing="5" cellpadding="4">
 				<div id="results">
 							<c:forEach var="o" items="${observations}">
 								
                                                                     
                                                                     <tr>
-                                                                        <td width="70%" class="description">
+                                                                        <td width="70%" class="observationlist_title">
                                                                                 <img src="<s:url value="/static/img/${o.categorie.iconFileName}" htmlEscape="true" />" width="14px" height="14px" alt="${o.categorie.title}">
                                                                         <b><s:escapeBody>${o.title}</s:escapeBody></b><br />
                                                                             
                                                                             
-                                                                       <s:escapeBody>${o.description}</s:escapeBody>
+                                                                       <p class="observationlist_description"><s:escapeBody>${o.description}</s:escapeBody></p>
                                                                             
                                                                             </td>
                                                                             <td width="30%">
