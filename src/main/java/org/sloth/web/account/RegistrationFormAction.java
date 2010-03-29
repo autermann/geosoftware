@@ -1,5 +1,8 @@
 package org.sloth.web.account;
 
+import org.sloth.model.Group;
+import org.sloth.model.User;
+
 public class RegistrationFormAction {
 
 	private String password;
@@ -97,5 +100,14 @@ public class RegistrationFormAction {
 	 */
 	public void setMailRepeat(String mailRepeat) {
 		this.mailRepeat = mailRepeat;
+	}
+
+	public User createUser() {
+		User u = new User();
+		u.setFamilyName(getFamilyName());
+		u.setMail(getMail());
+		u.setPassword(getPassword());
+		u.setName(getName());
+		return u;
 	}
 }

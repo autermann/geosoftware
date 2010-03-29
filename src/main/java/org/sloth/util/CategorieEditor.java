@@ -1,4 +1,4 @@
-package org.sloth.web.util;
+package org.sloth.util;
 
 import java.beans.PropertyEditorSupport;
 import org.sloth.model.Categorie;

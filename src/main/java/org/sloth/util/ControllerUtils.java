@@ -15,10 +15,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.sloth.web.util;
+package org.sloth.util;
 
 import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
+import static javax.servlet.http.HttpServletResponse.SC_FORBIDDEN;
+import static javax.servlet.http.HttpServletResponse.SC_NOT_FOUND;
+import static javax.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
 import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +35,7 @@ public class ControllerUtils {
 
 	protected static Logger logger = LoggerFactory
 			.getLogger(ControllerUtils.class);
-	private static final String sessionAttribute = "LOGIN";
+	private static final String SESSION_ATTRIBUTE = "LOGIN";
 	private static final String UNAUTHORIZED_VIEW = "error/unauthorized";
 	private static final String NOT_FOUND_VIEW = "error/notfound";
 	private static final String UNEXPECTED_ERROR_VIEW = "error/unexpected";
@@ -49,9 +52,9 @@ public class ControllerUtils {
 	}
 
 	public static User getUser(HttpSession s) {
-		Object o = s.getAttribute(sessionAttribute);
+		Object o = s.getAttribute(SESSION_ATTRIBUTE);
 		if (o != null && o instanceof User)
-			return ((User) o);
+			return (User) o;
 		else
 			return null;
 	}
@@ -59,7 +62,7 @@ public class ControllerUtils {
 	public static void auth(HttpSession s, User u) {
 		if (u == null)
 			throw new NullPointerException("User must not be null.");
-		s.setAttribute(sessionAttribute, u);
+		s.setAttribute(SESSION_ATTRIBUTE, u);
 	}
 
 	public static void deAuth(HttpSession s) {
@@ -107,12 +110,12 @@ public class ControllerUtils {
 
 	public static String forbiddenView(HttpServletResponse r)
 			throws IOException {
-		r.sendError(HttpServletResponse.SC_FORBIDDEN);
+		r.sendError(SC_FORBIDDEN);
 		return UNAUTHORIZED_VIEW;
 	}
 
 	public static String notFoundView(HttpServletResponse r) throws IOException {
-		r.sendError(HttpServletResponse.SC_NOT_FOUND);
+		r.sendError(SC_NOT_FOUND);
 		return NOT_FOUND_VIEW;
 	}
 
@@ -128,7 +131,7 @@ public class ControllerUtils {
 
 	public static String internalErrorView(HttpServletResponse r)
 			throws IOException {
-		r.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+		r.sendError(SC_INTERNAL_SERVER_ERROR);
 		return UNEXPECTED_ERROR_VIEW;
 	}
 }

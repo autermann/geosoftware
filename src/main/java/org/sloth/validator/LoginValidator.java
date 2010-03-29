@@ -15,16 +15,23 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.sloth.service.validator;
+package org.sloth.validator;
 
-import org.sloth.model.Categorie;
+import org.sloth.service.Login;
 import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
+import static org.sloth.util.ValidatorUtils.*;
 
-public class CategorieValidator {
+public class LoginValidator implements Validator {
 
-	public void validate(Categorie obj, Errors errors) {
-		/**
-		 * TODO neues Categorie-Objekt ueberpruefen...
-		 */
+	@Override
+	public boolean supports(Class<?> clazz) {
+		return clazz.equals(Login.class);
+	}
+
+	@Override
+	public void validate(Object t, Errors e) {
+		rejectIfEmptyOrWhitespace(e, "mail", "field.login.mail.empty");
+		rejectIfEmptyOrWhitespace(e, "password", "field.login.password.empty");
 	}
 }

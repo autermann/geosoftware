@@ -27,8 +27,8 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/o")
 public class ListObservationsController {
 
-	private final static String view = "observations/list";
-	private final static String modelAttribute = "observations";
+	private final static String VIEW = "observations/list";
+	private final static String OBSERVATIONS_ATTRIBUTE = "observations";
 	private ObservationService observationService;
 
 	@Autowired
@@ -38,7 +38,7 @@ public class ListObservationsController {
 
 	@RequestMapping
 	public ModelAndView setupList() {
-		return new ModelAndView(view, modelAttribute, observationService
+		return new ModelAndView(VIEW, OBSERVATIONS_ATTRIBUTE, observationService
 				.getObservations());
 	}
 }

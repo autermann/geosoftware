@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.sloth.model.Observation;
 import org.sloth.model.Report;
 import org.sloth.service.ObservationService;
-import org.sloth.service.validator.ReportValidator;
+import org.sloth.validator.ReportValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -21,14 +21,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
-import static org.sloth.web.util.ControllerUtils.*;
+import static org.sloth.util.ControllerUtils.*;
 
 @Controller
 @RequestMapping("/r/o/{id}/new")
 public class CreateReportController {
 
-	private static final String view = "reports/form";
-	private static final String modelName = "report";
+	private static final String VIEW = "reports/form";
+	private static final String REPORT_ATTRIBUTE = "report";
 	private static final Logger logger = LoggerFactory
 			.getLogger(CreateReportController.class);
 	private ObservationService observationService;
@@ -56,7 +56,7 @@ public class CreateReportController {
 			Observation o = observationService.getObservation(id);
 			if (o == null)
 				return notFoundMAV(r);
-			return new ModelAndView(view, modelName, new Report());
+			return new ModelAndView(VIEW, REPORT_ATTRIBUTE, new Report());
 		}
 		return forbiddenMAV(r);
 	}
@@ -75,7 +75,7 @@ public class CreateReportController {
 				report.setAuthor(getUser(s));
 				reportValidator.validate(report, result);
 				if (result.hasErrors())
-					return view;
+					return VIEW;
 				status.setComplete();
 				observationService.registrate(report);
 				return "redirect:/";

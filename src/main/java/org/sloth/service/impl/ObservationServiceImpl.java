@@ -281,4 +281,9 @@ public class ObservationServiceImpl implements ObservationService {
 	public List<Observation> getNewestObservations(int u) {
 		return getObservationDao().getNewestObservations(u);
 	}
+
+	@Override
+	public boolean isCategorieTitleAvailable(String title) {
+		return this.getCategorieByTitle(title) == null;
+	}
 }

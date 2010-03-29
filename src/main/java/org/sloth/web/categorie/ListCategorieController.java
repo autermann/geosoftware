@@ -25,14 +25,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import static org.sloth.web.util.ControllerUtils.*;
+import static org.sloth.util.ControllerUtils.*;
 
 @Controller
 @RequestMapping("/c")
 public class ListCategorieController {
 
-	private static final String view = "categories/list";
-	private static final String modelAttribute = "categories";
+	private static final String VIEW = "categories/list";
+	private static final String CATEGORIE_ATTRIBUTE = "categories";
 	private ObservationService observationManager;
 
 	@Autowired
@@ -44,7 +44,7 @@ public class ListCategorieController {
 	public ModelAndView setupList(HttpSession s, HttpServletResponse r)
 			throws IOException {
 		if (isAdmin(s))
-			return new ModelAndView(view, modelAttribute, observationManager
+			return new ModelAndView(VIEW, CATEGORIE_ATTRIBUTE, observationManager
 					.getCategories());
 		else
 			return forbiddenMAV(r);

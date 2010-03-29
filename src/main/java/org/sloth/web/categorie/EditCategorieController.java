@@ -24,7 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sloth.model.Categorie;
 import org.sloth.service.ObservationService;
-import org.sloth.service.validator.CategorieValidator;
+import org.sloth.validator.CategorieValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,16 +37,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-import static org.sloth.web.util.ControllerUtils.*;
+import static org.sloth.util.ControllerUtils.*;
 
 @Controller
 @RequestMapping("/c/edit/{id}")
 @SessionAttributes(types = Categorie.class)
 public class EditCategorieController {
 
-	private static final String view = "categories/edit";
-	private static final String modelAttributeName = "categorie";
-	private Logger logger = LoggerFactory
+	private static final String VIEW = "categories/edit";
+	private static final String CATEGORIE_ATTRIBUTE = "categorie";
+	private static final Logger logger = LoggerFactory
 			.getLogger(EditCategorieController.class);
 	private ObservationService observationManager;
 	private CategorieValidator categorieValidator;
@@ -73,8 +73,8 @@ public class EditCategorieController {
 			Categorie c = observationManager.getCategorie(id);
 			if (c == null)
 				return notFoundView(r);
-			model.addAttribute(modelAttributeName, c);
-			return view;
+			model.addAttribute(CATEGORIE_ATTRIBUTE, c);
+			return VIEW;
 		} else
 			return forbiddenView(r);
 
@@ -82,13 +82,13 @@ public class EditCategorieController {
 
 	@RequestMapping(method = POST)
 	public String processSubmit(
-			@ModelAttribute(modelAttributeName) Categorie categorie,
+			@ModelAttribute(CATEGORIE_ATTRIBUTE) Categorie categorie,
 			BindingResult result, SessionStatus status, HttpSession s,
 			HttpServletResponse r) throws IOException {
 		if (isAdmin(s)) {
 			categorieValidator.validate(categorie, result);
 			if (result.hasErrors())
-				return view;
+				return VIEW;
 			else {
 				try {
 					observationManager.updateCategorie(categorie);

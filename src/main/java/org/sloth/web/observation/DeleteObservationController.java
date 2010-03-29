@@ -24,7 +24,6 @@ import org.sloth.model.Observation;
 import org.sloth.service.ObservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -34,15 +33,15 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
-import static org.sloth.web.util.ControllerUtils.*;
+import static org.sloth.util.ControllerUtils.*;
 
 @Controller
 @RequestMapping("/o/del/{id}")
 @SessionAttributes(types = Observation.class)
 public class DeleteObservationController {
 
-	private static final String view = "observations/delete";
-	private static final String modelAttribute = "observation";
+	private static final String VIEW = "observations/delete";
+	private static final String OBSERVATIONS_ATTRIBUTE = "observation";
 	protected static final Logger logger = LoggerFactory
 			.getLogger(DeleteObservationController.class);
 	private ObservationService observationService;
@@ -65,7 +64,7 @@ public class DeleteObservationController {
 			if (o == null)
 				return notFoundMAV(r);
 			if (isAdmin(s) || isOwnObservation(s, o))
-				return new ModelAndView(view, modelAttribute, o);
+				return new ModelAndView(VIEW, OBSERVATIONS_ATTRIBUTE, o);
 		}
 		return forbiddenMAV(r);
 	}

@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sloth.model.Report;
 import org.sloth.service.ObservationService;
-import org.sloth.service.validator.ReportValidator;
+import org.sloth.validator.ReportValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
-import static org.sloth.web.util.ControllerUtils.*;
+import static org.sloth.util.ControllerUtils.*;
 
 @Controller
 @RequestMapping("/r/edit/{id}")
@@ -30,9 +30,9 @@ public class EditReportController {
 
 	private ObservationService observationService;
 	private ReportValidator reportValidator;
-	private static final String view = "reports/form";
-	private static final String attibuteR = "report";
-	private static final String attibuteP = "processed";
+	private static final String VIEW = "reports/form";
+	private static final String REPORT_ATTRIBUTE = "report";
+	private static final String PROCESSED_ATTRIBUTE = "processed";
 	private static final Logger logger = LoggerFactory
 			.getLogger(EditReportController.class);
 
@@ -68,9 +68,9 @@ public class EditReportController {
 				return notFoundMAV(r);
 
 			if (isAdmin(s) || isOwnReport(s, report)) {
-				ModelAndView mav = new ModelAndView(view);
-				mav.addObject(attibuteP, new Boolean(report.isProcessed()));
-				mav.addObject(attibuteR, report);
+				ModelAndView mav = new ModelAndView(VIEW);
+				mav.addObject(PROCESSED_ATTRIBUTE, new Boolean(report.isProcessed()));
+				mav.addObject(REPORT_ATTRIBUTE, report);
 				return mav;
 			}
 
@@ -80,8 +80,8 @@ public class EditReportController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String handlePost(@PathVariable Long id,
-			@ModelAttribute(attibuteP) Boolean processed,
-			@ModelAttribute(attibuteR) Report report, BindingResult result,
+			@ModelAttribute(PROCESSED_ATTRIBUTE) Boolean processed,
+			@ModelAttribute(REPORT_ATTRIBUTE) Report report, BindingResult result,
 			SessionStatus status, HttpSession s, HttpServletResponse r)
 			throws IOException {
 		if (isAuth(s)) {
@@ -93,7 +93,7 @@ public class EditReportController {
 			if (isAdmin(s) || isOwnReport(s, report)) {
 				reportValidator.validate(report, result);
 				if (result.hasErrors())
-					return view;
+					return VIEW;
 				status.setComplete();
 				try {
 					report.setLastUpdateDate(new Date());

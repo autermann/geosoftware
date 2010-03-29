@@ -73,7 +73,7 @@ public abstract class EntityFactory {
 	public static Observation getObservation(Categorie c, User u) {
 		Observation o = new Observation();
 		o.setCategorie(c);
-		o.setCoordinate(new Coordinate(observationCount, observationCount));
+		o.setCoordinate(new Coordinate(Double.valueOf(observationCount), Double.valueOf(observationCount)));
 		o.setDescription("Description of Observation " + observationCount);
 		o.setTitle("Title of Observation " + observationCount);
 		o.setUser(u);

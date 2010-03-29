@@ -92,23 +92,22 @@ public class Coordinate implements Serializable {
 	@Override
 	@SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
 	public boolean equals(Object obj) {
-		if (obj != null)
+		if (obj != null) {
 			return this.hashCode() == obj.hashCode();
-		else
+		} else {
 			return false;
+		}
 	}
 
 	@Override
 	public int hashCode() {
 		int hash = 5;
 		hash = 47
-				* hash
-				+ (int) (Double.doubleToLongBits(this.getLatitude()) ^ (Double
-						.doubleToLongBits(this.getLatitude()) >>> 32));
+			   * hash
+			   + (int) (Double.doubleToLongBits(this.getLatitude()) ^ (Double.doubleToLongBits(this.getLatitude()) >>> 32));
 		hash = 47
-				* hash
-				+ (int) (Double.doubleToLongBits(this.getLongitude()) ^ (Double
-						.doubleToLongBits(this.getLongitude()) >>> 32));
+			   * hash
+			   + (int) (Double.doubleToLongBits(this.getLongitude()) ^ (Double.doubleToLongBits(this.getLongitude()) >>> 32));
 		return hash;
 	}
 

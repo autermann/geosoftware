@@ -129,15 +129,18 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User login(Login login) throws NullPointerException {
-		if (login == null)
+	public User login(String mail,
+					  String plainPassword) throws NullPointerException {
+		if (mail == null || plainPassword == null)
 			throw new NullPointerException();
-		User u = get(login.getMail());
-		if (u != null
-				&& getPasswordService().check(u.getPassword(),
-						login.getPassword()))
-			return u;
-		else
+		User u = get(mail);
+		if (u == null)
 			return null;
+		return getPasswordService().check(u.getPassword(), plainPassword) ? u : null;
+	}
+
+	@Override
+	public boolean isMailAddressAvailable(String mail) throws NullPointerException {
+		return this.get(mail) == null;
 	}
 }

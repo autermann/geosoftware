@@ -14,15 +14,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import static org.sloth.web.util.ControllerUtils.*;
+import static org.sloth.util.ControllerUtils.*;
 
 @Controller
 @RequestMapping("/u/{id}")
 public class UserDetailController {
 
+	private static final String VIEW = "users/details";
+	private static final String USERS_ATTRIBUTE = "users";
 	private UserService userService;
-	private static final String view = "users/details";
-	private static final String modelAttribute = "users";
 
 	@Autowired
 	public void setUserService(UserService userService) {
@@ -38,7 +38,7 @@ public class UserDetailController {
 			if (u == null)
 				return notFoundMAV(r);
 			else
-				return new ModelAndView(view, modelAttribute, u);
+				return new ModelAndView(VIEW, USERS_ATTRIBUTE, u);
 		} else
 			return forbiddenMAV(r);
 	}

@@ -5,13 +5,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import static org.sloth.web.util.ControllerUtils.*;
+import static org.sloth.util.ControllerUtils.*;
 
 @Controller
 public class AccountController {
 
-	private final static String userView = "account/user";
-	private final static String adminView = "account/admin";
+	private final static String USER_VIEW = "account/user";
+	private final static String ADMIN_VIEW = "account/admin";
 
 	@RequestMapping("/acc")
 	public String handle(HttpSession s, HttpServletResponse r)
@@ -19,9 +19,9 @@ public class AccountController {
 		if (!isAuth(s))
 			return forbiddenView(r);
 		if (isAdmin(s))
-			return adminView;
+			return ADMIN_VIEW;
 		else
-			return userView;
+			return USER_VIEW;
 
 	}
 }

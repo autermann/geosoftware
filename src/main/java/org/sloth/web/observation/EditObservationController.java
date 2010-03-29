@@ -32,12 +32,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-import static org.sloth.web.util.ControllerUtils.*;
+import static org.sloth.util.ControllerUtils.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sloth.model.Categorie;
-import org.sloth.service.validator.ObservationValidator;
-import org.sloth.web.util.CategorieEditor;
+import org.sloth.validator.ObservationValidator;
+import org.sloth.util.CategorieEditor;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -46,10 +46,10 @@ import org.springframework.web.servlet.ModelAndView;
 @SessionAttributes(types = Observation.class)
 public class EditObservationController {
 
-	private static final String view = "observations/edit";
-	private static final String observationAttribute = "observation";
-	private static final String categorieAttribute = "categories";
-	protected static final Logger logger = LoggerFactory
+	private static final String VIEW = "observations/edit";
+	private static final String OBSERVATION_ATTRIBUTE = "observation";
+	private static final String CATEGORIE_ATTRIBUTE = "categories";
+	private static final Logger logger = LoggerFactory
 			.getLogger(EditObservationController.class);
 	private ObservationService observationService;
 	private ObservationValidator observationValidator;
@@ -81,9 +81,9 @@ public class EditObservationController {
 			if (o == null)
 				return notFoundMAV(r);
 			if (isAdmin(s) || isOwnObservation(s, o)) {
-				ModelAndView mav = new ModelAndView(view);
-				mav.addObject(observationAttribute, o);
-				mav.addObject(categorieAttribute, observationService
+				ModelAndView mav = new ModelAndView(VIEW);
+				mav.addObject(OBSERVATION_ATTRIBUTE, o);
+				mav.addObject(CATEGORIE_ATTRIBUTE, observationService
 						.getCategories());
 				return mav;
 			}
@@ -98,7 +98,7 @@ public class EditObservationController {
 		if (isAdmin(s) || isOwnObservation(s, o)) {
 			observationValidator.validate(o, result);
 			if (result.hasErrors())
-				return view;
+				return VIEW;
 			else {
 				try {
 					observationService.updateObservation(o);

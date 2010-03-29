@@ -6,6 +6,7 @@ import org.sloth.model.User;
 public class UserEditFormAction {
 
 	private User oldUser;
+	private User editingUser;
 	private String actualPassword;
 	private String newPassword;
 	private String newPasswordHash;
@@ -15,16 +16,33 @@ public class UserEditFormAction {
 	private String newFamilyName;
 	private Group newGroup;
 
+
 	public Long getId() {
 		return getOldUser().getId();
 	}
 
-	public UserEditFormAction(User oldUser) {
+	public UserEditFormAction(User oldUser, User editingUser) {
 		this.oldUser = oldUser;
+		setEditingUser(editingUser);
 		setNewFamilyName(oldUser.getFamilyName());
 		setNewGroup(oldUser.getUserGroup());
 		setNewName(oldUser.getName());
 		setNewMail(oldUser.getMail());
+	}
+
+	public User getMergedUser() {
+		User u = getOldUser();
+		if (getNewPasswordHash() != null)
+			u.setPassword(getNewPasswordHash());
+		if (getNewMail() != null)
+			u.setMail(getNewMail());
+		if (getNewGroup() != null)
+			u.setUserGroup(getNewGroup());
+
+		u.setFamilyName(getNewFamilyName());
+		u.setName(getNewName());
+
+		return u;
 	}
 
 	/**
@@ -152,5 +170,19 @@ public class UserEditFormAction {
 	 */
 	public void setNewPasswordHash(String newPasswordHash) {
 		this.newPasswordHash = newPasswordHash;
+	}
+
+	/**
+	 * @return the editingUser
+	 */
+	public User getEditingUser() {
+		return editingUser;
+	}
+
+	/**
+	 * @param editingUser the editingUser to set
+	 */
+	public void setEditingUser(User editingUser) {
+		this.editingUser = editingUser;
 	}
 }

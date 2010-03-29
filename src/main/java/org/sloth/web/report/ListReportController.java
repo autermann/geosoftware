@@ -12,13 +12,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import static org.sloth.web.util.ControllerUtils.*;
+import static org.sloth.util.ControllerUtils.*;
 
 @Controller
 public class ListReportController {
 
-	private static final String view = "reports/list";
-	private static final String modelName = "reports";
+	private static final String VIEW = "reports/list";
+	private static final String REPORTS_ATTRIBUTE = "reports";
 	private ObservationService observationService;
 	private UserService userService;
 
@@ -45,7 +45,7 @@ public class ListReportController {
 			throws IOException {
 		if (isAuth(s))
 			if (isAdmin(s))
-				return new ModelAndView(view, modelName, observationService
+				return new ModelAndView(VIEW, REPORTS_ATTRIBUTE, observationService
 						.getReports());
 			else
 				return new ModelAndView("redirect:/r/u/" + getUser(s).getId());
@@ -59,7 +59,7 @@ public class ListReportController {
 			Observation o = observationService.getObservation(id);
 			if (o == null)
 				return notFoundMAV(r);
-			return new ModelAndView(view, modelName, observationService
+			return new ModelAndView(VIEW, REPORTS_ATTRIBUTE, observationService
 					.getReportsByObservation(o));
 		}
 		return forbiddenMAV(r);
@@ -69,13 +69,13 @@ public class ListReportController {
 	public ModelAndView handleUserFilter(@PathVariable Long id, HttpSession s,
 			HttpServletResponse r) throws IOException {
 		if (isSameId(s, id))
-			return new ModelAndView(view, modelName, observationService
+			return new ModelAndView(VIEW, REPORTS_ATTRIBUTE, observationService
 					.getObservationsByUser(getUser(s)));
 		if (isAdmin(s)) {
 			User u = userService.get(id);
 			if (u == null)
 				return notFoundMAV(r);
-			return new ModelAndView(view, modelName, observationService
+			return new ModelAndView(VIEW, REPORTS_ATTRIBUTE, observationService
 					.getReportsByUser(u));
 		}
 		return forbiddenMAV(r);

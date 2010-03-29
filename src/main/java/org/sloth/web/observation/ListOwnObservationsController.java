@@ -12,14 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import static org.sloth.web.util.ControllerUtils.*;
+import static org.sloth.util.ControllerUtils.*;
 
 @Controller
 @RequestMapping("/o/own")
 public class ListOwnObservationsController {
 
-	private final static String view = "observations/list";
-	private final static String modelAttribute = "observations";
+	private final static String VIEW = "observations/list";
+	private final static String OBSERVATIONS_ATTRIBUTE = "observations";
 	private ObservationService observationService;
 
 	@Autowired
@@ -31,7 +31,7 @@ public class ListOwnObservationsController {
 	public ModelAndView setupList(HttpSession s, HttpServletResponse r)
 			throws IOException {
 		if (isAuth(s))
-			return new ModelAndView(view, modelAttribute, observationService
+			return new ModelAndView(VIEW, OBSERVATIONS_ATTRIBUTE, observationService
 					.getObservationsByUser(getUser(s)));
 		else
 			return forbiddenMAV(r);

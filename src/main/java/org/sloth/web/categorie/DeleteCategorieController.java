@@ -24,7 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sloth.model.Categorie;
 import org.sloth.service.ObservationService;
-import static org.sloth.web.util.ControllerUtils.*;
+import static org.sloth.util.ControllerUtils.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,8 +38,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @RequestMapping("/c/del/{id}")
 public class DeleteCategorieController {
 
-	private static final String modelAttribute = "categorie";
-	private static final String view = "categories/delete";
+	private static final String CATEGORIE_ATTRIBUTE = "categorie";
+	private static final String VIEW = "categories/delete";
 	private static final Logger logger = LoggerFactory
 			.getLogger(DeleteCategorieController.class);
 	private ObservationService observationService;
@@ -61,8 +61,8 @@ public class DeleteCategorieController {
 			Categorie categorie = observationService.getCategorie(id);
 			if (categorie == null)
 				return notFoundView(r);
-			model.addAttribute(modelAttribute, categorie);
-			return view;
+			model.addAttribute(CATEGORIE_ATTRIBUTE, categorie);
+			return VIEW;
 		} else
 			return forbiddenView(r);
 	}

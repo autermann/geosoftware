@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
 import org.sloth.model.User;
 import org.sloth.service.Login;
 import org.sloth.service.UserService;
-import org.sloth.service.validator.LoginValidator;
+import org.sloth.validator.LoginValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -35,15 +35,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
-import static org.sloth.web.util.ControllerUtils.*;
+import static org.sloth.util.ControllerUtils.*;
 
 @Controller
 @RequestMapping("/login")
 @SessionAttributes(types = Login.class)
 public class LoginController {
 
-	private static final String view = "login";
-	private static final String modelAttribute = "login";
+	private static final String VIEW = "login";
+	private static final String LOGIN_ATTRIBUTE = "login";
 	private static final Logger logger = LoggerFactory
 			.getLogger(LoginController.class);
 	private UserService userService;
@@ -68,22 +68,22 @@ public class LoginController {
 	public ModelAndView prepare(HttpSession s) {
 		if (isAuth(s))
 			return new ModelAndView("redirect:/");
-		return new ModelAndView(view, modelAttribute, new Login());
+		return new ModelAndView(VIEW, LOGIN_ATTRIBUTE, new Login());
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String login(@ModelAttribute(modelAttribute) Login login,
+	public String login(@ModelAttribute(LOGIN_ATTRIBUTE) Login l,
 			BindingResult result, SessionStatus status, HttpSession s) {
 		if (isAuth(s))
 			return "redirect:/";
-		validator.validate(login, result);
+		validator.validate(l, result);
 		if (result.hasErrors())
-			return view;
+			return VIEW;
 		else {
-			User u = userService.login(login);
+			User u = userService.login(l.getMail(), l.getPassword());
 			if (u == null) {
 				result.reject("field.invalidLogin");
-				return view;
+				return VIEW;
 			} else {
 				logger.debug("Got valid user. Setting Session-Attribute.");
 				auth(s, u);

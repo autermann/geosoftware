@@ -24,11 +24,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sloth.model.Categorie;
 import org.sloth.service.ObservationService;
-import org.sloth.service.validator.CategorieValidator;
-import static org.sloth.web.util.ControllerUtils.*;
+import org.sloth.validator.CategorieValidator;
+import static org.sloth.util.ControllerUtils.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -44,8 +43,8 @@ import org.springframework.web.servlet.ModelAndView;
 @SessionAttributes(types = Categorie.class)
 public class CreateCategorieController {
 
-	private static final String modelAttributeName = "categorie";
-	private static final String view = "categories/new";
+	private static final String CATEGORIE_ATTRIBUTE = "categorie";
+	private static final String VIEW = "categories/new";
 	private static final Logger logger = LoggerFactory
 			.getLogger(CreateCategorieController.class);
 	private ObservationService observationService;
@@ -70,20 +69,20 @@ public class CreateCategorieController {
 	public ModelAndView setup(HttpSession session, HttpServletResponse response)
 			throws IOException {
 		if (isAdmin(session))
-			return new ModelAndView(view, modelAttributeName, new Categorie());
+			return new ModelAndView(VIEW, CATEGORIE_ATTRIBUTE, new Categorie());
 		else
 			return forbiddenMAV(response);
 	}
 
 	@RequestMapping(method = POST)
 	public String submit(
-			@ModelAttribute(modelAttributeName) Categorie categorie,
+			@ModelAttribute(CATEGORIE_ATTRIBUTE) Categorie categorie,
 			BindingResult result, SessionStatus status, HttpSession s,
 			HttpServletResponse r) throws IOException {
 		if (isAdmin(s)) {
 			categorieValidator.validate(categorie, result);
 			if (result.hasErrors())
-				return view;
+				return VIEW;
 			else {
 				try {
 					observationService.registrate(categorie);

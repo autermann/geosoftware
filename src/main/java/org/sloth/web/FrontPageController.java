@@ -2,14 +2,14 @@ package org.sloth.web;
 
 import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
-import org.sloth.web.util.CategorieEditor;
+import org.sloth.util.CategorieEditor;
 import org.slf4j.Logger;
 import javax.servlet.http.HttpSession;
 import org.slf4j.LoggerFactory;
 import org.sloth.model.Categorie;
 import org.sloth.model.Observation;
 import org.sloth.service.ObservationService;
-import org.sloth.service.validator.ObservationValidator;
+import org.sloth.validator.ObservationValidator;
 import org.sloth.util.Config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,25 +23,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
-import static org.sloth.web.util.ControllerUtils.*;
+import static org.sloth.util.ControllerUtils.*;
 
 @Controller
 @RequestMapping("/")
 @SessionAttributes( { "observations", "observation", "categories" })
 public class FrontPageController {
 
-	private ObservationService os;
-	private ObservationValidator validator;
-	private static final Logger logger = LoggerFactory
-			.getLogger(FrontPageController.class);
+
+
 	private static final String VIEW = "index";
-	private static final String MAP_CONTENT = "observations";
+	private static final String MAP_CONTENT_ATTRIBUTE = "observations";
 	private static final String NEW_OBSERVATION_ATTRIBUTE = "observation";
 	private static final String CATEGORIE_ATTRIBUTE = "categories";
 	private static final String SEARCH_PARAM = "q";
 	private static final int VISIBLE_OBSERVATIONS_DEFAULT = 10;
 	private static final int VISIBLE_OBSERVATIONS;
-
+	private static final Logger logger = LoggerFactory
+			.getLogger(FrontPageController.class);
+	private ObservationService os;
+	private ObservationValidator validator;
 	static {
 		Integer i = null;
 		try {
@@ -83,7 +84,7 @@ public class FrontPageController {
 			mav.addObject(NEW_OBSERVATION_ATTRIBUTE, new Observation());
 			mav.addObject(CATEGORIE_ATTRIBUTE, os.getCategories());
 		}
-		return mav.addObject(MAP_CONTENT,
+		return mav.addObject(MAP_CONTENT_ATTRIBUTE,
 				(q == null || q.trim().isEmpty()) ? os
 						.getNewestObservations(VISIBLE_OBSERVATIONS) : os
 						.getObservations(q));

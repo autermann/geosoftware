@@ -19,15 +19,14 @@ package org.sloth.web.observation;
 
 import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
-import org.sloth.web.util.CategorieEditor;
+import org.sloth.util.CategorieEditor;
 import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sloth.model.Categorie;
-import org.sloth.model.Group;
 import org.sloth.model.Observation;
 import org.sloth.service.ObservationService;
-import org.sloth.service.validator.ObservationValidator;
+import org.sloth.validator.ObservationValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -39,7 +38,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
-import static org.sloth.web.util.ControllerUtils.*;
+import static org.sloth.util.ControllerUtils.*;
 
 @Controller
 @RequestMapping("/o/new")
@@ -47,9 +46,9 @@ import static org.sloth.web.util.ControllerUtils.*;
 @Deprecated
 public class ObservationAddController {
 
-	private static final String view = "observations/form";
-	private static final String observationAttribute = "observation";
-	private static final String categorieCollectionAttribute = "categories";
+	private static final String VIEW = "observations/form";
+	private static final String OBSERVATION_ATTRIBUTE = "observation";
+	private static final String CATEGORIES_ATTRIBUTE = "categories";
 	private Logger logger = LoggerFactory
 			.getLogger(ObservationAddController.class);
 	private ObservationService observationManager;
@@ -77,9 +76,9 @@ public class ObservationAddController {
 	public ModelAndView setupForm(HttpSession s, HttpServletResponse r)
 			throws IOException {
 		if (isAuth(s)) {
-			ModelAndView mav = new ModelAndView(view);
-			mav.addObject(observationAttribute, new Observation());
-			mav.addObject(categorieCollectionAttribute, observationManager
+			ModelAndView mav = new ModelAndView(VIEW);
+			mav.addObject(OBSERVATION_ATTRIBUTE, new Observation());
+			mav.addObject(CATEGORIES_ATTRIBUTE, observationManager
 					.getCategories());
 			return mav;
 		} else
@@ -88,14 +87,14 @@ public class ObservationAddController {
 
 	@RequestMapping(method = POST)
 	public String processSubmit(
-			@ModelAttribute(observationAttribute) Observation observation,
+			@ModelAttribute(OBSERVATION_ATTRIBUTE) Observation observation,
 			BindingResult result, SessionStatus status, HttpSession session,
 			HttpServletResponse r) throws IOException {
 		if (isAuth(session)) {
 			observation.setUser(getUser(session));
 			validator.validate(observation, result);
 			if (result.hasErrors())
-				return view;
+				return VIEW;
 			else {
 				try {
 					this.observationManager.registrate(observation);

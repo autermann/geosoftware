@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import static org.sloth.web.util.ControllerUtils.*;
+import static org.sloth.util.ControllerUtils.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,8 +21,8 @@ import org.springframework.web.servlet.ModelAndView;
 @SessionAttributes(types = Observation.class)
 public class ViewObservationController {
 
-	private static final String view = "observations/details";
-	private static final String observationAttribute = "observation";
+	private static final String VIEW = "observations/details";
+	private static final String OBSERVATIONS_ATTRIBUTE = "observation";
 	protected static final Logger logger = LoggerFactory
 			.getLogger(EditObservationController.class);
 	private ObservationService observationService;
@@ -40,8 +40,8 @@ public class ViewObservationController {
 			if (o == null)
 				return notFoundMAV(r);
 			if (isAdmin(s) || isOwnObservation(s, o)) {
-				ModelAndView mav = new ModelAndView(view);
-				mav.addObject(observationAttribute, o);
+				ModelAndView mav = new ModelAndView(VIEW);
+				mav.addObject(OBSERVATIONS_ATTRIBUTE, o);
 				return mav;
 			}
 		}

@@ -221,6 +221,8 @@ public interface ObservationService {
 
 	public Categorie getCategorieByTitle(String title);
 
+	public boolean isCategorieTitleAvailable(String title);
+
 	public Collection<Observation> getObservationsByUser(User u);
 
 	public List<Observation> getNewestObservations(int u);

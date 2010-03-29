@@ -122,10 +122,14 @@ public interface UserService {
 	 * found {@code User}. If no {@code User} found, {@code null} will be
 	 * returned.
 	 * 
-	 * @param login
+	 * @param mail the mail address
+	 * @param plainPassword the plain password
 	 * @return the {@code User} or {@code null}
 	 * @throws NullPointerException
 	 *             if {@code login} is {@code null}
 	 */
-	public User login(Login login) throws NullPointerException;
+	public User login(String mail, String plainPassword) throws NullPointerException;
+
+	public boolean isMailAddressAvailable(String mail) throws NullPointerException;
+
 }

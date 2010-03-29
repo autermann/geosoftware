@@ -17,17 +17,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
-import static org.sloth.web.util.ControllerUtils.*;
+import static org.sloth.util.ControllerUtils.*;
 
 @Controller
 @RequestMapping("/r/del/{id}")
 public class DeleteReportController {
 
-	private ObservationService observationService;
-	private static final String view = "reports/details";
-	private static final String attibute = "report";
+	
+	private static final String VIEW = "reports/details";
+	private static final String REPORT_ATTRIBUTE = "report";
 	private static final Logger logger = LoggerFactory
 			.getLogger(DeleteReportController.class);
+	private ObservationService observationService;
 
 	/**
 	 * @param observationService
@@ -51,7 +52,7 @@ public class DeleteReportController {
 			if (report == null)
 				return notFoundMAV(r);
 			if (isAdmin(s) || isOwnReport(s, report))
-				return new ModelAndView(view, attibute, report);
+				return new ModelAndView(VIEW, REPORT_ATTRIBUTE, report);
 		}
 		return forbiddenMAV(r);
 	}

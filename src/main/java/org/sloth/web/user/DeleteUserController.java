@@ -32,15 +32,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
-import static org.sloth.web.util.ControllerUtils.*;
+import static org.sloth.util.ControllerUtils.*;
 
 @Controller
 @RequestMapping("/u/del/{id}")
 public class DeleteUserController {
 
-	private static final String view = "users/delete";
-	private static final String modelAttribute = "user";
-	protected static final Logger logger = LoggerFactory
+	private static final String VIEW = "users/delete";
+	private static final String USER_ATTRIBUTE = "user";
+	private static final Logger logger = LoggerFactory
 			.getLogger(DeleteUserController.class);
 	private UserService userManager;
 
@@ -59,13 +59,13 @@ public class DeleteUserController {
 			HttpServletResponse r) throws IOException {
 		if (isAuth(s))
 			if (getUser(s).getId().equals(id))
-				return new ModelAndView(view, modelAttribute, getUser(s));
+				return new ModelAndView(VIEW, USER_ATTRIBUTE, getUser(s));
 			else if (isAdmin(s)) {
 				User u = userManager.get(id);
 				if (u == null)
 					return notFoundMAV(r);
 				else
-					return new ModelAndView(view, modelAttribute, u);
+					return new ModelAndView(VIEW, USER_ATTRIBUTE, u);
 			}
 		return forbiddenMAV(r);
 

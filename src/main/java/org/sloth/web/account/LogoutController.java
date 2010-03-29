@@ -20,7 +20,7 @@ package org.sloth.web.account;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import static org.sloth.web.util.ControllerUtils.deAuth;
+import static org.sloth.util.ControllerUtils.deAuth;
 
 @Controller
 public class LogoutController {
