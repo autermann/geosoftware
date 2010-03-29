@@ -1,12 +1,26 @@
 <%@ include file="/WEB-INF/jsp/includes.jsp" %>
 <%@ include file="/WEB-INF/jsp/header.jsp" %>
-<div>
-	<h2><fmt:message key="registration"/></h2>
-	<form:form modelAttribute="user" method="POST">
-		<table width="40%" border="1">
-			<tr>
-				<td>
-					<table border="0" width="100%">
+
+
+     <table align="center" style="height: 100%">
+
+                <tr style="height: 33%">
+                        <td>
+
+                         <img src="<s:url value="/static/img/logo.png" htmlEscape="true"/>" align="right" alt="Logo" />
+
+                        </td>
+                        <td class="register_statement"><fmt:message key="register.statement"/><br /><br /> </td>
+                        <td></td>
+                </tr>
+                <tr style="height: 33%">
+
+                    <td width=33%></td>
+                    <td width=33% class="registerform">
+
+                        <form:form modelAttribute="user" method="POST">
+
+                        <table border="0" width="100%" class="registerform">
 						<tr>
 							<td width="20%" align="right"><fmt:message key="user.name"/>:</td>
 							<td width="40%" align="left"><form:input path="name"/></td>
@@ -43,9 +57,25 @@
 							</td>
 						</tr>
 					</table>
-				</td>
-			</tr>
-		</table>
-	</form:form>
-</div>
-<%@ include file="/WEB-INF/jsp/footer.jsp" %>
+                        </form:form>
+
+
+
+                    </td>
+                    <td width=33%></td>
+
+
+                </tr>
+                <tr style="height: 33%">
+                    <td></td>
+                    <td align="center">
+
+                        <a href="<s:url value="/" htmlEscape="true" />"><fmt:message key="nav.home"/></a> <fmt:message key="copyright"/>
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+
+           
+
+	

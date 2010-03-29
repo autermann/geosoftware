@@ -48,7 +48,7 @@ img{
 }
 
 table.observationlist {
-    margin: 1px 1px 1px 1px;
+    margin: 1px 1px 1px 3px;
     border-collapse: separate;
 }
 
@@ -106,4 +106,47 @@ input.searchbutton {
 
 div.map {
     border: 1px solid silver;
+}
+
+/*----------Login Page------------------*/
+td.loginform {
+    background-color: #EEEEEE;    
+    padding: 20px 30px 20px 30px;
+    }
+
+    td.login_statement {
+     font: normal 14px/ 100% Verdana, Tahoma, sans-serif;
+     color:  #222222;
+     vertical-align: bottom;
+}
+
+/*----------Registration Page------------------*/
+td.registerform {
+    background-color: #EEEEEE;
+    padding: 20px 30px 20px 30px;
+    }
+
+    td.register_statement {
+     font: normal 14px/ 100% Verdana, Tahoma, sans-serif;
+     color:  #222222;
+     vertical-align: bottom;
+}
+
+table.registerform {
+    font: normal 12px/ 100% Verdana, Tahoma, sans-serif;
+     color:  #222222;
+}
+
+/*----------Admin Backend------------------*/
+td.admin_backend {
+    font: normal 18px/ 100% Verdana, Tahoma, sans-serif;
+    background-color: #EEEEEE;
+    padding: 20px 30px 20px 30px;
+    line-height: 2.4em;
+    }
+
+    td.admin_statement {
+     font: normal 14px/ 100% Verdana, Tahoma, sans-serif;
+     color:  #222222;
+     vertical-align: bottom;
 }

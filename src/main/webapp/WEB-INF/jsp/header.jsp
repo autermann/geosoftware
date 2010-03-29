@@ -8,15 +8,19 @@
 		<script type="text/javascript" src="<s:url value="/static/js/jquery-1.4.2.min.js" htmlEscape="true" />"></script>
 	</head>
 	<body>
+
+              <img src="<s:url value="/static/img/logo.png" htmlEscape="true"/>" align="left" width="160" alt="Logo" ></img>
+
 		<div align="right">
 			<c:choose>
 				<c:when test="${sessionScope.LOGIN != null}">
-					<a href="<s:url value="/acc" />"><b>${sessionScope.LOGIN.mail}</b></a>
-					<input type="submit" onclick="window.location='<s:url value="/logout"/>'" value="<fmt:message key="logout.button"/>" /> <br/>
-					<fmt:message key="login"/>: <%= new Date(session.getCreationTime())%><br/>
+					<a href="<s:url value="/acc" />"><b>${sessionScope.LOGIN.mail}</b></a> | 
+					<a href="<s:url value="/logout"/>"><fmt:message key="logout.button"/></a> <br/>
+					
 				</c:when>
 				<c:otherwise>
 					<input type="submit" onclick="window.location='<s:url value="/login"/>'" value="<fmt:message key="login.button"/>" /> <br/>
 				</c:otherwise>
 			</c:choose>
 		</div>
+              <hr style="border:solid #DDDDEE 1px"/><br/>
