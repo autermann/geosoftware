@@ -1,9 +1,11 @@
 package org.sloth.validator;
 
-import org.sloth.web.account.RegistrationFormAction;
+import org.sloth.web.action.RegistrationFormAction;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import static org.sloth.util.ValidatorUtils.*;
 
+@Component
 public class RegistrationFormValidator extends AbstractUserActionValidator {
 
 	@Override

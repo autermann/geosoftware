@@ -30,7 +30,6 @@ import org.springframework.stereotype.Service;
  * @see BCryptPasswordService
  * @author Christian Autermann
  */
-@Service
 @Deprecated
 public class MD5PasswordService extends AbstractPasswordService {
 

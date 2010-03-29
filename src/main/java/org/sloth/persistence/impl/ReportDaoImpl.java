@@ -12,10 +12,10 @@ import org.sloth.model.Report_;
 import org.sloth.model.User;
 import org.sloth.persistence.ReportDao;
 
-/**
- * 
- * @author auti
- */
+import org.springframework.stereotype.Repository;
+
+@Repository
+
 public class ReportDaoImpl extends EntityManagerDao<Report> implements
 		ReportDao {
 

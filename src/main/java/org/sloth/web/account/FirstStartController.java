@@ -4,6 +4,7 @@
  */
 package org.sloth.web.account;
 
+import org.sloth.web.action.RegistrationFormAction;
 import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;

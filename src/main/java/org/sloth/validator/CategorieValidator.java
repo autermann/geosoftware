@@ -20,10 +20,12 @@ package org.sloth.validator;
 import org.sloth.model.Categorie;
 import org.sloth.service.ObservationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import static org.sloth.util.ValidatorUtils.*;
 
+@Component
 public class CategorieValidator implements Validator {
 
 	private ObservationService observationService;

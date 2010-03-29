@@ -35,11 +35,9 @@ import org.sloth.util.Config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * @todo
- * @author auti
- */
-@Transactional
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class UserDaoImpl extends EntityManagerDao<User> implements UserDao {
 
 	private ObservationDao observationDao;

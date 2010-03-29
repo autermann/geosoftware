@@ -19,10 +19,12 @@ package org.sloth.validator;
 
 import org.sloth.model.Observation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import static org.sloth.util.ValidatorUtils.*;
 
+@Component
 public class ObservationValidator implements Validator {
 
 	private CoordinateValidator coordinateValidator;

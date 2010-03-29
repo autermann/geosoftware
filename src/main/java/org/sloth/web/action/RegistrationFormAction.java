@@ -1,4 +1,4 @@
-package org.sloth.web.account;
+package org.sloth.web.action;
 
 import org.sloth.model.Group;
 import org.sloth.model.User;

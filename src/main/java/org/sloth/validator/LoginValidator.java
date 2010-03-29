@@ -17,11 +17,13 @@
  */
 package org.sloth.validator;
 
-import org.sloth.service.Login;
+import org.sloth.web.action.Login;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import static org.sloth.util.ValidatorUtils.*;
 
+@Component
 public class LoginValidator implements Validator {
 
 	@Override

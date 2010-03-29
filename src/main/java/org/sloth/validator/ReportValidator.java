@@ -1,10 +1,12 @@
 package org.sloth.validator;
 
 import org.sloth.model.Report;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import static org.sloth.util.ValidatorUtils.*;
 
+@Component
 public class ReportValidator implements Validator{
 
 	@Override

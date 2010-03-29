@@ -17,6 +17,7 @@
  */
 package org.sloth.web.user;
 
+import org.sloth.web.action.UserEditFormAction;
 import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;

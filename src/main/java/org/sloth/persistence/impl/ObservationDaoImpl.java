@@ -33,7 +33,9 @@ import org.sloth.model.Observation;
 import org.sloth.model.Observation_;
 import org.sloth.persistence.ReportDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class ObservationDaoImpl extends EntityManagerDao<Observation> implements
 		ObservationDao {
 

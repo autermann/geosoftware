@@ -17,12 +17,12 @@
  */
 package org.sloth.validator;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.sloth.web.user.UserEditFormAction;
+import org.sloth.web.action.UserEditFormAction;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import static org.sloth.util.ValidatorUtils.*;
 
+@Component
 public class UserEditFormValidator extends AbstractUserActionValidator {
 
 	@Override
@@ -52,7 +52,6 @@ public class UserEditFormValidator extends AbstractUserActionValidator {
 	}
 
 	private void test(UserEditFormAction a, Errors e) {
-		LoggerFactory.getLogger(UserEditFormValidator.class).warn("regex: {}", REGEX);
 		rejectIfEmptyOrWhitespace(e, "newName", "field.useredit.newName.empty");
 		rejectIfTooLong(e, "newName", "field.useredit.newName.tooLong", 255);
 		rejectIfEmptyOrWhitespace(e, "newFamilyName", "field.useredit.newFamilyName.empty");

@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sloth.model.User;
-import org.sloth.service.Login;
+import org.sloth.web.action.Login;
 import org.sloth.service.UserService;
 import org.sloth.validator.LoginValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,7 +82,7 @@ public class LoginController {
 		else {
 			User u = userService.login(l.getMail(), l.getPassword());
 			if (u == null) {
-				result.reject("field.invalidLogin");
+				result.reject("field.login.invalid");
 				return VIEW;
 			} else {
 				logger.debug("Got valid user. Setting Session-Attribute.");
