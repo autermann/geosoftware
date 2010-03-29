@@ -17,6 +17,8 @@
  */
 package org.sloth.validator;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sloth.web.user.UserEditFormAction;
 import org.springframework.validation.Errors;
 import static org.sloth.util.ValidatorUtils.*;
@@ -50,6 +52,7 @@ public class UserEditFormValidator extends AbstractUserActionValidator {
 	}
 
 	private void test(UserEditFormAction a, Errors e) {
+		LoggerFactory.getLogger(UserEditFormValidator.class).warn("regex: {}", REGEX);
 		rejectIfEmptyOrWhitespace(e, "newName", "field.useredit.newName.empty");
 		rejectIfTooLong(e, "newName", "field.useredit.newName.tooLong", 255);
 		rejectIfEmptyOrWhitespace(e, "newFamilyName", "field.useredit.newFamilyName.empty");
@@ -68,7 +71,7 @@ public class UserEditFormValidator extends AbstractUserActionValidator {
 		if (notNullAndNotEmpty(a.getNewPassword())) {
 			if (notNullAndNotEmpty(a.getNewPasswordRepeat())) {
 				if (a.getNewPassword().equals(a.getNewPasswordRepeat())) {
-					if (a.getNewPassword().matches(REGEX)) {
+					if (passwordService.meetsRecommendation(a.getNewPassword())) {
 						a.setNewPasswordHash(passwordService.hash(a.getNewPassword()));
 					} else {
 						e.rejectValue("newPassword", "field.useredit.newPassword.lowSecurity");
