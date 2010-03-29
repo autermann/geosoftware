@@ -17,6 +17,7 @@
  */
 package org.sloth.web.user;
 
+import org.sloth.web.actions.UserEditFormAction;
 import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -46,7 +47,8 @@ public class EditUserController {
 
 	private static final String USER_ATTRIBUTE = "userEditAction";
 	private static final String VIEW = "users/edit";
-	private static final Logger logger = LoggerFactory.getLogger(EditUserController.class);
+	private static final Logger logger = LoggerFactory.getLogger(
+			EditUserController.class);
 	private UserService userService;
 	private UserEditFormValidator validator;
 
@@ -63,7 +65,8 @@ public class EditUserController {
 	@InitBinder
 	public void setAllowedFields(WebDataBinder dataBinder) {
 		dataBinder.setAllowedFields("newName", "newFamilyName", "newPassword",
-				"newPasswordRepeat", "newMail", "actualPassword");
+									"newPasswordRepeat", "newMail",
+									"actualPassword");
 	}
 
 	@RequestMapping(method = GET)
@@ -81,15 +84,18 @@ public class EditUserController {
 			} else {
 				return forbiddenMAV(r);
 			}
-			return new ModelAndView(VIEW, USER_ATTRIBUTE, new UserEditFormAction(u, getUser(s)));
+			return new ModelAndView(VIEW, USER_ATTRIBUTE, new UserEditFormAction(
+					u, getUser(s)));
 		} else {
 			return forbiddenMAV(r);
 		}
 	}
 
 	@RequestMapping(method = POST)
-	public String processSubmit(@ModelAttribute(USER_ATTRIBUTE) UserEditFormAction action,
-								BindingResult result, SessionStatus status, HttpSession s,
+	public String processSubmit(
+			@ModelAttribute(USER_ATTRIBUTE) UserEditFormAction action,
+								BindingResult result, SessionStatus status,
+								HttpSession s,
 								HttpServletResponse r) throws IOException {
 		if (isSameId(s, action.getId()) || isAdmin(s)) {
 			validator.validate(action, result);
@@ -104,11 +110,12 @@ public class EditUserController {
 				} else {
 					return "redirect:/u";
 				}
-			} catch (Exception e) {
+			} catch(Exception e) {
 				logger.warn("Unexpected Exception", e);
 				return internalErrorView(r);
 			}
 		}
 		return forbiddenView(r);
 	}
+
 }

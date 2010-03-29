@@ -40,8 +40,8 @@ public class DeleteUserController {
 
 	private static final String VIEW = "users/delete";
 	private static final String USER_ATTRIBUTE = "user";
-	private static final Logger logger = LoggerFactory
-			.getLogger(DeleteUserController.class);
+	private static final Logger logger = LoggerFactory.getLogger(
+			DeleteUserController.class);
 	private UserService userManager;
 
 	@Autowired
@@ -56,27 +56,29 @@ public class DeleteUserController {
 
 	@RequestMapping(method = GET)
 	public ModelAndView setupForm(@PathVariable Long id, HttpSession s,
-			HttpServletResponse r) throws IOException {
-		if (isAuth(s))
-			if (getUser(s).getId().equals(id))
+								  HttpServletResponse r) throws IOException {
+		if (isAuth(s)) {
+			if (getUser(s).getId().equals(id)) {
 				return new ModelAndView(VIEW, USER_ATTRIBUTE, getUser(s));
-			else if (isAdmin(s)) {
+			} else if (isAdmin(s)) {
 				User u = userManager.get(id);
-				if (u == null)
+				if (u == null) {
 					return notFoundMAV(r);
-				else
+				} else {
 					return new ModelAndView(VIEW, USER_ATTRIBUTE, u);
+				}
 			}
+		}
 		return forbiddenMAV(r);
 
 	}
 
 	@RequestMapping(method = POST)
 	public String processSubmit(@PathVariable Long id, HttpSession s,
-			HttpServletResponse r) throws IOException {
+								HttpServletResponse r) throws IOException {
 		if (isAuth(s)) {
 			boolean self = getUser(s).getId().equals(id);
-			if (self || isAdmin(s))
+			if (self || isAdmin(s)) {
 				try {
 					userManager.delete(id);
 					if (self) {
@@ -87,11 +89,13 @@ public class DeleteUserController {
 						return "redirect:/u";
 					}
 
-				} catch (Exception e) {
+				} catch(Exception e) {
 					logger.warn("Unexpected Exception", e);
 					return internalErrorView(r);
 				}
+			}
 		}
 		return forbiddenView(r);
 	}
+
 }

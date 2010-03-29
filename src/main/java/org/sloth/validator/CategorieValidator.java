@@ -20,10 +20,12 @@ package org.sloth.validator;
 import org.sloth.model.Categorie;
 import org.sloth.service.ObservationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import static org.sloth.util.ValidatorUtils.*;
 
+@Component
 public class CategorieValidator implements Validator {
 
 	private ObservationService observationService;
@@ -34,20 +36,26 @@ public class CategorieValidator implements Validator {
 	}
 
 	@Autowired
-	public void setObservationService(ObservationService observationService){
+	public void setObservationService(ObservationService observationService) {
 		this.observationService = observationService;
 	}
 
 	@Override
 	public void validate(Object t, Errors e) {
 		rejectIfEmptyOrWhitespace(e, "title", "field.categorie.title.empty");
-		rejectIfEmptyOrWhitespace(e, "description", "field.categorie.description.empty");
-		rejectIfEmptyOrWhitespace(e, "iconFileName", "field.categorie.iconFileName.empty");
+		rejectIfEmptyOrWhitespace(e, "description",
+								  "field.categorie.description.empty");
+		rejectIfEmptyOrWhitespace(e, "iconFileName",
+								  "field.categorie.iconFileName.empty");
 		rejectIfTooLong(e, "title", "field.categorie.title.tooLong", 255);
-		rejectIfTooLong(e, "description", "field.categorie.description.tooLong", 255);
-		rejectIfTooLong(e, "iconFileName", "field.categorie.iconFileName.tooLong", 255);
+		rejectIfTooLong(e, "description", "field.categorie.description.tooLong",
+						255);
+		rejectIfTooLong(e, "iconFileName",
+						"field.categorie.iconFileName.tooLong", 255);
 		Categorie c = (Categorie) t;
-		if (observationService.isCategorieTitleAvailable(c.getTitle()))
+		if (observationService.isCategorieTitleAvailable(c.getTitle())) {
 			e.rejectValue("title", "field.categorie.title.notUnique");
+		}
 	}
+
 }

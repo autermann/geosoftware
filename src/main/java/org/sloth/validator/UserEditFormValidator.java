@@ -17,10 +17,12 @@
  */
 package org.sloth.validator;
 
-import org.sloth.web.user.UserEditFormAction;
+import org.sloth.web.actions.UserEditFormAction;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import static org.sloth.util.ValidatorUtils.*;
 
+@Component
 public class UserEditFormValidator extends AbstractUserActionValidator {
 
 	@Override
@@ -33,18 +35,22 @@ public class UserEditFormValidator extends AbstractUserActionValidator {
 		UserEditFormAction a = (UserEditFormAction) t;
 		if (a.getEditingUser().getId().equals(a.getOldUser().getId())) { // self editing
 			if (notNullAndNotEmpty(a.getActualPassword())) {
-				if (passwordService.check(a.getOldUser().getPassword(), a.getActualPassword())) {
+				if (passwordService.check(a.getOldUser().getPassword(), a.
+						getActualPassword())) {
 					test(a, e);
 				} else {
-					e.rejectValue("actualPassword", "field.useredit.actualpassword.wrong");
+					e.rejectValue("actualPassword",
+								  "field.useredit.actualpassword.wrong");
 				}
 			} else {
-				e.rejectValue("actualPassword", "field.useredit.actualpassword.empty");
+				e.rejectValue("actualPassword",
+							  "field.useredit.actualpassword.empty");
 			}
 		} else { // editing somone else
 			test(a, e);
 			if (!a.getNewGroup().equals(a.getOldUser().getUserGroup())) {
-				e.rejectValue("newGroup", "field.useredit.newGroup.canNotChangeOwnGroup");
+				e.rejectValue("newGroup",
+							  "field.useredit.newGroup.canNotChangeOwnGroup");
 			}
 		}
 	}
@@ -52,8 +58,10 @@ public class UserEditFormValidator extends AbstractUserActionValidator {
 	private void test(UserEditFormAction a, Errors e) {
 		rejectIfEmptyOrWhitespace(e, "newName", "field.useredit.newName.empty");
 		rejectIfTooLong(e, "newName", "field.useredit.newName.tooLong", 255);
-		rejectIfEmptyOrWhitespace(e, "newFamilyName", "field.useredit.newFamilyName.empty");
-		rejectIfTooLong(e, "newFamilyName", "field.useredit.newFamilyName.tooLong", 255);
+		rejectIfEmptyOrWhitespace(e, "newFamilyName",
+								  "field.useredit.newFamilyName.empty");
+		rejectIfTooLong(e, "newFamilyName",
+						"field.useredit.newFamilyName.tooLong", 255);
 		rejectIfEmptyOrWhitespace(e, "newMail", "field.useredit.newMail.empty");
 
 		if (a.getNewMail().matches(REGEX)) {
@@ -69,15 +77,19 @@ public class UserEditFormValidator extends AbstractUserActionValidator {
 			if (notNullAndNotEmpty(a.getNewPasswordRepeat())) {
 				if (a.getNewPassword().equals(a.getNewPasswordRepeat())) {
 					if (a.getNewPassword().matches(REGEX)) {
-						a.setNewPasswordHash(passwordService.hash(a.getNewPassword()));
+						a.setNewPasswordHash(passwordService.hash(a.
+								getNewPassword()));
 					} else {
-						e.rejectValue("newPassword", "field.useredit.newPassword.lowSecurity");
+						e.rejectValue("newPassword",
+									  "field.useredit.newPassword.lowSecurity");
 					}
 				} else {
-					e.rejectValue("newPasswordRepeat", "field.useredit.newPasswordRepeat.wrong");
+					e.rejectValue("newPasswordRepeat",
+								  "field.useredit.newPasswordRepeat.wrong");
 				}
 			} else {
-				e.rejectValue("newPasswordRepeat", "field.useredit.newPasswordRepeat.empty");
+				e.rejectValue("newPasswordRepeat",
+							  "field.useredit.newPasswordRepeat.empty");
 			}
 		} else {
 			if (notNullAndNotEmpty(a.getNewPasswordRepeat())) {
@@ -85,4 +97,5 @@ public class UserEditFormValidator extends AbstractUserActionValidator {
 			}
 		}
 	}
+
 }

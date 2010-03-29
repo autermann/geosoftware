@@ -23,11 +23,10 @@ import static org.sloth.util.ControllerUtils.*;
 @RequestMapping("/r/del/{id}")
 public class DeleteReportController {
 
-	
 	private static final String VIEW = "reports/details";
 	private static final String REPORT_ATTRIBUTE = "report";
-	private static final Logger logger = LoggerFactory
-			.getLogger(DeleteReportController.class);
+	private static final Logger logger = LoggerFactory.getLogger(
+			DeleteReportController.class);
 	private ObservationService observationService;
 
 	/**
@@ -46,30 +45,35 @@ public class DeleteReportController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView handleGet(@PathVariable Long id, HttpSession s,
-			HttpServletResponse r) throws IOException {
+								  HttpServletResponse r) throws IOException {
 		if (isAuth(s)) {
 			Report report = observationService.getReport(id);
-			if (report == null)
+			if (report == null) {
 				return notFoundMAV(r);
-			if (isAdmin(s) || isOwnReport(s, report))
+			}
+			if (isAdmin(s) || isOwnReport(s, report)) {
 				return new ModelAndView(VIEW, REPORT_ATTRIBUTE, report);
+			}
 		}
 		return forbiddenMAV(r);
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String handlePost(@ModelAttribute Report report,
-			SessionStatus status, HttpSession s, HttpServletResponse r)
+							 SessionStatus status, HttpSession s,
+							 HttpServletResponse r)
 			throws IOException {
 		status.setComplete();
-		if (isAdmin(s) || isOwnReport(s, report))
+		if (isAdmin(s) || isOwnReport(s, report)) {
 			try {
 				observationService.deleteReport(report);
 				return "redirect:/r";
-			} catch (Exception e) {
+			} catch(Exception e) {
 				logger.warn("Unexpected Exception", e);
 				return internalErrorView(r);
 			}
+		}
 		return forbiddenView(r);
 	}
+
 }

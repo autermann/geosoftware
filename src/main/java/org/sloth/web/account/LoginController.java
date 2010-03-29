@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sloth.model.User;
-import org.sloth.service.Login;
+import org.sloth.web.actions.LoginAction;
 import org.sloth.service.UserService;
 import org.sloth.validator.LoginValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,13 +39,13 @@ import static org.sloth.util.ControllerUtils.*;
 
 @Controller
 @RequestMapping("/login")
-@SessionAttributes(types = Login.class)
+@SessionAttributes(types = LoginAction.class)
 public class LoginController {
 
 	private static final String VIEW = "login";
 	private static final String LOGIN_ATTRIBUTE = "login";
-	private static final Logger logger = LoggerFactory
-			.getLogger(LoginController.class);
+	private static final Logger logger = LoggerFactory.getLogger(
+			LoginController.class);
 	private UserService userService;
 	private LoginValidator validator;
 
@@ -66,20 +66,23 @@ public class LoginController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView prepare(HttpSession s) {
-		if (isAuth(s))
+		if (isAuth(s)) {
 			return new ModelAndView("redirect:/");
-		return new ModelAndView(VIEW, LOGIN_ATTRIBUTE, new Login());
+		}
+		return new ModelAndView(VIEW, LOGIN_ATTRIBUTE, new LoginAction());
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String login(@ModelAttribute(LOGIN_ATTRIBUTE) Login l,
-			BindingResult result, SessionStatus status, HttpSession s) {
-		if (isAuth(s))
+	public String login(@ModelAttribute(LOGIN_ATTRIBUTE) LoginAction l,
+						BindingResult result, SessionStatus status,
+						HttpSession s) {
+		if (isAuth(s)) {
 			return "redirect:/";
+		}
 		validator.validate(l, result);
-		if (result.hasErrors())
+		if (result.hasErrors()) {
 			return VIEW;
-		else {
+		} else {
 			User u = userService.login(l.getMail(), l.getPassword());
 			if (u == null) {
 				result.reject("field.invalidLogin");
@@ -92,4 +95,5 @@ public class LoginController {
 			}
 		}
 	}
+
 }

@@ -29,8 +29,8 @@ public class CreateReportController {
 
 	private static final String VIEW = "reports/form";
 	private static final String REPORT_ATTRIBUTE = "report";
-	private static final Logger logger = LoggerFactory
-			.getLogger(CreateReportController.class);
+	private static final Logger logger = LoggerFactory.getLogger(
+			CreateReportController.class);
 	private ObservationService observationService;
 	private ReportValidator reportValidator;
 
@@ -51,11 +51,12 @@ public class CreateReportController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView handleGet(@PathVariable Long id, HttpSession s,
-			HttpServletResponse r) throws IOException {
+								  HttpServletResponse r) throws IOException {
 		if (isAuth(s)) {
 			Observation o = observationService.getObservation(id);
-			if (o == null)
+			if (o == null) {
 				return notFoundMAV(r);
+			}
 			return new ModelAndView(VIEW, REPORT_ATTRIBUTE, new Report());
 		}
 		return forbiddenMAV(r);
@@ -63,26 +64,32 @@ public class CreateReportController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String handlePost(@ModelAttribute Report report,
-			BindingResult result, @PathVariable Long id, SessionStatus status,
-			HttpSession s, HttpServletResponse r) throws IOException {
-		if (isAuth(s))
+							 BindingResult result, @PathVariable Long id,
+							 SessionStatus status,
+							 HttpSession s, HttpServletResponse r) throws
+			IOException {
+		if (isAuth(s)) {
 			try {
 
 				Observation o = observationService.getObservation(id);
-				if (o == null)
+				if (o == null) {
 					return notFoundView(r);
+				}
 				report.setObservation(o);
 				report.setAuthor(getUser(s));
 				reportValidator.validate(report, result);
-				if (result.hasErrors())
+				if (result.hasErrors()) {
 					return VIEW;
+				}
 				status.setComplete();
 				observationService.registrate(report);
 				return "redirect:/";
-			} catch (Exception e) {
+			} catch(Exception e) {
 				logger.warn("Unexpected Exception", e);
 				return internalErrorView(r);
 			}
+		}
 		return forbiddenView(r);
 	}
+
 }

@@ -13,17 +13,15 @@ import org.springframework.validation.Errors;
  */
 public class ValidatorUtils extends org.springframework.validation.ValidationUtils {
 
-	public static void rejectIfTooLong(Errors errors,
-									   String field,
-									   String errorCode,
-									   int maxLength) {
-		if (errors.getFieldValue(field).toString().length() > maxLength)
+	public static void rejectIfTooLong(Errors errors, String field,
+									   String errorCode, int maxLength) {
+		if (errors.getFieldValue(field).toString().length() > maxLength) {
 			errors.rejectValue(field, errorCode);
+		}
 	}
 
-	public static boolean rejectIfNull(Errors errors,
-									String field,
-									String errorCode) {
+	public static boolean rejectIfNull(Errors errors, String field,
+									   String errorCode) {
 		if (notNull(errors.getFieldValue(field))) {
 			return true;
 		}
@@ -42,7 +40,8 @@ public class ValidatorUtils extends org.springframework.validation.ValidationUti
 		return o != null;
 	}
 
-	public static boolean notNullAndNotEmpty(String s){
+	public static boolean notNullAndNotEmpty(String s) {
 		return notNull(s) && hasText(s);
 	}
+
 }

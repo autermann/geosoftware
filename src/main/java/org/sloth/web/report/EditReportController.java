@@ -25,7 +25,7 @@ import static org.sloth.util.ControllerUtils.*;
 
 @Controller
 @RequestMapping("/r/edit/{id}")
-@SessionAttributes(types = { Report.class, Boolean.class })
+@SessionAttributes(types = {Report.class, Boolean.class})
 public class EditReportController {
 
 	private ObservationService observationService;
@@ -33,8 +33,8 @@ public class EditReportController {
 	private static final String VIEW = "reports/form";
 	private static final String REPORT_ATTRIBUTE = "report";
 	private static final String PROCESSED_ATTRIBUTE = "processed";
-	private static final Logger logger = LoggerFactory
-			.getLogger(EditReportController.class);
+	private static final Logger logger = LoggerFactory.getLogger(
+			EditReportController.class);
 
 	/**
 	 * @param observationService
@@ -61,15 +61,17 @@ public class EditReportController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView handleGet(@PathVariable Long id, HttpSession s,
-			HttpServletResponse r) throws IOException {
+								  HttpServletResponse r) throws IOException {
 		if (isAuth(s)) {
 			Report report = observationService.getReport(id);
-			if (report == null)
+			if (report == null) {
 				return notFoundMAV(r);
+			}
 
 			if (isAdmin(s) || isOwnReport(s, report)) {
 				ModelAndView mav = new ModelAndView(VIEW);
-				mav.addObject(PROCESSED_ATTRIBUTE, new Boolean(report.isProcessed()));
+				mav.addObject(PROCESSED_ATTRIBUTE, new Boolean(report.
+						isProcessed()));
 				mav.addObject(REPORT_ATTRIBUTE, report);
 				return mav;
 			}
@@ -80,26 +82,31 @@ public class EditReportController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String handlePost(@PathVariable Long id,
-			@ModelAttribute(PROCESSED_ATTRIBUTE) Boolean processed,
-			@ModelAttribute(REPORT_ATTRIBUTE) Report report, BindingResult result,
-			SessionStatus status, HttpSession s, HttpServletResponse r)
+							 @ModelAttribute(PROCESSED_ATTRIBUTE) Boolean processed,
+							 @ModelAttribute(REPORT_ATTRIBUTE) Report report,
+							 BindingResult result,
+							 SessionStatus status, HttpSession s,
+							 HttpServletResponse r)
 			throws IOException {
 		if (isAuth(s)) {
-			if (report == null)
+			if (report == null) {
 				return notFoundView(r);
+			}
 			if (!isAdmin(s)
-					&& !processed.equals(Boolean.valueOf(report.isProcessed())))
+				&& !processed.equals(Boolean.valueOf(report.isProcessed()))) {
 				return forbiddenView(r);
+			}
 			if (isAdmin(s) || isOwnReport(s, report)) {
 				reportValidator.validate(report, result);
-				if (result.hasErrors())
+				if (result.hasErrors()) {
 					return VIEW;
+				}
 				status.setComplete();
 				try {
 					report.setLastUpdateDate(new Date());
 					observationService.updateReport(report);
 					return "redirect:/r";
-				} catch (Exception e) {
+				} catch(Exception e) {
 					logger.warn("Unexpected Exception", e);
 					return internalErrorView(r);
 				}
@@ -107,4 +114,5 @@ public class EditReportController {
 		}
 		return forbiddenView(r);
 	}
+
 }

@@ -31,15 +31,18 @@ public class UserDetailController {
 
 	@RequestMapping
 	public ModelAndView handle(@PathVariable Long id, HttpSession s,
-			HttpServletResponse r) throws IOException {
+							   HttpServletResponse r) throws IOException {
 
 		if (isAdmin(s)) {
 			User u = userService.get(id);
-			if (u == null)
+			if (u == null) {
 				return notFoundMAV(r);
-			else
+			} else {
 				return new ModelAndView(VIEW, USERS_ATTRIBUTE, u);
-		} else
+			}
+		} else {
 			return forbiddenMAV(r);
+		}
 	}
+
 }

@@ -19,10 +19,12 @@ package org.sloth.validator;
 
 import org.sloth.model.Observation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import static org.sloth.util.ValidatorUtils.*;
 
+@Component
 public class ObservationValidator implements Validator {
 
 	private CoordinateValidator coordinateValidator;
@@ -41,13 +43,17 @@ public class ObservationValidator implements Validator {
 	public void validate(Object t,
 						 Errors e) {
 		rejectIfEmptyOrWhitespace(e, "title", "field.observation.title.empty");
-		rejectIfEmptyOrWhitespace(e, "description", "field.observation.description.empty");
+		rejectIfEmptyOrWhitespace(e, "description",
+								  "field.observation.description.empty");
 		rejectIfTooLong(e, "title", "field.observation.title.tooLong", 255);
-		rejectIfTooLong(e, "description", "field.observation.description.tooLong", 1000);
+		rejectIfTooLong(e, "description",
+						"field.observation.description.tooLong", 1000);
 		rejectIfNull(e, "categorie", "field.observation.categorie.empty");
 		rejectIfNull(e, "user", "field.observation.user.empty");
 		e.setNestedPath("coordinate");
-		invokeValidator(coordinateValidator, ((Observation) t).getCoordinate(), e);
+		invokeValidator(coordinateValidator, ((Observation) t).getCoordinate(),
+						e);
 		e.setNestedPath(null);
 	}
+
 }

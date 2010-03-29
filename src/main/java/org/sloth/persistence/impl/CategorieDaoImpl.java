@@ -30,11 +30,15 @@ import org.sloth.model.Categorie;
 import org.sloth.model.Categorie_;
 import org.sloth.persistence.ObservationDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @todo
  * @author auti
  */
+@Repository
+@Transactional
 public class CategorieDaoImpl extends EntityManagerDao<Categorie> implements
 		CategorieDao {
 

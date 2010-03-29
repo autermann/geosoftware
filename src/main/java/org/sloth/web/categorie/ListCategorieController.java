@@ -43,10 +43,12 @@ public class ListCategorieController {
 	@RequestMapping
 	public ModelAndView setupList(HttpSession s, HttpServletResponse r)
 			throws IOException {
-		if (isAdmin(s))
-			return new ModelAndView(VIEW, CATEGORIE_ATTRIBUTE, observationManager
-					.getCategories());
-		else
+		if (isAdmin(s)) {
+			return new ModelAndView(VIEW, CATEGORIE_ATTRIBUTE, observationManager.
+					getCategories());
+		} else {
 			return forbiddenMAV(r);
+		}
 	}
+
 }

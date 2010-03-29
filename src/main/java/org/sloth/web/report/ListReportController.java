@@ -43,41 +43,50 @@ public class ListReportController {
 	@RequestMapping("/r")
 	public ModelAndView handleAllAndOwn(HttpSession s, HttpServletResponse r)
 			throws IOException {
-		if (isAuth(s))
-			if (isAdmin(s))
-				return new ModelAndView(VIEW, REPORTS_ATTRIBUTE, observationService
-						.getReports());
-			else
+		if (isAuth(s)) {
+			if (isAdmin(s)) {
+				return new ModelAndView(VIEW, REPORTS_ATTRIBUTE, observationService.
+						getReports());
+			} else {
 				return new ModelAndView("redirect:/r/u/" + getUser(s).getId());
+			}
+		}
 		return forbiddenMAV(r);
 	}
 
 	@RequestMapping("/r/o/{id}")
 	public ModelAndView handleObservationFilter(@PathVariable Long id,
-			HttpSession s, HttpServletResponse r) throws IOException {
+												HttpSession s,
+												HttpServletResponse r) throws
+			IOException {
 		if (isAdmin(s)) {
 			Observation o = observationService.getObservation(id);
-			if (o == null)
+			if (o == null) {
 				return notFoundMAV(r);
-			return new ModelAndView(VIEW, REPORTS_ATTRIBUTE, observationService
-					.getReportsByObservation(o));
+			}
+			return new ModelAndView(VIEW, REPORTS_ATTRIBUTE, observationService.
+					getReportsByObservation(o));
 		}
 		return forbiddenMAV(r);
 	}
 
 	@RequestMapping("/r/u/{id}")
 	public ModelAndView handleUserFilter(@PathVariable Long id, HttpSession s,
-			HttpServletResponse r) throws IOException {
-		if (isSameId(s, id))
-			return new ModelAndView(VIEW, REPORTS_ATTRIBUTE, observationService
-					.getObservationsByUser(getUser(s)));
+										 HttpServletResponse r) throws
+			IOException {
+		if (isSameId(s, id)) {
+			return new ModelAndView(VIEW, REPORTS_ATTRIBUTE, observationService.
+					getObservationsByUser(getUser(s)));
+		}
 		if (isAdmin(s)) {
 			User u = userService.get(id);
-			if (u == null)
+			if (u == null) {
 				return notFoundMAV(r);
-			return new ModelAndView(VIEW, REPORTS_ATTRIBUTE, observationService
-					.getReportsByUser(u));
+			}
+			return new ModelAndView(VIEW, REPORTS_ATTRIBUTE, observationService.
+					getReportsByUser(u));
 		}
 		return forbiddenMAV(r);
 	}
+
 }

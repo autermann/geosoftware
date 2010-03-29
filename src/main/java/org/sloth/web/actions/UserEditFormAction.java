@@ -1,4 +1,4 @@
-package org.sloth.web.user;
+package org.sloth.web.actions;
 
 import org.sloth.model.Group;
 import org.sloth.model.User;
@@ -16,7 +16,6 @@ public class UserEditFormAction {
 	private String newFamilyName;
 	private Group newGroup;
 
-
 	public Long getId() {
 		return getOldUser().getId();
 	}
@@ -32,12 +31,15 @@ public class UserEditFormAction {
 
 	public User getMergedUser() {
 		User u = getOldUser();
-		if (getNewPasswordHash() != null)
+		if (getNewPasswordHash() != null) {
 			u.setPassword(getNewPasswordHash());
-		if (getNewMail() != null)
+		}
+		if (getNewMail() != null) {
 			u.setMail(getNewMail());
-		if (getNewGroup() != null)
+		}
+		if (getNewGroup() != null) {
 			u.setUserGroup(getNewGroup());
+		}
 
 		u.setFamilyName(getNewFamilyName());
 		u.setName(getNewName());
@@ -185,4 +187,5 @@ public class UserEditFormAction {
 	public void setEditingUser(User editingUser) {
 		this.editingUser = editingUser;
 	}
+
 }

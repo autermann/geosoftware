@@ -34,8 +34,6 @@ import org.springframework.transaction.annotation.Transactional;
  * @see EntityManager
  * @author Christian Autermann
  */
-@Transactional
-@Repository
 public abstract class EntityManagerDao<T extends BaseEntity> {
 
 	/**

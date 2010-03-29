@@ -20,7 +20,6 @@ package org.sloth.service.impl;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import org.springframework.stereotype.Service;
 
 /**
  * Realizes password hashing through MD5-Hashing. Due security vulnerabilities
@@ -30,7 +29,6 @@ import org.springframework.stereotype.Service;
  * @see BCryptPasswordService
  * @author Christian Autermann
  */
-@Service
 @Deprecated
 public class MD5PasswordService extends AbstractPasswordService {
 

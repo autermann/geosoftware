@@ -49,8 +49,8 @@ public class ObservationAddController {
 	private static final String VIEW = "observations/form";
 	private static final String OBSERVATION_ATTRIBUTE = "observation";
 	private static final String CATEGORIES_ATTRIBUTE = "categories";
-	private Logger logger = LoggerFactory
-			.getLogger(ObservationAddController.class);
+	private Logger logger = LoggerFactory.getLogger(
+			ObservationAddController.class);
 	private ObservationService observationManager;
 	private ObservationValidator validator;
 
@@ -78,11 +78,12 @@ public class ObservationAddController {
 		if (isAuth(s)) {
 			ModelAndView mav = new ModelAndView(VIEW);
 			mav.addObject(OBSERVATION_ATTRIBUTE, new Observation());
-			mav.addObject(CATEGORIES_ATTRIBUTE, observationManager
-					.getCategories());
+			mav.addObject(CATEGORIES_ATTRIBUTE,
+						  observationManager.getCategories());
 			return mav;
-		} else
+		} else {
 			return forbiddenMAV(r);
+		}
 	}
 
 	@RequestMapping(method = POST)
@@ -93,19 +94,21 @@ public class ObservationAddController {
 		if (isAuth(session)) {
 			observation.setUser(getUser(session));
 			validator.validate(observation, result);
-			if (result.hasErrors())
+			if (result.hasErrors()) {
 				return VIEW;
-			else {
+			} else {
 				try {
 					this.observationManager.registrate(observation);
-				} catch (Exception e) {
+				} catch(Exception e) {
 					logger.warn("Unexpected Exception", e);
 					return internalErrorView(r);
 				}
 				status.setComplete();
 				return "redirect:/admin/observations";
 			}
-		} else
+		} else {
 			return forbiddenView(r);
+		}
 	}
+
 }
