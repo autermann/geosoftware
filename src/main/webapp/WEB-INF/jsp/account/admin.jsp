@@ -18,10 +18,10 @@
 
                             
                         <table>
-                                    <tr><td><a href="<s:url value="/u" />"><img src="<s:url value="/static/img/user_mng.png" htmlEscape="true"/>" alt="" align="left"/>  <fmt:message key="userManagement"/></a></td></tr>
-                                    <tr><td><a href="<s:url value="/o" />"><img src="<s:url value="/static/img/observation_mng.png" htmlEscape="true"/>" alt="" align="left"/>   <fmt:message key="observationManagement"/></a></td></tr>
-                                    <tr><td><a href="<s:url value="/c" />"><img src="<s:url value="/static/img/categorie_mng.png" htmlEscape="true"/>" alt="" align="left"/>  <fmt:message key="categorieManagement"/></a></td></tr>
-                                    <tr><td><a href="<s:url value="/r" />"><img src="<s:url value="/static/img/report_mng.png" htmlEscape="true"/>" alt="" align="left"/>  <fmt:message key="reportManagement"/></a></td></tr>
+                                    <tr><td><a href="<s:url value="/u" />"><img src="<s:url value="/static/img/user_mng.png" htmlEscape="true"/>" alt="" /></a></td><td><a href="<s:url value="/u" />">  <fmt:message key="userManagement"/></a></td></tr>
+                                    <tr><td><a href="<s:url value="/o" />"><img src="<s:url value="/static/img/observation_mng.png" htmlEscape="true"/>" alt="" /></a></td><td><a href="<s:url value="/o" />">   <fmt:message key="observationManagement"/></a></td></tr>
+                                    <tr><td><a href="<s:url value="/c" />"><img src="<s:url value="/static/img/categorie_mng.png" htmlEscape="true"/>" alt="" /></a></td><td><a href="<s:url value="/c" />">  <fmt:message key="categorieManagement"/></a></td></tr>
+                                    <tr><td><a href="<s:url value="/r" />"><img src="<s:url value="/static/img/report_mng.png" htmlEscape="true"/>" alt=""/></a></td><td><a href="<s:url value="/r" />">  <fmt:message key="reportManagement"/></a></td></tr>
                         </table>
                             
 

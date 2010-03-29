@@ -4,12 +4,8 @@
 
      <table align="center" style="height: 100%">
 
-                <tr style="height: 33%">
-                        <td>
-
-                         <img src="<s:url value="/static/img/logo.png" htmlEscape="true"/>" align="right" alt="Logo" />
-
-                        </td>
+                <tr style="height: 25%">
+                        <td></td>
                         <td class="register_statement"><fmt:message key="register.statement"/><br /><br /> </td>
                         <td></td>
                 </tr>
@@ -62,7 +58,7 @@
 
 
                     </td>
-                    <td width=33%></td>
+                    <td width=41%></td>
 
 
                 </tr>

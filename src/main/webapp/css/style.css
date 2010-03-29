@@ -150,3 +150,15 @@ td.admin_backend {
      color:  #222222;
      vertical-align: bottom;
 }
+
+/*----------Management Backend Lists ------------------*/
+
+table.management_lists {
+    border: 0px;
+    background-color: #EEEEEE;    
+}
+
+td.management_lists, tr.management_lists, th.management_lists {
+    border-bottom: 1px solid silver;
+    border-left: 1px solid silver;
+}
