@@ -45,8 +45,8 @@ public class CreateCategorieController {
 
 	private static final String CATEGORIE_ATTRIBUTE = "categorie";
 	private static final String VIEW = "categories/new";
-	private static final Logger logger = LoggerFactory.getLogger(
-			CreateCategorieController.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(CreateCategorieController.class);
 	private ObservationService observationService;
 	private CategorieValidator categorieValidator;
 
@@ -68,11 +68,10 @@ public class CreateCategorieController {
 	@RequestMapping(method = GET)
 	public ModelAndView setup(HttpSession session, HttpServletResponse response)
 			throws IOException {
-		if (isAdmin(session)) {
+		if (isAdmin(session))
 			return new ModelAndView(VIEW, CATEGORIE_ATTRIBUTE, new Categorie());
-		} else {
+		else
 			return forbiddenMAV(response);
-		}
 	}
 
 	@RequestMapping(method = POST)
@@ -82,12 +81,12 @@ public class CreateCategorieController {
 			HttpServletResponse r) throws IOException {
 		if (isAdmin(s)) {
 			categorieValidator.validate(categorie, result);
-			if (result.hasErrors()) {
+			if (result.hasErrors())
 				return VIEW;
-			} else {
+			else {
 				try {
 					observationService.registrate(categorie);
-				} catch(Exception e) {
+				} catch (Exception e) {
 					// should not happen; the validator shound found all cases.
 					logger.warn("Unexpected Exception", e);
 					return internalErrorView(r);
@@ -95,9 +94,7 @@ public class CreateCategorieController {
 				status.setComplete();
 				return "redirect:/c";
 			}
-		} else {
+		} else
 			return forbiddenView(r);
-		}
 	}
-
 }

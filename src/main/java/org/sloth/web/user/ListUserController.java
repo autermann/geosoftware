@@ -44,12 +44,10 @@ public class ListUserController {
 	@RequestMapping(method = GET)
 	public ModelAndView setupList(HttpSession s, HttpServletResponse r)
 			throws IOException {
-		if (isAdmin(s)) {
-			return new ModelAndView(VIEW, USERS_ATTRIBUTE,
-									userManager.getUsers());
-		} else {
+		if (isAdmin(s))
+			return new ModelAndView(VIEW, USERS_ATTRIBUTE, userManager
+					.getUsers());
+		else
 			return forbiddenMAV(r);
-		}
 	}
-
 }

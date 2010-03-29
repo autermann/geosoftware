@@ -13,21 +13,18 @@ public class SelfRedirectController {
 	@RequestMapping("/u/edit")
 	public String handleEditRequest(HttpSession s, HttpServletResponse r)
 			throws IOException {
-		if (isAuth(s)) {
+		if (isAuth(s))
 			return "redirect:/u/edit/" + getUser(s).getId();
-		} else {
+		else
 			return forbiddenView(r);
-		}
 	}
 
 	@RequestMapping("/u/del")
 	public String handleDeleteRequest(HttpSession s, HttpServletResponse r)
 			throws IOException {
-		if (isAuth(s)) {
+		if (isAuth(s))
 			return "redirect:/u/del/" + getUser(s).getId();
-		} else {
+		else
 			return forbiddenView(r);
-		}
 	}
-
 }

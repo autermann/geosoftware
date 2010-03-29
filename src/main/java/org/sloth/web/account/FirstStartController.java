@@ -4,7 +4,6 @@
  */
 package org.sloth.web.account;
 
-import org.sloth.web.actions.RegistrationFormAction;
 import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
@@ -34,14 +33,12 @@ public class FirstStartController {
 
 	private static final String VIEW = "users/registration";
 	private static final String USER_ATTRIBUTE = "user";
-	private static final Logger logger = LoggerFactory.getLogger(
-			RegistrationController.class);
+	private static final Logger logger = LoggerFactory.getLogger(RegistrationController.class);
 	private UserService userService;
 	private RegistrationFormValidator registrationFormValidator;
 
 	@Autowired
-	public void setUserValidator(
-			RegistrationFormValidator registrationFormValidator) {
+	public void setUserValidator(RegistrationFormValidator registrationFormValidator) {
 		this.registrationFormValidator = registrationFormValidator;
 	}
 
@@ -58,18 +55,15 @@ public class FirstStartController {
 	@RequestMapping(method = GET)
 	public ModelAndView prepare(HttpServletResponse r) throws IOException {
 		if (isFirstStart()) {
-			return new ModelAndView(VIEW, USER_ATTRIBUTE,
-									new RegistrationFormAction());
+			return new ModelAndView(VIEW, USER_ATTRIBUTE, new RegistrationFormAction());
 		} else {
 			return forbiddenMAV(r);
 		}
 	}
 
 	@RequestMapping(method = POST)
-	public String submit(
-			@ModelAttribute(USER_ATTRIBUTE) RegistrationFormAction action,
-						 BindingResult result, SessionStatus status,
-						 HttpSession s,
+	public String submit(@ModelAttribute(USER_ATTRIBUTE) RegistrationFormAction action,
+						 BindingResult result, SessionStatus status, HttpSession s,
 						 HttpServletResponse r) throws IOException {
 		if (isFirstStart()) {
 			registrationFormValidator.validate(action, result);
@@ -83,7 +77,7 @@ public class FirstStartController {
 					auth(s, u);
 					status.setComplete();
 					return "redirect:/";
-				} catch(Exception e) {
+				} catch (Exception e) {
 					logger.warn("Unexpected Exception", e);
 					return internalErrorView(r);
 				}
@@ -97,5 +91,4 @@ public class FirstStartController {
 	private boolean isFirstStart() {
 		return userService.getUsers().size() == 0;
 	}
-
 }

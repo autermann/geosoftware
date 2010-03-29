@@ -40,8 +40,8 @@ public class DeleteCategorieController {
 
 	private static final String CATEGORIE_ATTRIBUTE = "categorie";
 	private static final String VIEW = "categories/delete";
-	private static final Logger logger = LoggerFactory.getLogger(
-			DeleteCategorieController.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(DeleteCategorieController.class);
 	private ObservationService observationService;
 
 	@Autowired
@@ -56,34 +56,29 @@ public class DeleteCategorieController {
 
 	@RequestMapping(method = GET)
 	public String setupForm(@PathVariable("id") Long id, Model model,
-							HttpSession s, HttpServletResponse r) throws
-			IOException {
+			HttpSession s, HttpServletResponse r) throws IOException {
 		if (isAdmin(s)) {
 			Categorie categorie = observationService.getCategorie(id);
-			if (categorie == null) {
+			if (categorie == null)
 				return notFoundView(r);
-			}
 			model.addAttribute(CATEGORIE_ATTRIBUTE, categorie);
 			return VIEW;
-		} else {
+		} else
 			return forbiddenView(r);
-		}
 	}
 
 	@RequestMapping(method = POST)
 	public String processSubmit(@PathVariable("id") Long id, HttpSession s,
-								HttpServletResponse r) throws IOException {
+			HttpServletResponse r) throws IOException {
 		if (isAdmin(s)) {
 			try {
 				this.observationService.deleteCategorie(id);
-			} catch(Exception e) {
+			} catch (Exception e) {
 				logger.warn("Unexpected Exception", e);
 				return internalErrorView(r);
 			}
 			return "redirect:/c";
-		} else {
+		} else
 			return forbiddenView(r);
-		}
 	}
-
 }

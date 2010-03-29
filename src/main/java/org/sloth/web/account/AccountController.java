@@ -16,15 +16,12 @@ public class AccountController {
 	@RequestMapping("/acc")
 	public String handle(HttpSession s, HttpServletResponse r)
 			throws IOException {
-		if (!isAuth(s)) {
+		if (!isAuth(s))
 			return forbiddenView(r);
-		}
-		if (isAdmin(s)) {
+		if (isAdmin(s))
 			return ADMIN_VIEW;
-		} else {
+		else
 			return USER_VIEW;
-		}
 
 	}
-
 }

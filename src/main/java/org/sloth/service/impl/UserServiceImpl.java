@@ -23,6 +23,7 @@ import org.slf4j.LoggerFactory;
 import org.sloth.exceptions.ConstraintViolationException;
 import org.sloth.model.User;
 import org.sloth.persistence.UserDao;
+import org.sloth.service.Login;
 import org.sloth.service.PasswordService;
 import org.sloth.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

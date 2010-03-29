@@ -19,6 +19,7 @@ package org.sloth.service;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import org.sloth.exceptions.ConstraintViolationException;
 import org.sloth.model.Observation;
 import org.sloth.model.Categorie;

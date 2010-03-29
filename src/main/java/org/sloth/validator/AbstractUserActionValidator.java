@@ -24,8 +24,8 @@ public abstract class AbstractUserActionValidator implements Validator {
 	}
 
 	@Autowired
-	public void setPasswordService(PasswordService passwordService) {
-		this.passwordService = passwordService;
+	public void setPasswordManager(PasswordService passwordManager) {
+		this.passwordService = passwordManager;
 	}
 
 	@Autowired

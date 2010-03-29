@@ -46,8 +46,8 @@ public class EditCategorieController {
 
 	private static final String VIEW = "categories/edit";
 	private static final String CATEGORIE_ATTRIBUTE = "categorie";
-	private static final Logger logger = LoggerFactory.getLogger(
-			EditCategorieController.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(EditCategorieController.class);
 	private ObservationService observationManager;
 	private CategorieValidator categorieValidator;
 
@@ -68,17 +68,15 @@ public class EditCategorieController {
 
 	@RequestMapping(method = GET)
 	public String setupForm(@PathVariable Long id, Model model, HttpSession s,
-							HttpServletResponse r) throws IOException {
+			HttpServletResponse r) throws IOException {
 		if (isAdmin(s)) {
 			Categorie c = observationManager.getCategorie(id);
-			if (c == null) {
+			if (c == null)
 				return notFoundView(r);
-			}
 			model.addAttribute(CATEGORIE_ATTRIBUTE, c);
 			return VIEW;
-		} else {
+		} else
 			return forbiddenView(r);
-		}
 
 	}
 
@@ -89,21 +87,19 @@ public class EditCategorieController {
 			HttpServletResponse r) throws IOException {
 		if (isAdmin(s)) {
 			categorieValidator.validate(categorie, result);
-			if (result.hasErrors()) {
+			if (result.hasErrors())
 				return VIEW;
-			} else {
+			else {
 				try {
 					observationManager.updateCategorie(categorie);
-				} catch(Exception e) {
+				} catch (Exception e) {
 					logger.warn("Unexpected Exception", e);
 					return internalErrorView(r);
 				}
 				status.setComplete();
 				return "redirect:/c";
 			}
-		} else {
+		} else
 			return forbiddenView(r);
-		}
 	}
-
 }

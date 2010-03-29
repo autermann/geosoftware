@@ -27,8 +27,10 @@ import static org.sloth.util.ControllerUtils.*;
 
 @Controller
 @RequestMapping("/")
-@SessionAttributes({"observations", "observation", "categories"})
+@SessionAttributes( { "observations", "observation", "categories" })
 public class FrontPageController {
+
+
 
 	private static final String VIEW = "index";
 	private static final String MAP_CONTENT_ATTRIBUTE = "observations";
@@ -37,25 +39,24 @@ public class FrontPageController {
 	private static final String SEARCH_PARAM = "q";
 	private static final int VISIBLE_OBSERVATIONS_DEFAULT = 10;
 	private static final int VISIBLE_OBSERVATIONS;
-	private static final Logger logger = LoggerFactory.getLogger(
-			FrontPageController.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(FrontPageController.class);
 	private ObservationService os;
 	private ObservationValidator validator;
-
 	static {
 		Integer i = null;
 		try {
 			i = Integer.valueOf(Config.getProperty("lastObservationsCount"));
-		} catch(NumberFormatException e) {
-			logger.warn(
-					"Invalid or null value for property 'lastObservationsCount'.",
-					e);
+		} catch (NumberFormatException e) {
+			logger
+					.warn(
+							"Invalid or null value for property 'lastObservationsCount'.",
+							e);
 		}
-		if (i == null) {
+		if (i == null)
 			VISIBLE_OBSERVATIONS = VISIBLE_OBSERVATIONS_DEFAULT;
-		} else {
+		else
 			VISIBLE_OBSERVATIONS = i;
-		}
 	}
 
 	@Autowired
@@ -77,43 +78,38 @@ public class FrontPageController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView fillMap(HttpSession s,
-								@RequestParam(value = SEARCH_PARAM, required =
-																	false) String q) {
+			@RequestParam(value = SEARCH_PARAM, required = false) String q) {
 		ModelAndView mav = new ModelAndView(VIEW);
 		if (isAuth(s)) {
 			mav.addObject(NEW_OBSERVATION_ATTRIBUTE, new Observation());
 			mav.addObject(CATEGORIE_ATTRIBUTE, os.getCategories());
 		}
 		return mav.addObject(MAP_CONTENT_ATTRIBUTE,
-							 (q == null || q.trim().isEmpty()) ? os.
-				getNewestObservations(VISIBLE_OBSERVATIONS) : os.getObservations(
-				q));
+				(q == null || q.trim().isEmpty()) ? os
+						.getNewestObservations(VISIBLE_OBSERVATIONS) : os
+						.getObservations(q));
 
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String saveObservation(HttpSession s, HttpServletResponse r,
-								  @ModelAttribute(NEW_OBSERVATION_ATTRIBUTE) Observation observation,
-								  BindingResult result, SessionStatus status)
-			throws IOException {
+			@ModelAttribute(NEW_OBSERVATION_ATTRIBUTE) Observation observation,
+			BindingResult result, SessionStatus status) throws IOException {
 		if (isAuth(s)) {
 			observation.setUser(getUser(s));
 			validator.validate(observation, result);
-			if (result.hasErrors()) {
+			if (result.hasErrors())
 				return VIEW;
-			} else {
+			else
 				try {
 					status.setComplete();
 					this.os.registrate(observation);
 					return "redirect:/";
-				} catch(Exception e) {
+				} catch (Exception e) {
 					logger.warn("Unexpected Exception", e);
 					return internalErrorView(r);
 				}
-			}
-		} else {
+		} else
 			return forbiddenView(r);
-		}
 	}
-
 }

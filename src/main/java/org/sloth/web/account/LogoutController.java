@@ -30,5 +30,4 @@ public class LogoutController {
 		deAuth(session);
 		return "redirect:/";
 	}
-
 }

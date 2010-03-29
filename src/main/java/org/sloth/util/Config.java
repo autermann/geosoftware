@@ -32,17 +32,15 @@ public class Config {
 	}
 
 	public static String getProperty(String key) {
-		if (props == null) {
+		if (props == null)
 			try {
 				logger.info("Loading configuration.");
-				props = PropertiesLoaderUtils.loadAllProperties(
-						"config.properties");
-			} catch(IOException ex) {
+				props = PropertiesLoaderUtils
+						.loadAllProperties("config.properties");
+			} catch (IOException ex) {
 				logger.warn("Can not load configuration", ex);
 				return null;
 			}
-		}
 		return props.getProperty(key);
 	}
-
 }

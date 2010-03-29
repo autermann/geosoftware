@@ -25,19 +25,20 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import org.sloth.exceptions.EntityAlreadyKnownException;
 import org.sloth.exceptions.EntityNotKnownException;
+import org.sloth.model.Group;
+import org.sloth.model.Observation;
 import org.sloth.persistence.UserDao;
 import org.sloth.model.User;
 import org.sloth.model.User_;
 import org.sloth.persistence.ObservationDao;
+import org.sloth.util.Config;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @todo
  * @author auti
  */
-@Repository
 @Transactional
 public class UserDaoImpl extends EntityManagerDao<User> implements UserDao {
 

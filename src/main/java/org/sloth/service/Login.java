@@ -15,12 +15,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.sloth.web.actions;
+package org.sloth.service;
 
 /**
  * @todo
  */
-public class LoginAction {
+public class Login {
 
 	private String password, mail;
 

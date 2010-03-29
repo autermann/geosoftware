@@ -11,15 +11,11 @@ import org.sloth.model.Report;
 import org.sloth.model.Report_;
 import org.sloth.model.User;
 import org.sloth.persistence.ReportDao;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 
  * @author auti
  */
-@Repository
-@Transactional
 public class ReportDaoImpl extends EntityManagerDao<Report> implements
 		ReportDao {
 

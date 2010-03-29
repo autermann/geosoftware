@@ -17,18 +17,16 @@
  */
 package org.sloth.validator;
 
-import org.sloth.web.actions.LoginAction;
-import org.springframework.stereotype.Component;
+import org.sloth.service.Login;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import static org.sloth.util.ValidatorUtils.*;
 
-@Component
 public class LoginValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> clazz) {
-		return clazz.equals(LoginAction.class);
+		return clazz.equals(Login.class);
 	}
 
 	@Override
@@ -36,5 +34,4 @@ public class LoginValidator implements Validator {
 		rejectIfEmptyOrWhitespace(e, "mail", "field.login.mail.empty");
 		rejectIfEmptyOrWhitespace(e, "password", "field.login.password.empty");
 	}
-
 }

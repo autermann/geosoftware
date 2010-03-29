@@ -33,8 +33,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 public class ControllerUtils {
 
-	protected static Logger logger = LoggerFactory.getLogger(
-			ControllerUtils.class);
+	protected static Logger logger = LoggerFactory
+			.getLogger(ControllerUtils.class);
 	private static final String SESSION_ATTRIBUTE = "LOGIN";
 	private static final String UNAUTHORIZED_VIEW = "error/unauthorized";
 	private static final String NOT_FOUND_VIEW = "error/notfound";
@@ -45,35 +45,31 @@ public class ControllerUtils {
 
 	public static Group getGroup(HttpSession s) {
 		User u = getUser(s);
-		if (u != null) {
+		if (u != null)
 			return u.getUserGroup();
-		} else {
+		else
 			return null;
-		}
 	}
 
 	public static User getUser(HttpSession s) {
 		Object o = s.getAttribute(SESSION_ATTRIBUTE);
-		if (o != null && o instanceof User) {
+		if (o != null && o instanceof User)
 			return (User) o;
-		} else {
+		else
 			return null;
-		}
 	}
 
 	public static void auth(HttpSession s, User u) {
-		if (u == null) {
+		if (u == null)
 			throw new NullPointerException("User must not be null.");
-		}
 		s.setAttribute(SESSION_ATTRIBUTE, u);
 	}
 
 	public static void deAuth(HttpSession s) {
 		User u = getUser(s);
-		if (u != null) {
-			logger.debug("Unbinding User {} from Session {}", u.getId(),
-						 s.getId());
-		}
+		if (u != null)
+			logger.debug("Unbinding User {} from Session {}", u.getId(), s
+					.getId());
 		s.invalidate();
 	}
 
@@ -87,26 +83,23 @@ public class ControllerUtils {
 
 	public static boolean isOwnObservation(HttpSession s, Observation o) {
 		User u = getUser(s);
-		if (u != null) {
+		if (u != null)
 			return u.getId().equals(o.getUser().getId());
-		}
 		return false;
 	}
 
 	public static boolean isSameId(HttpSession s, Long id) {
 		User u = getUser(s);
-		if (u != null) {
+		if (u != null)
 			return id.equals(u.getId());
-		} else {
+		else
 			return false;
-		}
 	}
 
 	public static boolean isOwnReport(HttpSession s, Report r) {
 		User u = getUser(s);
-		if (u != null) {
+		if (u != null)
 			return u.getId().equals(r.getAuthor().getId());
-		}
 		return false;
 	}
 
@@ -141,5 +134,4 @@ public class ControllerUtils {
 		r.sendError(SC_INTERNAL_SERVER_ERROR);
 		return UNEXPECTED_ERROR_VIEW;
 	}
-
 }

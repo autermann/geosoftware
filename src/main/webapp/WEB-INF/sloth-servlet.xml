@@ -6,7 +6,15 @@
 	   http://www.springframework.org/schema/beans/spring-beans.xsd
 	   http://www.springframework.org/schema/context
 	   http://www.springframework.org/schema/context/spring-context.xsd">
-	<context:component-scan base-package="org.sloth"/>
+
+
+	<context:component-scan base-package="org.sloth.web" />
+	<!--
+		<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="webBindingInitializer"> <bean
+		class="org.sloth.web.BindingInitializer"/> </property> </bean>
+	-->
 	<bean
 		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<property name="exceptionMappings">
@@ -29,4 +37,8 @@
 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
 		<property name="basename" value="messages" />
 	</bean>
+
+	<import resource="sloth/services.xml" />
+	<import resource="sloth/validators.xml" />
+
 </beans>
