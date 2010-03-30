@@ -27,7 +27,6 @@ import org.sloth.service.ObservationService;
 import org.sloth.validator.CategorieValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -37,6 +36,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
 import static org.sloth.util.ControllerUtils.*;
 
 @Controller
@@ -46,60 +46,65 @@ public class EditCategorieController {
 
 	private static final String VIEW = "categories/edit";
 	private static final String CATEGORIE_ATTRIBUTE = "categorie";
-	private static final Logger logger = LoggerFactory
-			.getLogger(EditCategorieController.class);
-	private ObservationService observationManager;
-	private CategorieValidator categorieValidator;
+	private static final Logger logger = LoggerFactory.getLogger(
+			EditCategorieController.class);
+	private ObservationService os;
+	private CategorieValidator cv;
 
 	@Autowired
-	public void setCategorieValidator(CategorieValidator categorieValidator) {
-		this.categorieValidator = categorieValidator;
+	public void setCategorieValidator(CategorieValidator cv) {
+		this.cv = cv;
 	}
 
 	@Autowired
-	public void setObservationManager(ObservationService observationManager) {
-		this.observationManager = observationManager;
+	public void setObservationService(ObservationService os) {
+		this.os = os;
 	}
 
 	@InitBinder
-	public void setAllowedFields(WebDataBinder dataBinder) {
-		dataBinder.setAllowedFields("title", "description", "iconFileName");
+	public void setAllowedFields(WebDataBinder wdb) {
+		wdb.setAllowedFields("title", "description", "iconFileName");
 	}
 
 	@RequestMapping(method = GET)
-	public String setupForm(@PathVariable Long id, Model model, HttpSession s,
-			HttpServletResponse r) throws IOException {
+	public ModelAndView setupForm(@PathVariable Long id, HttpSession s,
+								  HttpServletResponse r) throws IOException {
 		if (isAdmin(s)) {
-			Categorie c = observationManager.getCategorie(id);
-			if (c == null)
-				return notFoundView(r);
-			model.addAttribute(CATEGORIE_ATTRIBUTE, c);
-			return VIEW;
-		} else
-			return forbiddenView(r);
+			Categorie c = os.getCategorie(id);
+			if (c == null) {
+				return notFoundMAV(r);
+			} else {
+				return new ModelAndView(VIEW, CATEGORIE_ATTRIBUTE, c);
+			}
+		} else {
+			return forbiddenMAV(r);
+		}
 
 	}
 
 	@RequestMapping(method = POST)
 	public String processSubmit(
-			@ModelAttribute(CATEGORIE_ATTRIBUTE) Categorie categorie,
+			@ModelAttribute(CATEGORIE_ATTRIBUTE) Categorie c,
 			BindingResult result, SessionStatus status, HttpSession s,
 			HttpServletResponse r) throws IOException {
 		if (isAdmin(s)) {
-			categorieValidator.validate(categorie, result);
-			if (result.hasErrors())
+			cv.validate(c, result);
+			if (result.hasErrors()) {
 				return VIEW;
-			else {
+			} else {
 				try {
-					observationManager.updateCategorie(categorie);
-				} catch (Exception e) {
+					os.updateCategorie(c);
+				} catch(Exception e) {
 					logger.warn("Unexpected Exception", e);
 					return internalErrorView(r);
+				} finally {
+					status.setComplete();
 				}
-				status.setComplete();
 				return "redirect:/c";
 			}
-		} else
+		} else {
 			return forbiddenView(r);
+		}
 	}
+
 }

@@ -47,51 +47,55 @@ public class RegistrationController {
 
 	private static final String VIEW = "users/registration";
 	private static final String USER_ATTRIBUTE = "user";
-	private static final Logger logger = LoggerFactory.getLogger(RegistrationController.class);
-	private UserService userService;
-	private RegistrationFormValidator registrationFormValidator;
+	private static final Logger logger = LoggerFactory.getLogger(
+			RegistrationController.class);
+	private UserService us;
+	private RegistrationFormValidator rfv;
 
 	@Autowired
-	public void setUserValidator(RegistrationFormValidator registrationFormValidator) {
-		this.registrationFormValidator = registrationFormValidator;
+	public void setUserValidator(
+			RegistrationFormValidator rfv) {
+		this.rfv = rfv;
 	}
 
 	@Autowired
-	public void setUserService(UserService userService) {
-		this.userService = userService;
+	public void setUserService(UserService us) {
+		this.us = us;
 	}
 
 	@InitBinder
-	public void initBinder(WebDataBinder dataBinder) {
-		dataBinder.setDisallowedFields("id", "creationDate", "userGroup");
+	public void initBinder(WebDataBinder wdb) {
+		wdb.setDisallowedFields("id", "creationDate", "userGroup");
 	}
 
 	@RequestMapping(method = GET)
 	public ModelAndView prepare() {
 		return new ModelAndView(VIEW, USER_ATTRIBUTE,
-				new RegistrationFormAction());
+								new RegistrationFormAction());
 	}
 
 	@RequestMapping(method = POST)
-	public String submit(
-			@ModelAttribute(USER_ATTRIBUTE) RegistrationFormAction action,
-			BindingResult result, SessionStatus status, HttpSession s,
-			HttpServletResponse r) throws IOException {
-		registrationFormValidator.validate(action, result);
+	public String submit(HttpSession s, HttpServletResponse r,
+						 @ModelAttribute(USER_ATTRIBUTE) RegistrationFormAction a,
+						 BindingResult result, SessionStatus status) throws
+			IOException {
+		rfv.validate(a, result);
 		if (result.hasErrors()) {
 			return VIEW;
 		} else {
 			try {
-				User u = action.createUser();
+				User u = a.createUser();
 				u.setUserGroup(Group.USER);
-				userService.registrate(u);
+				us.registrate(u);
 				auth(s, u);
-				status.setComplete();
-				return "redirect:/";
-			} catch (Exception e) {
+			} catch(Exception e) {
 				logger.warn("Unexpected Exception", e);
 				return internalErrorView(r);
+			} finally {
+				status.setComplete();
 			}
+			return "redirect:/";
 		}
 	}
+
 }

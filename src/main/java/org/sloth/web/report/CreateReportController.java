@@ -1,7 +1,6 @@
 package org.sloth.web.report;
 
 import java.io.IOException;
-import javax.naming.Binding;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
@@ -29,33 +28,34 @@ public class CreateReportController {
 
 	private static final String VIEW = "reports/form";
 	private static final String REPORT_ATTRIBUTE = "report";
-	private static final Logger logger = LoggerFactory
-			.getLogger(CreateReportController.class);
-	private ObservationService observationService;
-	private ReportValidator reportValidator;
+	private static final Logger logger = LoggerFactory.getLogger(
+			CreateReportController.class);
+	private ObservationService os;
+	private ReportValidator rv;
 
 	@Autowired
-	public void setObservationService(ObservationService observationService) {
-		this.observationService = observationService;
+	public void setObservationService(ObservationService os) {
+		this.os = os;
 	}
 
 	@Autowired
-	public void setReportValidator(ReportValidator reportValidator) {
-		this.reportValidator = reportValidator;
+	public void setReportValidator(ReportValidator rv) {
+		this.rv = rv;
 	}
 
 	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-		binder.setAllowedFields("description");
+	public void initBinder(WebDataBinder wdb) {
+		wdb.setAllowedFields("description");
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView handleGet(@PathVariable Long id, HttpSession s,
-			HttpServletResponse r) throws IOException {
+								  HttpServletResponse r) throws IOException {
 		if (isAuth(s)) {
-			Observation o = observationService.getObservation(id);
-			if (o == null)
+			Observation o = os.getObservation(id);
+			if (o == null) {
 				return notFoundMAV(r);
+			}
 			return new ModelAndView(VIEW, REPORT_ATTRIBUTE, new Report());
 		}
 		return forbiddenMAV(r);
@@ -63,26 +63,33 @@ public class CreateReportController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String handlePost(@ModelAttribute Report report,
-			BindingResult result, @PathVariable Long id, SessionStatus status,
-			HttpSession s, HttpServletResponse r) throws IOException {
-		if (isAuth(s))
+							 BindingResult result, @PathVariable Long id,
+							 SessionStatus status,
+							 HttpSession s, HttpServletResponse r) throws
+			IOException {
+		if (isAuth(s)) {
 			try {
-
-				Observation o = observationService.getObservation(id);
-				if (o == null)
+				Observation o = os.getObservation(id);
+				if (o == null) {
 					return notFoundView(r);
-				report.setObservation(o);
-				report.setAuthor(getUser(s));
-				reportValidator.validate(report, result);
-				if (result.hasErrors())
-					return VIEW;
-				status.setComplete();
-				observationService.registrate(report);
-				return "redirect:/";
-			} catch (Exception e) {
+				} else {
+					report.setObservation(o);
+					report.setAuthor(getUser(s));
+					rv.validate(report, result);
+					if (result.hasErrors()) {
+						return VIEW;
+					} else {
+						status.setComplete();
+						os.registrate(report);
+						return "redirect:/";
+					}
+				}
+			} catch(Exception e) {
 				logger.warn("Unexpected Exception", e);
 				return internalErrorView(r);
 			}
+		}
 		return forbiddenView(r);
 	}
+
 }

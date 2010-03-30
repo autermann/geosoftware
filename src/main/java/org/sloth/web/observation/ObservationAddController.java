@@ -49,27 +49,27 @@ public class ObservationAddController {
 	private static final String VIEW = "observations/form";
 	private static final String OBSERVATION_ATTRIBUTE = "observation";
 	private static final String CATEGORIES_ATTRIBUTE = "categories";
-	private Logger logger = LoggerFactory
-			.getLogger(ObservationAddController.class);
-	private ObservationService observationManager;
-	private ObservationValidator validator;
+	private Logger logger = LoggerFactory.getLogger(
+			ObservationAddController.class);
+	private ObservationService os;
+	private ObservationValidator ov;
 
 	@Autowired
-	public void setObservationValidator(ObservationValidator validator) {
-		this.validator = validator;
+	public void setObservationValidator(ObservationValidator ov) {
+		this.ov = ov;
 	}
 
 	@Autowired
-	public void setObservationManager(ObservationService observationManager) {
-		this.observationManager = observationManager;
+	public void setObservationService(ObservationService os) {
+		this.os = os;
 	}
 
 	@InitBinder
-	public void initBinder(WebDataBinder dataBinder) {
-		dataBinder.setDisallowedFields("id", "user", "creationDate");
+	public void initBinder(WebDataBinder wdb) {
+		wdb.setDisallowedFields("id", "user", "creationDate");
 		CategorieEditor c = new CategorieEditor();
-		c.setObservationService(observationManager);
-		dataBinder.registerCustomEditor(Categorie.class, c);
+		c.setObservationService(os);
+		wdb.registerCustomEditor(Categorie.class, c);
 	}
 
 	@RequestMapping(method = GET)
@@ -78,34 +78,37 @@ public class ObservationAddController {
 		if (isAuth(s)) {
 			ModelAndView mav = new ModelAndView(VIEW);
 			mav.addObject(OBSERVATION_ATTRIBUTE, new Observation());
-			mav.addObject(CATEGORIES_ATTRIBUTE, observationManager
-					.getCategories());
+			mav.addObject(CATEGORIES_ATTRIBUTE, os.getCategories());
 			return mav;
-		} else
+		} else {
 			return forbiddenMAV(r);
+		}
 	}
 
 	@RequestMapping(method = POST)
 	public String processSubmit(
-			@ModelAttribute(OBSERVATION_ATTRIBUTE) Observation observation,
-			BindingResult result, SessionStatus status, HttpSession session,
+			@ModelAttribute(OBSERVATION_ATTRIBUTE) Observation o,
+			BindingResult result, SessionStatus status, HttpSession s,
 			HttpServletResponse r) throws IOException {
-		if (isAuth(session)) {
-			observation.setUser(getUser(session));
-			validator.validate(observation, result);
-			if (result.hasErrors())
+		if (isAuth(s)) {
+			o.setUser(getUser(s));
+			ov.validate(o, result);
+			if (result.hasErrors()) {
 				return VIEW;
-			else {
+			} else {
 				try {
-					this.observationManager.registrate(observation);
-				} catch (Exception e) {
+					this.os.registrate(o);
+				} catch(Exception e) {
 					logger.warn("Unexpected Exception", e);
 					return internalErrorView(r);
+				} finally {
+					status.setComplete();
 				}
-				status.setComplete();
 				return "redirect:/admin/observations";
 			}
-		} else
+		} else {
 			return forbiddenView(r);
+		}
 	}
+
 }

@@ -34,54 +34,58 @@ public class FirstStartController {
 
 	private static final String VIEW = "users/registration";
 	private static final String USER_ATTRIBUTE = "user";
-	private static final Logger logger = LoggerFactory.getLogger(RegistrationController.class);
+	private static final Logger logger = LoggerFactory.getLogger(
+			RegistrationController.class);
 	private UserService userService;
-	private RegistrationFormValidator registrationFormValidator;
+	private RegistrationFormValidator rfv;
 
 	@Autowired
-	public void setUserValidator(RegistrationFormValidator registrationFormValidator) {
-		this.registrationFormValidator = registrationFormValidator;
+	public void setUserValidator(RegistrationFormValidator rfv) {
+		this.rfv = rfv;
 	}
 
 	@Autowired
-	public void setUserService(UserService userService) {
-		this.userService = userService;
+	public void setUserService(UserService us) {
+		this.userService = us;
 	}
 
 	@InitBinder
-	public void initBinder(WebDataBinder dataBinder) {
-		dataBinder.setDisallowedFields("id", "creationDate", "userGroup");
+	public void initBinder(WebDataBinder wdb) {
+		wdb.setDisallowedFields("id", "creationDate", "userGroup");
 	}
 
 	@RequestMapping(method = GET)
 	public ModelAndView prepare(HttpServletResponse r) throws IOException {
 		if (isFirstStart()) {
-			return new ModelAndView(VIEW, USER_ATTRIBUTE, new RegistrationFormAction());
+			return new ModelAndView(VIEW, USER_ATTRIBUTE,
+									new RegistrationFormAction());
 		} else {
 			return forbiddenMAV(r);
 		}
 	}
 
 	@RequestMapping(method = POST)
-	public String submit(@ModelAttribute(USER_ATTRIBUTE) RegistrationFormAction action,
-						 BindingResult result, SessionStatus status, HttpSession s,
-						 HttpServletResponse r) throws IOException {
+	public String submit(
+			@ModelAttribute(USER_ATTRIBUTE) RegistrationFormAction a,
+			BindingResult result, SessionStatus status,
+			HttpSession s, HttpServletResponse r) throws IOException {
 		if (isFirstStart()) {
-			registrationFormValidator.validate(action, result);
+			rfv.validate(a, result);
 			if (result.hasErrors()) {
 				return VIEW;
 			} else {
 				try {
-					User u = action.createUser();
+					User u = a.createUser();
 					u.setUserGroup(Group.ADMIN);
 					userService.registrate(u);
 					auth(s, u);
-					status.setComplete();
-					return "redirect:/";
-				} catch (Exception e) {
+				} catch(Exception e) {
 					logger.warn("Unexpected Exception", e);
 					return internalErrorView(r);
+				} finally {
+					status.setComplete();
 				}
+				return "redirect:/";
 			}
 		} else {
 			return forbiddenView(r);
@@ -92,4 +96,5 @@ public class FirstStartController {
 	private boolean isFirstStart() {
 		return userService.getUsers().size() == 0;
 	}
+
 }

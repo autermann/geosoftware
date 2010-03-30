@@ -34,20 +34,22 @@ public class ListUserController {
 
 	private static final String VIEW = "users/list";
 	private static final String USERS_ATTRIBUTE = "users";
-	private UserService userManager;
+	private UserService us;
 
 	@Autowired
-	public void setUserManager(UserService userManager) {
-		this.userManager = userManager;
+	public void setUserService(UserService us) {
+		this.us = us;
 	}
 
 	@RequestMapping(method = GET)
 	public ModelAndView setupList(HttpSession s, HttpServletResponse r)
 			throws IOException {
-		if (isAdmin(s))
-			return new ModelAndView(VIEW, USERS_ATTRIBUTE, userManager
-					.getUsers());
-		else
+		if (isAdmin(s)) {
+			return new ModelAndView(VIEW, USERS_ATTRIBUTE,
+									us.getUsers());
+		} else {
 			return forbiddenMAV(r);
+		}
 	}
+
 }

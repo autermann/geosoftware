@@ -37,54 +37,57 @@ import static org.sloth.util.ControllerUtils.*;
 
 @Controller
 @RequestMapping("/o/del/{id}")
-@SessionAttributes(types = Observation.class)
 public class DeleteObservationController {
 
 	private static final String VIEW = "observations/delete";
 	private static final String OBSERVATIONS_ATTRIBUTE = "observation";
-	protected static final Logger logger = LoggerFactory
-			.getLogger(DeleteObservationController.class);
-	private ObservationService observationService;
+	protected static final Logger logger = LoggerFactory.getLogger(
+			DeleteObservationController.class);
+	private ObservationService os;
 
 	@Autowired
-	public void setObservationService(ObservationService observationService) {
-		this.observationService = observationService;
+	public void setObservationService(ObservationService os) {
+		this.os = os;
 	}
 
 	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-		binder.setAllowedFields();
+	public void initBinder(WebDataBinder wdb) {
+		wdb.setAllowedFields();
 	}
 
 	@RequestMapping(method = GET)
 	public ModelAndView setupForm(@PathVariable Long id, HttpSession s,
-			HttpServletResponse r) throws IOException {
+								  HttpServletResponse r) throws IOException {
 		if (isAuth(s)) {
-			Observation o = observationService.getObservation(id);
-			if (o == null)
+			Observation o = os.getObservation(id);
+			if (o == null) {
 				return notFoundMAV(r);
-			if (isAdmin(s) || isOwnObservation(s, o))
+			}
+			if (isAdmin(s) || isOwnObservation(s, o)) {
 				return new ModelAndView(VIEW, OBSERVATIONS_ATTRIBUTE, o);
+			}
 		}
 		return forbiddenMAV(r);
 	}
 
 	@RequestMapping(method = POST)
 	public String processSubmit(@PathVariable Long id, HttpSession s,
-			HttpServletResponse r) throws IOException {
+								HttpServletResponse r) throws IOException {
 		if (isAuth(s)) {
-			Observation o = observationService.getObservation(id);
-			if (o == null)
+			Observation o = os.getObservation(id);
+			if (o == null) {
 				return notFoundView(r);
-			if (isAdmin(s) || isOwnObservation(s, o))
+			} else if (isAdmin(s) || isOwnObservation(s, o)) {
 				try {
-					observationService.deleteObservation(o);
+					os.deleteObservation(o);
 					return "redirect:/o";
-				} catch (Exception e) {
+				} catch(Exception e) {
 					logger.warn("Unexpected Exception.", e);
 					return internalErrorView(r);
 				}
+			}
 		}
 		return forbiddenView(r);
 	}
+
 }

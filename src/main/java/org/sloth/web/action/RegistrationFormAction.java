@@ -1,6 +1,5 @@
 package org.sloth.web.action;
 
-import org.sloth.model.Group;
 import org.sloth.model.User;
 
 public class RegistrationFormAction {
@@ -110,4 +109,5 @@ public class RegistrationFormAction {
 		u.setName(getName());
 		return u;
 	}
+
 }

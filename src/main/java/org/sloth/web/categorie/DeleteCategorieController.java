@@ -27,11 +27,11 @@ import org.sloth.service.ObservationService;
 import static org.sloth.util.ControllerUtils.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @Controller
@@ -40,45 +40,49 @@ public class DeleteCategorieController {
 
 	private static final String CATEGORIE_ATTRIBUTE = "categorie";
 	private static final String VIEW = "categories/delete";
-	private static final Logger logger = LoggerFactory
-			.getLogger(DeleteCategorieController.class);
-	private ObservationService observationService;
+	private static final Logger logger = LoggerFactory.getLogger(
+			DeleteCategorieController.class);
+	private ObservationService os;
 
 	@Autowired
-	public void setObservationService(ObservationService observationService) {
-		this.observationService = observationService;
+	public void setObservationService(ObservationService os) {
+		this.os = os;
 	}
 
 	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-		binder.setAllowedFields();
+	public void initBinder(WebDataBinder wdb) {
+		wdb.setAllowedFields();
 	}
 
 	@RequestMapping(method = GET)
-	public String setupForm(@PathVariable("id") Long id, Model model,
-			HttpSession s, HttpServletResponse r) throws IOException {
+	public ModelAndView setupForm(@PathVariable("id") Long id, HttpSession s,
+								  HttpServletResponse r) throws IOException {
 		if (isAdmin(s)) {
-			Categorie categorie = observationService.getCategorie(id);
-			if (categorie == null)
-				return notFoundView(r);
-			model.addAttribute(CATEGORIE_ATTRIBUTE, categorie);
-			return VIEW;
-		} else
-			return forbiddenView(r);
+			Categorie c = os.getCategorie(id);
+			if (c == null) {
+				return notFoundMAV(r);
+			} else {
+				return new ModelAndView(VIEW, CATEGORIE_ATTRIBUTE, c);
+			}
+		} else {
+			return forbiddenMAV(r);
+		}
 	}
 
 	@RequestMapping(method = POST)
 	public String processSubmit(@PathVariable("id") Long id, HttpSession s,
-			HttpServletResponse r) throws IOException {
+								HttpServletResponse r) throws IOException {
 		if (isAdmin(s)) {
 			try {
-				this.observationService.deleteCategorie(id);
-			} catch (Exception e) {
+				this.os.deleteCategorie(id);
+				return "redirect:/c";
+			} catch(Exception e) {
 				logger.warn("Unexpected Exception", e);
 				return internalErrorView(r);
 			}
-			return "redirect:/c";
-		} else
+		} else {
 			return forbiddenView(r);
+		}
 	}
+
 }

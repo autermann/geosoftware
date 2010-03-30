@@ -49,42 +49,41 @@ public class EditObservationController {
 	private static final String VIEW = "observations/edit";
 	private static final String OBSERVATION_ATTRIBUTE = "observation";
 	private static final String CATEGORIE_ATTRIBUTE = "categories";
-	private static final Logger logger = LoggerFactory
-			.getLogger(EditObservationController.class);
-	private ObservationService observationService;
-	private ObservationValidator observationValidator;
+	private static final Logger logger = LoggerFactory.getLogger(
+			EditObservationController.class);
+	private ObservationService os;
+	private ObservationValidator ov;
 
 	@Autowired
 	public void setObservationValidator(
-			ObservationValidator observationValidator) {
-		this.observationValidator = observationValidator;
+			ObservationValidator ov) {
+		this.ov = ov;
 	}
 
 	@Autowired
-	public void setObservationManager(ObservationService observationManager) {
-		this.observationService = observationManager;
+	public void setObservationService(ObservationService os) {
+		this.os = os;
 	}
 
 	@InitBinder
-	public void setAllowedFields(WebDataBinder dataBinder) {
+	public void setAllowedFields(WebDataBinder wdb) {
 		CategorieEditor c = new CategorieEditor();
-		c.setObservationService(observationService);
-		dataBinder.registerCustomEditor(Categorie.class, c);
-		dataBinder.setDisallowedFields("id", "creationDate", "user");
+		c.setObservationService(os);
+		wdb.registerCustomEditor(Categorie.class, c);
+		wdb.setDisallowedFields("id", "creationDate", "user");
 	}
 
 	@RequestMapping(method = GET)
 	public ModelAndView setupForm(@PathVariable Long id, HttpSession s,
-			HttpServletResponse r) throws IOException {
+								  HttpServletResponse r) throws IOException {
 		if (isAuth(s)) {
-			Observation o = observationService.getObservation(id);
-			if (o == null)
+			Observation o = os.getObservation(id);
+			if (o == null) {
 				return notFoundMAV(r);
-			if (isAdmin(s) || isOwnObservation(s, o)) {
+			} else if (isAdmin(s) || isOwnObservation(s, o)) {
 				ModelAndView mav = new ModelAndView(VIEW);
 				mav.addObject(OBSERVATION_ATTRIBUTE, o);
-				mav.addObject(CATEGORIE_ATTRIBUTE, observationService
-						.getCategories());
+				mav.addObject(CATEGORIE_ATTRIBUTE, os.getCategories());
 				return mav;
 			}
 		}
@@ -93,20 +92,22 @@ public class EditObservationController {
 
 	@RequestMapping(method = POST)
 	public String processSubmit(@ModelAttribute Observation o,
-			BindingResult result, SessionStatus status, HttpSession s,
-			HttpServletResponse r) throws IOException {
+								BindingResult result, SessionStatus status,
+								HttpSession s,
+								HttpServletResponse r) throws IOException {
 		if (isAdmin(s) || isOwnObservation(s, o)) {
-			observationValidator.validate(o, result);
-			if (result.hasErrors())
+			ov.validate(o, result);
+			if (result.hasErrors()) {
 				return VIEW;
-			else {
+			} else {
 				try {
-					observationService.updateObservation(o);
-				} catch (Exception e) {
+					os.updateObservation(o);
+				} catch(Exception e) {
 					logger.warn("Unexpected Exception", e);
 					return internalErrorView(r);
+				} finally {
+					status.setComplete();
 				}
-				status.setComplete();
 				return "redirect:/o";
 			}
 		}

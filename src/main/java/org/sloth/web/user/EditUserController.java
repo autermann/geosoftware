@@ -47,24 +47,26 @@ public class EditUserController {
 
 	private static final String USER_ATTRIBUTE = "userEditAction";
 	private static final String VIEW = "users/edit";
-	private static final Logger logger = LoggerFactory.getLogger(EditUserController.class);
-	private UserService userService;
-	private UserEditFormValidator validator;
+	private static final Logger logger = LoggerFactory.getLogger(
+			EditUserController.class);
+	private UserService us;
+	private UserEditFormValidator uefv;
 
 	@Autowired
 	public void setUserValidator(UserEditFormValidator validator) {
-		this.validator = validator;
+		this.uefv = validator;
 	}
 
 	@Autowired
 	public void setUserService(UserService userManager) {
-		this.userService = userManager;
+		this.us = userManager;
 	}
 
 	@InitBinder
 	public void setAllowedFields(WebDataBinder dataBinder) {
 		dataBinder.setAllowedFields("newName", "newFamilyName", "newPassword",
-				"newPasswordRepeat", "newMail", "actualPassword");
+									"newPasswordRepeat", "newMail",
+									"actualPassword");
 	}
 
 	@RequestMapping(method = GET)
@@ -75,41 +77,46 @@ public class EditUserController {
 			if (isSameId(s, id)) {
 				u = getUser(s);
 			} else if (isAdmin(s)) {
-				u = userService.get(id);
+				u = us.get(id);
 				if (u == null) {
 					return notFoundMAV(r);
 				}
 			} else {
 				return forbiddenMAV(r);
 			}
-			return new ModelAndView(VIEW, USER_ATTRIBUTE, new UserEditFormAction(u, getUser(s)));
+			return new ModelAndView(VIEW, USER_ATTRIBUTE, new UserEditFormAction(
+					u, getUser(s)));
 		} else {
 			return forbiddenMAV(r);
 		}
 	}
 
 	@RequestMapping(method = POST)
-	public String processSubmit(@ModelAttribute(USER_ATTRIBUTE) UserEditFormAction action,
-								BindingResult result, SessionStatus status, HttpSession s,
-								HttpServletResponse r) throws IOException {
-		if (isSameId(s, action.getId()) || isAdmin(s)) {
-			validator.validate(action, result);
+	public String processSubmit(HttpSession s, HttpServletResponse r,
+								@ModelAttribute(USER_ATTRIBUTE) UserEditFormAction a,
+								BindingResult result, SessionStatus status)
+			throws IOException {
+		if (isSameId(s, a.getId()) || isAdmin(s)) {
+			uefv.validate(a, result);
 			if (result.hasErrors()) {
 				return VIEW;
-			}
-			try {
-				userService.update(action.getMergedUser());
-				status.setComplete();
-				if (isSameId(s, action.getId())) {
+			} else {
+				try {
+					us.update(a.getMergedUser());
+				} catch(Exception e) {
+					logger.warn("Unexpected Exception", e);
+					return internalErrorView(r);
+				} finally {
+					status.setComplete();
+				}
+				if (isSameId(s, a.getId())) {
 					return "redirect:/acc";
 				} else {
 					return "redirect:/u";
 				}
-			} catch (Exception e) {
-				logger.warn("Unexpected Exception", e);
-				return internalErrorView(r);
 			}
 		}
 		return forbiddenView(r);
 	}
+
 }

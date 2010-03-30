@@ -45,56 +45,59 @@ public class CreateCategorieController {
 
 	private static final String CATEGORIE_ATTRIBUTE = "categorie";
 	private static final String VIEW = "categories/new";
-	private static final Logger logger = LoggerFactory
-			.getLogger(CreateCategorieController.class);
-	private ObservationService observationService;
-	private CategorieValidator categorieValidator;
+	private static final Logger logger = LoggerFactory.getLogger(
+			CreateCategorieController.class);
+	private ObservationService os;
+	private CategorieValidator cv;
 
 	@Autowired
-	public void setCategorieValidator(CategorieValidator categorieValidator) {
-		this.categorieValidator = categorieValidator;
+	public void setCategorieValidator(CategorieValidator cv) {
+		this.cv = cv;
 	}
 
 	@Autowired
-	public void setObservationService(ObservationService observationService) {
-		this.observationService = observationService;
+	public void setObservationService(ObservationService os) {
+		this.os = os;
 	}
 
 	@InitBinder
-	public void initBinder(WebDataBinder dataBinder) {
-		dataBinder.setAllowedFields("title", "description", "iconFileName");
+	public void initBinder(WebDataBinder wdb) {
+		wdb.setAllowedFields("title", "description", "iconFileName");
 	}
 
 	@RequestMapping(method = GET)
-	public ModelAndView setup(HttpSession session, HttpServletResponse response)
+	public ModelAndView setup(HttpSession s, HttpServletResponse r)
 			throws IOException {
-		if (isAdmin(session))
+		if (isAdmin(s)) {
 			return new ModelAndView(VIEW, CATEGORIE_ATTRIBUTE, new Categorie());
-		else
-			return forbiddenMAV(response);
+		} else {
+			return forbiddenMAV(r);
+		}
 	}
 
 	@RequestMapping(method = POST)
 	public String submit(
-			@ModelAttribute(CATEGORIE_ATTRIBUTE) Categorie categorie,
+			@ModelAttribute(CATEGORIE_ATTRIBUTE) Categorie c,
 			BindingResult result, SessionStatus status, HttpSession s,
 			HttpServletResponse r) throws IOException {
 		if (isAdmin(s)) {
-			categorieValidator.validate(categorie, result);
-			if (result.hasErrors())
+			cv.validate(c, result);
+			if (result.hasErrors()) {
 				return VIEW;
-			else {
+			} else {
 				try {
-					observationService.registrate(categorie);
-				} catch (Exception e) {
-					// should not happen; the validator shound found all cases.
+					os.registrate(c);
+				} catch(Exception e) {
 					logger.warn("Unexpected Exception", e);
 					return internalErrorView(r);
+				} finally {
+					status.setComplete();
 				}
-				status.setComplete();
 				return "redirect:/c";
 			}
-		} else
+		} else {
 			return forbiddenView(r);
+		}
 	}
+
 }

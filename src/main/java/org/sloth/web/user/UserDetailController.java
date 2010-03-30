@@ -22,24 +22,27 @@ public class UserDetailController {
 
 	private static final String VIEW = "users/details";
 	private static final String USERS_ATTRIBUTE = "users";
-	private UserService userService;
+	private UserService us;
 
 	@Autowired
-	public void setUserService(UserService userService) {
-		this.userService = userService;
+	public void setUserService(UserService us) {
+		this.us = us;
 	}
 
 	@RequestMapping
-	public ModelAndView handle(@PathVariable Long id, HttpSession s,
-			HttpServletResponse r) throws IOException {
+	public ModelAndView handleRequest(@PathVariable Long id, HttpSession s,
+									  HttpServletResponse r) throws IOException {
 
 		if (isAdmin(s)) {
-			User u = userService.get(id);
-			if (u == null)
+			User u = us.get(id);
+			if (u == null) {
 				return notFoundMAV(r);
-			else
+			} else {
 				return new ModelAndView(VIEW, USERS_ATTRIBUTE, u);
-		} else
+			}
+		} else {
 			return forbiddenMAV(r);
+		}
 	}
+
 }

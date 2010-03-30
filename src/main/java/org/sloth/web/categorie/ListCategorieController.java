@@ -33,20 +33,22 @@ public class ListCategorieController {
 
 	private static final String VIEW = "categories/list";
 	private static final String CATEGORIE_ATTRIBUTE = "categories";
-	private ObservationService observationManager;
+	private ObservationService os;
 
 	@Autowired
-	public void setobservationManager(ObservationService observationManager) {
-		this.observationManager = observationManager;
+	public void setobservationService(ObservationService os) {
+		this.os = os;
 	}
 
 	@RequestMapping
 	public ModelAndView setupList(HttpSession s, HttpServletResponse r)
 			throws IOException {
-		if (isAdmin(s))
-			return new ModelAndView(VIEW, CATEGORIE_ATTRIBUTE, observationManager
-					.getCategories());
-		else
+		if (isAdmin(s)) {
+			return new ModelAndView(VIEW, CATEGORIE_ATTRIBUTE,
+									os.getCategories());
+		} else {
 			return forbiddenMAV(r);
+		}
 	}
+
 }

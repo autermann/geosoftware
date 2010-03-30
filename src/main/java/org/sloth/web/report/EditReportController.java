@@ -25,51 +25,53 @@ import static org.sloth.util.ControllerUtils.*;
 
 @Controller
 @RequestMapping("/r/edit/{id}")
-@SessionAttributes(types = { Report.class, Boolean.class })
+@SessionAttributes(types = {Report.class, Boolean.class})
 public class EditReportController {
 
-	private ObservationService observationService;
-	private ReportValidator reportValidator;
+	private ObservationService os;
+	private ReportValidator rv;
 	private static final String VIEW = "reports/form";
 	private static final String REPORT_ATTRIBUTE = "report";
 	private static final String PROCESSED_ATTRIBUTE = "processed";
-	private static final Logger logger = LoggerFactory
-			.getLogger(EditReportController.class);
+	private static final Logger logger = LoggerFactory.getLogger(
+			EditReportController.class);
 
 	/**
-	 * @param observationService
+	 * @param os
 	 *            the observationService to set
 	 */
 	@Autowired
-	public void setObservationService(ObservationService observationService) {
-		this.observationService = observationService;
+	public void setObservationService(ObservationService os) {
+		this.os = os;
 	}
 
 	/**
-	 * @param reportValidator
+	 * @param rv
 	 *            the reportValidator to set
 	 */
 	@Autowired
-	public void setReportValidator(ReportValidator reportValidator) {
-		this.reportValidator = reportValidator;
+	public void setReportValidator(ReportValidator rv) {
+		this.rv = rv;
 	}
 
 	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-		binder.setAllowedFields("description", "processed");
+	public void initBinder(WebDataBinder wdb) {
+		wdb.setAllowedFields("description", "processed");
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView handleGet(@PathVariable Long id, HttpSession s,
-			HttpServletResponse r) throws IOException {
+								  HttpServletResponse r) throws IOException {
 		if (isAuth(s)) {
-			Report report = observationService.getReport(id);
-			if (report == null)
+			Report report = os.getReport(id);
+			if (report == null) {
 				return notFoundMAV(r);
+			}
 
 			if (isAdmin(s) || isOwnReport(s, report)) {
 				ModelAndView mav = new ModelAndView(VIEW);
-				mav.addObject(PROCESSED_ATTRIBUTE, new Boolean(report.isProcessed()));
+				mav.addObject(PROCESSED_ATTRIBUTE, new Boolean(report.
+						isProcessed()));
 				mav.addObject(REPORT_ATTRIBUTE, report);
 				return mav;
 			}
@@ -80,31 +82,37 @@ public class EditReportController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String handlePost(@PathVariable Long id,
-			@ModelAttribute(PROCESSED_ATTRIBUTE) Boolean processed,
-			@ModelAttribute(REPORT_ATTRIBUTE) Report report, BindingResult result,
-			SessionStatus status, HttpSession s, HttpServletResponse r)
+							 @ModelAttribute(PROCESSED_ATTRIBUTE) Boolean p,
+							 @ModelAttribute(REPORT_ATTRIBUTE) Report report,
+							 BindingResult result,
+							 SessionStatus status, HttpSession s,
+							 HttpServletResponse resp)
 			throws IOException {
 		if (isAuth(s)) {
-			if (report == null)
-				return notFoundView(r);
-			if (!isAdmin(s)
-					&& !processed.equals(Boolean.valueOf(report.isProcessed())))
-				return forbiddenView(r);
-			if (isAdmin(s) || isOwnReport(s, report)) {
-				reportValidator.validate(report, result);
-				if (result.hasErrors())
+			if (report == null) {
+				return notFoundView(resp);
+			} else if (!isAdmin(s) && !p.equals(Boolean.valueOf(report.
+					isProcessed()))) {
+				return forbiddenView(resp);
+			} else if (isAdmin(s) || isOwnReport(s, report)) {
+				rv.validate(report, result);
+				if (result.hasErrors()) {
 					return VIEW;
+				}
 				status.setComplete();
 				try {
 					report.setLastUpdateDate(new Date());
-					observationService.updateReport(report);
-					return "redirect:/r";
-				} catch (Exception e) {
+					os.updateReport(report);
+				} catch(Exception e) {
 					logger.warn("Unexpected Exception", e);
-					return internalErrorView(r);
+					return internalErrorView(resp);
+				} finally {
+					status.setComplete();
 				}
+				return "redirect:/r";
 			}
 		}
-		return forbiddenView(r);
+		return forbiddenView(resp);
 	}
+
 }

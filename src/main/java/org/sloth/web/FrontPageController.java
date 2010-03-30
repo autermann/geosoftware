@@ -27,10 +27,8 @@ import static org.sloth.util.ControllerUtils.*;
 
 @Controller
 @RequestMapping("/")
-@SessionAttributes( { "observations", "observation", "categories" })
+@SessionAttributes({"observations", "observation", "categories"})
 public class FrontPageController {
-
-
 
 	private static final String VIEW = "index";
 	private static final String MAP_CONTENT_ATTRIBUTE = "observations";
@@ -39,77 +37,80 @@ public class FrontPageController {
 	private static final String SEARCH_PARAM = "q";
 	private static final int VISIBLE_OBSERVATIONS_DEFAULT = 10;
 	private static final int VISIBLE_OBSERVATIONS;
-	private static final Logger logger = LoggerFactory
-			.getLogger(FrontPageController.class);
+	private static final Logger logger = LoggerFactory.getLogger(
+			FrontPageController.class);
 	private ObservationService os;
-	private ObservationValidator validator;
+	private ObservationValidator ov;
+
 	static {
 		Integer i = null;
 		try {
 			i = Integer.valueOf(Config.getProperty("lastObservationsCount"));
-		} catch (NumberFormatException e) {
-			logger
-					.warn(
-							"Invalid or null value for property 'lastObservationsCount'.",
-							e);
+		} catch(NumberFormatException e) {
+			logger.warn(
+					"Invalid or null value for property 'lastObservationsCount'.",
+					e);
 		}
-		if (i == null)
+		if (i == null) {
 			VISIBLE_OBSERVATIONS = VISIBLE_OBSERVATIONS_DEFAULT;
-		else
+		} else {
 			VISIBLE_OBSERVATIONS = i;
+		}
 	}
 
 	@Autowired
-	public void setObservationValidator(ObservationValidator validator) {
-		this.validator = validator;
+	public void setObservationValidator(ObservationValidator ov) {
+		this.ov = ov;
 	}
 
 	@Autowired
-	public void setObservationService(ObservationService observationService) {
-		this.os = observationService;
+	public void setObservationService(ObservationService os) {
+		this.os = os;
 	}
 
 	@InitBinder
-	public void initBinder(WebDataBinder dataBinder) {
+	public void initBinder(WebDataBinder wdb) {
 		CategorieEditor c = new CategorieEditor();
 		c.setObservationService(os);
-		dataBinder.registerCustomEditor(Categorie.class, c);
+		wdb.registerCustomEditor(Categorie.class, c);
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView fillMap(HttpSession s,
-			@RequestParam(value = SEARCH_PARAM, required = false) String q) {
+								@RequestParam(value = SEARCH_PARAM, required = false) String q) {
 		ModelAndView mav = new ModelAndView(VIEW);
 		if (isAuth(s)) {
 			mav.addObject(NEW_OBSERVATION_ATTRIBUTE, new Observation());
 			mav.addObject(CATEGORIE_ATTRIBUTE, os.getCategories());
 		}
-		return mav.addObject(MAP_CONTENT_ATTRIBUTE,
-				(q == null || q.trim().isEmpty()) ? os
-						.getNewestObservations(VISIBLE_OBSERVATIONS) : os
-						.getObservations(q));
-
+		return mav.addObject(MAP_CONTENT_ATTRIBUTE, (q == null || q.trim().isEmpty()) ?
+			os.getNewestObservations(VISIBLE_OBSERVATIONS) : os.getObservations(q));
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String saveObservation(HttpSession s, HttpServletResponse r,
-			@ModelAttribute(NEW_OBSERVATION_ATTRIBUTE) Observation observation,
-			BindingResult result, SessionStatus status) throws IOException {
+								  @ModelAttribute(NEW_OBSERVATION_ATTRIBUTE) Observation o,
+								  BindingResult result, SessionStatus status)
+			throws IOException {
 		if (isAuth(s)) {
-			observation.setUser(getUser(s));
-			validator.validate(observation, result);
-			if (result.hasErrors())
+			o.setUser(getUser(s));
+			ov.validate(o, result);
+			if (result.hasErrors()) {
 				return VIEW;
-			else
+			} else {
 				try {
-					status.setComplete();
-					this.os.registrate(observation);
-					return "redirect:/";
-				} catch (Exception e) {
+					this.os.registrate(o);
+				} catch(Exception e) {
 					logger.warn("Unexpected Exception", e);
 					return internalErrorView(r);
+				} finally {
+					status.setComplete();
 				}
-		} else
+				return "redirect:/";
+			}
+		} else {
 			return forbiddenView(r);
+		}
 	}
+
 }

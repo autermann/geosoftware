@@ -26,8 +26,9 @@ import static org.sloth.util.ControllerUtils.deAuth;
 public class LogoutController {
 
 	@RequestMapping("/logout")
-	public String logout(HttpSession session) {
-		deAuth(session);
+	public String logout(HttpSession s) {
+		deAuth(s);
 		return "redirect:/";
 	}
+
 }

@@ -20,20 +20,22 @@ public class ListOwnObservationsController {
 
 	private final static String VIEW = "observations/list";
 	private final static String OBSERVATIONS_ATTRIBUTE = "observations";
-	private ObservationService observationService;
+	private ObservationService os;
 
 	@Autowired
-	public void setobservationService(ObservationService observationService) {
-		this.observationService = observationService;
+	public void setobservationService(ObservationService os) {
+		this.os = os;
 	}
 
 	@RequestMapping
 	public ModelAndView setupList(HttpSession s, HttpServletResponse r)
 			throws IOException {
-		if (isAuth(s))
-			return new ModelAndView(VIEW, OBSERVATIONS_ATTRIBUTE, observationService
-					.getObservationsByUser(getUser(s)));
-		else
+		if (isAuth(s)) {
+			return new ModelAndView(VIEW, OBSERVATIONS_ATTRIBUTE, os.
+					getObservationsByUser(getUser(s)));
+		} else {
 			return forbiddenMAV(r);
+		}
 	}
+
 }

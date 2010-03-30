@@ -23,23 +23,23 @@ public class ViewObservationController {
 
 	private static final String VIEW = "observations/details";
 	private static final String OBSERVATIONS_ATTRIBUTE = "observation";
-	protected static final Logger logger = LoggerFactory
-			.getLogger(EditObservationController.class);
-	private ObservationService observationService;
+	protected static final Logger logger = LoggerFactory.getLogger(
+			EditObservationController.class);
+	private ObservationService os;
 
 	@Autowired
-	public void setObservationManager(ObservationService observationManager) {
-		this.observationService = observationManager;
+	public void setObservationService(ObservationService os) {
+		this.os = os;
 	}
 
 	@RequestMapping(method = GET)
 	public ModelAndView setupForm(@PathVariable Long id, HttpSession s,
-			HttpServletResponse r) throws IOException {
+								  HttpServletResponse r) throws IOException {
 		if (isAuth(s)) {
-			Observation o = observationService.getObservation(id);
-			if (o == null)
+			Observation o = os.getObservation(id);
+			if (o == null) {
 				return notFoundMAV(r);
-			if (isAdmin(s) || isOwnObservation(s, o)) {
+			} else if (isAdmin(s) || isOwnObservation(s, o)) {
 				ModelAndView mav = new ModelAndView(VIEW);
 				mav.addObject(OBSERVATIONS_ATTRIBUTE, o);
 				return mav;
@@ -47,4 +47,5 @@ public class ViewObservationController {
 		}
 		return forbiddenMAV(r);
 	}
+
 }

@@ -44,52 +44,58 @@ public class LoginController {
 
 	private static final String VIEW = "login";
 	private static final String LOGIN_ATTRIBUTE = "login";
-	private static final Logger logger = LoggerFactory
-			.getLogger(LoginController.class);
-	private UserService userService;
-	private LoginValidator validator;
+	private static final Logger logger = LoggerFactory.getLogger(
+			LoginController.class);
+	private UserService us;
+	private LoginValidator lv;
 
 	@Autowired
-	public void setUserService(UserService userService) {
-		this.userService = userService;
+	public void setUserService(UserService us) {
+		this.us = us;
 	}
 
 	@Autowired
-	public void setLoginValidator(LoginValidator loginValidator) {
-		this.validator = loginValidator;
+	public void setLoginValidator(LoginValidator lv) {
+		this.lv = lv;
 	}
 
 	@InitBinder
-	public void setAllowedFields(WebDataBinder dataBinder) {
-		dataBinder.setAllowedFields("mail", "password");
+	public void setAllowedFields(WebDataBinder wdb) {
+		wdb.setAllowedFields("mail", "password");
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView prepare(HttpSession s) {
-		if (isAuth(s))
+		if (isAuth(s)) {
 			return new ModelAndView("redirect:/");
-		return new ModelAndView(VIEW, LOGIN_ATTRIBUTE, new Login());
+		} else {
+			return new ModelAndView(VIEW, LOGIN_ATTRIBUTE, new Login());
+		}
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String login(@ModelAttribute(LOGIN_ATTRIBUTE) Login l,
-			BindingResult result, SessionStatus status, HttpSession s) {
-		if (isAuth(s))
+						BindingResult result, SessionStatus status,
+						HttpSession s) {
+		if (isAuth(s)) {
 			return "redirect:/";
-		validator.validate(l, result);
-		if (result.hasErrors())
-			return VIEW;
-		else {
-			User u = userService.login(l.getMail(), l.getPassword());
-			if (u == null) {
-				result.reject("field.login.invalid");
+		} else {
+			lv.validate(l, result);
+			if (result.hasErrors()) {
 				return VIEW;
 			} else {
-				logger.debug("Got valid user. Setting Session-Attribute.");
-				auth(s, u);
-				status.setComplete();
-				return "redirect:/";
+				User u = us.login(l.getMail(), l.getPassword());
+				if (u == null) {
+					result.reject("field.login.invalid");
+					return VIEW;
+				} else {
+					logger.debug("Got valid user. Setting Session-Attribute.");
+					auth(s, u);
+					status.setComplete();
+					return "redirect:/";
+				}
 			}
 		}
 	}
+
 }

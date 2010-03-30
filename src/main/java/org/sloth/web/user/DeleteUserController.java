@@ -31,6 +31,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import static org.sloth.util.ControllerUtils.*;
 
@@ -40,58 +41,64 @@ public class DeleteUserController {
 
 	private static final String VIEW = "users/delete";
 	private static final String USER_ATTRIBUTE = "user";
-	private static final Logger logger = LoggerFactory
-			.getLogger(DeleteUserController.class);
-	private UserService userManager;
+	private static final Logger logger = LoggerFactory.getLogger(
+			DeleteUserController.class);
+	private UserService us;
 
 	@Autowired
-	public void setUserManager(UserService userManager) {
-		this.userManager = userManager;
+	public void setUserService(UserService us) {
+		this.us = us;
 	}
 
 	@InitBinder
-	public void setAllowedFields(WebDataBinder dataBinder) {
-		dataBinder.setAllowedFields();
+	public void setAllowedFields(WebDataBinder wdb) {
+		wdb.setAllowedFields();
 	}
 
 	@RequestMapping(method = GET)
 	public ModelAndView setupForm(@PathVariable Long id, HttpSession s,
-			HttpServletResponse r) throws IOException {
-		if (isAuth(s))
-			if (getUser(s).getId().equals(id))
+								  HttpServletResponse r) throws IOException {
+		if (isAuth(s)) {
+			if (getUser(s).getId().equals(id)) {
 				return new ModelAndView(VIEW, USER_ATTRIBUTE, getUser(s));
-			else if (isAdmin(s)) {
-				User u = userManager.get(id);
-				if (u == null)
+			} else if (isAdmin(s)) {
+				User u = us.get(id);
+				if (u == null) {
 					return notFoundMAV(r);
-				else
+				} else {
 					return new ModelAndView(VIEW, USER_ATTRIBUTE, u);
+				}
 			}
+		}
 		return forbiddenMAV(r);
 
 	}
 
 	@RequestMapping(method = POST)
 	public String processSubmit(@PathVariable Long id, HttpSession s,
-			HttpServletResponse r) throws IOException {
+								HttpServletResponse r, SessionStatus status)
+			throws IOException {
 		if (isAuth(s)) {
 			boolean self = getUser(s).getId().equals(id);
-			if (self || isAdmin(s))
+			if (self || isAdmin(s)) {
 				try {
-					userManager.delete(id);
-					if (self) {
-						deAuth(s);
-						return "redirect:/";
-					} else {
-						userManager.delete(id);
-						return "redirect:/u";
-					}
-
-				} catch (Exception e) {
+					us.delete(id);
+				} catch(Exception e) {
 					logger.warn("Unexpected Exception", e);
 					return internalErrorView(r);
+				} finally {
+					status.setComplete();
 				}
+				if (self) {
+					deAuth(s);
+					return "redirect:/";
+				} else {
+					us.delete(id);
+					return "redirect:/u";
+				}
+			}
 		}
 		return forbiddenView(r);
 	}
+
 }
