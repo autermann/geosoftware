@@ -99,10 +99,11 @@ public class Categorie extends BaseEntity implements Serializable {
 	@Override
 	@SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
 	public boolean equals(Object obj) {
-		if (obj == null)
+		if (obj == null) {
 			return false;
-		else
+		} else {
 			return this.hashCode() == obj.hashCode();
+		}
 	}
 
 	@Override
@@ -110,15 +111,15 @@ public class Categorie extends BaseEntity implements Serializable {
 		int hash = 7;
 		hash = 41 * hash + (this.getId() != null ? this.getId().hashCode() : 0);
 		hash = 41
-				* hash
-				+ (this.getIconFileName() != null ? this.getIconFileName()
-						.hashCode() : 0);
+			   * hash
+			   + (this.getIconFileName() != null ? this.getIconFileName().
+				hashCode() : 0);
 		hash = 41 * hash
-				+ (this.getTitle() != null ? this.getTitle().hashCode() : 0);
+			   + (this.getTitle() != null ? this.getTitle().hashCode() : 0);
 		hash = 41
-				* hash
-				+ (this.getDescription() != null ? this.getDescription()
-						.hashCode() : 0);
+			   * hash
+			   + (this.getDescription() != null
+				  ? this.getDescription().hashCode() : 0);
 		return hash;
 	}
 
@@ -130,14 +131,16 @@ public class Categorie extends BaseEntity implements Serializable {
 	@Override
 	public void validate() throws ConstraintViolationException {
 		if (this.getDescription() == null || this.getTitle() == null
-				|| this.getIconFileName() == null
-				|| this.getIconFileName().isEmpty()
-				|| this.getDescription().isEmpty() || this.getTitle().isEmpty())
+			|| this.getIconFileName() == null
+			|| this.getIconFileName().isEmpty()
+			|| this.getDescription().isEmpty() || this.getTitle().isEmpty()) {
 			throw new NotNullConstraintViolationException();
+		}
 		if (this.getDescription().length() > 1000
-				|| this.getTitle().length() > 255
-				|| this.getIconFileName().length() > 255)
+			|| this.getTitle().length() > 255
+			|| this.getIconFileName().length() > 255) {
 			throw new FieldLengthConstraintViolationException();
+		}
 	}
 
 	/**
@@ -154,4 +157,5 @@ public class Categorie extends BaseEntity implements Serializable {
 	public void setIconFileName(String iconFileName) {
 		this.iconFileName = iconFileName;
 	}
+
 }

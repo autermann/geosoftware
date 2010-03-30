@@ -28,7 +28,77 @@ import org.sloth.model.User;
  * 
  * @author Christian Autermann
  */
-public interface ObservationDao extends BaseEntityDao<Observation> {
+public interface ObservationDao {
+
+	/**
+	 * Query for all Entities.
+	 *
+	 * @return all Entities found
+	 */
+	public Collection<Observation> getAll();
+
+	/**
+	 * Query for a Entity with a known {@code id}.
+	 *
+	 * @param id
+	 *            the id
+	 * @return the @code Entity with the specified id, if no matching Entity
+	 *         found {@code null} is returned.
+	 */
+	public Observation getById(Long id);
+
+	/**
+	 * Update a Entity. Invoking this method with an Entity not known by the
+	 * database will cause an {@code IllegalArgumentException}.
+	 *
+	 * @param t
+	 *            the Entity to be updated
+	 * @throws NullPointerException
+	 *             if {@code t} is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if {@code t} is not found in the database.
+	 */
+	public void update(Observation t) throws NullPointerException,
+											 IllegalArgumentException;
+
+	/**
+	 * Delete a Entity from database. Invoking this method with an Entity not
+	 * known by the database will cause an {@code IllegalArgumentException}.
+	 *
+	 * @param t
+	 *            the Entity to be deleted
+	 * @throws NullPointerException
+	 *             if {@code t} is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if {@code t} is not found in the database.
+	 */
+	public void delete(Observation t) throws NullPointerException,
+											 IllegalArgumentException;
+
+	/**
+	 * Delete Entities from database. Invoking this method with Entities not
+	 * known by the database will cause an {@code IllegalArgumentException}.
+	 *
+	 * @param t
+	 *            the Entities to be deleted
+	 * @throws NullPointerException
+	 *             if {@code t} or {@code t}'s content is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if Entities are not found in the database.
+	 */
+	public void delete(Collection<Observation> t) throws NullPointerException,
+														 IllegalArgumentException;
+
+	/**
+	 * Save a {@code Observation} in the database. {@link Observation#id} will
+	 * be generated.
+	 *
+	 * @param t
+	 *            the {@code Observation} to be saved
+	 * @throws NullPointerException
+	 *             if {@code t} is {@code null}
+	 */
+	public void save(Observation t) throws NullPointerException;
 
 	/**
 	 * Query for all {@code Observation}s in a {@code Categorie}.
@@ -74,4 +144,5 @@ public interface ObservationDao extends BaseEntityDao<Observation> {
 
 	public Collection<Observation> getByKeyWord(String keyword)
 			throws NullPointerException;
+
 }

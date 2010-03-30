@@ -102,12 +102,12 @@ public class Coordinate implements Serializable {
 	@Override
 	public int hashCode() {
 		int hash = 5;
-		hash = 47
-			   * hash
-			   + (int) (Double.doubleToLongBits(this.getLatitude()) ^ (Double.doubleToLongBits(this.getLatitude()) >>> 32));
-		hash = 47
-			   * hash
-			   + (int) (Double.doubleToLongBits(this.getLongitude()) ^ (Double.doubleToLongBits(this.getLongitude()) >>> 32));
+		hash = 47 * hash
+			   + (int) (Double.doubleToLongBits(this.getLatitude())
+			   ^ (Double.doubleToLongBits(this.getLatitude()) >>> 32));
+		hash = 47 * hash
+			   + (int) (Double.doubleToLongBits(this.getLongitude())
+			   ^ (Double.doubleToLongBits(this.getLongitude()) >>> 32));
 		return hash;
 	}
 
@@ -121,4 +121,5 @@ public class Coordinate implements Serializable {
 		buf.append(")");
 		return buf.toString();
 	}
+
 }

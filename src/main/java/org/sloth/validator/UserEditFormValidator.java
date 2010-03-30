@@ -37,6 +37,9 @@ public class UserEditFormValidator extends AbstractUserActionValidator {
 			if (notNullAndNotEmpty(a.getActualPassword())) {
 				if (passwordService.check(a.getOldUser().getPassword(), a.getActualPassword())) {
 					test(a, e);
+					if (!a.getNewGroup().equals(a.getOldUser().getUserGroup())) {
+						e.rejectValue("newGroup", "field.useredit.newGroup.canNotChangeOwnGroup");
+					}
 				} else {
 					e.rejectValue("actualPassword", "field.useredit.actualpassword.wrong");
 				}
@@ -45,9 +48,6 @@ public class UserEditFormValidator extends AbstractUserActionValidator {
 			}
 		} else { // editing somone else
 			test(a, e);
-			if (!a.getNewGroup().equals(a.getOldUser().getUserGroup())) {
-				e.rejectValue("newGroup", "field.useredit.newGroup.canNotChangeOwnGroup");
-			}
 		}
 	}
 

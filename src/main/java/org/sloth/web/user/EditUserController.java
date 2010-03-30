@@ -65,7 +65,7 @@ public class EditUserController {
 	@InitBinder
 	public void setAllowedFields(WebDataBinder dataBinder) {
 		dataBinder.setAllowedFields("newName", "newFamilyName", "newPassword",
-									"newPasswordRepeat", "newMail",
+									"newPasswordRepeat", "newMail", "newGroup",
 									"actualPassword");
 	}
 

@@ -18,6 +18,11 @@ import org.sloth.exceptions.ConstraintViolationException;
 import org.sloth.exceptions.FieldLengthConstraintViolationException;
 import org.sloth.exceptions.NotNullConstraintViolationException;
 
+/**
+ * Model class for Reports created by {@code User}s for {@code Observation}s.
+ *
+ * @author Christian Autermann
+ */
 @Entity(name = "REPORTS")
 public class Report extends BaseEntity implements Serializable {
 
@@ -40,6 +45,10 @@ public class Report extends BaseEntity implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date lastUpdateDate;
 
+	/**
+	 * Creates a new {@code Report}. {@code creationDate} and {@code lastUpdateDate}
+	 * are set too the actual time. All other properties are initialised with {@code null}.
+	 */
 	public Report() {
 		setCreationDate(new Date());
 		setLastUpdateDate(getCreationDate());
@@ -48,11 +57,13 @@ public class Report extends BaseEntity implements Serializable {
 	@Override
 	public void validate() throws ConstraintViolationException {
 		if (getAuthor() == null || getObservation() == null
-				|| getDescription() == null
-				|| getDescription().trim().isEmpty())
+			|| getDescription() == null
+			|| getDescription().trim().isEmpty()) {
 			throw new NotNullConstraintViolationException();
-		if (getDescription().length() > 1000)
+		}
+		if (getDescription().length() > 1000) {
 			throw new FieldLengthConstraintViolationException();
+		}
 	}
 
 	/**
@@ -144,4 +155,5 @@ public class Report extends BaseEntity implements Serializable {
 	public void setLastUpdateDate(Date lastUpdateDate) {
 		this.lastUpdateDate = lastUpdateDate;
 	}
+
 }

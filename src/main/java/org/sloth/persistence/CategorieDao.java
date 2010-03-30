@@ -17,6 +17,7 @@
  */
 package org.sloth.persistence;
 
+import java.util.Collection;
 import org.sloth.model.Categorie;
 
 /**
@@ -24,7 +25,76 @@ import org.sloth.model.Categorie;
  * 
  * @author Christian Autermann
  */
-public interface CategorieDao extends BaseEntityDao<Categorie> {
+public interface CategorieDao {
+
+	/**
+	 * Query for all Entities.
+	 *
+	 * @return all Entities found
+	 */
+	public Collection<Categorie> getAll();
+
+	/**
+	 * Query for a Entity with a known {@code id}.
+	 *
+	 * @param id
+	 *            the id
+	 * @return the @code Entity with the specified id, if no matching Entity
+	 *         found {@code null} is returned.
+	 */
+	public Categorie getById(Long id);
+
+	/**
+	 * Update a Entity. Invoking this method with an Entity not known by the
+	 * database will cause an {@code IllegalArgumentException}.
+	 *
+	 * @param t
+	 *            the Entity to be updated
+	 * @throws NullPointerException
+	 *             if {@code t} is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if {@code t} is not found in the database.
+	 */
+	public void update(Categorie t) throws NullPointerException,
+										   IllegalArgumentException;
+
+	/**
+	 * Delete a Entity from database. Invoking this method with an Entity not
+	 * known by the database will cause an {@code IllegalArgumentException}.
+	 *
+	 * @param t
+	 *            the Entity to be deleted
+	 * @throws NullPointerException
+	 *             if {@code t} is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if {@code t} is not found in the database.
+	 */
+	public void delete(Categorie t) throws NullPointerException,
+										   IllegalArgumentException;
+
+	/**
+	 * Delete Entities from database. Invoking this method with Entities not
+	 * known by the database will cause an {@code IllegalArgumentException}.
+	 *
+	 * @param t
+	 *            the Entities to be deleted
+	 * @throws NullPointerException
+	 *             if {@code t} or {@code t}'s content is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if Entities are not found in the database.
+	 */
+	public void delete(Collection<Categorie> t) throws NullPointerException,
+													   IllegalArgumentException;
+
+	/**
+	 * Save a categorie in the database. {@link Categorie#id} will be generated.
+	 *
+	 * @param t
+	 *            the {@code Categorie} to be saved
+	 * @throws NullPointerException
+	 *             if {@code t} is {@code null}
+	 */
+	public void save(Categorie t) throws NullPointerException;
 
 	/**
 	 * Returns the {@code Categorie} with given {@code title}.
@@ -37,4 +107,5 @@ public interface CategorieDao extends BaseEntityDao<Categorie> {
 	 * 
 	 */
 	public Categorie getByTitle(String title) throws NullPointerException;
+
 }

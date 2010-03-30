@@ -73,4 +73,5 @@ public abstract class BaseEntity {
 	@PrePersist
 	@PreUpdate
 	public abstract void validate() throws ConstraintViolationException;
+
 }

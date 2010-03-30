@@ -1,4 +1,4 @@
-/*
+	/*
  * Copyright (C) 2009-2010  Stefan Arndt, Christian Autermann, Dustin Demuth,
  *                  Christoph Fendrich, Simon Ottenhues, Christian Paluschek
  *
@@ -73,7 +73,7 @@ public class User extends BaseEntity implements Serializable {
 	 *            the group
 	 */
 	public User(String mail, String name, String familyName, String password,
-			Group group) {
+				Group group) {
 		this();
 		setMail(mail);
 		setName(name);
@@ -167,10 +167,11 @@ public class User extends BaseEntity implements Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null)
+		if (obj == null) {
 			return false;
-		else
+		} else {
 			return (obj instanceof User) && obj.hashCode() == this.hashCode();
+		}
 	}
 
 	@Override
@@ -180,12 +181,12 @@ public class User extends BaseEntity implements Serializable {
 		hash = 37 * hash + (getMail() != null ? getMail().hashCode() : 0);
 		hash = 37 * hash + (getName() != null ? getName().hashCode() : 0);
 		hash = 37 * hash
-				+ (getFamilyName() != null ? getFamilyName().hashCode() : 0);
+			   + (getFamilyName() != null ? getFamilyName().hashCode() : 0);
 		hash = 37 * hash
-				+ (getPassword() != null ? getPassword().hashCode() : 0);
+			   + (getPassword() != null ? getPassword().hashCode() : 0);
 		hash = 37
-				* hash
-				+ (getCreationDate() != null ? getCreationDate().hashCode() : 0);
+			   * hash
+			   + (getCreationDate() != null ? getCreationDate().hashCode() : 0);
 		return hash;
 	}
 
@@ -219,13 +220,16 @@ public class User extends BaseEntity implements Serializable {
 	@Override
 	public void validate() throws ConstraintViolationException {
 		if (getCreationDate() == null || getFamilyName() == null
-				|| getName() == null || getMail() == null
-				|| getPassword() == null || getUserGroup() == null
-				|| getName().isEmpty() || getFamilyName().isEmpty()
-				|| getMail().isEmpty())
+			|| getName() == null || getMail() == null
+			|| getPassword() == null || getUserGroup() == null
+			|| getName().isEmpty() || getFamilyName().isEmpty()
+			|| getMail().isEmpty()) {
 			throw new NotNullConstraintViolationException();
+		}
 		if (getFamilyName().length() > 255 || getName().length() > 255
-				|| getPassword().length() > 255 || getName().length() > 255)
+			|| getPassword().length() > 255 || getName().length() > 255) {
 			throw new FieldLengthConstraintViolationException();
+		}
 	}
+
 }

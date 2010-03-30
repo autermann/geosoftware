@@ -32,8 +32,9 @@ import org.sloth.exceptions.NotNullConstraintViolationException;
 import static javax.persistence.TemporalType.TIMESTAMP;
 
 /**
- * @todo
- * @author auti
+ * Class to represent an Observation in an {@code Categorie} created by a 
+ * {@code User}.
+ * @author Christian Autermann
  */
 @Entity(name = "OBSERVATIONS")
 public class Observation extends BaseEntity implements Serializable {
@@ -66,7 +67,7 @@ public class Observation extends BaseEntity implements Serializable {
 	 * @param coordinate
 	 */
 	public Observation(String title, String description, User user,
-			Categorie categorie, Coordinate coordinate) {
+					   Categorie categorie, Coordinate coordinate) {
 		setCreationDate(new Date());
 		setTitle(title);
 		setDescription(description);
@@ -76,7 +77,8 @@ public class Observation extends BaseEntity implements Serializable {
 	}
 
 	/**
-	 * @todo
+	 * Creates a new {@code Observation} with the actual time as the {@code
+	 * creationDate} and {@code null} as default value for all other properties.
 	 */
 	public Observation() {
 		setCreationDate(new Date());
@@ -173,12 +175,16 @@ public class Observation extends BaseEntity implements Serializable {
 	}
 
 	@Override
-	@SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
 	public boolean equals(Object obj) {
-		if (obj == null)
+		if (obj == null) {
 			return false;
-		else
-			return this.hashCode() == obj.hashCode();
+		} else {
+			if (obj instanceof Observation) {
+				return this.hashCode() == obj.hashCode();
+			} else {
+				return false;
+			}
+		}
 	}
 
 	@Override
@@ -186,25 +192,25 @@ public class Observation extends BaseEntity implements Serializable {
 		int hash = 7;
 		hash = 59 * hash + (this.getId() != null ? this.getId().hashCode() : 0);
 		hash = 59 * hash
-				+ (this.getTitle() != null ? this.getTitle().hashCode() : 0);
+			   + (this.getTitle() != null ? this.getTitle().hashCode() : 0);
 		hash = 59
-				* hash
-				+ (this.getDescription() != null ? this.getDescription()
-						.hashCode() : 0);
+			   * hash
+			   + (this.getDescription() != null
+				  ? this.getDescription().hashCode() : 0);
 		hash = 59 * hash
-				+ (this.getUser() != null ? this.getUser().hashCode() : 0);
+			   + (this.getUser() != null ? this.getUser().hashCode() : 0);
 		hash = 59
-				* hash
-				+ (this.getCreationDate() != null ? this.getCreationDate()
-						.hashCode() : 0);
+			   * hash
+			   + (this.getCreationDate() != null ? this.getCreationDate().
+				hashCode() : 0);
 		hash = 59
-				* hash
-				+ (this.getCategorie() != null ? this.getCategorie().hashCode()
-						: 0);
+			   * hash
+			   + (this.getCategorie() != null ? this.getCategorie().hashCode()
+				  : 0);
 		hash = 59
-				* hash
-				+ (this.getCoordinate() != null ? this.getCoordinate()
-						.hashCode() : 0);
+			   * hash
+			   + (this.getCoordinate() != null ? this.getCoordinate().hashCode()
+				  : 0);
 		return hash;
 	}
 
@@ -232,12 +238,15 @@ public class Observation extends BaseEntity implements Serializable {
 	@Override
 	public void validate() throws ConstraintViolationException {
 		if (getCoordinate() == null || getCreationDate() == null
-				|| getDescription() == null || getTitle() == null
-				|| getUser() == null || getDescription().isEmpty()
-				|| getTitle().isEmpty())
+			|| getDescription() == null || getTitle() == null
+			|| getUser() == null || getDescription().isEmpty()
+			|| getTitle().isEmpty()) {
 			throw new NotNullConstraintViolationException();
-		if (getTitle().length() > 255 || getDescription().length() > 1000)
+		}
+		if (getTitle().length() > 255 || getDescription().length() > 1000) {
 			throw new FieldLengthConstraintViolationException();
+		}
 		getUser().validate();
 	}
+
 }
