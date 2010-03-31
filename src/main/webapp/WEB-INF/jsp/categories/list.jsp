@@ -7,7 +7,7 @@
                 <tr style="height: 25%">
                         <td></td>
                         <td><h3><fmt:message key="categorie.list"/></h3><br />
-                            <p align="right"><a href="<s:url value="/categories/new"/>">
+                            <p align="right"><a href="<s:url value="/c/new"/>">
                                 <img src="<s:url value="/static/img/add.png" htmlEscape="true"/>" height="24" alt="" />
                                     <fmt:message key="categorie.new"/>
                             </a></p>

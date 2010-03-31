@@ -1,13 +1,49 @@
 <%@include file="../includes.jsp" %>
 <%@include file="../header.jsp" %>
-<div>
-	<ul>
-		<li><a href="<s:url value="/u/del" />"><fmt:message key="user.delete"/></a></li>
-		<li><a href="<s:url value="/u/edit" />"><fmt:message key="user.edit"/></a></li>
-		<li><a href="<s:url value="/logout" />"><fmt:message key="logout"/></a></li>
-		<li><a href="<s:url value="/o/own" />"><fmt:message key="observations.own"/></a></li>
-		<li><a href="<s:url value="/o" />"><fmt:message key="observations.all"/></a></li>
-	</ul>
-	<a href="<c:out value="${headerValues['referer'][0]}" default="/"/>" ><fmt:message key="nav.back"/></a>
-</div>
-<%@include file="../footer.jsp" %>
+
+
+        <table align="center" style="height: 100%">
+
+                <tr style="height: 25%">
+                        <td></td>
+                        <td class="admin_statement"><fmt:message key="user.backend"/><br /><br /> </td>
+                        <td></td>
+                </tr>
+                <tr style="height: 33%">
+
+                    <td width=20%></td>
+                    <td width=40% class="admin_backend">
+
+
+
+
+                        <table>
+                                    <tr><td>    <a href="<s:url value="/u/del" />"><img src="<s:url value="/static/img/userdelete.png" htmlEscape="true"/>" alt="" /></a></td><td><a href="<s:url value="/u/del" />"><fmt:message key="user.delete.account"/></a></td></tr>
+                                    <tr><td>    <a href="<s:url value="/u/edit" />"><img src="<s:url value="/static/img/user_mng.png" htmlEscape="true"/>" alt="" /></a></td><td><a href="<s:url value="/u/edit" />"><fmt:message key="user.edit"/></a></td></tr>
+                                    <tr><td>    <a href="<s:url value="/o/own" />"><img src="<s:url value="/static/img/observation_mng.png" htmlEscape="true"/>" alt="" /></a></td><td><a href="<s:url value="/o/own" />"><fmt:message key="observations.own"/></a></td></tr>
+                                    <tr><td>    <a href="<s:url value="/o" />"><img src="<s:url value="/static/img/observation_mng.png" htmlEscape="true"/>" alt="" /></a></td><td> <a href="<s:url value="/o" />"><fmt:message key="observations.all"/></a></tr>
+                                    
+                                    
+                                    
+                                    
+                        </table>
+
+
+
+
+
+                    </td>
+                    <td width=40%></td>
+
+
+                </tr>
+                <tr style="height: 41%">
+                    <td></td>
+                    <td align="center">
+
+                        <a href="<s:url value="/" htmlEscape="true" />"><fmt:message key="nav.home"/></a> <fmt:message key="copyright"/>
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+

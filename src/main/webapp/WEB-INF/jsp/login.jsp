@@ -12,7 +12,7 @@
                 <tr style="height: 33%">
                         <td>
 
-                         <img src="<s:url value="/static/img/logo.png" htmlEscape="true"/>" align="right" alt="Logo" ></img>
+                         <a href="<s:url value="/" htmlEscape="true" />"><img src="<s:url value="/static/img/logo.png" htmlEscape="true"/>" align="right" alt="Logo" ></img></a>
 
                         </td>
                         <td class="login_statement"><fmt:message key="login.statement"/><br /><br /> </td>
