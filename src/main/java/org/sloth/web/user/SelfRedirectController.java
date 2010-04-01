@@ -29,5 +29,4 @@ public class SelfRedirectController {
 			return forbiddenView(r);
 		}
 	}
-
 }

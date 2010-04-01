@@ -46,10 +46,9 @@ public class ListUserController {
 			throws IOException {
 		if (isAdmin(s)) {
 			return new ModelAndView(VIEW, USERS_ATTRIBUTE,
-									us.getUsers());
+					this.us.getUsers());
 		} else {
 			return forbiddenMAV(r);
 		}
 	}
-
 }

@@ -34,9 +34,9 @@ public class ViewObservationController {
 
 	@RequestMapping(method = GET)
 	public ModelAndView setupForm(@PathVariable Long id, HttpSession s,
-								  HttpServletResponse r) throws IOException {
+			HttpServletResponse r) throws IOException {
 		if (isAuth(s)) {
-			Observation o = os.getObservation(id);
+			Observation o = this.os.getObservation(id);
 			if (o == null) {
 				return notFoundMAV(r);
 			} else if (isAdmin(s) || isOwnObservation(s, o)) {
@@ -47,5 +47,4 @@ public class ViewObservationController {
 		}
 		return forbiddenMAV(r);
 	}
-
 }

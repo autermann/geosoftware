@@ -24,16 +24,16 @@ import static org.sloth.util.Config.getProperty;
 
 public abstract class AbstractPasswordService implements PasswordService {
 
-	protected static final Logger logger = LoggerFactory
-			.getLogger(AbstractPasswordService.class);
-	protected final int LENGTH;
-	protected final boolean DIGIT;
-	protected final boolean LOWER_CASE;
-	protected final boolean UPPER_CASE;
-	protected final boolean NON_ALPHA_NUM;
-	protected String REGEX;
+	protected static final Logger logger = LoggerFactory.getLogger(AbstractPasswordService.class);
+	protected static final String REGEX;
+	public static final int LENGTH;
+	public static final boolean DIGIT;
+	public static final boolean LOWER_CASE;
+	public static final boolean UPPER_CASE;
+	public static final boolean NON_ALPHA_NUM;
 
-	public AbstractPasswordService() {
+
+	static {
 		String length = getProperty("password.length");
 		String digit = getProperty("password.digit");
 		String lowercase = getProperty("password.lowercase");
@@ -44,20 +44,23 @@ public abstract class AbstractPasswordService implements PasswordService {
 		DIGIT = (digit == null) ? false : Boolean.valueOf(digit);
 		LOWER_CASE = (lowercase == null) ? false : Boolean.valueOf(lowercase);
 		UPPER_CASE = (uppercase == null) ? false : Boolean.valueOf(uppercase);
-		NON_ALPHA_NUM = (nonalphanum == null) ? false : Boolean
-				.valueOf(nonalphanum);
+		NON_ALPHA_NUM = (nonalphanum == null) ? false : Boolean.valueOf(nonalphanum);
 
 		StringBuilder builder = new StringBuilder("^(?=.{");
 		builder.append(LENGTH);
 		builder.append(",})");
-		if (DIGIT)
+		if (DIGIT) {
 			builder.append("(?=.*[0-9])");
-		if (LOWER_CASE)
+		}
+		if (LOWER_CASE) {
 			builder.append("(?=.*[a-z])");
-		if (UPPER_CASE)
+		}
+		if (UPPER_CASE) {
 			builder.append("(?=.*[A-Z])");
-		if (NON_ALPHA_NUM)
+		}
+		if (NON_ALPHA_NUM) {
 			builder.append("(?=.*[^A-Za-z0-9])");
+		}
 		builder.append(".*$");
 
 		REGEX = builder.toString();

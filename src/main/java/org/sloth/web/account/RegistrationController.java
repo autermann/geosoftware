@@ -37,7 +37,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 import org.sloth.model.Group;
-import org.sloth.validator.RegistrationFormValidator;
+import org.sloth.validation.RegistrationFormValidator;
 import static org.sloth.util.ControllerUtils.*;
 
 @Controller
@@ -71,24 +71,24 @@ public class RegistrationController {
 	@RequestMapping(method = GET)
 	public ModelAndView prepare() {
 		return new ModelAndView(VIEW, USER_ATTRIBUTE,
-								new RegistrationFormAction());
+				new RegistrationFormAction());
 	}
 
 	@RequestMapping(method = POST)
 	public String submit(HttpSession s, HttpServletResponse r,
-						 @ModelAttribute(USER_ATTRIBUTE) RegistrationFormAction a,
-						 BindingResult result, SessionStatus status) throws
+			@ModelAttribute(USER_ATTRIBUTE) RegistrationFormAction a,
+			BindingResult result, SessionStatus status) throws
 			IOException {
-		rfv.validate(a, result);
+		this.rfv.validate(a, result);
 		if (result.hasErrors()) {
 			return VIEW;
 		} else {
 			try {
 				User u = a.createUser();
 				u.setUserGroup(Group.USER);
-				us.registrate(u);
+				this.us.registrate(u);
 				auth(s, u);
-			} catch(Exception e) {
+			} catch (Exception e) {
 				logger.warn("Unexpected Exception", e);
 				return internalErrorView(r);
 			} finally {
@@ -97,5 +97,4 @@ public class RegistrationController {
 			return "redirect:/";
 		}
 	}
-
 }

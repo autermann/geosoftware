@@ -73,13 +73,14 @@ public class User extends BaseEntity implements Serializable {
 	 *            the group
 	 */
 	public User(String mail, String name, String familyName, String password,
-				Group group) {
+			Group group) {
 		this();
-		setMail(mail);
-		setName(name);
-		setPassword(password);
-		setFamilyName(familyName);
-		setUserGroup(group);
+		this.creationDate = new Date();
+		this.mail = mail;
+		this.name = name;
+		this.familyName = familyName;
+		this.password = password;
+		this.userGroup = group;
 	}
 
 	/**
@@ -87,7 +88,7 @@ public class User extends BaseEntity implements Serializable {
 	 * and <code>null</code> for all other members.
 	 */
 	public User() {
-		setCreationDate(new Date());
+		this.creationDate = new Date();
 	}
 
 	/**
@@ -167,10 +168,10 @@ public class User extends BaseEntity implements Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
-			return false;
-		} else {
+		if (obj != null && obj instanceof User) {
 			return (obj instanceof User) && obj.hashCode() == this.hashCode();
+		} else {
+			return false;
 		}
 	}
 
@@ -178,15 +179,11 @@ public class User extends BaseEntity implements Serializable {
 	public int hashCode() {
 		int hash = 5;
 		hash = 37 * hash + (this.getId() != null ? this.getId().hashCode() : 0);
-		hash = 37 * hash + (getMail() != null ? getMail().hashCode() : 0);
-		hash = 37 * hash + (getName() != null ? getName().hashCode() : 0);
-		hash = 37 * hash
-			   + (getFamilyName() != null ? getFamilyName().hashCode() : 0);
-		hash = 37 * hash
-			   + (getPassword() != null ? getPassword().hashCode() : 0);
-		hash = 37
-			   * hash
-			   + (getCreationDate() != null ? getCreationDate().hashCode() : 0);
+		hash = 37 * hash + (this.mail != null ? this.mail.hashCode() : 0);
+		hash = 37 * hash + (this.name != null ? this.name.hashCode() : 0);
+		hash = 37 * hash + (this.familyName != null ? this.familyName.hashCode() : 0);
+		hash = 37 * hash + (this.password != null ? this.password.hashCode() : 0);
+		hash = 37 * hash + (this.creationDate != null ? this.creationDate.hashCode() : 0);
 		return hash;
 	}
 
@@ -219,17 +216,23 @@ public class User extends BaseEntity implements Serializable {
 
 	@Override
 	public void validate() throws ConstraintViolationException {
-		if (getCreationDate() == null || getFamilyName() == null
-			|| getName() == null || getMail() == null
-			|| getPassword() == null || getUserGroup() == null
-			|| getName().isEmpty() || getFamilyName().isEmpty()
-			|| getMail().isEmpty()) {
+		if (this.creationDate == null
+				|| this.familyName == null
+				|| this.name == null
+				|| this.mail == null
+				|| this.password == null
+				|| this.userGroup == null
+				|| this.name.isEmpty()
+				|| this.familyName.isEmpty()
+				|| this.mail.isEmpty()
+				|| this.password.isEmpty()) {
 			throw new NotNullConstraintViolationException();
 		}
-		if (getFamilyName().length() > 255 || getName().length() > 255
-			|| getPassword().length() > 255 || getName().length() > 255) {
+		if (this.familyName.length() > 255
+				|| this.mail.length() > 255
+				|| this.password.length() > 255
+				|| this.name.length() > 255) {
 			throw new FieldLengthConstraintViolationException();
 		}
 	}
-
 }

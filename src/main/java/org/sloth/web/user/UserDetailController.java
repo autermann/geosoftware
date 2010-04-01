@@ -31,10 +31,10 @@ public class UserDetailController {
 
 	@RequestMapping
 	public ModelAndView handleRequest(@PathVariable Long id, HttpSession s,
-									  HttpServletResponse r) throws IOException {
+			HttpServletResponse r) throws IOException {
 
 		if (isAdmin(s)) {
-			User u = us.get(id);
+			User u = this.us.get(id);
 			if (u == null) {
 				return notFoundMAV(r);
 			} else {
@@ -44,5 +44,4 @@ public class UserDetailController {
 			return forbiddenMAV(r);
 		}
 	}
-
 }

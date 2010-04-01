@@ -41,8 +41,7 @@ public abstract class EntityManagerDao<T extends BaseEntity> {
 	/**
 	 * {@code Logger}-Facade for this class and subclasses.
 	 */
-	protected static final Logger logger = LoggerFactory
-			.getLogger(EntityManagerDao.class);
+	protected static final Logger logger = LoggerFactory.getLogger(EntityManagerDao.class);
 	private EntityManager entityManager;
 
 	/**
@@ -73,8 +72,9 @@ public abstract class EntityManagerDao<T extends BaseEntity> {
 	 * @throws NullPointerException
 	 */
 	protected boolean isAttached(T t) throws NullPointerException {
-		if (t == null)
+		if (t == null) {
 			throw new NullPointerException();
+		}
 		return getEntityManager().contains(t);
 	}
 }

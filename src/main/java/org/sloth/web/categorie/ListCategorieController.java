@@ -45,10 +45,9 @@ public class ListCategorieController {
 			throws IOException {
 		if (isAdmin(s)) {
 			return new ModelAndView(VIEW, CATEGORIE_ATTRIBUTE,
-									os.getCategories());
+					this.os.getCategories());
 		} else {
 			return forbiddenMAV(r);
 		}
 	}
-
 }

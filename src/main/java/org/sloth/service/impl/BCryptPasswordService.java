@@ -17,9 +17,12 @@
  */
 package org.sloth.service.impl;
 
+import org.omg.CORBA.BAD_CONTEXT;
 import org.sloth.util.BCrypt;
 import org.springframework.stereotype.Service;
-import static org.sloth.util.BCrypt.*;
+import static org.sloth.util.BCrypt.hashpw;
+import static org.sloth.util.BCrypt.checkpw;
+import static org.sloth.util.BCrypt.gensalt;
 
 /**
  * Realizes the password hashing with an OpenBSD-style Blowfish password hashing
@@ -31,9 +34,6 @@ import static org.sloth.util.BCrypt.*;
  */
 @Service
 public class BCryptPasswordService extends AbstractPasswordService {
-
-	public BCryptPasswordService() {
-	}
 
 	@Override
 	public String hash(String plain) {

@@ -36,7 +36,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import static org.sloth.util.ControllerUtils.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sloth.validator.UserEditFormValidator;
+import org.sloth.validation.UserEditFormValidator;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -65,19 +65,18 @@ public class EditUserController {
 	@InitBinder
 	public void setAllowedFields(WebDataBinder dataBinder) {
 		dataBinder.setAllowedFields("newName", "newFamilyName", "newPassword",
-									"newPasswordRepeat", "newMail", "newGroup",
-									"actualPassword");
+				"newPasswordRepeat", "newMail", "newGroup", "actualPassword");
 	}
 
 	@RequestMapping(method = GET)
 	public ModelAndView setupForm(@PathVariable Long id, HttpSession s,
-								  HttpServletResponse r) throws IOException {
+			HttpServletResponse r) throws IOException {
 		if (isAuth(s)) {
 			User u = null;
 			if (isSameId(s, id)) {
 				u = getUser(s);
 			} else if (isAdmin(s)) {
-				u = us.get(id);
+				u = this.us.get(id);
 				if (u == null) {
 					return notFoundMAV(r);
 				}
@@ -93,17 +92,17 @@ public class EditUserController {
 
 	@RequestMapping(method = POST)
 	public String processSubmit(HttpSession s, HttpServletResponse r,
-								@ModelAttribute(USER_ATTRIBUTE) UserEditFormAction a,
-								BindingResult result, SessionStatus status)
+			@ModelAttribute(USER_ATTRIBUTE) UserEditFormAction a,
+			BindingResult result, SessionStatus status)
 			throws IOException {
 		if (isSameId(s, a.getId()) || isAdmin(s)) {
-			uefv.validate(a, result);
+			this.uefv.validate(a, result);
 			if (result.hasErrors()) {
 				return VIEW;
 			} else {
 				try {
-					us.update(a.getMergedUser());
-				} catch(Exception e) {
+					this.us.update(a.getMergedUser());
+				} catch (Exception e) {
 					logger.warn("Unexpected Exception", e);
 					return internalErrorView(r);
 				} finally {
@@ -118,5 +117,4 @@ public class EditUserController {
 		}
 		return forbiddenView(r);
 	}
-
 }

@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.sloth.model.Categorie;
 import org.sloth.model.Observation;
 import org.sloth.service.ObservationService;
-import org.sloth.validator.ObservationValidator;
+import org.sloth.validation.ObservationValidator;
 import org.sloth.util.Config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import static org.sloth.util.ControllerUtils.*;
+import static org.sloth.util.ValidationUtils.notNullAndNotEmpty;
 
 @Controller
 @RequestMapping("/")
@@ -46,7 +47,7 @@ public class FrontPageController {
 		Integer i = null;
 		try {
 			i = Integer.valueOf(Config.getProperty("lastObservationsCount"));
-		} catch(NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			logger.warn(
 					"Invalid or null value for property 'lastObservationsCount'.",
 					e);
@@ -77,30 +78,31 @@ public class FrontPageController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView fillMap(HttpSession s,
-								@RequestParam(value = SEARCH_PARAM, required = false) String q) {
+			@RequestParam(value = SEARCH_PARAM, required = false) String q) {
 		ModelAndView mav = new ModelAndView(VIEW);
 		if (isAuth(s)) {
 			mav.addObject(NEW_OBSERVATION_ATTRIBUTE, new Observation());
 			mav.addObject(CATEGORIE_ATTRIBUTE, os.getCategories());
 		}
-		return mav.addObject(MAP_CONTENT_ATTRIBUTE, (q == null || q.trim().isEmpty()) ?
-			os.getNewestObservations(VISIBLE_OBSERVATIONS) : os.getObservations(q));
+		return mav.addObject(MAP_CONTENT_ATTRIBUTE, notNullAndNotEmpty(q)
+				? this.os.getObservations(q)
+				: this.os.getNewestObservations(VISIBLE_OBSERVATIONS));
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String saveObservation(HttpSession s, HttpServletResponse r,
-								  @ModelAttribute(NEW_OBSERVATION_ATTRIBUTE) Observation o,
-								  BindingResult result, SessionStatus status)
+			@ModelAttribute(NEW_OBSERVATION_ATTRIBUTE) Observation o,
+			BindingResult result, SessionStatus status)
 			throws IOException {
 		if (isAuth(s)) {
 			o.setUser(getUser(s));
-			ov.validate(o, result);
+			this.ov.validate(o, result);
 			if (result.hasErrors()) {
 				return VIEW;
 			} else {
 				try {
 					this.os.registrate(o);
-				} catch(Exception e) {
+				} catch (Exception e) {
 					logger.warn("Unexpected Exception", e);
 					return internalErrorView(r);
 				} finally {
@@ -112,5 +114,4 @@ public class FrontPageController {
 			return forbiddenView(r);
 		}
 	}
-
 }

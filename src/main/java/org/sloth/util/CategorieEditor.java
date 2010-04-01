@@ -14,19 +14,23 @@ public class CategorieEditor extends PropertyEditorSupport {
 
 	@Override
 	public void setAsText(final String text) {
-		if (text == null)
+		if (text == null) {
 			return;
+		}
 		Categorie c = observationService.getCategorie(Long.valueOf(text));
-		if (c == null)
+		if (c == null) {
 			throw new IllegalArgumentException();
+		}
 		setValue(c);
 	}
 
 	@Override
 	public String getAsText() {
-		if (getValue() == null)
+		Object o = getValue();
+		if (o == null) {
 			return null;
-		Categorie c = (Categorie) getValue();
-		return String.valueOf(c.getId());
+		} else {
+			return String.valueOf(((Categorie) getValue()).getId());
+		}
 	}
 }

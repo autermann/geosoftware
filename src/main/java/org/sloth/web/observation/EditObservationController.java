@@ -36,7 +36,7 @@ import static org.sloth.util.ControllerUtils.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sloth.model.Categorie;
-import org.sloth.validator.ObservationValidator;
+import org.sloth.validation.ObservationValidator;
 import org.sloth.util.CategorieEditor;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
@@ -75,7 +75,7 @@ public class EditObservationController {
 
 	@RequestMapping(method = GET)
 	public ModelAndView setupForm(@PathVariable Long id, HttpSession s,
-								  HttpServletResponse r) throws IOException {
+			HttpServletResponse r) throws IOException {
 		if (isAuth(s)) {
 			Observation o = os.getObservation(id);
 			if (o == null) {
@@ -83,7 +83,7 @@ public class EditObservationController {
 			} else if (isAdmin(s) || isOwnObservation(s, o)) {
 				ModelAndView mav = new ModelAndView(VIEW);
 				mav.addObject(OBSERVATION_ATTRIBUTE, o);
-				mav.addObject(CATEGORIE_ATTRIBUTE, os.getCategories());
+				mav.addObject(CATEGORIE_ATTRIBUTE, this.os.getCategories());
 				return mav;
 			}
 		}
@@ -92,17 +92,16 @@ public class EditObservationController {
 
 	@RequestMapping(method = POST)
 	public String processSubmit(@ModelAttribute Observation o,
-								BindingResult result, SessionStatus status,
-								HttpSession s,
-								HttpServletResponse r) throws IOException {
+			BindingResult result, SessionStatus status, HttpSession s,
+			HttpServletResponse r) throws IOException {
 		if (isAdmin(s) || isOwnObservation(s, o)) {
-			ov.validate(o, result);
+			this.ov.validate(o, result);
 			if (result.hasErrors()) {
 				return VIEW;
 			} else {
 				try {
-					os.updateObservation(o);
-				} catch(Exception e) {
+					this.os.updateObservation(o);
+				} catch (Exception e) {
 					logger.warn("Unexpected Exception", e);
 					return internalErrorView(r);
 				} finally {

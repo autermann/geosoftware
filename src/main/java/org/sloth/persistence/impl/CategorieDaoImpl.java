@@ -49,19 +49,18 @@ public class CategorieDaoImpl extends EntityManagerDao<Categorie> implements
 
 	@Override
 	public Collection<Categorie> getAll() {
-		CriteriaQuery<Categorie> cq = getEntityManager().getCriteriaBuilder()
-				.createQuery(Categorie.class);
+		CriteriaQuery<Categorie> cq = getEntityManager().getCriteriaBuilder().createQuery(Categorie.class);
 		cq.select(cq.from(Categorie.class));
-		Collection<Categorie> list = getEntityManager().createQuery(cq)
-				.getResultList();
+		Collection<Categorie> list = getEntityManager().createQuery(cq).getResultList();
 		logger.info("Getting all Categories; Found: {}", list.size());
 		return list;
 	}
 
 	@Override
 	public Categorie getByTitle(String title) {
-		if (title == null)
+		if (title == null) {
 			throw new NullPointerException();
+		}
 		CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
 		CriteriaQuery<Categorie> cq = cb.createQuery(Categorie.class);
 		Root<Categorie> categorie = cq.from(Categorie.class);
@@ -80,24 +79,27 @@ public class CategorieDaoImpl extends EntityManagerDao<Categorie> implements
 
 	@Override
 	public Categorie getById(Long id) {
-		if (id == null)
+		if (id == null) {
 			throw new NullPointerException();
+		}
 		logger.info("Searching for Categorie with Id: {}", id);
 		Categorie oc = getEntityManager().find(Categorie.class, id);
-		if (oc != null)
+		if (oc != null) {
 			logger.info(
 					"Found Categorie with Id {}; Title: {}; Description: {}",
-					new Object[] { oc.getId(), oc.getTitle(),
-							oc.getDescription() });
-		else
+					new Object[]{oc.getId(), oc.getTitle(),
+								 oc.getDescription()});
+		} else {
 			logger.info("Can't find Categorie with Id {}", id);
+		}
 		return oc;
 	}
 
 	@Override
 	public void update(Categorie oc) {
-		if (!isAttached(oc))
+		if (!isAttached(oc)) {
 			throw new EntityNotKnownException();
+		}
 		logger.info("Updating Categorie with Id: {}", oc.getId());
 		getEntityManager().merge(oc);
 		getEntityManager().flush();
@@ -106,9 +108,10 @@ public class CategorieDaoImpl extends EntityManagerDao<Categorie> implements
 
 	@Override
 	public void delete(Categorie oc) {
-		if (!isAttached(oc))
+		if (!isAttached(oc)) {
 			throw new EntityNotKnownException();
-		observationDao.delete(observationDao.getByCategorie(oc));
+		}
+		this.observationDao.delete(this.observationDao.getByCategorie(oc));
 		logger.info("Deleting Categorie with Id: {}", oc.getId());
 		getEntityManager().remove(oc);
 		getEntityManager().flush();
@@ -117,8 +120,9 @@ public class CategorieDaoImpl extends EntityManagerDao<Categorie> implements
 
 	@Override
 	public void save(Categorie oc) {
-		if (isAttached(oc))
+		if (isAttached(oc)) {
 			throw new EntityAlreadyKnownException();
+		}
 		getEntityManager().persist(oc);
 		logger.info("Persisting Categorie; Generated Id is: {}", oc.getId());
 		getEntityManager().flush();
@@ -129,9 +133,10 @@ public class CategorieDaoImpl extends EntityManagerDao<Categorie> implements
 	public void delete(Collection<Categorie> t) throws NullPointerException,
 			IllegalArgumentException {
 		for (Categorie c : t) {
-			if (!isAttached(c))
+			if (!isAttached(c)) {
 				throw new EntityNotKnownException();
-			observationDao.delete(observationDao.getByCategorie(c));
+			}
+			this.observationDao.delete(this.observationDao.getByCategorie(c));
 			logger.info("Deleting Categorie with Id: {}", c.getId());
 			getEntityManager().remove(c);
 		}

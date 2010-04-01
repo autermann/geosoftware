@@ -26,7 +26,7 @@ import org.slf4j.LoggerFactory;
 import org.sloth.model.Categorie;
 import org.sloth.model.Observation;
 import org.sloth.service.ObservationService;
-import org.sloth.validator.ObservationValidator;
+import org.sloth.validation.ObservationValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -68,7 +68,7 @@ public class ObservationAddController {
 	public void initBinder(WebDataBinder wdb) {
 		wdb.setDisallowedFields("id", "user", "creationDate");
 		CategorieEditor c = new CategorieEditor();
-		c.setObservationService(os);
+		c.setObservationService(this.os);
 		wdb.registerCustomEditor(Categorie.class, c);
 	}
 
@@ -92,7 +92,7 @@ public class ObservationAddController {
 			HttpServletResponse r) throws IOException {
 		if (isAuth(s)) {
 			o.setUser(getUser(s));
-			ov.validate(o, result);
+			this.ov.validate(o, result);
 			if (result.hasErrors()) {
 				return VIEW;
 			} else {

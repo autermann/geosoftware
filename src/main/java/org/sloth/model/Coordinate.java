@@ -55,8 +55,8 @@ public class Coordinate implements Serializable {
 	 *            the latitude
 	 */
 	public Coordinate(double lon, double lat) {
-		this.setLatitude(lat);
-		this.setLongitude(lon);
+		this.latitude = lat;
+		this.longitude = lon;
 	}
 
 	/**
@@ -92,7 +92,7 @@ public class Coordinate implements Serializable {
 	@Override
 	@SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
 	public boolean equals(Object obj) {
-		if (obj != null) {
+		if (obj != null && obj instanceof Coordinate) {
 			return this.hashCode() == obj.hashCode();
 		} else {
 			return false;
@@ -102,12 +102,8 @@ public class Coordinate implements Serializable {
 	@Override
 	public int hashCode() {
 		int hash = 5;
-		hash = 47 * hash
-			   + (int) (Double.doubleToLongBits(this.getLatitude())
-			   ^ (Double.doubleToLongBits(this.getLatitude()) >>> 32));
-		hash = 47 * hash
-			   + (int) (Double.doubleToLongBits(this.getLongitude())
-			   ^ (Double.doubleToLongBits(this.getLongitude()) >>> 32));
+		hash = 47 * hash + (int) (Double.doubleToLongBits(this.latitude) ^ (Double.doubleToLongBits(this.latitude) >>> 32));
+		hash = 47 * hash + (int) (Double.doubleToLongBits(this.longitude) ^ (Double.doubleToLongBits(this.longitude) >>> 32));
 		return hash;
 	}
 
@@ -115,11 +111,10 @@ public class Coordinate implements Serializable {
 	public String toString() {
 		StringBuffer buf = new StringBuffer();
 		buf.append("(");
-		buf.append(this.getLongitude());
+		buf.append(this.longitude);
 		buf.append(",");
-		buf.append(this.getLatitude());
+		buf.append(this.latitude);
 		buf.append(")");
 		return buf.toString();
 	}
-
 }

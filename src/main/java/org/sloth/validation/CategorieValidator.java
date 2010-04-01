@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.sloth.validator;
+package org.sloth.validation;
 
 import org.sloth.model.Categorie;
 import org.sloth.service.ObservationService;
@@ -23,7 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import static org.sloth.util.ValidatorUtils.*;
+import static org.sloth.util.ValidationUtils.*;
 
 @Component
 public class CategorieValidator implements Validator {
@@ -48,8 +48,7 @@ public class CategorieValidator implements Validator {
 		rejectIfTooLong(e, "title", "field.categorie.title.tooLong", 255);
 		rejectIfTooLong(e, "description", "field.categorie.description.tooLong", 255);
 		rejectIfTooLong(e, "iconFileName", "field.categorie.iconFileName.tooLong", 255);
-		Categorie c = (Categorie) t;
-		if (observationService.isCategorieTitleAvailable(c.getTitle()))
+		if (this.observationService.isCategorieTitleAvailable(((Categorie) t).getTitle()))
 			e.rejectValue("title", "field.categorie.title.notUnique");
 	}
 }

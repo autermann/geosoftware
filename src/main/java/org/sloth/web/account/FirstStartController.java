@@ -24,7 +24,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 import org.sloth.model.Group;
-import org.sloth.validator.RegistrationFormValidator;
+import org.sloth.validation.RegistrationFormValidator;
 import static org.sloth.util.ControllerUtils.*;
 
 @Controller
@@ -34,8 +34,7 @@ public class FirstStartController {
 
 	private static final String VIEW = "users/registration";
 	private static final String USER_ATTRIBUTE = "user";
-	private static final Logger logger = LoggerFactory.getLogger(
-			RegistrationController.class);
+	private static final Logger logger = LoggerFactory.getLogger(RegistrationController.class);
 	private UserService userService;
 	private RegistrationFormValidator rfv;
 
@@ -56,9 +55,9 @@ public class FirstStartController {
 
 	@RequestMapping(method = GET)
 	public ModelAndView prepare(HttpServletResponse r) throws IOException {
-		if (isFirstStart()) {
+		if (this.isFirstStart()) {
 			return new ModelAndView(VIEW, USER_ATTRIBUTE,
-									new RegistrationFormAction());
+					new RegistrationFormAction());
 		} else {
 			return forbiddenMAV(r);
 		}
@@ -70,16 +69,16 @@ public class FirstStartController {
 			BindingResult result, SessionStatus status,
 			HttpSession s, HttpServletResponse r) throws IOException {
 		if (isFirstStart()) {
-			rfv.validate(a, result);
+			this.rfv.validate(a, result);
 			if (result.hasErrors()) {
 				return VIEW;
 			} else {
 				try {
 					User u = a.createUser();
 					u.setUserGroup(Group.ADMIN);
-					userService.registrate(u);
+					this.userService.registrate(u);
 					auth(s, u);
-				} catch(Exception e) {
+				} catch (Exception e) {
 					logger.warn("Unexpected Exception", e);
 					return internalErrorView(r);
 				} finally {
@@ -96,5 +95,4 @@ public class FirstStartController {
 	private boolean isFirstStart() {
 		return userService.getUsers().size() == 0;
 	}
-
 }

@@ -31,11 +31,9 @@ public class ListOwnObservationsController {
 	public ModelAndView setupList(HttpSession s, HttpServletResponse r)
 			throws IOException {
 		if (isAuth(s)) {
-			return new ModelAndView(VIEW, OBSERVATIONS_ATTRIBUTE, os.
-					getObservationsByUser(getUser(s)));
+			return new ModelAndView(VIEW, OBSERVATIONS_ATTRIBUTE, this.os.getObservationsByUser(getUser(s)));
 		} else {
 			return forbiddenMAV(r);
 		}
 	}
-
 }

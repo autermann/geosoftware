@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
 import org.sloth.model.User;
 import org.sloth.web.action.Login;
 import org.sloth.service.UserService;
-import org.sloth.validator.LoginValidator;
+import org.sloth.validation.LoginValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -80,11 +80,11 @@ public class LoginController {
 		if (isAuth(s)) {
 			return "redirect:/";
 		} else {
-			lv.validate(l, result);
+			this.lv.validate(l, result);
 			if (result.hasErrors()) {
 				return VIEW;
 			} else {
-				User u = us.login(l.getMail(), l.getPassword());
+				User u = this.us.login(l.getMail(), l.getPassword());
 				if (u == null) {
 					result.reject("field.login.invalid");
 					return VIEW;

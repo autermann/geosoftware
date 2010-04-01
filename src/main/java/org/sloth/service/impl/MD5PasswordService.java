@@ -20,7 +20,6 @@ package org.sloth.service.impl;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import org.springframework.stereotype.Service;
 
 /**
  * Realizes password hashing through MD5-Hashing. Due security vulnerabilities
@@ -39,12 +38,12 @@ public class MD5PasswordService extends AbstractPasswordService {
 		try {
 			MessageDigest m = MessageDigest.getInstance("MD5");
 			m.update(plain.getBytes());
-			BigInteger i = new BigInteger(1, m.digest());
-			hash = String.format("%1$032X", i);
+			return String.format("%1$032X", new BigInteger(1, m.digest()));
 		} catch (NoSuchAlgorithmException e) {
 			logger.trace("can not hash passwords", e);
+			return null;
 		}
-		return hash;
+
 	}
 
 	@Override

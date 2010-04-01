@@ -57,12 +57,12 @@ public class DeleteUserController {
 
 	@RequestMapping(method = GET)
 	public ModelAndView setupForm(@PathVariable Long id, HttpSession s,
-								  HttpServletResponse r) throws IOException {
+			HttpServletResponse r) throws IOException {
 		if (isAuth(s)) {
 			if (getUser(s).getId().equals(id)) {
 				return new ModelAndView(VIEW, USER_ATTRIBUTE, getUser(s));
 			} else if (isAdmin(s)) {
-				User u = us.get(id);
+				User u = this.us.get(id);
 				if (u == null) {
 					return notFoundMAV(r);
 				} else {
@@ -76,14 +76,13 @@ public class DeleteUserController {
 
 	@RequestMapping(method = POST)
 	public String processSubmit(@PathVariable Long id, HttpSession s,
-								HttpServletResponse r, SessionStatus status)
-			throws IOException {
+			HttpServletResponse r, SessionStatus status) throws IOException {
 		if (isAuth(s)) {
 			boolean self = getUser(s).getId().equals(id);
 			if (self || isAdmin(s)) {
 				try {
-					us.delete(id);
-				} catch(Exception e) {
+					this.us.delete(id);
+				} catch (Exception e) {
 					logger.warn("Unexpected Exception", e);
 					return internalErrorView(r);
 				} finally {
@@ -93,12 +92,11 @@ public class DeleteUserController {
 					deAuth(s);
 					return "redirect:/";
 				} else {
-					us.delete(id);
+					this.us.delete(id);
 					return "redirect:/u";
 				}
 			}
 		}
 		return forbiddenView(r);
 	}
-
 }

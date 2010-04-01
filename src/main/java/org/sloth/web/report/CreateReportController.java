@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.sloth.model.Observation;
 import org.sloth.model.Report;
 import org.sloth.service.ObservationService;
-import org.sloth.validator.ReportValidator;
+import org.sloth.validation.ReportValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -50,9 +50,9 @@ public class CreateReportController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView handleGet(@PathVariable Long id, HttpSession s,
-								  HttpServletResponse r) throws IOException {
+			HttpServletResponse r) throws IOException {
 		if (isAuth(s)) {
-			Observation o = os.getObservation(id);
+			Observation o = this.os.getObservation(id);
 			if (o == null) {
 				return notFoundMAV(r);
 			}
@@ -62,34 +62,31 @@ public class CreateReportController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String handlePost(@ModelAttribute Report report,
-							 BindingResult result, @PathVariable Long id,
-							 SessionStatus status,
-							 HttpSession s, HttpServletResponse r) throws
-			IOException {
+	public String handlePost(@ModelAttribute Report report, BindingResult result,
+			@PathVariable Long id, SessionStatus status, HttpSession s,
+			HttpServletResponse r) throws IOException {
 		if (isAuth(s)) {
 			try {
-				Observation o = os.getObservation(id);
+				Observation o = this.os.getObservation(id);
 				if (o == null) {
 					return notFoundView(r);
 				} else {
 					report.setObservation(o);
 					report.setAuthor(getUser(s));
-					rv.validate(report, result);
+					this.rv.validate(report, result);
 					if (result.hasErrors()) {
 						return VIEW;
 					} else {
 						status.setComplete();
-						os.registrate(report);
+						this.os.registrate(report);
 						return "redirect:/";
 					}
 				}
-			} catch(Exception e) {
+			} catch (Exception e) {
 				logger.warn("Unexpected Exception", e);
 				return internalErrorView(r);
 			}
 		}
 		return forbiddenView(r);
 	}
-
 }

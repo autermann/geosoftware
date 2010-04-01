@@ -45,7 +45,7 @@ public class ListReportController {
 			throws IOException {
 		if (isAuth(s)) {
 			if (isAdmin(s)) {
-				return new ModelAndView(VIEW, REPORTS_ATTRIBUTE, os.getReports());
+				return new ModelAndView(VIEW, REPORTS_ATTRIBUTE, this.os.getReports());
 			} else {
 				return new ModelAndView("redirect:/r/u/" + getUser(s).getId());
 			}
@@ -55,37 +55,30 @@ public class ListReportController {
 
 	@RequestMapping("/r/o/{id}")
 	public ModelAndView handleObservationFilter(@PathVariable Long id,
-												HttpSession s,
-												HttpServletResponse r) throws
-			IOException {
+			HttpSession s, HttpServletResponse r) throws IOException {
 		if (isAdmin(s)) {
-			Observation o = os.getObservation(id);
+			Observation o = this.os.getObservation(id);
 			if (o == null) {
 				return notFoundMAV(r);
 			}
-			return new ModelAndView(VIEW, REPORTS_ATTRIBUTE, os.
-					getReportsByObservation(o));
+			return new ModelAndView(VIEW, REPORTS_ATTRIBUTE, this.os.getReportsByObservation(o));
 		}
 		return forbiddenMAV(r);
 	}
 
 	@RequestMapping("/r/u/{id}")
 	public ModelAndView handleUserFilter(@PathVariable Long id, HttpSession s,
-										 HttpServletResponse r) throws
-			IOException {
+			HttpServletResponse r) throws IOException {
 		if (isSameId(s, id)) {
-			return new ModelAndView(VIEW, REPORTS_ATTRIBUTE, os.
-					getObservationsByUser(getUser(s)));
+			return new ModelAndView(VIEW, REPORTS_ATTRIBUTE, this.os.getObservationsByUser(getUser(s)));
 		} else if (isAdmin(s)) {
 			User u = us.get(id);
 			if (u == null) {
 				return notFoundMAV(r);
 			} else {
-				return new ModelAndView(VIEW, REPORTS_ATTRIBUTE, os.
-						getReportsByUser(u));
+				return new ModelAndView(VIEW, REPORTS_ATTRIBUTE, this.os.getReportsByUser(u));
 			}
 		}
 		return forbiddenMAV(r);
 	}
-
 }

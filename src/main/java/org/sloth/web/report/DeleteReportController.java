@@ -45,9 +45,9 @@ public class DeleteReportController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView handleGet(@PathVariable Long id, HttpSession s,
-								  HttpServletResponse r) throws IOException {
+			HttpServletResponse r) throws IOException {
 		if (isAuth(s)) {
-			Report report = os.getReport(id);
+			Report report = this.os.getReport(id);
 			if (report == null) {
 				return notFoundMAV(r);
 			}
@@ -60,14 +60,14 @@ public class DeleteReportController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String handlePost(@ModelAttribute Report report,
-							 SessionStatus status, HttpSession s,
-							 HttpServletResponse r)
+			SessionStatus status, HttpSession s,
+			HttpServletResponse r)
 			throws IOException {
 		status.setComplete();
 		if (isAdmin(s) || isOwnReport(s, report)) {
 			try {
-				os.deleteReport(report);
-			} catch(Exception e) {
+				this.os.deleteReport(report);
+			} catch (Exception e) {
 				logger.warn("Unexpected Exception", e);
 				return internalErrorView(r);
 			} finally {
@@ -78,5 +78,4 @@ public class DeleteReportController {
 			return forbiddenView(r);
 		}
 	}
-
 }

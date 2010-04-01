@@ -15,14 +15,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.sloth.validator;
+package org.sloth.validation;
 
 import org.sloth.model.Observation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import static org.sloth.util.ValidatorUtils.*;
+import static org.sloth.util.ValidationUtils.*;
 
 @Component
 public class ObservationValidator implements Validator {
@@ -40,8 +40,7 @@ public class ObservationValidator implements Validator {
 	}
 
 	@Override
-	public void validate(Object t,
-						 Errors e) {
+	public void validate(Object t, Errors e) {
 		rejectIfEmptyOrWhitespace(e, "title", "field.observation.title.empty");
 		rejectIfEmptyOrWhitespace(e, "description", "field.observation.description.empty");
 		rejectIfTooLong(e, "title", "field.observation.title.tooLong", 255);
@@ -49,7 +48,7 @@ public class ObservationValidator implements Validator {
 		rejectIfNull(e, "categorie", "field.observation.categorie.empty");
 		rejectIfNull(e, "user", "field.observation.user.empty");
 		e.setNestedPath("coordinate");
-		invokeValidator(coordinateValidator, ((Observation) t).getCoordinate(), e);
+		invokeValidator(this.coordinateValidator, ((Observation) t).getCoordinate(), e);
 		e.setNestedPath(null);
 	}
 }

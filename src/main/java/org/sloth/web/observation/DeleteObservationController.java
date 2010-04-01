@@ -26,7 +26,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.WebDataBinder;
@@ -59,7 +58,7 @@ public class DeleteObservationController {
 	public ModelAndView setupForm(@PathVariable Long id, HttpSession s,
 								  HttpServletResponse r) throws IOException {
 		if (isAuth(s)) {
-			Observation o = os.getObservation(id);
+			Observation o = this.os.getObservation(id);
 			if (o == null) {
 				return notFoundMAV(r);
 			}
@@ -74,12 +73,12 @@ public class DeleteObservationController {
 	public String processSubmit(@PathVariable Long id, HttpSession s,
 								HttpServletResponse r) throws IOException {
 		if (isAuth(s)) {
-			Observation o = os.getObservation(id);
+			Observation o = this.os.getObservation(id);
 			if (o == null) {
 				return notFoundView(r);
 			} else if (isAdmin(s) || isOwnObservation(s, o)) {
 				try {
-					os.deleteObservation(o);
+					this.os.deleteObservation(o);
 					return "redirect:/o";
 				} catch(Exception e) {
 					logger.warn("Unexpected Exception.", e);

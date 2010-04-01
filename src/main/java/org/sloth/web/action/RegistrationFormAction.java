@@ -109,5 +109,4 @@ public class RegistrationFormAction {
 		u.setName(getName());
 		return u;
 	}
-
 }

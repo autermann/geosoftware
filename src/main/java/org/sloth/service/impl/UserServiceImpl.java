@@ -31,8 +31,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService {
 
-	protected static final Logger logger = LoggerFactory
-			.getLogger(UserServiceImpl.class);
+	protected static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 	@Autowired
 	private PasswordService passwordService;
 	@Autowired
@@ -45,9 +44,11 @@ public class UserServiceImpl implements UserService {
 	 */
 	public void setUserDao(UserDao userDao) throws NullPointerException {
 		logger.info("Setting autowired UserDao");
-		if (userDao == null)
+		if (userDao == null) {
 			throw new NullPointerException();
-		this.userDao = userDao;
+		} else {
+			this.userDao = userDao;
+		}
 	}
 
 	/**
@@ -58,84 +59,95 @@ public class UserServiceImpl implements UserService {
 	public void setPasswordService(PasswordService passwordService)
 			throws NullPointerException {
 		logger.info("Setting autowired PasswordService");
-		if (passwordService == null)
+		if (passwordService == null) {
 			throw new NullPointerException();
-		this.passwordService = passwordService;
-	}
-
-	private PasswordService getPasswordService() {
-		return passwordService;
-	}
-
-	private UserDao getUserDao() {
-		return userDao;
+		} else {
+			this.passwordService = passwordService;
+		}
 	}
 
 	@Override
 	public Collection<User> getUsers() {
-		return getUserDao().getAll();
+		return this.userDao.getAll();
 	}
 
 	@Override
 	public User get(String mail) throws NullPointerException {
-		if (mail == null)
+		if (mail == null) {
 			throw new NullPointerException();
-		return getUserDao().getByMail(mail);
+		} else {
+			return this.userDao.getByMail(mail);
+		}
 	}
 
 	@Override
 	public User get(Long id) throws NullPointerException {
-		return getUserDao().getById(id);
+		if (id == null) {
+			throw new NullPointerException();
+		} else {
+			return this.userDao.getById(id);
+		}
 	}
 
 	@Override
 	public void update(User u) throws NullPointerException,
-			IllegalArgumentException, ConstraintViolationException {
-		if (u == null)
+									  IllegalArgumentException, ConstraintViolationException {
+		if (u == null) {
 			throw new NullPointerException();
-		getUserDao().update(u);
+		} else {
+			this.userDao.update(u);
+		}
 	}
 
 	@Override
 	public void delete(Long id) throws NullPointerException,
-			IllegalArgumentException {
-		if (id == null)
+									   IllegalArgumentException {
+		if (id == null) {
 			throw new NullPointerException();
-		getUserDao().delete(getUserDao().getById(id));
+		} else {
+			this.userDao.delete(this.userDao.getById(id));
+		}
 	}
 
 	@Override
 	public void delete(User user) throws NullPointerException,
-			IllegalArgumentException {
-		if (user == null)
+										 IllegalArgumentException {
+		if (user == null) {
 			throw new NullPointerException();
-		getUserDao().delete(user);
+		} else {
+			this.userDao.delete(user);
+		}
 	}
 
 	@Override
 	public void registrate(User user) throws NullPointerException,
-			ConstraintViolationException {
-		if (user == null)
+											 ConstraintViolationException {
+		if (user == null) {
 			throw new NullPointerException();
-		user.setPassword(getPasswordService().hash(user.getPassword()));
-		logger
-				.info(
-						"Registrating User: ID: {}, Mail: {}, Name: {}, FamilyName: {}, Password: {}, Group: {}",
-						new Object[] { user.getId(), user.getMail(),
-								user.getName(), user.getFamilyName(),
-								user.getPassword(), user.getUserGroup() });
-		getUserDao().save(user);
+		} else {
+			user.setPassword(this.passwordService.hash(user.getPassword()));
+			logger.info(
+					"Registrating User: ID: {}, Mail: {}, Name: {}, FamilyName: {}, Password: {}, Group: {}",
+					new Object[]{user.getId(), user.getMail(),
+								 user.getName(), user.getFamilyName(),
+								 user.getPassword(), user.getUserGroup()});
+			this.userDao.save(user);
+		}
 	}
 
 	@Override
 	public User login(String mail,
 					  String plainPassword) throws NullPointerException {
-		if (mail == null || plainPassword == null)
+		if (mail == null || plainPassword == null) {
 			throw new NullPointerException();
-		User u = get(mail);
-		if (u == null)
-			return null;
-		return getPasswordService().check(u.getPassword(), plainPassword) ? u : null;
+		} else {
+			User u = this.get(mail);
+			if (u == null) {
+				return null;
+			} else {
+				return this.passwordService.check(u.getPassword(), plainPassword) ? u : null;
+			}
+		}
 	}
 
 	@Override

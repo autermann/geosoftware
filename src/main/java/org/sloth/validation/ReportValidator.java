@@ -1,13 +1,13 @@
-package org.sloth.validator;
+package org.sloth.validation;
 
 import org.sloth.model.Report;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import static org.sloth.util.ValidatorUtils.*;
+import static org.sloth.util.ValidationUtils.*;
 
 @Component
-public class ReportValidator implements Validator{
+public class ReportValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> clazz) {

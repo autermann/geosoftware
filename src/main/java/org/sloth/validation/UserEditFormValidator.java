@@ -15,12 +15,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.sloth.validator;
+package org.sloth.validation;
 
 import org.sloth.web.action.UserEditFormAction;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
-import static org.sloth.util.ValidatorUtils.*;
+import static org.sloth.util.ValidationUtils.*;
 
 @Component
 public class UserEditFormValidator extends AbstractUserActionValidator {
@@ -33,21 +33,17 @@ public class UserEditFormValidator extends AbstractUserActionValidator {
 	@Override
 	public void validate(Object t, Errors e) {
 		UserEditFormAction a = (UserEditFormAction) t;
-		if (a.getEditingUser().getId().equals(a.getOldUser().getId())) { // self editing
-			if (notNullAndNotEmpty(a.getActualPassword())) {
-				if (passwordService.check(a.getOldUser().getPassword(), a.getActualPassword())) {
-					test(a, e);
-					if (!a.getNewGroup().equals(a.getOldUser().getUserGroup())) {
-						e.rejectValue("newGroup", "field.useredit.newGroup.canNotChangeOwnGroup");
-					}
-				} else {
-					e.rejectValue("actualPassword", "field.useredit.actualpassword.wrong");
-				}
-			} else {
-				e.rejectValue("actualPassword", "field.useredit.actualpassword.empty");
-			}
-		} else { // editing somone else
+		if (!a.getEditingUser().getId().equals(a.getOldUser().getId())) { // editing someone else
 			test(a, e);
+		} else if (!notNullAndNotEmpty(a.getActualPassword())) {
+			e.rejectValue("actualPassword", "field.useredit.actualpassword.empty");
+		} else if (this.passwordService.check(a.getOldUser().getPassword(), a.getActualPassword())) {
+			test(a, e);
+			if (!a.getNewGroup().equals(a.getOldUser().getUserGroup())) {
+				e.rejectValue("newGroup", "field.useredit.newGroup.canNotChangeOwnGroup");
+			}
+		} else {
+			e.rejectValue("actualPassword", "field.useredit.actualpassword.wrong");
 		}
 	}
 
@@ -57,34 +53,27 @@ public class UserEditFormValidator extends AbstractUserActionValidator {
 		rejectIfEmptyOrWhitespace(e, "newFamilyName", "field.useredit.newFamilyName.empty");
 		rejectIfTooLong(e, "newFamilyName", "field.useredit.newFamilyName.tooLong", 255);
 		rejectIfEmptyOrWhitespace(e, "newMail", "field.useredit.newMail.empty");
-
-		if (a.getNewMail().matches(REGEX)) {
-			if (!a.getNewMail().equals(a.getOldUser().getMail()) //changed ...
-				&& !userService.isMailAddressAvailable(a.getNewMail())) { // and available
-				e.rejectValue("newMail", "field.useredit.newMail.notUnique");
-			}
-		} else {
+		String newMail = a.getNewMail();
+		if (!newMail.matches(REGEX)) {
 			e.rejectValue("newMail", "field.useredit.newMail.invaild");
+		} else if (!newMail.equals(a.getOldUser().getMail()) // changed ...
+				&& !this.userService.isMailAddressAvailable(newMail)) { // but not available
+			e.rejectValue("newMail", "field.useredit.newMail.notUnique");
 		}
-
-		if (notNullAndNotEmpty(a.getNewPassword())) {
-			if (notNullAndNotEmpty(a.getNewPasswordRepeat())) {
-				if (a.getNewPassword().equals(a.getNewPasswordRepeat())) {
-					if (passwordService.meetsRecommendation(a.getNewPassword())) {
-						a.setNewPasswordHash(passwordService.hash(a.getNewPassword()));
-					} else {
-						e.rejectValue("newPassword", "field.useredit.newPassword.lowSecurity");
-					}
-				} else {
-					e.rejectValue("newPasswordRepeat", "field.useredit.newPasswordRepeat.wrong");
-				}
-			} else {
+		String newPassword = a.getNewPassword();
+		String newPasswordRepeat = a.getNewPasswordRepeat();
+		if (notNullAndNotEmpty(newPassword)) {
+			if (!notNullAndNotEmpty(newPasswordRepeat)) {
 				e.rejectValue("newPasswordRepeat", "field.useredit.newPasswordRepeat.empty");
+			} else if (!newPassword.equals(newPasswordRepeat)) {
+				e.rejectValue("newPasswordRepeat", "field.useredit.newPasswordRepeat.wrong");
+			} else if (this.passwordService.meetsRecommendation(newPassword)) {
+				a.setNewPasswordHash(this.passwordService.hash(newPassword));
+			} else {
+				e.rejectValue("newPassword", "field.useredit.newPassword.lowSecurity");
 			}
-		} else {
-			if (notNullAndNotEmpty(a.getNewPasswordRepeat())) {
-				e.rejectValue("newPassword", "field.useredit.newPassword.empty");
-			}
+		} else if (notNullAndNotEmpty(newPasswordRepeat)) {
+			e.rejectValue("newPassword", "field.useredit.newPassword.empty");
 		}
 	}
 }

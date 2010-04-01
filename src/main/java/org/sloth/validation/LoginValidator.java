@@ -15,13 +15,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.sloth.validator;
+package org.sloth.validation;
 
 import org.sloth.web.action.Login;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import static org.sloth.util.ValidatorUtils.*;
+import static org.sloth.util.ValidationUtils.*;
 
 @Component
 public class LoginValidator implements Validator {

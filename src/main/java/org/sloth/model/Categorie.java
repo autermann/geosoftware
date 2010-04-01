@@ -54,8 +54,8 @@ public class Categorie extends BaseEntity implements Serializable {
 	 *            the description
 	 */
 	public Categorie(String title, String description) {
-		setTitle(title);
-		setDescription(description);
+		this.title = title;
+		this.description = description;
 	}
 
 	/**
@@ -97,12 +97,11 @@ public class Categorie extends BaseEntity implements Serializable {
 	}
 
 	@Override
-	@SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
-	public boolean equals(Object obj) {
-		if (obj == null) {
-			return false;
+	public boolean equals(Object o) {
+		if (o != null && o instanceof Categorie) {
+			return this.hashCode() == o.hashCode();
 		} else {
-			return this.hashCode() == obj.hashCode();
+			return false;
 		}
 	}
 
@@ -110,16 +109,9 @@ public class Categorie extends BaseEntity implements Serializable {
 	public int hashCode() {
 		int hash = 7;
 		hash = 41 * hash + (this.getId() != null ? this.getId().hashCode() : 0);
-		hash = 41
-			   * hash
-			   + (this.getIconFileName() != null ? this.getIconFileName().
-				hashCode() : 0);
-		hash = 41 * hash
-			   + (this.getTitle() != null ? this.getTitle().hashCode() : 0);
-		hash = 41
-			   * hash
-			   + (this.getDescription() != null
-				  ? this.getDescription().hashCode() : 0);
+		hash = 41 * hash + (this.iconFileName != null ? this.iconFileName.hashCode() : 0);
+		hash = 41 * hash + (this.title != null ? this.title.hashCode() : 0);
+		hash = 41 * hash + (this.description != null ? this.description.hashCode() : 0);
 		return hash;
 	}
 
@@ -130,15 +122,17 @@ public class Categorie extends BaseEntity implements Serializable {
 
 	@Override
 	public void validate() throws ConstraintViolationException {
-		if (this.getDescription() == null || this.getTitle() == null
-			|| this.getIconFileName() == null
-			|| this.getIconFileName().isEmpty()
-			|| this.getDescription().isEmpty() || this.getTitle().isEmpty()) {
+		if (this.description == null
+				|| this.title == null
+				|| this.iconFileName == null
+				|| this.iconFileName.isEmpty()
+				|| this.description.isEmpty()
+				|| this.title.isEmpty()) {
 			throw new NotNullConstraintViolationException();
 		}
-		if (this.getDescription().length() > 1000
-			|| this.getTitle().length() > 255
-			|| this.getIconFileName().length() > 255) {
+		if (this.description.length() > 1000
+				|| this.title.length() > 255
+				|| this.iconFileName.length() > 255) {
 			throw new FieldLengthConstraintViolationException();
 		}
 	}
@@ -157,5 +151,4 @@ public class Categorie extends BaseEntity implements Serializable {
 	public void setIconFileName(String iconFileName) {
 		this.iconFileName = iconFileName;
 	}
-
 }

@@ -31,19 +31,17 @@ public class UserEditFormAction {
 
 	public User getMergedUser() {
 		User u = getOldUser();
-		if (getNewPasswordHash() != null) {
+		if (this.newPasswordHash != null) {
 			u.setPassword(getNewPasswordHash());
 		}
-		if (getNewMail() != null) {
+		if (this.newMail != null) {
 			u.setMail(getNewMail());
 		}
-		if (getNewGroup() != null) {
+		if (this.newGroup != null) {
 			u.setUserGroup(getNewGroup());
 		}
-
-		u.setFamilyName(getNewFamilyName());
-		u.setName(getNewName());
-
+		u.setFamilyName(this.newFamilyName);
+		u.setName(this.newName);
 		return u;
 	}
 
@@ -187,5 +185,4 @@ public class UserEditFormAction {
 	public void setEditingUser(User editingUser) {
 		this.editingUser = editingUser;
 	}
-
 }

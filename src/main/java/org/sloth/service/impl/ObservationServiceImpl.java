@@ -18,7 +18,6 @@
 package org.sloth.service.impl;
 
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,253 +32,264 @@ import org.sloth.persistence.ReportDao;
 import org.sloth.service.ObservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import static java.lang.Character.toLowerCase;
-import static java.lang.Character.toUpperCase;
 
 @Service
 public class ObservationServiceImpl implements ObservationService {
 
-	protected static final Logger logger = LoggerFactory
-			.getLogger(ObservationServiceImpl.class);
+	protected static final Logger logger = LoggerFactory.getLogger(ObservationServiceImpl.class);
 	private ObservationDao observationDao;
 	private CategorieDao categorieDao;
 	private ReportDao reportDao;
 
-	private ObservationDao getObservationDao() {
-		return observationDao;
-	}
-
-	private CategorieDao getCategorieDao() {
-		return categorieDao;
-	}
-
-	private ReportDao getReportDao() {
-		return reportDao;
-	}
-
 	@Autowired
 	public void setObservationDao(ObservationDao oDao)
 			throws NullPointerException {
-		if (oDao == null)
+		if (oDao == null) {
 			throw new NullPointerException();
-		this.observationDao = oDao;
+		} else {
+			this.observationDao = oDao;
+		}
 	}
 
 	@Autowired
 	public void setCategorieDao(CategorieDao ocDao) throws NullPointerException {
-		if (ocDao == null)
+		if (ocDao == null) {
 			throw new NullPointerException();
-		this.categorieDao = ocDao;
+		} else {
+			this.categorieDao = ocDao;
+		}
 	}
 
 	@Autowired
 	public void setReportDao(ReportDao rDao) throws NullPointerException {
-		if (rDao == null)
+		if (rDao == null) {
 			throw new NullPointerException();
-		this.reportDao = rDao;
+		} else {
+			this.reportDao = rDao;
+		}
 	}
 
 	@Override
 	public Observation getObservation(Long id) throws NullPointerException {
-		if (id == null)
+		if (id == null) {
 			throw new NullPointerException();
-		return getObservationDao().getById(id);
+		} else {
+			return this.observationDao.getById(id);
+		}
 	}
 
 	@Override
 	public Collection<Observation> getObservations() {
-		return getObservationDao().getAll();
+		return this.observationDao.getAll();
 	}
 
 	@Override
 	public Collection<Observation> getObservations(String keyword)
 			throws NullPointerException {
-		if (keyword == null)
+		if (keyword == null) {
 			throw new NullPointerException();
-		return getObservationDao().getByKeyWord(keyword);
+		} else {
+			return this.observationDao.getByKeyWord(keyword);
+		}
 	}
 
 	@Override
 	public void deleteObservation(Observation observation)
 			throws NullPointerException, IllegalArgumentException {
-		if (observation == null)
+		if (observation == null) {
 			throw new NullPointerException();
-		getObservationDao().delete(observation);
+		} else {
+			this.observationDao.delete(observation);
+		}
 	}
 
 	@Override
 	public void updateObservation(Observation observation)
 			throws NullPointerException, ConstraintViolationException,
-			IllegalArgumentException {
-		if (observation == null)
+				   IllegalArgumentException {
+		if (observation == null) {
 			throw new NullPointerException();
-		getObservationDao().update(observation);
+		} else {
+			this.observationDao.update(observation);
+		}
 	}
 
 	@Override
 	public void registrate(Observation observation)
 			throws NullPointerException, ConstraintViolationException,
-			IllegalArgumentException {
-		if (observation == null)
+				   IllegalArgumentException {
+		if (observation == null) {
 			throw new NullPointerException();
-		getObservationDao().save(observation);
-	}
-
-	private String buildRegex(String keyword) {
-		// TODO geht besser
-		StringBuffer buffer = new StringBuffer(".*");
-		for (char c : keyword.toCharArray()) {
-			buffer.append("[");
-			buffer.append(toLowerCase(c));
-			buffer.append("|");
-			buffer.append(toUpperCase(c));
-			buffer.append("]");
+		} else {
+			this.observationDao.save(observation);
 		}
-		buffer.append(".*");
-		return buffer.toString();
 	}
 
 	@Override
 	public Collection<Observation> getObservations(Categorie oc)
 			throws NullPointerException, IllegalArgumentException {
-		if (oc == null)
+		if (oc == null) {
 			throw new NullPointerException();
-		Collection<Observation> result = new LinkedList<Observation>();
-		for (Observation o : getObservations())
-			if (o.getCategorie().equals(oc))
-				result.add(o);
-		return result;
+		} else {
+			return this.observationDao.getByCategorie(oc);
+		}
 	}
 
 	@Override
 	public Categorie getCategorie(Long id) throws NullPointerException {
-		if (id == null)
+		if (id == null) {
 			throw new NullPointerException();
-		return getCategorieDao().getById(id);
+		} else {
+			return this.categorieDao.getById(id);
+		}
 	}
 
 	@Override
 	public Collection<Categorie> getCategories() {
-		return getCategorieDao().getAll();
+		return this.categorieDao.getAll();
 	}
 
 	@Override
 	public void deleteCategorie(Categorie categorie)
 			throws NullPointerException, IllegalArgumentException {
-		if (categorie == null)
+		if (categorie == null) {
 			throw new NullPointerException();
-		getCategorieDao().delete(categorie);
+		} else {
+			this.categorieDao.delete(categorie);
+		}
 	}
 
 	@Override
 	public void deleteCategorie(Long id) throws NullPointerException,
-			IllegalArgumentException {
-		if (id == null)
+												IllegalArgumentException {
+		if (id == null) {
 			throw new NullPointerException();
-		getCategorieDao().delete(getCategorie(id));
+		} else {
+			this.categorieDao.delete(this.getCategorie(id));
+		}
 	}
 
 	@Override
 	public void updateCategorie(Categorie categorie)
 			throws NullPointerException, ConstraintViolationException,
-			IllegalArgumentException {
-		if (categorie == null)
+				   IllegalArgumentException {
+		if (categorie == null) {
 			throw new NullPointerException();
-		getCategorieDao().update(categorie);
+		} else {
+			this.categorieDao.update(categorie);
+		}
 	}
 
 	@Override
 	public void registrate(Categorie categorie)
 			throws ConstraintViolationException, NullPointerException {
-		if (categorie == null)
+		if (categorie == null) {
 			throw new NullPointerException();
-		getCategorieDao().save(categorie);
+		} else {
+			this.categorieDao.save(categorie);
+		}
 	}
 
 	@Override
 	public void deleteObservation(Long id) throws NullPointerException,
-			IllegalArgumentException {
-		if (id == null)
+												  IllegalArgumentException {
+		if (id == null) {
 			throw new NullPointerException();
-		deleteCategorie(getCategorieDao().getById(id));
+		} else {
+			this.deleteCategorie(this.categorieDao.getById(id));
+		}
 	}
 
 	@Override
 	public Categorie getCategorieByTitle(String title) {
-		if (title == null)
+		if (title == null) {
 			throw new NullPointerException();
-		return categorieDao.getByTitle(title);
+		} else {
+			return this.categorieDao.getByTitle(title);
+		}
 	}
 
 	@Override
 	public Collection<Observation> getObservationsByUser(User u) {
-		if (u == null)
+		if (u == null) {
 			throw new NullPointerException();
-		else
-			return getObservationDao().getByUser(u);
+		} else {
+			return this.observationDao.getByUser(u);
+		}
 	}
 
 	@Override
 	public Collection<Report> getReports() {
-		return getReportDao().getAll();
+		return this.reportDao.getAll();
 	}
 
 	@Override
 	public Collection<Report> getReportsByUser(User u)
 			throws NullPointerException, IllegalArgumentException {
-		if (u == null)
+		if (u == null) {
 			throw new NullPointerException();
-		return getReportDao().getByUser(u);
+		} else {
+			return this.reportDao.getByUser(u);
+		}
 	}
 
 	@Override
 	public Collection<Report> getReportsByObservation(Observation o)
 			throws NullPointerException, IllegalArgumentException {
-		if (o == null)
+		if (o == null) {
 			throw new NullPointerException();
-		return getReportDao().getByObservation(o);
+		} else {
+			return this.reportDao.getByObservation(o);
+		}
 	}
 
 	@Override
 	public Collection<Report> getReportsByProcessedState(boolean processed) {
-		return (processed) ? getReportDao().getProcessed() : getReportDao()
-				.getUnprocessed();
+		return (processed) ? this.reportDao.getProcessed() : this.reportDao.getUnprocessed();
 	}
 
 	@Override
 	public void deleteReport(Report r) throws NullPointerException,
-			IllegalArgumentException {
-		if (r == null)
+											  IllegalArgumentException {
+		if (r == null) {
 			throw new NullPointerException();
-		getReportDao().delete(r);
+		} else {
+			this.reportDao.delete(r);
+		}
 	}
 
 	@Override
 	public void registrate(Report r) throws NullPointerException,
-			IllegalArgumentException, ConstraintViolationException {
-		if (r == null)
+											IllegalArgumentException, ConstraintViolationException {
+		if (r == null) {
 			throw new NullPointerException();
-		getReportDao().save(r);
+		} else {
+			this.reportDao.save(r);
+		}
 	}
 
 	@Override
 	public Report getReport(Long id) throws NullPointerException {
-		if (id == null)
+		if (id == null) {
 			throw new NullPointerException();
-		return getReportDao().getById(id);
+		} else {
+			return this.reportDao.getById(id);
+		}
 	}
 
 	@Override
 	public void updateReport(Report r) throws NullPointerException,
-			IllegalArgumentException, ConstraintViolationException {
-		if (r == null)
+											  IllegalArgumentException, ConstraintViolationException {
+		if (r == null) {
 			throw new NullPointerException();
-		getReportDao().update(r);
+		} else {
+			this.reportDao.update(r);
+		}
 	}
 
 	@Override
 	public List<Observation> getNewestObservations(int u) {
-		return getObservationDao().getNewestObservations(u);
+		return this.observationDao.getNewestObservations(u);
 	}
 
 	@Override

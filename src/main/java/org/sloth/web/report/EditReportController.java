@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sloth.model.Report;
 import org.sloth.service.ObservationService;
-import org.sloth.validator.ReportValidator;
+import org.sloth.validation.ReportValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -70,8 +70,7 @@ public class EditReportController {
 
 			if (isAdmin(s) || isOwnReport(s, report)) {
 				ModelAndView mav = new ModelAndView(VIEW);
-				mav.addObject(PROCESSED_ATTRIBUTE, new Boolean(report.
-						isProcessed()));
+				mav.addObject(PROCESSED_ATTRIBUTE, new Boolean(report.isProcessed()));
 				mav.addObject(REPORT_ATTRIBUTE, report);
 				return mav;
 			}
@@ -95,14 +94,14 @@ public class EditReportController {
 					isProcessed()))) {
 				return forbiddenView(resp);
 			} else if (isAdmin(s) || isOwnReport(s, report)) {
-				rv.validate(report, result);
+				this.rv.validate(report, result);
 				if (result.hasErrors()) {
 					return VIEW;
 				}
 				status.setComplete();
 				try {
 					report.setLastUpdateDate(new Date());
-					os.updateReport(report);
+					this.os.updateReport(report);
 				} catch(Exception e) {
 					logger.warn("Unexpected Exception", e);
 					return internalErrorView(resp);

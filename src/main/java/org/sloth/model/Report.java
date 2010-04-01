@@ -50,18 +50,18 @@ public class Report extends BaseEntity implements Serializable {
 	 * are set too the actual time. All other properties are initialised with {@code null}.
 	 */
 	public Report() {
-		setCreationDate(new Date());
-		setLastUpdateDate(getCreationDate());
+		this.creationDate = this.lastUpdateDate = new Date();
 	}
 
 	@Override
 	public void validate() throws ConstraintViolationException {
-		if (getAuthor() == null || getObservation() == null
-			|| getDescription() == null
-			|| getDescription().trim().isEmpty()) {
+		if (this.author == null
+				|| this.observation == null
+				|| this.description == null
+				|| this.description.trim().isEmpty()) {
 			throw new NotNullConstraintViolationException();
 		}
-		if (getDescription().length() > 1000) {
+		if (this.description.length() > 1000) {
 			throw new FieldLengthConstraintViolationException();
 		}
 	}
@@ -156,4 +156,25 @@ public class Report extends BaseEntity implements Serializable {
 		this.lastUpdateDate = lastUpdateDate;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (obj != null && obj instanceof Report) {
+			return obj.hashCode() == this.hashCode();
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public int hashCode() {
+		int hash = 5;
+		hash = 37 * hash + (this.getId() != null ? this.getId().hashCode() : 0);
+		hash = 37 * hash + (this.observation != null ? this.observation.hashCode() : 0);
+		hash = 37 * hash + (this.author != null ? this.author.hashCode() : 0);
+		hash = 37 * hash + (this.description != null ? this.description.hashCode() : 0);
+		hash = 37 * hash + (this.processed ? 1 : 0);
+		hash = 37 * hash + (this.creationDate != null ? this.creationDate.hashCode() : 0);
+		hash = 37 * hash + (this.lastUpdateDate != null ? this.lastUpdateDate.hashCode() : 0);
+		return hash;
+	}
 }

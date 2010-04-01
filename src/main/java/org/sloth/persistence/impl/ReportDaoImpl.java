@@ -15,7 +15,6 @@ import org.sloth.persistence.ReportDao;
 import org.springframework.stereotype.Repository;
 
 @Repository
-
 public class ReportDaoImpl extends EntityManagerDao<Report> implements
 		ReportDao {
 
@@ -28,52 +27,53 @@ public class ReportDaoImpl extends EntityManagerDao<Report> implements
 	@Override
 	public Collection<Report> getByObservation(Observation o)
 			throws NullPointerException, IllegalArgumentException {
-		if (o == null)
+		if (o == null) {
 			throw new NullPointerException();
-		if (o.isNew())
+		}
+		if (o.isNew()) {
 			throw new IllegalArgumentException();
+		}
 		CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
 		CriteriaQuery<Report> cq = cb.createQuery(Report.class);
 		Root<Report> r = cq.from(Report.class);
-		cq.select(r);
-		cq.where(cb.equal(r.get(Report_.observation), o));
-		Collection<Report> result = getEntityManager().createQuery(cq)
-				.getResultList();
+		cq.select(r).where(cb.equal(r.get(Report_.observation), o));
+		Collection<Report> result = getEntityManager().createQuery(cq).getResultList();
 		logger.info("{} Reports for Observation {}.", result.size(), o);
 		return result;
 	}
 
 	@Override
 	public Collection<Report> getAll() {
-		CriteriaQuery<Report> cq = getEntityManager().getCriteriaBuilder()
-				.createQuery(Report.class);
+		CriteriaQuery<Report> cq = getEntityManager().getCriteriaBuilder().createQuery(Report.class);
 		cq.select(cq.from(Report.class));
-		Collection<Report> list = getEntityManager().createQuery(cq)
-				.getResultList();
+		Collection<Report> list = getEntityManager().createQuery(cq).getResultList();
 		logger.info("Getting all Reports; Found: {}", list.size());
 		return list;
 	}
 
 	@Override
 	public Report getById(Long id) {
-		if (id == null)
+		if (id == null) {
 			throw new NullPointerException();
+		}
 		logger.info("Searching for Report with Id: {}", id);
 		Report r = getEntityManager().find(Report.class, id);
-		if (r != null)
+		if (r != null) {
 			logger.info("Found Report with Id {}; Author: {}; Observation: {}",
-					new Object[] { r.getId(), r.getAuthor().getId(),
-							r.getObservation().getId() });
-		else
+					new Object[]{r.getId(), r.getAuthor().getId(),
+								 r.getObservation().getId()});
+		} else {
 			logger.info("Can't find Report with Id {}", id);
+		}
 		return r;
 	}
 
 	@Override
 	public void update(Report t) throws NullPointerException,
 			IllegalArgumentException {
-		if (!isAttached(t))
+		if (!isAttached(t)) {
 			throw new EntityNotKnownException();
+		}
 		logger.info("Updating Report with Id: {}", t.getId());
 		getEntityManager().merge(t);
 		getEntityManager().flush();
@@ -82,8 +82,9 @@ public class ReportDaoImpl extends EntityManagerDao<Report> implements
 	@Override
 	public void delete(Report t) throws NullPointerException,
 			IllegalArgumentException {
-		if (!isAttached(t))
+		if (!isAttached(t)) {
 			throw new EntityNotKnownException();
+		}
 		logger.info("Deleting Report with Id: {}", t.getId());
 		getEntityManager().remove(t);
 		getEntityManager().flush();
@@ -92,8 +93,9 @@ public class ReportDaoImpl extends EntityManagerDao<Report> implements
 
 	@Override
 	public void save(Report t) throws NullPointerException {
-		if (isAttached(t))
+		if (isAttached(t)) {
 			throw new EntityAlreadyKnownException();
+		}
 		getEntityManager().persist(t);
 		logger.info("Persisting Report; Generated Id is: {}", t.getId());
 		getEntityManager().flush();
@@ -114,10 +116,8 @@ public class ReportDaoImpl extends EntityManagerDao<Report> implements
 		CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
 		CriteriaQuery<Report> cq = cb.createQuery(Report.class);
 		Root<Report> r = cq.from(Report.class);
-		cq.select(r);
-		cq.where(cb.equal(r.get(Report_.processed), processed));
-		Collection<Report> result = getEntityManager().createQuery(cq)
-				.getResultList();
+		cq.select(r).where(cb.equal(r.get(Report_.processed), processed));
+		Collection<Report> result = getEntityManager().createQuery(cq).getResultList();
 		logger.info("{} {} Reports.",
 				(processed) ? "processed" : "unprocessed", result.size());
 		return result;
@@ -127,8 +127,9 @@ public class ReportDaoImpl extends EntityManagerDao<Report> implements
 	public void delete(Collection<Report> t) throws NullPointerException,
 			IllegalArgumentException {
 		for (Report r : t) {
-			if (!isAttached(r))
+			if (!isAttached(r)) {
 				throw new EntityNotKnownException();
+			}
 			logger.info("Deleting Report with Id: {}", r.getId());
 			getEntityManager().remove(r);
 		}

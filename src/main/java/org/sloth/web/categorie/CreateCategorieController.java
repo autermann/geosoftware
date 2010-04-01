@@ -24,7 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sloth.model.Categorie;
 import org.sloth.service.ObservationService;
-import org.sloth.validator.CategorieValidator;
+import org.sloth.validation.CategorieValidator;
 import static org.sloth.util.ControllerUtils.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -81,12 +81,12 @@ public class CreateCategorieController {
 			BindingResult result, SessionStatus status, HttpSession s,
 			HttpServletResponse r) throws IOException {
 		if (isAdmin(s)) {
-			cv.validate(c, result);
+			this.cv.validate(c, result);
 			if (result.hasErrors()) {
 				return VIEW;
 			} else {
 				try {
-					os.registrate(c);
+					this.os.registrate(c);
 				} catch(Exception e) {
 					logger.warn("Unexpected Exception", e);
 					return internalErrorView(r);
