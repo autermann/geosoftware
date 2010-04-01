@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/jsp/includes.jsp" %>
 <%@page import="java.util.Date" %>
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
 
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -14,9 +14,9 @@
 		<%-- Add already existing features to the map --%>
 		<script type="text/javascript">
 			function fillMap(){
-				<c:forEach var="o" items="${observations}">
-						addMarker(${o.coordinate.longitude}, ${o.coordinate.latitude},"<b><s:escapeBody htmlEscape="true" javaScriptEscape="true">${o.title}</s:escapeBody></b><br/><br /><s:escapeBody htmlEscape="true" javaScriptEscape="true">${o.description}</s:escapeBody><br/><br/>Koordinaten:<br/><small>Lon: ${o.coordinate.longitude} | Lat: ${o.coordinate.latitude} </small>", "<s:url value="/static/img/${o.categorie.iconFileName}"/>");</c:forEach>
-					}
+			<c:forEach var="o" items="${observations}">
+					addMarker(${o.coordinate.longitude}, ${o.coordinate.latitude},"<b><s:escapeBody htmlEscape="true" javaScriptEscape="true">${o.title}</s:escapeBody></b><br/><br /><s:escapeBody htmlEscape="true" javaScriptEscape="true">${o.description}</s:escapeBody><br/><br/>Koordinaten:<br/><small>Lon: ${o.coordinate.longitude} | Lat: ${o.coordinate.latitude} </small>", "<s:url value="/static/img/${o.categorie.iconFileName}"/>");</c:forEach>
+				}
 			</script>
 		<c:if test="${sessionScope.LOGIN != null}"><script type="text/javascript">
 				<%-- add formular data --%>
@@ -39,93 +39,93 @@
 							categorie: "<s:bind path="observation.categorie" htmlEscape="true">${status.errorMessages[0]}</s:bind>"
 						},
 						categories:	[
-							<c:forEach varStatus="status" var="categorie" items="${categories}">
-								[${categorie.id}, "<s:escapeBody htmlEscape="true" javaScriptEscape="true">${categorie.title}</s:escapeBody>"]
-								<c:if test="${!status.last}">,</c:if>
-							</c:forEach>
+				<c:forEach varStatus="status" var="categorie" items="${categories}">
+							[${categorie.id}, "<s:escapeBody htmlEscape="true" javaScriptEscape="true">${categorie.title}</s:escapeBody>"]
+					<c:if test="${!status.last}">,</c:if>
+				</c:forEach>
 						]
 					});
-						</script></c:if>
-			</head>
-			<body onload="init();">
+			</script></c:if>
+		</head>
+		<body onload="init();">
 
-                            <a href="<s:url value="/" htmlEscape="true" />"><img src="<s:url value="/static/img/logo.png" htmlEscape="true"/>" align="left" width="160" alt="Logo" ></img></a>
-                                            <div align="right">
-			
-
-                                                             <c:choose>
-                                                            <c:when test="${sessionScope.LOGIN != null}">
-                                                                <a href="<s:url value="/acc" />"><img src="<s:url value="/static/img/user_mng.png" htmlEscape="true"/>" alt="" height="18"/><b>${sessionScope.LOGIN.mail}</b></a> |
-								<a href="<s:url value="/logout"/>"><fmt:message key="logout.button"/></a>
-								
-                                                            </c:when>
-                                                            <c:otherwise>
-								<a href="<s:url value="/login"/>"> <fmt:message key="login.button"/></a>
-                                                            </c:otherwise>
-                                                        </c:choose>
-                                                    <form action="<s:url value="/"/>" method="GET" style="display:inline">
-                                                             | <input type="text" name="q" value="Search..." class="search" onfocus="this.value=''"/>
-                                                             <input type="image" src="<s:url value="/static/img/search.png" htmlEscape="true" />" alt="Search" class="searchbutton"/>
-
-							                                                
-                                                     </form>
-                                        </div>
-
-                                                   
-						
-                                                    
-                                  
-                                <hr style="border:solid #DDDDEE 1px"/><br/>
-                                 
-                                    <br />
-                                <table width="28%"><tr><td>
-						<h3><fmt:message key="welcome"/></h3>
-                                                <h4><fmt:message key="begruessung"/></h4>
-                                               
-                                        </td></tr>
-					</table>
-					<div>
-						
+			<a href="<s:url value="/" htmlEscape="true" />"><img src="<s:url value="/static/img/logo.png" htmlEscape="true"/>" align="left" width="160" alt="Logo" ></img></a>
+		<div align="right">
 
 
-                             <table width="29%" class="observationlist">
+			<c:choose>
+				<c:when test="${sessionScope.LOGIN != null}">
+					<a href="<s:url value="/acc" />"><img src="<s:url value="/static/img/user_mng.png" htmlEscape="true"/>" alt="" height="18"/><b>${sessionScope.LOGIN.mail}</b></a> |
+					<a href="<s:url value="/logout"/>"><fmt:message key="logout.button"/></a>
+
+				</c:when>
+				<c:otherwise>
+					<a href="<s:url value="/login"/>"> <fmt:message key="login.button"/></a>
+				</c:otherwise>
+			</c:choose>
+			<form action="<s:url value="/"/>" method="GET" style="display:inline">
+				| <input type="text" name="q" value="Search..." class="search" onfocus="this.value=''"/>
+				<input type="image" src="<s:url value="/static/img/search.png" htmlEscape="true" />" alt="Search" class="searchbutton"/>
+
+
+			</form>
+		</div>
+
+
+
+
+
+		<hr style="border:solid #DDDDEE 1px"/><br/>
+
+		<br />
+		<table width="28%"><tr><td>
+					<h3><fmt:message key="welcome"/></h3>
+					<h4><fmt:message key="begruessung"/></h4>
+
+				</td></tr>
+		</table>
+		<div>
+
+
+
+			<table width="29%" class="observationlist">
 				<div id="results">
-							<c:forEach var="o" items="${observations}">
-								
-                                                                    
-                                                                    <tr>
-                                                                        <td width="70%" class="observationlist_title">
-                                                                                <img src="<s:url value="/static/img/${o.categorie.iconFileName}" htmlEscape="true" />" width="20px" height="20px" alt="${o.categorie.title}"></img>
-                                                                        <b class="obsTitle"><s:escapeBody>${o.title}</s:escapeBody></b>
+					<c:forEach var="o" items="${observations}">
 
 
-                                                                                 <a href="#" onclick="goTo(${o.coordinate.longitude}, ${o.coordinate.latitude}, 16);"><img src="<s:url value="/static/img/show.png" htmlEscape="true" />" alt="<fmt:message key="observation.viewInMap"/>" align="right" height="20px"></img></a>
-                                                                                    <c:if test="${sessionScope.LOGIN != null}">
-                                                                                        <a href="<s:url value="/r/o/${o.id}/new"/>"><img src="<s:url value="/static/img/report.png" htmlEscape="true" />" alt="<fmt:message key="observation.report"/>" align="right" height="20px"></img></a>
-                                                                                    <c:if test="${sessionScope.LOGIN.userGroup == 'ADMIN' || o.user.id == sessionScope.LOGIN.id}">
-											<a href="<s:url value="/o/edit/${o.id}"/>"><img src="<s:url value="/static/img/edit.png" htmlEscape="true" />" alt="<fmt:message key="observation.edit"/>" align="right" height="20px"></img></a>
-                                                                                    </c:if>
-                                                                                    </c:if>
+						<tr>
+							<td width="70%" class="observationlist_title">
+								<img src="<s:url value="/static/img/${o.categorie.iconFileName}" htmlEscape="true" />" width="20px" height="20px" alt="${o.categorie.title}"></img>
+								<b class="obsTitle"><s:escapeBody>${o.title}</s:escapeBody></b>
 
-                                                                                <p class="observationlist_description"><s:escapeBody>${o.description}</s:escapeBody></p>
-                                                                            </td>
-                                                                           
-                                                                    </tr>
-								
-								
-							</c:forEach>
-						</div>
-                            </table>
-					</div>
-                                        <div id="map" class="map"></div>
-					<div align="center">
-                                            <br />
-						<table class="footer">
-							<tr>
-								<td><a href="<s:url value="/" htmlEscape="true" />"><fmt:message key="nav.home"/></a></td>
-								<td align="right"><fmt:message key="copyright"/></td>
-							</tr>
-						</table>
-					</div>
-				</body>
-			</html>
+
+								<a href="#" onclick="goTo(${o.coordinate.longitude}, ${o.coordinate.latitude}, 16);"><img src="<s:url value="/static/img/show.png" htmlEscape="true" />" alt="<fmt:message key="observation.viewInMap"/>" align="right" height="20px"></img></a>
+									<c:if test="${sessionScope.LOGIN != null}">
+									<a href="<s:url value="/r/o/${o.id}/new"/>"><img src="<s:url value="/static/img/report.png" htmlEscape="true" />" alt="<fmt:message key="observation.report"/>" align="right" height="20px"></img></a>
+										<c:if test="${sessionScope.LOGIN.userGroup == 'ADMIN' || o.user.id == sessionScope.LOGIN.id}">
+										<a href="<s:url value="/o/edit/${o.id}"/>"><img src="<s:url value="/static/img/edit.png" htmlEscape="true" />" alt="<fmt:message key="observation.edit"/>" align="right" height="20px"></img></a>
+										</c:if>
+									</c:if>
+
+										<p class="observationlist_description"><s:escapeBody htmlEscape="true" javaScriptEscape="false" >${o.description}</s:escapeBody></p>
+							</td>
+
+						</tr>
+
+
+					</c:forEach>
+				</div>
+			</table>
+		</div>
+		<div id="map" class="map"></div>
+		<div align="center">
+			<br />
+			<table class="footer">
+				<tr>
+					<td><a href="<s:url value="/" htmlEscape="true" />"><fmt:message key="nav.home"/></a></td>
+					<td align="right"><fmt:message key="copyright"/></td>
+				</tr>
+			</table>
+		</div>
+	</body>
+</html>

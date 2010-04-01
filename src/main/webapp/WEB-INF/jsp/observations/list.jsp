@@ -25,8 +25,8 @@
                                                     <c:forEach var="observation" items="${observations}">
                                                <tr>
                                                 <td class="management_lists">${observation.id}</td>
-                                                <td class="management_lists">${observation.title}</td>
-                                                <td class="management_lists">${observation.description}</td>
+                                                <td class="management_lists"><s:escapeBody htmlEscape="true" javaScriptEscape="true">${observation.title}</s:escapeBody></td>
+                                                <td class="management_lists"><s:escapeBody htmlEscape="true" javaScriptEscape="true">${observation.description}</s:escapeBody></td>
                                                <td class="management_lists">
                                                     <c:if test="${sessionScope.LOGIN.id eq observation.user.id || sessionScope.LOGIN.userGroup eq 'ADMIN'}">
                                                             <a href="<s:url value="/o/edit/${observation.id}"/>"><img src="<s:url value="/static/img/edit.png" htmlEscape="true" />" alt="<fmt:message key="observation.edit" />"></a>

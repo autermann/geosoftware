@@ -9,11 +9,11 @@
 		</tr>
 		<tr>
 			<td><fmt:message key="observation.title"/>:</td>
-			<td>${observation.title}</td>
+			<td><s:escapeBody htmlEscape="true">${observation.title}</s:escapeBody></td>
 		</tr>
 		<tr>
 			<td><fmt:message key="observation.description"/>:</td>
-			<td>${observation.description}</td>
+			<td><s:escapeBody htmlEscape="true">${observation.description}</s:escapeBody></td>
 		<tr/>
 		<tr>
 			<td><fmt:message key="observation.user"/>:</td>
@@ -25,7 +25,7 @@
 		<tr/>
 		<tr>
 			<td><fmt:message key="observation.observationCategorie"/>:</td>
-			<td>${observation.categorie}</td>
+			<td><s:escapeBody htmlEscape="true">${observation.categorie}</s:escapeBody></td>
 		<tr/>
 		<tr>
 			<td><fmt:message key="observation.coordinate"/>:</td>
@@ -33,6 +33,6 @@
 		<tr/>
 
 	</table>
-	<p><a href="<s:url value="/observations"/>"><fmt:message key="nav.back"/></a></p>
+			<p><a href="<s:url value="/observations"/>"><s:escapeBody htmlEscape="true"><fmt:message key="nav.back"/></s:escapeBody></a></p>
 </div>
 <%@ include file="/WEB-INF/jsp/footer.jsp" %>

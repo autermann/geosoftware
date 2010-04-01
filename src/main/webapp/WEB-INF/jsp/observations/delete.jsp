@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/jsp/includes.jsp" %>
 <%@ include file="/WEB-INF/jsp/header.jsp" %>
 <div>
-	<h2><fmt:message key="observation.delete"/></h2>
+	<h2><s:escapeBody htmlEscape="true"><fmt:message key="observation.delete"/></s:escapeBody></h2>
 	<form:form modelAttribute="observation">
 		<table border="1">
 			<tr>
@@ -10,11 +10,11 @@
 			</tr>
 			<tr>
 				<td><fmt:message key="observation.title"/>:</td>
-				<td>${observation.title}</td>
+				<td><s:escapeBody htmlEscape="true">${observation.title}</s:escapeBody></td>
 			</tr>
 			<tr>
 				<td><fmt:message key="observation.description"/>:</td>
-				<td>${observation.description}</td>
+				<td><s:escapeBody htmlEscape="true">${observation.description}</s:escapeBody></td>
 			<tr/>
 			<tr>
 				<td><fmt:message key="observation.user"/>:</td>

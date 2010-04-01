@@ -106,6 +106,7 @@ input.searchbutton {
 
 div.map {
     border: 1px solid silver;
+	height: 90%;
 }
 
 /*----------Login Page------------------*/
