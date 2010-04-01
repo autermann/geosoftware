@@ -35,7 +35,7 @@ public class RegistrationFormValidator extends AbstractUserActionValidator {
 			e.rejectValue("mailRepeat", "field.registration.mailRepeat.wrong");
 		} else if (!mail.matches(REGEX)) {
 			e.rejectValue("mail", "field.registration.mail.invalid");
-		} else if (this.userService.isMailAddressAvailable(mail)) {
+		} else if (!this.userService.isMailAddressAvailable(mail)) {
 			e.rejectValue("mail", "field.registration.mail.notUnique");
 		}
 	}
