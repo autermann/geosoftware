@@ -84,11 +84,11 @@
 								<b class="obsTitle"><s:escapeBody>${o.title}</s:escapeBody></b>
 
 
-								<a href="#" onclick="goTo(${o.coordinate.longitude}, ${o.coordinate.latitude}, 16);"><img src="<s:url value="/static/img/show.png" htmlEscape="true" />" alt="<fmt:message key="observation.viewInMap"/>" align="right" height="20px"></img></a>
+								<a href="#" onclick="goTo(${o.coordinate.longitude}, ${o.coordinate.latitude}, 16);"><img src="<s:url value="/static/img/show.png" htmlEscape="true" />" alt="<fmt:message key="observation.viewInMap"/>" align="right" height="20px"/></a>
 									<c:if test="${sessionScope.LOGIN != null}">
-									<a href="<s:url value="/r/o/${o.id}/new"/>"><img src="<s:url value="/static/img/report.png" htmlEscape="true" />" alt="<fmt:message key="observation.report"/>" align="right" height="20px"></img></a>
+									<a href="<s:url value="/r/o/${o.id}/new"/>"><img src="<s:url value="/static/img/report.png" htmlEscape="true" />" alt="<fmt:message key="observation.report"/>" align="right" height="20px"/></a>
 										<c:if test="${sessionScope.LOGIN.userGroup == 'ADMIN' || o.user.id == sessionScope.LOGIN.id}">
-										<a href="<s:url value="/o/edit/${o.id}"/>"><img src="<s:url value="/static/img/edit.png" htmlEscape="true" />" alt="<fmt:message key="observation.edit"/>" align="right" height="20px"></img></a>
+										<a href="<s:url value="/o/edit/${o.id}"/>"><img src="<s:url value="/static/img/edit.png" htmlEscape="true" />" alt="<fmt:message key="observation.edit"/>" align="right" height="20px"/></a>
 										</c:if>
 									</c:if>
 
