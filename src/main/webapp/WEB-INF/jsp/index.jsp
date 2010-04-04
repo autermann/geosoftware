@@ -15,7 +15,7 @@
 		<script type="text/javascript">
 			function fillMap(){
 			<c:forEach var="o" items="${observations}">
-					addMarker(${o.coordinate.longitude}, ${o.coordinate.latitude},"<b><s:escapeBody htmlEscape="true" javaScriptEscape="true">${o.title}</s:escapeBody></b><br/><br /><s:escapeBody htmlEscape="true" javaScriptEscape="true">${o.description}</s:escapeBody><br/><br/>Koordinaten:<br/><small>Lon: ${o.coordinate.longitude} | Lat: ${o.coordinate.latitude} </small>", "<s:url value="/static/img/${o.categorie.iconFileName}"/>");</c:forEach>
+					addMarker(${o.coordinate.longitude}, ${o.coordinate.latitude},"<b><s:escapeBody htmlEscape="true" javaScriptEscape="true">${o.title}</s:escapeBody></b><br/><br /><s:escapeBody htmlEscape="true" javaScriptEscape="true">${o.description}</s:escapeBody><br/><br/>Koordinaten:<br/><small>Lon: ${o.coordinate.longitude} | Lat: ${o.coordinate.latitude} </small>", "${o.categorie.iconFileName}");</c:forEach>
 				}
 			</script>
 		<c:if test="${sessionScope.LOGIN != null}"><script type="text/javascript">
@@ -48,11 +48,8 @@
 			</script></c:if>
 		</head>
 		<body onload="init();">
-
 			<a href="<s:url value="/" htmlEscape="true" />"><img src="<s:url value="/static/img/logo.png" htmlEscape="true"/>" align="left" width="160" alt="Logo" ></img></a>
 		<div align="right">
-
-
 			<c:choose>
 				<c:when test="${sessionScope.LOGIN != null}">
 					<a href="<s:url value="/acc" />"><img src="<s:url value="/static/img/user_mng.png" htmlEscape="true"/>" alt="" height="18"/><b>${sessionScope.LOGIN.mail}</b></a> |
@@ -66,28 +63,16 @@
 			<form action="<s:url value="/"/>" method="GET" style="display:inline">
 				| <input type="text" name="q" value="Search..." class="search" onfocus="this.value=''"/>
 				<input type="image" src="<s:url value="/static/img/search.png" htmlEscape="true" />" alt="Search" class="searchbutton"/>
-
-
 			</form>
 		</div>
-
-
-
-
-
 		<hr style="border:solid #DDDDEE 1px"/><br/>
-
 		<br />
 		<table width="28%"><tr><td>
 					<h3><fmt:message key="welcome"/></h3>
 					<h4><fmt:message key="begruessung"/></h4>
-
 				</td></tr>
 		</table>
 		<div>
-
-
-
 			<table width="29%" class="observationlist">
 				<div id="results">
 					<c:forEach var="o" items="${observations}">
@@ -95,7 +80,7 @@
 
 						<tr>
 							<td width="70%" class="observationlist_title">
-								<img src="<s:url value="/static/img/${o.categorie.iconFileName}" htmlEscape="true" />" width="20px" height="20px" alt="${o.categorie.title}"></img>
+								<img src="${o.categorie.iconFileName}" width="20px" height="20px" alt="${o.categorie.title}"></img>
 								<b class="obsTitle"><s:escapeBody>${o.title}</s:escapeBody></b>
 
 
@@ -107,7 +92,7 @@
 										</c:if>
 									</c:if>
 
-										<p class="observationlist_description"><s:escapeBody htmlEscape="true" javaScriptEscape="false" >${o.description}</s:escapeBody></p>
+								<p class="observationlist_description"><s:escapeBody htmlEscape="true" javaScriptEscape="false" >${o.description}</s:escapeBody></p>
 							</td>
 
 						</tr>

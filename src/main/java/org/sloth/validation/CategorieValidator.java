@@ -48,7 +48,7 @@ public class CategorieValidator implements Validator {
 		rejectIfTooLong(e, "title", "field.categorie.title.tooLong", 255);
 		rejectIfTooLong(e, "description", "field.categorie.description.tooLong", 255);
 		rejectIfTooLong(e, "iconFileName", "field.categorie.iconFileName.tooLong", 255);
-		if (this.observationService.isCategorieTitleAvailable(((Categorie) t).getTitle()))
+		if (!this.observationService.isCategorieTitleAvailable(((Categorie) t).getTitle()))
 			e.rejectValue("title", "field.categorie.title.notUnique");
 	}
 }

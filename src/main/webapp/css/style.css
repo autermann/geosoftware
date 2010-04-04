@@ -163,3 +163,11 @@ td.management_lists, tr.management_lists, th.management_lists {
     border-bottom: 1px solid silver;
     border-left: 1px solid silver;
 }
+
+.categorieImage {
+	border: 2px solid transparent;
+}
+
+.selected {
+	border: 2px solid red;
+}
