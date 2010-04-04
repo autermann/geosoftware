@@ -14,7 +14,7 @@
 						</tr>
 						<tr>
 							<td width="20%" align="right"><fmt:message key="categorie.description"/>:</td>
-							<td width="40%" align="left"><form:input path="description" /></td>
+							<td width="40%" align="left"><form:textarea path="description" /></td>
 							<td width="40%" align="right"><form:errors cssStyle="color:red;" path="description"/></td>
 						</tr>
 						<tr>
@@ -44,7 +44,7 @@
 	</form:form>
 </div>
 <script type="text/javascript">
-	$('img.categorieImage').live('click', function(){
+	$('img.categorieImage').click(function(){
 		$('img.categorieImage').removeClass('selected');
 		$('#iconFileName').val($(this).attr('src'));
 		$(this).addClass('selected');

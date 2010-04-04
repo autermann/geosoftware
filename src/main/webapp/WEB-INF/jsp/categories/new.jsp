@@ -44,7 +44,7 @@
 	</form:form>
 </div>
 <script type="text/javascript">
-	$('img.categorieImage').live('click', function(){
+	$('img.categorieImage').click(function(){
 		$('img.categorieImage').removeClass('selected');
 		$('#iconFileName').val($(this).attr('src'));
 		$(this).addClass('selected');
