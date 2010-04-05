@@ -22,12 +22,12 @@
 				<c:forEach var="observation" items="${observations}">
 					<tr>
 						<td class="management_lists">${observation.id}</td>
-						<td class="management_lists"><s:escapeBody htmlEscape="true" javaScriptEscape="true">${observation.title}</s:escapeBody></td>
-						<td class="management_lists"><s:escapeBody htmlEscape="true" javaScriptEscape="true">${observation.description}</s:escapeBody></td>
+						<td class="management_lists"><s:escapeBody htmlEscape="true" javaScriptEscape="false">${observation.title}</s:escapeBody></td>
+						<td class="management_lists"><s:escapeBody htmlEscape="true" javaScriptEscape="false">${observation.description}</s:escapeBody></td>
 						<td class="management_lists">
 							<c:if test="${sessionScope.LOGIN.id eq observation.user.id || sessionScope.LOGIN.userGroup eq 'ADMIN'}">
-								<a href="<s:url value="/o/edit/${observation.id}"/>"><img src="<s:url value="/static/img/edit.png" htmlEscape="true" />" alt="<fmt:message key="observation.edit" />"></a>
-								<a href="<s:url value="/o/del/${observation.id}"/>"><img src="<s:url value="/static/img/delete.png" htmlEscape="true" />" alt="<fmt:message key="observation.delete" />"></a>
+								<a href="<s:url value="/o/edit/${observation.id}"/>"><img src="<s:url value="/static/img/edit.png" htmlEscape="true" />" alt="<s:escapeBody htmlEscape="true"><fmt:message key="observation.edit" /></s:escapeBody>"></a>
+								<a href="<s:url value="/o/del/${observation.id}"/>"><img src="<s:url value="/static/img/delete.png" htmlEscape="true" />" alt="<s:escapeBody htmlEscape="true"><fmt:message key="observation.delete" /></s:escapeBody>"></a>
 								<a href="<s:url value="/r/o/${o.id}/new"/>"><img src="<s:url value="/static/img/report.png" htmlEscape="true" />" alt="<fmt:message key="observation.report"/>"/></a>
 							</c:if>
 						</td>

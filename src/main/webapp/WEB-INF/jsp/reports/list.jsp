@@ -36,8 +36,8 @@
                                                         </c:choose>
                                                 </td>
                                                 <td class="management_lists">
-                                                        <a href="<s:url value="/r/edit/${report.id}"/>"><img src="<s:url value="/static/img/edit.png" htmlEscape="true" />" alt="<fmt:message key="report.edit"/>"></a>
-                                                        <a href="<s:url value="/r/del/${report.id}"/>"><img src="<s:url value="/static/img/delete.png" htmlEscape="true" />" alt="<fmt:message key="report.delete"/>"></a>
+                                                        <a href="<s:url value="/r/edit/${report.id}"/>"><img src="<s:url value="/static/img/edit.png" htmlEscape="true" />" alt="<s:escapeBody htmlEscape="true"><fmt:message key="report.edit"/></s:escapeBody>"</a>
+														<a href="<s:url value="/r/del/${report.id}"/>"><img src="<s:url value="/static/img/delete.png" htmlEscape="true" />" alt="<s:escapeBody htmlEscape="true"><fmt:message key="report.delete"/></s:escapeBody>"></a>
                                                 </td>
                                         </tr>
                                 </c:forEach>

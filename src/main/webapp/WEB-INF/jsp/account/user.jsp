@@ -6,7 +6,7 @@
 
                 <tr style="height: 25%">
                         <td></td>
-                        <td class="admin_statement"><fmt:message key="user.backend"/><br /><br /> </td>
+                        <td class="admin_statement"><s:escapeBody htmlEscape="true"><fmt:message key="user.backend"/></s:escapeBody><br /><br /> </td>
                         <td></td>
                 </tr>
                 <tr style="height: 33%">
@@ -41,7 +41,7 @@
                     <td></td>
                     <td align="center">
 
-                        <a href="<s:url value="/" htmlEscape="true" />"><fmt:message key="nav.home"/></a> <fmt:message key="copyright"/>
+                        <a href="<s:url value="/" htmlEscape="true" />"><s:escapeBody htmlEscape="true"><fmt:message key="nav.home"/></s:escapeBody></a> <fmt:message key="copyright"/>
                     </td>
                     <td></td>
                 </tr>

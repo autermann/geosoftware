@@ -104,6 +104,10 @@ input.searchbutton {
     vertical-align: bottom;
 }
 
+div.observationlist {
+
+}
+
 div.map {
     border: 1px solid silver;
 	height: 90%;
@@ -161,6 +165,11 @@ table.management_lists {
 
 td.management_lists, tr.management_lists, th.management_lists {
     border-bottom: 1px solid silver;
+    border-left: 1px solid silver;
+}
+td.management_lists_image {
+	text-align: center;
+	border-bottom: 1px solid silver;
     border-left: 1px solid silver;
 }
 

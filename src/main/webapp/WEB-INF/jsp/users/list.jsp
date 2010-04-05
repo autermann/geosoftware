@@ -24,7 +24,7 @@
                                         <tr>
                                                 <td  class="management_lists"><a href="<s:url value="/u/${user.id}"/>">${user.id}</a></td>
                                                 <td  class="management_lists">${user.mail}</td>
-                                                <td  class="management_lists"><a href="<s:url value="/u/edit/${user.id}"/>"><img src="<s:url value="/static/img/edit.png" htmlEscape="true" />" alt="<fmt:message key="user.edit"/>"></a></td>
+                                                <td  class="management_lists"><a href="<s:url value="/u/edit/${user.id}"/>"><img src="<s:url value="/static/img/edit.png" htmlEscape="true" />" alt="<s:escapeBody htmlEscape="true"><fmt:message key="user.edit"/></s:escapeBody>"></a></td>
                                         </tr>
                                 </c:forEach>
                             </table>

@@ -5,7 +5,7 @@
 
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-		<title><fmt:message key="title"/></title>
+		<title><s:escapeBody htmlEscape="true"><fmt:message key="title"/></s:escapeBody></title>
 		<link href="<s:url value="/static/css/style.css" htmlEscape="true" />" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" src="http://openlayers.org/api/OpenLayers.js"></script>
 		<script type="text/javascript" src="http://www.openstreetmap.org/openlayers/OpenStreetMap.js"></script>
@@ -47,6 +47,7 @@
 					});
 			</script></c:if>
 		</head>
+
 		<body onload="init();">
 			<a href="<s:url value="/" htmlEscape="true" />"><img src="<s:url value="/static/img/logo.png" htmlEscape="true"/>" align="left" width="160" alt="Logo" ></img></a>
 		<div align="right">
@@ -60,21 +61,27 @@
 					<a href="<s:url value="/login"/>"> <fmt:message key="login.button"/></a>
 				</c:otherwise>
 			</c:choose>
+
+			<!-- Searchbox -->
 			<form action="<s:url value="/"/>" method="GET" style="display:inline">
 				| <input type="text" name="q" value="Search..." class="search" onfocus="this.value=''"/>
 				<input type="image" src="<s:url value="/static/img/search.png" htmlEscape="true" />" alt="Search" class="searchbutton"/>
 			</form>
+			
 		</div>
 		<hr style="border:solid #DDDDEE 1px"/><br/>
 		<br />
 		<table width="28%"><tr><td>
-					<h3><fmt:message key="welcome"/></h3>
-					<h4><fmt:message key="begruessung"/></h4>
+					<h3><s:escapeBody htmlEscape="true"><fmt:message key="welcome"/></s:escapeBody></h3>
+					<h4><s:escapeBody htmlEscape="true"><fmt:message key="begruessung"/></s:escapeBody></h4>
 				</td></tr>
 		</table>
 		<div>
+
+
+		<!-- Beginning of observationlist-->
 			<table width="29%" class="observationlist">
-				<div id="results">
+				<div id="results" class="observationlist">
 					<c:forEach var="o" items="${observations}">
 
 
@@ -86,9 +93,9 @@
 
 								<a href="#" onclick="goTo(${o.coordinate.longitude}, ${o.coordinate.latitude}, 16);"><img src="<s:url value="/static/img/show.png" htmlEscape="true" />" alt="<fmt:message key="observation.viewInMap"/>" align="right" height="20px"/></a>
 									<c:if test="${sessionScope.LOGIN != null}">
-									<a href="<s:url value="/r/o/${o.id}/new"/>"><img src="<s:url value="/static/img/report.png" htmlEscape="true" />" alt="<fmt:message key="observation.report"/>" align="right" height="20px"/></a>
+									<a href="<s:url value="/r/o/${o.id}/new"/>"><img src="<s:url value="/static/img/report.png" htmlEscape="true" />" alt="<s:escapeBody htmlEscape="true"><fmt:message key="observation.report"/></s:escapeBody>" align="right" height="20px"></img></a>
 										<c:if test="${sessionScope.LOGIN.userGroup == 'ADMIN' || o.user.id == sessionScope.LOGIN.id}">
-										<a href="<s:url value="/o/edit/${o.id}"/>"><img src="<s:url value="/static/img/edit.png" htmlEscape="true" />" alt="<fmt:message key="observation.edit"/>" align="right" height="20px"/></a>
+										<a href="<s:url value="/o/edit/${o.id}"/>"><img src="<s:url value="/static/img/edit.png" htmlEscape="true" />" alt="<s:escapeBody htmlEscape="true"><fmt:message key="observation.edit"/></s:escapeBody>" align="right" height="20px"></img></a>
 										</c:if>
 									</c:if>
 
@@ -102,12 +109,13 @@
 				</div>
 			</table>
 		</div>
+		<!-- beginning of map -->
 		<div id="map" class="map"></div>
 		<div align="center">
 			<br />
 			<table class="footer">
 				<tr>
-					<td><a href="<s:url value="/" htmlEscape="true" />"><fmt:message key="nav.home"/></a></td>
+					<td><a href="<s:url value="/" htmlEscape="true" />"><s:escapeBody htmlEscape="true"><fmt:message key="nav.home"/></s:escapeBody></a></td>
 					<td align="right"><fmt:message key="copyright"/></td>
 				</tr>
 			</table>
