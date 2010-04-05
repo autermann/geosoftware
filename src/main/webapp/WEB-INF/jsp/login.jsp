@@ -26,7 +26,7 @@
 
 					<form:form name="login" modelAttribute="login" method="POST">
 						<b><fmt:message key="login.button" /></b>
-						<br/><br/>
+						<p />
 						<table>
 							<tr>
 								<td>
@@ -34,7 +34,7 @@
 								</td>
 
 								<td>
-									<form:input path="mail" value="E-mail" onfocus="this.value=''" size="30"/>
+									<form:input path="mail" class="loginInputBox" value="E-mail" onfocus="this.value=''" size="30"/>
 									<form:errors cssStyle="color: red;" path="mail" />
 								</td>
 							</tr>
@@ -45,7 +45,7 @@
 								</td>
 
 								<td>
-									<form:password path="password" onfocus="this.value=''" size="30" />
+									<form:password path="password" class="loginInputBox" onfocus="this.value=''" size="30" />
 									<form:errors cssStyle="color: red;" path="password"/>
 								</td>
 							</tr>

@@ -73,7 +73,7 @@
 		<br />
 		<table width="28%"><tr><td>
 					<h3><s:escapeBody htmlEscape="true"><fmt:message key="welcome"/></s:escapeBody></h3>
-					<h4><s:escapeBody htmlEscape="true"><fmt:message key="begruessung"/></s:escapeBody></h4>
+					<h4><s:escapeBody htmlEscape="true"><fmt:message key="greeting"/></s:escapeBody></h4>
 				</td></tr>
 		</table>
 		<div>

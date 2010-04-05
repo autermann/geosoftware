@@ -125,6 +125,11 @@ td.loginform {
      vertical-align: bottom;
 }
 
+.loginInputBox { /* needed for same box sizes on IE8 */
+	width: 200px;
+}
+
+
 /*----------Registration Page------------------*/
 td.registerform {
     background-color: #EEEEEE;
