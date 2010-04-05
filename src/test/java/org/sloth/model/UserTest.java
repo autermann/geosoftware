@@ -55,7 +55,6 @@ public class UserTest {
 		assertEquals(Group.USER, b.getUserGroup());
 		assertEquals("mail", b.getMail());
 		assertEquals(0, b.getVersion());
-
 	}
 
 	@Test
@@ -90,8 +89,7 @@ public class UserTest {
 
 	@Test
 	public void testEquals() throws Exception {
-		User a = new User();
-		User b = new User();
+		User a = new User(), b = new User();
 		assertEquals(a, b);
 		a.setName("name");
 		assertTrue(!a.equals(b));

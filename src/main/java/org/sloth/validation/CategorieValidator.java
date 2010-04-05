@@ -36,7 +36,7 @@ public class CategorieValidator implements Validator {
 	}
 
 	@Autowired
-	public void setObservationService(ObservationService observationService){
+	public void setObservationService(ObservationService observationService) {
 		this.observationService = observationService;
 	}
 
@@ -48,7 +48,11 @@ public class CategorieValidator implements Validator {
 		rejectIfTooLong(e, "title", "field.categorie.title.tooLong", 255);
 		rejectIfTooLong(e, "description", "field.categorie.description.tooLong", 255);
 		rejectIfTooLong(e, "iconFileName", "field.categorie.iconFileName.tooLong", 255);
-		if (!this.observationService.isCategorieTitleAvailable(((Categorie) t).getTitle()))
+		Categorie c = (Categorie) t;
+		Categorie orig = this.observationService.getCategorieByTitle(c.getTitle());
+		if (notNull(orig) && (c.isNew() || (c.getId() != orig.getId()))) {
 			e.rejectValue("title", "field.categorie.title.notUnique");
+		}
+
 	}
 }

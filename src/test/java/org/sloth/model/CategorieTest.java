@@ -46,8 +46,7 @@ public class CategorieTest {
 
 	@Test
 	public void testEquals() {
-		Categorie a = new Categorie();
-		Categorie b = new Categorie();
+		Categorie a = new Categorie(), b = new Categorie();
 		assertEquals(a, b);
 		a.setDescription("asdf");
 		assertTrue(!a.equals(b));

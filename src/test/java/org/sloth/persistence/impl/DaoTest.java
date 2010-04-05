@@ -19,10 +19,6 @@ package org.sloth.persistence.impl;
 
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import java.util.Date;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import org.junit.Before;
 import org.junit.Test;
 import org.sloth.exceptions.EntityAlreadyKnownException;
 import org.sloth.exceptions.FieldLengthConstraintViolationException;
@@ -33,36 +29,22 @@ import org.sloth.model.User;
 import org.sloth.model.Group;
 import org.sloth.persistence.CategorieDao;
 import org.sloth.persistence.ObservationDao;
+import org.sloth.persistence.ReportDao;
 import org.sloth.persistence.UserDao;
 import static org.sloth.EntityFactory.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.orm.jpa.JpaSystemException;
-import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 
 @ContextConfiguration
 public class DaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 
-	private JpaTransactionManager transactionManager = null;
-	private EntityManagerFactory entityManagerFactory = null;
 	private UserDao userDao = null;
 	private CategorieDao categorieDao = null;
+	private ReportDao reportDao = null;
 	private ObservationDao observationDao = null;
-	private EntityManager entityManager = null;
-	private EntityTransaction entityTransaction = null;
-
-	@Autowired
-	public void setTransactionManager(JpaTransactionManager transactionManager) {
-		this.transactionManager = transactionManager;
-	}
-
-	@Autowired
-	public void setEntityManagerFactory(
-			EntityManagerFactory entityManagerFactory) {
-		this.entityManagerFactory = entityManagerFactory;
-	}
 
 	@Autowired
 	public void setUserDao(UserDao userDao) {
@@ -75,25 +57,20 @@ public class DaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 	}
 
 	@Autowired
+	public void setCategorieDao(ReportDao reportDao) {
+		this.reportDao = reportDao;
+	}
+
+	@Autowired
 	public void setObservationDao(ObservationDao observationDao) {
 		this.observationDao = observationDao;
 	}
 
-	@Before
-	public void setUp() {
-		deleteFromTables("USERS_TEST", "CATEGORIES_TEST", "OBSERVATIONS_TEST");
-	}
-
-	public void tearDown() {
-		deleteFromTables("USERS_TEST", "CATEGORIES_TEST", "OBSERVATIONS_TEST");
-	}
-
 	private void testRows() {
 		assertEquals(userDao.getAll().size(), countRowsInTable("USERS_TEST"));
-		assertEquals(categorieDao.getAll().size(),
-				countRowsInTable("CATEGORIES_TEST"));
-		assertEquals(observationDao.getAll().size(),
-				countRowsInTable("OBSERVATIONS_TEST"));
+		assertEquals(categorieDao.getAll().size(), countRowsInTable("CATEGORIES_TEST"));
+		assertEquals(observationDao.getAll().size(), countRowsInTable("OBSERVATIONS_TEST"));
+		assertEquals(reportDao.getAll(), countRowsInTable("REPORTS_TEST"));
 	}
 
 	@Test
@@ -102,8 +79,7 @@ public class DaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 		assertNotNull(userDao);
 		assertNotNull(categorieDao);
 		assertNotNull(observationDao);
-		assertNotNull(transactionManager);
-		assertNotNull(entityManagerFactory);
+		assertNotNull(reportDao);
 	}
 
 	/**
@@ -112,19 +88,16 @@ public class DaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 	@Test
 	public void duplicateMailAddress() {
 		/* ugly workaround to getById in another transaction... */
-		this.simpleJdbcTemplate
-				.update(
-						"INSERT INTO USERS_TEST (ID, MAIL_ADDRESS, CREATION_DATE, NAME, USER_GROUP, FAMILY_NAME, PASSWORD)"
-								+ " VALUES (?, ?, ?, ?, ?, ?, ?)", 999L,
-						"default@example.tld", new Date(), "TEST", Group.USER
-								.toString(), "TEST", "password");
+		this.simpleJdbcTemplate.update(
+				"INSERT INTO USERS_TEST (ID, MAIL_ADDRESS, CREATION_DATE, NAME, USER_GROUP, FAMILY_NAME, PASSWORD, VERSION)"
+				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?)", 999L,
+				"default@example.tld", new Date(), "TEST", Group.USER.toString(), "TEST", "password", "0");
 		User u = getUser();
 		u.setMail("default@example.tld");
 		try {
 			userDao.save(u);
 		} catch (JpaSystemException e) {
-			assertTrue(e
-					.contains(MySQLIntegrityConstraintViolationException.class));
+			assertTrue(e.contains(MySQLIntegrityConstraintViolationException.class));
 			return;
 		}
 		fail("no exception");
@@ -366,8 +339,9 @@ public class DaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 	@Test
 	public void tooLongName() {
 		StringBuffer buf = new StringBuffer();
-		for (int i = 0; i < 255; i++)
+		for (int i = 0; i < 255; i++) {
 			buf.append("a");
+		}
 		assertEquals(buf.toString().length(), 255);
 		User uNormal = getUser();
 		uNormal.setName(buf.toString());

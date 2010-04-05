@@ -53,8 +53,7 @@ public class CoordinateTest {
 
 	@Test
 	public void testEquals() throws Exception {
-		Coordinate a = new Coordinate();
-		Coordinate b = new Coordinate();
+		Coordinate a = new Coordinate(), b = new Coordinate();
 		assertEquals(a, b);
 		a.setLongitude(5);
 		assertTrue(!a.equals(b));

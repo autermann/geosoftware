@@ -83,8 +83,7 @@ public class ObservationTest {
 
 	@Test
 	public void testEquals() throws Exception {
-		Observation a = new Observation();
-		Observation b = new Observation();
+		Observation a = new Observation(), b = new Observation();
 		assertEquals(a, b);
 		User u = new User();
 		a.setUser(u);
