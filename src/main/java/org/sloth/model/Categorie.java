@@ -52,9 +52,12 @@ public class Categorie extends BaseEntity implements Serializable {
 	 *            the title
 	 * @param description
 	 *            the description
+	 * @param iconFileName
+	 *            the iconFileName
 	 */
-	public Categorie(String title, String description) {
+	public Categorie(String title, String description, String iconFileName) {
 		this.title = title;
+		this.iconFileName = iconFileName;
 		this.description = description;
 	}
 
@@ -108,6 +111,7 @@ public class Categorie extends BaseEntity implements Serializable {
 	@Override
 	public int hashCode() {
 		int hash = 7;
+		hash = 41 * hash + this.getVersion();
 		hash = 41 * hash + (this.getId() != null ? this.getId().hashCode() : 0);
 		hash = 41 * hash + (this.iconFileName != null ? this.iconFileName.hashCode() : 0);
 		hash = 41 * hash + (this.title != null ? this.title.hashCode() : 0);

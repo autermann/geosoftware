@@ -1,0 +1,201 @@
+<html>
+<head>
+    <title>
+        com.gtcgroup.testutil package
+    </title>
+</head>
+<body> TestUtil attempts to reflectively invoke all matching accessor methods on a mutable
+    object. It has a single class with static methods providing verification services.
+    Optional configuration details are available by viewing the annotated <a
+        href="../../../testutil-config.xml">testutil-config.xml </a>descriptor document.
+    Additional information is maintained at the <a href="http://gtcgroup.com/util/">
+    TestUtil Home Page </a>.
+    <br/>
+    <br/> TestUtil seeks to identify a concrete class to use as a test instance to "set" and
+    "get". If a setter signature specifies a primitive parameter (data) type, a random value
+    is set and verification ensures the same value returned. (In the case of a
+    <code>boolean</code> or <code>Boolean</code> both 'true' and 'false' are tested.) If
+    an Interface is detected a <code>DynamicProxy</code> is instantiated as the test
+    instance.
+    <br/>
+    <br/> <b>The following test method demonstrates the simplicity of the TestUtil API:</b>
+    <br/>
+    <br/> <code>
+    &nbsp;&nbsp;&nbsp;&nbsp;/**
+    <br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Verify accessor methods of a mutable business
+    object.
+    <br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
+    <br/>
+    <br/> &nbsp;&nbsp;&nbsp;&nbsp;public void testPersonBO() {
+    <br/>
+    <br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    assertTrue(TestUtil.verifyMutable(new PersonBO(), 1, 0));
+    <br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;} </code>
+    <br/>
+    <br/> <b>Sample console output from execution of the above
+    <code>verifyMutable()</code> method:</b>
+    <br/>
+    <br/> <code>
+    &nbsp;&nbsp;&nbsp;&nbsp;+ Verification Warning(s) -
+    com.gtcgroup.testutil.bo.PersonBO +
+    <br/>
+    <br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;Warning [# 1]: Setter = [setInt0()]; Getter = [getInt0()]
+    <br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;Setter first parameter [int] and getter return type
+    [java.lang.String] are not TestUtil verifiable.
+    <br/>
+    <br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;-----&gt; Verification :
+    com.gtcgroup.testutil.bo.PersonBO
+    <br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;-&gt; Anticipated: 25 Successful Verification(s); 1
+    Warning(s); 0 Glitch(es)
+    <br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;-----&gt; Results: 25 Successful Verification(s); 1
+    Warning(s); 0 Glitch(es)
+    <br/> </code>
+    <br/> <b>Verify a complete application with one line of test code:</b>
+    <br/>
+    <br/> <code>
+    &nbsp;&nbsp;&nbsp;&nbsp;/**
+    <br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Verify methods for mutable objects within a
+    directory.
+    <br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
+    <br/>
+    <br/> &nbsp;&nbsp;&nbsp;&nbsp;public void testDirectory() {
+    <br/>
+    <br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    assertTrue(TestUtil.verifyDirectory("\\C:\\projects\\workspace\\testutil\\testing",
+    false, "com.gtcgroup", true, 17, 22, 5));
+    <br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;} </code>
+    <br/>
+    <br/> <b>Sample console output from execution of the above
+    <code>verifyDirectory()</code> method:</b>
+    <br/>
+    <br/> <code>
+    &nbsp;&nbsp;&nbsp;&nbsp;****************************************************************************************************
+    <br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;*
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TestUtil
+    v. x.x - Verify Directory Summary Results
+    <br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;* -------&gt; Skips: 11 Non-Java files, interfaces, or
+    abstract classes not attempted.
+    <br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;* -&gt; Anticipated: 124 Successful Verification(s); 17
+    Warning(s); 22 Glitch(es); 5 Caution(s)
+    <br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;* -----&gt; Results: 124 Successful Verification(s); 17
+    Warning(s); 22 Glitch(es); 5 Caution(s)
+    <br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;****************************************************************************************************
+    <br/> </code>
+    <br/> TestUtil builds upon the <b>Runs</b>, <b>Errors</b> and <b>Failures</b> endemic
+    to JUnit. Feedback is augmented with <b>Successful Verifications</b>,
+    <b>Warnings</b>, <b>Glitches</b>, <b>Cautions</b> and <b>Skips</b>. These
+    additional states are further defined as follows:
+    <ul>
+        <li>Successful Verification - When an object returned (with a getter) was the "same"
+            as the test instance set - or, the objects were (successfully) asserted to be
+            "equal". </li>
+        <li>Warning - When a verification was <b><i>not</i></b> attempted for an accessor
+            pair. A "warning" warrants manual analysis to determine the source of the
+            anomaly. </li>
+        <li>Glitch - When a verification was attempted but either reflective invocation or
+            the assertions failed. If a programming error is not the culprit - in some cases
+            verification may be enabled with an optional <a href="../../../testutil-config.xml">
+            testutil-config.xml </a>descriptor document. </li>
+        <li>Caution [<code>verifyDirectory()</code> only] - When a Java class could
+            <b><i>not</i></b> be reflectively instantiated by TestUtil - so none of the
+            accessor methods were verified. In some cases, special handling with an
+            optional <a href="../../../testutil-config.xml">testutil-config.xml </a>
+            descriptor document may enable verification to occur. </li>
+        <li>Skip [<code>verifyDirectory()</code> only] - When a file is an Interface or
+            Abstract class, or contains no Java at all (e.g. .xml etc). Skips are
+            informational only and no action is required. </li>
+    </ul>
+    Beginning with version 2.0, <b>classes can be excluded from verification with the
+    (simple) addition of a Javadoc tag</b>. Several variants are supported:
+    <ul>
+        <li>@excludeClass </li>
+        <li>@excludeClassFromTestUtilVerification </li>
+        <li>@excludeClass caution </li>
+        <li>@excludeClass skip </li>
+        <li>@excludeClassFromTestUtilVerification caution </li>
+        <li>@excludeClassFromTestUtilVerification skip </li>
+    </ul>
+    For example:
+    <br/>
+    <br/>
+    <code>
+    &nbsp;&nbsp;&nbsp;&nbsp; * Javadoc comments here.
+    <br/>
+    &nbsp;&nbsp;&nbsp;&nbsp; * @author MarvinToll@gtcGroup.com 
+    <br/>
+    &nbsp;&nbsp;&nbsp;&nbsp; * @since v. 2.0
+    <br/>
+    &nbsp;&nbsp;&nbsp;&nbsp; * @excludeClass
+    <br/>
+    <br/>
+    &nbsp;&nbsp;&nbsp;&nbsp; public class ExcludeClassUsingJavadocTagBO extends BaseTestBO {
+    <br/>
+    <br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // code here ...
+    <br/>
+    &nbsp;&nbsp;&nbsp;&nbsp; }
+    <br/> </code>
+    <br/>
+    
+    <p> Beginning with version 2.0, <b>method pairs can be excluded from verification with
+        the (simple) addition of a Javadoc tag on the setter</b>. Both
+        <code>@excludeSetter</code> and the more descriptive
+        <code>@excludeSetterFromTestUtilInvocation</code> are supported.
+        <br/>
+        <br/> <code>
+        &nbsp;&nbsp;&nbsp;&nbsp; * Javadoc comments here.
+        <br/>
+        &nbsp;&nbsp;&nbsp;&nbsp; * @param strTest
+        <br/>
+        &nbsp;&nbsp;&nbsp;&nbsp; *
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The strTest to set.
+        <br/>
+        &nbsp;&nbsp;&nbsp;&nbsp; * @excludeSetter
+        <br/>
+        <br/>
+        &nbsp;&nbsp;&nbsp;&nbsp; public void setStrTest(String strTest) {
+        <br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.strTest = strTest;
+        <br/>
+        &nbsp;&nbsp;&nbsp;&nbsp; }
+        <br/>
+        <br/>
+        &nbsp;&nbsp;&nbsp;&nbsp; * Javadoc comments here.
+        <br/>
+        &nbsp;&nbsp;&nbsp;&nbsp; * @param strTest
+        <br/>
+        &nbsp;&nbsp;&nbsp;&nbsp; *
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The strTest to set.
+        <br/>
+        &nbsp;&nbsp;&nbsp;&nbsp; * @excludeSetterFromTestUtilVerification
+        <br/>
+        <br/>
+        &nbsp;&nbsp;&nbsp;&nbsp; public void setStrTest(String strTest) {
+        <br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.strTest = strTest;
+        <br/>
+        &nbsp;&nbsp;&nbsp;&nbsp; } </code>
+        <br/> </p>
+    
+    <p style="font-family:Verdana; font-size:10px; font-style:italic">Copyright
+        (c) 1999 - 2008 by Global Technology Consulting Group, Inc. at <a
+            href="http://gtcGroup.com">gtcGroup.com</a>.
+        <br/> Use is authorized, provided the source is acknowledged by inclusion of this
+        copyright notice. </p> </body>
+</html>

@@ -17,125 +17,85 @@
  */
 package org.sloth.model;
 
-import org.junit.Before;
+import com.gtcgroup.testutil.TestUtil;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class CategorieTest {
 
-	private Categorie a, b, c;
-	private final String titleA = "Title of A";
-	private final String titleB = "Title of A";
-	private final String titleC = "Title of C";
-	private final String descriptionA = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
-	private final String descriptionB = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
-	private final String descriptionC = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod";
-
-	@Before
-	public void setUp() throws Exception {
-		a = new Categorie();
-		b = new Categorie();
-		c = new Categorie();
-	}
-
-	/**
-	 * Test of getTitle and setTitle method, of class Categorie.
-	 */
 	@Test
-	public void testGetTitle() {
-		String expResult = null;
-		String result = a.getTitle();
-		assertEquals(expResult, result);
-		expResult = titleA;
-		a.setTitle(titleA);
-		result = a.getTitle();
-		assertEquals(expResult, result);
+	public void testGetterAndSetter() {
+		assertTrue(TestUtil.verifyMutable(new Categorie()));
 	}
 
-	/**
-	 * Test of getDescription and setDescription method, of class Categorie.
-	 */
 	@Test
-	public void testGetDescription() {
-		String expResult = null;
-		String result = a.getDescription();
-		assertEquals(expResult, result);
-		expResult = descriptionA;
-		a.setDescription(descriptionA);
-		result = a.getDescription();
-		assertEquals(expResult, result);
+	public void testConstructor() {
+		Categorie a = new Categorie("title", "description", "iconFileName");
+		assertEquals("description", a.getDescription());
+		assertEquals("iconFileName", a.getIconFileName());
+		assertEquals("title", a.getTitle());
+		assertNull(a.getId());
+		assertEquals(0, a.getVersion());
+		Categorie b = new Categorie();
+		assertNull(b.getDescription());
+		assertNull(b.getIconFileName());
+		assertNull(b.getTitle());
+		assertNull(b.getId());
+		assertEquals(0, b.getVersion());
 	}
 
-	/**
-	 * Test of equals method, of class Categorie.
-	 */
 	@Test
 	public void testEquals() {
-		a.setDescription(descriptionA);
-		b.setDescription(descriptionB);
-
-		assertTrue(a.equals(b));
-		assertTrue(b.equals(a));
-		assertTrue(!c.equals(a));
-		assertTrue(!c.equals(b));
-		assertTrue(!b.equals(c));
-		assertTrue(!a.equals(c));
+		Categorie a = new Categorie();
+		Categorie b = new Categorie();
+		assertEquals(a, b);
+		a.setDescription("asdf");
+		assertTrue(!a.equals(b));
+		b.setDescription("asdf");
+		assertEquals(a, b);
+		a.setIconFileName("asdf");
+		assertTrue(!a.equals(b));
+		b.setIconFileName("asdf");
+		assertEquals(a, b);
+		a.setTitle("asdf");
+		assertTrue(!a.equals(b));
+		b.setTitle("asdf");
+		assertEquals(a, b);
+		a.setId(new Long(123));
+		assertTrue(!a.equals(b));
+		b.setId(new Long(123));
+		assertEquals(a, b);
+		a.setVersion(123);
+		assertTrue(!a.equals(b));
+		b.setVersion(123);
+		assertEquals(a, b);
 	}
 
-	/**
-	 * Test of hashCode method, of class Categorie.
-	 */
 	@Test
 	public void testHashCode() {
-		assertTrue(c.hashCode() == a.hashCode());
-		a.setDescription(descriptionA);
-		assertTrue(c.hashCode() != a.hashCode());
+		Categorie a = new Categorie();
+		int aHash = a.hashCode();
+		assertEquals(aHash, new Categorie().hashCode());
+		a.setDescription("asdf");
+		assertTrue(a.hashCode() != aHash);
+		aHash = a.hashCode();
+		a.setIconFileName("asdf");
+		assertTrue(a.hashCode() != aHash);
+		aHash = a.hashCode();
+		a.setTitle("asdf");
+		assertTrue(a.hashCode() != aHash);
+		aHash = a.hashCode();
+		a.setVersion(a.getVersion() + 1);
+		assertTrue(a.hashCode() != aHash);
+		aHash = a.hashCode();
+		a.setId(new Long(123));
+		assertTrue(a.hashCode() != aHash);
 	}
 
-	/**
-	 * Test of toString method, of class Categorie.
-	 */
 	@Test
 	public void testToString() {
-		a.setDescription(descriptionA);
-		a.setTitle(titleA);
-		assertEquals(a.toString(), titleA);
-	}
-
-	/**
-	 * Test of getId method, of class Categorie.
-	 */
-	@Test
-	public void testGetId() {
-		Long expResult = null;
-		Long result = a.getId();
-		assertEquals(expResult, result);
-
-	}
-
-	/**
-	 * Test of setId method, of class Categorie.
-	 */
-	@Test
-	public void testSetId() {
-		Long id = 12345L;
-		a.setId(id);
-		assertEquals(a.getId(), id);
-	}
-
-	/**
-	 * Test of isNew method, of class Categorie.
-	 */
-	@Test
-	public void testIsNew() {
-		boolean expResult = true;
-		boolean result = a.isNew();
-		assertEquals(expResult, result);
-
-		a.setId(12345L);
-		expResult = false;
-		result = a.isNew();
-		assertEquals(expResult, result);
-
+		Categorie a = new Categorie();
+		a.setTitle("asdf");
+		assertEquals("asdf", a.toString());
 	}
 }

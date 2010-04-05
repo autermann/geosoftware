@@ -17,81 +17,58 @@
  */
 package org.sloth.model;
 
-import org.junit.After;
-import org.junit.Before;
+import com.gtcgroup.testutil.TestUtil;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class CoordinateTest {
 
-	private Coordinate a, b, c, d;
-	private final double lonA = 231847D, latA = 1234423D;
-	private final double lonB = -12347D, latB = -1231234134423D;
-	private final double lonC = 1234455687D, latC = -123424D;
-	private final double lonD = 1234455687D, latD = -123424D;
-
-	@Before
-	public void setUp() throws Exception {
-		a = new Coordinate(lonA, latA);
-		b = new Coordinate(lonB, latB);
-		c = new Coordinate(lonC, latC);
-		d = new Coordinate(lonD, latD);
+	@Test
+	public void testGetterAndSetter() {
+		assertTrue(TestUtil.verifyMutable(new Coordinate()));
 	}
 
 	@Test
-	public void latitude() throws Exception {
-		Coordinate u = new Coordinate();
-		assertEquals("checking default value of latitude", u.getLatitude(), 0,
-				0);
-		u.setLatitude(latA);
-		assertEquals("checking correct setting of latitude", u.getLatitude(),
-				latA, 0);
-
+	public void testConstructor() {
+		Coordinate a = new Coordinate();
+		assertEquals(0d, a.getLatitude(), 0d);
+		assertEquals(0d, a.getLongitude(), 0d);
+		double lon = 231, lat = 234;
+		Coordinate b = new Coordinate(lon, lat);
+		assertEquals(lon, b.getLongitude(), 0);
+		assertEquals(lat, b.getLatitude(), 0);
 	}
 
 	@Test
-	public void longitude() throws Exception {
-		Coordinate u = new Coordinate();
-		assertEquals(u.getLongitude(), 0, 0);
-		u.setLongitude(lonA);
-		assertEquals(u.getLongitude(), lonA, 0);
+	public void testHashCode() throws Exception {
+		Coordinate a = new Coordinate();
+		int aHash = a.hashCode();
+		assertEquals(aHash, new Coordinate().hashCode());
+		a.setLongitude(2);
+		assertTrue(a.hashCode() != aHash);
+		aHash = a.hashCode();
+		a.setLatitude(123);
+		assertTrue(a.hashCode() != aHash);
 	}
 
 	@Test
-	public void hash() throws Exception {
-
-		assertEquals(c.hashCode(), d.hashCode());
-		assertTrue(a.hashCode() != b.hashCode());
-		assertTrue(b.hashCode() != c.hashCode());
-		assertTrue(a.hashCode() != c.hashCode());
-		int hash1 = a.hashCode();
-		int hash2 = a.hashCode();
-		assertEquals(hash1, hash2);
-	}
-
-	@Test
-	public void equal() throws Exception {
-		assertTrue(c.equals(d));
-		assertTrue(d.equals(c));
+	public void testEquals() throws Exception {
+		Coordinate a = new Coordinate();
+		Coordinate b = new Coordinate();
+		assertEquals(a, b);
+		a.setLongitude(5);
 		assertTrue(!a.equals(b));
-		assertTrue(!b.equals(a));
-		assertTrue(!a.equals(c));
-		assertTrue(!c.equals(a));
-		assertTrue(!a.equals(d));
-		assertTrue(!d.equals(a));
+		b.setLongitude(5);
+		assertEquals(a, b);
+		a.setLatitude(5);
+		assertTrue(!a.equals(b));
+		b.setLatitude(5);
+		assertEquals(a, b);
 	}
 
 	@Test
-	public void string() throws Exception {
-		assertEquals("(" + lonA + "," + latA + ")", a.toString());
-	}
-
-	@After
-	public void bla() {
-	}
-
-	@Test(expected = NullPointerException.class)
-	public void exc() throws Exception {
-		throw new NullPointerException();
+	public void testToString() throws Exception {
+		double lon = 15, lat = 10;
+		assertEquals("(" + lon + "," + lat + ")", new Coordinate(lon, lat).toString());
 	}
 }

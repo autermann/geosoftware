@@ -35,5 +35,4 @@ public enum Group {
 	public Group[] getValues() {
 		return values();
 	}
-
 }

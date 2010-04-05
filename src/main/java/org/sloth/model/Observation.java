@@ -145,7 +145,7 @@ public class Observation extends BaseEntity implements Serializable {
 	}
 
 	/**
-	 * @return the observationCategorie
+	 * @return the categorie
 	 */
 	public Categorie getCategorie() {
 		return categorie;
@@ -186,6 +186,7 @@ public class Observation extends BaseEntity implements Serializable {
 	@Override
 	public int hashCode() {
 		int hash = 7;
+		hash = 59 * hash + this.getVersion();
 		hash = 59 * hash + (this.getId() != null ? this.getId().hashCode() : 0);
 		hash = 59 * hash + (this.title != null ? this.title.hashCode() : 0);
 		hash = 59 * hash + (this.description != null ? this.description.hashCode() : 0);

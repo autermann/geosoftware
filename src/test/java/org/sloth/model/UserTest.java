@@ -17,232 +17,114 @@
  */
 package org.sloth.model;
 
+import com.gtcgroup.testutil.TestUtil;
 import java.util.Date;
-import org.junit.Before;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class UserTest {
 
-	private User aUser = new User();
-	private final String nameA = "test1";
-	private final String familyNameA = "User1";
-	private final String eMailA = "test1.User1@domain.tld";
-	private final String hPwdA = "qwertz";
-	private final Long idA = 12345L;
-
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	/**
-	 * Test of geteMail method, of class User.
-	 */
 	@Test
-	public void testGeteMail() {
-		String expResult = null;
-		String result = aUser.getMail();
-		assertEquals(expResult, result);
-		aUser.setMail(eMailA);
-		assertEquals(eMailA, aUser.getMail());
-
+	public void testGetterAndSetter() {
+		assertTrue(TestUtil.verifyMutable(new User(), null, 1, 0));
+		User u = new User();
+		assertNull(u.getUserGroup());
+		u.setUserGroup(Group.USER);
+		assertEquals(u.getUserGroup(), Group.USER);
+		u.setUserGroup(null);
+		assertNull(u.getUserGroup());
 	}
 
-	/**
-	 * Test of seteMail method, of class User.
-	 */
 	@Test
-	public void testSeteMail() {
-		aUser.setMail(eMailA);
-		assertEquals(eMailA, aUser.getMail());
-	}
-
-	/**
-	 * Test of getName method, of class User.
-	 */
-	@Test
-	public void testGetName() {
-		String expResult = null;
-		String result = aUser.getName();
-		assertEquals(expResult, result);
-
-		aUser.setName(nameA);
-		assertEquals(nameA, aUser.getName());
-
-	}
-
-	/**
-	 * Test of setName method, of class User.
-	 */
-	@Test
-	public void testSetName() {
-		aUser.setName(nameA);
-		assertEquals(nameA, aUser.getName());
-	}
-
-	/**
-	 * Test of getFamilyName method, of class User.
-	 */
-	@Test
-	public void testGetFamilyName() {
-		String expResult = null;
-		String result = aUser.getFamilyName();
-		assertEquals(expResult, result);
-
-		aUser.setFamilyName(familyNameA);
-		assertEquals(familyNameA, aUser.getFamilyName());
-	}
-
-	/**
-	 * Test of setFamilyName method, of class User.
-	 */
-	@Test
-	public void testSetFamilyName() {
-		aUser.setFamilyName(familyNameA);
-		assertEquals(familyNameA, aUser.getFamilyName());
-	}
-
-	/**
-	 * Test of getHashedPassword method, of class User.
-	 */
-	@Test
-	public void testGetPassword() {
-		String expResult = null;
-		String result = aUser.getPassword();
-		assertEquals(expResult, result);
-
-		aUser.setPassword(hPwdA);
-		assertEquals(hPwdA, aUser.getPassword());
+	public void testConstructor() {
+		User a = new User();
+		assertNotNull(a.getCreationDate());
+		assertNull(a.getFamilyName());
+		assertNull(a.getName());
+		assertNull(a.getId());
+		assertNull(a.getPassword());
+		assertNull(a.getUserGroup());
+		assertNull(a.getMail());
+		assertEquals(0, a.getVersion());
+		User b = new User("mail", "name", "familyName", "password", Group.USER);
+		assertNotNull(b.getCreationDate());
+		assertEquals("familyName", b.getFamilyName());
+		assertEquals("name", b.getName());
+		assertNull(b.getId());
+		assertEquals("password", b.getPassword());
+		assertEquals(Group.USER, b.getUserGroup());
+		assertEquals("mail", b.getMail());
+		assertEquals(0, b.getVersion());
 
 	}
 
-	/**
-	 * Test of setHashedPassword method, of class User.
-	 */
-	@Test
-	public void testSetPassword() {
-		aUser.setPassword(hPwdA);
-		assertEquals(hPwdA, aUser.getPassword());
-	}
-
-	/**
-	 * Test of getCreationDate method, of class User.
-	 */
-	@Test
-	public void testGetCreationDate() {
-		assertNotNull(aUser.getCreationDate());
-	}
-
-	/**
-	 * Test of setCreationDate method, of class User.
-	 */
-	@Test
-	public void testSetCreationDate() {
-		Date creationDate = new Date();
-		aUser.setCreationDate(creationDate);
-		assertEquals(creationDate, aUser.getCreationDate());
-	}
-
-	/**
-	 * Test of equals method, of class User.
-	 */
-	@Test
-	public void testEquals() {
-		User bUser = new User();
-		User cUser = new User();
-		aUser.setFamilyName(familyNameA);
-		aUser.setName(nameA);
-		bUser.setFamilyName(familyNameA);
-		bUser.setName(nameA);
-		bUser.setCreationDate(aUser.getCreationDate());
-		cUser.setFamilyName(familyNameA);
-		assertTrue(!cUser.equals(aUser));
-		assertTrue(bUser.equals(aUser));
-
-	}
-
-	/**
-	 * Test of hashCode method, of class User.
-	 */
 	@Test
 	public void testHashCode() {
-		User bUser = new User();
-		aUser.setFamilyName(familyNameA);
-		aUser.setName(nameA);
-		assertFalse(aUser.hashCode() == bUser.hashCode());
-
+		User u = new User();
+		int aHash = u.hashCode();
+		u.setName("name");
+		assertTrue(u.hashCode() != aHash);
+		aHash = u.hashCode();
+		u.setFamilyName("familyName");
+		assertTrue(u.hashCode() != aHash);
+		aHash = u.hashCode();
+		u.setMail("mail");
+		assertTrue(u.hashCode() != aHash);
+		aHash = u.hashCode();
+		u.setPassword("password");
+		assertTrue(u.hashCode() != aHash);
+		aHash = u.hashCode();
+		u.setId(new Long(123));
+		assertTrue(u.hashCode() != aHash);
+		aHash = u.hashCode();
+		u.setVersion(123);
+		assertTrue(u.hashCode() != aHash);
+		aHash = u.hashCode();
+		u.setCreationDate(new Date(System.currentTimeMillis() + 21));
+		assertTrue(u.hashCode() != aHash);
+		aHash = u.hashCode();
+		u.setUserGroup(Group.USER);
+		assertTrue(u.hashCode() != aHash);
+		aHash = u.hashCode();
 	}
 
-	/**
-	 * Test of toString method, of class User.
-	 */
 	@Test
-	public void testToString() {
-		aUser.setFamilyName(familyNameA);
-		aUser.setName(nameA);
-		aUser.setId(idA);
-		String expresult = familyNameA + ", " + nameA + " (" + idA.toString()
-				+ ")";
-
-		assertEquals(expresult, aUser.toString());
-
-	}
-
-	/**
-	 * Test of getUserRight method, of class User.
-	 */
-	@Test
-	public void testGetUserRight() {
-		assertEquals(aUser.getUserGroup(), null);
-		aUser.setUserGroup(Group.USER);
-		assertEquals(aUser.getUserGroup(), Group.USER);
-
-	}
-
-	/**
-	 * Test of setUserRight method, of class User.
-	 */
-	@Test
-	public void testSetUserRight() {
-		aUser.setUserGroup(Group.USER);
-		assertEquals(aUser.getUserGroup(), Group.USER);
-	}
-
-	/**
-	 * Test of getId method, of class User.
-	 */
-	@Test
-	public void testGetId() {
-		Long expResult = null;
-		Long result = aUser.getId();
-		assertEquals(expResult, result);
-
-		aUser.setId(idA);
-		expResult = idA;
-		result = aUser.getId();
-		assertEquals(expResult, result);
-
-	}
-
-	/**
-	 * Test of setId method, of class User.
-	 */
-	@Test
-	public void testSetId() {
-		aUser.setId(idA);
-		Long expResult = idA;
-		Long result = aUser.getId();
-		assertEquals(expResult, result);
-	}
-
-	/**
-	 * Test of isNew method, of class User.
-	 */
-	@Test
-	public void testIsNew() {
-		assertTrue(aUser.isNew());
-		aUser.setId(idA);
-		assertFalse(aUser.isNew());
-
+	public void testEquals() throws Exception {
+		User a = new User();
+		User b = new User();
+		assertEquals(a, b);
+		a.setName("name");
+		assertTrue(!a.equals(b));
+		b.setName("name");
+		assertEquals(a, b);
+		a.setFamilyName("familyName");
+		assertTrue(!a.equals(b));
+		b.setFamilyName("familyName");
+		assertEquals(a, b);
+		a.setMail("mail");
+		assertTrue(!a.equals(b));
+		b.setMail("mail");
+		assertEquals(a, b);
+		a.setPassword("password");
+		assertTrue(!a.equals(b));
+		b.setPassword("password");
+		assertEquals(a, b);
+		a.setId(new Long(123));
+		assertTrue(!a.equals(b));
+		b.setId(new Long(123));
+		assertEquals(a, b);
+		a.setVersion(123);
+		assertTrue(!a.equals(b));
+		b.setVersion(123);
+		assertEquals(a, b);
+		Date d = new Date(System.currentTimeMillis() + 123);
+		a.setCreationDate(d);
+		assertTrue(!a.equals(b));
+		b.setCreationDate(d);
+		assertEquals(a, b);
+		a.setUserGroup(Group.USER);
+		assertTrue(!a.equals(b));
+		b.setUserGroup(Group.USER);
+		assertEquals(a, b);
 	}
 }

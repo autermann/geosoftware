@@ -178,12 +178,14 @@ public class User extends BaseEntity implements Serializable {
 	@Override
 	public int hashCode() {
 		int hash = 5;
+		hash = 37 * hash + this.getVersion();
 		hash = 37 * hash + (this.getId() != null ? this.getId().hashCode() : 0);
 		hash = 37 * hash + (this.mail != null ? this.mail.hashCode() : 0);
 		hash = 37 * hash + (this.name != null ? this.name.hashCode() : 0);
 		hash = 37 * hash + (this.familyName != null ? this.familyName.hashCode() : 0);
 		hash = 37 * hash + (this.password != null ? this.password.hashCode() : 0);
 		hash = 37 * hash + (this.creationDate != null ? this.creationDate.hashCode() : 0);
+		hash = 37 * hash + (this.userGroup != null ? this.userGroup.hashCode() : 0);
 		return hash;
 	}
 

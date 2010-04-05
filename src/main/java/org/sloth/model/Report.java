@@ -168,6 +168,7 @@ public class Report extends BaseEntity implements Serializable {
 	@Override
 	public int hashCode() {
 		int hash = 5;
+		hash = 37 * hash + this.getVersion();
 		hash = 37 * hash + (this.getId() != null ? this.getId().hashCode() : 0);
 		hash = 37 * hash + (this.observation != null ? this.observation.hashCode() : 0);
 		hash = 37 * hash + (this.author != null ? this.author.hashCode() : 0);

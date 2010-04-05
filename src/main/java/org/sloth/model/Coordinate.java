@@ -90,7 +90,6 @@ public class Coordinate implements Serializable {
 	}
 
 	@Override
-	@SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
 	public boolean equals(Object obj) {
 		if (obj != null && obj instanceof Coordinate) {
 			return this.hashCode() == obj.hashCode();
