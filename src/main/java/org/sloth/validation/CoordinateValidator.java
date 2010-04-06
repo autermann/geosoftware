@@ -8,6 +8,7 @@ import org.sloth.model.Coordinate;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
+import static org.sloth.validation.ErrorCodes.*;
 
 @Component
 public class CoordinateValidator implements Validator {
@@ -22,10 +23,10 @@ public class CoordinateValidator implements Validator {
 		Coordinate c = (Coordinate) t;
 		double lon = c.getLongitude(), lat = c.getLatitude();
 		if (lon > 180.0 || lon < -180.0) {
-			e.rejectValue("longitude", "field.coordinate.longitude.invalid");
+			e.rejectValue("longitude", COORDINATE.INVALID_LONGITUDE);
 		}
 		if (lat > 180.0 || lat < -180.0) {
-			e.rejectValue("longitude", "field.coordinate.latitude.invalid");
+			e.rejectValue("longitude", COORDINATE.INVALID_LATITUDE);
 		}
 	}
 }

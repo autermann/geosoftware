@@ -22,6 +22,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import static org.sloth.util.ValidationUtils.*;
+import static org.sloth.validation.ErrorCodes.LOGIN.*;
 
 @Component
 public class LoginValidator implements Validator {
@@ -33,7 +34,7 @@ public class LoginValidator implements Validator {
 
 	@Override
 	public void validate(Object t, Errors e) {
-		rejectIfEmptyOrWhitespace(e, "mail", "field.login.mail.empty");
-		rejectIfEmptyOrWhitespace(e, "password", "field.login.password.empty");
+		rejectIfEmptyOrWhitespace(e, "mail", EMPTY_MAIL);
+		rejectIfEmptyOrWhitespace(e, "password", EMPTY_PASSWORD);
 	}
 }

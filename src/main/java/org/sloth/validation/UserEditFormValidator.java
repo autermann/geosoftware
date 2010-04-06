@@ -21,6 +21,7 @@ import org.sloth.web.action.UserEditFormAction;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import static org.sloth.util.ValidationUtils.*;
+import static org.sloth.validation.ErrorCodes.USER_EDIT.*;
 
 @Component
 public class UserEditFormValidator extends AbstractUserActionValidator {
@@ -33,47 +34,47 @@ public class UserEditFormValidator extends AbstractUserActionValidator {
 	@Override
 	public void validate(Object t, Errors e) {
 		UserEditFormAction a = (UserEditFormAction) t;
-		if (!a.getEditingUser().getId().equals(a.getOldUser().getId())) { // editing someone else
+		if (!a.getEditingUser().getId().equals(a.getOldUser().getId())) {
 			test(a, e);
 		} else if (!notNullAndNotEmpty(a.getActualPassword())) {
-			e.rejectValue("actualPassword", "field.useredit.actualpassword.empty");
+			e.rejectValue("actualPassword", EMPTY_ACTUAL_PASSWORD);
 		} else if (this.passwordService.check(a.getOldUser().getPassword(), a.getActualPassword())) {
 			test(a, e);
 			if (!a.getNewGroup().equals(a.getOldUser().getUserGroup())) {
-				e.rejectValue("newGroup", "field.useredit.newGroup.canNotChangeOwnGroup");
+				e.rejectValue("newGroup", CAN_NOT_CHANGE_OWN_GROUP);
 			}
 		} else {
-			e.rejectValue("actualPassword", "field.useredit.actualpassword.wrong");
+			e.rejectValue("actualPassword", WRONG_ACTUAL_PASSWORD);
 		}
 	}
 
 	private void test(UserEditFormAction a, Errors e) {
-		rejectIfEmptyOrWhitespace(e, "newName", "field.useredit.newName.empty");
-		rejectIfTooLong(e, "newName", "field.useredit.newName.tooLong", 255);
-		rejectIfEmptyOrWhitespace(e, "newFamilyName", "field.useredit.newFamilyName.empty");
-		rejectIfTooLong(e, "newFamilyName", "field.useredit.newFamilyName.tooLong", 255);
-		rejectIfEmptyOrWhitespace(e, "newMail", "field.useredit.newMail.empty");
+		rejectIfEmptyOrWhitespace(e, "newName", EMPTY_NEW_NAME);
+		rejectIfTooLong(e, "newName", TOO_LONG_NEW_NAME, 255);
+		rejectIfEmptyOrWhitespace(e, "newFamilyName", EMPTY_NEW_FAMILY_NAME);
+		rejectIfTooLong(e, "newFamilyName", TOO_LONG_NEW_FAMILY_NAME, 255);
+		rejectIfEmptyOrWhitespace(e, "newMail", EMPTY_NEW_MAIL);
 		String newMail = a.getNewMail();
 		if (!newMail.matches(REGEX)) {
-			e.rejectValue("newMail", "field.useredit.newMail.invaild");
-		} else if (!newMail.equals(a.getOldUser().getMail()) // changed ...
-				&& !this.userService.isMailAddressAvailable(newMail)) { // but not available
-			e.rejectValue("newMail", "field.useredit.newMail.notUnique");
+			e.rejectValue("newMail", INVALID_NEW_MAIL);
+		} else if (!newMail.equals(a.getOldUser().getMail())
+				&& !this.userService.isMailAddressAvailable(newMail)) {
+			e.rejectValue("newMail", NOT_UNIQUE_NEW_MAIL);
 		}
 		String newPassword = a.getNewPassword();
 		String newPasswordRepeat = a.getNewPasswordRepeat();
 		if (notNullAndNotEmpty(newPassword)) {
 			if (!notNullAndNotEmpty(newPasswordRepeat)) {
-				e.rejectValue("newPasswordRepeat", "field.useredit.newPasswordRepeat.empty");
+				e.rejectValue("newPasswordRepeat", EMPTY_NEW_PASSWORD_REPEAT);
 			} else if (!newPassword.equals(newPasswordRepeat)) {
-				e.rejectValue("newPasswordRepeat", "field.useredit.newPasswordRepeat.wrong");
+				e.rejectValue("newPasswordRepeat", WRONG_NEW_PASSWORD_REPEAT);
 			} else if (this.passwordService.meetsRecommendation(newPassword)) {
 				a.setNewPasswordHash(this.passwordService.hash(newPassword));
 			} else {
-				e.rejectValue("newPassword", "field.useredit.newPassword.lowSecurity");
+				e.rejectValue("newPassword", BAD_SECURED_NEW_PASSWORD);
 			}
 		} else if (notNullAndNotEmpty(newPasswordRepeat)) {
-			e.rejectValue("newPassword", "field.useredit.newPassword.empty");
+			e.rejectValue("newPassword", EMPTY_NEW_PASSWORD);
 		}
 	}
 }

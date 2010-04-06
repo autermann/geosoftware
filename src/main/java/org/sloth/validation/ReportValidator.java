@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import static org.sloth.util.ValidationUtils.*;
+import static org.sloth.validation.ErrorCodes.REPORT.*;
 
 @Component
 public class ReportValidator implements Validator {
@@ -16,11 +17,11 @@ public class ReportValidator implements Validator {
 
 	@Override
 	public void validate(Object t, Errors e) {
-		rejectIfEmptyOrWhitespace(e, "title", "field.report.title.empty");
-		rejectIfEmptyOrWhitespace(e, "title", "field.report.description.empty");
-		rejectIfTooLong(e, "title", "field.report.title.tooLong", 255);
-		rejectIfTooLong(e, "description", "field.report.description.tooLong", 100);
-		rejectIfNull(e, "author", "field.report.author.empty");
-		rejectIfNull(e, "observation", "field.report.observation.empty");
+		rejectIfEmptyOrWhitespace(e, "title", EMPTY_TITLE);
+		rejectIfEmptyOrWhitespace(e, "title", EMPTY_DESCRIPTION);
+		rejectIfTooLong(e, "title", TOO_LONG_TITLE, 255);
+		rejectIfTooLong(e, "description", TOO_LONG_DESCRIPTION, 100);
+		rejectIfNull(e, "author", EMPTY_AUTHOR);
+		rejectIfNull(e, "observation", EMPTY_OBSERVATION);
 	}
 }

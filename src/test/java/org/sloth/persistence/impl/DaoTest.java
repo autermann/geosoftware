@@ -19,6 +19,7 @@ package org.sloth.persistence.impl;
 
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import java.util.Date;
+import javax.jws.soap.SOAPBinding.Use;
 import org.junit.Test;
 import org.sloth.exceptions.EntityAlreadyKnownException;
 import org.sloth.exceptions.FieldLengthConstraintViolationException;
@@ -27,6 +28,7 @@ import org.sloth.model.Categorie;
 import org.sloth.model.Observation;
 import org.sloth.model.User;
 import org.sloth.model.Group;
+import org.sloth.model.Report;
 import org.sloth.persistence.CategorieDao;
 import org.sloth.persistence.ObservationDao;
 import org.sloth.persistence.ReportDao;
@@ -57,7 +59,7 @@ public class DaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 	}
 
 	@Autowired
-	public void setCategorieDao(ReportDao reportDao) {
+	public void setReportDao(ReportDao reportDao) {
 		this.reportDao = reportDao;
 	}
 
@@ -70,7 +72,7 @@ public class DaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 		assertEquals(userDao.getAll().size(), countRowsInTable("USERS_TEST"));
 		assertEquals(categorieDao.getAll().size(), countRowsInTable("CATEGORIES_TEST"));
 		assertEquals(observationDao.getAll().size(), countRowsInTable("OBSERVATIONS_TEST"));
-		assertEquals(reportDao.getAll(), countRowsInTable("REPORTS_TEST"));
+		assertEquals(reportDao.getAll().size(), countRowsInTable("REPORTS_TEST"));
 	}
 
 	@Test
@@ -144,74 +146,115 @@ public class DaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 		assertEquals(o, observationDao.getById(o.getId()));
 	}
 
+	@Test
+	public void saveReport() {
+		testRows();
+		User u1 = getUser(), u2 =getUser();
+		Categorie c = getCategorie();
+		Observation o = getObservation(c, u1);
+		Report r = getReport(u2, o);
+		userDao.save(u1);
+		userDao.save(u2);
+		categorieDao.save(c);
+		observationDao.save(o);
+		reportDao.save(r);
+		testRows();
+		assertEquals(r, reportDao.getById(r.getId()));
+	}
+
 	/*
-	 * IllegalArgumentException Tests - Not Known Objects - UserDao
+	 * InvalidDataAccessApiUsageException Tests - Not Known Objects - UserDao
 	 */
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = InvalidDataAccessApiUsageException.class)
 	public void deleteNotPersistedUser() {
 		userDao.delete(getUser());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = InvalidDataAccessApiUsageException.class)
 	public void updateNotPersistedUser() {
 		userDao.update(getUser());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = InvalidDataAccessApiUsageException.class)
 	public void deleteNotPersistedUserWithId() {
 		userDao.delete(getUser(42L));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = InvalidDataAccessApiUsageException.class)
 	public void updateNotPersistedUserWithId() {
 		userDao.update(getUser(42L));
 	}
 
 	/*
-	 * IllegalArgumentException Tests - Not Known Objects - CategorieDao
+	 * InvalidDataAccessApiUsageException Tests - Not Known Objects - CategorieDao
 	 */
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = InvalidDataAccessApiUsageException.class)
 	public void deleteNotPersistedCategorie() {
 		categorieDao.delete(getCategorie());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = InvalidDataAccessApiUsageException.class)
 	public void updateNotPersistedCategorie() {
 		categorieDao.update(getCategorie());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = InvalidDataAccessApiUsageException.class)
 	public void deleteNotPersistedCategorieWithId() {
 		categorieDao.delete(getCategorie(42L));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = InvalidDataAccessApiUsageException.class)
 	public void updateNotPersistedCategorieWithId() {
 		categorieDao.update(getCategorie(42L));
 	}
 
 	/*
-	 * IllegalArgumentException Tests - Not Known Objects - ObservationDao
+	 * InvalidDataAccessApiUsageException Tests - Not Known Objects - ObservationDao
 	 */
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = InvalidDataAccessApiUsageException.class)
 	public void deleteNotPersistedObservation() {
 		observationDao.delete(getObservation(getCategorie(), getUser()));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = InvalidDataAccessApiUsageException.class)
 	public void updateNotPersistedObservation() {
 		observationDao.update(getObservation(getCategorie(), getUser()));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = InvalidDataAccessApiUsageException.class)
 	public void deleteNotPersistedObservationWithId() {
-		observationDao.delete(getObservation(getCategorie(42L), getUser()));
+		observationDao.delete(getObservation(getCategorie(42L), getUser(42L)));
+	}
+
+	@Test(expected = InvalidDataAccessApiUsageException.class)
+	public void updateNotPersistedObservationWithId() {
+		observationDao.update(getObservation(getCategorie(42L), getUser(42L)));
+	}
+
+	/*
+	 * InvalidDataAccessApiUsageException Tests - Not Known Objects - ObservationDao
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void deleteNotPersistedReport() {
+		reportDao.delete(getReport(getUser(), getObservation(getCategorie(42L), getUser(42L))));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void updateNotPersistedObservationWithId() {
-		observationDao.update(getObservation(getCategorie(42L), getUser()));
+	public void updateNotPersistedReport() {
+		reportDao.update(getReport(getUser(), getObservation(getCategorie(42L), getUser(42L))));
 	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void deleteNotPersistedReportWithId() {
+		reportDao.delete(getReport(42L, getUser(), getObservation(getCategorie(42L), getUser(42L))));
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void updateNotPersistedReportWithId() {
+		reportDao.update(getReport(42L, getUser(), getObservation(getCategorie(42L), getUser(42L))));
+	}
+
+
 
 	/*
 	 * NullPointerException Tests - ObservationDao
@@ -288,7 +331,7 @@ public class DaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 	}
 
 	/*
-	 * IllegalArgumentException Tests - Saving Already Known Objects
+	 * InvalidDataAccessApiUsageException Tests - Saving Already Known Objects
 	 */
 	@Test
 	public void saveAlreadyPersistedObservation() {
@@ -361,5 +404,6 @@ public class DaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 		Categorie c = getCategorie();
 		categorieDao.save(c);
 		assertEquals(c, categorieDao.getByTitle(c.getTitle()));
+		assertEquals(null, categorieDao.getByTitle("asdf"));
 	}
 }

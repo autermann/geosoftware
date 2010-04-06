@@ -24,6 +24,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import static org.sloth.util.ValidationUtils.*;
+import static org.sloth.validation.ErrorCodes.CATEGORIE.*;
 
 @Component
 public class CategorieValidator implements Validator {
@@ -42,16 +43,16 @@ public class CategorieValidator implements Validator {
 
 	@Override
 	public void validate(Object t, Errors e) {
-		rejectIfEmptyOrWhitespace(e, "title", "field.categorie.title.empty");
-		rejectIfEmptyOrWhitespace(e, "description", "field.categorie.description.empty");
-		rejectIfEmptyOrWhitespace(e, "iconFileName", "field.categorie.iconFileName.empty");
-		rejectIfTooLong(e, "title", "field.categorie.title.tooLong", 255);
-		rejectIfTooLong(e, "description", "field.categorie.description.tooLong", 255);
-		rejectIfTooLong(e, "iconFileName", "field.categorie.iconFileName.tooLong", 255);
+		rejectIfEmptyOrWhitespace(e, "title", EMPTY_TITLE);
+		rejectIfEmptyOrWhitespace(e, "description", EMPTY_DESCRIPTION);
+		rejectIfEmptyOrWhitespace(e, "iconFileName", EMPTY_ICON_FILE_NAME);
+		rejectIfTooLong(e, "title", TOO_LON_TITLE, 255);
+		rejectIfTooLong(e, "description", TOO_LONG_DESCRIPTION, 255);
+		rejectIfTooLong(e, "iconFileName", TOO_LONG_ICON_FILE_NAME, 255);
 		Categorie c = (Categorie) t;
 		Categorie orig = this.observationService.getCategorieByTitle(c.getTitle());
 		if (notNull(orig) && (c.isNew() || (c.getId() != orig.getId()))) {
-			e.rejectValue("title", "field.categorie.title.notUnique");
+			e.rejectValue("title", NOT_UNIQUE_TITLE);
 		}
 
 	}

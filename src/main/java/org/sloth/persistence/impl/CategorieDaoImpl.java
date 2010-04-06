@@ -124,9 +124,8 @@ public class CategorieDaoImpl extends EntityManagerDao<Categorie> implements
 			throw new EntityAlreadyKnownException();
 		}
 		getEntityManager().persist(oc);
-		logger.info("Persisting Categorie; Generated Id is: {}", oc.getId());
 		getEntityManager().flush();
-
+		logger.info("Persisting Categorie; Generated Id is: {}", oc.getId());
 	}
 
 	@Override

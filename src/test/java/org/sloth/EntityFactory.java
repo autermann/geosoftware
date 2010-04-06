@@ -17,10 +17,12 @@
  */
 package org.sloth;
 
+import java.util.Date;
 import org.sloth.model.Categorie;
 import org.sloth.model.Coordinate;
 import org.sloth.model.Group;
 import org.sloth.model.Observation;
+import org.sloth.model.Report;
 import org.sloth.model.User;
 
 public abstract class EntityFactory {
@@ -28,6 +30,7 @@ public abstract class EntityFactory {
 	private static long userCount = 0;
 	private static long categorieCount = 0;
 	private static long observationCount = 0;
+	private static long reportCount = 0;
 
 	private static User getUser(Group g) {
 		User u = new User();
@@ -102,7 +105,22 @@ public abstract class EntityFactory {
 		return c;
 	}
 
+	public static Report getReport(long id, User u, Observation o){
+		Report r = getReport(u, o);
+		r.setId(new Long(id));
+		return r;
+	}
+
+	public static Report getReport(User u, Observation o) {
+		Report r = new Report();
+		r.setCreationDate(new Date(System.currentTimeMillis()-1234567));
+		r.setAuthor(u);
+		r.setObservation(o);
+		r.setDescription("Description of Report "+ reportCount);
+		return r;
+	}
+
 	public static void reset() {
-		categorieCount = observationCount = userCount = 0;
+		categorieCount = observationCount = userCount = reportCount = 0;
 	}
 }
