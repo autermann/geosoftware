@@ -46,7 +46,7 @@ public class CategorieValidator implements Validator {
 		rejectIfEmptyOrWhitespace(e, "title", EMPTY_TITLE);
 		rejectIfEmptyOrWhitespace(e, "description", EMPTY_DESCRIPTION);
 		rejectIfEmptyOrWhitespace(e, "iconFileName", EMPTY_ICON_FILE_NAME);
-		rejectIfTooLong(e, "title", TOO_LON_TITLE, 255);
+		rejectIfTooLong(e, "title", TOO_LONG_TITLE, 255);
 		rejectIfTooLong(e, "description", TOO_LONG_DESCRIPTION, 255);
 		rejectIfTooLong(e, "iconFileName", TOO_LONG_ICON_FILE_NAME, 255);
 		Categorie c = (Categorie) t;

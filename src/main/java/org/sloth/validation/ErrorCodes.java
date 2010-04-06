@@ -19,7 +19,7 @@ public class ErrorCodes {
 		/**
 		 * Indicating that the entered title is too long.
 		 */
-		public static final String TOO_LON_TITLE = "field.categorie.title.tooLong";
+		public static final String TOO_LONG_TITLE = "field.categorie.title.tooLong";
 		/**
 		 * Indicating that the entered title is not unique.
 		 */
@@ -136,14 +136,6 @@ public class ErrorCodes {
 		 * Indicating that the entered description is too long.
 		 */
 		public static final String TOO_LONG_DESCRIPTION = "field.report.description.tooLong";
-		/**
-		 * Indicating that the entered title is {@code null} or empty.
-		 */
-		public static final String EMPTY_TITLE = "field.report.title.empty";
-		/**
-		 * Indicating that the entered title is too long.
-		 */
-		public static final String TOO_LONG_TITLE = "field.report.title.tooLong";
 	}
 
 	/**

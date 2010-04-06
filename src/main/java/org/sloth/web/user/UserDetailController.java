@@ -21,7 +21,7 @@ import static org.sloth.util.ControllerUtils.*;
 public class UserDetailController {
 
 	private static final String VIEW = "users/details";
-	private static final String USERS_ATTRIBUTE = "users";
+	private static final String USERS_ATTRIBUTE = "user";
 	private UserService us;
 
 	@Autowired

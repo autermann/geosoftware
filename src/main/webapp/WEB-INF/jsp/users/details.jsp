@@ -5,19 +5,19 @@
 	<table border="1">
 		<tr>
 			<td><fmt:message key="user.id"/>:</td>
-			<td><c:out value="${user.id}" default="-" /></td>
+			<td>${user.id}</td>
 		</tr>
 		<tr>
 			<td><fmt:message key="user.mail"/>:</td>
-			<td><c:out value="${user.mail}" default="-" /></td>
+			<td>${user.mail}</td>
 		</tr>
 		<tr>
 			<td><fmt:message key="user.name"/>:</td>
-			<td><c:out value="${user.name}" default="-" /></td>
+			<td>${user.name}</td>
 		<tr/>
 		<tr>
 			<td><fmt:message key="user.familyName"/>:</td>
-			<td><c:out value="${user.familyName}" default="-" /></td>
+			<td>${user.familyName}</td>
 		<tr/>
 		<tr>
 			<td><fmt:message key="user.creationDate"/>:</td>
@@ -25,7 +25,7 @@
 		<tr/>
 		<tr>
 			<td><fmt:message key="user.userGroup"/>:</td>
-			<td><c:out value="${user.userGroup}" default="-"/></td>
+			<td>${user.userGroup}</td>
 		<tr/>
 	</table>
 	<p><a href="<s:url value="/u"/>"><fmt:message key="nav.back"/></a></p>
