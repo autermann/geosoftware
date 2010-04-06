@@ -18,6 +18,7 @@
 package org.sloth.persistence.impl;
 
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -142,16 +143,20 @@ public class ObservationDaoImpl extends EntityManagerDao<Observation> implements
 
 	@Override
 	public List<Observation> getNewestObservations(int count) {
+		if (count <= 0) {
+			return new LinkedList<Observation>();
+		}
 		CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
 		CriteriaQuery<Observation> cq = cb.createQuery(Observation.class);
 
 		Root<Observation> o = cq.from(Observation.class);
 		cq.select(o).orderBy(cb.desc(o.get(Observation_.creationDate)));
 		List<Observation> obs = getEntityManager().createQuery(cq).getResultList();
-		if (!obs.isEmpty()) {
-			return obs.subList(0, ((obs.size() < count) ? obs.size() : count) - 1);
-		} else {
+
+		if (obs.size() < count) {
 			return obs;
+		} else {
+			return obs.subList(0, count);
 		}
 	}
 
@@ -161,14 +166,14 @@ public class ObservationDaoImpl extends EntityManagerDao<Observation> implements
 		if (key == null) {
 			throw new NullPointerException();
 		}
-		key = "%" + key.trim().replace('*','%').toUpperCase() + "%";
+		key = "%" + key.trim().replace('*', '%').toUpperCase() + "%";
 		CriteriaBuilder b = getEntityManager().getCriteriaBuilder();
 		CriteriaQuery<Observation> q = b.createQuery(Observation.class);
 		Root<Observation> o = q.from(Observation.class);
 		Join<Observation, Categorie> j = o.join(Observation_.categorie);
 		Collection<Observation> result = getEntityManager().createQuery(
-		q.select(o).distinct(true).where(b.or(
-				b.like(b.upper(j.get(Categorie_.description)), key),
+				q.select(o).distinct(true).where(b.or(
+				b.like(b.upper(j.get(Categorie_.title)), key),
 				b.like(b.upper(j.get(Categorie_.description)), key),
 				b.like(b.upper(o.get(Observation_.title)), key),
 				b.like(b.upper(o.get(Observation_.description)), key)))).getResultList();

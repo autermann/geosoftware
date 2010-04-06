@@ -22,6 +22,7 @@ import java.util.LinkedList;
 import org.junit.Before;
 import org.junit.Test;
 import org.sloth.exceptions.EntityAlreadyKnownException;
+import org.sloth.exceptions.EntityNotKnownException;
 import org.sloth.exceptions.FieldLengthConstraintViolationException;
 import org.sloth.exceptions.NotNullConstraintViolationException;
 import static org.junit.Assert.*;
@@ -1094,5 +1095,113 @@ public class DaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 		userDao.delete(u);
 		assertNull(reportDao.getById(r.getId()));
 		assertNull(observationDao.getById(o.getId()));
+	}
+
+	@Test(expected = NullPointerException.class)
+	public void testGetObservationByNullUser() {
+		observationDao.getByUser(null);
+	}
+
+	@Test(expected = EntityNotKnownException.class)
+	public void testGetObservationByNotKnownUser() {
+		observationDao.getByUser(getUser());
+	}
+
+	@Test
+	public void testGetObservationByUser() {
+		User u1 = getUser();
+		User u2 = getUser();
+		Categorie c = getCategorie();
+		Observation o1 = getObservation(c, u1);
+		Observation o2 = getObservation(c, u2);
+		categorieDao.save(c);
+		userDao.save(u1);
+		userDao.save(u2);
+		observationDao.save(o1);
+		observationDao.save(o2);
+		assertEquals(o1, observationDao.getByUser(u1).iterator().next());
+		assertEquals(o2, observationDao.getByUser(u2).iterator().next());
+	}
+
+	@Test(expected = NullPointerException.class)
+	public void testGetObservationByNullCategorie() {
+		observationDao.getByCategorie(null);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testGetObservationByNotKnownCategorie() {
+		observationDao.getByCategorie(getCategorie());
+	}
+
+	@Test
+	public void testGetObservationByCategorie() {
+		User u = getUser();
+		Categorie c1 = getCategorie();
+		Categorie c2 = getCategorie();
+		Observation o1 = getObservation(c1, u);
+		Observation o2 = getObservation(c2, u);
+		categorieDao.save(c1);
+		categorieDao.save(c2);
+		userDao.save(u);
+		observationDao.save(o1);
+		observationDao.save(o2);
+		assertEquals(o1, observationDao.getByCategorie(c1).iterator().next());
+		assertEquals(o2, observationDao.getByCategorie(c2).iterator().next());
+	}
+
+	@Test
+	public void testGetNewestObservations() {
+		User u = getUser();
+		userDao.save(u);
+		Categorie c = getCategorie();
+		categorieDao.save(c);
+		for (int i = 0; i < 20; i++) {
+			observationDao.save(getObservation(c, u));
+		}
+		assertEquals(20, observationDao.getAll().size());
+		assertEquals(0, observationDao.getNewestObservations(-1).size());
+		assertEquals(10, observationDao.getNewestObservations(10).size());
+		assertEquals(20, observationDao.getNewestObservations(30).size());
+		assertEquals(0, observationDao.getNewestObservations(0).size());
+		assertEquals(1, observationDao.getNewestObservations(1).size());
+	}
+
+	@Test(expected = NullPointerException.class)
+	public void testGetObservationsByNullKeyword() {
+		observationDao.getByKeyWord(null);
+	}
+
+	@Test
+	public void testGetObservationByKeyword() {
+		String keyword = "ZdbnksaiI1";
+		String keyword2 = "2342134fgsdadc" + keyword + "asgdh";
+		Categorie c1 = getCategorie();
+		c1.setTitle(keyword2);
+		Categorie c2 = getCategorie();
+		c2.setDescription(keyword2);
+		Categorie c3 = getCategorie();
+		User u = getUser();
+		Observation o1 = getObservation(c1, u);
+		Observation o2 = getObservation(c2, u);
+		Observation o3 = getObservation(c3, u);
+		o3.setTitle(keyword2);
+		Observation o4 = getObservation(c3, u);
+		o4.setDescription(keyword2);
+		Observation o5 = getObservation(c3, u);
+		userDao.save(u);
+		categorieDao.save(c1);
+		categorieDao.save(c2);
+		categorieDao.save(c3);
+		observationDao.save(o1);
+		observationDao.save(o2);
+		observationDao.save(o3);
+		observationDao.save(o4);
+		observationDao.save(o5);
+		Collection<Observation> list = observationDao.getByKeyWord(keyword);
+		assertTrue(list.contains(o1)); // o1.categorie.title
+		assertTrue(list.contains(o2)); // o2.categorie.description
+		assertTrue(list.contains(o3)); // o3.title
+		assertTrue(list.contains(o4)); // o3.description
+		assertTrue(!list.contains(o5)); // none
 	}
 }
