@@ -20,13 +20,17 @@ package org.sloth.validation;
 import java.util.List;
 import org.junit.Test;
 import org.sloth.model.Observation;
-import org.sloth.validation.CoordinateValidator;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
 import static org.sloth.EntityFactory.*;
 import static org.sloth.validation.ErrorCodes.OBSERVATION.*;
 import static org.junit.Assert.*;
+
+/**
+ *
+ * @author Christoph Fendrich
+ */
 
 public class ObservationValidatorTest {
 
