@@ -38,10 +38,12 @@ public class InMemoryDao<T extends BaseEntity> {
 
 	public void update(T t) throws NullPointerException,
 			IllegalArgumentException {
-		if (t == null)
+		if (t == null) {
 			throw new NullPointerException();
-		if (t.isNew() || !database.containsKey(t.getId()))
+		}
+		if (t.isNew() || !database.containsKey(t.getId())) {
 			throw new IllegalArgumentException();
+		}
 
 		database.remove(t.getId());
 		database.put(t.getId(), t);
@@ -49,24 +51,32 @@ public class InMemoryDao<T extends BaseEntity> {
 
 	public void delete(T t) throws NullPointerException,
 			IllegalArgumentException {
-		if (t == null)
+		if (t == null) {
 			throw new NullPointerException();
-		if (t.isNew() || !database.containsKey(t.getId()))
+		}
+		if (t.isNew() || !database.containsKey(t.getId())) {
 			throw new IllegalArgumentException();
+		}
 		database.remove(t.getId());
 	}
 
 	public void save(T t) throws NullPointerException {
-		if (t == null)
+		if (t == null) {
 			throw new NullPointerException();
-		if (!t.isNew() && database.containsKey(t.getId()))
+		}
+		if (!t.isNew()) {
 			throw new IllegalArgumentException();
+		}
+		if (!t.isNew() && database.containsKey(t.getId())) {
+			throw new IllegalArgumentException();
+		}
 		t.setId(count++);
 		database.put(t.getId(), t);
 	}
 
 	protected void deleteAll(Collection<T> c) {
-		for (T t : c)
+		for (T t : c) {
 			this.delete(t);
+		}
 	}
 }

@@ -1,5 +1,6 @@
 package org.sloth.service.impl;
 
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import org.junit.Before;
@@ -33,29 +34,6 @@ public class ObservationServiceTest {
 		observationService.setCategorieDao(categorieDao);
 		observationService.setObservationDao(observationDao);
 		reset();
-		fillDaos();
-	}
-
-	private void fillDaos() {
-		for (int i = 0; i < 10; i++) {
-			User u = getUser();
-			userList.add(u);
-			userDao.save(u);
-		}
-		for (int i = 0; i < 5; i++) {
-			Categorie c = getCategorie();
-			categorieList.add(c);
-			categorieDao.save(c);
-		}
-		for (int o = 0, u = 0, c = 0; o < 50; o++) {
-			Observation ob = getObservation(categorieList.get(c++
-					% categorieList.size()), userList
-					.get(u++ % userList.size()));
-			observationList.add(ob);
-			observationDao.save(ob);
-		}
-		for (Observation o : observationList)
-			System.out.println(o);
 	}
 
 	@Test
@@ -64,17 +42,55 @@ public class ObservationServiceTest {
 	}
 
 	@Test
-	public void testGetObservations_0args() {
-		assertEquals(observationService.getObservations().size(),
-				observationList.size());
+	public void testGetObservationById() {
+		Categorie c = getCategorie();
+		User u = getUser();
+		LinkedList<Observation> oList = new LinkedList<Observation>();
+		for (int i = 0; i < 200; i++) {
+			Observation o = getObservation(c, u);
+			observationService.registrate(o);
+			oList.add(o);
+		}
+		for (Observation o : oList) {
+			assertNotNull(o.getId());
+			assertEquals(o, observationService.getObservation(o.getId()));
+		}
+		assertNull(observationService.getObservation(Long.valueOf(-4)));
+		assertNull(observationService.getObservation(Long.valueOf(12341234)));
 	}
 
 	@Test
-	public void testGetObservations_String() {
+	public void testGetObservations() {
+		for (int i = 0; i < 100; i++) {
+			observationService.registrate(getObservation(getCategorie(), getUser()));
+			assertEquals(i + 1, observationService.getObservations().size());
+		}
 	}
 
 	@Test
-	public void testDeleteObservation_Observation() {
+	public void testGetObservationsByKeyword() {
+		Categorie c1 = getCategorie();
+		Categorie c2 = getCategorie();
+		Categorie c3 = getCategorie();
+		Observation o1 = getObservation(c1, getUser());
+		Observation o2 = getObservation(c2, getUser());
+		Observation o3 = getObservation(c3, getUser());
+		Observation o4 = getObservation(c3, getUser());
+		String keyword = "ZdbnksaiI1";
+		String keyword2 = "2342134fgsdadc" + keyword + "asgdh";
+		c1.setTitle(keyword2);
+		c2.setDescription(keyword2);
+		o3.setTitle(keyword2);
+		o4.setDescription(keyword2);
+		Collection<Observation> list = observationService.getObservations(keyword);
+		assertTrue(list.contains(o1));
+		assertTrue(list.contains(o2));
+		assertTrue(list.contains(o3));
+		assertTrue(list.contains(o4));
+	}
+
+	@Test
+	public void testDeleteObservation() {
 	}
 
 	@Test
@@ -82,29 +98,27 @@ public class ObservationServiceTest {
 	}
 
 	@Test
-	public void testRegistrate_Observation() throws Exception {
+	public void testRegistrateObservation() throws Exception {
 	}
 
 	@Test
-	public void testGetObservations_Categorie() {
+	public void testGetObservationsByCategorie() {
 	}
 
 	@Test
-	public void testGetCategorie() {
+	public void testGetCategorieById() {
 	}
 
 	@Test
 	public void testGetCategories() {
-		assertEquals(observationService.getCategories().size(), categorieList
-				.size());
 	}
 
 	@Test
-	public void testDeleteCategorie_Categorie() {
+	public void testDeleteCategorie() {
 	}
 
 	@Test
-	public void testDeleteCategorie_Long() {
+	public void testDeleteCategorieById() {
 	}
 
 	@Test
@@ -112,18 +126,58 @@ public class ObservationServiceTest {
 	}
 
 	@Test
-	public void testRegistrate_Categorie() throws Exception {
+	public void testRegistrateCategorie() throws Exception {
 	}
 
 	@Test
-	public void testDeleteObservation_Long() {
-	}
-
-	@Test
-	public void testGetObservationsByCategories() {
+	public void testDeleteObservationById() {
 	}
 
 	@Test
 	public void testGetCategorieByTitle() {
+	}
+
+	@Test
+	public void testGetObservationsByUser() {
+	}
+
+	@Test
+	public void testGetReports() {
+	}
+
+	@Test
+	public void testGetReportsByUser() {
+	}
+
+	@Test
+	public void testGetReportsByObservation() {
+	}
+
+	@Test
+	public void testGetReportsByProcessedState() {
+	}
+
+	@Test
+	public void testDeleteReport() {
+	}
+
+	@Test
+	public void testRegistrateReport() throws Exception {
+	}
+
+	@Test
+	public void testGetReport() {
+	}
+
+	@Test
+	public void testUpdateReport() throws Exception {
+	}
+
+	@Test
+	public void testGetNewestObservations() {
+	}
+
+	@Test
+	public void testIsCategorieTitleAvailable() {
 	}
 }

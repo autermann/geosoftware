@@ -19,10 +19,12 @@ package org.sloth.persistence.impl;
 
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import java.util.Date;
-import javax.jws.soap.SOAPBinding.Use;
+import java.util.LinkedList;
 import org.junit.Test;
 import org.sloth.exceptions.EntityAlreadyKnownException;
 import org.sloth.exceptions.FieldLengthConstraintViolationException;
+import org.sloth.exceptions.NotNullConstraintViolationException;
+import org.sloth.exceptions.UniqueConstraintViolationException;
 import static org.junit.Assert.*;
 import org.sloth.model.Categorie;
 import org.sloth.model.Observation;
@@ -84,287 +86,115 @@ public class DaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 		assertNotNull(reportDao);
 	}
 
-	/**
-	 * Will fail if executed on HSQLDB... known bug in EclipseLink/HSQLDB...
-	 */
 	@Test
-	public void duplicateMailAddress() {
-		/* ugly workaround to getById in another transaction... */
-		this.simpleJdbcTemplate.update(
-				"INSERT INTO USERS_TEST (ID, MAIL_ADDRESS, CREATION_DATE, NAME, USER_GROUP, FAMILY_NAME, PASSWORD, VERSION)"
-				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?)", 999L,
-				"default@example.tld", new Date(), "TEST", Group.USER.toString(), "TEST", "password", "0");
-		User u = getUser();
-		u.setMail("default@example.tld");
-		try {
-			userDao.save(u);
-		} catch (JpaSystemException e) {
-			assertTrue(e.contains(MySQLIntegrityConstraintViolationException.class));
-			return;
-		}
-		fail("no exception");
+	public void testGetAllCategories() {
+		assertTrue(categorieDao.getAll().size() == 0);
+		categorieDao.save(getCategorie());
+		assertTrue(categorieDao.getAll().size() == 1);
 	}
 
 	@Test
-	public void saveUser() {
-		testRows();
-		User u = getUser();
-		assertTrue(u.isNew());
-		userDao.save(u);
-		assertTrue(!u.isNew());
-		testRows();
-		assertEquals(u, userDao.getById(u.getId()));
-	}
-
-	@Test
-	public void saveCategorie() {
-		testRows();
+	public void testGetCategorieById() {
+		assertNull(categorieDao.getById(Long.valueOf((long) Math.random() * 100)));
 		Categorie c = getCategorie();
-		assertTrue(c.isNew());
 		categorieDao.save(c);
-		assertTrue(!c.isNew());
-		testRows();
+		assertNotNull(c.getId());
+		assertNotNull(categorieDao.getById(c.getId()));
 		assertEquals(c, categorieDao.getById(c.getId()));
 	}
 
-	@Test
-	public void saveObservation() {
-		testRows();
-		User u = getUser();
-		Categorie c = getCategorie();
-		Observation o = getObservation(c, u);
-		assertTrue(u.isNew());
-		assertTrue(c.isNew());
-		assertTrue(o.isNew());
-		userDao.save(u);
-		categorieDao.save(c);
-		observationDao.save(o);
-		assertTrue(!u.isNew());
-		assertTrue(!c.isNew());
-		assertTrue(!o.isNew());
-		testRows();
-		assertEquals(o, observationDao.getById(o.getId()));
-	}
-
-	@Test
-	public void saveReport() {
-		testRows();
-		User u1 = getUser(), u2 =getUser();
-		Categorie c = getCategorie();
-		Observation o = getObservation(c, u1);
-		Report r = getReport(u2, o);
-		userDao.save(u1);
-		userDao.save(u2);
-		categorieDao.save(c);
-		observationDao.save(o);
-		reportDao.save(r);
-		testRows();
-		assertEquals(r, reportDao.getById(r.getId()));
-	}
-
-	/*
-	 * InvalidDataAccessApiUsageException Tests - Not Known Objects - UserDao
-	 */
-	@Test(expected = InvalidDataAccessApiUsageException.class)
-	public void deleteNotPersistedUser() {
-		userDao.delete(getUser());
+	@Test(expected = NullPointerException.class)
+	public void testUpdateNullCategorie() {
+		categorieDao.update(null);
 	}
 
 	@Test(expected = InvalidDataAccessApiUsageException.class)
-	public void updateNotPersistedUser() {
-		userDao.update(getUser());
-	}
-
-	@Test(expected = InvalidDataAccessApiUsageException.class)
-	public void deleteNotPersistedUserWithId() {
-		userDao.delete(getUser(42L));
-	}
-
-	@Test(expected = InvalidDataAccessApiUsageException.class)
-	public void updateNotPersistedUserWithId() {
-		userDao.update(getUser(42L));
-	}
-
-	/*
-	 * InvalidDataAccessApiUsageException Tests - Not Known Objects - CategorieDao
-	 */
-	@Test(expected = InvalidDataAccessApiUsageException.class)
-	public void deleteNotPersistedCategorie() {
-		categorieDao.delete(getCategorie());
-	}
-
-	@Test(expected = InvalidDataAccessApiUsageException.class)
-	public void updateNotPersistedCategorie() {
+	public void testUpdateNotSavedCategorie() {
 		categorieDao.update(getCategorie());
 	}
 
 	@Test(expected = InvalidDataAccessApiUsageException.class)
-	public void deleteNotPersistedCategorieWithId() {
-		categorieDao.delete(getCategorie(42L));
+	public void testUpdateNotSavedCategorieWithId() {
+		categorieDao.update(getCategorie(213L));
+	}
+
+	@Test
+	public void testUpdateCategorie() {
+		Categorie c = getCategorie();
+		categorieDao.save(c);
+		assertNotNull(c.getId());
+		c.setTitle("new Title");
+		categorieDao.update(c);
+		assertEquals("new Title", categorieDao.getById(c.getId()).getTitle());
 	}
 
 	@Test(expected = InvalidDataAccessApiUsageException.class)
-	public void updateNotPersistedCategorieWithId() {
-		categorieDao.update(getCategorie(42L));
-	}
-
-	/*
-	 * InvalidDataAccessApiUsageException Tests - Not Known Objects - ObservationDao
-	 */
-	@Test(expected = InvalidDataAccessApiUsageException.class)
-	public void deleteNotPersistedObservation() {
-		observationDao.delete(getObservation(getCategorie(), getUser()));
+	public void testDeleteNotSavedCategorie() {
+		categorieDao.delete(getCategorie());
 	}
 
 	@Test(expected = InvalidDataAccessApiUsageException.class)
-	public void updateNotPersistedObservation() {
-		observationDao.update(getObservation(getCategorie(), getUser()));
+	public void testDeleteNotSavedCategorieWithId() {
+		categorieDao.delete(getCategorie(213L));
 	}
 
-	@Test(expected = InvalidDataAccessApiUsageException.class)
-	public void deleteNotPersistedObservationWithId() {
-		observationDao.delete(getObservation(getCategorie(42L), getUser(42L)));
-	}
-
-	@Test(expected = InvalidDataAccessApiUsageException.class)
-	public void updateNotPersistedObservationWithId() {
-		observationDao.update(getObservation(getCategorie(42L), getUser(42L)));
-	}
-
-	/*
-	 * InvalidDataAccessApiUsageException Tests - Not Known Objects - ObservationDao
-	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void deleteNotPersistedReport() {
-		reportDao.delete(getReport(getUser(), getObservation(getCategorie(42L), getUser(42L))));
+	@Test
+	public void testDeleteCategorie() {
+		Categorie c = getCategorie();
+		categorieDao.save(c);
+		assertNotNull(c.getId());
+		assertNotNull(categorieDao.getById(c.getId()));
+		categorieDao.delete(c);
+		assertNull(categorieDao.getById(c.getId()));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void updateNotPersistedReport() {
-		reportDao.update(getReport(getUser(), getObservation(getCategorie(42L), getUser(42L))));
+	public void testDeleteNotSavedCategorieList() {
+		LinkedList<Categorie> l = new LinkedList<Categorie>();
+		for (int i = 0; i < 10; i++) {
+			l.add(getCategorie());
+		}
+		categorieDao.delete(l);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void deleteNotPersistedReportWithId() {
-		reportDao.delete(getReport(42L, getUser(), getObservation(getCategorie(42L), getUser(42L))));
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void updateNotPersistedReportWithId() {
-		reportDao.update(getReport(42L, getUser(), getObservation(getCategorie(42L), getUser(42L))));
-	}
-
-
-
-	/*
-	 * NullPointerException Tests - ObservationDao
-	 */
-	@Test(expected = NullPointerException.class)
-	public void updateNullObservation() {
-		observationDao.update(null);
+	public void testDeleteNotSavedCategorieListWithId() {
+		LinkedList<Categorie> l = new LinkedList<Categorie>();
+		for (int i = 0; i < 10; i++) {
+			l.add(getCategorie((long) i));
+		}
+		categorieDao.delete(l);
 	}
 
 	@Test(expected = NullPointerException.class)
-	public void saveNullObservation() {
-		observationDao.save(null);
+	public void testDeleteCategorieListWithNullValue() {
+		LinkedList<Categorie> l = new LinkedList<Categorie>();
+		l.add(null);
+		categorieDao.delete(l);
+	}
+
+	@Test
+	public void testDeleteCategorieList() {
+		LinkedList<Categorie> l = new LinkedList<Categorie>();
+		for (int i = 0; i < 10; i++) {
+			l.add(getCategorie());
+		}
+		for (Categorie c : l) {
+			categorieDao.save(c);
+		}
+		categorieDao.delete(l);
+		for (Categorie c : l) {
+			assertNull(categorieDao.getById(c.getId()));
+		}
 	}
 
 	@Test(expected = NullPointerException.class)
-	public void getObservationByNullCategorie() {
-		observationDao.getByCategorie(null);
-	}
-
-	@Test(expected = NullPointerException.class)
-	public void getObservationByNullUser() {
-		observationDao.getByUser(null);
-	}
-
-	@Test(expected = NullPointerException.class)
-	public void getObservationByNullId() {
-		observationDao.getById(null);
-	}
-
-	/*
-	 * NullPointerException Tests - CategorieDao
-	 */
-	@Test(expected = NullPointerException.class)
-	public void updateNullCategorie() {
-		categorieDao.update(null);
-	}
-
-	@Test(expected = NullPointerException.class)
-	public void saveNullCategorie() {
+	public void testSaveNullCategorie() {
 		categorieDao.save(null);
 	}
 
-	@Test(expected = NullPointerException.class)
-	public void getCategorieByNullTitle() {
-		categorieDao.getByTitle(null);
-	}
-
-	@Test(expected = NullPointerException.class)
-	public void getCategorieByNullId() {
-		categorieDao.getById(null);
-	}
-
-	/*
-	 * NullPointerException Tests - UserDao
-	 */
-	@Test(expected = NullPointerException.class)
-	public void updateNullUser() {
-		userDao.update(null);
-	}
-
-	@Test(expected = NullPointerException.class)
-	public void saveNullUser() {
-		userDao.save(null);
-	}
-
-	@Test(expected = NullPointerException.class)
-	public void getUserByNullMail() {
-		userDao.getByMail(null);
-	}
-
-	@Test(expected = NullPointerException.class)
-	public void getUserByNullId() {
-		userDao.getById(null);
-	}
-
-	/*
-	 * InvalidDataAccessApiUsageException Tests - Saving Already Known Objects
-	 */
 	@Test
-	public void saveAlreadyPersistedObservation() {
-		User u = getUser();
-		Categorie c = getCategorie();
-		Observation o = getObservation(c, u);
-		categorieDao.save(c);
-		userDao.save(u);
-		observationDao.save(o);
-		try {
-			observationDao.save(o);
-		} catch (InvalidDataAccessApiUsageException e) {
-			assertTrue(e.contains(EntityAlreadyKnownException.class));
-			return;
-		}
-		fail();
-	}
-
-	@Test
-	public void saveAlreadyPersistedUser() {
-		User u = getUser();
-		userDao.save(u);
-		try {
-			userDao.save(u);
-		} catch (InvalidDataAccessApiUsageException e) {
-			assertTrue(e.contains(EntityAlreadyKnownException.class));
-			return;
-		}
-		fail();
-	}
-
-	@Test
-	public void saveAlreadyPersistedEntity() {
+	public void testAlreadyKnownCategorie() {
 		Categorie c = getCategorie();
 		categorieDao.save(c);
 		try {
@@ -376,34 +206,72 @@ public class DaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 		fail();
 	}
 
-	/*
-	 * ConstraintViolationException Tests - User
-	 */
 	@Test
-	public void tooLongName() {
-		StringBuffer buf = new StringBuffer();
-		for (int i = 0; i < 255; i++) {
-			buf.append("a");
-		}
-		assertEquals(buf.toString().length(), 255);
-		User uNormal = getUser();
-		uNormal.setName(buf.toString());
-		User uAbNormal = getUser();
-		uAbNormal.setName(buf.toString() + "a");
-		userDao.save(uNormal);
-		try {
-			userDao.save(uAbNormal);
-		} catch (FieldLengthConstraintViolationException e) {
-			return;
-		}
-		fail();
+	public void testSaveCategorie() {
+		Categorie c = getCategorie();
+		categorieDao.save(c);
+		assertNotNull(c.getId());
+	}
+
+	@Test(expected = NotNullConstraintViolationException.class)
+	public void testSaveCategoreWithNullTitle() {
+		Categorie c = getCategorie();
+		c.setTitle(null);
+		categorieDao.save(c);
+	}
+
+	@Test(expected = NotNullConstraintViolationException.class)
+	public void testSaveCategoreWithNullDescription() {
+		Categorie c = getCategorie();
+		c.setDescription(null);
+		categorieDao.save(c);
+	}
+
+	@Test(expected = NotNullConstraintViolationException.class)
+	public void testSaveCategoreWithNullIconFileName() {
+		Categorie c = getCategorie();
+		c.setIconFileName(null);
+		categorieDao.save(c);
+	}
+
+	@Test(expected = JpaSystemException.class)
+	public void testSaveCategoreWithAlreadySavedTitle() {
+		Categorie c1 = getCategorie();
+		Categorie c2 = getCategorie();
+		c1.setTitle(c2.getTitle());
+		categorieDao.save(c1);
+		categorieDao.save(c2);
+	}
+
+	@Test(expected=NullPointerException.class)
+	public void testGetCategorieByNullTitle(){
+		categorieDao.getByTitle(null);
 	}
 
 	@Test
-	public void getCategorieByTitle() {
+	public void testGetCategorieByNotKnownTitle(){
+		assertNull(categorieDao.getByTitle("asdf"));
+	}
+
+	@Test
+	public void testGetCategorieByTitle(){
 		Categorie c = getCategorie();
 		categorieDao.save(c);
-		assertEquals(c, categorieDao.getByTitle(c.getTitle()));
-		assertEquals(null, categorieDao.getByTitle("asdf"));
+		assertNotNull(categorieDao.getByTitle(c.getTitle()));
 	}
+
+	@Test
+	public void testDeleteCategorieCascade(){
+		User u = getUser();
+		Categorie c = getCategorie();
+		Observation o = getObservation(c, u);
+		userDao.save(u);
+		categorieDao.save(c);
+		observationDao.save(o);
+		categorieDao.delete(c);
+		assertNull(categorieDao.getById(c.getId()));
+		assertNull(observationDao.getById(o.getId()));
+		assertNotNull(userDao.getById(u.getId()));
+	}
+
 }

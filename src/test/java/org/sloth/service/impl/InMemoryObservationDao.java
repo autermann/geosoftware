@@ -32,24 +32,30 @@ public class InMemoryObservationDao extends InMemoryDao<Observation> implements
 
 	@Override
 	public Collection<Observation> getByCategorie(Categorie c) {
-		if (c == null)
+		if (c == null) {
 			throw new NullPointerException();
+		}
 		Collection<Observation> result = new ArrayList<Observation>();
-		for (Observation o : getAll())
-			if (o.getCategorie().equals(c))
+		for (Observation o : getAll()) {
+			if (o.getCategorie().equals(c)) {
 				result.add(o);
+			}
+		}
 		return result;
 	}
 
 	@Override
 	public Collection<Observation> getByUser(User u)
 			throws NullPointerException {
-		if (u == null)
+		if (u == null) {
 			throw new NullPointerException();
+		}
 		Collection<Observation> result = new ArrayList<Observation>();
-		for (Observation o : getAll())
-			if (o.getUser().equals(u))
+		for (Observation o : getAll()) {
+			if (o.getUser().equals(u)) {
 				result.add(o);
+			}
+		}
 		return result;
 	}
 
@@ -63,23 +69,27 @@ public class InMemoryObservationDao extends InMemoryDao<Observation> implements
 				return o1.getCreationDate().compareTo(o2.getCreationDate());
 			}
 		});
-		if (!obs.isEmpty())
+		if (!obs.isEmpty()) {
 			return obs.subList(0,
 					((obs.size() < count) ? obs.size() : count) - 1);
-		else
+		} else {
 			return obs;
+		}
 	}
 
 	@Override
 	public Collection<Observation> getByKeyWord(String keyword)
 			throws NullPointerException {
 		Collection<Observation> result = new ArrayList<Observation>();
-		for (Observation o : getAll())
+		for (Observation o : getAll()) {
+			Categorie c = o.getCategorie();
 			if (matches(keyword, o.getTitle())
-					|| matches(keyword, o.getDescription())
-					|| matches(keyword, o.getCategorie().getTitle())
-					|| matches(keyword, o.getCategorie().getDescription()))
+			 || matches(keyword, o.getDescription())
+			 || matches(keyword, c.getTitle())
+			 || matches(keyword, c.getDescription())) {
 				result.add(o);
+			}
+		}
 		return result;
 	}
 

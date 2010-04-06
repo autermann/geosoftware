@@ -59,23 +59,26 @@ public class DeleteReportController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String handlePost(@ModelAttribute Report report,
-			SessionStatus status, HttpSession s,
-			HttpServletResponse r)
-			throws IOException {
+	public String handlePost(@PathVariable Long id, SessionStatus status,
+			HttpSession s, HttpServletResponse r) throws IOException {
 		status.setComplete();
-		if (isAdmin(s) || isOwnReport(s, report)) {
-			try {
-				this.os.deleteReport(report);
-			} catch (Exception e) {
-				logger.warn("Unexpected Exception", e);
-				return internalErrorView(r);
-			} finally {
-				status.setComplete();
-			}
-			return "redirect:/r";
+		Report report = this.os.getReport(id);
+		if (report == null) {
+			return notFoundView(r);
 		} else {
-			return forbiddenView(r);
+			if (isAdmin(s) || isOwnReport(s, report)) {
+				try {
+					this.os.deleteReport(report);
+				} catch (Exception e) {
+					logger.warn("Unexpected Exception", e);
+					return internalErrorView(r);
+				} finally {
+					status.setComplete();
+				}
+				return "redirect:/r";
+			} else {
+				return forbiddenView(r);
+			}
 		}
 	}
 }
