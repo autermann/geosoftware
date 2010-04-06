@@ -33,6 +33,6 @@
 		<tr/>
 
 	</table>
-			<p><a href="<s:url value="/observations"/>"><s:escapeBody htmlEscape="true"><fmt:message key="nav.back.title"/></s:escapeBody></a></p>
+	<p><a href="<s:url value="/observations"/>"><s:escapeBody htmlEscape="true"><fmt:message key="nav.back.title"/></s:escapeBody></a></p>
 </div>
 <%@ include file="/WEB-INF/jsp/footer.jsp" %>

@@ -1,8 +1,6 @@
 <%@ include file="/WEB-INF/jsp/includes.jsp" %>
 <%@page import="java.util.Date" %>
-
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
-
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 		<title><s:escapeBody htmlEscape="true"><fmt:message key="tab.title"/></s:escapeBody></title>
@@ -47,7 +45,6 @@
 					});
 			</script></c:if>
 		</head>
-
 		<body onload="init();">
 			<a href="<s:url value="/" htmlEscape="true" />"><img src="<s:url value="/static/img/logo.png" htmlEscape="true"/>" align="left" width="160" alt="Logo" ></img></a>
 		<div align="right">
@@ -67,7 +64,7 @@
 				| <input type="text" name="q" value="Search..." class="search" onfocus="this.value=''"/>
 				<input type="image" src="<s:url value="/static/img/search.png" htmlEscape="true" />" alt="Search" class="searchbutton"/>
 			</form>
-			
+
 		</div>
 		<hr style="border:solid #DDDDEE 1px"/><br/>
 		<br />
@@ -77,20 +74,14 @@
 				</td></tr>
 		</table>
 		<div>
-
-
-		<!-- Beginning of observationlist-->
+			<!-- Beginning of observationlist-->
 			<table width="29%" class="observationlist">
 				<div id="results" class="observationlist">
 					<c:forEach var="o" items="${observations}">
-
-
 						<tr>
 							<td width="70%" class="observationlist_title">
 								<img src="${o.categorie.iconFileName}" width="20px" height="20px" alt="${o.categorie.title}"></img>
 								<b class="obsTitle"><s:escapeBody>${o.title}</s:escapeBody></b>
-
-
 								<a href="#" onclick="goTo(${o.coordinate.longitude}, ${o.coordinate.latitude}, 16);"><img src="<s:url value="/static/img/show.png" htmlEscape="true" />" alt="<fmt:message key="observation.viewInMap.title"/>" align="right" height="20px"/></a>
 									<c:if test="${sessionScope.LOGIN != null}">
 									<a href="<s:url value="/r/o/${o.id}/new"/>"><img src="<s:url value="/static/img/report.png" htmlEscape="true" />" alt="<s:escapeBody htmlEscape="true"><fmt:message key="observation.report.title"/></s:escapeBody>" align="right" height="20px"></img></a>
@@ -98,13 +89,9 @@
 										<a href="<s:url value="/o/edit/${o.id}"/>"><img src="<s:url value="/static/img/edit.png" htmlEscape="true" />" alt="<s:escapeBody htmlEscape="true"><fmt:message key="observation.edit.title"/></s:escapeBody>" align="right" height="20px"></img></a>
 										</c:if>
 									</c:if>
-
 								<p class="observationlist_description"><s:escapeBody htmlEscape="true" javaScriptEscape="false" >${o.description}</s:escapeBody></p>
 							</td>
-
 						</tr>
-
-
 					</c:forEach>
 				</div>
 			</table>

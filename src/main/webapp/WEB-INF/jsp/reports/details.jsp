@@ -12,55 +12,47 @@
 	<tr style="height: 50%">
 		<td width=10%></td>
 		<td width=60%>
+			<form:form modelAttribute="report">
+				<table class="management_lists">
+					<tr>
+						<td class="management_lists"><fmt:message key="report.id.title"/>:</td>
+						<td class="management_lists">${report.id}</td>
+					</tr>
+					<tr>
+						<td class="management_lists"><fmt:message key="report.description.title"/>:</td>
+						<td class="management_lists">${report.description}</td>
+					<tr/>
+					<tr>
+						<td class="management_lists"><fmt:message key="report.author.mail.title"/>:</td>
+						<td class="management_lists">${report.author.mail}</td>
+					<tr/>
+					<tr>
+						<td class="management_lists"><fmt:message key="report.observation.title"/>:</td>
+						<td class="management_lists">${report.observation.title}</td>
+					<tr/>
+					<tr>
+						<td class="management_lists"><fmt:message key="report.creationDate.title"/>:</td>
+						<td class="management_lists"><fmt:formatDate pattern="dd. MM. yyyy - HH:mm" value="${report.creationDate}"/></td>
+					<tr/>
+					<tr>
+						<td class="management_lists"><fmt:message key="report.lastUpdateDate.title"/>:</td>
+						<td class="management_lists"><fmt:formatDate pattern="dd. MM. yyyy - HH:mm" value="${report.lastUpdateDate}"/></td>
+					<tr/>
 
-                <form:form modelAttribute="report">
-                    <table class="management_lists">
-		<tr>
-			<td class="management_lists"><fmt:message key="report.id.title"/>:</td>
-			<td class="management_lists">${report.id}</td>
-		</tr>
-		<tr>
-			<td class="management_lists"><fmt:message key="report.description.title"/>:</td>
-			<td class="management_lists">${report.description}</td>
-		<tr/>
-		<tr>
-			<td class="management_lists"><fmt:message key="report.author.mail.title"/>:</td>
-			<td class="management_lists">${report.author.mail}</td>
-		<tr/>
-		<tr>
-			<td class="management_lists"><fmt:message key="report.observation.title"/>:</td>
-			<td class="management_lists">${report.observation.title}</td>
-		<tr/>
-		<tr>
-			<td class="management_lists"><fmt:message key="report.creationDate.title"/>:</td>
-			<td class="management_lists"><fmt:formatDate pattern="dd. MM. yyyy - HH:mm" value="${report.creationDate}"/></td>
-		<tr/>
-		<tr>
-			<td class="management_lists"><fmt:message key="report.lastUpdateDate.title"/>:</td>
-			<td class="management_lists"><fmt:formatDate pattern="dd. MM. yyyy - HH:mm" value="${report.lastUpdateDate}"/></td>
-		<tr/>
-
-		<tr>
-                    <td class="management_lists"><fmt:message key="report.processed.title"/>:</td>
-			<td class="management_lists"><c:choose>
-				<c:when test="${report.processed}"><fmt:message key="report.processed.true.title"/></c:when>
-				<c:otherwise><fmt:message key="report.processed.false.title"/></c:otherwise>
+					<tr>
+						<td class="management_lists"><fmt:message key="report.processed.title"/>:</td>
+						<td class="management_lists">
+							<c:choose>
+								<c:when test="${report.processed}"><fmt:message key="report.processed.true.title"/></c:when>
+								<c:otherwise><fmt:message key="report.processed.false.title"/></c:otherwise>
                             </c:choose>
                         </td>
-		<tr/>
-	</table>
-                        <br/>
-                        
-	
-		<input type="submit" value="Delete" />
+					<tr/>
+				</table>
+				<br/>
+				<input type="submit" value="Delete" />
                 <input type="button" value="Cancel" onclick="window.location.href='<s:url value="/acc"></s:url>'">
-
-	</form:form>
-
-
-
-
-
+			</form:form>
 		</td>
 		<td width=30%></td>
 	</tr>

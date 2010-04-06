@@ -5,7 +5,6 @@
 			<td align="right"><fmt:message key="copyright.title"/></td>
 		</tr>
 	</table>
-
 </div>
 </body>
 </html>

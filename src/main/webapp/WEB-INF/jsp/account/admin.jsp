@@ -1,37 +1,66 @@
 <%@include file="../includes.jsp" %>
 <%@include file="../header.jsp" %>
-
-
 <table align="center" style="height: 100%">
-
 	<tr style="height: 25%">
 		<td></td>
 		<td class="admin_statement"><s:escapeBody htmlEscape="true"><fmt:message key="admin.backend.title"/></s:escapeBody><br /><br /> </td>
 		<td></td>
 	</tr>
 	<tr style="height: 33%">
-
 		<td width=20%></td>
 		<td width=40% class="admin_backend">
-
-
-
-
 			<table>
-				<tr><td><a href="<s:url value="/u" />"><img src="<s:url value="/static/img/user_mng.png" htmlEscape="true"/>" alt="" /></a></td><td><a href="<s:url value="/u" />">  <fmt:message key="userManagement.title"/></a></td></tr>
-				<tr><td><a href="<s:url value="/o" />"><img src="<s:url value="/static/img/observation_mng.png" htmlEscape="true"/>" alt="" /></a></td><td><a href="<s:url value="/o" />">   <fmt:message key="observationManagement.title"/></a></td></tr>
-				<tr><td><a href="<s:url value="/c" />"><img src="<s:url value="/static/img/categorie_mng.png" htmlEscape="true"/>" alt="" /></a></td><td><a href="<s:url value="/c" />">  <fmt:message key="categorieManagement.title"/></a></td></tr>
-				<tr><td><a href="<s:url value="/r" />"><img src="<s:url value="/static/img/report_mng.png" htmlEscape="true"/>" alt=""/></a></td><td><a href="<s:url value="/r" />">  <fmt:message key="reportManagement.title"/></a></td></tr>
+				<tr>
+					<td>
+						<a href="<s:url value="/u" />">
+							<img src="<s:url value="/static/img/user_mng.png" htmlEscape="true"/>" alt="" />
+						</a>
+					</td>
+					<td>
+						<a href="<s:url value="/u" />">
+							<fmt:message key="userManagement.title"/>
+						</a>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<a href="<s:url value="/o" />">
+							<img src="<s:url value="/static/img/observation_mng.png" htmlEscape="true"/>" alt="" />
+						</a>
+					</td>
+					<td>
+						<a href="<s:url value="/o" />">
+							<fmt:message key="observationManagement.title"/>
+						</a>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<a href="<s:url value="/c" />">
+							<img src="<s:url value="/static/img/categorie_mng.png" htmlEscape="true"/>" alt="" />
+						</a>
+					</td>
+					<td>
+						<a href="<s:url value="/c" />">
+							<fmt:message key="categorieManagement.title"/>
+						</a>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<a href="<s:url value="/r" />">
+							<img src="<s:url value="/static/img/report_mng.png" htmlEscape="true"/>" alt=""/>
+						</a>
+					</td>
+					<td>
+						<a href="<s:url value="/r" />">
+							<fmt:message key="reportManagement.title"/>
+						</a>
+					</td>
+				</tr>
 			</table>
-
-
-
-
-
 		</td>
 		<td width=40%></td>
-
-
 	</tr>
 	<tr style="height: 41%">
 		<td></td>

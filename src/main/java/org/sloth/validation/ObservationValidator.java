@@ -31,7 +31,7 @@ public class ObservationValidator implements Validator {
 	private CoordinateValidator coordinateValidator;
 
 	@Autowired
-	public void setCategorieValidator(CoordinateValidator coordinateValidator) {
+	public void setCoordinateValidator(CoordinateValidator coordinateValidator) {
 		this.coordinateValidator = coordinateValidator;
 	}
 
