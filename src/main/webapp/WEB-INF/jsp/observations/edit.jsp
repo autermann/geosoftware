@@ -6,7 +6,7 @@
 
 	<tr style="height: 25%">
 		<td></td>
-		<td><h3><fmt:message key="observation.edit"/>: #${observation.id}</h3> </td>
+		<td><h3><fmt:message key="observation.edit.title"/>: #${observation.id}</h3> </td>
 		<td></td>
 	</tr>
 	<tr style="height: 50%">
@@ -22,17 +22,17 @@
 				<td>
 					<table border="0" width="100%">
 						<tr>
-							<td width="20%" align="right" class="management_lists"><fmt:message key="observation.title"/>:</td>
+							<td width="20%" align="right" class="management_lists"><fmt:message key="observation.title.title"/>:</td>
 							<td width="40%" align="left" class="management_lists"><form:input path="title"/></td>
 							<td width="40%" align="right" class="management_lists"><form:errors cssStyle="color:red;" path="title"/></td>
 						</tr>
 						<tr>
-							<td width="20%" align="right" class="management_lists"><fmt:message key="observation.description"/>:</td>
+							<td width="20%" align="right" class="management_lists"><fmt:message key="observation.description.title"/>:</td>
 							<td width="40%" align="left" class="management_lists"><form:textarea path="description"/></td>
 							<td width="40%" align="right" class="management_lists"><form:errors cssStyle="color:red;" path="description"/></td>
 						</tr>
 						<tr>
-							<td width="20%" align="right" class="management_lists"><fmt:message key="observation.categorie"/>:</td>
+							<td width="20%" align="right" class="management_lists"><fmt:message key="observation.categorie.title"/>:</td>
 
 							<td width="40%" align="left" class="management_lists">
 								<form:select path="categorie">
@@ -42,7 +42,7 @@
 							<td width="40%" align="right" class="management_lists"><form:errors cssStyle="color:red;" path="categorie"/></td>
 						</tr>
 						<tr>
-							<td width="20%" align="right" class="management_lists"><fmt:message key="observation.coordinate"/>:</td>
+							<td width="20%" align="right" class="management_lists"><fmt:message key="observation.coordinate.title"/>:</td>
 							<td width="40%" align="left" class="management_lists">
                                                 <small>Lon:<form:input path="coordinate.longitude"/><br/>
 								Lat:<form:input path="coordinate.latitude"/></small>
@@ -69,7 +69,7 @@
 	<tr style="height: 25%">
 		<td></td>
 		<td align="center">
-			<a href="<s:url value="/" htmlEscape="true" />"><fmt:message key="nav.home"/></a> <fmt:message key="copyright"/>
+			<a href="<s:url value="/" htmlEscape="true" />"><fmt:message key="nav.home.title"/></a> <fmt:message key="copyright.title"/>
 		</td>
 		<td></td>
 	</tr>

@@ -6,7 +6,7 @@
 
 	<tr style="height: 25%">
 		<td></td>
-		<td><h3><fmt:message key="observation.list"/></h3><br /><br /> </td>
+		<td><h3><fmt:message key="observation.list.title"/></h3><br /><br /> </td>
 		<td></td>
 	</tr>
 	<tr style="height: 50%">
@@ -14,11 +14,11 @@
 		<td width=60%>
 			<table class="management_lists">
 				<tr>
-					<th class="management_lists"><fmt:message key="observation.id"/></th>
-					<th class="management_lists"><fmt:message key="observation.title"/></th>
-					<th class="management_lists"><fmt:message key="observation.description"/></th>
-                                        <th class="management_lists" width="25%"><fmt:message key="observation.user"/></th>
-					<th class="management_lists"><fmt:message key="observation.edit"/></th>
+					<th class="management_lists"><fmt:message key="observation.id.title"/></th>
+					<th class="management_lists"><fmt:message key="observation.title.title"/></th>
+					<th class="management_lists"><fmt:message key="observation.description.title"/></th>
+                                        <th class="management_lists" width="25%"><fmt:message key="observation.user.title"/></th>
+					<th class="management_lists"><fmt:message key="observation.edit.title"/></th>
 				</tr>
 				<c:forEach var="observation" items="${observations}">
 					<tr>
@@ -28,9 +28,9 @@
                                                 <td class="management_lists"><s:escapeBody htmlEscape="true" javaScriptEscape="false">${observation.user.name}, ${observation.user.familyName}</s:escapeBody></td>
 						<td class="management_lists">
 							<c:if test="${sessionScope.LOGIN.id eq observation.user.id || sessionScope.LOGIN.userGroup eq 'ADMIN'}">
-								<a href="<s:url value="/o/edit/${observation.id}"/>"><img src="<s:url value="/static/img/edit.png" htmlEscape="true" />" alt="<s:escapeBody htmlEscape="true"><fmt:message key="observation.edit" /></s:escapeBody>"></a>
-								<a href="<s:url value="/o/del/${observation.id}"/>"><img src="<s:url value="/static/img/delete.png" htmlEscape="true" />" alt="<s:escapeBody htmlEscape="true"><fmt:message key="observation.delete" /></s:escapeBody>"></a>
-								<a href="<s:url value="/r/o/${observation.id}/new"/>"><img src="<s:url value="/static/img/report.png" htmlEscape="true" />" alt="<fmt:message key="observation.report"/>"/></a>
+								<a href="<s:url value="/o/edit/${observation.id}"/>"><img src="<s:url value="/static/img/edit.png" htmlEscape="true" />" alt="<s:escapeBody htmlEscape="true"><fmt:message key="observation.edit.title" /></s:escapeBody>"></a>
+								<a href="<s:url value="/o/del/${observation.id}"/>"><img src="<s:url value="/static/img/delete.png" htmlEscape="true" />" alt="<s:escapeBody htmlEscape="true"><fmt:message key="observation.delete.title" /></s:escapeBody>"></a>
+								<a href="<s:url value="/r/o/${observation.id}/new"/>"><img src="<s:url value="/static/img/report.png" htmlEscape="true" />" alt="<fmt:message key="observation.report.title"/>"/></a>
 
 							</c:if>
 						</td>
@@ -43,7 +43,7 @@
 	<tr style="height: 25%">
 		<td></td>
 		<td align="center">
-			<a href="<s:url value="/" htmlEscape="true" />"><fmt:message key="nav.home"/></a> <fmt:message key="copyright"/>
+			<a href="<s:url value="/" htmlEscape="true" />"><fmt:message key="nav.home.title"/></a> <fmt:message key="copyright.title"/>
 		</td>
 		<td></td>
 	</tr>

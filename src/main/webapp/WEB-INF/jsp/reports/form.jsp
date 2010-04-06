@@ -6,7 +6,7 @@
 
 	<tr style="height: 25%">
 		<td></td>
-		<td><h3><fmt:message key="report.details"/></h3></td>
+		<td><h3><fmt:message key="report.details.title"/></h3></td>
 		<td></td>
 	</tr>
 	<tr style="height: 50%">
@@ -18,7 +18,7 @@
 		<table class="management_lists">
 			<tr>
 				<td class="management_lists">
-					<fmt:message key="report.description"/>:
+					<fmt:message key="report.description.title"/>:
 				</td>
 			</tr>
 			<tr>
@@ -34,7 +34,7 @@
 			<c:if test="${sessionScope.LOGIN.userGroup == 'ADMIN'}">
 				<tr>
 					<td>
-						<fmt:message key="report.processed"/>
+						<fmt:message key="report.processed.title"/>
 						<form:checkbox path="processed"/>
 					</td>
 				</tr>
@@ -57,7 +57,7 @@
 	<tr style="height: 25%">
 		<td></td>
 		<td align="center">
-			<a href="<s:url value="/" htmlEscape="true" />"><fmt:message key="nav.home"/></a> <fmt:message key="copyright"/>
+			<a href="<s:url value="/" htmlEscape="true" />"><fmt:message key="nav.home.title"/></a> <fmt:message key="copyright.title"/>
 		</td>
 		<td></td>
 	</tr>

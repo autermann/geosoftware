@@ -6,7 +6,7 @@
 
 	<tr style="height: 25%">
 		<td></td>
-		<td><h3><s:escapeBody htmlEscape="true"><fmt:message key="observation.delete"/></s:escapeBody></h3> </td>
+		<td><h3><s:escapeBody htmlEscape="true"><fmt:message key="observation.delete.title"/></s:escapeBody></h3> </td>
 		<td></td>
 	</tr>
 	<tr style="height: 50%">
@@ -19,23 +19,23 @@
                 <form:form modelAttribute="observation">
 		<table class="management_lists">
 			<tr>
-				<td class="management_lists"><fmt:message key="observation.id"/>:</td>
+				<td class="management_lists"><fmt:message key="observation.id.title"/>:</td>
 				<td class="management_lists">${observation.id}</td>
 			</tr>
 			<tr>
-				<td class="management_lists"><fmt:message key="observation.title"/>:</td>
+				<td class="management_lists"><fmt:message key="observation.title.title"/>:</td>
 				<td class="management_lists"><s:escapeBody htmlEscape="true">${observation.title}</s:escapeBody></td>
 			</tr>
 			<tr>
-				<td class="management_lists"><fmt:message key="observation.description"/>:</td>
+				<td class="management_lists"><fmt:message key="observation.description.title"/>:</td>
 				<td class="management_lists"><s:escapeBody htmlEscape="true">${observation.description}</s:escapeBody></td>
 			<tr/>
 			<tr>
-				<td class="management_lists"><fmt:message key="observation.user"/>:</td>
+				<td class="management_lists"><fmt:message key="observation.user.title"/>:</td>
 				<td class="management_lists">${observation.user}</td>
 			<tr/>
 			<tr>
-				<td class="management_lists"><fmt:message key="observation.creationDate"/>:</td>
+				<td class="management_lists"><fmt:message key="observation.creationDate.title"/>:</td>
 				<td class="management_lists">${observation.creationDate}</td>
 			<tr/>
 			<td align="center" colspan="2">
@@ -53,7 +53,7 @@
 	<tr style="height: 25%">
 		<td></td>
 		<td align="center">
-			<a href="<s:url value="/" htmlEscape="true" />"><fmt:message key="nav.home"/></a> <fmt:message key="copyright"/>
+			<a href="<s:url value="/" htmlEscape="true" />"><fmt:message key="nav.home.title"/></a> <fmt:message key="copyright.title"/>
 		</td>
 		<td></td>
 	</tr>

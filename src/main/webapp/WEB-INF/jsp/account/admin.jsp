@@ -6,7 +6,7 @@
 
 	<tr style="height: 25%">
 		<td></td>
-		<td class="admin_statement"><s:escapeBody htmlEscape="true"><fmt:message key="admin.backend"/></s:escapeBody><br /><br /> </td>
+		<td class="admin_statement"><s:escapeBody htmlEscape="true"><fmt:message key="admin.backend.title"/></s:escapeBody><br /><br /> </td>
 		<td></td>
 	</tr>
 	<tr style="height: 33%">
@@ -18,10 +18,10 @@
 
 
 			<table>
-				<tr><td><a href="<s:url value="/u" />"><img src="<s:url value="/static/img/user_mng.png" htmlEscape="true"/>" alt="" /></a></td><td><a href="<s:url value="/u" />">  <fmt:message key="userManagement"/></a></td></tr>
-				<tr><td><a href="<s:url value="/o" />"><img src="<s:url value="/static/img/observation_mng.png" htmlEscape="true"/>" alt="" /></a></td><td><a href="<s:url value="/o" />">   <fmt:message key="observationManagement"/></a></td></tr>
-				<tr><td><a href="<s:url value="/c" />"><img src="<s:url value="/static/img/categorie_mng.png" htmlEscape="true"/>" alt="" /></a></td><td><a href="<s:url value="/c" />">  <fmt:message key="categorieManagement"/></a></td></tr>
-				<tr><td><a href="<s:url value="/r" />"><img src="<s:url value="/static/img/report_mng.png" htmlEscape="true"/>" alt=""/></a></td><td><a href="<s:url value="/r" />">  <fmt:message key="reportManagement"/></a></td></tr>
+				<tr><td><a href="<s:url value="/u" />"><img src="<s:url value="/static/img/user_mng.png" htmlEscape="true"/>" alt="" /></a></td><td><a href="<s:url value="/u" />">  <fmt:message key="userManagement.title"/></a></td></tr>
+				<tr><td><a href="<s:url value="/o" />"><img src="<s:url value="/static/img/observation_mng.png" htmlEscape="true"/>" alt="" /></a></td><td><a href="<s:url value="/o" />">   <fmt:message key="observationManagement.title"/></a></td></tr>
+				<tr><td><a href="<s:url value="/c" />"><img src="<s:url value="/static/img/categorie_mng.png" htmlEscape="true"/>" alt="" /></a></td><td><a href="<s:url value="/c" />">  <fmt:message key="categorieManagement.title"/></a></td></tr>
+				<tr><td><a href="<s:url value="/r" />"><img src="<s:url value="/static/img/report_mng.png" htmlEscape="true"/>" alt=""/></a></td><td><a href="<s:url value="/r" />">  <fmt:message key="reportManagement.title"/></a></td></tr>
 			</table>
 
 
@@ -37,7 +37,7 @@
 		<td></td>
 		<td align="center">
 
-			<a href="<s:url value="/" htmlEscape="true" />"><s:escapeBody htmlEscape="true"><fmt:message key="nav.home"/></s:escapeBody></a> <fmt:message key="copyright"/>
+			<a href="<s:url value="/" htmlEscape="true" />"><s:escapeBody htmlEscape="true"><fmt:message key="nav.home.title"/></s:escapeBody></a> <fmt:message key="copyright.title"/>
 		</td>
 		<td></td>
 	</tr>

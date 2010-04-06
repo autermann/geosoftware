@@ -6,7 +6,7 @@
 
 	<tr style="height: 25%">
 		<td></td>
-		<td><h3><s:escapeBody htmlEscape="true"><fmt:message key="user.delete"/></s:escapeBody></h3> </td>
+		<td><h3><s:escapeBody htmlEscape="true"><fmt:message key="user.delete.title"/></s:escapeBody></h3> </td>
 		<td></td>
 	</tr>
 	<tr style="height: 50%">
@@ -19,23 +19,23 @@
              <form:form modelAttribute="user">
 		<table class="management_lists">
 			<tr>
-				<td class="management_lists"><fmt:message key="user.id"/>:</td>
+				<td class="management_lists"><fmt:message key="user.id.title"/>:</td>
 				<td class="management_lists">${user.id}</td>
 			</tr>
 			<tr>
-				<td class="management_lists"><fmt:message key="user.mail"/>:</td>
+				<td class="management_lists"><fmt:message key="user.mail.title"/>:</td>
 				<td class="management_lists">${user.mail}</td>
 			</tr>
 			<tr>
-				<td class="management_lists"><fmt:message key="user.name"/>:</td>
+				<td class="management_lists"><fmt:message key="user.name.title"/>:</td>
 				<td class="management_lists">${user.name}</td>
 			<tr/>
 			<tr>
-				<td class="management_lists"><fmt:message key="user.familyName"/>:</td>
+				<td class="management_lists"><fmt:message key="user.familyName.title"/>:</td>
 				<td class="management_lists">${user.familyName}</td>
 			<tr/>
 			<tr>
-				<td class="management_lists"><fmt:message key="user.creationDate"/>:</td>
+				<td class="management_lists"><fmt:message key="user.creationDate.title"/>:</td>
 				<td class="management_lists">${user.creationDate}</td>
 			<tr/>
 			<td align="center" colspan="2" class="management_lists">
@@ -53,7 +53,7 @@
 	<tr style="height: 25%">
 		<td></td>
 		<td align="center">
-			<a href="<s:url value="/" htmlEscape="true" />"><fmt:message key="nav.home"/></a> <fmt:message key="copyright"/>
+			<a href="<s:url value="/" htmlEscape="true" />"><fmt:message key="nav.home.title"/></a> <fmt:message key="copyright.title"/>
 		</td>
 		<td></td>
 	</tr>

@@ -23,17 +23,17 @@
 					<form:errors cssStyle="color:red;"/>
 					<table class="management_lists">
 						<tr>
-							<td  class="management_lists" width="20%" align="right"><fmt:message key="user.familyName"/>:</td>
+							<td  class="management_lists" width="20%" align="right"><fmt:message key="user.familyName.title"/>:</td>
 							<td  class="management_lists" width="40%" align="left"><form:input path="newFamilyName"/></td>
 							<td  class="management_lists" width="40%" align="right"><form:errors cssStyle="color:red;" path="newFamilyName"/></td>
 						</tr>
 						<tr>
-							<td  class="management_lists" width="20%" align="right"><fmt:message key="user.name"/>:</td>
+							<td  class="management_lists" width="20%" align="right"><fmt:message key="user.name.title"/>:</td>
 							<td  class="management_lists" width="40%" align="left"><form:input path="newName" /></td>
 							<td  class="management_lists" width="40%" align="right"><form:errors cssStyle="color:red;" path="newName"/></td>
 						</tr>
 						<tr>
-							<td  class="management_lists" width="20%" align="right"><fmt:message key="user.mail"/>:</td>
+							<td  class="management_lists" width="20%" align="right"><fmt:message key="user.mail.title"/>:</td>
 							<td  class="management_lists" width="40%" align="left"><form:input path="newMail" /></td>
 							<td  class="management_lists" width="40%" align="right"><form:errors cssStyle="color:red;" path="newMail"/></td>
 						</tr>
@@ -46,19 +46,19 @@
 							</tr>
 						</c:if> --%>
 						<tr>
-							<td class="management_lists" width="20%" align="right"><fmt:message key="user.newPassword"/>:</td>
+							<td class="management_lists" width="20%" align="right"><fmt:message key="user.newPassword.title"/>:</td>
 							<td class="management_lists" width="40%" align="left"><form:password path="newPassword" /></td>
 							<td class="management_lists" width="40%" align="right"><form:errors cssStyle="color:red;" path="newPassword"/></td>
 						</tr>
 						<tr>
-							<td class="management_lists"width="20%" align="right"><fmt:message key="user.newPasswordRepeat"/>:</td>
+							<td class="management_lists"width="20%" align="right"><fmt:message key="user.newPasswordRepeat.title"/>:</td>
 							<td class="management_lists" width="40%" align="left"><form:password path="newPasswordRepeat" /></td>
 							<td class="management_lists" width="40%" align="right"><form:errors cssStyle="color:red;" path="newPasswordRepeat"/></td>
 						</tr>
 						<%-- only Admins can change the group, except for themself --%>
 						<c:if test="${sessionScope.LOGIN.userGroup == 'ADMIN' && sessionScope.LOGIN.id != userEditAction.id}">
 							<tr>
-								<td class="management_lists" width="20%" align="right"><fmt:message key="user.userGroup"/>:</td>
+								<td class="management_lists" width="20%" align="right"><fmt:message key="user.userGroup.title"/>:</td>
 								<td class="management_lists" width="40%" align="left">
 									<form:select path="newGroup">
 										<form:option title="Admin" value="ADMIN"/>
@@ -88,7 +88,7 @@
 	<tr style="height: 25%">
 		<td></td>
 		<td align="center">
-			<a href="<s:url value="/" htmlEscape="true" />"><fmt:message key="nav.home"/></a> <fmt:message key="copyright"/>
+			<a href="<s:url value="/" htmlEscape="true" />"><fmt:message key="nav.home.title"/></a> <fmt:message key="copyright.title"/>
 		</td>
 		<td></td>
 	</tr>

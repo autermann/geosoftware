@@ -6,7 +6,7 @@
 
                 <tr style="height: 25%">
                         <td></td>
-                        <td><h3><fmt:message key="categorie.new"/></h3></td>
+                        <td><h3><fmt:message key="categorie.new.title"/></h3></td>
                         <td></td>
                 </tr>
                 <tr style="height: 33%">
@@ -18,18 +18,18 @@
 
 					<table class="management_lists">
 						<tr>
-							<td class="management_lists" width="20%" align="right"><fmt:message key="categorie.title"/>:</td>
+							<td class="management_lists" width="20%" align="right"><fmt:message key="categorie.title.title"/>:</td>
 							<td class="management_lists" width="40%" align="left"><form:input path="title"/></td>
 							<td class="management_lists" width="40%" align="right"><form:errors cssStyle="color:red;" path="title"/></td>
 						</tr>
 						<tr>
-							<td class="management_lists" width="20%" align="right"><fmt:message key="categorie.description"/>:</td>
+							<td class="management_lists" width="20%" align="right"><fmt:message key="categorie.description.title"/>:</td>
 							<td class="management_lists" width="40%" align="left"><form:textarea path="description" /></td>
 							<td class="management_lists" width="40%" align="right"><form:errors cssStyle="color:red;" path="description"/></td>
 						</tr>
 						<tr>
 						<tr>
-							<td class="management_lists" width="20%" align="right"><fmt:message key="categorie.iconFileName"/>:</td>
+							<td class="management_lists" width="20%" align="right"><fmt:message key="categorie.iconFileName.title"/>:</td>
 							<td>
 								<form:hidden path="iconFileName" />
 								<img class="categorieImage" src="<s:url value="/static/img/flag_black.png" />" alt="" />
@@ -63,7 +63,7 @@
                     <td></td>
                     <td align="center">
 
-                        <a href="<s:url value="/" htmlEscape="true" />"><fmt:message key="nav.home"/></a> <fmt:message key="copyright"/>
+                        <a href="<s:url value="/" htmlEscape="true" />"><fmt:message key="nav.home.title"/></a> <fmt:message key="copyright.title"/>
                     </td>
                     <td></td>
                 </tr>
@@ -85,25 +85,25 @@
 <%@ include file="/WEB-INF/jsp/header.jsp" %>
 
 <div>
-	<h2><fmt:message key="categorie.new"/></h2>
+	<h2><fmt:message key="categorie.new.title"/></h2>
 	<form:form modelAttribute="categorie" method="POST">
 		<table width="40%" border="1">
 			<tr>
 				<td>
 					<table border="0" width="100%">
 						<tr>
-							<td width="20%" align="right"><fmt:message key="categorie.title"/>:</td>
+							<td width="20%" align="right"><fmt:message key="categorie.title.title"/>:</td>
 							<td width="40%" align="left"><form:input path="title"/></td>
 							<td width="40%" align="right"><form:errors cssStyle="color:red;" path="title"/></td>
 						</tr>
 						<tr>
-							<td width="20%" align="right"><fmt:message key="categorie.description"/>:</td>
+							<td width="20%" align="right"><fmt:message key="categorie.description.title"/>:</td>
 							<td width="40%" align="left"><form:textarea path="description" /></td>
 							<td width="40%" align="right"><form:errors cssStyle="color:red;" path="description"/></td>
 						</tr>
 						<tr>
 						<tr>
-							<td width="20%" align="right"><fmt:message key="categorie.iconFileName"/>:</td>
+							<td width="20%" align="right"><fmt:message key="categorie.iconFileName.title"/>:</td>
 							<td>
 								<form:hidden path="iconFileName" />
 								<img class="categorieImage" src="<s:url value="/static/img/flag_black.png" />" alt="" />

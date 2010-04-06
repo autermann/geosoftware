@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-		<title><fmt:message key="title"/></title>
+		<title><fmt:message key="tab.title"/></title>
 		<link href="<s:url value="/static/css/style.css" htmlEscape="true" />" rel="stylesheet" type="text/css" />
 	</head>
 	<body>
@@ -15,7 +15,7 @@
 					<a href="<s:url value="/" htmlEscape="true" />"><img src="<s:url value="/static/img/logo.png" htmlEscape="true"/>" align="right" alt="Logo" ></img></a>
 
 				</td>
-				<td class="login_statement"><s:escapeBody htmlEscape="true"><fmt:message key="login.statement"/></s:escapeBody><br /><br /> </td>
+				<td class="login_statement"><s:escapeBody htmlEscape="true"><fmt:message key="login.statement.title"/></s:escapeBody><br /><br /> </td>
 				<td></td>
 			</tr>
 			<tr style="height: 33%">
@@ -25,12 +25,12 @@
 
 
 					<form:form name="login" modelAttribute="login" method="POST">
-						<b><fmt:message key="login.button" /></b>
+						<b><fmt:message key="login.button.title" /></b>
 						<p />
 						<table>
 							<tr>
 								<td>
-									<s:escapeBody htmlEscape="true"><fmt:message key="user.mail"/>: </s:escapeBody>
+									<s:escapeBody htmlEscape="true"><fmt:message key="user.mail.title"/>: </s:escapeBody>
 								</td>
 
 								<td>
@@ -40,7 +40,7 @@
 							</tr>
 							<tr>
 								<td>
-									<s:escapeBody htmlEscape="true"><fmt:message key="user.password"/>: </s:escapeBody>
+									<s:escapeBody htmlEscape="true"><fmt:message key="user.password.title"/>: </s:escapeBody>
 
 								</td>
 
@@ -52,9 +52,9 @@
 							<tr align="center">
 								<form:errors cssStyle="color: red;"/>
 								<td>
-									<input type="submit" value="<s:escapeBody htmlEscape="true"><fmt:message key="login.button" /></s:escapeBody>"/>
+									<input type="submit" value="<s:escapeBody htmlEscape="true"><fmt:message key="login.button.title" /></s:escapeBody>"/>
 								</td> <td>
-									<input type="button" onClick="window.location='<s:url value="/signup"/>'" value="<s:escapeBody htmlEscape="true"><fmt:message key="reg.button"/></s:escapeBody>" />
+									<input type="button" onClick="window.location='<s:url value="/signup"/>'" value="<s:escapeBody htmlEscape="true"><fmt:message key="reg.button.title"/></s:escapeBody>" />
 								</td>
 							</tr>
 						</table>
@@ -74,7 +74,7 @@
 				<td></td>
 				<td align="center">
 
-					<a href="<s:url value="/" htmlEscape="true" />"><fmt:message key="nav.home"/></a> <fmt:message key="copyright"/>
+					<a href="<s:url value="/" htmlEscape="true" />"><fmt:message key="nav.home.title"/></a> <fmt:message key="copyright.title"/>
 				</td>
 				<td></td>
 			</tr>

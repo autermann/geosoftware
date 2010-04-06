@@ -5,7 +5,7 @@
 
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-		<title><s:escapeBody htmlEscape="true"><fmt:message key="title"/></s:escapeBody></title>
+		<title><s:escapeBody htmlEscape="true"><fmt:message key="tab.title"/></s:escapeBody></title>
 		<link href="<s:url value="/static/css/style.css" htmlEscape="true" />" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" src="http://openlayers.org/api/OpenLayers.js"></script>
 		<script type="text/javascript" src="http://www.openstreetmap.org/openlayers/OpenStreetMap.js"></script>
@@ -29,9 +29,9 @@
 						title: "<s:escapeBody htmlEscape="true" javaScriptEscape="true">${observation.title}</s:escapeBody>",
 						action: "<s:url value="/"/>",
 						lang: {
-							title:"<fmt:message key="observation.title"/>",
-							description:"<fmt:message key="observation.description"/>",
-							categorie:"<fmt:message key="observation.categorie"/>"
+							title:"<fmt:message key="observation.title.title"/>",
+							description:"<fmt:message key="observation.description.title"/>",
+							categorie:"<fmt:message key="observation.categorie.title"/>"
 						},
 						errors: {
 							description: "<s:bind path="observation.description" htmlEscape="true">${status.errorMessages[0]}</s:bind>",
@@ -54,11 +54,11 @@
 			<c:choose>
 				<c:when test="${sessionScope.LOGIN != null}">
 					<a href="<s:url value="/acc" />"><img src="<s:url value="/static/img/user_mng.png" htmlEscape="true"/>" alt="" height="18"/><b>${sessionScope.LOGIN.mail}</b></a> |
-					<a href="<s:url value="/logout"/>"><fmt:message key="logout.button"/></a>
+					<a href="<s:url value="/logout"/>"><fmt:message key="logout.button.title"/></a>
 
 				</c:when>
 				<c:otherwise>
-					<a href="<s:url value="/login"/>"> <fmt:message key="login.button"/></a>
+					<a href="<s:url value="/login"/>"> <fmt:message key="login.button.title"/></a>
 				</c:otherwise>
 			</c:choose>
 
@@ -72,8 +72,8 @@
 		<hr style="border:solid #DDDDEE 1px"/><br/>
 		<br />
 		<table width="28%"><tr><td>
-					<h3><s:escapeBody htmlEscape="true"><fmt:message key="welcome"/></s:escapeBody></h3>
-					<h4><s:escapeBody htmlEscape="true"><fmt:message key="greeting"/></s:escapeBody></h4>
+					<h3><s:escapeBody htmlEscape="true"><fmt:message key="welcome.title"/></s:escapeBody></h3>
+					<h4><s:escapeBody htmlEscape="true"><fmt:message key="greeting.title"/></s:escapeBody></h4>
 				</td></tr>
 		</table>
 		<div>
@@ -91,11 +91,11 @@
 								<b class="obsTitle"><s:escapeBody>${o.title}</s:escapeBody></b>
 
 
-								<a href="#" onclick="goTo(${o.coordinate.longitude}, ${o.coordinate.latitude}, 16);"><img src="<s:url value="/static/img/show.png" htmlEscape="true" />" alt="<fmt:message key="observation.viewInMap"/>" align="right" height="20px"/></a>
+								<a href="#" onclick="goTo(${o.coordinate.longitude}, ${o.coordinate.latitude}, 16);"><img src="<s:url value="/static/img/show.png" htmlEscape="true" />" alt="<fmt:message key="observation.viewInMap.title"/>" align="right" height="20px"/></a>
 									<c:if test="${sessionScope.LOGIN != null}">
-									<a href="<s:url value="/r/o/${o.id}/new"/>"><img src="<s:url value="/static/img/report.png" htmlEscape="true" />" alt="<s:escapeBody htmlEscape="true"><fmt:message key="observation.report"/></s:escapeBody>" align="right" height="20px"></img></a>
+									<a href="<s:url value="/r/o/${o.id}/new"/>"><img src="<s:url value="/static/img/report.png" htmlEscape="true" />" alt="<s:escapeBody htmlEscape="true"><fmt:message key="observation.report.title"/></s:escapeBody>" align="right" height="20px"></img></a>
 										<c:if test="${sessionScope.LOGIN.userGroup == 'ADMIN' || o.user.id == sessionScope.LOGIN.id}">
-										<a href="<s:url value="/o/edit/${o.id}"/>"><img src="<s:url value="/static/img/edit.png" htmlEscape="true" />" alt="<s:escapeBody htmlEscape="true"><fmt:message key="observation.edit"/></s:escapeBody>" align="right" height="20px"></img></a>
+										<a href="<s:url value="/o/edit/${o.id}"/>"><img src="<s:url value="/static/img/edit.png" htmlEscape="true" />" alt="<s:escapeBody htmlEscape="true"><fmt:message key="observation.edit.title"/></s:escapeBody>" align="right" height="20px"></img></a>
 										</c:if>
 									</c:if>
 
@@ -115,8 +115,8 @@
 			<br />
 			<table class="footer">
 				<tr>
-					<td><a href="<s:url value="/" htmlEscape="true" />"><s:escapeBody htmlEscape="true"><fmt:message key="nav.home"/></s:escapeBody></a></td>
-					<td align="right"><fmt:message key="copyright"/></td>
+					<td><a href="<s:url value="/" htmlEscape="true" />"><s:escapeBody htmlEscape="true"><fmt:message key="nav.home.title"/></s:escapeBody></a></td>
+					<td align="right"><fmt:message key="copyright.title"/></td>
 				</tr>
 			</table>
 		</div>

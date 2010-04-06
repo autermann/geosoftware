@@ -1,24 +1,24 @@
 <%@ include file="/WEB-INF/jsp/includes.jsp" %>
 <%@ include file="/WEB-INF/jsp/header.jsp" %>
 <div>
-	<h2><fmt:message key="observation.new"/></h2>
+	<h2><fmt:message key="observation.new.title"/></h2>
 	<form:form modelAttribute="observation" method="POST">
 		<table width="40%" border="1">
 			<tr>
 				<td>
 					<table border="0" width="100%">
 						<tr>
-							<td width="20%" align="right"><fmt:message key="observation.title"/>:</td>
+							<td width="20%" align="right"><fmt:message key="observation.title.title"/>:</td>
 							<td width="40%" align="left"><form:input path="title"/></td>
 							<td width="40%" align="right"><form:errors cssStyle="color:red;" path="title"/></td>
 						</tr>
 						<tr>
-							<td width="20%" align="right"><fmt:message key="observation.description"/>:</td>
+							<td width="20%" align="right"><fmt:message key="observation.description.title"/>:</td>
 							<td width="40%" align="left"><form:textarea path="description"/></td>
 							<td width="40%" align="right"><form:errors cssStyle="color:red;" path="description"/></td>
 						</tr>
 						<tr>
-							<td width="20%" align="right"><fmt:message key="observation.categorie"/>:</td>
+							<td width="20%" align="right"><fmt:message key="observation.categorie.title"/>:</td>
 
 							<td width="40%" align="left">
 								<form:select path="categorie">
@@ -28,7 +28,7 @@
 							<td width="40%" align="right"><form:errors cssStyle="color:red;" path="categorie"/></td>
 						</tr>
 						<tr>
-							<td width="20%" align="right"><fmt:message key="observation.coordinate"/>:</td>
+							<td width="20%" align="right"><fmt:message key="observation.coordinate.title"/>:</td>
 							<td width="40%" align="left">
 								Lon:<form:input path="coordinate.longitude"/><br/>
 								Lat:<form:input path="coordinate.latitude"/>
