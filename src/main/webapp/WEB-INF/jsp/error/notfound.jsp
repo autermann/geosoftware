@@ -1,34 +1,62 @@
-<%@include file="../includes.jsp" %>
+<%@ include file="/WEB-INF/jsp/includes.jsp" %>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-		<title>404 - Not Found</title>
+		<title><fmt:message key="title"/></title>
 		<link href="<s:url value="/static/css/style.css" htmlEscape="true" />" rel="stylesheet" type="text/css" />
 	</head>
 	<body>
-		<div id="login" style="padding-top: 15%">
-			<table align="center" style="border: 1px solid #CCE5FF;" >
-				<tr>
-					<td bgcolor="#CCE5FF" width="40%" align="center">
-						<div style="padding-top: 20px">
-							<h2 style="font-style: oblique;">404 - Not Found</h2>
-							How could that happen :-(
-							<br/>
-							<br/>
-							<br/>
-							<input type="button" onclick="window.location=<s:url value="/"/>" value="Go Back" />
-						</div>
-						<br/>
-					</td>
-				</tr>
-			</table>
-			<div>
-				<table class="footer" align="center" style="padding-top: 10%">
-					<tr>
-						<td align="right">&copy; Sloth Inc.</td>
-					</tr>
-				</table>
-			</div>
-		</div>
+
+		<table align="center" style="height: 100%">
+
+			<tr style="height: 33%">
+				<td>
+
+					<a href="<s:url value="/" htmlEscape="true" />"><img src="<s:url value="/static/img/logo.png" htmlEscape="true"/>" align="right" alt="Logo" ></img></a>
+
+				</td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr style="height: 33%">
+
+				<td width=33%></td>
+				<td width=33% class="error">
+
+
+                                    <center>
+                                        <h2 style="font-style: oblique;">404 - Not Found</h2>
+                                            How could that happen :-(
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <input type="button" onclick="window.location=<s:url value="/"/>" value="Go Back" />
+                                    </center>
+
+
+
+
+
+
+				</td>
+				<td width=33%></td>
+
+
+			</tr>
+			<tr style="height: 33%">
+				<td></td>
+				<td align="center">
+
+					<a href="<s:url value="/" htmlEscape="true" />"><fmt:message key="nav.home"/></a> <fmt:message key="copyright"/>
+				</td>
+				<td></td>
+			</tr>
+		</table>
+
+
+
+
+
 	</body>
 </html>
+

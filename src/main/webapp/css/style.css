@@ -183,5 +183,16 @@ td.management_lists_image {
 }
 
 .selected {
-	border: 2px solid red;
+	border: 2px solid #DDDDDD;
+}
+
+
+
+/*----------Error Sites ------------------*/
+
+td.error {
+    border: 0px;
+    background-color: #EEEEEE;
+    padding: 35px;
+    border: 1px solid silver;
 }

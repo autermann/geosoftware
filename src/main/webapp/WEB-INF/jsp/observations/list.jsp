@@ -17,6 +17,7 @@
 					<th class="management_lists"><fmt:message key="observation.id"/></th>
 					<th class="management_lists"><fmt:message key="observation.title"/></th>
 					<th class="management_lists"><fmt:message key="observation.description"/></th>
+                                        <th class="management_lists" width="25%"><fmt:message key="observation.user"/></th>
 					<th class="management_lists"><fmt:message key="observation.edit"/></th>
 				</tr>
 				<c:forEach var="observation" items="${observations}">
@@ -24,11 +25,13 @@
 						<td class="management_lists">${observation.id}</td>
 						<td class="management_lists"><s:escapeBody htmlEscape="true" javaScriptEscape="false">${observation.title}</s:escapeBody></td>
 						<td class="management_lists"><s:escapeBody htmlEscape="true" javaScriptEscape="false">${observation.description}</s:escapeBody></td>
+                                                <td class="management_lists"><s:escapeBody htmlEscape="true" javaScriptEscape="false">${observation.user.name}, ${observation.user.familyName}</s:escapeBody></td>
 						<td class="management_lists">
 							<c:if test="${sessionScope.LOGIN.id eq observation.user.id || sessionScope.LOGIN.userGroup eq 'ADMIN'}">
 								<a href="<s:url value="/o/edit/${observation.id}"/>"><img src="<s:url value="/static/img/edit.png" htmlEscape="true" />" alt="<s:escapeBody htmlEscape="true"><fmt:message key="observation.edit" /></s:escapeBody>"></a>
 								<a href="<s:url value="/o/del/${observation.id}"/>"><img src="<s:url value="/static/img/delete.png" htmlEscape="true" />" alt="<s:escapeBody htmlEscape="true"><fmt:message key="observation.delete" /></s:escapeBody>"></a>
-								<a href="<s:url value="/r/o/${o.id}/new"/>"><img src="<s:url value="/static/img/report.png" htmlEscape="true" />" alt="<fmt:message key="observation.report"/>"/></a>
+								<a href="<s:url value="/r/o/${observation.id}/new"/>"><img src="<s:url value="/static/img/report.png" htmlEscape="true" />" alt="<fmt:message key="observation.report"/>"/></a>
+
 							</c:if>
 						</td>
 					</tr>

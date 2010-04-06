@@ -1,25 +1,39 @@
 <%@ include file="/WEB-INF/jsp/includes.jsp" %>
 <%@ include file="/WEB-INF/jsp/header.jsp" %>
-<div>
-	<h2><fmt:message key="categorie.edit.title"/>: ${categorie.title}</h2>
-	<form:form modelAttribute="categorie">
-		<table width="40%" border="1">
+
+
+<table align="center" style="height: 100%">
+
+	<tr style="height: 25%">
+		<td></td>
+		<td><h3><fmt:message key="categorie.edit.title"/>: ${categorie.title}</h3> </td>
+		<td></td>
+	</tr>
+	<tr style="height: 50%">
+		<td width=10%></td>
+		<td width=60%>
+
+
+
+
+                 <form:form modelAttribute="categorie">
+		<table  class="management_lists">
 			<tr>
 				<td>
-					<table border="0" width="100%">
+					<table  class="management_lists">
 						<tr>
-							<td width="20%" align="right"><fmt:message key="categorie.title"/>:</td>
-							<td width="40%" align="left"><form:input path="title"/></td>
-							<td width="40%" align="right"><form:errors cssStyle="color:red;" path="title"/></td>
+							<td class="management_lists" width="20%" align="right"><fmt:message key="categorie.title"/>:</td>
+							<td class="management_lists" width="40%" align="left"><form:input path="title"/></td>
+							<td class="management_lists" width="40%" align="right"><form:errors cssStyle="color:red;" path="title"/></td>
 						</tr>
 						<tr>
-							<td width="20%" align="right"><fmt:message key="categorie.description"/>:</td>
-							<td width="40%" align="left"><form:textarea path="description" /></td>
-							<td width="40%" align="right"><form:errors cssStyle="color:red;" path="description"/></td>
+							<td class="management_lists" width="20%" align="right"><fmt:message key="categorie.description"/>:</td>
+							<td class="management_lists" width="40%" align="left"><form:textarea path="description" /></td>
+							<td class="management_lists" width="40%" align="right"><form:errors cssStyle="color:red;" path="description"/></td>
 						</tr>
 						<tr>
-							<td width="20%" align="right"><fmt:message key="categorie.iconFileName"/>:</td>
-							<td>
+							<td class="management_lists" width="20%" align="right"><fmt:message key="categorie.iconFileName"/>:</td>
+							<td class="management_lists">
 								<form:hidden path="iconFileName" />
 								<img class="categorieImage" src="<s:url value="/static/img/flag_black.png" />" alt="" />
 								<img class="categorieImage" src="<s:url value="/static/img/flag_blue.png" />" alt="" />
@@ -28,11 +42,12 @@
 								<img class="categorieImage" src="<s:url value="/static/img/trash.png"/>" alt="" />
 								<img class="categorieImage" src="<s:url value="/static/img/attention.png"/>" alt="" />
 							</td>
-							<td width="40%" align="right"><form:errors cssStyle="color:red;" path="iconFileName"/></td>
+							<td class="management_lists" width="40%" align="right"><form:errors cssStyle="color:red;" path="iconFileName"/></td>
 						</tr>
 						<tr>
-							<td align="center" colspan="2">
-								<input type="submit" value="<fmt:message key="update"/>" />
+							<td class="management_lists" align="center" colspan="2">
+
+                                                                <input type="submit" value="<fmt:message key="update"/>" />
 								<input type="button" value="<fmt:message key="cancel"/>" onclick="window.location.href='<s:url value="/c/"></s:url>'">
 								<input type="button" value="<fmt:message key="delete"/>" onclick="window.location.href='<s:url value="/c/del/${categorie.id}"></s:url>'">
 							</td>
@@ -42,13 +57,27 @@
 			</tr>
 		</table>
 	</form:form>
-</div>
-<script type="text/javascript">
-	$('img.categorieImage').click(function(){
+
+
+
+		</td>
+		<td width=30%></td>
+	</tr>
+	<tr style="height: 25%">
+		<td></td>
+		<td align="center">
+			<a href="<s:url value="/" htmlEscape="true" />"><fmt:message key="nav.home"/></a> <fmt:message key="copyright"/>
+		</td>
+		<td></td>
+	</tr>
+</table>
+
+            <script type="text/javascript">
+                $('img.categorieImage').click(function(){
 		$('img.categorieImage').removeClass('selected');
 		$('#iconFileName').val($(this).attr('src'));
 		$(this).addClass('selected');
-	});
-</script>
-<%@ include file="/WEB-INF/jsp/footer.jsp" %>
+                });
+            </script>
+
 

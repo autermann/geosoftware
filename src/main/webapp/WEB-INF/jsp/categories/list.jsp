@@ -34,7 +34,7 @@
                                                     <td class="management_lists"><s:escapeBody htmlEscape="true">${categorie.title}</s:escapeBody></td>
                                                     <td class="management_lists"><s:escapeBody htmlEscape="true">${categorie.description}</s:escapeBody></td>
                                                     <td class="management_lists">${categorie.iconFileName}</td>
-													<td class="management_lists_image"><img src="<s:url value="/static/img/${categorie.iconFileName}"/>" alt="<s:escapeBody htmlEscape="true"><fmt:message key="categorie.icon" /></s:escapeBody>"></td>
+													<td class="management_lists_image"><img src="${categorie.iconFileName}" alt="<s:escapeBody htmlEscape="true"><fmt:message key="categorie.icon" /></s:escapeBody>"></td>
                                                     <td class="management_lists_image">
                                                         <a href="<s:url value="/c/edit/${categorie.id}"/>"><img src="<s:url value="/static/img/edit.png" htmlEscape="true" />" alt="<s:escapeBody htmlEscape="true"><fmt:message key="categorie.edit" /></s:escapeBody>"></a>
 														<a href="<s:url value="/c/del/${categorie.id}"/>"><img src="<s:url value="/static/img/delete.png" htmlEscape="true" />" alt="<s:escapeBody htmlEscape="true"><fmt:message key="categorie.delete" /></s:escapeBody>"></a>
