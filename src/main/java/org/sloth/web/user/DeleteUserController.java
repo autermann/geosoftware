@@ -62,8 +62,7 @@ public class DeleteUserController {
 
 	private static final String VIEW = "users/delete";
 	private static final String USER_ATTRIBUTE = "user";
-	private static final Logger logger = LoggerFactory
-			.getLogger(DeleteUserController.class);
+	private static final Logger logger = LoggerFactory.getLogger(DeleteUserController.class);
 	private UserService userService;
 
 	/**
@@ -119,19 +118,19 @@ public class DeleteUserController {
 			boolean self = getUser(session).getId().equals(id);
 			if (self || isAdmin(session)) {
 				try {
-					this.userService.delete(id);
+					if (self) {
+						deAuth(session);
+						this.userService.delete(id);
+						return "redirect:/";
+					} else {
+						this.userService.delete(id);
+						return "redirect:/u";
+					}
 				} catch (Exception e) {
 					logger.warn("Unexpected Exception", e);
 					return internalErrorView(response);
 				} finally {
 					status.setComplete();
-				}
-				if (self) {
-					deAuth(session);
-					return "redirect:/";
-				} else {
-					this.userService.delete(id);
-					return "redirect:/u";
 				}
 			}
 		}

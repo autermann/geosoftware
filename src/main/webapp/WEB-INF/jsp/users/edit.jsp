@@ -31,13 +31,13 @@
 									<td  class="management_lists" width="40%" align="right"><form:errors cssStyle="color:red;" path="newMail"/></td>
 								</tr>
 								<%-- we need only enter our password editing ourself --%>
-								<%-- <c:if test="${sessionScope.LOGIN.id == userEditAction.id}">
-							<tr>
-								<td class="management_lists" width="20%" align="right"><fmt:message key="user.actualPassword"/>:</td>
-								<td class="management_lists" width="40%" align="left"><form:password path="actualPassword" /></td>
-								<td class="management_lists" width="40%" align="right"><form:errors cssStyle="color:red;" path="actualPassword"/></td>
-							</tr>
-						</c:if> --%>
+								<c:if test="${sessionScope.LOGIN.id == userEditAction.id}">
+									<tr>
+										<td class="management_lists" width="20%" align="right"><fmt:message key="user.actualPassword"/>:</td>
+										<td class="management_lists" width="40%" align="left"><form:password path="actualPassword" /></td>
+										<td class="management_lists" width="40%" align="right"><form:errors cssStyle="color:red;" path="actualPassword"/></td>
+									</tr>
+								</c:if>
 								<tr>
 									<td class="management_lists" width="20%" align="right"><fmt:message key="user.newPassword.title"/>:</td>
 									<td class="management_lists" width="40%" align="left"><form:password path="newPassword" /></td>
