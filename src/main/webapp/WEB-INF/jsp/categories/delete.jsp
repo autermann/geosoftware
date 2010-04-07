@@ -25,8 +25,8 @@
 					<tr/>
 					<tr>
 						<td align="center" colspan="2" class="management_lists">
-							<input type="submit" value="Delete" />
-							<input type="button" value="Cancel" onclick="window.location.href='<s:url value="/c"></s:url>'">
+							<input type="submit" value="<s:escapeBody htmlEscape="true"><fmt:message key="delete.title"/></s:escapeBody>" />
+							<input type="button" value="<s:escapeBody htmlEscape="true"><fmt:message key="cancel.title"/></s:escapeBody>" onclick="window.location.href='<s:url value="/c"></s:url>'">
 						</td>
 					</tr>
 				</table>
