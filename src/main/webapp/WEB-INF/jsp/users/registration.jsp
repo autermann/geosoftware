@@ -3,44 +3,50 @@
 <table align="center" style="height: 100%">
 	<tr style="height: 25%">
 		<td></td>
-		<td class="register_statement"><fmt:message key="register.statement.title"/><br /><br /> </td>
+                <td class="register_statement"><s:escapeBody htmlEscape="true"><fmt:message key="register.statement.title"/></s:escapeBody><br /><br /> </td>
 		<td></td>
 	</tr>
 	<tr style="height: 33%">
-		<td width=33%></td>
-		<td width=33% class="registerform">
+            <td width="33%"></td>
+		<td width="33%" class="registerform">
 			<form:form modelAttribute="user" method="POST">
 				<table border="0" width="100%" class="registerform">
 					<tr>
-						<td width="20%" align="right"><fmt:message key="user.name.title"/>:</td>
+						<td width="40%" align="right"><fmt:message key="user.name.title"/>:</td>
 						<td width="40%" align="left"><form:input path="name"/></td>
-						<td width="40%" align="right"><form:errors cssStyle="color:red;" path="name"/></td>
+						<td width="20%" align="right"><form:errors cssStyle="color:red;" path="name"/></td>
 					</tr>
+                                        <tr></tr>
 					<tr>
-						<td width="20%" align="right"><fmt:message key="user.familyName.title"/>:</td>
+						<td width="40%" align="right"><fmt:message key="user.familyName.title"/>:</td>
 						<td width="40%" align="left"><form:input path="familyName"/></td>
-						<td width="40%" align="right"><form:errors cssStyle="color:red;" path="familyName"/></td>
+						<td width="20%" align="right"><form:errors cssStyle="color:red;" path="familyName"/></td>
 					</tr>
+                                        <tr></tr>
 					<tr>
-						<td width="20%" align="right"><fmt:message key="user.mail.title"/>:</td>
+						<td width="40%" align="right"><fmt:message key="user.mail.title"/>:</td>
 						<td width="40%" align="left"><form:input path="mail" /></td>
-						<td width="40%" align="right"><form:errors cssStyle="color:red;" path="mail"/></td>
+						<td width="20%" align="right"><form:errors cssStyle="color:red;" path="mail"/></td>
 					</tr>
+                                        <tr></tr>
 					<tr>
-						<td width="20%" align="right"><fmt:message key="user.mailRepeat.title"/>:</td>
+						<td width="40%" align="right"><fmt:message key="user.mailRepeat.title"/>:</td>
 						<td width="40%" align="left"><form:input path="mailRepeat" /></td>
-						<td width="40%" align="right"><form:errors cssStyle="color:red;" path="mailRepeat"/></td>
+						<td width="20%" align="right"><form:errors cssStyle="color:red;" path="mailRepeat"/></td>
 					</tr>
+                                        <tr></tr>
 					<tr>
-						<td width="20%" align="right"><fmt:message key="user.password.title"/>:</td>
+						<td width="40%" align="right"><fmt:message key="user.password.title"/>:</td>
 						<td width="40%" align="left"><form:password path="password"/></td>
-						<td width="40%" align="right"><form:errors cssStyle="color:red;" path="password"/></td>
+						<td width="20%" align="right"><form:errors cssStyle="color:red;" path="password"/></td>
 					</tr>
+                                        <tr></tr>
 					<tr>
-						<td width="20%" align="right"><fmt:message key="user.passwordRepeat.title"/>:</td>
+						<td width="40%" align="right"><fmt:message key="user.passwordRepeat.title"/>:</td>
 						<td width="40%" align="left"><form:password path="passwordRepeat"/></td>
-						<td width="40%" align="right"><form:errors cssStyle="color:red;" path="passwordRepeat"/></td>
+						<td width="20%" align="right"><form:errors cssStyle="color:red;" path="passwordRepeat"/></td>
 					</tr>
+                                        <tr></tr>
 					<tr>
 						<td align="center" colspan="2">
 							<input type="submit" value="Submit" />
