@@ -11,11 +11,12 @@
 		<script type="text/javascript" src="<s:url value="/static/js/map.js" htmlEscape="true" />"></script>
 		<%-- Add already existing features to the map --%>
 		<script type="text/javascript">
+			setNotLoggedInUserErrorLocalized("<p><s:escapeBody htmlEscape="true" javaScriptEscape="true"><fmt:message key="observation.new.notLoggedInError"/></s:escapeBody></p>")
 			function fillMap(){
 			<c:forEach var="o" items="${observations}">
 					addMarker(${o.coordinate.longitude}, ${o.coordinate.latitude},"<b><s:escapeBody htmlEscape="true" javaScriptEscape="true">${o.title}</s:escapeBody></b><br/><br /><s:escapeBody htmlEscape="true" javaScriptEscape="true">${o.description}</s:escapeBody><br/><br/>Koordinaten:<br/><small>Lon: ${o.coordinate.longitude} | Lat: ${o.coordinate.latitude} </small>", "${o.categorie.iconFileName}");</c:forEach>
 				}
-			</script>
+		</script>
 		<c:if test="${sessionScope.LOGIN != null}"><script type="text/javascript">
 				<%-- add formular data --%>
 					setEditingFeature({

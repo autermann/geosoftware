@@ -8,15 +8,21 @@ var editingMarker;
 // actual shown popup
 var popup;
 
+var notLoggedInUserError;
+
 function setEditingFeature(feature) {
 	data = feature;
 }
+function setNotLoggedInUserErrorLocalized(error){
+	notLoggedInUserError = error;
+}
+
 
 function createLoginInformation(lonlat) {
 
 	var popup = new OpenLayers.Popup.FramedCloud("Login", lonlat,
 			new OpenLayers.Size(300, 180),
-			"<p>You have to be logged in to create Observations.<p>", null,
+			notLoggedInUserError, null,
 			true, function() {
 				map.removePopup(this);
 			});
