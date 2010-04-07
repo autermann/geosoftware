@@ -114,7 +114,7 @@ function buildFormularContent(data) {
 /* Initialize the Map */
 function init() {
 	OpenLayers.Lang.setCode('de');
-	map = new OpenLayers.Map('map', {
+	map = new OpenLayers.Map('mapArea', {
 		numZoomLevels : 18,
 		maxResolution : 156543.0399,
 		units : 'meters',

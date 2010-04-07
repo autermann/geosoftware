@@ -48,7 +48,8 @@ img{
 }
 
 table.observationlist {
-    margin: 1px 1px 1px 3px;
+	width: 100%;
+    margin: 0px 0px 0px 0px;
     border-collapse: separate;
 }
 
@@ -63,20 +64,12 @@ b.obsTitle {
     vertical-align: 6px;
 }
 
-
 p.observationlist_description {
 
          font: normal 12px/ 100% Verdana, Tahoma, sans-serif;
          color:  #555555;
          background-color: #EEEEEE;
        }
-
-/* Nicht mehr notwendig
-td.observationlist_icons  {
-        font: normal 12px/ 100% Verdana, Tahoma, sans-serif;
-        background-color: #EEEEEE;       
-      } */
-
 
 h4 {
     font: normal 12px/ 100% Verdana, Tahoma, sans-serif;
@@ -103,14 +96,33 @@ input.searchbutton {
     height: 18px;
     vertical-align: bottom;
 }
+td.header{
+	width: 100%;
+	vertical-align: baseline;
+	text-align: right;
+}
 
-div.observationlist {
+tr.content {
 
 }
 
-div.map {
+
+td.sidebar {
+	width: 30%;
+}
+td.mapArea {
+	width: 70%;
+}
+div.observationlist{
+	height: auto;
+	overflow: auto;
+}
+
+div.mapArea {
+	position: relative;
     border: 1px solid silver;
-	height: 90%;
+	height: 100%;
+	width: 100%;
 }
 
 /*----------Login Page------------------*/
