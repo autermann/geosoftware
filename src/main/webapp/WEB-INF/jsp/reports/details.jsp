@@ -20,7 +20,7 @@
 					</tr>
 					<tr>
 						<td class="management_lists"><fmt:message key="report.description.title"/>:</td>
-						<td class="management_lists">${report.description}</td>
+                                                <td class="management_lists"><s:escapeBody htmlEscape="true">${report.description}</s:escapeBody></td>
 					<tr/>
 					<tr>
 						<td class="management_lists"><fmt:message key="report.author.mail.title"/>:</td>
@@ -28,7 +28,7 @@
 					<tr/>
 					<tr>
 						<td class="management_lists"><fmt:message key="report.observation.title"/>:</td>
-						<td class="management_lists">${report.observation.title}</td>
+                                                <td class="management_lists"><s:escapeBody htmlEscape="true">${report.observation.title}</s:escapeBody></td>
 					<tr/>
 					<tr>
 						<td class="management_lists"><fmt:message key="report.creationDate.title"/>:</td>
