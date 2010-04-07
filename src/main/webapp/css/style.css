@@ -100,6 +100,8 @@ td.header{
 	width: 100%;
 	vertical-align: baseline;
 	text-align: right;
+	font: normal 13px/ 100% Verdana, Tahoma, sans-serif;
+    color:  #222222;
 }
 
 tr.content {

@@ -18,7 +18,7 @@
 					</td>
 					<td>
 						<a href="<s:url value="/u" />">
-							<fmt:message key="userManagement.title"/>
+							<s:escapeBody htmlEscape="true"><fmt:message key="userManagement.title"/></s:escapeBody>
 						</a>
 					</td>
 				</tr>
@@ -30,7 +30,7 @@
 					</td>
 					<td>
 						<a href="<s:url value="/o" />">
-							<fmt:message key="observationManagement.title"/>
+							<s:escapeBody htmlEscape="true"><fmt:message key="observationManagement.title"/></s:escapeBody>
 						</a>
 					</td>
 				</tr>
@@ -42,7 +42,7 @@
 					</td>
 					<td>
 						<a href="<s:url value="/c" />">
-							<fmt:message key="categorieManagement.title"/>
+							<s:escapeBody htmlEscape="true"><fmt:message key="categorieManagement.title"/></s:escapeBody>
 						</a>
 					</td>
 				</tr>
@@ -54,7 +54,7 @@
 					</td>
 					<td>
 						<a href="<s:url value="/r" />">
-							<fmt:message key="reportManagement.title"/>
+							<s:escapeBody htmlEscape="true"><fmt:message key="reportManagement.title"/></s:escapeBody>
 						</a>
 					</td>
 				</tr>

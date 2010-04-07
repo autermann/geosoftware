@@ -30,7 +30,7 @@
 					</td>
 					<td>
 						<a href="<s:url value="/u/edit" />">
-							<fmt:message key="user.edit.title"/>
+							<s:escapeBody htmlEscape="true"><fmt:message key="user.edit.title"/></s:escapeBody>
 						</a>
 					</td>
 				</tr>
@@ -42,7 +42,7 @@
 					</td>
 					<td>
 						<a href="<s:url value="/o/own" />">
-							<fmt:message key="observations.own.title"/>
+							<s:escapeBody htmlEscape="true"><fmt:message key="observations.own.title"/></s:escapeBody>
 						</a>
 					</td>
 				</tr>
@@ -54,7 +54,7 @@
 					</td>
 					<td>
 						<a href="<s:url value="/o" />">
-							<fmt:message key="observations.all.title"/>
+							<s:escapeBody htmlEscape="true"><fmt:message key="observations.all.title"/></s:escapeBody>
 						</a>
 					</td>
 				</tr>

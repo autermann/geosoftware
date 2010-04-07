@@ -103,7 +103,6 @@
 				<!-- beginning of map -->
 				<td class="mapArea">
 					<div class="mapArea" id="mapArea">
-					<%--<div id="map" class="map"></div>--%>
 					</div>
 				</td>
 				<!-- End of Content-->
