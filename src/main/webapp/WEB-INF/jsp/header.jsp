@@ -13,11 +13,12 @@
 			<c:choose>
 				<c:when test="${sessionScope.LOGIN != null}">
 					<a href="<s:url value="/acc" />"><img src="<s:url value="/static/img/user_mng.png" htmlEscape="true"/>" alt="" height="18" /><b>${sessionScope.LOGIN.mail}</b></a> |
-					<a href="<s:url value="/logout"/>"><fmt:message key="logout.button.title"/></a> <br/>
-
+					<a href="<s:url value="/logout"/>"><fmt:message key="logout.button.title"/></a>
+                                        <a href="<s:url value="/help" />"><img src="<s:url value="/static/img/help.png" htmlEscape="true"/>" alt="" height="18"/></a><br/>
 				</c:when>
 				<c:otherwise>
-					<input type="submit" onclick="window.location='<s:url value="/login"/>'" value="<fmt:message key="login.button.title"/>" /> <br/>
+					<input type="submit" onclick="window.location='<s:url value="/login"/>'" value="<fmt:message key="login.button.title"/>" />
+                                        <a href="<s:url value="/help" />"><img src="<s:url value="/static/img/help.png" htmlEscape="true"/>" alt="" height="18"/></a><br/>
 				</c:otherwise>
 			</c:choose>
 		</div>
