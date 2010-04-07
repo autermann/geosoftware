@@ -44,7 +44,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
+
 /**
+ * Controller for creating a new {@code Categorie}.
  * 
  * @author Christian Autermann
  * @author Stefan Arndt
@@ -52,7 +54,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Christoph Fendrich
  * @author Simon Ottenhues
  * @author Christian Paluschek
- *
+ * 
  */
 @Controller
 @RequestMapping("/c/new")
@@ -63,55 +65,77 @@ public class CreateCategorieController {
 	private static final String VIEW = "categories/new";
 	private static final Logger logger = LoggerFactory
 			.getLogger(CreateCategorieController.class);
-	private ObservationService os;
-	private CategorieValidator cv;
+	private ObservationService observationService;
+	private CategorieValidator categorieValidator;
 
+	/**
+	 * @param categorieValidator
+	 *            the {@link CategorieValidator} to set
+	 */
 	@Autowired
-	public void setCategorieValidator(CategorieValidator cv) {
-		this.cv = cv;
+	public void setCategorieValidator(CategorieValidator categorieValidator) {
+		this.categorieValidator = categorieValidator;
 	}
 
+	/**
+	 * @param observationService
+	 *            the {@code ObservationService} to set
+	 */
 	@Autowired
-	public void setObservationService(ObservationService os) {
-		this.os = os;
+	public void setObservationService(ObservationService observationService) {
+		this.observationService = observationService;
 	}
 
+	/**
+	 * Sets custom parameters to the {@code WebDataBinder}.
+	 * 
+	 * @param webDataBinder
+	 *            the {@code WebDataBinder} to initialize
+	 */
 	@InitBinder
-	public void initBinder(WebDataBinder wdb) {
-		wdb.setAllowedFields("title", "description", "iconFileName");
+	public void initBinder(WebDataBinder webDataBinder) {
+		webDataBinder.setAllowedFields("title", "description", "iconFileName");
 	}
 
+	/**
+	 * Handles the {@code GET} request. Test the rights and sets up the form.
+	 */
 	@RequestMapping(method = GET)
-	public ModelAndView setup(HttpSession s, HttpServletResponse r)
+	public ModelAndView setup(HttpSession session, HttpServletResponse response)
 			throws IOException {
-		if (isAdmin(s)) {
+		if (isAdmin(session)) {
 			return new ModelAndView(VIEW, CATEGORIE_ATTRIBUTE, new Categorie());
 		} else {
-			return forbiddenMAV(r);
+			return forbiddenMAV(response);
 		}
 	}
 
+	/**
+	 * Handles the {@code POST} request. Validates the input and creates a new
+	 * {@code Categorie}.
+	 */
 	@RequestMapping(method = POST)
-	public String submit(@ModelAttribute(CATEGORIE_ATTRIBUTE) Categorie c,
-			BindingResult result, SessionStatus status, HttpSession s,
-			HttpServletResponse r) throws IOException {
-		if (isAdmin(s)) {
-			this.cv.validate(c, result);
+	public String submit(
+			@ModelAttribute(CATEGORIE_ATTRIBUTE) Categorie categorie,
+			BindingResult result, SessionStatus status, HttpSession session,
+			HttpServletResponse response) throws IOException {
+		if (isAdmin(session)) {
+			this.categorieValidator.validate(categorie, result);
 			if (result.hasErrors()) {
 				return VIEW;
 			} else {
 				try {
-					this.os.registrate(c);
+					this.observationService.registrate(categorie);
 				} catch (Exception e) {
 					logger.warn("Unexpected Exception", e);
-					return internalErrorView(r);
+					return internalErrorView(response);
 				} finally {
 					status.setComplete();
 				}
 				return "redirect:/c";
 			}
 		} else {
-			return forbiddenView(r);
+			return forbiddenView(response);
 		}
 	}
 

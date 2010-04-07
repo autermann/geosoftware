@@ -47,6 +47,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
+ * Controller to delete a {@code User}.
  * 
  * @author Christian Autermann
  * @author Stefan Arndt
@@ -54,7 +55,6 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Christoph Fendrich
  * @author Simon Ottenhues
  * @author Christian Paluschek
- *
  */
 @Controller
 @RequestMapping("/u/del/{id}")
@@ -64,60 +64,77 @@ public class DeleteUserController {
 	private static final String USER_ATTRIBUTE = "user";
 	private static final Logger logger = LoggerFactory
 			.getLogger(DeleteUserController.class);
-	private UserService us;
+	private UserService userService;
 
+	/**
+	 * @param userService
+	 *            the {@code UserService} to set
+	 */
 	@Autowired
-	public void setUserService(UserService us) {
-		this.us = us;
+	public void setUserService(UserService userService) {
+		this.userService = userService;
 	}
 
+	/**
+	 * Sets custom parameters to the {@code WebDataBinder}.
+	 * 
+	 * @param webDataBinder
+	 *            the {@code WebDataBinder} to initialize
+	 */
 	@InitBinder
-	public void setAllowedFields(WebDataBinder wdb) {
-		wdb.setAllowedFields();
+	public void setAllowedFields(WebDataBinder webDataBinder) {
+		webDataBinder.setAllowedFields();
 	}
 
+	/**
+	 * Handles all {@code GET} requests. Sets up the form.
+	 */
 	@RequestMapping(method = GET)
-	public ModelAndView setupForm(@PathVariable Long id, HttpSession s,
-			HttpServletResponse r) throws IOException {
-		if (isAuth(s)) {
-			if (getUser(s).getId().equals(id)) {
-				return new ModelAndView(VIEW, USER_ATTRIBUTE, getUser(s));
-			} else if (isAdmin(s)) {
-				User u = this.us.get(id);
+	public ModelAndView setupForm(@PathVariable Long id, HttpSession session,
+			HttpServletResponse response) throws IOException {
+		if (isAuth(session)) {
+			if (getUser(session).getId().equals(id)) {
+				return new ModelAndView(VIEW, USER_ATTRIBUTE, getUser(session));
+			} else if (isAdmin(session)) {
+				User u = this.userService.get(id);
 				if (u == null) {
-					return notFoundMAV(r);
+					return notFoundMAV(response);
 				} else {
 					return new ModelAndView(VIEW, USER_ATTRIBUTE, u);
 				}
 			}
 		}
-		return forbiddenMAV(r);
+		return forbiddenMAV(response);
 
 	}
 
+	/**
+	 * Handles all {@code POST} requests and deletes a {@code User}.
+	 */
 	@RequestMapping(method = POST)
-	public String processSubmit(@PathVariable Long id, HttpSession s,
-			HttpServletResponse r, SessionStatus status) throws IOException {
-		if (isAuth(s)) {
-			boolean self = getUser(s).getId().equals(id);
-			if (self || isAdmin(s)) {
+	public String processSubmit(@PathVariable Long id, HttpSession session,
+			HttpServletResponse response, SessionStatus status)
+			throws IOException {
+		if (isAuth(session)) {
+			boolean self = getUser(session).getId().equals(id);
+			if (self || isAdmin(session)) {
 				try {
-					this.us.delete(id);
+					this.userService.delete(id);
 				} catch (Exception e) {
 					logger.warn("Unexpected Exception", e);
-					return internalErrorView(r);
+					return internalErrorView(response);
 				} finally {
 					status.setComplete();
 				}
 				if (self) {
-					deAuth(s);
+					deAuth(session);
 					return "redirect:/";
 				} else {
-					this.us.delete(id);
+					this.userService.delete(id);
 					return "redirect:/u";
 				}
 			}
 		}
-		return forbiddenView(r);
+		return forbiddenView(response);
 	}
 }

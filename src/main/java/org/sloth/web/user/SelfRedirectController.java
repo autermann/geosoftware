@@ -30,6 +30,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
+ * Controller to redirect {@code User}s to their edit and delete pages.
  * 
  * @author Christian Autermann
  * @author Stefan Arndt
@@ -37,28 +38,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author Christoph Fendrich
  * @author Simon Ottenhues
  * @author Christian Paluschek
- *
+ * 
  */
 @Controller
 public class SelfRedirectController {
 
+	/**
+	 * Redirects a {@code User} to the page where he can edit himself.
+	 */
 	@RequestMapping("/u/edit")
-	public String handleEditRequest(HttpSession s, HttpServletResponse r)
-			throws IOException {
-		if (isAuth(s)) {
-			return "redirect:/u/edit/" + getUser(s).getId();
+	public String handleEditRequest(HttpSession session,
+			HttpServletResponse response) throws IOException {
+		if (isAuth(session)) {
+			return "redirect:/u/edit/" + getUser(session).getId();
 		} else {
-			return forbiddenView(r);
+			return forbiddenView(response);
 		}
 	}
 
+	/**
+	 * Redirects a {@code User} to the page where he can delete himself.
+	 */
 	@RequestMapping("/u/del")
-	public String handleDeleteRequest(HttpSession s, HttpServletResponse r)
-			throws IOException {
-		if (isAuth(s)) {
-			return "redirect:/u/del/" + getUser(s).getId();
+	public String handleDeleteRequest(HttpSession session,
+			HttpServletResponse response) throws IOException {
+		if (isAuth(session)) {
+			return "redirect:/u/del/" + getUser(session).getId();
 		} else {
-			return forbiddenView(r);
+			return forbiddenView(response);
 		}
 	}
 }

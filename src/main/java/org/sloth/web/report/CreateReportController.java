@@ -49,6 +49,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
+ * Controller to create a new {@code Report}.
  * 
  * @author Christian Autermann
  * @author Stefan Arndt
@@ -56,7 +57,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Christoph Fendrich
  * @author Simon Ottenhues
  * @author Christian Paluschek
- *
+ * 
  */
 @Controller
 @RequestMapping("/r/o/{id}/new")
@@ -66,63 +67,84 @@ public class CreateReportController {
 	private static final String REPORT_ATTRIBUTE = "report";
 	private static final Logger logger = LoggerFactory
 			.getLogger(CreateReportController.class);
-	private ObservationService os;
-	private ReportValidator rv;
+	private ObservationService observationService;
+	private ReportValidator reportValidator;
 
+	/**
+	 * @param observationService
+	 *            the {@code ObservationService} to set
+	 */
 	@Autowired
-	public void setObservationService(ObservationService os) {
-		this.os = os;
+	public void setObservationService(ObservationService observationService) {
+		this.observationService = observationService;
 	}
 
+	/**
+	 * @param reportValidator
+	 *            the {@code ReportValidator} to set
+	 */
 	@Autowired
-	public void setReportValidator(ReportValidator rv) {
-		this.rv = rv;
+	public void setReportValidator(ReportValidator reportValidator) {
+		this.reportValidator = reportValidator;
 	}
 
+	/**
+	 * Sets custom parameters to the {@code WebDataBinder}.
+	 * 
+	 * @param webDataBinder
+	 *            the {@code WebDataBinder} to initialize
+	 */
 	@InitBinder
-	public void initBinder(WebDataBinder wdb) {
-		wdb.setAllowedFields("description");
+	public void initBinder(WebDataBinder webDataBinder) {
+		webDataBinder.setAllowedFields("description");
 	}
 
+	/**
+	 * Handles the {@code GET} request and sets up the form.
+	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView handleGet(@PathVariable Long id, HttpSession s,
-			HttpServletResponse r) throws IOException {
-		if (isAuth(s)) {
-			Observation o = this.os.getObservation(id);
+	public ModelAndView handleGet(@PathVariable Long id, HttpSession session,
+			HttpServletResponse response) throws IOException {
+		if (isAuth(session)) {
+			Observation o = this.observationService.getObservation(id);
 			if (o == null) {
-				return notFoundMAV(r);
+				return notFoundMAV(response);
 			}
 			return new ModelAndView(VIEW, REPORT_ATTRIBUTE, new Report());
 		}
-		return forbiddenMAV(r);
+		return forbiddenMAV(response);
 	}
 
+	/**
+	 * Handles the {@code POST} request and saves the new {@code Report}.
+	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public String handlePost(@ModelAttribute Report report,
 			BindingResult result, @PathVariable Long id, SessionStatus status,
-			HttpSession s, HttpServletResponse r) throws IOException {
-		if (isAuth(s)) {
+			HttpSession session, HttpServletResponse response)
+			throws IOException {
+		if (isAuth(session)) {
 			try {
-				Observation o = this.os.getObservation(id);
+				Observation o = this.observationService.getObservation(id);
 				if (o == null) {
-					return notFoundView(r);
+					return notFoundView(response);
 				} else {
 					report.setObservation(o);
-					report.setAuthor(getUser(s));
-					this.rv.validate(report, result);
+					report.setAuthor(getUser(session));
+					this.reportValidator.validate(report, result);
 					if (result.hasErrors()) {
 						return VIEW;
 					} else {
 						status.setComplete();
-						this.os.registrate(report);
+						this.observationService.registrate(report);
 						return "redirect:/";
 					}
 				}
 			} catch (Exception e) {
 				logger.warn("Unexpected Exception", e);
-				return internalErrorView(r);
+				return internalErrorView(response);
 			}
 		}
-		return forbiddenView(r);
+		return forbiddenView(response);
 	}
 }

@@ -31,7 +31,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
 /**
+ * Controller to list own {@code Observation}s.
  * 
  * @author Christian Autermann
  * @author Stefan Arndt
@@ -39,7 +41,6 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Christoph Fendrich
  * @author Simon Ottenhues
  * @author Christian Paluschek
- *
  */
 @Controller
 @RequestMapping("/o/own")
@@ -49,19 +50,26 @@ public class ListOwnObservationsController {
 	private final static String OBSERVATIONS_ATTRIBUTE = "observations";
 	private ObservationService os;
 
+	/**
+	 * @param observationService
+	 *            the {@code ObservationService} to set
+	 */
 	@Autowired
-	public void setobservationService(ObservationService os) {
-		this.os = os;
+	public void setObservationService(ObservationService observationService) {
+		this.os = observationService;
 	}
 
+	/**
+	 * Handles all requests and sets up the list.
+	 */
 	@RequestMapping
-	public ModelAndView setupList(HttpSession s, HttpServletResponse r)
-			throws IOException {
-		if (isAuth(s)) {
+	public ModelAndView setupList(HttpSession session,
+			HttpServletResponse response) throws IOException {
+		if (isAuth(session)) {
 			return new ModelAndView(VIEW, OBSERVATIONS_ATTRIBUTE, this.os
-					.getObservationsByUser(getUser(s)));
+					.getObservationsByUser(getUser(session)));
 		} else {
-			return forbiddenMAV(r);
+			return forbiddenMAV(response);
 		}
 	}
 }

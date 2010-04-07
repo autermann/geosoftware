@@ -52,6 +52,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
+ * Controller to edit a {@code User}.
  * 
  * @author Christian Autermann
  * @author Stefan Arndt
@@ -59,7 +60,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Christoph Fendrich
  * @author Simon Ottenhues
  * @author Christian Paluschek
- *
+ * 
  */
 @Controller
 @RequestMapping("/u/edit/{id}")
@@ -70,34 +71,53 @@ public class EditUserController {
 	private static final String VIEW = "users/edit";
 	private static final Logger logger = LoggerFactory
 			.getLogger(EditUserController.class);
-	private UserService us;
-	private UserEditFormValidator uefv;
+	private UserService userService;
+	private UserEditFormValidator userEditFormValidator;
 
+	/**
+	 * @param userEditFormValidator
+	 *            the {@code UserEditFormValidator} to set
+	 */
 	@Autowired
-	public void setUserValidator(UserEditFormValidator validator) {
-		this.uefv = validator;
+	public void setUserEditFormValidator(
+			UserEditFormValidator userEditFormValidator) {
+		this.userEditFormValidator = userEditFormValidator;
 	}
 
+	/**
+	 * @param userService
+	 *            the {@code UserService} to set
+	 */
 	@Autowired
-	public void setUserService(UserService userManager) {
-		this.us = userManager;
+	public void setUserService(UserService userService) {
+		this.userService = userService;
 	}
 
+	/**
+	 * Sets custom parameters to the {@code WebDataBinder}.
+	 * 
+	 * @param wdb
+	 *            the {@code WebDataBinder} to initialize
+	 */
 	@InitBinder
-	public void setAllowedFields(WebDataBinder dataBinder) {
-		dataBinder.setAllowedFields("newName", "newFamilyName", "newPassword",
-				"newPasswordRepeat", "newMail", "newGroup", "actualPassword");
+	public void setAllowedFields(WebDataBinder webDataBinder) {
+		webDataBinder.setAllowedFields("newName", "newFamilyName",
+				"newPassword", "newPasswordRepeat", "newMail", "newGroup",
+				"actualPassword");
 	}
 
+	/**
+	 * Handles all {@code GET} requests and sets up the form.
+	 */
 	@RequestMapping(method = GET)
-	public ModelAndView setupForm(@PathVariable Long id, HttpSession s,
+	public ModelAndView setupForm(@PathVariable Long id, HttpSession session,
 			HttpServletResponse r) throws IOException {
-		if (isAuth(s)) {
+		if (isAuth(session)) {
 			User u = null;
-			if (isSameId(s, id)) {
-				u = getUser(s);
-			} else if (isAdmin(s)) {
-				u = this.us.get(id);
+			if (isSameId(session, id)) {
+				u = getUser(session);
+			} else if (isAdmin(session)) {
+				u = this.userService.get(id);
 				if (u == null) {
 					return notFoundMAV(r);
 				}
@@ -105,36 +125,41 @@ public class EditUserController {
 				return forbiddenMAV(r);
 			}
 			return new ModelAndView(VIEW, USER_ATTRIBUTE,
-					new UserEditFormAction(u, getUser(s)));
+					new UserEditFormAction(u, getUser(session)));
 		} else {
 			return forbiddenMAV(r);
 		}
 	}
 
+	/**
+	 * Handles all {@code POST} requests and saves the changes made to the
+	 * {@code User}.
+	 */
 	@RequestMapping(method = POST)
-	public String processSubmit(HttpSession s, HttpServletResponse r,
-			@ModelAttribute(USER_ATTRIBUTE) UserEditFormAction a,
+	public String processSubmit(HttpSession session,
+			HttpServletResponse response,
+			@ModelAttribute(USER_ATTRIBUTE) UserEditFormAction action,
 			BindingResult result, SessionStatus status) throws IOException {
-		if (isSameId(s, a.getId()) || isAdmin(s)) {
-			this.uefv.validate(a, result);
+		if (isSameId(session, action.getId()) || isAdmin(session)) {
+			this.userEditFormValidator.validate(action, result);
 			if (result.hasErrors()) {
 				return VIEW;
 			} else {
 				try {
-					this.us.update(a.getMergedUser());
+					this.userService.update(action.getMergedUser());
 				} catch (Exception e) {
 					logger.warn("Unexpected Exception", e);
-					return internalErrorView(r);
+					return internalErrorView(response);
 				} finally {
 					status.setComplete();
 				}
-				if (isSameId(s, a.getId())) {
+				if (isSameId(session, action.getId())) {
 					return "redirect:/acc";
 				} else {
 					return "redirect:/u";
 				}
 			}
 		}
-		return forbiddenView(r);
+		return forbiddenView(response);
 	}
 }

@@ -19,7 +19,6 @@ package org.sloth.web.user;
 
 import static org.sloth.util.ControllerUtils.forbiddenMAV;
 import static org.sloth.util.ControllerUtils.isAdmin;
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 import java.io.IOException;
 
@@ -33,6 +32,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
+ * Controller to list all {@code User}s.
  * 
  * @author Christian Autermann
  * @author Stefan Arndt
@@ -40,7 +40,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Christoph Fendrich
  * @author Simon Ottenhues
  * @author Christian Paluschek
- *
+ * 
  */
 @Controller
 @RequestMapping("/u")
@@ -48,20 +48,28 @@ public class ListUserController {
 
 	private static final String VIEW = "users/list";
 	private static final String USERS_ATTRIBUTE = "users";
-	private UserService us;
+	private UserService userService;
 
+	/**
+	 * @param userService
+	 *            the {@code UserService} to set
+	 */
 	@Autowired
-	public void setUserService(UserService us) {
-		this.us = us;
+	public void setUserService(UserService userService) {
+		this.userService = userService;
 	}
 
-	@RequestMapping(method = GET)
-	public ModelAndView setupList(HttpSession s, HttpServletResponse r)
-			throws IOException {
-		if (isAdmin(s)) {
-			return new ModelAndView(VIEW, USERS_ATTRIBUTE, this.us.getUsers());
+	/**
+	 * Handles all requests and sets up the list.
+	 */
+	@RequestMapping
+	public ModelAndView setupList(HttpSession session,
+			HttpServletResponse response) throws IOException {
+		if (isAdmin(session)) {
+			return new ModelAndView(VIEW, USERS_ATTRIBUTE, this.userService
+					.getUsers());
 		} else {
-			return forbiddenMAV(r);
+			return forbiddenMAV(response);
 		}
 	}
 }

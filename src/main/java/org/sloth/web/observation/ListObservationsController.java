@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
+ * Controller to list all {@code Observation}s.
  * 
  * @author Christian Autermann
  * @author Stefan Arndt
@@ -31,7 +32,6 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Christoph Fendrich
  * @author Simon Ottenhues
  * @author Christian Paluschek
- *
  */
 @Controller
 @RequestMapping("/o")
@@ -39,16 +39,23 @@ public class ListObservationsController {
 
 	private final static String VIEW = "observations/list";
 	private final static String OBSERVATIONS_ATTRIBUTE = "observations";
-	private ObservationService os;
+	private ObservationService observationService;
 
+	/**
+	 * @param observationService
+	 *            the {@code ObservationService} to set
+	 */
 	@Autowired
-	public void setobservationService(ObservationService os) {
-		this.os = os;
+	public void setObservationService(ObservationService observationService) {
+		this.observationService = observationService;
 	}
 
+	/**
+	 * Handles all requests and sets up the list.
+	 */
 	@RequestMapping
 	public ModelAndView setupList() {
-		return new ModelAndView(VIEW, OBSERVATIONS_ATTRIBUTE, this.os
+		return new ModelAndView(VIEW, OBSERVATIONS_ATTRIBUTE, this.observationService
 				.getObservations());
 	}
 }

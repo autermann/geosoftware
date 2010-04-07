@@ -44,7 +44,9 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
 /**
+ * Controller to delete a {@code Observation}.
  * 
  * @author Christian Autermann
  * @author Stefan Arndt
@@ -52,7 +54,6 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Christoph Fendrich
  * @author Simon Ottenhues
  * @author Christian Paluschek
- *
  */
 @Controller
 @RequestMapping("/o/del/{id}")
@@ -60,53 +61,69 @@ public class DeleteObservationController {
 
 	private static final String VIEW = "observations/delete";
 	private static final String OBSERVATIONS_ATTRIBUTE = "observation";
-	protected static final Logger logger = LoggerFactory
+	private static final Logger logger = LoggerFactory
 			.getLogger(DeleteObservationController.class);
-	private ObservationService os;
+	private ObservationService observationService;
 
+	/**
+	 * @param observationService
+	 *            the {@code ObservationService} to set
+	 */
 	@Autowired
-	public void setObservationService(ObservationService os) {
-		this.os = os;
+	public void setObservationService(ObservationService observationService) {
+		this.observationService = observationService;
 	}
 
+	/**
+	 * Sets custom parameters to the {@code WebDataBinder}.
+	 * 
+	 * @param webDataBinder
+	 *            the {@code WebDataBinder} to initialize
+	 */
 	@InitBinder
-	public void initBinder(WebDataBinder wdb) {
-		wdb.setAllowedFields();
+	public void initBinder(WebDataBinder webDataBinder) {
+		webDataBinder.setAllowedFields();
 	}
 
+	/**
+	 * Handles the {@code GET} request. Sets up the Form.
+	 */
 	@RequestMapping(method = GET)
-	public ModelAndView setupForm(@PathVariable Long id, HttpSession s,
-			HttpServletResponse r) throws IOException {
-		if (isAuth(s)) {
-			Observation o = this.os.getObservation(id);
+	public ModelAndView setupForm(@PathVariable Long id, HttpSession session,
+			HttpServletResponse response) throws IOException {
+		if (isAuth(session)) {
+			Observation o = this.observationService.getObservation(id);
 			if (o == null) {
-				return notFoundMAV(r);
+				return notFoundMAV(response);
 			}
-			if (isAdmin(s) || isOwnObservation(s, o)) {
+			if (isAdmin(session) || isOwnObservation(session, o)) {
 				return new ModelAndView(VIEW, OBSERVATIONS_ATTRIBUTE, o);
 			}
 		}
-		return forbiddenMAV(r);
+		return forbiddenMAV(response);
 	}
 
+	/**
+	 * Handles the {@code POST} request and deletes the {@code Observation}.
+	 */
 	@RequestMapping(method = POST)
-	public String processSubmit(@PathVariable Long id, HttpSession s,
-			HttpServletResponse r) throws IOException {
-		if (isAuth(s)) {
-			Observation o = this.os.getObservation(id);
+	public String processSubmit(@PathVariable Long id, HttpSession session,
+			HttpServletResponse response) throws IOException {
+		if (isAuth(session)) {
+			Observation o = this.observationService.getObservation(id);
 			if (o == null) {
-				return notFoundView(r);
-			} else if (isAdmin(s) || isOwnObservation(s, o)) {
+				return notFoundView(response);
+			} else if (isAdmin(session) || isOwnObservation(session, o)) {
 				try {
-					this.os.deleteObservation(o);
+					this.observationService.deleteObservation(o);
 					return "redirect:/o";
 				} catch (Exception e) {
 					logger.warn("Unexpected Exception.", e);
-					return internalErrorView(r);
+					return internalErrorView(response);
 				}
 			}
 		}
-		return forbiddenView(r);
+		return forbiddenView(response);
 	}
 
 }

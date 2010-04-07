@@ -50,7 +50,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
+
 /**
+ * Controller to edit an {@code Observation}.
  * 
  * @author Christian Autermann
  * @author Stefan Arndt
@@ -58,7 +60,6 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Christoph Fendrich
  * @author Simon Ottenhues
  * @author Christian Paluschek
- *
  */
 @Controller
 @RequestMapping("/o/edit/{id}")
@@ -70,64 +71,87 @@ public class EditObservationController {
 	private static final String CATEGORIE_ATTRIBUTE = "categories";
 	private static final Logger logger = LoggerFactory
 			.getLogger(EditObservationController.class);
-	private ObservationService os;
-	private ObservationValidator ov;
+	private ObservationService observationService;
+	private ObservationValidator observationValidator;
 
+	/**
+	 * 
+	 * @param observationValidator
+	 *            the {@code ObservationValidator} to set
+	 */
 	@Autowired
-	public void setObservationValidator(ObservationValidator ov) {
-		this.ov = ov;
+	public void setObservationValidator(
+			ObservationValidator observationValidator) {
+		this.observationValidator = observationValidator;
 	}
 
+	/**
+	 * @param observationService
+	 *            the {@code ObservationService} to set
+	 */
 	@Autowired
-	public void setObservationService(ObservationService os) {
-		this.os = os;
+	public void setObservationService(ObservationService observationService) {
+		this.observationService = observationService;
 	}
 
+	/**
+	 * Sets custom parameters to the {@code WebDataBinder}.
+	 * 
+	 * @param webDataBinder
+	 *            the {@code WebDataBinder} to initialize
+	 */
 	@InitBinder
-	public void setAllowedFields(WebDataBinder wdb) {
+	public void setAllowedFields(WebDataBinder webDataBinder) {
 		CategorieEditor c = new CategorieEditor();
-		c.setObservationService(os);
-		wdb.registerCustomEditor(Categorie.class, c);
-		wdb.setDisallowedFields("id", "creationDate", "user");
+		c.setObservationService(observationService);
+		webDataBinder.registerCustomEditor(Categorie.class, c);
+		webDataBinder.setDisallowedFields("id", "creationDate", "user");
 	}
 
+	/**
+	 * Handles the {@code GET} request and sets up the form.
+	 */
 	@RequestMapping(method = GET)
-	public ModelAndView setupForm(@PathVariable Long id, HttpSession s,
-			HttpServletResponse r) throws IOException {
-		if (isAuth(s)) {
-			Observation o = os.getObservation(id);
+	public ModelAndView setupForm(@PathVariable Long id, HttpSession session,
+			HttpServletResponse response) throws IOException {
+		if (isAuth(session)) {
+			Observation o = observationService.getObservation(id);
 			if (o == null) {
-				return notFoundMAV(r);
-			} else if (isAdmin(s) || isOwnObservation(s, o)) {
+				return notFoundMAV(response);
+			} else if (isAdmin(session) || isOwnObservation(session, o)) {
 				ModelAndView mav = new ModelAndView(VIEW);
 				mav.addObject(OBSERVATION_ATTRIBUTE, o);
-				mav.addObject(CATEGORIE_ATTRIBUTE, this.os.getCategories());
+				mav.addObject(CATEGORIE_ATTRIBUTE, this.observationService
+						.getCategories());
 				return mav;
 			}
 		}
-		return forbiddenMAV(r);
+		return forbiddenMAV(response);
 	}
 
+	/**
+	 * Handles the {@code POST} request and saves the changes made.
+	 */
 	@RequestMapping(method = POST)
-	public String processSubmit(@ModelAttribute Observation o,
-			BindingResult result, SessionStatus status, HttpSession s,
-			HttpServletResponse r) throws IOException {
-		if (isAdmin(s) || isOwnObservation(s, o)) {
-			this.ov.validate(o, result);
+	public String processSubmit(@ModelAttribute Observation observation,
+			BindingResult result, SessionStatus status, HttpSession session,
+			HttpServletResponse response) throws IOException {
+		if (isAdmin(session) || isOwnObservation(session, observation)) {
+			this.observationValidator.validate(observation, result);
 			if (result.hasErrors()) {
 				return VIEW;
 			} else {
 				try {
-					this.os.updateObservation(o);
+					this.observationService.updateObservation(observation);
 				} catch (Exception e) {
 					logger.warn("Unexpected Exception", e);
-					return internalErrorView(r);
+					return internalErrorView(response);
 				} finally {
 					status.setComplete();
 				}
 				return "redirect:/o";
 			}
 		}
-		return forbiddenView(r);
+		return forbiddenView(response);
 	}
 }

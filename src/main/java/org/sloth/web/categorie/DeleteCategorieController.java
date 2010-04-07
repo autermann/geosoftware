@@ -41,7 +41,9 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
 /**
+ * Controller to delete a {@code Categorie}.
  * 
  * @author Christian Autermann
  * @author Stefan Arndt
@@ -49,7 +51,6 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Christoph Fendrich
  * @author Simon Ottenhues
  * @author Christian Paluschek
- *
  */
 @Controller
 @RequestMapping("/c/del/{id}")
@@ -61,16 +62,29 @@ public class DeleteCategorieController {
 			.getLogger(DeleteCategorieController.class);
 	private ObservationService os;
 
+	/**
+	 * @param os
+	 *            the {@code ObservationService} to set
+	 */
 	@Autowired
 	public void setObservationService(ObservationService os) {
 		this.os = os;
 	}
 
+	/**
+	 * Sets custom parameters to the {@code WebDataBinder}.
+	 * 
+	 * @param wdb
+	 *            the {@code WebDataBinder} to initialize
+	 */
 	@InitBinder
 	public void initBinder(WebDataBinder wdb) {
 		wdb.setAllowedFields();
 	}
 
+	/**
+	 * Handles the {@code GET} request. Test the rights and sets up the form.
+	 */
 	@RequestMapping(method = GET)
 	public ModelAndView setupForm(@PathVariable("id") Long id, HttpSession s,
 			HttpServletResponse r) throws IOException {
@@ -86,6 +100,10 @@ public class DeleteCategorieController {
 		}
 	}
 
+	/**
+	 * Handles the {@code POST} request. Tests the rights and deletes the
+	 * {@code Categorie}.
+	 */
 	@RequestMapping(method = POST)
 	public String processSubmit(@PathVariable("id") Long id, HttpSession s,
 			HttpServletResponse r) throws IOException {

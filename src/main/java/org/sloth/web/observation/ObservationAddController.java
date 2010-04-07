@@ -49,6 +49,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
+ * Controller to create a new {@code Observation}.
  * 
  * @author Christian Autermann
  * @author Stefan Arndt
@@ -56,7 +57,6 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Christoph Fendrich
  * @author Simon Ottenhues
  * @author Christian Paluschek
- *
  */
 @Controller
 @RequestMapping("/o/new")
@@ -69,63 +69,87 @@ public class ObservationAddController {
 	private static final String CATEGORIES_ATTRIBUTE = "categories";
 	private Logger logger = LoggerFactory
 			.getLogger(ObservationAddController.class);
-	private ObservationService os;
-	private ObservationValidator ov;
+	private ObservationService observationService;
+	private ObservationValidator observationValidator;
 
+	/**
+	 * 
+	 * @param observationValidator
+	 *            the {@code ObservationValidator} to set
+	 */
 	@Autowired
-	public void setObservationValidator(ObservationValidator ov) {
-		this.ov = ov;
+	public void setObservationValidator(
+			ObservationValidator observationValidator) {
+		this.observationValidator = observationValidator;
 	}
 
+	/**
+	 * @param observationService
+	 *            the {@code ObservationService} to set
+	 */
 	@Autowired
-	public void setObservationService(ObservationService os) {
-		this.os = os;
+	public void setObservationService(ObservationService observationService) {
+		this.observationService = observationService;
 	}
 
+	/**
+	 * Sets custom parameters to the {@code WebDataBinder}.
+	 * 
+	 * @param webDataBinder
+	 *            the {@code WebDataBinder} to initialize
+	 */
 	@InitBinder
-	public void initBinder(WebDataBinder wdb) {
-		wdb.setDisallowedFields("id", "user", "creationDate");
+	public void initBinder(WebDataBinder webDataBinder) {
+		webDataBinder.setDisallowedFields("id", "user", "creationDate");
 		CategorieEditor c = new CategorieEditor();
-		c.setObservationService(this.os);
-		wdb.registerCustomEditor(Categorie.class, c);
+		c.setObservationService(this.observationService);
+		webDataBinder.registerCustomEditor(Categorie.class, c);
 	}
 
+	/**
+	 * Handles the {@code GET} request and sets up the form.
+	 */
 	@RequestMapping(method = GET)
-	public ModelAndView setupForm(HttpSession s, HttpServletResponse r)
-			throws IOException {
-		if (isAuth(s)) {
+	public ModelAndView setupForm(HttpSession session,
+			HttpServletResponse response) throws IOException {
+		if (isAuth(session)) {
 			ModelAndView mav = new ModelAndView(VIEW);
 			mav.addObject(OBSERVATION_ATTRIBUTE, new Observation());
-			mav.addObject(CATEGORIES_ATTRIBUTE, os.getCategories());
+			mav.addObject(CATEGORIES_ATTRIBUTE, observationService
+					.getCategories());
 			return mav;
 		} else {
-			return forbiddenMAV(r);
+			return forbiddenMAV(response);
 		}
 	}
 
+	/**
+	 * Handles the {@code POST} request, validates the form and registers the
+	 * new {@code Observation}.
+	 */
 	@RequestMapping(method = POST)
 	public String processSubmit(
-			@ModelAttribute(OBSERVATION_ATTRIBUTE) Observation o,
-			BindingResult result, SessionStatus status, HttpSession s,
-			HttpServletResponse r) throws IOException {
-		if (isAuth(s)) {
-			o.setUser(getUser(s));
-			this.ov.validate(o, result);
+			@ModelAttribute(OBSERVATION_ATTRIBUTE) Observation observation,
+			BindingResult result, SessionStatus status, HttpSession session,
+			HttpServletResponse response) throws IOException {
+		if (isAuth(session)) {
+			observation.setUser(getUser(session));
+			this.observationValidator.validate(observation, result);
 			if (result.hasErrors()) {
 				return VIEW;
 			} else {
 				try {
-					this.os.registrate(o);
+					this.observationService.registrate(observation);
 				} catch (Exception e) {
 					logger.warn("Unexpected Exception", e);
-					return internalErrorView(r);
+					return internalErrorView(response);
 				} finally {
 					status.setComplete();
 				}
 				return "redirect:/admin/observations";
 			}
 		} else {
-			return forbiddenView(r);
+			return forbiddenView(response);
 		}
 	}
 

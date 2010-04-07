@@ -40,6 +40,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
+ * Controller to list {@code Report}s. Can be filtered by an {@code User} or an
+ * {@code Observation}.
  * 
  * @author Christian Autermann
  * @author Stefan Arndt
@@ -47,77 +49,90 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Christoph Fendrich
  * @author Simon Ottenhues
  * @author Christian Paluschek
- *
+ * 
  */
 @Controller
 public class ListReportController {
 
 	private static final String VIEW = "reports/list";
 	private static final String REPORTS_ATTRIBUTE = "reports";
-	private ObservationService os;
-	private UserService us;
+	private ObservationService observationService;
+	private UserService userService;
 
 	/**
-	 * @param os
-	 *            the observationService to set
+	 * @param observationService
+	 *            the {@code ObservationService} to set
 	 */
 	@Autowired
-	public void setObservationService(ObservationService os) {
-		this.os = os;
+	public void setObservationService(ObservationService observationService) {
+		this.observationService = observationService;
 	}
 
 	/**
-	 * @param us
+	 * @param userService
 	 *            the userService to set
 	 */
 	@Autowired
-	public void setUserService(UserService us) {
-		this.us = us;
+	public void setUserService(UserService userService) {
+		this.userService = userService;
 	}
 
+	/**
+	 * Lists <b>all</b> {@code Observation}s.
+	 */
 	@RequestMapping("/r")
-	public ModelAndView handleAllAndOwn(HttpSession s, HttpServletResponse r)
-			throws IOException {
-		if (isAuth(s)) {
-			if (isAdmin(s)) {
-				return new ModelAndView(VIEW, REPORTS_ATTRIBUTE, this.os
-						.getReports());
+	public ModelAndView handleAllAndOwn(HttpSession session,
+			HttpServletResponse response) throws IOException {
+		if (isAuth(session)) {
+			if (isAdmin(session)) {
+				return new ModelAndView(VIEW, REPORTS_ATTRIBUTE,
+						this.observationService.getReports());
 			} else {
-				return new ModelAndView("redirect:/r/u/" + getUser(s).getId());
+				return new ModelAndView("redirect:/r/u/"
+						+ getUser(session).getId());
 			}
 		}
-		return forbiddenMAV(r);
+		return forbiddenMAV(response);
 	}
 
+	/**
+	 * Lists all {@code Report}s for a {@code Observation}.
+	 */
 	@RequestMapping("/r/o/{id}")
 	public ModelAndView handleObservationFilter(@PathVariable Long id,
-			HttpSession s, HttpServletResponse r) throws IOException {
-		if (isAdmin(s)) {
-			Observation o = this.os.getObservation(id);
+			HttpSession session, HttpServletResponse response)
+			throws IOException {
+		if (isAdmin(session)) {
+			Observation o = this.observationService.getObservation(id);
 			if (o == null) {
-				return notFoundMAV(r);
+				return notFoundMAV(response);
 			}
-			return new ModelAndView(VIEW, REPORTS_ATTRIBUTE, this.os
-					.getReportsByObservation(o));
+			return new ModelAndView(VIEW, REPORTS_ATTRIBUTE,
+					this.observationService.getReportsByObservation(o));
 		}
-		return forbiddenMAV(r);
+		return forbiddenMAV(response);
 	}
 
+	/**
+	 * Lists all {@code Report}s made by a {@code User}.
+	 */
 	@RequestMapping("/r/u/{id}")
-	public ModelAndView handleUserFilter(@PathVariable Long id, HttpSession s,
-			HttpServletResponse r) throws IOException {
-		if (isSameId(s, id)) {
-			return new ModelAndView(VIEW, REPORTS_ATTRIBUTE, this.os
-					.getObservationsByUser(getUser(s)));
-		} else if (isAdmin(s)) {
-			User u = us.get(id);
+	public ModelAndView handleUserFilter(@PathVariable Long id,
+			HttpSession session, HttpServletResponse response)
+			throws IOException {
+		if (isSameId(session, id)) {
+			return new ModelAndView(VIEW, REPORTS_ATTRIBUTE,
+					this.observationService
+							.getObservationsByUser(getUser(session)));
+		} else if (isAdmin(session)) {
+			User u = userService.get(id);
 			if (u == null) {
-				return notFoundMAV(r);
+				return notFoundMAV(response);
 			} else {
-				return new ModelAndView(VIEW, REPORTS_ATTRIBUTE, this.os
-						.getReportsByUser(u));
+				return new ModelAndView(VIEW, REPORTS_ATTRIBUTE,
+						this.observationService.getReportsByUser(u));
 			}
 		}
-		return forbiddenMAV(r);
+		return forbiddenMAV(response);
 	}
 }

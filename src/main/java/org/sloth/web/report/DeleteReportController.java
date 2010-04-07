@@ -44,7 +44,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
+
 /**
+ * Controller to delete a {@code Report}.
  * 
  * @author Christian Autermann
  * @author Stefan Arndt
@@ -52,7 +54,6 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Christoph Fendrich
  * @author Simon Ottenhues
  * @author Christian Paluschek
- *
  */
 @Controller
 @RequestMapping("/r/del/{id}")
@@ -62,57 +63,69 @@ public class DeleteReportController {
 	private static final String REPORT_ATTRIBUTE = "report";
 	private static final Logger logger = LoggerFactory
 			.getLogger(DeleteReportController.class);
-	private ObservationService os;
+	private ObservationService observationService;
 
 	/**
-	 * @param os
-	 *            the observationService to set
+	 * @param observationService
+	 *            the {@code ObservationService} to set
 	 */
 	@Autowired
-	public void setObservationService(ObservationService os) {
-		this.os = os;
+	public void setObservationService(ObservationService observationService) {
+		this.observationService = observationService;
 	}
 
+	/**
+	 * Sets custom parameters to the {@code WebDataBinder}.
+	 * 
+	 * @param wdb
+	 *            the {@code WebDataBinder} to initialize
+	 */
 	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-		binder.setAllowedFields();
+	public void initBinder(WebDataBinder webDataBinder) {
+		webDataBinder.setAllowedFields();
 	}
 
+	/**
+	 * Handles the {@code GET} request and sets up the form.
+	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView handleGet(@PathVariable Long id, HttpSession s,
-			HttpServletResponse r) throws IOException {
-		if (isAuth(s)) {
-			Report report = this.os.getReport(id);
+	public ModelAndView handleGet(@PathVariable Long id, HttpSession session,
+			HttpServletResponse response) throws IOException {
+		if (isAuth(session)) {
+			Report report = this.observationService.getReport(id);
 			if (report == null) {
-				return notFoundMAV(r);
+				return notFoundMAV(response);
 			}
-			if (isAdmin(s) || isOwnReport(s, report)) {
+			if (isAdmin(session) || isOwnReport(session, report)) {
 				return new ModelAndView(VIEW, REPORT_ATTRIBUTE, report);
 			}
 		}
-		return forbiddenMAV(r);
+		return forbiddenMAV(response);
 	}
 
+	/**
+	 * Handles the {@code POST} request and deletes the observation.
+	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public String handlePost(@PathVariable Long id, SessionStatus status,
-			HttpSession s, HttpServletResponse r) throws IOException {
+			HttpSession session, HttpServletResponse response) throws IOException {
 		status.setComplete();
-		Report report = this.os.getReport(id);
+		Report report = this.observationService.getReport(id);
 		if (report == null) {
-			return notFoundView(r);
+			return notFoundView(response);
 		} else {
-			if (isAdmin(s) || isOwnReport(s, report)) {
+			if (isAdmin(session) || isOwnReport(session, report)) {
 				try {
-					this.os.deleteReport(report);
+					this.observationService.deleteReport(report);
 				} catch (Exception e) {
 					logger.warn("Unexpected Exception", e);
-					return internalErrorView(r);
+					return internalErrorView(response);
 				} finally {
 					status.setComplete();
 				}
 				return "redirect:/r";
 			} else {
-				return forbiddenView(r);
+				return forbiddenView(response);
 			}
 		}
 	}

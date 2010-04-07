@@ -30,7 +30,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
 /**
+ * Controller to list all {@code Categorie}s.
  * 
  * @author Christian Autermann
  * @author Stefan Arndt
@@ -38,7 +40,6 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Christoph Fendrich
  * @author Simon Ottenhues
  * @author Christian Paluschek
- *
  */
 @Controller
 @RequestMapping("/c")
@@ -46,19 +47,26 @@ public class ListCategorieController {
 
 	private static final String VIEW = "categories/list";
 	private static final String CATEGORIE_ATTRIBUTE = "categories";
-	private ObservationService os;
+	private ObservationService observationService;
 
+	/**
+	 * @param observationService
+	 *            the {@code ObservationService} to set
+	 */
 	@Autowired
-	public void setobservationService(ObservationService os) {
-		this.os = os;
+	public void setObservationService(ObservationService observationService) {
+		this.observationService = observationService;
 	}
 
+	/**
+	 * Handles all requests. Sets up the list.
+	 */
 	@RequestMapping
 	public ModelAndView setupList(HttpSession s, HttpServletResponse r)
 			throws IOException {
 		if (isAdmin(s)) {
-			return new ModelAndView(VIEW, CATEGORIE_ATTRIBUTE, this.os
-					.getCategories());
+			return new ModelAndView(VIEW, CATEGORIE_ATTRIBUTE,
+					this.observationService.getCategories());
 		} else {
 			return forbiddenMAV(r);
 		}

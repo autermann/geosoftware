@@ -35,6 +35,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
+ * Controller to display the datails of a {@code User}.
  * 
  * @author Christian Autermann
  * @author Stefan Arndt
@@ -42,7 +43,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Christoph Fendrich
  * @author Simon Ottenhues
  * @author Christian Paluschek
- *
+ * 
  */
 @Controller
 @RequestMapping("/u/{id}")
@@ -52,15 +53,21 @@ public class UserDetailController {
 	private static final String USERS_ATTRIBUTE = "user";
 	private UserService us;
 
+	/**
+	 * @param us
+	 *            the {@code UserService} to set
+	 */
 	@Autowired
 	public void setUserService(UserService us) {
 		this.us = us;
 	}
 
+	/**
+	 * Handles all requests and sets up the view.
+	 */
 	@RequestMapping
 	public ModelAndView handleRequest(@PathVariable Long id, HttpSession s,
 			HttpServletResponse r) throws IOException {
-
 		if (isAdmin(s)) {
 			User u = this.us.get(id);
 			if (u == null) {

@@ -54,6 +54,7 @@ import org.springframework.validation.Errors;
 @Component
 public class UserEditFormValidator extends AbstractUserActionValidator {
 
+	
 	@Override
 	public boolean supports(Class<?> clazz) {
 		return clazz.equals(UserEditFormAction.class);

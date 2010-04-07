@@ -51,6 +51,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
+ * Controller to edit a {@code Report}.
  * 
  * @author Christian Autermann
  * @author Stefan Arndt
@@ -58,15 +59,15 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Christoph Fendrich
  * @author Simon Ottenhues
  * @author Christian Paluschek
- *
+ * 
  */
 @Controller
 @RequestMapping("/r/edit/{id}")
 @SessionAttributes(types = { Report.class, Boolean.class })
 public class EditReportController {
 
-	private ObservationService os;
-	private ReportValidator rv;
+	private ObservationService observationService;
+	private ReportValidator reportValidator;
 	private static final String VIEW = "reports/form";
 	private static final String REPORT_ATTRIBUTE = "report";
 	private static final String PROCESSED_ATTRIBUTE = "processed";
@@ -74,38 +75,47 @@ public class EditReportController {
 			.getLogger(EditReportController.class);
 
 	/**
-	 * @param os
-	 *            the observationService to set
+	 * @param observationService
+	 *            the {@code ObservationService} to set
 	 */
 	@Autowired
-	public void setObservationService(ObservationService os) {
-		this.os = os;
+	public void setObservationService(ObservationService observationService) {
+		this.observationService = observationService;
 	}
 
 	/**
-	 * @param rv
+	 * @param reportValidator
 	 *            the reportValidator to set
 	 */
 	@Autowired
-	public void setReportValidator(ReportValidator rv) {
-		this.rv = rv;
+	public void setReportValidator(ReportValidator reportValidator) {
+		this.reportValidator = reportValidator;
 	}
 
+	/**
+	 * Sets custom parameters to the {@code WebDataBinder}.
+	 * 
+	 * @param webDataBinder
+	 *            the {@code WebDataBinder} to initialize
+	 */
 	@InitBinder
-	public void initBinder(WebDataBinder wdb) {
-		wdb.setAllowedFields("description", "processed");
+	public void initBinder(WebDataBinder webDataBinder) {
+		webDataBinder.setAllowedFields("description", "processed");
 	}
 
+	/**
+	 * Handles the {@code GET} request and sets up the form.
+	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView handleGet(@PathVariable Long id, HttpSession s,
-			HttpServletResponse r) throws IOException {
-		if (isAuth(s)) {
-			Report report = os.getReport(id);
+	public ModelAndView handleGet(@PathVariable Long id, HttpSession session,
+			HttpServletResponse response) throws IOException {
+		if (isAuth(session)) {
+			Report report = observationService.getReport(id);
 			if (report == null) {
-				return notFoundMAV(r);
+				return notFoundMAV(response);
 			}
 
-			if (isAdmin(s) || isOwnReport(s, report)) {
+			if (isAdmin(session) || isOwnReport(session, report)) {
 				ModelAndView mav = new ModelAndView(VIEW);
 				mav.addObject(PROCESSED_ATTRIBUTE, new Boolean(report
 						.isProcessed()));
@@ -114,40 +124,44 @@ public class EditReportController {
 			}
 
 		}
-		return forbiddenMAV(r);
+		return forbiddenMAV(response);
 	}
 
+	/**
+	 * Handles the {@code POST} request and saves the changes made to the
+	 * {@code Report}.
+	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public String handlePost(@PathVariable Long id,
-			@ModelAttribute(PROCESSED_ATTRIBUTE) Boolean p,
+			@ModelAttribute(PROCESSED_ATTRIBUTE) Boolean processed,
 			@ModelAttribute(REPORT_ATTRIBUTE) Report report,
-			BindingResult result, SessionStatus status, HttpSession s,
-			HttpServletResponse resp) throws IOException {
-		if (isAuth(s)) {
+			BindingResult result, SessionStatus status, HttpSession session,
+			HttpServletResponse response) throws IOException {
+		if (isAuth(session)) {
 			if (report == null) {
-				return notFoundView(resp);
-			} else if (!isAdmin(s)
-					&& !p.equals(Boolean.valueOf(report.isProcessed()))) {
-				return forbiddenView(resp);
-			} else if (isAdmin(s) || isOwnReport(s, report)) {
-				this.rv.validate(report, result);
+				return notFoundView(response);
+			} else if (!isAdmin(session)
+					&& !processed.equals(Boolean.valueOf(report.isProcessed()))) {
+				return forbiddenView(response);
+			} else if (isAdmin(session) || isOwnReport(session, report)) {
+				this.reportValidator.validate(report, result);
 				if (result.hasErrors()) {
 					return VIEW;
 				}
 				status.setComplete();
 				try {
 					report.setLastUpdateDate(new Date());
-					this.os.updateReport(report);
+					this.observationService.updateReport(report);
 				} catch (Exception e) {
 					logger.warn("Unexpected Exception", e);
-					return internalErrorView(resp);
+					return internalErrorView(response);
 				} finally {
 					status.setComplete();
 				}
 				return "redirect:/r";
 			}
 		}
-		return forbiddenView(resp);
+		return forbiddenView(response);
 	}
 
 }

@@ -48,7 +48,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
+
 /**
+ * Controller to handle the front page. It cares for filling the map, search the
+ * database and creating new {@code Observation}s.
  * 
  * @author Christian Autermann
  * @author Stefan Arndt
@@ -56,7 +59,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Christoph Fendrich
  * @author Simon Ottenhues
  * @author Christian Paluschek
- *
+ * 
  */
 @Controller
 @RequestMapping("/")
@@ -72,15 +75,18 @@ public class FrontPageController {
 	private static final int VISIBLE_OBSERVATIONS;
 	private static final Logger logger = LoggerFactory
 			.getLogger(FrontPageController.class);
-	private ObservationService os;
-	private ObservationValidator ov;
+	private ObservationService observationService;
+	private ObservationValidator observationValidator;
 
 	static {
 		Integer i = null;
 		try {
 			i = Integer.valueOf(Config.getProperty("lastObservationsCount"));
 		} catch (NumberFormatException e) {
-			logger.warn("Invalid or null value for property 'lastObservationsCount'.",e);
+			logger
+					.warn(
+							"Invalid or null value for property 'lastObservationsCount'.",
+							e);
 		}
 		if (i == null) {
 			VISIBLE_OBSERVATIONS = VISIBLE_OBSERVATIONS_DEFAULT;
@@ -89,58 +95,82 @@ public class FrontPageController {
 		}
 	}
 
+	/**
+	 * @param ov
+	 *            the {@code ObservationValidator} to set
+	 */
 	@Autowired
 	public void setObservationValidator(ObservationValidator ov) {
-		this.ov = ov;
+		this.observationValidator = ov;
 	}
 
+	/**
+	 * @param os
+	 *            the {@code ObservationService} to set
+	 */
 	@Autowired
 	public void setObservationService(ObservationService os) {
-		this.os = os;
+		this.observationService = os;
 	}
 
+	/**
+	 * Sets custom parameters to the {@code WebDataBinder}.
+	 * 
+	 * @param webDataBinder
+	 *            the {@code WebDataBinder} to initialize
+	 */
 	@InitBinder
-	public void initBinder(WebDataBinder wdb) {
+	public void initBinder(WebDataBinder webDataBinder) {
 		CategorieEditor c = new CategorieEditor();
-		c.setObservationService(os);
-		wdb.registerCustomEditor(Categorie.class, c);
+		c.setObservationService(observationService);
+		webDataBinder.registerCustomEditor(Categorie.class, c);
 	}
 
+	/**
+	 * Handles the {@code GET} request. It creates the model to fill the Map
+	 * with {@code Observation}s. An optional query parameter is also processed.
+	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView fillMap(HttpSession s,
-			@RequestParam(value = SEARCH_PARAM, required = false) String q) {
+	public ModelAndView fillMap(HttpSession session,
+			@RequestParam(value = SEARCH_PARAM, required = false) String string) {
 		ModelAndView mav = new ModelAndView(VIEW);
-		if (isAuth(s)) {
+		if (isAuth(session)) {
 			mav.addObject(NEW_OBSERVATION_ATTRIBUTE, new Observation());
-			mav.addObject(CATEGORIE_ATTRIBUTE, os.getCategories());
+			mav.addObject(CATEGORIE_ATTRIBUTE, observationService
+					.getCategories());
 		}
 		return mav.addObject(MAP_CONTENT_ATTRIBUTE,
-				isNotEmptyOrWhitespace(q) ? this.os.getObservations(q) : this.os
+				isNotEmptyOrWhitespace(string) ? this.observationService
+						.getObservations(string) : this.observationService
 						.getNewestObservations(VISIBLE_OBSERVATIONS));
 	}
 
+	/**
+	 * Handles the {@code POST} request. Creates a new {@code Observation}.
+	 */
 	@RequestMapping(method = RequestMethod.POST)
-	public String saveObservation(HttpSession s, HttpServletResponse r,
-			@ModelAttribute(NEW_OBSERVATION_ATTRIBUTE) Observation o,
+	public String saveObservation(HttpSession session,
+			HttpServletResponse request,
+			@ModelAttribute(NEW_OBSERVATION_ATTRIBUTE) Observation observation,
 			BindingResult result, SessionStatus status) throws IOException {
-		if (isAuth(s)) {
-			o.setUser(getUser(s));
-			this.ov.validate(o, result);
+		if (isAuth(session)) {
+			observation.setUser(getUser(session));
+			this.observationValidator.validate(observation, result);
 			if (result.hasErrors()) {
 				return VIEW;
 			} else {
 				try {
-					this.os.registrate(o);
+					this.observationService.registrate(observation);
 				} catch (Exception e) {
 					logger.warn("Unexpected Exception", e);
-					return internalErrorView(r);
+					return internalErrorView(request);
 				} finally {
 					status.setComplete();
 				}
 				return "redirect:/";
 			}
 		} else {
-			return forbiddenView(r);
+			return forbiddenView(request);
 		}
 	}
 }
