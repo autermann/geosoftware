@@ -229,7 +229,7 @@ public class ErrorCodes {
 		/**
 		 * Indicating that the entered mail address is invalid.
 		 */
-		public static final String INVALID_MAIL = "field.egistration.mail.invalid";
+		public static final String INVALID_MAIL = "field.registration.mail.invalid";
 		/**
 		 * Indicating that the entered mail address is not unique.
 		 */
