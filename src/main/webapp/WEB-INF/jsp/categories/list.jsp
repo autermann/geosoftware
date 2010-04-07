@@ -16,12 +16,12 @@
 		<td width=40%>
 			<table class="management_lists">
 				<tr>
-					<th class="management_lists"><fmt:message key="categorie.id.title"/></th>
-					<th class="management_lists"><fmt:message key="categorie.title.title"/></th>
-					<th class="management_lists"><fmt:message key="categorie.description.title"/></th>
-					<th class="management_lists"><fmt:message key="categorie.iconFileName.title" /></th>
-					<th class="manegement_lists"><fmt:message key="categorie.icon.title" /></th>
-					<th class="management_lists"><fmt:message key="categorie.action.title" /></th>
+					<th class="management_lists"><s:escapeBody htmlEscape="true"><fmt:message key="categorie.id.title"/></s:escapeBody></th>
+					<th class="management_lists"><s:escapeBody htmlEscape="true"><fmt:message key="categorie.title.title"/></s:escapeBody></th>
+					<th class="management_lists"><s:escapeBody htmlEscape="true"><fmt:message key="categorie.description.title"/></s:escapeBody></th>
+					<th class="management_lists"><s:escapeBody htmlEscape="true"><fmt:message key="categorie.iconFileName.title" /></s:escapeBody></th>
+					<th class="manegement_lists"><s:escapeBody htmlEscape="true"><fmt:message key="categorie.icon.title" /></s:escapeBody></th>
+					<th class="management_lists"><s:escapeBody htmlEscape="true"><fmt:message key="categorie.action.title" /></s:escapeBody></th>
 				</tr>
 				<c:forEach var="categorie" items="${categories}">
 					<tr>
@@ -44,7 +44,7 @@
 		<td></td>
 		<td align="center">
 
-			<a href="<s:url value="/" htmlEscape="true" />"><fmt:message key="nav.home.title"/></a> <fmt:message key="copyright.title"/>
+			<a href="<s:url value="/" htmlEscape="true" />"><s:escapeBody htmlEscape="true"><fmt:message key="nav.home.title"/></s:escapeBody></a> <fmt:message key="copyright.title"/>
 		</td>
 		<td></td>
 	</tr>

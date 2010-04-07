@@ -12,18 +12,18 @@
 			<form:form modelAttribute="categorie" method="POST">
 				<table class="management_lists">
 					<tr>
-						<td class="management_lists" width="20%" align="right"><fmt:message key="categorie.title.title"/>:</td>
+						<td class="management_lists" width="20%" align="right"><s:escapeBody htmlEscape="true"><fmt:message key="categorie.title.title"/></s:escapeBody>:</td>
 						<td class="management_lists" width="40%" align="left"><form:input path="title"/></td>
 						<td class="management_lists" width="40%" align="right"><form:errors cssStyle="color:red;" path="title"/></td>
 					</tr>
 					<tr>
-						<td class="management_lists" width="20%" align="right"><fmt:message key="categorie.description.title"/>:</td>
+						<td class="management_lists" width="20%" align="right"><s:escapeBody htmlEscape="true"><fmt:message key="categorie.description.title"/></s:escapeBody>:</td>
 						<td class="management_lists" width="40%" align="left"><form:textarea path="description" /></td>
 						<td class="management_lists" width="40%" align="right"><form:errors cssStyle="color:red;" path="description"/></td>
 					</tr>
 					<tr>
 					<tr>
-						<td class="management_lists" width="20%" align="right"><fmt:message key="categorie.iconFileName.title"/>:</td>
+						<td class="management_lists" width="20%" align="right"><s:escapeBody htmlEscape="true"><fmt:message key="categorie.iconFileName.title"/></s:escapeBody>:</td>
 						<td>
 							<form:hidden path="iconFileName" />
 							<img class="categorieImage" src="<s:url value="/static/img/flag_black.png" />" alt="" />
@@ -49,7 +49,7 @@
 	<tr style="height: 41%">
 		<td></td>
 		<td align="center">
-			<a href="<s:url value="/" htmlEscape="true" />"><fmt:message key="nav.home.title"/></a> <fmt:message key="copyright.title"/>
+			<a href="<s:url value="/" htmlEscape="true" />"><s:escapeBody htmlEscape="true"><fmt:message key="nav.home.title"/></s:escapeBody></a> <fmt:message key="copyright.title"/>
 		</td>
 		<td></td>
 	</tr>
