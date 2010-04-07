@@ -17,30 +17,49 @@
  */
 package org.sloth.web.observation;
 
+import static org.sloth.util.ControllerUtils.forbiddenMAV;
+import static org.sloth.util.ControllerUtils.forbiddenView;
+import static org.sloth.util.ControllerUtils.internalErrorView;
+import static org.sloth.util.ControllerUtils.isAdmin;
+import static org.sloth.util.ControllerUtils.isAuth;
+import static org.sloth.util.ControllerUtils.isOwnObservation;
+import static org.sloth.util.ControllerUtils.notFoundMAV;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
 import java.io.IOException;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.sloth.model.Categorie;
 import org.sloth.model.Observation;
 import org.sloth.service.ObservationService;
+import org.sloth.util.CategorieEditor;
+import org.sloth.validation.ObservationValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import static org.springframework.web.bind.annotation.RequestMethod.*;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-import static org.sloth.util.ControllerUtils.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.sloth.model.Categorie;
-import org.sloth.validation.ObservationValidator;
-import org.sloth.util.CategorieEditor;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
-
+/**
+ * 
+ * @author Christian Autermann
+ * @author Stefan Arndt
+ * @author Dustin Demuth
+ * @author Christoph Fendrich
+ * @author Simon Ottenhues
+ * @author Christian Paluschek
+ *
+ */
 @Controller
 @RequestMapping("/o/edit/{id}")
 @SessionAttributes(types = Observation.class)
@@ -49,14 +68,13 @@ public class EditObservationController {
 	private static final String VIEW = "observations/edit";
 	private static final String OBSERVATION_ATTRIBUTE = "observation";
 	private static final String CATEGORIE_ATTRIBUTE = "categories";
-	private static final Logger logger = LoggerFactory.getLogger(
-			EditObservationController.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(EditObservationController.class);
 	private ObservationService os;
 	private ObservationValidator ov;
 
 	@Autowired
-	public void setObservationValidator(
-			ObservationValidator ov) {
+	public void setObservationValidator(ObservationValidator ov) {
 		this.ov = ov;
 	}
 

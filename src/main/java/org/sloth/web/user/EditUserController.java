@@ -17,29 +17,50 @@
  */
 package org.sloth.web.user;
 
-import org.sloth.web.action.UserEditFormAction;
+import static org.sloth.util.ControllerUtils.forbiddenMAV;
+import static org.sloth.util.ControllerUtils.forbiddenView;
+import static org.sloth.util.ControllerUtils.getUser;
+import static org.sloth.util.ControllerUtils.internalErrorView;
+import static org.sloth.util.ControllerUtils.isAdmin;
+import static org.sloth.util.ControllerUtils.isAuth;
+import static org.sloth.util.ControllerUtils.isSameId;
+import static org.sloth.util.ControllerUtils.notFoundMAV;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
 import java.io.IOException;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sloth.model.User;
 import org.sloth.service.UserService;
+import org.sloth.validation.UserEditFormValidator;
+import org.sloth.web.action.UserEditFormAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import static org.springframework.web.bind.annotation.RequestMethod.*;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-import static org.sloth.util.ControllerUtils.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.sloth.validation.UserEditFormValidator;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
+/**
+ * 
+ * @author Christian Autermann
+ * @author Stefan Arndt
+ * @author Dustin Demuth
+ * @author Christoph Fendrich
+ * @author Simon Ottenhues
+ * @author Christian Paluschek
+ *
+ */
 @Controller
 @RequestMapping("/u/edit/{id}")
 @SessionAttributes(types = UserEditFormAction.class)
@@ -47,8 +68,8 @@ public class EditUserController {
 
 	private static final String USER_ATTRIBUTE = "userEditAction";
 	private static final String VIEW = "users/edit";
-	private static final Logger logger = LoggerFactory.getLogger(
-			EditUserController.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(EditUserController.class);
 	private UserService us;
 	private UserEditFormValidator uefv;
 
@@ -83,8 +104,8 @@ public class EditUserController {
 			} else {
 				return forbiddenMAV(r);
 			}
-			return new ModelAndView(VIEW, USER_ATTRIBUTE, new UserEditFormAction(
-					u, getUser(s)));
+			return new ModelAndView(VIEW, USER_ATTRIBUTE,
+					new UserEditFormAction(u, getUser(s)));
 		} else {
 			return forbiddenMAV(r);
 		}
@@ -93,8 +114,7 @@ public class EditUserController {
 	@RequestMapping(method = POST)
 	public String processSubmit(HttpSession s, HttpServletResponse r,
 			@ModelAttribute(USER_ATTRIBUTE) UserEditFormAction a,
-			BindingResult result, SessionStatus status)
-			throws IOException {
+			BindingResult result, SessionStatus status) throws IOException {
 		if (isSameId(s, a.getId()) || isAdmin(s)) {
 			this.uefv.validate(a, result);
 			if (result.hasErrors()) {

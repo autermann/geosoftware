@@ -17,15 +17,25 @@
  */
 package org.sloth.web.observation;
 
+import static org.sloth.util.ControllerUtils.forbiddenMAV;
+import static org.sloth.util.ControllerUtils.forbiddenView;
+import static org.sloth.util.ControllerUtils.getUser;
+import static org.sloth.util.ControllerUtils.internalErrorView;
+import static org.sloth.util.ControllerUtils.isAuth;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
 import java.io.IOException;
+
 import javax.servlet.http.HttpServletResponse;
-import org.sloth.util.CategorieEditor;
 import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sloth.model.Categorie;
 import org.sloth.model.Observation;
 import org.sloth.service.ObservationService;
+import org.sloth.util.CategorieEditor;
 import org.sloth.validation.ObservationValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,12 +44,20 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import static org.springframework.web.bind.annotation.RequestMethod.*;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
-import static org.sloth.util.ControllerUtils.*;
 
+/**
+ * 
+ * @author Christian Autermann
+ * @author Stefan Arndt
+ * @author Dustin Demuth
+ * @author Christoph Fendrich
+ * @author Simon Ottenhues
+ * @author Christian Paluschek
+ *
+ */
 @Controller
 @RequestMapping("/o/new")
 @SessionAttributes(types = Observation.class)
@@ -49,8 +67,8 @@ public class ObservationAddController {
 	private static final String VIEW = "observations/form";
 	private static final String OBSERVATION_ATTRIBUTE = "observation";
 	private static final String CATEGORIES_ATTRIBUTE = "categories";
-	private Logger logger = LoggerFactory.getLogger(
-			ObservationAddController.class);
+	private Logger logger = LoggerFactory
+			.getLogger(ObservationAddController.class);
 	private ObservationService os;
 	private ObservationValidator ov;
 
@@ -98,7 +116,7 @@ public class ObservationAddController {
 			} else {
 				try {
 					this.os.registrate(o);
-				} catch(Exception e) {
+				} catch (Exception e) {
 					logger.warn("Unexpected Exception", e);
 					return internalErrorView(r);
 				} finally {

@@ -17,31 +17,51 @@
  */
 package org.sloth.web.observation;
 
+import static org.sloth.util.ControllerUtils.forbiddenMAV;
+import static org.sloth.util.ControllerUtils.forbiddenView;
+import static org.sloth.util.ControllerUtils.internalErrorView;
+import static org.sloth.util.ControllerUtils.isAdmin;
+import static org.sloth.util.ControllerUtils.isAuth;
+import static org.sloth.util.ControllerUtils.isOwnObservation;
+import static org.sloth.util.ControllerUtils.notFoundMAV;
+import static org.sloth.util.ControllerUtils.notFoundView;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
 import java.io.IOException;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sloth.model.Observation;
 import org.sloth.service.ObservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import static org.springframework.web.bind.annotation.RequestMethod.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import static org.sloth.util.ControllerUtils.*;
-
+/**
+ * 
+ * @author Christian Autermann
+ * @author Stefan Arndt
+ * @author Dustin Demuth
+ * @author Christoph Fendrich
+ * @author Simon Ottenhues
+ * @author Christian Paluschek
+ *
+ */
 @Controller
 @RequestMapping("/o/del/{id}")
 public class DeleteObservationController {
 
 	private static final String VIEW = "observations/delete";
 	private static final String OBSERVATIONS_ATTRIBUTE = "observation";
-	protected static final Logger logger = LoggerFactory.getLogger(
-			DeleteObservationController.class);
+	protected static final Logger logger = LoggerFactory
+			.getLogger(DeleteObservationController.class);
 	private ObservationService os;
 
 	@Autowired
@@ -56,7 +76,7 @@ public class DeleteObservationController {
 
 	@RequestMapping(method = GET)
 	public ModelAndView setupForm(@PathVariable Long id, HttpSession s,
-								  HttpServletResponse r) throws IOException {
+			HttpServletResponse r) throws IOException {
 		if (isAuth(s)) {
 			Observation o = this.os.getObservation(id);
 			if (o == null) {
@@ -71,7 +91,7 @@ public class DeleteObservationController {
 
 	@RequestMapping(method = POST)
 	public String processSubmit(@PathVariable Long id, HttpSession s,
-								HttpServletResponse r) throws IOException {
+			HttpServletResponse r) throws IOException {
 		if (isAuth(s)) {
 			Observation o = this.os.getObservation(id);
 			if (o == null) {
@@ -80,7 +100,7 @@ public class DeleteObservationController {
 				try {
 					this.os.deleteObservation(o);
 					return "redirect:/o";
-				} catch(Exception e) {
+				} catch (Exception e) {
 					logger.warn("Unexpected Exception.", e);
 					return internalErrorView(r);
 				}

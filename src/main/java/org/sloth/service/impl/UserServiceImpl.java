@@ -18,6 +18,7 @@
 package org.sloth.service.impl;
 
 import java.util.Collection;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sloth.exceptions.ConstraintViolationException;
@@ -28,55 +29,43 @@ import org.sloth.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * Implemtation of {@link UserService}.
+ * 
+ * @author Christian Autermann
+ * @author Stefan Arndt
+ * @author Dustin Demuth
+ * @author Christoph Fendrich
+ * @author Simon Ottenhues
+ * @author Christian Paluschek
+ */
 @Service
 public class UserServiceImpl implements UserService {
 
-	protected static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(UserServiceImpl.class);
 	@Autowired
 	private PasswordService passwordService;
 	@Autowired
 	private UserDao userDao;
 
-	/**
-	 * @todo
-	 * @param userDao
-	 * @throws NullPointerException
-	 */
-	public void setUserDao(UserDao userDao) throws NullPointerException {
-		logger.info("Setting autowired UserDao");
-		if (userDao == null) {
+	@Override
+	public void delete(Long id) throws NullPointerException,
+			IllegalArgumentException {
+		if (id == null) {
 			throw new NullPointerException();
 		} else {
-			this.userDao = userDao;
-		}
-	}
-
-	/**
-	 * @todo
-	 * @param passwordService
-	 * @throws NullPointerException
-	 */
-	public void setPasswordService(PasswordService passwordService)
-			throws NullPointerException {
-		logger.info("Setting autowired PasswordService");
-		if (passwordService == null) {
-			throw new NullPointerException();
-		} else {
-			this.passwordService = passwordService;
+			this.userDao.delete(this.userDao.getById(id));
 		}
 	}
 
 	@Override
-	public Collection<User> getUsers() {
-		return this.userDao.getAll();
-	}
-
-	@Override
-	public User get(String mail) throws NullPointerException {
-		if (mail == null) {
+	public void delete(User user) throws NullPointerException,
+			IllegalArgumentException {
+		if (user == null) {
 			throw new NullPointerException();
 		} else {
-			return this.userDao.getByMail(mail);
+			this.userDao.delete(user);
 		}
 	}
 
@@ -90,54 +79,28 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void update(User u) throws NullPointerException,
-									  IllegalArgumentException, ConstraintViolationException {
-		if (u == null) {
+	public User get(String mail) throws NullPointerException {
+		if (mail == null) {
 			throw new NullPointerException();
 		} else {
-			this.userDao.update(u);
+			return this.userDao.getByMail(mail);
 		}
 	}
 
 	@Override
-	public void delete(Long id) throws NullPointerException,
-									   IllegalArgumentException {
-		if (id == null) {
-			throw new NullPointerException();
-		} else {
-			this.userDao.delete(this.userDao.getById(id));
-		}
+	public Collection<User> getUsers() {
+		return this.userDao.getAll();
 	}
 
 	@Override
-	public void delete(User user) throws NullPointerException,
-										 IllegalArgumentException {
-		if (user == null) {
-			throw new NullPointerException();
-		} else {
-			this.userDao.delete(user);
-		}
+	public boolean isMailAddressAvailable(String mail)
+			throws NullPointerException {
+		return this.get(mail) == null;
 	}
 
 	@Override
-	public void registrate(User user) throws NullPointerException,
-											 ConstraintViolationException {
-		if (user == null) {
-			throw new NullPointerException();
-		} else {
-			user.setPassword(this.passwordService.hash(user.getPassword()));
-			logger.info(
-					"Registrating User: ID: {}, Mail: {}, Name: {}, FamilyName: {}, Password: {}, Group: {}",
-					new Object[]{user.getId(), user.getMail(),
-								 user.getName(), user.getFamilyName(),
-								 user.getPassword(), user.getUserGroup()});
-			this.userDao.save(user);
-		}
-	}
-
-	@Override
-	public User login(String mail,
-					  String plainPassword) throws NullPointerException {
+	public User login(String mail, String plainPassword)
+			throws NullPointerException {
 		if (mail == null || plainPassword == null) {
 			throw new NullPointerException();
 		} else {
@@ -145,13 +108,60 @@ public class UserServiceImpl implements UserService {
 			if (u == null) {
 				return null;
 			} else {
-				return this.passwordService.check(u.getPassword(), plainPassword) ? u : null;
+				return this.passwordService.check(u.getPassword(),
+						plainPassword) ? u : null;
 			}
 		}
 	}
 
 	@Override
-	public boolean isMailAddressAvailable(String mail) throws NullPointerException {
-		return this.get(mail) == null;
+	public void registrate(User user) throws NullPointerException,
+			ConstraintViolationException {
+		if (user == null) {
+			throw new NullPointerException();
+		} else {
+			user.setPassword(this.passwordService.hash(user.getPassword()));
+			logger.info(
+				"Registrating User: ID: {}, Mail: {}, Name: {}, FamilyName: {}, Password: {}, Group: {}",
+				new Object[] { user.getId(), user.getMail(),user.getName(), user.getFamilyName(),
+									user.getPassword(), user.getUserGroup() });
+			this.userDao.save(user);
+		}
+	}
+
+	/**
+	 * @param passwordService
+	 *            the passwordService to set
+	 */
+	public void setPasswordService(PasswordService passwordService) {
+		logger.info("Setting autowired PasswordService");
+		if (passwordService == null) {
+			throw new NullPointerException();
+		} else {
+			this.passwordService = passwordService;
+		}
+	}
+
+	/**
+	 * @param userDao
+	 *            the userDao to set
+	 */
+	public void setUserDao(UserDao userDao) {
+		logger.info("Setting autowired UserDao");
+		if (userDao == null) {
+			throw new NullPointerException();
+		} else {
+			this.userDao = userDao;
+		}
+	}
+
+	@Override
+	public void update(User u) throws NullPointerException,
+			IllegalArgumentException, ConstraintViolationException {
+		if (u == null) {
+			throw new NullPointerException();
+		} else {
+			this.userDao.update(u);
+		}
 	}
 }

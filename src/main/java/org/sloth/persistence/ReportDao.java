@@ -18,6 +18,7 @@
 package org.sloth.persistence;
 
 import java.util.Collection;
+
 import org.sloth.model.Categorie;
 import org.sloth.model.Observation;
 import org.sloth.model.Report;
@@ -25,58 +26,20 @@ import org.sloth.model.User;
 
 /**
  * Data Access Object for {@link Categorie}
+ * 
+ * @author Christian Autermann
+ * @author Stefan Arndt
+ * @author Dustin Demuth
+ * @author Christoph Fendrich
+ * @author Simon Ottenhues
+ * @author Christian Paluschek
  */
 public interface ReportDao {
 
 	/**
-	 * Query for all Entities.
-	 *
-	 * @return all Entities found
-	 */
-	public Collection<Report> getAll();
-
-	/**
-	 * Query for a Entity with a known {@code id}.
-	 *
-	 * @param id
-	 *            the id
-	 * @return the @code Entity with the specified id, if no matching Entity
-	 *         found {@code null} is returned.
-	 */
-	public Report getById(Long id);
-
-	/**
-	 * Update a Entity. Invoking this method with an Entity not known by the
-	 * database will cause an {@code IllegalArgumentException}.
-	 *
-	 * @param t
-	 *            the Entity to be updated
-	 * @throws NullPointerException
-	 *             if {@code t} is {@code null}
-	 * @throws IllegalArgumentException
-	 *             if {@code t} is not found in the database.
-	 */
-	public void update(Report t) throws NullPointerException,
-										IllegalArgumentException;
-
-	/**
-	 * Delete a Entity from database. Invoking this method with an Entity not
-	 * known by the database will cause an {@code IllegalArgumentException}.
-	 *
-	 * @param t
-	 *            the Entity to be deleted
-	 * @throws NullPointerException
-	 *             if {@code t} is {@code null}
-	 * @throws IllegalArgumentException
-	 *             if {@code t} is not found in the database.
-	 */
-	public void delete(Report t) throws NullPointerException,
-										IllegalArgumentException;
-
-	/**
 	 * Delete Entities from database. Invoking this method with Entities not
 	 * known by the database will cause an {@code IllegalArgumentException}.
-	 *
+	 * 
 	 * @param t
 	 *            the Entities to be deleted
 	 * @throws NullPointerException
@@ -85,48 +48,66 @@ public interface ReportDao {
 	 *             if Entities are not found in the database.
 	 */
 	public void delete(Collection<Report> t) throws NullPointerException,
-													IllegalArgumentException;
+			IllegalArgumentException;
 
 	/**
-	 * Save a Report in the database. {@link Categorie#id} will be generated.
-	 *
+	 * Delete a Entity from database. Invoking this method with an Entity not
+	 * known by the database will cause an {@code IllegalArgumentException}.
+	 * 
 	 * @param t
-	 *            the {@code Report} to be saved
+	 *            the Entity to be deleted
 	 * @throws NullPointerException
 	 *             if {@code t} is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if {@code t} is not found in the database.
 	 */
-	public void save(Report t) throws NullPointerException;
+	public void delete(Report t) throws NullPointerException,
+			IllegalArgumentException;
 
 	/**
-	 * Return all {@code Report}s created by the specified {@code User}.
+	 * Query for all Entities.
 	 * 
-	 * @param u the {@code User}
-	 * @return all {@code Report}s of the {@code User}
-	 * @throws NullPointerException if {@code u} is {@code null}
-	 * @throws IllegalArgumentException if {@code u} is not known
+	 * @return all Entities found
 	 */
-	public Collection<Report> getByUser(User u) throws NullPointerException,
-													   IllegalArgumentException;
+	public Collection<Report> getAll();
+
+	/**
+	 * Query for a Entity with a known {@code id}.
+	 * 
+	 * @param id
+	 *            the id
+	 * @return the @code Entity with the specified id, if no matching Entity
+	 *         found {@code null} is returned.
+	 */
+	public Report getById(Long id);
 
 	/**
 	 * Return all {@code Report}s for the specified {@code Observation}.
-	 *
-	 * @param o the {@code Observation}
+	 * 
+	 * @param o
+	 *            the {@code Observation}
 	 * @return all {@code Report}s for the {@code Observation}
-	 * @throws NullPointerException if {@code o} is {@code null}
-	 * @throws IllegalArgumentException if {@code o} is not known
+	 * @throws NullPointerException
+	 *             if {@code o} is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if {@code o} is not known
 	 */
 	public Collection<Report> getByObservation(Observation o)
 			throws NullPointerException, IllegalArgumentException;
 
 	/**
-	 * Get all {@code Report}s which are unprocessed.
-	 *
-	 * @see Report#isProcessed()
-	 * @see Report#setProcessed(boolean)
-	 * @return all processed {@code Report}s
+	 * Return all {@code Report}s created by the specified {@code User}.
+	 * 
+	 * @param u
+	 *            the {@code User}
+	 * @return all {@code Report}s of the {@code User}
+	 * @throws NullPointerException
+	 *             if {@code u} is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if {@code u} is not known
 	 */
-	public Collection<Report> getUnprocessed();
+	public Collection<Report> getByUser(User u) throws NullPointerException,
+			IllegalArgumentException;
 
 	/**
 	 * Get all {@code Report}s which are processed.
@@ -137,4 +118,36 @@ public interface ReportDao {
 	 */
 	public Collection<Report> getProcessed();
 
+	/**
+	 * Get all {@code Report}s which are unprocessed.
+	 * 
+	 * @see Report#isProcessed()
+	 * @see Report#setProcessed(boolean)
+	 * @return all processed {@code Report}s
+	 */
+	public Collection<Report> getUnprocessed();
+
+	/**
+	 * Save a Report in the database. {@link Categorie#id} will be generated.
+	 * 
+	 * @param t
+	 *            the {@code Report} to be saved
+	 * @throws NullPointerException
+	 *             if {@code t} is {@code null}
+	 */
+	public void save(Report t) throws NullPointerException;
+
+	/**
+	 * Update a Entity. Invoking this method with an Entity not known by the
+	 * database will cause an {@code IllegalArgumentException}.
+	 * 
+	 * @param t
+	 *            the Entity to be updated
+	 * @throws NullPointerException
+	 *             if {@code t} is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if {@code t} is not found in the database.
+	 */
+	public void update(Report t) throws NullPointerException,
+			IllegalArgumentException;
 }

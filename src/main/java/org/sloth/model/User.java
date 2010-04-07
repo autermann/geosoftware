@@ -1,4 +1,4 @@
-	/*
+/*
  * Copyright (C) 2009-2010  Stefan Arndt, Christian Autermann, Dustin Demuth,
  *                  Christoph Fendrich, Simon Ottenhues, Christian Paluschek
  *
@@ -17,15 +17,18 @@
  */
 package org.sloth.model;
 
+import static javax.persistence.EnumType.STRING;
+import static javax.persistence.TemporalType.TIMESTAMP;
+
 import java.io.Serializable;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.Temporal;
 import javax.persistence.Transient;
-import static javax.persistence.EnumType.*;
-import static javax.persistence.TemporalType.*;
+
 import org.sloth.exceptions.ConstraintViolationException;
 import org.sloth.exceptions.FieldLengthConstraintViolationException;
 import org.sloth.exceptions.NotNullConstraintViolationException;
@@ -35,8 +38,13 @@ import org.sloth.exceptions.NotNullConstraintViolationException;
  * family name and a password. It stores also the date of creation and the group
  * of the user.
  * 
- * @author Christian Autermann
  * @see Group
+ * @author Christian Autermann
+ * @author Stefan Arndt
+ * @author Dustin Demuth
+ * @author Christoph Fendrich
+ * @author Simon Ottenhues
+ * @author Christian Paluschek
  */
 @Entity(name = "USERS")
 public class User extends BaseEntity implements Serializable {
@@ -166,6 +174,21 @@ public class User extends BaseEntity implements Serializable {
 		this.creationDate = creationDate;
 	}
 
+	/**
+	 * @return the group
+	 */
+	public Group getUserGroup() {
+		return userGroup;
+	}
+
+	/**
+	 * @param group
+	 *            the userGroup to set
+	 */
+	public void setUserGroup(Group group) {
+		this.userGroup = group;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (obj != null && obj instanceof User) {
@@ -182,10 +205,15 @@ public class User extends BaseEntity implements Serializable {
 		hash = 37 * hash + (this.getId() != null ? this.getId().hashCode() : 0);
 		hash = 37 * hash + (this.mail != null ? this.mail.hashCode() : 0);
 		hash = 37 * hash + (this.name != null ? this.name.hashCode() : 0);
-		hash = 37 * hash + (this.familyName != null ? this.familyName.hashCode() : 0);
-		hash = 37 * hash + (this.password != null ? this.password.hashCode() : 0);
-		hash = 37 * hash + (this.creationDate != null ? this.creationDate.hashCode() : 0);
-		hash = 37 * hash + (this.userGroup != null ? this.userGroup.hashCode() : 0);
+		hash = 37 * hash
+				+ (this.familyName != null ? this.familyName.hashCode() : 0);
+		hash = 37 * hash
+				+ (this.password != null ? this.password.hashCode() : 0);
+		hash = 37
+				* hash
+				+ (this.creationDate != null ? this.creationDate.hashCode() : 0);
+		hash = 37 * hash
+				+ (this.userGroup != null ? this.userGroup.hashCode() : 0);
 		return hash;
 	}
 
@@ -201,39 +229,17 @@ public class User extends BaseEntity implements Serializable {
 		return buf.toString();
 	}
 
-	/**
-	 * @return the group
-	 */
-	public Group getUserGroup() {
-		return userGroup;
-	}
-
-	/**
-	 * @param group
-	 *            the userRight to set
-	 */
-	public void setUserGroup(Group group) {
-		this.userGroup = group;
-	}
-
 	@Override
 	public void validate() throws ConstraintViolationException {
-		if (this.creationDate == null
-				|| this.familyName == null
-				|| this.name == null
-				|| this.mail == null
-				|| this.password == null
-				|| this.userGroup == null
-				|| this.name.isEmpty()
-				|| this.familyName.isEmpty()
-				|| this.mail.isEmpty()
-				|| this.password.isEmpty()) {
+		if (this.creationDate == null || this.familyName == null
+				|| this.name == null || this.mail == null
+				|| this.password == null || this.userGroup == null
+				|| this.name.isEmpty() || this.familyName.isEmpty()
+				|| this.mail.isEmpty() || this.password.isEmpty()) {
 			throw new NotNullConstraintViolationException();
 		}
-		if (this.familyName.length() > 255
-				|| this.mail.length() > 255
-				|| this.password.length() > 255
-				|| this.name.length() > 255) {
+		if (this.familyName.length() > 255 || this.mail.length() > 255
+				|| this.password.length() > 255 || this.name.length() > 255) {
 			throw new FieldLengthConstraintViolationException();
 		}
 	}

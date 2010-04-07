@@ -18,64 +18,25 @@
 package org.sloth.persistence;
 
 import java.util.Collection;
+
 import org.sloth.model.User;
 
 /**
  * Data Access Object for {@link User}.
  * 
  * @author Christian Autermann
+ * @author Stefan Arndt
+ * @author Dustin Demuth
+ * @author Christoph Fendrich
+ * @author Simon Ottenhues
+ * @author Christian Paluschek
  */
 public interface UserDao {
 
 	/**
-	 * Query for all Entities.
-	 *
-	 * @return all Entities found
-	 */
-	public Collection<User> getAll();
-
-	/**
-	 * Query for a Entity with a known {@code id}.
-	 *
-	 * @param id
-	 *            the id
-	 * @return the @code Entity with the specified id, if no matching Entity
-	 *         found {@code null} is returned.
-	 */
-	public User getById(Long id);
-
-	/**
-	 * Update a Entity. Invoking this method with an Entity not known by the
-	 * database will cause an {@code IllegalArgumentException}.
-	 *
-	 * @param t
-	 *            the Entity to be updated
-	 * @throws NullPointerException
-	 *             if {@code t} is {@code null}
-	 * @throws IllegalArgumentException
-	 *             if {@code t} is not found in the database.
-	 */
-	public void update(User t) throws NullPointerException,
-									  IllegalArgumentException;
-
-	/**
-	 * Delete a Entity from database. Invoking this method with an Entity not
-	 * known by the database will cause an {@code IllegalArgumentException}.
-	 *
-	 * @param t
-	 *            the Entity to be deleted
-	 * @throws NullPointerException
-	 *             if {@code t} is {@code null}
-	 * @throws IllegalArgumentException
-	 *             if {@code t} is not found in the database.
-	 */
-	public void delete(User t) throws NullPointerException,
-									  IllegalArgumentException;
-
-	/**
 	 * Delete Entities from database. Invoking this method with Entities not
 	 * known by the database will cause an {@code IllegalArgumentException}.
-	 *
+	 * 
 	 * @param t
 	 *            the Entities to be deleted
 	 * @throws NullPointerException
@@ -84,17 +45,38 @@ public interface UserDao {
 	 *             if Entities are not found in the database.
 	 */
 	public void delete(Collection<User> t) throws NullPointerException,
-												  IllegalArgumentException;
+			IllegalArgumentException;
 
 	/**
-	 * Save a {@code User} in the database. {@link User#id} will be generated.
-	 *
+	 * Delete a Entity from database. Invoking this method with an Entity not
+	 * known by the database will cause an {@code IllegalArgumentException}.
+	 * 
 	 * @param t
-	 *            the {@code User} to be saved
+	 *            the Entity to be deleted
 	 * @throws NullPointerException
 	 *             if {@code t} is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if {@code t} is not found in the database.
 	 */
-	public void save(User t) throws NullPointerException;
+	public void delete(User t) throws NullPointerException,
+			IllegalArgumentException;
+
+	/**
+	 * Query for all Entities.
+	 * 
+	 * @return all Entities found
+	 */
+	public Collection<User> getAll();
+
+	/**
+	 * Query for a Entity with a known {@code id}.
+	 * 
+	 * @param id
+	 *            the id
+	 * @return the @code Entity with the specified id, if no matching Entity
+	 *         found {@code null} is returned.
+	 */
+	public User getById(Long id);
 
 	/**
 	 * Query for a {@code User} with known mail address.
@@ -108,5 +90,29 @@ public interface UserDao {
 	 *             if {@code u} is not in the database.
 	 */
 	public User getByMail(String mail);
+
+	/**
+	 * Save a {@code User} in the database. {@link User#id} will be generated.
+	 * 
+	 * @param t
+	 *            the {@code User} to be saved
+	 * @throws NullPointerException
+	 *             if {@code t} is {@code null}
+	 */
+	public void save(User t) throws NullPointerException;
+
+	/**
+	 * Update a Entity. Invoking this method with an Entity not known by the
+	 * database will cause an {@code IllegalArgumentException}.
+	 * 
+	 * @param t
+	 *            the Entity to be updated
+	 * @throws NullPointerException
+	 *             if {@code t} is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if {@code t} is not found in the database.
+	 */
+	public void update(User t) throws NullPointerException,
+			IllegalArgumentException;
 
 }

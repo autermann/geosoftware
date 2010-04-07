@@ -23,6 +23,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+/**
+ * 
+ * @author Christian Autermann
+ * @author Stefan Arndt
+ * @author Dustin Demuth
+ * @author Christoph Fendrich
+ * @author Simon Ottenhues
+ * @author Christian Paluschek
+ *
+ */
 @Controller
 @RequestMapping("/o")
 public class ListObservationsController {
@@ -38,7 +48,7 @@ public class ListObservationsController {
 
 	@RequestMapping
 	public ModelAndView setupList() {
-		return new ModelAndView(VIEW, OBSERVATIONS_ATTRIBUTE,
-				this.os.getObservations());
+		return new ModelAndView(VIEW, OBSERVATIONS_ATTRIBUTE, this.os
+				.getObservations());
 	}
 }

@@ -17,13 +17,27 @@
  */
 package org.sloth.validation;
 
+import static org.sloth.validation.ErrorCodes.LOGIN.EMPTY_MAIL;
+import static org.sloth.validation.ErrorCodes.LOGIN.EMPTY_PASSWORD;
+import static org.springframework.validation.ValidationUtils.rejectIfEmptyOrWhitespace;
+
 import org.sloth.web.action.Login;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import static org.sloth.util.ValidationUtils.*;
-import static org.sloth.validation.ErrorCodes.LOGIN.*;
 
+
+/**
+ * A {@code Validator} for validating {@code Login}s.
+ * 
+ * @author Christian Autermann
+ * @author Stefan Arndt
+ * @author Dustin Demuth
+ * @author Christoph Fendrich
+ * @author Simon Ottenhues
+ * @author Christian Paluschek
+ * 
+ */
 @Component
 public class LoginValidator implements Validator {
 

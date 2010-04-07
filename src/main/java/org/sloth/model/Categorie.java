@@ -18,9 +18,11 @@
 package org.sloth.model;
 
 import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Transient;
+
 import org.sloth.exceptions.ConstraintViolationException;
 import org.sloth.exceptions.FieldLengthConstraintViolationException;
 import org.sloth.exceptions.NotNullConstraintViolationException;
@@ -30,8 +32,11 @@ import org.sloth.exceptions.NotNullConstraintViolationException;
  * 
  * @see Observation
  * @author Christian Autermann
- * @version 1.0
- * @since 1.0
+ * @author Stefan Arndt
+ * @author Dustin Demuth
+ * @author Christoph Fendrich
+ * @author Simon Ottenhues
+ * @author Christian Paluschek
  */
 @Entity(name = "CATEGORIES")
 public class Categorie extends BaseEntity implements Serializable {
@@ -44,6 +49,14 @@ public class Categorie extends BaseEntity implements Serializable {
 	private String description;
 	@Column(nullable = false)
 	private String iconFileName;
+
+	/**
+	 * Creates a new <code>Categorie</code> with <code>null</code> as default
+	 * value.
+	 */
+	public Categorie() {
+		/* nothing to do here */
+	}
 
 	/**
 	 * Creates a new <code>Categorie</code> with specified title and description
@@ -61,27 +74,13 @@ public class Categorie extends BaseEntity implements Serializable {
 		this.description = description;
 	}
 
-	/**
-	 * Creates a new <code>Categorie</code> with <code>null</code> as default
-	 * value.
-	 */
-	public Categorie() {
-		/* nothing to do here */
-	}
-
-	/**
-	 * @return the title
-	 */
-	public String getTitle() {
-		return title;
-	}
-
-	/**
-	 * @param title
-	 *            the title to set
-	 */
-	public void setTitle(String title) {
-		this.title = title;
+	@Override
+	public boolean equals(Object o) {
+		if (o != null && o instanceof Categorie) {
+			return this.hashCode() == o.hashCode();
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -92,20 +91,17 @@ public class Categorie extends BaseEntity implements Serializable {
 	}
 
 	/**
-	 * @param description
-	 *            the description to set
+	 * @return the iconFileName
 	 */
-	public void setDescription(String description) {
-		this.description = description;
+	public String getIconFileName() {
+		return iconFileName;
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		if (o != null && o instanceof Categorie) {
-			return this.hashCode() == o.hashCode();
-		} else {
-			return false;
-		}
+	/**
+	 * @return the title
+	 */
+	public String getTitle() {
+		return title;
 	}
 
 	@Override
@@ -113,10 +109,37 @@ public class Categorie extends BaseEntity implements Serializable {
 		int hash = 7;
 		hash = 41 * hash + this.getVersion();
 		hash = 41 * hash + (this.getId() != null ? this.getId().hashCode() : 0);
-		hash = 41 * hash + (this.iconFileName != null ? this.iconFileName.hashCode() : 0);
+		hash = 41
+				* hash
+				+ (this.iconFileName != null ? this.iconFileName.hashCode() : 0);
 		hash = 41 * hash + (this.title != null ? this.title.hashCode() : 0);
-		hash = 41 * hash + (this.description != null ? this.description.hashCode() : 0);
+		hash = 41 * hash
+				+ (this.description != null ? this.description.hashCode() : 0);
 		return hash;
+	}
+
+	/**
+	 * @param description
+	 *            the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	/**
+	 * @param iconFileName
+	 *            the iconFileName to set
+	 */
+	public void setIconFileName(String iconFileName) {
+		this.iconFileName = iconFileName;
+	}
+
+	/**
+	 * @param title
+	 *            the title to set
+	 */
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	@Override
@@ -126,33 +149,14 @@ public class Categorie extends BaseEntity implements Serializable {
 
 	@Override
 	public void validate() throws ConstraintViolationException {
-		if (this.description == null
-				|| this.title == null
-				|| this.iconFileName == null
-				|| this.iconFileName.isEmpty()
-				|| this.description.isEmpty()
-				|| this.title.isEmpty()) {
+		if (this.description == null || this.title == null
+				|| this.iconFileName == null || this.iconFileName.isEmpty()
+				|| this.description.isEmpty() || this.title.isEmpty()) {
 			throw new NotNullConstraintViolationException();
 		}
-		if (this.description.length() > 1000
-				|| this.title.length() > 255
+		if (this.description.length() > 1000 || this.title.length() > 255
 				|| this.iconFileName.length() > 255) {
 			throw new FieldLengthConstraintViolationException();
 		}
-	}
-
-	/**
-	 * @return the iconFileName
-	 */
-	public String getIconFileName() {
-		return iconFileName;
-	}
-
-	/**
-	 * @param iconFileName
-	 *            the iconFileName to set
-	 */
-	public void setIconFileName(String iconFileName) {
-		this.iconFileName = iconFileName;
 	}
 }

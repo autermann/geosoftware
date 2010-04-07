@@ -26,8 +26,11 @@ import javax.persistence.Transient;
  * Represents a simple two valued coordinate.
  * 
  * @author Christian Autermann
- * @version 1.0
- * @since 1.0
+ * @author Stefan Arndt
+ * @author Dustin Demuth
+ * @author Christoph Fendrich
+ * @author Simon Ottenhues
+ * @author Christian Paluschek
  */
 @Embeddable
 public class Coordinate implements Serializable {
@@ -59,11 +62,41 @@ public class Coordinate implements Serializable {
 		this.longitude = lon;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (obj != null && obj instanceof Coordinate) {
+			return this.hashCode() == obj.hashCode();
+		} else {
+			return false;
+		}
+	}
+
 	/**
 	 * @return the latitude
 	 */
 	public double getLatitude() {
 		return latitude;
+	}
+
+	/**
+	 * @return the longitude
+	 */
+	public double getLongitude() {
+		return longitude;
+	}
+
+	@Override
+	public int hashCode() {
+		int hash = 5;
+		hash = 47
+				* hash
+				+ (int) (Double.doubleToLongBits(this.latitude) ^ (Double
+						.doubleToLongBits(this.latitude) >>> 32));
+		hash = 47
+				* hash
+				+ (int) (Double.doubleToLongBits(this.longitude) ^ (Double
+						.doubleToLongBits(this.longitude) >>> 32));
+		return hash;
 	}
 
 	/**
@@ -75,35 +108,11 @@ public class Coordinate implements Serializable {
 	}
 
 	/**
-	 * @return the longitude
-	 */
-	public double getLongitude() {
-		return longitude;
-	}
-
-	/**
 	 * @param longitude
 	 *            the longitude to set
 	 */
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (obj != null && obj instanceof Coordinate) {
-			return this.hashCode() == obj.hashCode();
-		} else {
-			return false;
-		}
-	}
-
-	@Override
-	public int hashCode() {
-		int hash = 5;
-		hash = 47 * hash + (int) (Double.doubleToLongBits(this.latitude) ^ (Double.doubleToLongBits(this.latitude) >>> 32));
-		hash = 47 * hash + (int) (Double.doubleToLongBits(this.longitude) ^ (Double.doubleToLongBits(this.longitude) >>> 32));
-		return hash;
 	}
 
 	@Override

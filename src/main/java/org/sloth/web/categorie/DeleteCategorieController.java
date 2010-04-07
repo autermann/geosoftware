@@ -17,14 +17,23 @@
  */
 package org.sloth.web.categorie;
 
+import static org.sloth.util.ControllerUtils.forbiddenMAV;
+import static org.sloth.util.ControllerUtils.forbiddenView;
+import static org.sloth.util.ControllerUtils.internalErrorView;
+import static org.sloth.util.ControllerUtils.isAdmin;
+import static org.sloth.util.ControllerUtils.notFoundMAV;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
 import java.io.IOException;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sloth.model.Categorie;
 import org.sloth.service.ObservationService;
-import static org.sloth.util.ControllerUtils.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
@@ -32,16 +41,24 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import static org.springframework.web.bind.annotation.RequestMethod.*;
-
+/**
+ * 
+ * @author Christian Autermann
+ * @author Stefan Arndt
+ * @author Dustin Demuth
+ * @author Christoph Fendrich
+ * @author Simon Ottenhues
+ * @author Christian Paluschek
+ *
+ */
 @Controller
 @RequestMapping("/c/del/{id}")
 public class DeleteCategorieController {
 
 	private static final String CATEGORIE_ATTRIBUTE = "categorie";
 	private static final String VIEW = "categories/delete";
-	private static final Logger logger = LoggerFactory.getLogger(
-			DeleteCategorieController.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(DeleteCategorieController.class);
 	private ObservationService os;
 
 	@Autowired
@@ -56,7 +73,7 @@ public class DeleteCategorieController {
 
 	@RequestMapping(method = GET)
 	public ModelAndView setupForm(@PathVariable("id") Long id, HttpSession s,
-								  HttpServletResponse r) throws IOException {
+			HttpServletResponse r) throws IOException {
 		if (isAdmin(s)) {
 			Categorie c = os.getCategorie(id);
 			if (c == null) {
@@ -71,12 +88,12 @@ public class DeleteCategorieController {
 
 	@RequestMapping(method = POST)
 	public String processSubmit(@PathVariable("id") Long id, HttpSession s,
-								HttpServletResponse r) throws IOException {
+			HttpServletResponse r) throws IOException {
 		if (isAdmin(s)) {
 			try {
 				this.os.deleteCategorie(id);
 				return "redirect:/c";
-			} catch(Exception e) {
+			} catch (Exception e) {
 				logger.warn("Unexpected Exception", e);
 				return internalErrorView(r);
 			}

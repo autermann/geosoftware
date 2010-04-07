@@ -17,6 +17,17 @@
  */
 package org.sloth.exceptions;
 
+/**
+ * Exception which can be thrown, if an Enitity which should by known is not
+ * known.
+ * 
+ * @author Christian Autermann
+ * @author Stefan Arndt
+ * @author Dustin Demuth
+ * @author Christoph Fendrich
+ * @author Simon Ottenhues
+ * @author Christian Paluschek
+ */
 public class EntityNotKnownException extends IllegalArgumentException {
 
 	private static final long serialVersionUID = -569385867925643484L;

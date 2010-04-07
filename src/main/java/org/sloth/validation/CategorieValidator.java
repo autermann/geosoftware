@@ -17,28 +17,47 @@
  */
 package org.sloth.validation;
 
+import static org.sloth.util.ValidationUtils.notNull;
+import static org.sloth.util.ValidationUtils.rejectIfTooLong;
+import static org.sloth.validation.ErrorCodes.CATEGORIE.EMPTY_DESCRIPTION;
+import static org.sloth.validation.ErrorCodes.CATEGORIE.EMPTY_ICON_FILE_NAME;
+import static org.sloth.validation.ErrorCodes.CATEGORIE.EMPTY_TITLE;
+import static org.sloth.validation.ErrorCodes.CATEGORIE.NOT_UNIQUE_TITLE;
+import static org.sloth.validation.ErrorCodes.CATEGORIE.TOO_LONG_DESCRIPTION;
+import static org.sloth.validation.ErrorCodes.CATEGORIE.TOO_LONG_ICON_FILE_NAME;
+import static org.sloth.validation.ErrorCodes.CATEGORIE.TOO_LONG_TITLE;
+import static org.springframework.validation.ValidationUtils.rejectIfEmptyOrWhitespace;
+
 import org.sloth.model.Categorie;
 import org.sloth.service.ObservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import static org.sloth.util.ValidationUtils.*;
-import static org.sloth.validation.ErrorCodes.CATEGORIE.*;
 
+/**
+ * A {@code Validator} for validating {@code Categorie}s.
+ * 
+ * @author Christian Autermann
+ * @author Stefan Arndt
+ * @author Dustin Demuth
+ * @author Christoph Fendrich
+ * @author Simon Ottenhues
+ * @author Christian Paluschek
+ */
 @Component
 public class CategorieValidator implements Validator {
 
 	private ObservationService observationService;
 
-	@Override
-	public boolean supports(Class<?> clazz) {
-		return clazz.equals(Categorie.class);
-	}
-
 	@Autowired
 	public void setObservationService(ObservationService observationService) {
 		this.observationService = observationService;
+	}
+
+	@Override
+	public boolean supports(Class<?> clazz) {
+		return clazz.equals(Categorie.class);
 	}
 
 	@Override
@@ -50,7 +69,8 @@ public class CategorieValidator implements Validator {
 		rejectIfTooLong(e, "description", TOO_LONG_DESCRIPTION, 255);
 		rejectIfTooLong(e, "iconFileName", TOO_LONG_ICON_FILE_NAME, 255);
 		Categorie c = (Categorie) t;
-		Categorie orig = this.observationService.getCategorieByTitle(c.getTitle());
+		Categorie orig = this.observationService.getCategorieByTitle(c
+				.getTitle());
 		if (notNull(orig) && (c.isNew() || (c.getId() != orig.getId()))) {
 			e.rejectValue("title", NOT_UNIQUE_TITLE);
 		}

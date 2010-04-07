@@ -17,17 +17,31 @@
  */
 package org.sloth.web.user;
 
+import static org.sloth.util.ControllerUtils.forbiddenMAV;
+import static org.sloth.util.ControllerUtils.isAdmin;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+
 import java.io.IOException;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.sloth.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import static org.springframework.web.bind.annotation.RequestMethod.*;
-import static org.sloth.util.ControllerUtils.*;
 
+/**
+ * 
+ * @author Christian Autermann
+ * @author Stefan Arndt
+ * @author Dustin Demuth
+ * @author Christoph Fendrich
+ * @author Simon Ottenhues
+ * @author Christian Paluschek
+ *
+ */
 @Controller
 @RequestMapping("/u")
 public class ListUserController {
@@ -45,8 +59,7 @@ public class ListUserController {
 	public ModelAndView setupList(HttpSession s, HttpServletResponse r)
 			throws IOException {
 		if (isAdmin(s)) {
-			return new ModelAndView(VIEW, USERS_ATTRIBUTE,
-					this.us.getUsers());
+			return new ModelAndView(VIEW, USERS_ATTRIBUTE, this.us.getUsers());
 		} else {
 			return forbiddenMAV(r);
 		}

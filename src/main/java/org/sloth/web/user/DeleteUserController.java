@@ -17,32 +17,53 @@
  */
 package org.sloth.web.user;
 
+import static org.sloth.util.ControllerUtils.deAuth;
+import static org.sloth.util.ControllerUtils.forbiddenMAV;
+import static org.sloth.util.ControllerUtils.forbiddenView;
+import static org.sloth.util.ControllerUtils.getUser;
+import static org.sloth.util.ControllerUtils.internalErrorView;
+import static org.sloth.util.ControllerUtils.isAdmin;
+import static org.sloth.util.ControllerUtils.isAuth;
+import static org.sloth.util.ControllerUtils.notFoundMAV;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
 import java.io.IOException;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sloth.model.User;
 import org.sloth.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.RequestMapping;
-import static org.springframework.web.bind.annotation.RequestMethod.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
-import static org.sloth.util.ControllerUtils.*;
 
+/**
+ * 
+ * @author Christian Autermann
+ * @author Stefan Arndt
+ * @author Dustin Demuth
+ * @author Christoph Fendrich
+ * @author Simon Ottenhues
+ * @author Christian Paluschek
+ *
+ */
 @Controller
 @RequestMapping("/u/del/{id}")
 public class DeleteUserController {
 
 	private static final String VIEW = "users/delete";
 	private static final String USER_ATTRIBUTE = "user";
-	private static final Logger logger = LoggerFactory.getLogger(
-			DeleteUserController.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(DeleteUserController.class);
 	private UserService us;
 
 	@Autowired

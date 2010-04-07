@@ -17,19 +17,36 @@
  */
 package org.sloth.util;
 
-import java.io.IOException;
-import java.util.Properties;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import static org.springframework.core.io.support.PropertiesLoaderUtils.loadAllProperties;
 
+import java.io.IOException;
+import java.util.Properties;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * Class wich encapsulates all configurations needed.
+ * 
+ * @author Christian Autermann
+ * @author Stefan Arndt
+ * @author Dustin Demuth
+ * @author Christoph Fendrich
+ * @author Simon Ottenhues
+ * @author Christian Paluschek
+ */
 public class Config {
 
 	private static final Logger logger = LoggerFactory.getLogger(Config.class);
 	private static Properties props;
 
-	private Config() {}
-
+	/**
+	 * Returns the configuration made in the specified key.
+	 * 
+	 * @param key
+	 *            the key
+	 * @return the property or {@code null} if no matching property found.
+	 */
 	public static String getProperty(String key) {
 		if (props == null) {
 			try {
@@ -41,5 +58,8 @@ public class Config {
 			}
 		}
 		return props.getProperty(key);
+	}
+
+	private Config() {
 	}
 }

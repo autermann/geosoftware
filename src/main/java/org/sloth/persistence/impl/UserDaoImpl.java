@@ -18,41 +18,69 @@
 package org.sloth.persistence.impl;
 
 import java.util.Collection;
+
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+
 import org.sloth.exceptions.EntityAlreadyKnownException;
 import org.sloth.exceptions.EntityNotKnownException;
-import org.sloth.persistence.UserDao;
 import org.sloth.model.User;
 import org.sloth.model.User_;
 import org.sloth.persistence.ObservationDao;
+import org.sloth.persistence.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Repository;
 
+/**
+ * Implementation of a {@link UserDao}
+ * 
+ * @author Christian Autermann
+ * @author Stefan Arndt
+ * @author Dustin Demuth
+ * @author Christoph Fendrich
+ * @author Simon Ottenhues
+ * @author Christian Paluschek
+ */
 @Repository
 public class UserDaoImpl extends EntityManagerDao<User> implements UserDao {
 
 	private ObservationDao observationDao;
 
-	/**
-	 * @param observationDao
-	 *            the observationDao to set
-	 */
-	@Autowired
-	public void setObservationDao(ObservationDao observationDao) {
-		logger.info("getting the observation dao");
-		this.observationDao = observationDao;
+	@Override
+	public void delete(Collection<User> t) throws NullPointerException,
+			IllegalArgumentException {
+		for (User u : t) {
+			if (!isAttached(u)) {
+				throw new EntityNotKnownException();
+			}
+			observationDao.delete(observationDao.getByUser(u));
+			logger.info("Deleting User with Id: {}", u.getId());
+			getEntityManager().remove(u);
+		}
+		getEntityManager().flush();
+	}
+
+	@Override
+	public void delete(User u) {
+		if (!isAttached(u)) {
+			throw new EntityNotKnownException();
+		}
+		observationDao.delete(observationDao.getByUser(u));
+		logger.info("Deleting User with Id: {}", u.getId());
+		getEntityManager().remove(u);
+		getEntityManager().flush();
 	}
 
 	@Override
 	public Collection<User> getAll() {
-		CriteriaQuery<User> cq = getEntityManager().getCriteriaBuilder().createQuery(User.class);
+		CriteriaQuery<User> cq = getEntityManager().getCriteriaBuilder()
+				.createQuery(User.class);
 		cq.select(cq.from(User.class));
-		Collection<User> list = getEntityManager().createQuery(cq).getResultList();
+		Collection<User> list = getEntityManager().createQuery(cq)
+				.getResultList();
 		logger.info("Getting all Users; Found: {}", list.size());
 		return list;
 	}
@@ -70,44 +98,6 @@ public class UserDaoImpl extends EntityManagerDao<User> implements UserDao {
 			logger.info("Can't find User with Id {}", id);
 		}
 		return u;
-	}
-
-	@Override
-	public void save(User u) {
-		if (u == null) {
-			throw new NullPointerException();
-		}
-		if (isAttached(u)) {
-			throw new EntityAlreadyKnownException();
-		}
-		logger.info(
-				"Registrating User: ID: {}, Mail: {}, Name: {}, FamilyName: {}, Password: {}, Group: {}",
-				new Object[]{u.getId(), u.getMail(), u.getName(),
-							 u.getFamilyName(), u.getUserGroup()});
-		getEntityManager().persist(u);
-		getEntityManager().flush();
-		logger.info("Persisting User; Generated Id is: {}", u.getId());
-	}
-
-	@Override
-	public void update(User u) {
-		if (!isAttached(u)) {
-			throw new EntityNotKnownException();
-		}
-		logger.info("Updating {}", u);
-		getEntityManager().merge(u);
-		getEntityManager().flush();
-	}
-
-	@Override
-	public void delete(User u) {
-		if (!isAttached(u)) {
-			throw new EntityNotKnownException();
-		}
-		observationDao.delete(observationDao.getByUser(u));
-		logger.info("Deleting User with Id: {}", u.getId());
-		getEntityManager().remove(u);
-		getEntityManager().flush();
 	}
 
 	@Override
@@ -131,16 +121,38 @@ public class UserDaoImpl extends EntityManagerDao<User> implements UserDao {
 	}
 
 	@Override
-	public void delete(Collection<User> t) throws NullPointerException,
-			IllegalArgumentException {
-		for (User u : t) {
-			if (!isAttached(u)) {
-				throw new EntityNotKnownException();
-			}
-			observationDao.delete(observationDao.getByUser(u));
-			logger.info("Deleting User with Id: {}", u.getId());
-			getEntityManager().remove(u);
+	public void save(User u) {
+		if (u == null) {
+			throw new NullPointerException();
 		}
+		if (isAttached(u)) {
+			throw new EntityAlreadyKnownException();
+		}
+		logger.info(
+			"Registrating User: ID: {}, Mail: {}, Name: {}, FamilyName: {}, Password: {}, Group: {}",
+			new Object[] { u.getId(), u.getMail(), u.getName(),u.getFamilyName(), u.getUserGroup() });
+		getEntityManager().persist(u);
+		getEntityManager().flush();
+		logger.info("Persisting User; Generated Id is: {}", u.getId());
+	}
+
+	/**
+	 * @param observationDao
+	 *            the observationDao to set
+	 */
+	@Autowired
+	public void setObservationDao(ObservationDao observationDao) {
+		logger.info("getting the observation dao");
+		this.observationDao = observationDao;
+	}
+
+	@Override
+	public void update(User u) {
+		if (!isAttached(u)) {
+			throw new EntityNotKnownException();
+		}
+		logger.info("Updating {}", u);
+		getEntityManager().merge(u);
 		getEntityManager().flush();
 	}
 }

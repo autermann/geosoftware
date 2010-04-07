@@ -25,12 +25,18 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Version;
+
 import org.sloth.exceptions.ConstraintViolationException;
 
 /**
  * Represtents an Entity with a {@code Long} as Id.
  * 
  * @author Christian Autermann
+ * @author Stefan Arndt
+ * @author Dustin Demuth
+ * @author Christoph Fendrich
+ * @author Simon Ottenhues
+ * @author Christian Paluschek
  */
 @MappedSuperclass
 public abstract class BaseEntity {
@@ -43,16 +49,6 @@ public abstract class BaseEntity {
 	private int version;
 
 	/**
-	 * Validates this Entity.
-	 *
-	 * @throws ConstraintViolationException
-	 *             if a database constraint is violated.
-	 */
-	@PrePersist
-	@PreUpdate
-	public abstract void validate() throws ConstraintViolationException;
-
-	/**
 	 * Returns 0 if the id is <code>null</code> and the id otherwise
 	 * 
 	 * @return the id
@@ -62,11 +58,10 @@ public abstract class BaseEntity {
 	}
 
 	/**
-	 * @param id
-	 *            the id
+	 * @return the version
 	 */
-	public void setId(Long id) {
-		this.id = id;
+	public int getVersion() {
+		return version;
 	}
 
 	/**
@@ -80,16 +75,28 @@ public abstract class BaseEntity {
 	}
 
 	/**
-	 * @return the version
+	 * @param id
+	 *            the id
 	 */
-	public int getVersion() {
-		return version;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	/**
-	 * @param version the version to set
+	 * @param version
+	 *            the version to set
 	 */
 	public void setVersion(int version) {
 		this.version = version;
 	}
+
+	/**
+	 * Validates this Entity.
+	 * 
+	 * @throws ConstraintViolationException
+	 *             if a database constraint is violated.
+	 */
+	@PrePersist
+	@PreUpdate
+	public abstract void validate() throws ConstraintViolationException;
 }

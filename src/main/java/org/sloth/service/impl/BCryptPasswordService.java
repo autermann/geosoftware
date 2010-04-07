@@ -17,7 +17,6 @@
  */
 package org.sloth.service.impl;
 
-import org.omg.CORBA.BAD_CONTEXT;
 import org.sloth.util.BCrypt;
 import org.springframework.stereotype.Service;
 import static org.sloth.util.BCrypt.hashpw;
@@ -31,17 +30,22 @@ import static org.sloth.util.BCrypt.gensalt;
  * 
  * @see BCrypt
  * @author Christian Autermann
+ * @author Stefan Arndt
+ * @author Dustin Demuth
+ * @author Christoph Fendrich
+ * @author Simon Ottenhues
+ * @author Christian Paluschek
  */
 @Service
 public class BCryptPasswordService extends AbstractPasswordService {
 
 	@Override
-	public String hash(String plain) {
-		return hashpw(plain, gensalt());
+	public boolean check(String hash, String plain) {
+		return checkpw(plain, hash);
 	}
 
 	@Override
-	public boolean check(String hash, String plain) {
-		return checkpw(plain, hash);
+	public String hash(String plain) {
+		return hashpw(plain, gensalt());
 	}
 }

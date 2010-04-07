@@ -17,21 +17,55 @@
  */
 package org.sloth.service.impl;
 
+import static org.sloth.util.Config.getProperty;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sloth.service.PasswordService;
-import static org.sloth.util.Config.getProperty;
 
+/**
+ * Abstract implementation of {@link PasswordService}. This class implements a
+ * mechanism to check wether a password meets a given recommandation.
+ * 
+ * @author Christian Autermann
+ * @author Stefan Arndt
+ * @author Dustin Demuth
+ * @author Christoph Fendrich
+ * @author Simon Ottenhues
+ * @author Christian Paluschek
+ */
 public abstract class AbstractPasswordService implements PasswordService {
 
-	protected static final Logger logger = LoggerFactory.getLogger(AbstractPasswordService.class);
+	/**
+	 * The {@code Logger} for this class and all subclasses.
+	 */
+	protected static final Logger logger = LoggerFactory
+			.getLogger(AbstractPasswordService.class);
+	/**
+	 * The regular expression used to check the security of a password.
+	 */
 	protected static final String REGEX;
-	public static final int LENGTH;
-	public static final boolean DIGIT;
-	public static final boolean LOWER_CASE;
-	public static final boolean UPPER_CASE;
-	public static final boolean NON_ALPHA_NUM;
 
+	/**
+	 * Specifies how long a password has to be.
+	 */
+	public static final int LENGTH;
+	/**
+	 * Specifies if a password has to contain at least one digit.
+	 */
+	public static final boolean DIGIT;
+	/**
+	 * Specifies if a password has to contain at least one lower case character.
+	 */
+	public static final boolean LOWER_CASE;
+	/**
+	 * Specifies if a password has to contain at least one upper case character.
+	 */
+	public static final boolean UPPER_CASE;
+	/**
+	 * Specifies if a password has to contain at least one non ASCII character.
+	 */
+	public static final boolean NON_ALPHA_NUM;
 
 	static {
 		String length = getProperty("password.length");
@@ -44,7 +78,8 @@ public abstract class AbstractPasswordService implements PasswordService {
 		DIGIT = (digit == null) ? false : Boolean.valueOf(digit);
 		LOWER_CASE = (lowercase == null) ? false : Boolean.valueOf(lowercase);
 		UPPER_CASE = (uppercase == null) ? false : Boolean.valueOf(uppercase);
-		NON_ALPHA_NUM = (nonalphanum == null) ? false : Boolean.valueOf(nonalphanum);
+		NON_ALPHA_NUM = (nonalphanum == null) ? false : Boolean
+				.valueOf(nonalphanum);
 
 		StringBuilder builder = new StringBuilder("^(?=.{");
 		builder.append(LENGTH);

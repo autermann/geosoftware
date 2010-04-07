@@ -20,8 +20,9 @@ package org.sloth.persistence.impl;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
-import org.slf4j.LoggerFactory;
+
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sloth.model.BaseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,9 +31,14 @@ import org.springframework.transaction.annotation.Transactional;
  * Abstract class for Data Acccess Objects using an {@code EntityManager}
  * 
  * @param <T>
- *            TODO
+ *            a subtype of {@link BaseEntity}F
  * @see EntityManager
  * @author Christian Autermann
+ * @author Stefan Arndt
+ * @author Dustin Demuth
+ * @author Christoph Fendrich
+ * @author Simon Ottenhues
+ * @author Christian Paluschek
  */
 @Transactional
 @Repository
@@ -41,7 +47,8 @@ public abstract class EntityManagerDao<T extends BaseEntity> {
 	/**
 	 * {@code Logger}-Facade for this class and subclasses.
 	 */
-	protected static final Logger logger = LoggerFactory.getLogger(EntityManagerDao.class);
+	protected static final Logger logger = LoggerFactory
+			.getLogger(EntityManagerDao.class);
 	private EntityManager entityManager;
 
 	/**
@@ -66,10 +73,13 @@ public abstract class EntityManagerDao<T extends BaseEntity> {
 	}
 
 	/**
-	 * @todo
+	 * Returns wether the Entity is attached to the {@code EntityManager}.
+	 * 
 	 * @param t
-	 * @return
+	 *            the Entity
+	 * @return {@code true} if it is attached, otherwise {@code false}
 	 * @throws NullPointerException
+	 *             if{@code t} is {@code null}
 	 */
 	protected boolean isAttached(T t) throws NullPointerException {
 		if (t == null) {

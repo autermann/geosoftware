@@ -19,33 +19,96 @@ package org.sloth.service;
 
 import java.util.Collection;
 import java.util.List;
+
 import org.sloth.exceptions.ConstraintViolationException;
-import org.sloth.model.Observation;
 import org.sloth.model.Categorie;
+import org.sloth.model.Observation;
 import org.sloth.model.Report;
 import org.sloth.model.User;
 
 /**
- * Service interface to handle {@code Observations} and {@code Categorie}s.
+ * Service interface to handle {@code Observation}s, {@code Categorie}s and
+ * {@code Report}s.
  * 
  * @see Categorie
  * @see Observation
+ * @see Report
  * @author Christian Autermann
+ * @author Stefan Arndt
+ * @author Dustin Demuth
+ * @author Christoph Fendrich
+ * @author Simon Ottenhues
+ * @author Christian Paluschek
  */
 public interface ObservationService {
 
 	/**
-	 * Returns the {@code Observation} with the specified {@code id}. If the
-	 * system does not an {@code Observation} with that id, {@code null} is
-	 * returned.
+	 * Deletes a {@code Categorie}.
+	 * 
+	 * @param categorie
+	 *            the {@code Categorie}
+	 * @throws NullPointerException
+	 *             if {@code categorie} is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if {@code categorie} is not know by the system or {@code
+	 *             categorie} is the default {@code Categorie}
+	 */
+	public void deleteCategorie(Categorie categorie)
+			throws NullPointerException, IllegalArgumentException;
+
+	/**
+	 * Deletes a {@code Categorie}.
 	 * 
 	 * @param id
-	 *            the {@code id} of the {@code Observation}
-	 * @return the {@code Observation} or {@code null}
+	 *            the id
 	 * @throws NullPointerException
 	 *             if {@code id} is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if no {@code Categorie} with {@code id} as Id is known by the
+	 *             system or the matching {@code categorie} is the default
+	 *             {@code Categorie}
 	 */
-	public Observation getObservation(Long id) throws NullPointerException;
+	public void deleteCategorie(Long id);
+
+	/**
+	 * Deletes an {@code Observation}.
+	 * 
+	 * @param id
+	 *            the id
+	 * @throws NullPointerException
+	 *             if {@code id} is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if no {@code Observation} with {@code id} as Id is known by
+	 *             the system
+	 */
+	public void deleteObservation(Long id) throws NullPointerException,
+			IllegalArgumentException;
+
+	/**
+	 * Deletes an {@code Observation}.
+	 * 
+	 * @param observation
+	 *            the {@code Observation}
+	 * @throws NullPointerException
+	 *             if {@code observation} is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if {@code observation} is not know by the system
+	 */
+	public void deleteObservation(Observation observation)
+			throws NullPointerException, IllegalArgumentException;
+
+	/**
+	 * Unregisters a {@code Report}.
+	 * 
+	 * @param r
+	 *            the {@code Report} to delete
+	 * @throws NullPointerException
+	 *             if {@code r} is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if {@code r} is not known
+	 */
+	public void deleteReport(Report r) throws NullPointerException,
+			IllegalArgumentException;
 
 	/**
 	 * Returns the {@code Categorie} with the specified {@code id}. If the
@@ -59,6 +122,50 @@ public interface ObservationService {
 	 *             if {@code id} is {@code null}
 	 */
 	public Categorie getCategorie(Long id) throws NullPointerException;
+
+	/**
+	 * Returns the {@code Categorie}s with the {@code title}.
+	 * 
+	 * @param title
+	 *            the title
+	 * @return the matching {@code Categorie} or {@code null} if none is present
+	 * @throws NullPointerException
+	 *             if {@code title} is {@code null}
+	 */
+	public Categorie getCategorieByTitle(String title)
+			throws NullPointerException;
+
+	/**
+	 * Returns all {@code Categorie}s known by the system. If no {@code
+	 * Categorie} is known an empty {@code Collection} will be returned.
+	 * 
+	 * @return all {@code Categorie}s
+	 */
+	public Collection<Categorie> getCategories();
+
+	/**
+	 * Returns the last created {@code Observation}s. Newest first. If there are
+	 * less {@code Obseravtion}s than {@code u} all {@code Observation}s are
+	 * returned.
+	 * 
+	 * @param u
+	 *            speciefies how many {@code Observation}s will be returned.
+	 * @return {@code u} or less {@code Observation}s. Newest first.
+	 */
+	public List<Observation> getNewestObservations(int u);
+
+	/**
+	 * Returns the {@code Observation} with the specified {@code id}. If the
+	 * system does not an {@code Observation} with that id, {@code null} is
+	 * returned.
+	 * 
+	 * @param id
+	 *            the {@code id} of the {@code Observation}
+	 * @return the {@code Observation} or {@code null}
+	 * @throws NullPointerException
+	 *             if {@code id} is {@code null}
+	 */
+	public Observation getObservation(Long id) throws NullPointerException;
 
 	/**
 	 * Returns all {@code Observation}s known by the system. If no {@code
@@ -93,67 +200,134 @@ public interface ObservationService {
 			throws NullPointerException;
 
 	/**
-	 * Returns all {@code Categorie}s known by the system. If no {@code
-	 * Categorie} is known an empty {@code Collection} will be returned.
+	 * Returns all {@code Observation}s created by the the specified {@code
+	 * User}.
 	 * 
-	 * @return all {@code Categorie}s
-	 */
-	public Collection<Categorie> getCategories();
-
-	/**
-	 * Deletes an {@code Observation}.
-	 * 
-	 * @param id
-	 *            the id
+	 * @param u
+	 *            the {@code User}
+	 * @return all {@code Observation}s created by {@code u}
 	 * @throws NullPointerException
-	 *             if {@code id} is {@code null}
+	 *             if {@code u} is {@code null}
 	 * @throws IllegalArgumentException
-	 *             if no {@code Observation} with {@code id} as Id is known by
-	 *             the system
+	 *             if {@code u} is not known
 	 */
-	public void deleteObservation(Long id) throws NullPointerException,
-			IllegalArgumentException;
-
-	/**
-	 * Deletes an {@code Observation}.
-	 * 
-	 * @param observation
-	 *            the {@code Observation}
-	 * @throws NullPointerException
-	 *             if {@code observation} is {@code null}
-	 * @throws IllegalArgumentException
-	 *             if {@code observation} is not know by the system
-	 */
-	public void deleteObservation(Observation observation)
+	public Collection<Observation> getObservationsByUser(User u)
 			throws NullPointerException, IllegalArgumentException;
 
 	/**
-	 * Deletes a {@code Categorie}.
+	 * Searches for a {@code Report} with the specified {@code id}.
+	 * 
+	 * @param id
+	 *            the id
+	 * @return the {@code Report} with this {@code id} or {@code null} if no
+	 *         found
+	 * @throws NullPointerException
+	 *             if {@code id} is {@code null}
+	 */
+	public Report getReport(Long id) throws NullPointerException;
+
+	/**
+	 * Returns all known {@code Report}s.
+	 * 
+	 * @return all {@code Report}s
+	 */
+	public Collection<Report> getReports();
+
+	/**
+	 * Returns all {@code Report}s made for a specified {@code Observation}.
+	 * 
+	 * @param o
+	 *            the {@code Observation}
+	 * @return all {@code Report}s made for {@code o}
+	 * @throws NullPointerException
+	 *             if {@code o} is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if {@code o} is not known
+	 */
+	public Collection<Report> getReportsByObservation(Observation o)
+			throws NullPointerException, IllegalArgumentException;
+
+	/**
+	 * Returns all {@code Report}s with the specified processed-state.
+	 * 
+	 * @param processed
+	 *            the state
+	 * @return all {@code Report}s with the specified state
+	 */
+	public Collection<Report> getReportsByProcessedState(boolean processed);
+
+	/**
+	 * Returns all {@code Report}s created by a {@code User}.
+	 * 
+	 * @param u
+	 *            the {@code author}
+	 * @return all {@code Report}s created by {@code u}
+	 * @throws NullPointerException
+	 *             if {@code u} is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if {@code u} is not known
+	 */
+	public Collection<Report> getReportsByUser(User u)
+			throws NullPointerException, IllegalArgumentException;
+
+	/**
+	 * Returns wether the {@code title} is available. The {@code Cateogorie}
+	 * {@code title} has to be unique.
+	 * 
+	 * @param title
+	 *            the title.
+	 * @return {@code true} if available, otherwise {@code false}
+	 * @throws NullPointerException
+	 *             if {@code title} is {@code null}.
+	 */
+	public boolean isCategorieTitleAvailable(String title)
+			throws NullPointerException;
+
+	/**
+	 * Adds a {@code Categorie} to the system.
 	 * 
 	 * @param categorie
 	 *            the {@code Categorie}
 	 * @throws NullPointerException
 	 *             if {@code categorie} is {@code null}
 	 * @throws IllegalArgumentException
-	 *             if {@code categorie} is not know by the system or {@code
-	 *             categorie} is the default {@code Categorie}
+	 *             if {@code categorie} is already known by the system.
+	 * @throws ConstraintViolationException
+	 *             if {@code categorie} violates a system constraint
 	 */
-	public void deleteCategorie(Categorie categorie)
-			throws NullPointerException, IllegalArgumentException;
+	public void registrate(Categorie categorie) throws NullPointerException,
+			IllegalArgumentException, ConstraintViolationException;
 
 	/**
-	 * Deletes a {@code Categorie}.
+	 * Adds an {@code Observation} to the system.
 	 * 
-	 * @param id
-	 *            the id
+	 * @param observation
+	 *            the {@code Observation}
 	 * @throws NullPointerException
-	 *             if {@code id} is {@code null}
+	 *             if {@code observation} is {@code null}
 	 * @throws IllegalArgumentException
-	 *             if no {@code Categorie} with {@code id} as Id is known by the
-	 *             system or the matching {@code categorie} is the default
-	 *             {@code Categorie}
+	 *             if {@code observation} is already known by the system.
+	 * @throws ConstraintViolationException
+	 *             if {@code observation} violates a system constraint
 	 */
-	public void deleteCategorie(Long id);
+	public void registrate(Observation observation)
+			throws NullPointerException, IllegalArgumentException,
+			ConstraintViolationException;
+
+	/**
+	 * Registrates a {@code Report}.
+	 * 
+	 * @param r
+	 *            the {@code Report}
+	 * @throws NullPointerException
+	 *             if {@code r} is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if {@code r} is already known.
+	 * @throws ConstraintViolationException
+	 *             if {@code r} violates any constraint
+	 */
+	public void registrate(Report r) throws NullPointerException,
+			IllegalArgumentException, ConstraintViolationException;
 
 	/**
 	 * Merges changes made to {@code categorie} into the system.
@@ -188,62 +362,17 @@ public interface ObservationService {
 			ConstraintViolationException;
 
 	/**
-	 * Adds a {@code Categorie} to the system.
+	 * Persist changes made to an specified {@code Report}.
 	 * 
-	 * @param categorie
-	 *            the {@code Categorie}
+	 * @param r
+	 *            the {@code Report}
 	 * @throws NullPointerException
-	 *             if {@code categorie} is {@code null}
+	 *             if {@code r} is {@code null}
 	 * @throws IllegalArgumentException
-	 *             if {@code categorie} is already known by the system.
+	 *             if {@code r} is not known.
 	 * @throws ConstraintViolationException
-	 *             if {@code categorie} violates a system constraint
+	 *             if {@code r} violates any constraint
 	 */
-	public void registrate(Categorie categorie) throws NullPointerException,
-			IllegalArgumentException, ConstraintViolationException;
-
-	/**
-	 * Adds an {@code Observation} to the system.
-	 * 
-	 * @param observation
-	 *            the {@code Observation}
-	 * @throws NullPointerException
-	 *             if {@code observation} is {@code null}
-	 * @throws IllegalArgumentException
-	 *             if {@code observation} is already known by the system.
-	 * @throws ConstraintViolationException
-	 *             if {@code observation} violates a system constraint
-	 */
-	public void registrate(Observation observation)
-			throws NullPointerException, IllegalArgumentException,
-			ConstraintViolationException;
-
-	public Categorie getCategorieByTitle(String title);
-
-	public boolean isCategorieTitleAvailable(String title);
-
-	public Collection<Observation> getObservationsByUser(User u);
-
-	public List<Observation> getNewestObservations(int u);
-
-	public Collection<Report> getReports();
-
-	public Collection<Report> getReportsByUser(User u)
-			throws NullPointerException, IllegalArgumentException;
-
-	public Collection<Report> getReportsByObservation(Observation o)
-			throws NullPointerException, IllegalArgumentException;
-
-	public Collection<Report> getReportsByProcessedState(boolean processed);
-
-	public void deleteReport(Report r) throws NullPointerException,
-			IllegalArgumentException;
-
-	public void registrate(Report r) throws NullPointerException,
-			IllegalArgumentException, ConstraintViolationException;
-
-	public Report getReport(Long id) throws NullPointerException;
-
 	public void updateReport(Report r) throws NullPointerException,
 			IllegalArgumentException, ConstraintViolationException;
 }

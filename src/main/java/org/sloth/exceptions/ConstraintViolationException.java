@@ -17,6 +17,16 @@
  */
 package org.sloth.exceptions;
 
+/**
+ * Exception which can be thrown, if some field constraint is violated.
+ * 
+ * @author Christian Autermann
+ * @author Stefan Arndt
+ * @author Dustin Demuth
+ * @author Christoph Fendrich
+ * @author Simon Ottenhues
+ * @author Christian Paluschek
+ */
 public class ConstraintViolationException extends Error {
 
 	private static final long serialVersionUID = -5899819351115968894L;

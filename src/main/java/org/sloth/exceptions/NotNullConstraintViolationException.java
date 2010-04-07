@@ -17,6 +17,17 @@
  */
 package org.sloth.exceptions;
 
+/**
+ * Exception which can be thrown, if a field violates a constraint by being
+ * {@code null}.
+ * 
+ * @author Christian Autermann
+ * @author Stefan Arndt
+ * @author Dustin Demuth
+ * @author Christoph Fendrich
+ * @author Simon Ottenhues
+ * @author Christian Paluschek
+ */
 public class NotNullConstraintViolationException extends
 		ConstraintViolationException {
 

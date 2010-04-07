@@ -22,6 +22,11 @@ package org.sloth.model;
  * 
  * @see User
  * @author Christian Autermann
+ * @author Stefan Arndt
+ * @author Dustin Demuth
+ * @author Christoph Fendrich
+ * @author Simon Ottenhues
+ * @author Christian Paluschek
  */
 public enum Group {
 

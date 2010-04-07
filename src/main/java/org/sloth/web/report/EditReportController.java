@@ -1,9 +1,37 @@
+/*
+ * Copyright (C) 2009-2010  Stefan Arndt, Christian Autermann, Dustin Demuth,
+ *                  Christoph Fendrich, Simon Ottenhues, Christian Paluschek
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package org.sloth.web.report;
+
+import static org.sloth.util.ControllerUtils.forbiddenMAV;
+import static org.sloth.util.ControllerUtils.forbiddenView;
+import static org.sloth.util.ControllerUtils.internalErrorView;
+import static org.sloth.util.ControllerUtils.isAdmin;
+import static org.sloth.util.ControllerUtils.isAuth;
+import static org.sloth.util.ControllerUtils.isOwnReport;
+import static org.sloth.util.ControllerUtils.notFoundMAV;
+import static org.sloth.util.ControllerUtils.notFoundView;
 
 import java.io.IOException;
 import java.util.Date;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sloth.model.Report;
@@ -21,11 +49,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
-import static org.sloth.util.ControllerUtils.*;
 
+/**
+ * 
+ * @author Christian Autermann
+ * @author Stefan Arndt
+ * @author Dustin Demuth
+ * @author Christoph Fendrich
+ * @author Simon Ottenhues
+ * @author Christian Paluschek
+ *
+ */
 @Controller
 @RequestMapping("/r/edit/{id}")
-@SessionAttributes(types = {Report.class, Boolean.class})
+@SessionAttributes(types = { Report.class, Boolean.class })
 public class EditReportController {
 
 	private ObservationService os;
@@ -33,8 +70,8 @@ public class EditReportController {
 	private static final String VIEW = "reports/form";
 	private static final String REPORT_ATTRIBUTE = "report";
 	private static final String PROCESSED_ATTRIBUTE = "processed";
-	private static final Logger logger = LoggerFactory.getLogger(
-			EditReportController.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(EditReportController.class);
 
 	/**
 	 * @param os
@@ -61,7 +98,7 @@ public class EditReportController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView handleGet(@PathVariable Long id, HttpSession s,
-								  HttpServletResponse r) throws IOException {
+			HttpServletResponse r) throws IOException {
 		if (isAuth(s)) {
 			Report report = os.getReport(id);
 			if (report == null) {
@@ -70,7 +107,8 @@ public class EditReportController {
 
 			if (isAdmin(s) || isOwnReport(s, report)) {
 				ModelAndView mav = new ModelAndView(VIEW);
-				mav.addObject(PROCESSED_ATTRIBUTE, new Boolean(report.isProcessed()));
+				mav.addObject(PROCESSED_ATTRIBUTE, new Boolean(report
+						.isProcessed()));
 				mav.addObject(REPORT_ATTRIBUTE, report);
 				return mav;
 			}
@@ -81,17 +119,15 @@ public class EditReportController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String handlePost(@PathVariable Long id,
-							 @ModelAttribute(PROCESSED_ATTRIBUTE) Boolean p,
-							 @ModelAttribute(REPORT_ATTRIBUTE) Report report,
-							 BindingResult result,
-							 SessionStatus status, HttpSession s,
-							 HttpServletResponse resp)
-			throws IOException {
+			@ModelAttribute(PROCESSED_ATTRIBUTE) Boolean p,
+			@ModelAttribute(REPORT_ATTRIBUTE) Report report,
+			BindingResult result, SessionStatus status, HttpSession s,
+			HttpServletResponse resp) throws IOException {
 		if (isAuth(s)) {
 			if (report == null) {
 				return notFoundView(resp);
-			} else if (!isAdmin(s) && !p.equals(Boolean.valueOf(report.
-					isProcessed()))) {
+			} else if (!isAdmin(s)
+					&& !p.equals(Boolean.valueOf(report.isProcessed()))) {
 				return forbiddenView(resp);
 			} else if (isAdmin(s) || isOwnReport(s, report)) {
 				this.rv.validate(report, result);
@@ -102,7 +138,7 @@ public class EditReportController {
 				try {
 					report.setLastUpdateDate(new Date());
 					this.os.updateReport(report);
-				} catch(Exception e) {
+				} catch (Exception e) {
 					logger.warn("Unexpected Exception", e);
 					return internalErrorView(resp);
 				} finally {

@@ -17,6 +17,17 @@
  */
 package org.sloth.exceptions;
 
+/**
+ * Exception which can be thrown, if an Entity which should be new is already
+ * known.
+ * 
+ * @author Christian Autermann
+ * @author Stefan Arndt
+ * @author Dustin Demuth
+ * @author Christoph Fendrich
+ * @author Simon Ottenhues
+ * @author Christian Paluschek
+ */
 public class EntityAlreadyKnownException extends IllegalArgumentException {
 
 	private static final long serialVersionUID = -1558670202310618862L;

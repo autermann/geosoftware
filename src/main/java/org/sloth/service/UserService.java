@@ -18,6 +18,7 @@
 package org.sloth.service;
 
 import java.util.Collection;
+
 import org.sloth.exceptions.ConstraintViolationException;
 import org.sloth.model.User;
 
@@ -26,40 +27,13 @@ import org.sloth.model.User;
  * 
  * @see User
  * @author Christian Autermann
+ * @author Stefan Arndt
+ * @author Dustin Demuth
+ * @author Christoph Fendrich
+ * @author Simon Ottenhues
+ * @author Christian Paluschek
  */
 public interface UserService {
-
-	/**
-	 * Returns all {@code User}s known by the system. If no {@code User}s are
-	 * known an empty {@code Collection} will be returned.
-	 * 
-	 * @return all {@code User}s
-	 */
-	public Collection<User> getUsers();
-
-	/**
-	 * Returns the {@code User} with the specified mail address. If no {@code
-	 * User} is found {@code null} will be returned.
-	 * 
-	 * @param mail
-	 *            the mail address
-	 * @return the {@code User} or {@code null}
-	 * @throws NullPointerException
-	 *             if {@code mail} is {@code null}
-	 */
-	public User get(String mail) throws NullPointerException;
-
-	/**
-	 * Returns the {@code User} with the specified id. If no {@code User} is
-	 * found {@code null} will be returned.
-	 * 
-	 * @param id
-	 *            the id
-	 * @return the {@code User} or {@code null}
-	 * @throws NullPointerException
-	 *             if {@code id} is {@code null}
-	 */
-	public User get(Long id) throws NullPointerException;
 
 	/**
 	 * Deletes the {@code User} with the specified id.
@@ -86,6 +60,67 @@ public interface UserService {
 	 */
 	public void delete(User user) throws NullPointerException,
 			IllegalArgumentException;
+
+	/**
+	 * Returns the {@code User} with the specified id. If no {@code User} is
+	 * found {@code null} will be returned.
+	 * 
+	 * @param id
+	 *            the id
+	 * @return the {@code User} or {@code null}
+	 * @throws NullPointerException
+	 *             if {@code id} is {@code null}
+	 */
+	public User get(Long id) throws NullPointerException;
+
+	/**
+	 * Returns the {@code User} with the specified mail address. If no {@code
+	 * User} is found {@code null} will be returned.
+	 * 
+	 * @param mail
+	 *            the mail address
+	 * @return the {@code User} or {@code null}
+	 * @throws NullPointerException
+	 *             if {@code mail} is {@code null}
+	 */
+	public User get(String mail) throws NullPointerException;
+
+	/**
+	 * Returns all {@code User}s known by the system. If no {@code User}s are
+	 * known an empty {@code Collection} will be returned.
+	 * 
+	 * @return all {@code User}s
+	 */
+	public Collection<User> getUsers();
+
+	/**
+	 * Checks wether the specified mail address is not owned by any {@code User}
+	 * .
+	 * 
+	 * @param mail
+	 *            the mail address
+	 * @return {@code true} if available, otherwise {@code false}
+	 * @throws NullPointerException
+	 *             if {@code mail} is {@code null}
+	 */
+	public boolean isMailAddressAvailable(String mail)
+			throws NullPointerException;
+
+	/**
+	 * Tests if a matching {@code User} exists in the system and return the
+	 * found {@code User}. If no {@code User} found, {@code null} will be
+	 * returned.
+	 * 
+	 * @param mail
+	 *            the mail address
+	 * @param plainPassword
+	 *            the plain password
+	 * @return the {@code User} or {@code null}
+	 * @throws NullPointerException
+	 *             if {@code login} is {@code null}
+	 */
+	public User login(String mail, String plainPassword)
+			throws NullPointerException;
 
 	/**
 	 * Adds a new {@code User} to the system.
@@ -116,20 +151,4 @@ public interface UserService {
 	 */
 	public void update(User u) throws NullPointerException,
 			IllegalArgumentException, ConstraintViolationException;
-
-	/**
-	 * Tests if a matching {@code User} exists in the system and return the
-	 * found {@code User}. If no {@code User} found, {@code null} will be
-	 * returned.
-	 * 
-	 * @param mail the mail address
-	 * @param plainPassword the plain password
-	 * @return the {@code User} or {@code null}
-	 * @throws NullPointerException
-	 *             if {@code login} is {@code null}
-	 */
-	public User login(String mail, String plainPassword) throws NullPointerException;
-
-	public boolean isMailAddressAvailable(String mail) throws NullPointerException;
-
 }

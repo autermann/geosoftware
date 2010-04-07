@@ -17,8 +17,11 @@
  */
 package org.sloth.model;
 
+import static javax.persistence.TemporalType.TIMESTAMP;
+
 import java.io.Serializable;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -26,15 +29,21 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.Transient;
+
 import org.sloth.exceptions.ConstraintViolationException;
 import org.sloth.exceptions.FieldLengthConstraintViolationException;
 import org.sloth.exceptions.NotNullConstraintViolationException;
-import static javax.persistence.TemporalType.TIMESTAMP;
 
 /**
- * Class to represent an Observation in an {@code Categorie} created by a 
+ * Class to represent an Observation in an {@code Categorie} created by a
  * {@code User}.
+ * 
  * @author Christian Autermann
+ * @author Stefan Arndt
+ * @author Dustin Demuth
+ * @author Christoph Fendrich
+ * @author Simon Ottenhues
+ * @author Christian Paluschek
  */
 @Entity(name = "OBSERVATIONS")
 public class Observation extends BaseEntity implements Serializable {
@@ -59,24 +68,6 @@ public class Observation extends BaseEntity implements Serializable {
 	private Coordinate coordinate;
 
 	/**
-	 * @todo
-	 * @param title
-	 * @param description
-	 * @param user
-	 * @param categorie
-	 * @param coordinate
-	 */
-	public Observation(String title, String description, User user,
-			Categorie categorie, Coordinate coordinate) {
-		this.creationDate = new Date();
-		this.title = title;
-		this.description = description;
-		this.user = user;
-		this.categorie = categorie;
-		this.coordinate = coordinate;
-	}
-
-	/**
 	 * Creates a new {@code Observation} with the actual time as the {@code
 	 * creationDate} and {@code null} as default value for all other properties.
 	 */
@@ -85,92 +76,26 @@ public class Observation extends BaseEntity implements Serializable {
 	}
 
 	/**
-	 * @return the title
-	 */
-	public String getTitle() {
-		return title;
-	}
-
-	/**
+	 * Creates a new {@code Observation}.
+	 * 
 	 * @param title
-	 *            the title to set
-	 */
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	/**
-	 * @return the description
-	 */
-	public String getDescription() {
-		return description;
-	}
-
-	/**
+	 *            the title
 	 * @param description
-	 *            the description to set
-	 */
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	/**
-	 * @return the user
-	 */
-	public User getUser() {
-		return user;
-	}
-
-	/**
+	 *            the description
 	 * @param user
-	 *            the user to set
-	 */
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	/**
-	 * @return the timestamp
-	 */
-	public Date getCreationDate() {
-		return creationDate;
-	}
-
-	/**
-	 * @todo
-	 * @param creationDate
-	 */
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
-
-	/**
-	 * @return the categorie
-	 */
-	public Categorie getCategorie() {
-		return categorie;
-	}
-
-	/**
-	 * @todo
+	 *            the user
 	 * @param categorie
-	 */
-	public void setCategorie(Categorie categorie) {
-		this.categorie = categorie;
-	}
-
-	/**
-	 * @return the coordinate
-	 */
-	public Coordinate getCoordinate() {
-		return coordinate;
-	}
-
-	/**
+	 *            the categorie
 	 * @param coordinate
-	 *            the coordinate to set
+	 *            the coordinate
 	 */
-	public void setCoordinate(Coordinate coordinate) {
+	public Observation(String title, String description, User user,
+			Categorie categorie, Coordinate coordinate) {
+		this.creationDate = new Date();
+		this.title = title;
+		this.description = description;
+		this.user = user;
+		this.categorie = categorie;
 		this.coordinate = coordinate;
 	}
 
@@ -183,18 +108,113 @@ public class Observation extends BaseEntity implements Serializable {
 		}
 	}
 
+	/**
+	 * @return the categorie
+	 */
+	public Categorie getCategorie() {
+		return categorie;
+	}
+
+	/**
+	 * @return the coordinate
+	 */
+	public Coordinate getCoordinate() {
+		return coordinate;
+	}
+
+	/**
+	 * @return the timestamp
+	 */
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * @return the title
+	 */
+	public String getTitle() {
+		return title;
+	}
+
+	/**
+	 * @return the user
+	 */
+	public User getUser() {
+		return user;
+	}
+
 	@Override
 	public int hashCode() {
 		int hash = 7;
 		hash = 59 * hash + this.getVersion();
 		hash = 59 * hash + (this.getId() != null ? this.getId().hashCode() : 0);
 		hash = 59 * hash + (this.title != null ? this.title.hashCode() : 0);
-		hash = 59 * hash + (this.description != null ? this.description.hashCode() : 0);
+		hash = 59 * hash
+				+ (this.description != null ? this.description.hashCode() : 0);
 		hash = 59 * hash + (this.user != null ? user.hashCode() : 0);
-		hash = 59 * hash + (this.creationDate != null ? this.creationDate.hashCode() : 0);
-		hash = 59 * hash + (this.categorie != null ? this.categorie.hashCode() : 0);
-		hash = 59 * hash + (this.coordinate != null ? this.coordinate.hashCode() : 0);
+		hash = 59
+				* hash
+				+ (this.creationDate != null ? this.creationDate.hashCode() : 0);
+		hash = 59 * hash
+				+ (this.categorie != null ? this.categorie.hashCode() : 0);
+		hash = 59 * hash
+				+ (this.coordinate != null ? this.coordinate.hashCode() : 0);
 		return hash;
+	}
+
+	/**
+	 * @param categorie
+	 *            the categorie to set
+	 */
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
+	}
+
+	/**
+	 * @param coordinate
+	 *            the coordinate to set
+	 */
+	public void setCoordinate(Coordinate coordinate) {
+		this.coordinate = coordinate;
+	}
+
+	/**
+	 * @param creationDate
+	 *            the creationDate to set
+	 */
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
+
+	/**
+	 * @param description
+	 *            the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	/**
+	 * @param title
+	 *            the title to set
+	 */
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	/**
+	 * @param user
+	 *            the user to set
+	 */
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override
@@ -220,9 +240,8 @@ public class Observation extends BaseEntity implements Serializable {
 
 	@Override
 	public void validate() throws ConstraintViolationException {
-		if (coordinate == null || creationDate == null
-				|| description == null || title == null
-				|| user == null || description.isEmpty()
+		if (coordinate == null || creationDate == null || description == null
+				|| title == null || user == null || description.isEmpty()
 				|| title.isEmpty()) {
 			throw new NotNullConstraintViolationException();
 		}

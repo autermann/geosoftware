@@ -17,12 +17,40 @@
  */
 package org.sloth.validation;
 
+import static org.sloth.util.ValidationUtils.isNotEmptyOrWhitespace;
+import static org.sloth.util.ValidationUtils.rejectIfTooLong;
+import static org.sloth.validation.ErrorCodes.USER_EDIT.BAD_SECURED_NEW_PASSWORD;
+import static org.sloth.validation.ErrorCodes.USER_EDIT.CAN_NOT_CHANGE_OWN_GROUP;
+import static org.sloth.validation.ErrorCodes.USER_EDIT.EMPTY_ACTUAL_PASSWORD;
+import static org.sloth.validation.ErrorCodes.USER_EDIT.EMPTY_NEW_FAMILY_NAME;
+import static org.sloth.validation.ErrorCodes.USER_EDIT.EMPTY_NEW_MAIL;
+import static org.sloth.validation.ErrorCodes.USER_EDIT.EMPTY_NEW_NAME;
+import static org.sloth.validation.ErrorCodes.USER_EDIT.EMPTY_NEW_PASSWORD;
+import static org.sloth.validation.ErrorCodes.USER_EDIT.EMPTY_NEW_PASSWORD_REPEAT;
+import static org.sloth.validation.ErrorCodes.USER_EDIT.INVALID_NEW_MAIL;
+import static org.sloth.validation.ErrorCodes.USER_EDIT.NOT_UNIQUE_NEW_MAIL;
+import static org.sloth.validation.ErrorCodes.USER_EDIT.TOO_LONG_NEW_FAMILY_NAME;
+import static org.sloth.validation.ErrorCodes.USER_EDIT.TOO_LONG_NEW_NAME;
+import static org.sloth.validation.ErrorCodes.USER_EDIT.WRONG_ACTUAL_PASSWORD;
+import static org.sloth.validation.ErrorCodes.USER_EDIT.WRONG_NEW_PASSWORD_REPEAT;
+import static org.springframework.validation.ValidationUtils.rejectIfEmptyOrWhitespace;
+
 import org.sloth.web.action.UserEditFormAction;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
-import static org.sloth.util.ValidationUtils.*;
-import static org.sloth.validation.ErrorCodes.USER_EDIT.*;
 
+
+/**
+ * A {@code Validator} for validating {@code UserEditFormAction}s.
+ * 
+ * @author Christian Autermann
+ * @author Stefan Arndt
+ * @author Dustin Demuth
+ * @author Christoph Fendrich
+ * @author Simon Ottenhues
+ * @author Christian Paluschek
+ * 
+ */
 @Component
 public class UserEditFormValidator extends AbstractUserActionValidator {
 
@@ -36,9 +64,10 @@ public class UserEditFormValidator extends AbstractUserActionValidator {
 		UserEditFormAction a = (UserEditFormAction) t;
 		if (!a.getEditingUser().getId().equals(a.getOldUser().getId())) {
 			test(a, e);
-		} else if (!notNullAndNotEmpty(a.getActualPassword())) {
+		} else if (!isNotEmptyOrWhitespace(a.getActualPassword())) {
 			e.rejectValue("actualPassword", EMPTY_ACTUAL_PASSWORD);
-		} else if (this.passwordService.check(a.getOldUser().getPassword(), a.getActualPassword())) {
+		} else if (this.passwordService.check(a.getOldUser().getPassword(), a
+				.getActualPassword())) {
 			test(a, e);
 			if (!a.getNewGroup().equals(a.getOldUser().getUserGroup())) {
 				e.rejectValue("newGroup", CAN_NOT_CHANGE_OWN_GROUP);
@@ -63,8 +92,8 @@ public class UserEditFormValidator extends AbstractUserActionValidator {
 		}
 		String newPassword = a.getNewPassword();
 		String newPasswordRepeat = a.getNewPasswordRepeat();
-		if (notNullAndNotEmpty(newPassword)) {
-			if (!notNullAndNotEmpty(newPasswordRepeat)) {
+		if (isNotEmptyOrWhitespace(newPassword)) {
+			if (!isNotEmptyOrWhitespace(newPasswordRepeat)) {
 				e.rejectValue("newPasswordRepeat", EMPTY_NEW_PASSWORD_REPEAT);
 			} else if (!newPassword.equals(newPasswordRepeat)) {
 				e.rejectValue("newPasswordRepeat", WRONG_NEW_PASSWORD_REPEAT);
@@ -73,7 +102,7 @@ public class UserEditFormValidator extends AbstractUserActionValidator {
 			} else {
 				e.rejectValue("newPassword", BAD_SECURED_NEW_PASSWORD);
 			}
-		} else if (notNullAndNotEmpty(newPasswordRepeat)) {
+		} else if (isNotEmptyOrWhitespace(newPasswordRepeat)) {
 			e.rejectValue("newPassword", EMPTY_NEW_PASSWORD);
 		}
 	}

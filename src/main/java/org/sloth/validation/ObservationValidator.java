@@ -17,14 +17,33 @@
  */
 package org.sloth.validation;
 
+import static org.sloth.util.ValidationUtils.rejectIfNull;
+import static org.sloth.util.ValidationUtils.rejectIfTooLong;
+import static org.sloth.validation.ErrorCodes.OBSERVATION.EMPTY_CATEGORIE;
+import static org.sloth.validation.ErrorCodes.OBSERVATION.EMPTY_DESCRIPTION;
+import static org.sloth.validation.ErrorCodes.OBSERVATION.EMPTY_TITLE;
+import static org.sloth.validation.ErrorCodes.OBSERVATION.EMPTY_USER;
+import static org.sloth.validation.ErrorCodes.OBSERVATION.TOO_LONG_DESCRIPTION;
+import static org.sloth.validation.ErrorCodes.OBSERVATION.TOO_LONG_TITLE;
+import static org.springframework.validation.ValidationUtils.invokeValidator;
+import static org.springframework.validation.ValidationUtils.rejectIfEmptyOrWhitespace;
+
 import org.sloth.model.Observation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import static org.sloth.util.ValidationUtils.*;
-import static org.sloth.validation.ErrorCodes.OBSERVATION.*;
 
+/**
+ * A {@code Validator} for validating {@code Observation}s.
+ * @author Christian Autermann
+ * @author Stefan Arndt
+ * @author Dustin Demuth
+ * @author Christoph Fendrich
+ * @author Simon Ottenhues
+ * @author Christian Paluschek
+ *
+ */
 @Component
 public class ObservationValidator implements Validator {
 
@@ -49,7 +68,8 @@ public class ObservationValidator implements Validator {
 		rejectIfNull(e, "categorie", EMPTY_CATEGORIE);
 		rejectIfNull(e, "user", EMPTY_USER);
 		e.setNestedPath("coordinate");
-		invokeValidator(this.coordinateValidator, ((Observation) t).getCoordinate(), e);
+		invokeValidator(this.coordinateValidator, ((Observation) t)
+				.getCoordinate(), e);
 		e.setNestedPath(null);
 	}
 }

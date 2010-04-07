@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth,
- * 					 Christoph Fendrich, Christian Paluschek
+ * Copyright (C) 2009-2010  Stefan Arndt, Christian Autermann, Dustin Demuth,
+ *                  Christoph Fendrich, Simon Ottenhues, Christian Paluschek
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,13 +17,17 @@
  */
 package org.sloth.web.account;
 
+import static org.sloth.util.ControllerUtils.auth;
+import static org.sloth.util.ControllerUtils.isAuth;
+
 import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sloth.model.User;
-import org.sloth.web.action.Login;
 import org.sloth.service.UserService;
 import org.sloth.validation.LoginValidator;
+import org.sloth.web.action.Login;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -35,8 +39,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
-import static org.sloth.util.ControllerUtils.*;
 
+/**
+ * 
+ * @author Christian Autermann
+ * @author Stefan Arndt
+ * @author Dustin Demuth
+ * @author Christoph Fendrich
+ * @author Simon Ottenhues
+ * @author Christian Paluschek
+ *
+ */
 @Controller
 @RequestMapping("/login")
 @SessionAttributes(types = Login.class)
@@ -44,8 +57,8 @@ public class LoginController {
 
 	private static final String VIEW = "login";
 	private static final String LOGIN_ATTRIBUTE = "login";
-	private static final Logger logger = LoggerFactory.getLogger(
-			LoginController.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(LoginController.class);
 	private UserService us;
 	private LoginValidator lv;
 
@@ -75,8 +88,7 @@ public class LoginController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String login(@ModelAttribute(LOGIN_ATTRIBUTE) Login l,
-						BindingResult result, SessionStatus status,
-						HttpSession s) {
+			BindingResult result, SessionStatus status, HttpSession s) {
 		if (isAuth(s)) {
 			return "redirect:/";
 		} else {

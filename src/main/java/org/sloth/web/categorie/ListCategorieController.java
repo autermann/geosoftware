@@ -17,16 +17,29 @@
  */
 package org.sloth.web.categorie;
 
+import static org.sloth.util.ControllerUtils.forbiddenMAV;
+import static org.sloth.util.ControllerUtils.isAdmin;
+
 import java.io.IOException;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.sloth.service.ObservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import static org.sloth.util.ControllerUtils.*;
-
+/**
+ * 
+ * @author Christian Autermann
+ * @author Stefan Arndt
+ * @author Dustin Demuth
+ * @author Christoph Fendrich
+ * @author Simon Ottenhues
+ * @author Christian Paluschek
+ *
+ */
 @Controller
 @RequestMapping("/c")
 public class ListCategorieController {
@@ -44,8 +57,8 @@ public class ListCategorieController {
 	public ModelAndView setupList(HttpSession s, HttpServletResponse r)
 			throws IOException {
 		if (isAdmin(s)) {
-			return new ModelAndView(VIEW, CATEGORIE_ATTRIBUTE,
-					this.os.getCategories());
+			return new ModelAndView(VIEW, CATEGORIE_ATTRIBUTE, this.os
+					.getCategories());
 		} else {
 			return forbiddenMAV(r);
 		}

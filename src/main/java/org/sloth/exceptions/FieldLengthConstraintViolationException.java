@@ -17,6 +17,17 @@
  */
 package org.sloth.exceptions;
 
+/**
+ * Exception which can be thrown, if the length of a field violates a
+ * constraint.
+ * 
+ * @author Christian Autermann
+ * @author Stefan Arndt
+ * @author Dustin Demuth
+ * @author Christoph Fendrich
+ * @author Simon Ottenhues
+ * @author Christian Paluschek
+ */
 public class FieldLengthConstraintViolationException extends
 		ConstraintViolationException {
 

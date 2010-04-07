@@ -28,13 +28,22 @@ import java.security.NoSuchAlgorithmException;
  * @deprecated not future safe.
  * @see BCryptPasswordService
  * @author Christian Autermann
+ * @author Stefan Arndt
+ * @author Dustin Demuth
+ * @author Christoph Fendrich
+ * @author Simon Ottenhues
+ * @author Christian Paluschek
  */
 @Deprecated
 public class MD5PasswordService extends AbstractPasswordService {
 
 	@Override
+	public boolean check(String hash, String plain) {
+		return hash(plain).equals(hash);
+	}
+
+	@Override
 	public String hash(String plain) {
-		String hash = null;
 		try {
 			MessageDigest m = MessageDigest.getInstance("MD5");
 			m.update(plain.getBytes());
@@ -44,10 +53,5 @@ public class MD5PasswordService extends AbstractPasswordService {
 			return null;
 		}
 
-	}
-
-	@Override
-	public boolean check(String hash, String plain) {
-		return hash(plain).equals(hash);
 	}
 }

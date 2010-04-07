@@ -26,17 +26,25 @@ import org.sloth.model.User;
  * @see User#getPassword()
  * 
  * @author Christian Autermann
+ * @author Stefan Arndt
+ * @author Dustin Demuth
+ * @author Christoph Fendrich
+ * @author Simon Ottenhues
+ * @author Christian Paluschek
  */
 public interface PasswordService {
 
 	/**
-	 * Tests the strength of a plain text password.
+	 * Checks wether the given password are the same.
 	 * 
+	 * @param hash
+	 *            the hashed password
 	 * @param plain
-	 *            the password
-	 * @return {@code true} if it is strong enough, {@code false} otherwise
+	 *            the plain password
+	 * @return {@code true} if the hash of the plain password is equal to the
+	 *         hashed password, otherwise {@code false}
 	 */
-	public boolean meetsRecommendation(String plain);
+	public boolean check(String hash, String plain);
 
 	/**
 	 * Hashs a plain text password.
@@ -58,14 +66,11 @@ public interface PasswordService {
 	public String hash(String plain);
 
 	/**
-	 * Checks wether the given password are the same.
+	 * Tests the strength of a plain text password.
 	 * 
-	 * @param hash
-	 *            the hashed password
 	 * @param plain
-	 *            the plain password
-	 * @return {@code true} if the hash of the plain password is equal to the
-	 *         hashed password, otherwise {@code false}
+	 *            the password
+	 * @return {@code true} if it is strong enough, {@code false} otherwise
 	 */
-	public boolean check(String hash, String plain);
+	public boolean meetsRecommendation(String plain);
 }
