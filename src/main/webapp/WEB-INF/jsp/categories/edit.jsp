@@ -42,7 +42,7 @@
 
 										<input type="submit" value="<fmt:message key="update.title"/>" />
 										<input type="button" value="<fmt:message key="cancel.title"/>" onclick="window.location.href='<s:url value="/c/"></s:url>'">
-										<input type="button" value="<fmt:message key="delete.title"/>" onclick="window.location.href='<s:url value="/c/del/${categorie.id}"></s:url>'">
+                                                                                <input type="button" value="<s:escapeBody htmlEscape="true"><fmt:message key="delete.title"/></s:escapeBody>" onclick="window.location.href='<s:url value="/c/del/${categorie.id}"></s:url>'">
 									</td>
 								</tr>
 							</table>
