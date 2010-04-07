@@ -111,9 +111,14 @@ tr.content {
 
 td.sidebar {
 	width: 30%;
+        
+        vertical-align: top;
 }
+
 td.mapArea {
 	width: 70%;
+        vertical-align: top;
+        height: 100%;
 }
 div.observationlist{
 	height: auto;
