@@ -249,4 +249,19 @@ public class Observation extends BaseEntity implements Serializable {
 			throw new FieldLengthConstraintViolationException();
 		}
 	}
+
+	@Override
+	public Object clone() {
+		Observation o = new Observation();
+		o.setCategorie(categorie);
+		o.setCoordinate((Coordinate) coordinate.clone());
+		o.setDescription(description);
+		o.setId(new Long(getId()));
+		o.setTitle(title);
+		o.setVersion(getVersion());
+		o.setCreationDate(creationDate);
+		o.setUser(user);
+		return o;
+
+	}
 }

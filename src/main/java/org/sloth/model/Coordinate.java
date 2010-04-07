@@ -33,7 +33,7 @@ import javax.persistence.Transient;
  * @author Christian Paluschek
  */
 @Embeddable
-public class Coordinate implements Serializable {
+public class Coordinate implements Serializable, Cloneable {
 
 	@Transient
 	private static final long serialVersionUID = 6550470689926763724L;
@@ -124,5 +124,13 @@ public class Coordinate implements Serializable {
 		buf.append(this.latitude);
 		buf.append(")");
 		return buf.toString();
+	}
+
+	@Override
+	public Object clone(){
+		Coordinate c = new Coordinate();
+		c.setLatitude(latitude);
+		c.setLongitude(longitude);
+		return c;
 	}
 }

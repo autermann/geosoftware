@@ -204,4 +204,18 @@ public class Report extends BaseEntity implements Serializable {
 			throw new FieldLengthConstraintViolationException();
 		}
 	}
+
+	@Override
+	public Object clone() {
+		Report r = new Report();
+		r.setCreationDate(creationDate);
+		r.setLastUpdateDate(lastUpdateDate);
+		r.setAuthor(author);
+		r.setObservation(observation);
+		r.setDescription(description);
+		r.setId(new Long(getId()));
+		r.setProcessed(processed);
+		r.setVersion(getVersion());
+		return r;
+	}
 }

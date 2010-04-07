@@ -38,8 +38,8 @@
 									<td width="20%" align="right" class="management_lists"><fmt:message key="observation.coordinate.title"/>:</td>
 									<td width="40%" align="left" class="management_lists">
 										<small>
-											Lon:<form:input path="coordinate.longitude"/><br/>
-											Lat:<form:input path="coordinate.latitude"/>
+											Lon:<form:input path="coordinate.longitude"/><form:errors cssStyle="color:red;" path="coordinate.longitude"/><br/>
+											Lat:<form:input path="coordinate.latitude"/><form:errors cssStyle="color:red;" path="coordinate.latitude"/>
 										</small>
 									</td>
 									<td width="40%" align="right" class="management_lists"><form:errors cssStyle="color:red;" path="coordinate"/></td>

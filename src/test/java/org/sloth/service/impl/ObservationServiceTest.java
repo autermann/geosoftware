@@ -129,9 +129,12 @@ public class ObservationServiceTest {
         User u = getUser();
         Observation o = getObservation(c, u);
         observationService.registrate(o);
+		String title = "new Title";
         assertNotNull(observationService.getObservation(o.getId()));
-        observationService.updateObservation(o);
-    }
+		o.setTitle(title);
+		observationService.updateObservation(o);
+		assertEquals(title, observationService.getObservation(o.getId()).getTitle());
+	}
 
     @Test
     public void testRegistrateObservation() throws Exception {
@@ -141,6 +144,7 @@ public class ObservationServiceTest {
         Observation o = getObservation(c, u);
         observationService.registrate(o);
         assertNotNull(observationService.getObservation(o.getId()));
+		assertNotNull(o.getId());
 
     }
 

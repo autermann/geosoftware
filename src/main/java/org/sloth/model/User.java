@@ -243,4 +243,18 @@ public class User extends BaseEntity implements Serializable {
 			throw new FieldLengthConstraintViolationException();
 		}
 	}
+
+	@Override
+	public Object clone() {
+		User u = new User();
+		u.setCreationDate(creationDate);
+		u.setFamilyName(familyName);
+		u.setId(new Long(getId()));
+		u.setMail(mail);
+		u.setName(name);
+		u.setPassword(password);
+		u.setUserGroup(userGroup);
+		u.setVersion(getVersion());
+		return u;
+	}
 }

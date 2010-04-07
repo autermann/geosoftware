@@ -159,4 +159,15 @@ public class Categorie extends BaseEntity implements Serializable {
 			throw new FieldLengthConstraintViolationException();
 		}
 	}
+
+	@Override
+	public Object clone() {
+		Categorie c = new Categorie();
+		c.setDescription(description);
+		c.setIconFileName(iconFileName);
+		c.setTitle(title);
+		c.setVersion(getVersion());
+		c.setId(new Long(getId()));
+		return c;
+	}
 }

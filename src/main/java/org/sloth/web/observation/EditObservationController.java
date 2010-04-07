@@ -105,7 +105,7 @@ public class EditObservationController {
 		CategorieEditor c = new CategorieEditor();
 		c.setObservationService(observationService);
 		webDataBinder.registerCustomEditor(Categorie.class, c);
-		webDataBinder.setDisallowedFields("id", "creationDate", "user");
+		webDataBinder.setDisallowedFields("id");
 	}
 
 	/**
@@ -120,7 +120,7 @@ public class EditObservationController {
 				return notFoundMAV(response);
 			} else if (isAdmin(session) || isOwnObservation(session, o)) {
 				ModelAndView mav = new ModelAndView(VIEW);
-				mav.addObject(OBSERVATION_ATTRIBUTE, o);
+				mav.addObject(OBSERVATION_ATTRIBUTE, o.clone());
 				mav.addObject(CATEGORIE_ATTRIBUTE, this.observationService
 						.getCategories());
 				return mav;
@@ -142,7 +142,10 @@ public class EditObservationController {
 				return VIEW;
 			} else {
 				try {
-					this.observationService.updateObservation(observation);
+					logger.warn("Wird das hier jemals ausgeführt!?");
+					Observation oOrig = this.observationService.getObservation(observation.getId());
+					mergeObservation(observation, oOrig);
+					this.observationService.updateObservation(oOrig);
 				} catch (Exception e) {
 					logger.warn("Unexpected Exception", e);
 					return internalErrorView(response);
@@ -153,5 +156,12 @@ public class EditObservationController {
 			}
 		}
 		return forbiddenView(response);
+	}
+
+	private void mergeObservation(Observation changes, Observation orig){
+		orig.setCategorie(changes.getCategorie());
+		orig.setCoordinate(changes.getCoordinate());
+		orig.setTitle(changes.getTitle());
+		orig.setDescription(changes.getDescription());
 	}
 }

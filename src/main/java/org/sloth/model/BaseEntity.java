@@ -39,7 +39,7 @@ import org.sloth.exceptions.ConstraintViolationException;
  * @author Christian Paluschek
  */
 @MappedSuperclass
-public abstract class BaseEntity {
+public abstract class BaseEntity implements Cloneable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -99,4 +99,7 @@ public abstract class BaseEntity {
 	@PrePersist
 	@PreUpdate
 	public abstract void validate() throws ConstraintViolationException;
+
+	@Override
+	public abstract Object clone();
 }
