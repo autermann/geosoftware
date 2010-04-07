@@ -23,7 +23,7 @@
 						<td class="management_lists">${report.id}</td>
 						<td class="management_lists"><a href="<s:url value="/u/${report.author.id}"/>">${report.author.id}</a></td>
 						<td class="management_lists"><a href="<s:url value="/o/${report.observation.id}"/>">${report.observation.id}</a></td>
-						<td class="management_lists">${report.description}</td>
+                                                <td class="management_lists"><s:escapeBody htmlEscape="true">${report.description}</s:escapeBody></td>
 						<td class="management_lists">
 							<c:choose>
 								<c:when test="${report.processed}"><fmt:message key="report.processed.true.title"/></c:when>
