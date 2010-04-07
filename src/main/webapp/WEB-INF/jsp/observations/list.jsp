@@ -22,7 +22,7 @@
 						<td class="management_lists">${observation.id}</td>
 						<td class="management_lists"><s:escapeBody htmlEscape="true" javaScriptEscape="false">${observation.title}</s:escapeBody></td>
 						<td class="management_lists"><s:escapeBody htmlEscape="true" javaScriptEscape="false">${observation.description}</s:escapeBody></td>
-						<td class="management_lists"><s:escapeBody htmlEscape="true" javaScriptEscape="false">${observation.user.name}, ${observation.user.familyName}</s:escapeBody></td>
+						<td class="management_lists"><s:escapeBody htmlEscape="true" javaScriptEscape="false">${observation.user.familyName}, ${observation.user.name}</s:escapeBody></td>
 						<td class="management_lists">
 							<c:if test="${sessionScope.LOGIN.id eq observation.user.id || sessionScope.LOGIN.userGroup eq 'ADMIN'}">
 								<a href="<s:url value="/o/edit/${observation.id}"/>"><img src="<s:url value="/static/img/edit.png" htmlEscape="true" />" alt="<s:escapeBody htmlEscape="true"><fmt:message key="observation.edit.title" /></s:escapeBody>"></a>
