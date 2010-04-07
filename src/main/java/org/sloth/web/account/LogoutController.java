@@ -23,7 +23,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 /**
+ * Controller to log a {@code User} out.
  * 
  * @author Christian Autermann
  * @author Stefan Arndt
@@ -31,14 +33,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author Christoph Fendrich
  * @author Simon Ottenhues
  * @author Christian Paluschek
- *
+ * 
  */
 @Controller
 public class LogoutController {
 
+	/**
+	 * Handles all requests. Removes any session attributes and redirects to the
+	 * front page.
+	 */
 	@RequestMapping("/logout")
-	public String logout(HttpSession s) {
-		deAuth(s);
+	public String logout(HttpSession session) {
+		deAuth(session);
 		return "redirect:/";
 	}
 

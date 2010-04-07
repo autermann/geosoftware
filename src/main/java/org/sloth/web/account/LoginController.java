@@ -41,6 +41,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
+ * Controller to let {@code User}s login.
  * 
  * @author Christian Autermann
  * @author Stefan Arndt
@@ -48,7 +49,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Christoph Fendrich
  * @author Simon Ottenhues
  * @author Christian Paluschek
- *
+ * 
  */
 @Controller
 @RequestMapping("/login")
@@ -59,50 +60,73 @@ public class LoginController {
 	private static final String LOGIN_ATTRIBUTE = "login";
 	private static final Logger logger = LoggerFactory
 			.getLogger(LoginController.class);
-	private UserService us;
-	private LoginValidator lv;
+	private UserService userService;
+	private LoginValidator loginValidator;
 
+	/**
+	 * @param userService
+	 *            the {@code UserService} to set
+	 */
 	@Autowired
-	public void setUserService(UserService us) {
-		this.us = us;
+	public void setUserService(UserService userService) {
+		this.userService = userService;
 	}
 
+	/**
+	 * 
+	 * @param loginValidator
+	 *            the {@code LoginValidator} to set
+	 */
 	@Autowired
-	public void setLoginValidator(LoginValidator lv) {
-		this.lv = lv;
+	public void setLoginValidator(LoginValidator loginValidator) {
+		this.loginValidator = loginValidator;
 	}
 
+	/**
+	 * Sets custom parameters to the {@code WebDataBinder}.
+	 * 
+	 * @param webDataBinder
+	 *            the {@code WebDataBinder} to initialize
+	 */
 	@InitBinder
-	public void setAllowedFields(WebDataBinder wdb) {
-		wdb.setAllowedFields("mail", "password");
+	public void setAllowedFields(WebDataBinder webDataBinder) {
+		webDataBinder.setAllowedFields("mail", "password");
 	}
 
+	/**
+	 * Handles the {@code GET} request and sets up the login form.
+	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView prepare(HttpSession s) {
-		if (isAuth(s)) {
+	public ModelAndView prepare(HttpSession session) {
+		if (isAuth(session)) {
 			return new ModelAndView("redirect:/");
 		} else {
 			return new ModelAndView(VIEW, LOGIN_ATTRIBUTE, new Login());
 		}
 	}
 
+	/**
+	 * Handles the {@code POST} request. Validates the login form and authorizes
+	 * the {@code HttpSession}.
+	 */
 	@RequestMapping(method = RequestMethod.POST)
-	public String login(@ModelAttribute(LOGIN_ATTRIBUTE) Login l,
-			BindingResult result, SessionStatus status, HttpSession s) {
-		if (isAuth(s)) {
+	public String login(@ModelAttribute(LOGIN_ATTRIBUTE) Login login,
+			BindingResult result, SessionStatus status, HttpSession session) {
+		if (isAuth(session)) {
 			return "redirect:/";
 		} else {
-			this.lv.validate(l, result);
+			this.loginValidator.validate(login, result);
 			if (result.hasErrors()) {
 				return VIEW;
 			} else {
-				User u = this.us.login(l.getMail(), l.getPassword());
+				User u = this.userService.login(login.getMail(), login
+						.getPassword());
 				if (u == null) {
 					result.reject("field.login.invalid");
 					return VIEW;
 				} else {
 					logger.debug("Got valid user. Setting Session-Attribute.");
-					auth(s, u);
+					auth(session, u);
 					status.setComplete();
 					return "redirect:/";
 				}

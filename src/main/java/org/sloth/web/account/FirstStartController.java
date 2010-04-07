@@ -46,7 +46,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
+
 /**
+ * Controller to handle the special case, that no {@code User} is registered. It
+ * delivers a View to register as an Administrator.
  * 
  * @author Christian Autermann
  * @author Stefan Arndt
@@ -54,7 +57,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Christoph Fendrich
  * @author Simon Ottenhues
  * @author Christian Paluschek
- *
+ * 
  */
 @Controller
 @RequestMapping("/firstStart")
@@ -66,58 +69,81 @@ public class FirstStartController {
 	private static final Logger logger = LoggerFactory
 			.getLogger(RegistrationController.class);
 	private UserService userService;
-	private RegistrationFormValidator rfv;
+	private RegistrationFormValidator registrationFormValidator;
 
+	/**
+	 * @param registrationFormValidator
+	 *            the {@code RegistrationFormController} to set
+	 */
 	@Autowired
-	public void setUserValidator(RegistrationFormValidator rfv) {
-		this.rfv = rfv;
+	public void setRegistrationFormValidator(
+			RegistrationFormValidator registrationFormValidator) {
+		this.registrationFormValidator = registrationFormValidator;
 	}
 
+	/**
+	 * @param userService
+	 *            the {@code UserService} to set
+	 */
 	@Autowired
-	public void setUserService(UserService us) {
-		this.userService = us;
+	public void setUserService(UserService userService) {
+		this.userService = userService;
 	}
 
+	/**
+	 * Sets custom parameters to the {@code WebDataBinder}.
+	 * 
+	 * @param webDataBinder
+	 *            the {@code WebDataBinder} to initialize
+	 */
 	@InitBinder
-	public void initBinder(WebDataBinder wdb) {
-		wdb.setDisallowedFields("id", "creationDate", "userGroup");
+	public void initBinder(WebDataBinder webDataBinder) {
+		webDataBinder.setDisallowedFields("id", "creationDate", "userGroup");
 	}
 
+	/**
+	 * Handles the {@code GET}-Request and sets up the registration form.
+	 */
 	@RequestMapping(method = GET)
-	public ModelAndView prepare(HttpServletResponse r) throws IOException {
+	public ModelAndView prepare(HttpServletResponse response)
+			throws IOException {
 		if (this.isFirstStart()) {
 			return new ModelAndView(VIEW, USER_ATTRIBUTE,
 					new RegistrationFormAction());
 		} else {
-			return forbiddenMAV(r);
+			return forbiddenMAV(response);
 		}
 	}
 
+	/**
+	 * Handles the {@code POST}-Request, validates the registration form,
+	 * creates a new {@code User} and authorizes the {@code HttpSession}.
+	 */
 	@RequestMapping(method = POST)
 	public String submit(
-			@ModelAttribute(USER_ATTRIBUTE) RegistrationFormAction a,
-			BindingResult result, SessionStatus status, HttpSession s,
-			HttpServletResponse r) throws IOException {
+			@ModelAttribute(USER_ATTRIBUTE) RegistrationFormAction action,
+			BindingResult result, SessionStatus status, HttpSession session,
+			HttpServletResponse response) throws IOException {
 		if (isFirstStart()) {
-			this.rfv.validate(a, result);
+			this.registrationFormValidator.validate(action, result);
 			if (result.hasErrors()) {
 				return VIEW;
 			} else {
 				try {
-					User u = a.createUser();
+					User u = action.createUser();
 					u.setUserGroup(Group.ADMIN);
 					this.userService.registrate(u);
-					auth(s, u);
+					auth(session, u);
 				} catch (Exception e) {
 					logger.warn("Unexpected Exception", e);
-					return internalErrorView(r);
+					return internalErrorView(response);
 				} finally {
 					status.setComplete();
 				}
 				return "redirect:/";
 			}
 		} else {
-			return forbiddenView(r);
+			return forbiddenView(response);
 		}
 
 	}

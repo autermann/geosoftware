@@ -44,7 +44,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
+
 /**
+ * Controller to handle a {@code User} registration.
  * 
  * @author Christian Autermann
  * @author Stefan Arndt
@@ -52,7 +54,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Christoph Fendrich
  * @author Simon Ottenhues
  * @author Christian Paluschek
- *
+ * 
  */
 @Controller
 @RequestMapping("/signup")
@@ -63,46 +65,68 @@ public class RegistrationController {
 	private static final String USER_ATTRIBUTE = "user";
 	private static final Logger logger = LoggerFactory
 			.getLogger(RegistrationController.class);
-	private UserService us;
-	private RegistrationFormValidator rfv;
+	private UserService userService;
+	private RegistrationFormValidator registrationFormValidator;
 
+	/**
+	 * @param registrationFormValidator
+	 *            the {@code RegistrationFormController} to set
+	 */
 	@Autowired
-	public void setUserValidator(RegistrationFormValidator rfv) {
-		this.rfv = rfv;
+	public void setRegistrationFormValidator(
+			RegistrationFormValidator registrationFormValidator) {
+		this.registrationFormValidator = registrationFormValidator;
 	}
 
+	/**
+	 * @param userService
+	 *            the {@code UserService} to set
+	 */
 	@Autowired
-	public void setUserService(UserService us) {
-		this.us = us;
+	public void setUserService(UserService userService) {
+		this.userService = userService;
 	}
 
+	/**
+	 * Sets custom parameters to the {@code WebDataBinder}.
+	 * 
+	 * @param wdb
+	 *            the {@code WebDataBinder} to initialize
+	 */
 	@InitBinder
 	public void initBinder(WebDataBinder wdb) {
 		wdb.setDisallowedFields("id", "creationDate", "userGroup");
 	}
 
+	/**
+	 * Handles the {@code GET}-Request and sets up the registration form.
+	 */
 	@RequestMapping(method = GET)
 	public ModelAndView prepare() {
 		return new ModelAndView(VIEW, USER_ATTRIBUTE,
 				new RegistrationFormAction());
 	}
 
+	/**
+	 * Handles the {@code POST}-Request, validates the registration form,
+	 * creates a new {@code User} and authorizes the {@code HttpSession}.
+	 */
 	@RequestMapping(method = POST)
-	public String submit(HttpSession s, HttpServletResponse r,
-			@ModelAttribute(USER_ATTRIBUTE) RegistrationFormAction a,
+	public String submit(HttpSession session, HttpServletResponse response,
+			@ModelAttribute(USER_ATTRIBUTE) RegistrationFormAction action,
 			BindingResult result, SessionStatus status) throws IOException {
-		this.rfv.validate(a, result);
+		this.registrationFormValidator.validate(action, result);
 		if (result.hasErrors()) {
 			return VIEW;
 		} else {
 			try {
-				User u = a.createUser();
+				User u = action.createUser();
 				u.setUserGroup(Group.USER);
-				this.us.registrate(u);
-				auth(s, u);
+				this.userService.registrate(u);
+				auth(session, u);
 			} catch (Exception e) {
 				logger.warn("Unexpected Exception", e);
-				return internalErrorView(r);
+				return internalErrorView(response);
 			} finally {
 				status.setComplete();
 			}

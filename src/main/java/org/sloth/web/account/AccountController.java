@@ -28,7 +28,10 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 /**
+ * Controller to test whether a {@code User} is logged in deliver the
+ * appropriate. view.
  * 
  * @author Christian Autermann
  * @author Stefan Arndt
@@ -36,7 +39,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author Christoph Fendrich
  * @author Simon Ottenhues
  * @author Christian Paluschek
- *
+ * 
  */
 @Controller
 public class AccountController {
@@ -44,12 +47,15 @@ public class AccountController {
 	private final static String USER_VIEW = "account/user";
 	private final static String ADMIN_VIEW = "account/admin";
 
+	/**
+	 * Handles any Request on "/acc" and returns the appropriate view.
+	 */
 	@RequestMapping("/acc")
-	public String handle(HttpSession s, HttpServletResponse r)
+	public String handle(HttpSession session, HttpServletResponse response)
 			throws IOException {
-		if (!isAuth(s)) {
-			return forbiddenView(r);
-		} else if (isAdmin(s)) {
+		if (!isAuth(session)) {
+			return forbiddenView(response);
+		} else if (isAdmin(session)) {
 			return ADMIN_VIEW;
 		} else {
 			return USER_VIEW;
