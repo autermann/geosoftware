@@ -1,7 +1,6 @@
 package org.sloth.web.user;
 
 import java.io.IOException;
-import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -9,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HelpController {
 
     @RequestMapping("/help")
-    public String setupForm(HttpServletResponse r)
+    public String setupForm()
             throws IOException {
         return "/support/support";
     }
