@@ -21,6 +21,5 @@ public class ReportValidator implements Validator {
 		rejectIfTooLong(e, "description", TOO_LONG_DESCRIPTION, 1000);
 		rejectIfNull(e, "author", EMPTY_AUTHOR);
 		rejectIfNull(e, "observation", EMPTY_OBSERVATION);
-		System.out.println(((Report) t).getObservation());
 	}
 }
