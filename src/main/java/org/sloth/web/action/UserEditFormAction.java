@@ -19,7 +19,9 @@ package org.sloth.web.action;
 
 import org.sloth.model.Group;
 import org.sloth.model.User;
+
 /**
+ * Form action bean for editing a {@code User}.
  * 
  * @author Christian Autermann
  * @author Stefan Arndt
@@ -27,7 +29,7 @@ import org.sloth.model.User;
  * @author Christoph Fendrich
  * @author Simon Ottenhues
  * @author Christian Paluschek
- *
+ * 
  */
 public class UserEditFormAction {
 
@@ -42,6 +44,13 @@ public class UserEditFormAction {
 	private String newPasswordRepeat;
 	private User oldUser;
 
+	/**
+	 * Creates a new {@code User} from the given {@code editingUser} and {@code
+	 * oldUser}.
+	 * 
+	 * @param oldUser
+	 * @param editingUser
+	 */
 	public UserEditFormAction(User oldUser, User editingUser) {
 		this.oldUser = oldUser;
 		setEditingUser(editingUser);

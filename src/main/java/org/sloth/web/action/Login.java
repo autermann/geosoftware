@@ -18,6 +18,8 @@
 package org.sloth.web.action;
 
 /**
+ * Form action bean for login.
+ * 
  * @author Christian Autermann
  * @author Stefan Arndt
  * @author Dustin Demuth

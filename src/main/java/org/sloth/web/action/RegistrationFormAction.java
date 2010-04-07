@@ -18,7 +18,9 @@
 package org.sloth.web.action;
 
 import org.sloth.model.User;
+
 /**
+ * Form action bean for registration.
  * 
  * @author Christian Autermann
  * @author Stefan Arndt
@@ -26,7 +28,7 @@ import org.sloth.model.User;
  * @author Christoph Fendrich
  * @author Simon Ottenhues
  * @author Christian Paluschek
- *
+ * 
  */
 public class RegistrationFormAction {
 
@@ -37,6 +39,11 @@ public class RegistrationFormAction {
 	private String password;
 	private String passwordRepeat;
 
+	/**
+	 * Constructs a merged {@code User} from the entered changes.
+	 * 
+	 * @return the merged {@code User}
+	 */
 	public User createUser() {
 		User u = new User();
 		u.setFamilyName(getFamilyName());
