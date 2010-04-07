@@ -15,7 +15,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package org.sloth.validation;
 
 import org.junit.Test;
@@ -29,30 +28,28 @@ import static org.junit.Assert.*;
  *
  * @author Christoph Fendrich
  */
-
 public class LoginValidatorTest {
 
-    @Test
-    public void testEmptyMailLogin() {
-        LoginValidator lv = new LoginValidator();
-        Login l = new Login();
-        l.setMail("");
-        Errors errors = new BeanPropertyBindingResult(l, "login");
-        lv.validate(l, errors);
-        assertTrue(errors.hasErrors());
-        assertEquals(LOGIN.EMPTY_MAIL, errors.getFieldError("login").getCode());
+	@Test
+	public void testEmptyMailLogin() {
+		LoginValidator lv = new LoginValidator();
+		Login l = new Login();
+		l.setMail("");
+		Errors errors = new BeanPropertyBindingResult(l, "login");
+		lv.validate(l, errors);
+		assertTrue(errors.hasErrors());
+		assertEquals(LOGIN.EMPTY_MAIL, errors.getFieldError("mail").getCode());
 
-    }
+	}
 
-    @Test
-    public void testEmptyPasswordLogin() {
-        LoginValidator lv = new LoginValidator();
-        Login l = new Login();
-        l.setPassword("");
-        Errors errors = new BeanPropertyBindingResult(l, "login");
-        lv.validate(l, errors);
-        assertTrue(errors.hasErrors());
-         assertEquals(LOGIN.EMPTY_PASSWORD, errors.getFieldError("login").getCode());
-    }
-
+	@Test
+	public void testEmptyPasswordLogin() {
+		LoginValidator lv = new LoginValidator();
+		Login l = new Login();
+		l.setPassword("");
+		Errors errors = new BeanPropertyBindingResult(l, "login");
+		lv.validate(l, errors);
+		assertTrue(errors.hasErrors());
+		assertEquals(LOGIN.EMPTY_PASSWORD, errors.getFieldError("password").getCode());
+	}
 }

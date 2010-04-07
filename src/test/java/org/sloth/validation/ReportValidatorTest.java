@@ -23,58 +23,59 @@ import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.Errors;
 import static org.sloth.validation.ErrorCodes.REPORT.*;
 import static org.junit.Assert.*;
+import static org.sloth.EntityFactory.*;
 
 /**
  *
  * @author Christoph Fendrich
  */
-
 public class ReportValidatorTest {
 
-    @Test
-    public void testEmptyDescription() {
-        ReportValidator rv = new ReportValidator();
-        Report r = new Report();
-        r.setDescription("");
-        Errors errors = new BeanPropertyBindingResult(r, "report");
-        rv.validate(r, errors);
-        assertTrue(errors.hasErrors());
-        assertEquals(EMPTY_DESCRIPTION, errors.getFieldError("report").getCode());
-    }
-    
-    @Test
-    public void testTooLongDescription() {
-        ReportValidator rv = new ReportValidator();
-        Report r = new Report();
-        StringBuffer buf = new StringBuffer();
-            for (int i=0; i<101; i++) buf.append("a");
-        r.setDescription(buf.toString());
-        Errors errors = new BeanPropertyBindingResult(r, "report");
-        rv.validate(r, errors);
-        assertTrue(errors.hasErrors());
-        assertEquals(TOO_LONG_DESCRIPTION, errors.getFieldError("report").getCode());
-    }
+	@Test
+	public void testEmptyDescription() {
+		ReportValidator rv = new ReportValidator();
+		Report r = getReport(getUser(), getObservation(getCategorie(), getUser()));
+		r.setDescription("");
+		Errors errors = new BeanPropertyBindingResult(r, "report");
+		rv.validate(r, errors);
+		assertTrue(errors.hasErrors());
+		assertEquals(EMPTY_DESCRIPTION, errors.getFieldError("description").getCode());
+	}
 
-    @Test
-    public void testEmptyAuthor() {
-        ReportValidator rv = new ReportValidator();
-        Report r = new Report();
-        r.setAuthor(null);
-        Errors errors = new BeanPropertyBindingResult(r, "report");
-        rv.validate(r, errors);
-        assertTrue(errors.hasErrors());
-        assertEquals(EMPTY_AUTHOR, errors.getFieldError("report").getCode());
-    }
+	@Test
+	public void testTooLongDescription() {
+		ReportValidator rv = new ReportValidator();
+		Report r = getReport(getUser(), getObservation(getCategorie(), getUser()));
+		StringBuffer buf = new StringBuffer();
+		for (int i = 0; i < 1001; i++) {
+			buf.append("a");
+		}
+		r.setDescription(buf.toString());
+		Errors errors = new BeanPropertyBindingResult(r, "report");
+		rv.validate(r, errors);
+		assertTrue(errors.hasErrors());
+		assertEquals(TOO_LONG_DESCRIPTION, errors.getFieldError("description").getCode());
+	}
 
-    @Test
-    public void testEmptyObservation() {
-        ReportValidator rv = new ReportValidator();
-        Report r = new Report();
-        r.setObservation(null);
-        Errors errors = new BeanPropertyBindingResult(r, "report");
-        rv.validate(r, errors);
-        assertTrue(errors.hasErrors());
-        assertEquals(EMPTY_OBSERVATION, errors.getFieldError("report").getCode());
-    }
+	@Test
+	public void testEmptyAuthor() {
+		ReportValidator rv = new ReportValidator();
+		Report r = getReport(getUser(), getObservation(getCategorie(), getUser()));
+		r.setAuthor(null);
+		Errors errors = new BeanPropertyBindingResult(r, "report", false);
+		rv.validate(r, errors);
+		assertTrue(errors.hasErrors());
+		assertEquals(EMPTY_AUTHOR, errors.getFieldError("author").getCode());
+	}
 
+	@Test
+	public void testEmptyObservation() {
+		ReportValidator rv = new ReportValidator();
+		Report r = getReport(getUser(), getObservation(getCategorie(), getUser()));
+		r.setObservation(null);
+		Errors errors = new BeanPropertyBindingResult(r, "report");
+		rv.validate(r, errors);
+		assertTrue(errors.hasErrors());
+		assertEquals(EMPTY_OBSERVATION, errors.getFieldError("observation").getCode());
+	}
 }

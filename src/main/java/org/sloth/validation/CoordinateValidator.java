@@ -22,11 +22,21 @@ public class CoordinateValidator implements Validator {
 	public void validate(Object t, Errors e) {
 		Coordinate c = (Coordinate) t;
 		double lon = c.getLongitude(), lat = c.getLatitude();
+
+		
+
+
 		if (lon > 180.0 || lon < -180.0) {
 			e.rejectValue("longitude", COORDINATE.INVALID_LONGITUDE);
 		}
-		if (lat > 180.0 || lat < -180.0) {
-			e.rejectValue("longitude", COORDINATE.INVALID_LATITUDE);
+		if (lat > 180.0 || lat < -180.0 || lat == Double.NaN) {
+			e.rejectValue("latitude", COORDINATE.INVALID_LATITUDE);
+		}
+		if (Double.isNaN(lat)) {
+			e.rejectValue("latitude", COORDINATE.EMPTY_LATITUDE);
+		}
+		if (Double.isNaN(lon)) {
+			e.rejectValue("longitude", COORDINATE.EMPTY_LONGITUDE);
 		}
 	}
 }

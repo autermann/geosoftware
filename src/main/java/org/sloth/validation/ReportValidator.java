@@ -18,8 +18,9 @@ public class ReportValidator implements Validator {
 	@Override
 	public void validate(Object t, Errors e) {
 		rejectIfEmptyOrWhitespace(e, "description", EMPTY_DESCRIPTION);
-		rejectIfTooLong(e, "description", TOO_LONG_DESCRIPTION, 100);
+		rejectIfTooLong(e, "description", TOO_LONG_DESCRIPTION, 1000);
 		rejectIfNull(e, "author", EMPTY_AUTHOR);
 		rejectIfNull(e, "observation", EMPTY_OBSERVATION);
+		System.out.println(((Report) t).getObservation());
 	}
 }

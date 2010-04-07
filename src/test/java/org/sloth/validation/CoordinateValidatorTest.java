@@ -95,7 +95,7 @@ public class CoordinateValidatorTest {
         Errors errors = new BeanPropertyBindingResult(c, "coordinate");
         cv.validate(c, errors);
         assertTrue(errors.hasErrors());
-        assertEquals(COORDINATE.INVALID_LATITUDE, errors.getFieldError("latitude").getCode());
+        assertEquals(COORDINATE.EMPTY_LATITUDE, errors.getFieldError("latitude").getCode());
     }
 
 }
