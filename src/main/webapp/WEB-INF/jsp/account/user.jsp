@@ -18,7 +18,7 @@
 					</td>
 					<td>
 						<a href="<s:url value="/u/del" />">
-							<fmt:message key="user.delete.account.title"/>
+                                                    <s:escapeBody htmlEscape="true"><fmt:message key="user.delete.account.title"/></s:escapeBody>
 						</a>
 					</td>
 				</tr>
