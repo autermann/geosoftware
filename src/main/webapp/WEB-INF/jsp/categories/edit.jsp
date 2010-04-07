@@ -3,7 +3,7 @@
 <table align="center" style="height: 100%">
 	<tr style="height: 25%">
 		<td></td>
-		<td><h3><fmt:message key="categorie.edit.title"/>: ${categorie.title}</h3> </td>
+                <td><h3><s:escapeBody htmlEscape="true"><fmt:message key="categorie.edit.title"/>: ${categorie.title}</s:escapeBody></h3> </td>
 		<td></td>
 	</tr>
 	<tr style="height: 50%">
