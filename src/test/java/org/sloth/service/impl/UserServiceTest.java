@@ -4,12 +4,13 @@
  */
 package org.sloth.service.impl;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
+import org.sloth.model.User;
+import org.sloth.persistence.UserDao;
+import org.sloth.service.PasswordService;
 import static org.junit.Assert.*;
+import static org.sloth.EntityFactory.*;
 
 /**
  * 
@@ -17,37 +18,21 @@ import static org.junit.Assert.*;
  */
 public class UserServiceTest {
 
-	public UserServiceTest() {
-	}
-
-	@BeforeClass
-	public static void setUpClass() throws Exception {
-	}
-
-	@AfterClass
-	public static void tearDownClass() throws Exception {
-	}
+	private UserDao userDao;
+	private UserServiceImpl userService;
+	private PasswordService passwordService;
 
 	@Before
 	public void setUp() {
+		userService = new UserServiceImpl();
+		passwordService = new BCryptPasswordService();
+		userDao = new InMemoryUserDao();
+		userService.setPasswordService(passwordService);
+		userService.setUserDao(userDao);
+		reset();
 	}
 
-	@After
-	public void tearDown() {
-	}
-
-	/**
-	 * Test of setUserDao method, of class UserServiceImpl.
-	 */
-	@Test
-	public void testSetUserDao() {
-	}
-
-	/**
-	 * Test of setPasswordService method, of class UserServiceImpl.
-	 */
-	@Test
-	public void testSetPasswordService() {
+	public UserServiceTest() {
 	}
 
 	/**
@@ -55,6 +40,11 @@ public class UserServiceTest {
 	 */
 	@Test
 	public void testGetUsers() {
+		User u = getUser();
+		u.setPassword("password");
+		userService.registrate(u);
+		assertTrue(passwordService.check(u.getPassword(), "password"));
+		assertEquals(1, userService.getUsers().size());
 	}
 
 	/**
@@ -62,6 +52,10 @@ public class UserServiceTest {
 	 */
 	@Test
 	public void testGet_String() {
+		User u = getUser();
+		userService.registrate(u);
+		assertNull(userService.get("asdf"));
+		assertEquals(u, userService.get(u.getMail()));
 	}
 
 	/**
@@ -69,13 +63,24 @@ public class UserServiceTest {
 	 */
 	@Test
 	public void testGet_Long() {
+		User u = getUser();
+		userService.registrate(u);
+		assertNotNull(u.getId());
+		assertEquals(u, userService.get(u.getId()));
+		assertNull(userService.get(42L));
 	}
 
 	/**
 	 * Test of update method, of class UserServiceImpl.
 	 */
 	@Test
-	public void testUpdate() throws Exception {
+	public void testUpdate() {
+		User u = getUser();
+		userService.registrate(u);
+		assertNotNull(u.getId());
+		u.setFamilyName("New Family Name");
+		userService.update(u);
+		assertEquals("New Family Name", userService.get(u.getId()).getFamilyName());
 	}
 
 	/**
@@ -83,6 +88,11 @@ public class UserServiceTest {
 	 */
 	@Test
 	public void testDelete_Long() {
+		User u = getUser();
+		userService.registrate(u);
+		assertNotNull(u.getId());
+		userService.delete(u.getId());
+		assertNull(userService.get(u.getId()));
 	}
 
 	/**
@@ -90,13 +100,23 @@ public class UserServiceTest {
 	 */
 	@Test
 	public void testDelete_User() {
+		User u = getUser();
+		userService.registrate(u);
+		assertNotNull(u.getId());
+		userService.delete(u);
+		assertNull(userService.get(u.getId()));
 	}
 
 	/**
 	 * Test of registrate method, of class UserServiceImpl.
 	 */
 	@Test
-	public void testRegistrate() throws Exception {
+	public void testRegistrate() {
+		User u = getUser();
+		u.setPassword("password");
+		userService.registrate(u);
+		assertTrue(passwordService.check(u.getPassword(), "password"));
+		assertNotNull(u.getId());
 	}
 
 	/**
@@ -104,5 +124,14 @@ public class UserServiceTest {
 	 */
 	@Test
 	public void testLogin() {
+		User u = getUser();
+		String pw = u.getPassword();
+		userService.registrate(u);
+		User dbu = userService.login(u.getMail(), pw);
+		assertNotNull(dbu);
+		assertEquals(u, dbu);
+
+		assertNull(userService.login("adsf", "asdfaadfd"));
+		assertNull(userService.login(u.getMail(), u.getPassword()));
 	}
 }
