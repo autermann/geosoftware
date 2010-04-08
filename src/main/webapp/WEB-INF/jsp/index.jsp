@@ -87,7 +87,7 @@
 									<td width="70%" class="observationlist_title">
 										<img src="${o.categorie.iconFileName}" width="20px" height="20px" alt="<s:escapeBody htmlEscape="true">${o.categorie.title}</s:escapeBody>"></img>
 										<b class="obsTitle"><s:escapeBody>${o.title}</s:escapeBody></b>
-										<a href="#" onclick="goTo(${o.coordinate.longitude}, ${o.coordinate.latitude}, 16);"><img src="<s:url value="/static/img/show.png" htmlEscape="true" />" alt="<fmt:message key="observation.viewInMap.title"/>" align="right" height="20px"/></a>
+										<a href="#" onclick="goTo(${o.coordinate.longitude}, ${o.coordinate.latitude}, 16);"><img src="<s:url value="/static/img/show.png" htmlEscape="true" />" alt="<s:escapeBody htmlEscape="true"><fmt:message key="observation.viewInMap.title"/></s:escapeBody>" align="right" height="20px"/></a>
 											<c:if test="${sessionScope.LOGIN != null}">
 											<a href="<s:url value="/r/o/${o.id}/new"/>"><img src="<s:url value="/static/img/report.png" htmlEscape="true" />" alt="<s:escapeBody htmlEscape="true"><fmt:message key="observation.report.title"/></s:escapeBody>" align="right" height="20px"></img></a>
 												<c:if test="${sessionScope.LOGIN.userGroup == 'ADMIN' || o.user.id == sessionScope.LOGIN.id}">
