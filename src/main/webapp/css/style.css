@@ -205,7 +205,11 @@ td.management_lists_image {
 	border: 2px solid #DDDDDD;
 }
 
-
+/*----------Support Site ------------------*/
+table.support {
+    font: normal 13px/ 100% Verdana, Tahoma, sans-serif;
+    color:  #222222;
+}
 
 /*----------Error Sites ------------------*/
 
