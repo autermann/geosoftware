@@ -142,8 +142,8 @@ public class EditObservationController {
 				return VIEW;
 			} else {
 				try {
-					logger.warn("Wird das hier jemals ausgeführt!?");
-					Observation oOrig = this.observationService.getObservation(observation.getId());
+					Observation oOrig = this.observationService
+							.getObservation(observation.getId());
 					mergeObservation(observation, oOrig);
 					this.observationService.updateObservation(oOrig);
 				} catch (Exception e) {
