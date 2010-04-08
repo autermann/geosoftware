@@ -48,7 +48,6 @@
 								</td>
 							</tr>
 						</table>
-
 					</form:form>
 				</td>
 				<td width=33%></td>
@@ -61,10 +60,5 @@
 				<td></td>
 			</tr>
 		</table>
-
-
-
-
-
 	</body>
 </html>
