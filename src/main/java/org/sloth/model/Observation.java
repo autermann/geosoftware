@@ -30,9 +30,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.Transient;
 
-import org.sloth.exceptions.ConstraintViolationException;
-import org.sloth.exceptions.FieldLengthConstraintViolationException;
-import org.sloth.exceptions.NotNullConstraintViolationException;
+import org.sloth.exception.ConstraintViolationException;
+import org.sloth.exception.FieldLengthConstraintViolationException;
+import org.sloth.exception.NotNullConstraintViolationException;
 
 /**
  * Class to represent an Observation in an {@code Categorie} created by a

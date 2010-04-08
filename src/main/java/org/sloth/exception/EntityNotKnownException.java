@@ -15,11 +15,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.sloth.exceptions;
+package org.sloth.exception;
 
 /**
- * Exception which can be thrown, if the length of a field violates a
- * constraint.
+ * Exception which can be thrown, if an Enitity which should by known is not
+ * known.
  * 
  * @author Christian Autermann
  * @author Stefan Arndt
@@ -28,9 +28,8 @@ package org.sloth.exceptions;
  * @author Simon Ottenhues
  * @author Christian Paluschek
  */
-public class FieldLengthConstraintViolationException extends
-		ConstraintViolationException {
+public class EntityNotKnownException extends IllegalArgumentException {
 
-	private static final long serialVersionUID = 1903058169168541242L;
+	private static final long serialVersionUID = -569385867925643484L;
 
 }

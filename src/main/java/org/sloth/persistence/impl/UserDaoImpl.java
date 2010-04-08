@@ -25,8 +25,8 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import org.sloth.exceptions.EntityAlreadyKnownException;
-import org.sloth.exceptions.EntityNotKnownException;
+import org.sloth.exception.EntityAlreadyKnownException;
+import org.sloth.exception.EntityNotKnownException;
 import org.sloth.model.User;
 import org.sloth.model.User_;
 import org.sloth.persistence.ObservationDao;

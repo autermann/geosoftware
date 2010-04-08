@@ -20,7 +20,7 @@ package org.sloth.service;
 import java.util.Collection;
 import java.util.List;
 
-import org.sloth.exceptions.ConstraintViolationException;
+import org.sloth.exception.ConstraintViolationException;
 import org.sloth.model.Categorie;
 import org.sloth.model.Observation;
 import org.sloth.model.Report;

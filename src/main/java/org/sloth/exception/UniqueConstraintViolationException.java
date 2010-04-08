@@ -15,11 +15,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.sloth.exceptions;
+package org.sloth.exception;
 
 /**
- * Exception which can be thrown, if a field violates a constraint by being
- * {@code null}.
+ * Exception which can be thrown, if a field violates a constraint by being not
+ * unique.
  * 
  * @author Christian Autermann
  * @author Stefan Arndt
@@ -28,9 +28,9 @@ package org.sloth.exceptions;
  * @author Simon Ottenhues
  * @author Christian Paluschek
  */
-public class NotNullConstraintViolationException extends
+public class UniqueConstraintViolationException extends
 		ConstraintViolationException {
 
-	private static final long serialVersionUID = 2851448351018912283L;
+	private static final long serialVersionUID = 6834497387858595693L;
 
 }

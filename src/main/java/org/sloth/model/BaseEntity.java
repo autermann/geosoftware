@@ -26,7 +26,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Version;
 
-import org.sloth.exceptions.ConstraintViolationException;
+import org.sloth.exception.ConstraintViolationException;
 
 /**
  * Represtents an Entity with a {@code Long} as Id.

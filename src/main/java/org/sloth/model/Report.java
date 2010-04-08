@@ -28,9 +28,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
-import org.sloth.exceptions.ConstraintViolationException;
-import org.sloth.exceptions.FieldLengthConstraintViolationException;
-import org.sloth.exceptions.NotNullConstraintViolationException;
+import org.sloth.exception.ConstraintViolationException;
+import org.sloth.exception.FieldLengthConstraintViolationException;
+import org.sloth.exception.NotNullConstraintViolationException;
 
 /**
  * Model class for Reports created by {@code User}s for {@code Observation}s.

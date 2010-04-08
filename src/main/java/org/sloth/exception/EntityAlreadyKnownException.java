@@ -15,10 +15,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.sloth.exceptions;
+package org.sloth.exception;
 
 /**
- * Exception which can be thrown, if some field constraint is violated.
+ * Exception which can be thrown, if an Entity which should be new is already
+ * known.
  * 
  * @author Christian Autermann
  * @author Stefan Arndt
@@ -27,8 +28,8 @@ package org.sloth.exceptions;
  * @author Simon Ottenhues
  * @author Christian Paluschek
  */
-public class ConstraintViolationException extends Error {
+public class EntityAlreadyKnownException extends IllegalArgumentException {
 
-	private static final long serialVersionUID = -5899819351115968894L;
+	private static final long serialVersionUID = -1558670202310618862L;
 
 }
