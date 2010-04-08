@@ -75,7 +75,7 @@ public class ObservationServiceImpl implements ObservationService {
 		if (id == null) {
 			throw new NullPointerException();
 		} else {
-			this.deleteCategorie(this.categorieDao.getById(id));
+			this.deleteObservation(this.observationDao.getById(id));
 		}
 	}
 

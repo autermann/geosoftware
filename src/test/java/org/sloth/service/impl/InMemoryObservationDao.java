@@ -65,15 +65,14 @@ public class InMemoryObservationDao extends InMemoryDao<Observation> implements
 		Collections.sort(obs, new Comparator<Observation>() {
 
 			@Override
-			public int compare(Observation o1, Observation o2) {
+			public int compare(Observation o2, Observation o1) {
 				return o1.getCreationDate().compareTo(o2.getCreationDate());
 			}
 		});
-		if (!obs.isEmpty()) {
-			return obs.subList(0,
-					((obs.size() < count) ? obs.size() : count) - 1);
-		} else {
+		if (obs.size() < count) {
 			return obs;
+		} else {
+			return obs.subList(0, count);
 		}
 	}
 

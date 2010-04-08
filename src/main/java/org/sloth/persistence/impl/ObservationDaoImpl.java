@@ -177,14 +177,10 @@ public class ObservationDaoImpl extends EntityManagerDao<Observation> implements
 
 		Root<Observation> o = cq.from(Observation.class);
 		cq.select(o).orderBy(cb.desc(o.get(Observation_.creationDate)));
-		List<Observation> obs = getEntityManager().createQuery(cq)
-				.getResultList();
+		return getEntityManager().createQuery(cq)
+				.setMaxResults(count).getResultList();
 
-		if (obs.size() < count) {
-			return obs;
-		} else {
-			return obs.subList(0, count);
-		}
+		
 	}
 
 	@Override
