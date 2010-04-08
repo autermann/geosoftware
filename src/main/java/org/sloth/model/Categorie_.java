@@ -53,7 +53,7 @@ public class Categorie_ {
 	 * Metamodel-Attribute for {@link Categorie#id}
 	 * 
 	 * @see Categorie#getId()
-	 * @see Categorie#setId(long)
+	 * @see Categorie#setId(java.lang.Long)
 	 */
 	public static volatile SingularAttribute<Categorie, Long> id;
 	/**

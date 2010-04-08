@@ -41,7 +41,7 @@ public class User_ {
 	 * Metamodel-Attribute for {@link User#id}
 	 * 
 	 * @see User#getId()
-	 * @see User#setId(long)
+	 * @see User#setId(java.lang.Long)
 	 */
 	public static volatile SingularAttribute<User, Long> id;
 	/**

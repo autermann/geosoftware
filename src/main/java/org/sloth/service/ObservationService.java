@@ -180,7 +180,8 @@ public interface ObservationService {
 	 * {@code Categorie} has to be known by the system and not {@code null}.
 	 * 
 	 * @param oc
-	 * @return
+				the {@code Categorie} to query
+	 * @return all {@code Observation}s in {@code oc}
 	 * @throws IllegalArgumentException
 	 *             if {@code oc} is not in the system
 	 * @throws NullPointerException
@@ -190,9 +191,11 @@ public interface ObservationService {
 			throws IllegalArgumentException, NullPointerException;
 
 	/**
-	 * @todo
-	 * @param keyword
-	 * @return
+	 * Searches all {@code Observaton} titles, descriptions and all 
+	 * {@code Categorie} titles and descriptions for the specified keyword.
+	 * 
+	 * @param keyword the keyword to search for
+	 * @return all matching {@code Observation}s
 	 * @throws NullPointerException
 	 *             if {@code keyword} is {@code null}
 	 */

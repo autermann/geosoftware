@@ -38,7 +38,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 public class Report_ {
 
 	/**
-	 * Metamodel-Attribute for {@link Report#user}
+	 * Metamodel-Attribute for {@link Report#author}
 	 * 
 	 * @see Report#getAuthor()
 	 * @see Report#setAuthor(org.sloth.model.User)
@@ -55,7 +55,7 @@ public class Report_ {
 	 * Metamodel-Attribute for {@link Report#id}
 	 * 
 	 * @see Report#getId()
-	 * @see Report#setId(long)
+	 * @see Report#setId(java.lang.Long)
 	 */
 	public static volatile SingularAttribute<Report, Long> id;
 	/**

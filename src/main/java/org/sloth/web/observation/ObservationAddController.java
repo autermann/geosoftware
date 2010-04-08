@@ -50,7 +50,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Controller to create a new {@code Observation}.
- * 
+ * @deprecated Functionality replaced by {@code FrontPageController}
+ * @see org.sloth.web.FrontPageController
  * @author Christian Autermann
  * @author Stefan Arndt
  * @author Dustin Demuth
@@ -58,7 +59,6 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Simon Ottenhues
  * @author Christian Paluschek
  */
-@Controller
 @RequestMapping("/o/new")
 @SessionAttributes(types = Observation.class)
 @Deprecated

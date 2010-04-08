@@ -76,7 +76,7 @@ public class Observation_ {
 	 * Metamodel-Attribute for {@link Observation#id}
 	 * 
 	 * @see Observation#getId()
-	 * @see Observation#setId(long)
+	 * @see Observation#setId(java.lang.Long)
 	 */
 	public static volatile SingularAttribute<Observation, Long> id;
 	/**

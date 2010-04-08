@@ -96,7 +96,7 @@ public class EditUserController {
 	/**
 	 * Sets custom parameters to the {@code WebDataBinder}.
 	 * 
-	 * @param wdb
+	 * @param webDataBinder
 	 *            the {@code WebDataBinder} to initialize
 	 */
 	@InitBinder
