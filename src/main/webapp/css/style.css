@@ -1,6 +1,6 @@
 body { /*background-color: #00008b;*/
-	font: normal 13px/ 100% Verdana, Tahoma, sans-serif;
-        background-color: #FFFFFF;
+	   font: normal 13px/ 100% Verdana, Tahoma, sans-serif;
+	   background-color: #FFFFFF;
 }
 
 #map {
@@ -40,7 +40,7 @@ input[type="button"], input[type="submit"] {
 a:link, a:visited, a:active {
     text-decoration: none;
     color: #333333;
-   }
+}
 
 
 img{
@@ -54,11 +54,10 @@ table.observationlist {
 }
 
 td.observationlist_title  {
-        font: normal 12px/ 100% Verdana, Tahoma, sans-serif;
-        background-color: #EEEEEE;
-        padding: 5px;
-              
-         }
+	font: normal 12px/ 100% Verdana, Tahoma, sans-serif;
+	background-color: #EEEEEE;
+	padding: 5px;
+}
 
 b.obsTitle {
     vertical-align: 6px;
@@ -66,15 +65,15 @@ b.obsTitle {
 
 p.observationlist_description {
 
-         font: normal 12px/ 100% Verdana, Tahoma, sans-serif;
-         color:  #555555;
-         background-color: #EEEEEE;
-       }
+	font: normal 12px/ 100% Verdana, Tahoma, sans-serif;
+	color:  #555555;
+	background-color: #EEEEEE;
+}
 
 h4 {
     font: normal 12px/ 100% Verdana, Tahoma, sans-serif;
     color:  #555555;
-    
+
 }
 
 h3 {
@@ -111,14 +110,14 @@ tr.content {
 
 td.sidebar {
 	width: 30%;
-        
-        vertical-align: top;
+
+	vertical-align: top;
 }
 
 td.mapArea {
 	width: 70%;
-        vertical-align: top;
-        height: 100%;
+    vertical-align: top;
+    height: 100%;
 }
 div.observationlist{
 	height: auto;
@@ -136,16 +135,16 @@ div.mapArea {
 td.loginform {
     background-color: #EEEEEE;    
     padding: 20px 30px 20px 30px;
-    }
+}
 
-    td.login_statement {
-     font: normal 14px/ 100% Verdana, Tahoma, sans-serif;
-     color:  #222222;
-     vertical-align: bottom;
+td.login_statement {
+	font: normal 14px/ 100% Verdana, Tahoma, sans-serif;
+	color:  #222222;
+	vertical-align: bottom;
 }
 
 .loginInputBox { /* needed for same box sizes on IE8 */
-	width: 200px;
+				 width: 200px;
 }
 
 
@@ -153,17 +152,17 @@ td.loginform {
 td.registerform {
     background-color: #EEEEEE;
     padding: 20px 30px 20px 30px;
-    }
+}
 
-    td.register_statement {
-     font: normal 14px/ 100% Verdana, Tahoma, sans-serif;
-     color:  #222222;
-     vertical-align: bottom;
+td.register_statement {
+	font: normal 14px/ 100% Verdana, Tahoma, sans-serif;
+	color:  #222222;
+	vertical-align: bottom;
 }
 
 table.registerform {
     font: normal 12px/ 100% Verdana, Tahoma, sans-serif;
-     color:  #222222;
+	color:  #222222;
 }
 
 /*----------Admin Backend------------------*/
@@ -172,12 +171,12 @@ td.admin_backend {
     background-color: #EEEEEE;
     padding: 20px 30px 20px 30px;
     line-height: 2.4em;
-    }
+}
 
-    td.admin_statement {
-     font: normal 14px/ 100% Verdana, Tahoma, sans-serif;
-     color:  #222222;
-     vertical-align: bottom;
+td.admin_statement {
+	font: normal 14px/ 100% Verdana, Tahoma, sans-serif;
+	color:  #222222;
+	vertical-align: bottom;
 }
 
 /*----------Management Backend Lists ------------------*/
