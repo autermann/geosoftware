@@ -1,0 +1,15 @@
+org.sloth.exception
+org.sloth.model
+org.sloth.persistence
+org.sloth.persistence.impl
+org.sloth.service
+org.sloth.service.impl
+org.sloth.util
+org.sloth.validation
+org.sloth.web
+org.sloth.web.account
+org.sloth.web.action
+org.sloth.web.categorie
+org.sloth.web.observation
+org.sloth.web.report
+org.sloth.web.user
