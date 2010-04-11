@@ -46,7 +46,7 @@ import org.sloth.exception.NotNullConstraintViolationException;
 public class Report extends BaseEntity implements Serializable {
 
 	@Transient
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -5792518757973281308L;
 	@ManyToOne
 	@JoinColumn(nullable = false, name = "OBSERVATION_ID")
 	private Observation observation;

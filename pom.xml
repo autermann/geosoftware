@@ -21,7 +21,7 @@ Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth, Christoph
 	<name>Geosoftware II</name>
 	<groupId>org.sloth</groupId>
 	<artifactId>sloth</artifactId>
-	<version>0.0.1</version>
+	<version>1.0.0RC</version>
 	<packaging>war</packaging>
 	<licenses>
 		<license>
@@ -267,11 +267,11 @@ Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth, Christoph
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 	        	<artifactId>maven-javadoc-plugin</artifactId>
-	        	<version>2.6.1</version>
 	        	<configuration>
 	        		<reportOutputDirectory>${basedir}/doc</reportOutputDirectory>
    	       			<destDir>javadoc</destDir>
    	       			<testDestDir>javadoc-test</testDestDir>
+					<additionalparam>-notimestamp</additionalparam>
    	     		</configuration>
    	   		</plugin>
 			<plugin>
