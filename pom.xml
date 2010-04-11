@@ -68,6 +68,14 @@ Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth, Christoph
 		<tag>HEAD</tag>
 		<url>http://code.google.com/p/geosoftware/source/browse/</url>
 	</scm>
+	<mailingLists>
+    	<mailingList>
+      		<name>Sloth Mailing List</name>
+      		<subscribe>majordomo@vespuccis.de</subscribe>
+      		<unsubscribe>majordomo@vespuccis.de</unsubscribe>
+      		<post>sloth@vespuccis.de</post>
+    	</mailingList>
+  	</mailingLists>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -191,18 +199,24 @@ Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth, Christoph
 			<version>4.8.1</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
+		<!--<dependency>
 			<groupId>org.dbunit</groupId>
 			<artifactId>dbunit</artifactId>
 			<version>2.2</version>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
+		</dependency>-->
+		<!--<dependency>
 			<groupId>hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
 			<version>1.8.0.7</version>
 			<scope>test</scope>
-		</dependency>
+		</dependency>-->
+		<dependency>
+	  		<groupId>com.thoughtworks.qdox</groupId>
+	  		<artifactId>qdox</artifactId>
+	  		<version>1.9.2</version>
+	  		<scope>test</scope>
+	 	</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -246,16 +260,22 @@ Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth, Christoph
 			<version>1.2.15</version>
 			<scope>runtime</scope>
 		</dependency>-->
-	 <dependency>
-	  <groupId>com.thoughtworks.qdox</groupId>
-	  <artifactId>qdox</artifactId>
-	  <version>1.9.2</version>
-	  <scope>test</scope>
-	 </dependency>
+
 	</dependencies>
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+	        	<artifactId>maven-javadoc-plugin</artifactId>
+	        	<version>2.6.1</version>
+	        	<configuration>
+	        		<reportOutputDirectory>${basedir}/doc</reportOutputDirectory>
+   	       			<destDir>javadoc</destDir>
+   	       			<testDestDir>javadoc-test</testDestDir>
+   	     		</configuration>
+   	   		</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
 					<source>1.6</source>
@@ -264,13 +284,14 @@ Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth, Christoph
 				</configuration>
 			</plugin>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
 				<configuration>
-
 					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
 			</plugin>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-eclipse-plugin</artifactId>
 				<configuration>
 					<encoding>${project.build.sourceEncoding}</encoding>
@@ -281,6 +302,7 @@ Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth, Christoph
 				</configuration>
 			</plugin>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<configuration>
 					<descriptorRefs>
@@ -289,12 +311,11 @@ Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth, Christoph
 				</configuration>
 			</plugin>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
 					<includes>
-						<!--<include>**/*Tests.java</include>-->
 						<include>**/*Test.java</include>
-						<!--<include>**/Test*.java</include>-->
 					</includes>
 				</configuration>
 			</plugin>

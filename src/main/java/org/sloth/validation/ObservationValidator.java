@@ -19,6 +19,8 @@ package org.sloth.validation;
 
 import static org.sloth.util.ValidationUtils.rejectIfNull;
 import static org.sloth.util.ValidationUtils.rejectIfTooLong;
+import static org.sloth.util.ValidationUtils.isNotEmptyOrWhitespace;
+
 import static org.sloth.validation.ErrorCodes.OBSERVATION.EMPTY_CATEGORIE;
 import static org.sloth.validation.ErrorCodes.OBSERVATION.EMPTY_DESCRIPTION;
 import static org.sloth.validation.ErrorCodes.OBSERVATION.EMPTY_TITLE;

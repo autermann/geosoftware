@@ -99,8 +99,11 @@ public class ValidationUtils extends
 	 */
 	public static void rejectIfTooLong(Errors errors, String field,
 			String errorCode, int maxLength) {
-		if (errors.getFieldValue(field).toString().length() > maxLength) {
-			errors.rejectValue(field, errorCode);
+		Object o = errors.getFieldValue(field);
+		if (notNull(o)) {
+			if (((String) o).length() > maxLength) {
+				errors.rejectValue(field, errorCode);
+			}
 		}
 	}
 }
