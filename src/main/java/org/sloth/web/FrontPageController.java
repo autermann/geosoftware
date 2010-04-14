@@ -63,13 +63,11 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 @RequestMapping("/")
-@SessionAttributes( { "observations", "observation", "categories" })
+@SessionAttributes("observations")
 public class FrontPageController {
 
 	private static final String VIEW = "index";
 	private static final String MAP_CONTENT_ATTRIBUTE = "observations";
-	private static final String NEW_OBSERVATION_ATTRIBUTE = "observation";
-	private static final String CATEGORIE_ATTRIBUTE = "categories";
 	private static final String SEARCH_PARAM = "q";
 	private static final int VISIBLE_OBSERVATIONS_DEFAULT = 10;
 	private static final int VISIBLE_OBSERVATIONS;
@@ -83,25 +81,13 @@ public class FrontPageController {
 		try {
 			i = Integer.valueOf(Config.getProperty("lastObservationsCount"));
 		} catch (NumberFormatException e) {
-			logger
-					.warn(
-							"Invalid or null value for property 'lastObservationsCount'.",
-							e);
+			logger.warn("Invalid or null value for property 'lastObservationsCount'.", e);
 		}
 		if (i == null) {
 			VISIBLE_OBSERVATIONS = VISIBLE_OBSERVATIONS_DEFAULT;
 		} else {
 			VISIBLE_OBSERVATIONS = i;
 		}
-	}
-
-	/**
-	 * @param ov
-	 *            the {@code ObservationValidator} to set
-	 */
-	@Autowired
-	public void setObservationValidator(ObservationValidator ov) {
-		this.observationValidator = ov;
 	}
 
 	/**
@@ -114,63 +100,13 @@ public class FrontPageController {
 	}
 
 	/**
-	 * Sets custom parameters to the {@code WebDataBinder}.
-	 * 
-	 * @param webDataBinder
-	 *            the {@code WebDataBinder} to initialize
-	 */
-	@InitBinder
-	public void initBinder(WebDataBinder webDataBinder) {
-		CategorieEditor c = new CategorieEditor();
-		c.setObservationService(observationService);
-		webDataBinder.registerCustomEditor(Categorie.class, c);
-	}
-
-	/**
 	 * Handles the {@code GET} request. It creates the model to fill the Map
 	 * with {@code Observation}s. An optional query parameter is also processed.
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView fillMap(HttpSession session,
-			@RequestParam(value = SEARCH_PARAM, required = false) String string) {
-		ModelAndView mav = new ModelAndView(VIEW);
-		if (isAuth(session)) {
-			mav.addObject(NEW_OBSERVATION_ATTRIBUTE, new Observation());
-			mav.addObject(CATEGORIE_ATTRIBUTE, observationService
-					.getCategories());
-		}
-		return mav.addObject(MAP_CONTENT_ATTRIBUTE,
-				isNotEmptyOrWhitespace(string) ? this.observationService
-						.getObservations(string) : this.observationService
-						.getNewestObservations(VISIBLE_OBSERVATIONS));
-	}
-
-	/**
-	 * Handles the {@code POST} request. Creates a new {@code Observation}.
-	 */
-	@RequestMapping(method = RequestMethod.POST)
-	public String saveObservation(HttpSession session,
-			HttpServletResponse request,
-			@ModelAttribute(NEW_OBSERVATION_ATTRIBUTE) Observation observation,
-			BindingResult result, SessionStatus status) throws IOException {
-		if (isAuth(session)) {
-			observation.setUser(getUser(session));
-			this.observationValidator.validate(observation, result);
-			if (result.hasErrors()) {
-				return VIEW;
-			} else {
-				try {
-					this.observationService.registrate(observation);
-				} catch (Exception e) {
-					logger.warn("Unexpected Exception", e);
-					return internalErrorView(request);
-				} finally {
-					status.setComplete();
-				}
-				return "redirect:/";
-			}
-		} else {
-			return forbiddenView(request);
-		}
+	public ModelAndView fillMap(@RequestParam(value = SEARCH_PARAM, required = false) String query) {
+		return new ModelAndView(VIEW, MAP_CONTENT_ATTRIBUTE, isNotEmptyOrWhitespace(query)
+				? this.observationService.getObservations(query)
+				: this.observationService.getNewestObservations(VISIBLE_OBSERVATIONS));
 	}
 }
