@@ -39,8 +39,28 @@
 		</tr>
 		<tr>
 			<td align="center" colspan="2">
-				<input type="button" id="submit" value="Submit" />
+				<%-- function will be added per js --%>
+				<input type="button" id="submit" value="Submit"/>
 			</td>
 		</tr>
 	</table>
+	<script type="text/javascript">
+		$("#submit").click(function(evt){
+			var lon = $("#longitude").val();
+			var lat = $("#latitude").val();
+			var ll = WGS2Merc(new OpenLayers.LonLat(lon,lat));
+			OpenLayers.Event.stop(evt);
+			$.post("ajax/bubble", {
+				categorie	: $("#categorie").val(),
+				title		: $("#title").val(),
+				description : $("#description").val(),
+				lon			: lon,
+				lat			: lat
+			}, function(data){
+				createPopup(ll, data);
+			},"html")
+			createPopup(ll, loading);
+		});
+	</script>
+
 </form:form>

@@ -53,22 +53,8 @@ function clickCallback(ll){
 		lat : wgs.lat
 	}, function(data) {
 		createPopup(ll, data);
-		$("#submit").click(function(evt){
-			OpenLayers.Event.stop(evt);
-			$.post("ajax/bubble", {
-				categorie	: $("#categorie").val(),
-				title		: $("#title").val(),
-				description : $("#description").val(),
-				lon			: $("#longitude").val(),
-				lat			: $("#latitude").val()
-			}, function(data){
-				createPopup(ll, data);
-			},"html")
-			createPopup(ll, loading);
-		});
 	}, "html");
 }
-
 
 function addMarker(lon, lat, content, iconPath) {
 	var feature = new OpenLayers.Feature(layer,

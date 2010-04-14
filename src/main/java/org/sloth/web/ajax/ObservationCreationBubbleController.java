@@ -100,7 +100,7 @@ public class ObservationCreationBubbleController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String post(@RequestParam(LONGITUDE_PARAM) Double longitude,
+	public ModelAndView post(@RequestParam(LONGITUDE_PARAM) Double longitude,
 					   @RequestParam(LATITUDE_PARAM) Double latitude,
 					   @ModelAttribute(OBSERVATION_ATTRIBUTE) Observation observation,
 					   BindingResult result, SessionStatus status,
@@ -116,8 +116,8 @@ public class ObservationCreationBubbleController {
 			observationValidator.validate(observation, result);
 			if (result.hasErrors()) {
 				logger.info("Found Errors.");
-				logger.info("{}",m.asMap().keySet());
-				return FORM_VIEW;
+				logger.debug("{}",m.asMap().keySet());
+				return new ModelAndView(FORM_VIEW,m.asMap());
 			} else {
 				try {
 					logger.info("Trying to persist Observation {}", observation);
@@ -125,10 +125,10 @@ public class ObservationCreationBubbleController {
 					logger.info("Succesfully persisted Observation {}", observation);
 					ModelAndView mav = new ModelAndView(SUCCESS_VIEW);
 					mav.addObject(observation);
-					return SUCCESS_VIEW;
+					return new ModelAndView(SUCCESS_VIEW, OBSERVATION_ATTRIBUTE, observation);
 				} catch(Exception e) {
 					logger.warn("Unexpected Exception.", e);
-					return ERROR_VIEW;
+					return new ModelAndView(ERROR_VIEW);
 				} finally {
 					logger.info("Clearing session attributes");
 					//status.setComplete();
@@ -136,7 +136,7 @@ public class ObservationCreationBubbleController {
 			}
 		} else {
 			logger.info("Session is not authed");
-			return REJECT_VIEW;
+			return new ModelAndView(REJECT_VIEW);
 		}
 	}
 
