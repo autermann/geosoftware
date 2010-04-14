@@ -1,106 +1,42 @@
-% created by Christian Paluschek
-
-
-\documentclass[a4paper,10pt]{scrartcl}
-
-
-\usepackage[ngerman]{babel} %zb deutsches verzeichnis%
-\usepackage[T1]{fontenc}
-\usepackage[ansinew]{inputenc}
-\usepackage{lmodern}
-\usepackage{graphicx} %einladen von grafiken%
-\usepackage{amsmath}
-\usepackage{hyperref}
-\usepackage{amsthm}
-\usepackage{amsfonts}
-\usepackage{textcomp} %eurozeichen lässt sich laden%
-\usepackage{subfig} %2 grafiken nebeneinander%
-\usepackage[paper=a4paper,left=40mm,right=25mm,top=25mm,bottom=25mm]{geometry}
-\usepackage{setspace} %Paket für den Zeilenabstand%
-\usepackage{fancyheadings}
-
-\usepackage{color}
-\definecolor{darkblue}{rgb}{0,0,.5}
-\definecolor{black}{rgb}{0,0,0}
-\hypersetup{colorlinks=true, breaklinks=true, linkcolor=black, menucolor=black, urlcolor=darkblue}
-
-%%% Einen der vom Package bereitgestellten Layouts benutzen
-\pagestyle{fancy}
-%%% Kopfzeile linker Bereich
-%      gerade Seite   ungerade Seite
-\lhead[ \leftmark   ]{\leftmark}
-%%% Kopfzeile mittlerer Bereich
-%      gerade Seite   ungerade Seite
-\chead[]{}
-%%% Kopfzeile linker Bereich
-%      gerade Seite             ungerade Seite
-\rhead[\rightmark]{sloth.city}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% DOCUMENT
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[a4paper,11pt]{scrartcl}
+\usepackage{../packages/geosoftware}
 \begin{document}
-\parindent 0pt %text nicht einrücken%
-
-\begin{titlepage}
-\copyright sloth.city \\
-Institut für Geoinformatik \\
-7.April 2010
-
-
+\title{Geosoftware II \\ \small Handbuch}
+\author{Arndt, Autermann, Demuth, Fendrich, Ottenhues, Paluschek}
+\date{\today}
+\version{1.0}
+\status{Entwurf}
+\authormail{sloth@vespuccis.de}
+\maketitle
+\thispagestyle{empty}
 \begin{center}
-\begin{huge}
-\vfill
-\textbf{sloth.city  \\[1em]								
-			 Handbuch}
-\end{huge}
+\bf Vers.: \MyVersion \\
+\bf Stadium: \MyStatus\\
+\bf Seiten: \thelastpage \\
+\bf Kontakt: \email \\
 \end{center}
-\vfill
-geschrieben von \\
-Christian Autermann \\
-Stefan Arndt \\
-Simon Ottenhues \\
-Dustin Demut\\
-Christoph Fendrich\\
-Christian Paluschek
-			
-			  
-			  
-\end{titlepage}
-
-
-
 \newpage
-%%%Inhaltsverzeichnis
-\pagenumbering{Roman}
-\setcounter{page}{2}
-\tableofcontents 
-
-
-
+\tableofcontents
 \newpage
-\pagenumbering{arabic}
-\setcounter{page}{3}
+
 
 
 \section{sloth.city}
-Auf der Internetseite von sloth.city ist es Bewohnern der Stadt Münster möglich Bschwerden einzureichen. Von zu Hause aus lassen sich Beobachtungen wie Schlaglöcher, Müll und Vandalismus eintragen. Die zuständige Abteilung der Stadt Münster wird diese dann bearbeiten und hoffentlich zu ihrer Zufriedenheit lösen.
+Auf der Internetseite von sloth.city ist es Bewohnern der Stadt MÃ¼nster mÃ¶glich Beschwerden einzureichen. Von zu Hause aus lassen sich Beobachtungen wie SchlaglÃ¶cher, MÃ¼ll und Vandalismus eintragen. Die zustÃ¤ndige Abteilung der Stadt MÃ¼nster wird diese dann bearbeiten und hoffentlich zu ihrer Zufriedenheit lÃ¶sen.
 
-In diesem Handbuch werden die Möglichkeiten beschrieben, um ein erfolgreiches interagieren zwischen Administrator, Benutzer und Webseite, zu gewährleisten. Es soll helfen Probleme mit der Seite sloth.city zu lösen. Durch Srceenshots wird versucht den beschreibenden Text visuell zu unterstützen, was hoffentlich zu einer besseren Problembewältigung führt.
+In diesem Handbuch werden die MÃ¶glichkeiten beschrieben, um ein erfolgreiches interagieren zwischen Administrator, Benutzer und Webseite, zu gewÃ¤hrleisten. Es soll helfen Probleme mit der Seite sloth.city zu lÃ¶sen. Durch Screenshots wird versucht den beschreibenden Text visuell zu unterstÃ¼tzen, was hoffentlich zu einer besseren ProblembewÃ¤ltigung fÃ¤hrt.
 
-Auf der Seite sloth.city wird es 3 Arten von Benutzern geben. Auf der einen Seite den Administrator, dem mehr Rechte zugesprochen werden, als dem "`normalen"' Nutzer. Der "`normale"' Nutzer verfügt somit über eingeschränktere Möglichkeiten, die später noch erläutert werden. Der Besucher der Seite hat am wenigsten Rechte.
+Auf der Seite sloth.city wird es 3 Arten von Benutzern geben. Auf der einen Seite den Administrator, dem mehr Rechte zugesprochen werden, als dem "`normalen"' Nutzer. Der "`normale"' Nutzer verfÃ¼gt somit Ã¼ber eingeschrÃ¤nktere MÃ¶glichkeiten, die spÃ¤ter noch erlÃ¤utert werden. Der Besucher der Seite hat am wenigsten Rechte.
 
-\newpage
 
 \section{Anforderungen}
-Die aufgelisteten Anforderungen sollten in jedem Fall erfüllt werden, damit eine zufriedenstellende Nutzung gewährleitet werden kann.
+Die aufgelisteten Anforderungen sollten in jedem Fall erfÃ¼llt werden, damit eine zufriedenstellende Nutzung gewÃ¤hrleistet werden kann.
 
 \begin{itemize}
 	\item stabile Internetverbindung (Empfehlung: DSL)
 	\item Browser (Empfehlung: Mozilla Firefox 3.6, Internet Explorer 8, Google Chrome 4.1, Safari 4.0.5, Opera 10.10)
 	\item Betriebssystem (Empfehlung: Windows 7, Windows Vista, Windows XP, Arch Linux \& Mac OS X 10.6.3)
 \end{itemize} 
-
-\newpage
 
 \section{Installation}
 Falls sie noch keinen der obigen Browser installiert haben, sollten sie eine der aufgelisteten Seiten besuchen. Die unten genannten Seiten sind die offiziellen Seiten des jeweiligen Anbieters und sind unsere Empfehlungen.
@@ -109,41 +45,39 @@ Falls sie noch keinen der obigen Browser installiert haben, sollten sie eine der
 	\item Internet Explorer 8 \\\url{http://www.microsoft.com/germany/windows/internet-explorer/browse-with-confidence.aspx}
 	\item Google Chrome 4.1 \\\url{http://www.google.com/chrome}
 	\item Safari 4.0.5 \\\url{http://www.apple.com/de/safari/}
-	\item Opera 10.10 \\\url{http://www.server-56.info/Opera/}
+	\item Opera 10.10 \\\url{http://opera.com/}
 \end{itemize} 
 
-Sollte man Probleme bei der Installation haben, dann empfehlen wir eine Installationsanleitung. Eine Installationsanleitung für den Firefox finden sie unter dem folgenden Link: \url{http://www.firefox-browser.de/wiki/Installation}
+Sollte man Probleme bei der Installation haben, dann empfehlen wir eine Installationsanleitung. Eine Installationsanleitung fÃ¼r den Firefox finden sie unter dem folgenden Link: \url{http://www.firefox-browser.de/wiki/Installation}
 
-\newpage
-
-\section{Überblick}
-Im folgenden wird ein kompletter Überblick über die Seite sloth.city gegeben. Die Oberfläche wird erklärt und die einzelnen Funktionen näher erläutert.
+\section{Ãœberblick}
+Im folgenden wird ein kompletter Ãœberblick Ã¼ber die Seite sloth.city gegeben. Die OberflÃ¤che wird erklÃ¤rt und die einzelnen Funktionen nÃ¤her erlÃ¤utert.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width = 15 cm]{img/ueberblick}
-\caption{Überblick der Webseite}
-\label{Überblick}
+\caption{Ãœberblick der Webseite}
+\label{Ãœberblick}
 \end{figure}
 
 
-Die \textbf{Karte} ist das zentrale Element der Seite sloth.city, da dort ein Überlick über die eingetragenen Beschwerden vorzufinden ist. Die Karteninteraktion erfolgt über die Zoom und Pan Panels. Desweiteren werden im unteren Bereich der Karte, die jeweiligen Koordinaten angezeigt. Die gesichteten Beobachtungen werden ebenfalls über die Karte hinzugefügt (siehe Beobachtungen anlegen). Der rechte Rand der Karte beinhaltet zwei Menüpunkte. Der obere Menüpunkt lässt die Auswahl zwischen drei Karten. Der untere Menüpunkt hingegen beinhaltet eine Übersichtskarte. 
+Die \textbf{Karte} ist das zentrale Element der Seite sloth.city, da dort ein Ãœberlick Ã¼ber die eingetragenen Beschwerden vorzufinden ist. Die Karteninteraktion erfolgt Ã¼ber die Zoom und Pan Panels. Des Weiteren werden im unteren Bereich der Karte, die jeweiligen Koordinaten angezeigt. Die gesichteten Beobachtungen werden ebenfalls Ã¼ber die Karte hinzugefÃ¼gt (siehe Beobachtungen anlegen). Der rechte Rand der Karte beinhaltet zwei MenÃ¼punkte. Der obere MenÃ¼punkt lÃ¤sst die Auswahl zwischen drei Karten. Der untere MenÃ¼punkt hingegen beinhaltet eine Ãœbersichtskarte. 
 
-Im rechten oberen Teil der Seite ist eine \textbf{Anmeldung} möglich oder eine \textbf{Suche} nach den eingetragenen Beobachtungen. Sollten sie Probleme jeglicher Art haben, können sie uns natürlich auch kontaktieren. Die Hilfe Schaltfläche steht ihnen hierfür zur Verfügung.  
+Im rechten oberen Teil der Seite ist eine \textbf{Anmeldung} mÃ¶glich oder eine \textbf{Suche} nach den eingetragenen Beobachtungen. Sollten sie Probleme jeglicher Art haben, kÃ¶nnen sie uns natÃ¼rlich auch kontaktieren. Die Hilfe SchaltflÃ¤che steht ihnen hierfÃ¼r zur VerfÃ¼gung.  
 
-Die eingetragenen \textbf{Beobachtungen} werden untereinander auf der linken Seite direkt neben der Karte dargestellt. Jedes Symbol hat ihre eigene Kategorie. Wird eine Beobachtung in der Karte nicht gefunden, kann die Zoomfunktion benutzt werden.
+Die eingetragenen \textbf{Beobachtungen} werden untereinander auf der linken Seite direkt neben der Karte dargestellt. Jedes Symbol hat ihre eigene Kategorie. Wird eine Beobachtung in der Karte nicht gefunden, kann die Zoom-Funktion benutzt werden.
 
-Im unteren Bereich haben sie mit dem \textbf{Start} Schriftzug die Möglichkeit zurück zur Hauptseite zu gelangen. Diesen Teil werden sie in jeder Ebene dieser Webseite wiederfinden.
+Im unteren Bereich haben sie mit dem \textbf{Start} Schriftzug die MÃ¶glichkeit zurÃ¼ck zur Hauptseite zu gelangen. Diesen Teil werden sie in jeder Ebene dieser Webseite wiederfinden.
 
 
 \newpage
 
 \section{Besucher}
-Wie schon erwähnt gibt es die Möglichkeit mit der Webseite sloth.city als Besucher zu interagieren. Ohne Anmeldung können sie nur einige der Funktionen nutzen. 
-Die erwähnten Funktionen im Überlick Abschnitt kann ein Besucher dieser Webseite vollständig ausführen (außer Beobachtungen anlegen!).
+Wie schon erwÃ¤hnt gibt es die MÃ¶glichkeit mit der Webseite sloth.city als Besucher zu interagieren. Ohne Anmeldung kÃ¶nnen sie nur einige der Funktionen nutzen. 
+Die erwÃ¤hnten Funktionen im Ãœberblick Abschnitt kann ein Besucher dieser Webseite vollstÃ¤ndig ausfÃ¼hren (auÃŸer Beobachtungen anlegen!).
 
 \subsection{Beobachtungen}
-Die wichtigste Funktion der Webseite ist die Erstellung von Beobachtungen. Normalerweise kann durch Klick in die Karte eine Beobachtung erstellt werden. Ein Fenster öffnet sich und mehrere Optionen stehen zur Verfügung. Diese Möglichkeit kann der Besucher nicht nutzen, da eine Meldung erscheint, dass er sich dafür anmelden muss. 
+Die wichtigste Funktion der Webseite ist die Erstellung von Beobachtungen. Normalerweise kann durch Klick in die Karte eine Beobachtung erstellt werden. Ein Fenster Ã¶ffnet sich und mehrere Optionen stehen zur VerfÃ¼gung. Diese MÃ¶glichkeit kann der Besucher nicht nutzen, da eine Meldung erscheint, dass er sich dafÃ¼r anmelden muss. 
 
 \begin{figure}[h]
 \centering
@@ -153,14 +87,14 @@ Die wichtigste Funktion der Webseite ist die Erstellung von Beobachtungen. Norma
 \end{figure}
 
 \subsection{Editieren}
-Auch die Möglichkeit Beobachtungen zu editieren, also zu verändern, entfällt komplett. Nur als Administrator oder eingeschränkt als Nutzer kann man Beobachtungen verändern.
+Auch die MÃ¶glichkeit Beobachtungen zu editieren, also zu verÃ¤ndern, entfÃ¤llt komplett. Nur als Administrator oder eingeschrÃ¤nkt als Nutzer kann man Beobachtungen verÃ¤ndern.
 
 \newpage
 
 \section{Administrator}
-Als Aministrator obligt einem die Verwaltung der Benutzer, Beobachtungen, Kategorien und Meldungen. Nur der Administrator kann Benutzer löschen, alle Beobachtungen editieren, Kategorien erstellen, editieren, löschen sowie Meldungen editieren und löschen.  
+Als Administrator obliegt einem die Verwaltung der Benutzer, Beobachtungen, Kategorien und Meldungen. Nur der Administrator kann Benutzer lÃ¶schen, alle Beobachtungen editieren, Kategorien erstellen, editieren, lÃ¶schen sowie Meldungen editieren und lÃ¶schen.  
 
-Die Registierung des Administrators erfolgt über eine Besonderheit. Der erste Benutzer der Webseite ist gleichzeitig auch der Administrator.
+Die Registrierung des Administrators erfolgt Ã¼ber eine Besonderheit. Der erste Benutzer der Webseite ist gleichzeitig auch der Administrator.
 
 \subsection{Verwaltung}
 Um in die Verwaltungsebene zu gelangen klicken sie auf ihre angegebene Administrator e-mail Adresse.
@@ -183,7 +117,7 @@ Es gibt 4 Verwaltungsoptionen. Die Benutzerverwaltung, Beobachtungsverwaltung, K
 \newpage
 
 \subsubsection{Benutzerverwaltung}
-In der Benutzerverwaltung können sie als Administrator die jeweiligen Benutzer editieren. Der Nachname, Vorname, die E-mail Adresse, das Passwort oder die Benutzergruppe lassen sich ändern.
+In der Benutzerverwaltung kÃ¶nnen sie als Administrator die jeweiligen Benutzer editieren. Der Nachname, Vorname, die E-mail Adresse, das Passwort oder die Benutzergruppe lassen sich Ã¤ndern.
 \begin{figure}[h]
 \centering
 \includegraphics[width = 10 cm]{img/Benutzerverwaltung}
@@ -192,7 +126,7 @@ In der Benutzerverwaltung können sie als Administrator die jeweiligen Benutzer e
 \end{figure}
 
 \subsubsection{Beobachtungsverwaltung}
-Hier lassen sich Beobachtungen editieren, löschen oder neu erstellen.
+Hier lassen sich Beobachtungen editieren, lÃ¶schen oder neu erstellen.
 \begin{figure}[h]
 \centering
 \includegraphics[width = 10 cm]{img/Beobachtungsverwaltung}
@@ -202,7 +136,7 @@ Hier lassen sich Beobachtungen editieren, löschen oder neu erstellen.
 
 \newpage
 \subsubsection{Kategorieverwaltung}
-Hier lassen sich die Kategorien erstellen, löschen und editieren.
+Hier lassen sich die Kategorien erstellen, lÃ¶schen und editieren.
 \begin{figure}[h]
 \centering
 \includegraphics[width = 10 cm]{img/Kategorieverwaltung}
@@ -211,7 +145,7 @@ Hier lassen sich die Kategorien erstellen, löschen und editieren.
 \end{figure}
 
 \subsubsection{Meldungsverwaltung}
-Meldungen lassen sich editieren und löschen. Sollte eine Meldung den Status "`Offen"' haben, kann diese durch die Editierfunktion auf "`Bearbeitet"' gesetzt werden. Hierfür muss lediglich ein Haken hinter Status im Editiermodus gesetzt und durch Submit bestätigt werden. Natürlich kann dies auch wieder rückgängig gemacht werden.
+Meldungen lassen sich editieren und lÃ¶schen. Sollte eine Meldung den Status "`Offen"' haben, kann diese durch die Editierfunktion auf "`Bearbeitet"' gesetzt werden. HierfÃ¼r muss lediglich ein Haken hinter Status im Editiermodus gesetzt und durch Submit bestÃ¤tigt werden. NatÃ¼rlich kann dies auch wieder rÃ¼ckgÃ¤ngig gemacht werden.
 \begin{figure}[h]
 \centering
 \includegraphics[width = 10 cm]{img/Meldungsverwaltung}
@@ -222,9 +156,9 @@ Meldungen lassen sich editieren und löschen. Sollte eine Meldung den Status "`Of
 \newpage
 
 \section{Benutzer}
-Der Benutzer kann Konten löschen, bearbeiten, seine Beobachtungen einsehen und alle Beobachtungen einsehen.
+Der Benutzer kann Konten lÃ¶schen, bearbeiten, seine Beobachtungen einsehen und alle Beobachtungen einsehen.
 \subsection{Anmelden}
-Um sich als Benutzer anzumelden müssen sie sich erst registrieren. Sie klicken auf Anmelden und danach auf Registrieren. Nun muss das Formular ausgefüllt werden.
+Um sich als Benutzer anzumelden mÃ¼ssen sie sich erst registrieren. Sie klicken auf Anmelden und danach auf Registrieren. Nun muss das Formular ausgefÃ¼llt werden.
 \begin{figure}[h]
 \centering
 \includegraphics[width = 10 cm]{img/benutzeranmelden}
@@ -232,7 +166,7 @@ Um sich als Benutzer anzumelden müssen sie sich erst registrieren. Sie klicken a
 \label{Benutzer anmelden}
 \end{figure}
 
-Sollte das Formular ausgefüllt sein, muss der Prozess mit Submit bestätigt werden.
+Sollte das Formular ausgefÃ¼llt sein, muss der Prozess mit Submit bestÃ¤tigt werden.
 
 \subsection{Verwaltung}
 Um in die Verwaltungsebene zu gelangen klicken sie auf ihre angegebene Benutzer E-mail Adresse.
@@ -246,7 +180,7 @@ Um in die Verwaltungsebene zu gelangen klicken sie auf ihre angegebene Benutzer 
 \newpage
 
 \subsubsection{Verwaltungsoptionen}
-Es gibt vier Verwaltungsoptionen. Sie können ein Konto löschen, bearbeiten, ihre und alle Beobachtungen einsehen.
+Es gibt vier Verwaltungsoptionen. Sie kÃ¶nnen ein Konto lÃ¶schen, bearbeiten, ihre und alle Beobachtungen einsehen.
 \begin{figure}[h]
 \centering
 \includegraphics[width = 10 cm]{img/Benutzerverwaltung2}
@@ -254,19 +188,19 @@ Es gibt vier Verwaltungsoptionen. Sie können ein Konto löschen, bearbeiten, ihre
 \label{Benutzerverwaltung}
 \end{figure}
 
-\subsubsection{Konto löschen}
-Sie können ihr Konto löschen, indem sie einfach mit Submit bestätigen.
+\subsubsection{Konto lÃ¶schen}
+Sie kÃ¶nnen ihr Konto lÃ¶schen, indem sie einfach mit Submit bestÃ¤tigen.
 \begin{figure}[h]
 \centering
 \includegraphics[width = 10 cm]{img/kontoloeschen}
-\caption{Konto löschen}
+\caption{Konto lÃ¶schen}
 \label{kontoloeschen}
 \end{figure}
 
 \newpage
 
 \subsubsection{Konto bearbeiten}
-Sie können ihr Konto bearbeiten und dann mit Update bestätigen.
+Sie kÃ¶nnen ihr Konto bearbeiten und dann mit Update bestÃ¤tigen.
 \begin{figure}[h]
 \centering
 \includegraphics[width = 10 cm]{img/kontobearbeiten}
@@ -275,7 +209,7 @@ Sie können ihr Konto bearbeiten und dann mit Update bestätigen.
 \end{figure}
 
 \subsubsection{Ihre Beobachtungen}
-Sie können ihre Beobachtungen bearbeiten, löschen und eine neue Meldung hinzufügen.
+Sie kÃ¶nnen ihre Beobachtungen bearbeiten, lÃ¶schen und eine neue Meldung hinzufÃ¼gen.
 \begin{figure}[h]
 \centering
 \includegraphics[width = 10 cm]{img/ihrebeobachtungen}
@@ -284,7 +218,7 @@ Sie können ihre Beobachtungen bearbeiten, löschen und eine neue Meldung hinzufüg
 \end{figure}
 
 \subsubsection{Alle Beobachtungen}
-Sie können alle Beobachtungen einsehen.
+Sie kÃ¶nnen alle Beobachtungen einsehen.
 \begin{figure}[h]
 \centering
 \includegraphics[width = 10 cm]{img/allebeobachtungen}
@@ -297,7 +231,7 @@ Sie können alle Beobachtungen einsehen.
 
 
 \section{Beobachtungen anlegen}
-Beobachtungen anzulegen ist ein wesentlicher Bestandteil der Webseite. Wenn sie einen Problemfall in einer Gegend festgestellt haben, dann können sie per Klick in die Karte eine neue Beobachtung anlegen. Beobachtungen können sie als Administrator und als registrierter Nutzer anlegen.
+Beobachtungen anzulegen ist ein wesentlicher Bestandteil der Webseite. Wenn sie einen Problemfall in einer Gegend festgestellt haben, dann kÃ¶nnen sie per Klick in die Karte eine neue Beobachtung anlegen. Beobachtungen kÃ¶nnen sie als Administrator und als registrierter Nutzer anlegen.
 \begin{figure}[h]
 \centering
 \includegraphics[width = 10 cm]{img/beobachtunganlegen}
@@ -305,7 +239,7 @@ Beobachtungen anzulegen ist ein wesentlicher Bestandteil der Webseite. Wenn sie 
 \label{Beobachtung anlegen}
 \end{figure}
 
-Wenn sie die Beobachtung wie im Beispiel ausgefüllt haben, können sie diese mit Submit bestätigen. Ihre neu angelegte Beobachtung wird in der Beobachtungsliste links von der Karte angezeigt.
+Wenn sie die Beobachtung wie im Beispiel ausgefÃ¼llt haben, kÃ¶nnen sie diese mit Submit bestÃ¤tigen. Ihre neu angelegte Beobachtung wird in der Beobachtungsliste links von der Karte angezeigt.
 \begin{figure}[h]
 \centering
 \includegraphics[width = 10 cm]{img/beobachtungsliste}
@@ -317,7 +251,7 @@ Wenn sie die Beobachtung wie im Beispiel ausgefüllt haben, können sie diese mit 
 \newpage
 
 \section{Kontakt}
-Sollten sie Probleme mit dem Handbuch oder der Webseite haben können sie uns unter der folgenden Adresse kontaktieren.
+Sollten sie Probleme mit dem Handbuch oder der Webseite haben kÃ¶nnen sie uns unter der folgenden Adresse kontaktieren.
 \\[1em]
 \begin{center}
 Support Informationen
@@ -330,7 +264,7 @@ Support Informationen
 \hline
 									
 						Name & Sloth Support  									\\\hline
-						Straße, Hausnummer  & Sloth Allee, -1    \\\hline
+						StraÃŸe, Hausnummer  & Sloth Allee, -1    \\\hline
 						Stadt, PLZ &  Virtual City, 42   					\\\hline
 						Webseite  & www.vespuccis.de   						 \\\hline
 						E-Mail  & sloth@vespuccis.de   							\\\hline
