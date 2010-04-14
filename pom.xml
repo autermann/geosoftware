@@ -269,8 +269,8 @@ Copyright (C) 2009  Stefan Arndt, Christian Autermann, Dustin Demuth, Christoph
 	        	<artifactId>maven-javadoc-plugin</artifactId>
 	        	<configuration>
 	        		<reportOutputDirectory>${basedir}/doc</reportOutputDirectory>
-   	       			<destDir>javadoc</destDir>
-   	       			<testDestDir>javadoc-test</testDestDir>
+   	       			<destDir>JavaDoc</destDir>
+   	       			<testDestDir>JavaDoc-test</testDestDir>
 					<additionalparam>-notimestamp</additionalparam>
    	     		</configuration>
    	   		</plugin>
