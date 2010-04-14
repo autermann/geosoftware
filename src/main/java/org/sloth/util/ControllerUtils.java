@@ -65,6 +65,7 @@ public class ControllerUtils {
 		if (u == null) {
 			throw new NullPointerException("User must not be null.");
 		}
+		logger.info("Authorizing Session {} by User {}", s.getId(), u.getId());
 		s.setAttribute(SESSION_ATTRIBUTE, u);
 	}
 
@@ -77,7 +78,7 @@ public class ControllerUtils {
 	public static void deAuth(HttpSession s) {
 		User u = getUser(s);
 		if (u != null) {
-			logger.debug("Unbinding User {} from Session {}", u.getId(), s
+			logger.info("Unbinding User {} from Session {}", u.getId(), s
 					.getId());
 		}
 		s.invalidate();

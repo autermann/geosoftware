@@ -18,7 +18,10 @@
 package org.sloth.service.impl;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.sloth.exception.ConstraintViolationException;
 import org.sloth.model.Categorie;
@@ -45,6 +48,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ObservationServiceImpl implements ObservationService {
 
+	private Logger logger = LoggerFactory.getLogger(ObservationServiceImpl.class);
 	private ObservationDao observationDao;
 	private CategorieDao categorieDao;
 	private ReportDao reportDao;
@@ -55,6 +59,7 @@ public class ObservationServiceImpl implements ObservationService {
 		if (categorie == null) {
 			throw new NullPointerException();
 		} else {
+			logger.info("Deleting Categorie: {}", categorie);
 			this.categorieDao.delete(categorie);
 		}
 	}
@@ -65,7 +70,7 @@ public class ObservationServiceImpl implements ObservationService {
 		if (id == null) {
 			throw new NullPointerException();
 		} else {
-			this.categorieDao.delete(this.getCategorie(id));
+			this.deleteCategorie(this.getCategorie(id));
 		}
 	}
 
@@ -75,7 +80,7 @@ public class ObservationServiceImpl implements ObservationService {
 		if (id == null) {
 			throw new NullPointerException();
 		} else {
-			this.deleteObservation(this.observationDao.getById(id));
+			this.deleteObservation(this.getObservation(id));
 		}
 	}
 
@@ -85,6 +90,7 @@ public class ObservationServiceImpl implements ObservationService {
 		if (observation == null) {
 			throw new NullPointerException();
 		} else {
+			logger.info("Deleting Observation {}", observation);
 			this.observationDao.delete(observation);
 		}
 	}
@@ -95,6 +101,7 @@ public class ObservationServiceImpl implements ObservationService {
 		if (r == null) {
 			throw new NullPointerException();
 		} else {
+			logger.info("Deleting Report {}", r);
 			this.reportDao.delete(r);
 		}
 	}
@@ -104,6 +111,7 @@ public class ObservationServiceImpl implements ObservationService {
 		if (id == null) {
 			throw new NullPointerException();
 		} else {
+			logger.info("Getting Categorie with Id {}", id);
 			return this.categorieDao.getById(id);
 		}
 	}
@@ -113,17 +121,20 @@ public class ObservationServiceImpl implements ObservationService {
 		if (title == null) {
 			throw new NullPointerException();
 		} else {
+			logger.info("Getting Categorie with title {}", title);
 			return this.categorieDao.getByTitle(title);
 		}
 	}
 
 	@Override
 	public Collection<Categorie> getCategories() {
+		logger.info("Getting all Categories");
 		return this.categorieDao.getAll();
 	}
 
 	@Override
 	public List<Observation> getNewestObservations(int u) {
+		logger.info("Getting {} newest Observations", u);
 		return this.observationDao.getNewestObservations(u);
 	}
 
@@ -132,12 +143,14 @@ public class ObservationServiceImpl implements ObservationService {
 		if (id == null) {
 			throw new NullPointerException();
 		} else {
+			logger.info("Getting Observation with Id {}", id);
 			return this.observationDao.getById(id);
 		}
 	}
 
 	@Override
 	public Collection<Observation> getObservations() {
+		logger.info("Getting all Observations");
 		return this.observationDao.getAll();
 	}
 
@@ -147,6 +160,7 @@ public class ObservationServiceImpl implements ObservationService {
 		if (oc == null) {
 			throw new NullPointerException();
 		} else {
+			logger.info("Getting all Observations in {}", oc);
 			return this.observationDao.getByCategorie(oc);
 		}
 	}
@@ -157,6 +171,7 @@ public class ObservationServiceImpl implements ObservationService {
 		if (keyword == null) {
 			throw new NullPointerException();
 		} else {
+			logger.info("Getting all Observations matching '{}'", keyword);
 			return this.observationDao.getByKeyWord(keyword);
 		}
 	}
@@ -166,6 +181,7 @@ public class ObservationServiceImpl implements ObservationService {
 		if (u == null) {
 			throw new NullPointerException();
 		} else {
+			logger.info("Getting all Observations by {}", u);
 			return this.observationDao.getByUser(u);
 		}
 	}
@@ -175,12 +191,14 @@ public class ObservationServiceImpl implements ObservationService {
 		if (id == null) {
 			throw new NullPointerException();
 		} else {
+			logger.info("Getting Report with Id {}", id);
 			return this.reportDao.getById(id);
 		}
 	}
 
 	@Override
 	public Collection<Report> getReports() {
+		logger.info("Getting all Reports");
 		return this.reportDao.getAll();
 	}
 
@@ -190,12 +208,14 @@ public class ObservationServiceImpl implements ObservationService {
 		if (o == null) {
 			throw new NullPointerException();
 		} else {
+			logger.info("Getting all Reports for {}", o);
 			return this.reportDao.getByObservation(o);
 		}
 	}
 
 	@Override
 	public Collection<Report> getReportsByProcessedState(boolean processed) {
+		logger.info("Getting all {} Reports", (processed) ? "processed":"unprocessed");
 		return (processed) ? this.reportDao.getProcessed() : this.reportDao
 				.getUnprocessed();
 	}
@@ -206,12 +226,14 @@ public class ObservationServiceImpl implements ObservationService {
 		if (u == null) {
 			throw new NullPointerException();
 		} else {
+			logger.info("Getting Reports by {}", u);
 			return this.reportDao.getByUser(u);
 		}
 	}
 
 	@Override
 	public boolean isCategorieTitleAvailable(String title) {
+		logger.info("Testing if Categorie with title '{}' is available", title);
 		return this.getCategorieByTitle(title) == null;
 	}
 
@@ -221,6 +243,7 @@ public class ObservationServiceImpl implements ObservationService {
 		if (categorie == null) {
 			throw new NullPointerException();
 		} else {
+			logger.info("Registering new Categorie {}", categorie);
 			this.categorieDao.save(categorie);
 		}
 	}
@@ -232,6 +255,7 @@ public class ObservationServiceImpl implements ObservationService {
 		if (observation == null) {
 			throw new NullPointerException();
 		} else {
+			logger.info("Registering new Observation {}", observation);
 			this.observationDao.save(observation);
 		}
 	}
@@ -242,6 +266,7 @@ public class ObservationServiceImpl implements ObservationService {
 		if (r == null) {
 			throw new NullPointerException();
 		} else {
+			logger.info("Registering new Report {}", r);
 			this.reportDao.save(r);
 		}
 	}
@@ -292,6 +317,7 @@ public class ObservationServiceImpl implements ObservationService {
 		if (categorie == null) {
 			throw new NullPointerException();
 		} else {
+			logger.info("Updating Categorie {}", categorie);
 			this.categorieDao.update(categorie);
 		}
 	}
@@ -303,6 +329,7 @@ public class ObservationServiceImpl implements ObservationService {
 		if (observation == null) {
 			throw new NullPointerException();
 		} else {
+			logger.info("Updating Observation {}", observation);
 			this.observationDao.update(observation);
 		}
 	}
@@ -313,6 +340,8 @@ public class ObservationServiceImpl implements ObservationService {
 		if (r == null) {
 			throw new NullPointerException();
 		} else {
+			logger.info("Updating Report {}", r);
+			r.setLastUpdateDate(new Date());
 			this.reportDao.update(r);
 		}
 	}

@@ -140,9 +140,9 @@ public class ObservationDaoImpl extends EntityManagerDao<Observation> implements
 		Collection<Observation> result = getEntityManager().createQuery(
 		q.select(o).distinct(true).where(b.or(
 			b.like(b.upper(j.get(Categorie_.title)), key),
-			b.like(b.upper(j.get(Categorie_.description)),key),
-			b.like(b.upper(o.get(Observation_.title)),key),
-			b.like(b.upper(o.get(Observation_.description)),key))))
+			b.like(b.upper(j.get(Categorie_.description)), key),
+			b.like(b.upper(o.get(Observation_.title)), key),
+			b.like(b.upper(o.get(Observation_.description)), key))))
 		.getResultList();
 		logger.info("Searched for {}. Got {} Results.", key, result.size());
 		return result;
@@ -174,12 +174,17 @@ public class ObservationDaoImpl extends EntityManagerDao<Observation> implements
 		}
 		CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
 		CriteriaQuery<Observation> cq = cb.createQuery(Observation.class);
-
 		Root<Observation> o = cq.from(Observation.class);
 		cq.select(o).orderBy(cb.desc(o.get(Observation_.creationDate)));
-		return getEntityManager().createQuery(cq)
+		List<Observation> result = getEntityManager().createQuery(cq)
 				.setMaxResults(count).getResultList();
 
+		if (result.size() < count){
+			logger.info("Only {} Observations in the database", result.size());
+		} else {
+			logger.info("Found the {} last Observations", result.size());
+		}
+		return result;
 		
 	}
 

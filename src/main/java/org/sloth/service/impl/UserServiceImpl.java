@@ -55,7 +55,8 @@ public class UserServiceImpl implements UserService {
 		if (id == null) {
 			throw new NullPointerException();
 		} else {
-			this.userDao.delete(this.userDao.getById(id));
+			logger.info("Deleting User with Id {}", id);
+			this.delete(this.get(id));
 		}
 	}
 
@@ -65,6 +66,7 @@ public class UserServiceImpl implements UserService {
 		if (user == null) {
 			throw new NullPointerException();
 		} else {
+			logger.info("Deleting User {}", user);
 			this.userDao.delete(user);
 		}
 	}
@@ -74,6 +76,7 @@ public class UserServiceImpl implements UserService {
 		if (id == null) {
 			throw new NullPointerException();
 		} else {
+			logger.info("Getting User with Id {}", id);
 			return this.userDao.getById(id);
 		}
 	}
@@ -83,18 +86,21 @@ public class UserServiceImpl implements UserService {
 		if (mail == null) {
 			throw new NullPointerException();
 		} else {
+			logger.info("Getting User with mail address '{}'", mail);
 			return this.userDao.getByMail(mail);
 		}
 	}
 
 	@Override
 	public Collection<User> getUsers() {
+		logger.info("Getting all Users");
 		return this.userDao.getAll();
 	}
 
 	@Override
 	public boolean isMailAddressAvailable(String mail)
 			throws NullPointerException {
+		logger.info("Testing whether mail address '{}' is available.", mail);
 		return this.get(mail) == null;
 	}
 
@@ -104,10 +110,13 @@ public class UserServiceImpl implements UserService {
 		if (mail == null || plainPassword == null) {
 			throw new NullPointerException();
 		} else {
+			logger.info("Logging in User with mail address {}", mail);
 			User u = this.get(mail);
 			if (u == null) {
+				logger.info("Unknown login");
 				return null;
 			} else {
+				logger.info("User found: {}", u);
 				return this.passwordService.check(u.getPassword(),
 						plainPassword) ? u : null;
 			}
@@ -161,6 +170,7 @@ public class UserServiceImpl implements UserService {
 		if (u == null) {
 			throw new NullPointerException();
 		} else {
+			logger.info("Updating User {}", u);
 			this.userDao.update(u);
 		}
 	}

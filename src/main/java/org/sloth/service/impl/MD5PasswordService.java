@@ -49,7 +49,7 @@ public class MD5PasswordService extends AbstractPasswordService {
 			m.update(plain.getBytes());
 			return String.format("%1$032X", new BigInteger(1, m.digest()));
 		} catch (NoSuchAlgorithmException e) {
-			logger.trace("can not hash passwords", e);
+			logger.error("Can not hash passwords", e);
 			return null;
 		}
 

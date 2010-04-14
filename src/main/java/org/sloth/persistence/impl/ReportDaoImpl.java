@@ -121,7 +121,20 @@ public class ReportDaoImpl extends EntityManagerDao<Report> implements
 	@Override
 	public Collection<Report> getByUser(User u) throws NullPointerException,
 			IllegalArgumentException {
-		throw new UnsupportedOperationException("Not supported yet.");
+		if (u == null) {
+			throw new NullPointerException();
+		}
+		if (u.isNew()) {
+			throw new IllegalArgumentException();
+		}
+		CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
+		CriteriaQuery<Report> cq = cb.createQuery(Report.class);
+		Root<Report> r = cq.from(Report.class);
+		cq.select(r).where(cb.equal(r.get(Report_.author), u));
+		Collection<Report> result = getEntityManager().createQuery(cq)
+				.getResultList();
+		logger.info("Found {} Reports by {}.", result.size(), u);
+		return result;
 	}
 
 	@Override

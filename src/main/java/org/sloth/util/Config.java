@@ -53,7 +53,7 @@ public class Config {
 				logger.info("Loading configuration.");
 				props = loadAllProperties("config.properties");
 			} catch (IOException ex) {
-				logger.warn("Can not load configuration", ex);
+				logger.error("Can not load configuration", ex);
 				return null;
 			}
 		}

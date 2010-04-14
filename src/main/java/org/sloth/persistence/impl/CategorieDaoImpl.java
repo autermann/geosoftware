@@ -95,10 +95,8 @@ public class CategorieDaoImpl extends EntityManagerDao<Categorie> implements
 		logger.info("Searching for Categorie with Id: {}", id);
 		Categorie oc = getEntityManager().find(Categorie.class, id);
 		if (oc != null) {
-			logger.info(
-					"Found Categorie with Id {}; Title: {}; Description: {}",
-					new Object[] { oc.getId(), oc.getTitle(),
-							oc.getDescription() });
+			logger.info("Found Categorie with Id {}; Title: {}; Description: {}",
+				new Object[] {oc.getId(), oc.getTitle(), oc.getDescription()});
 		} else {
 			logger.info("Can't find Categorie with Id {}", id);
 		}

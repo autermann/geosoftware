@@ -97,8 +97,15 @@ public abstract class AbstractPasswordService implements PasswordService {
 			builder.append("(?=.*[^A-Za-z0-9])");
 		}
 		builder.append(".*$");
-
 		REGEX = builder.toString();
+		
+		logger.info("Password Requirements:");
+		logger.info("Has to contain a digit: {}.", DIGIT);
+		logger.info("Has to contain a lower case character: {}.", LOWER_CASE);
+		logger.info("Has to contain a upper case character: {}.", UPPER_CASE);
+		logger.info("Has to contain a non alphanumeric character: {}.", NON_ALPHA_NUM);
+		logger.info("Has to be at least {} characters long.", LENGTH);
+		logger.info("Generated regular expression is: {}", REGEX);
 	}
 
 	@Override

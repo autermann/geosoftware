@@ -150,7 +150,6 @@ public class EditReportController {
 				}
 				status.setComplete();
 				try {
-					report.setLastUpdateDate(new Date());
 					this.observationService.updateReport(report);
 				} catch (Exception e) {
 					logger.warn("Unexpected Exception", e);
