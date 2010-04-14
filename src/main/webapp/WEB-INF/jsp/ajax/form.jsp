@@ -1,5 +1,5 @@
 <%@ include file="/WEB-INF/jsp/includes.jsp" %>
-<form:form modelAttribute="observation" method="POST">
+<form:form modelAttribute="observation" method="POST" action="/">
 	<input type="hidden" id="longitude" value="${observation.coordinate.longitude}"/>
 	<input type="hidden" id="latitude" value="${observation.coordinate.latitude}"/>
 	<table border="0" width="100%">

@@ -9,10 +9,15 @@
 		<script type="text/javascript" src="http://openlayers.org/api/OpenLayers.js"></script>
 		<script type="text/javascript" src="http://www.openstreetmap.org/openlayers/OpenStreetMap.js"></script>
 		<script type="text/javascript" src="<s:url value="/static/js/jquery.min.js" htmlEscape="true" />"></script>
+		<script type="text/javascript" src="<s:url value="/static/js/jquery.min.js" htmlEscape="true" />"></script>
+		<script type="text/javascript" src="<s:url value="/static/js/jquery.hyphenate.js" htmlEscape="true" />"></script>
 		<script type="text/javascript" src="<s:url value="/static/js/map.js" htmlEscape="true" />"></script>
+		<script type="text/javascript">var map, layer;</script>
 		<%-- Add already existing features to the map --%>
 		<script type="text/javascript">
 			$(document).ready(function(){
+				$(".observationlist_description").hyphenate({ oWidth : 400 });
+				$(".obsTitle").hyphenate({ oWidth : 400 });
 				init();
 				<c:forEach var="o" items="${observations}">
 					addMarker(${o.coordinate.longitude}, ${o.coordinate.latitude},"<b><s:escapeBody htmlEscape="true" javaScriptEscape="true">${o.title}</s:escapeBody></b><br/><br /><s:escapeBody htmlEscape="true" javaScriptEscape="true">${o.description}</s:escapeBody><br/><br/>Koordinaten:<br/><small>Lon: ${o.coordinate.longitude} | Lat: ${o.coordinate.latitude} </small>", "${o.categorie.iconFileName}");

@@ -1,11 +1,10 @@
 <%@ include file="/WEB-INF/jsp/includes.jsp" %>
 <img style="margin-top:42px; margin-left:42px" alt="Loading..." src="static/img/loading.gif"/>
 <script type="text/javascript">
-	// add the new observation to the top of the list
 	$("div.observationList:first").before($("#tableItem").html());
-	// create the marker
 	addMarker(${observation.coordinate.longitude}, ${observation.coordinate.latitude}, $("#bubbleContent").html(), "${observation.categorie.iconFileName}");
-	// remove loading popup
+	$(".observationlist_description").hyphenate({ oWidth : 400 });
+	$(".obsTitle").hyphenate({ oWidth : 400 });
 	handlePopups(null);
 </script>
 
