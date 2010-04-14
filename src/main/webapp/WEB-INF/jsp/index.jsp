@@ -16,8 +16,6 @@
 		<%-- Add already existing features to the map --%>
 		<script type="text/javascript">
 			$(document).ready(function(){
-				$(".observationlist_description").hyphenate({ oWidth : 400 });
-				$(".obsTitle").hyphenate({ oWidth : 400 });
 				init();
 				<c:forEach var="o" items="${observations}">
 					addMarker(${o.coordinate.longitude}, ${o.coordinate.latitude},"<b><s:escapeBody htmlEscape="true" javaScriptEscape="true">${o.title}</s:escapeBody></b><br/><br /><s:escapeBody htmlEscape="true" javaScriptEscape="true">${o.description}</s:escapeBody><br/><br/>Koordinaten:<br/><small>Lon: ${o.coordinate.longitude} | Lat: ${o.coordinate.latitude} </small>", "${o.categorie.iconFileName}");

@@ -3,8 +3,6 @@
 <script type="text/javascript">
 	$("div.observationList:first").before($("#tableItem").html());
 	addMarker(${observation.coordinate.longitude}, ${observation.coordinate.latitude}, $("#bubbleContent").html(), "${observation.categorie.iconFileName}");
-	$(".observationlist_description").hyphenate({ oWidth : 400 });
-	$(".obsTitle").hyphenate({ oWidth : 400 });
 	handlePopups(null);
 </script>
 
