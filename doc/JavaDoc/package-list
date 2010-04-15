@@ -9,6 +9,7 @@ org.sloth.validation
 org.sloth.web
 org.sloth.web.account
 org.sloth.web.action
+org.sloth.web.ajax
 org.sloth.web.categorie
 org.sloth.web.observation
 org.sloth.web.report

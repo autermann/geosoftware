@@ -4,7 +4,7 @@
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-FrontPageController (Geosoftware II 1.0.0RC API)
+FrontPageController (Geosoftware II 2.0.0-SNAPSHOT API)
 </TITLE>
 
 
@@ -14,7 +14,7 @@ FrontPageController (Geosoftware II 1.0.0RC API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FrontPageController (Geosoftware II 1.0.0RC API)";
+        parent.document.title="FrontPageController (Geosoftware II 2.0.0-SNAPSHOT API)";
     }
 }
 </SCRIPT>
@@ -98,7 +98,7 @@ java.lang.Object
 <DL>
 <DT><PRE><FONT SIZE="-1">@Controller
 @RequestMapping(value="/")
-@SessionAttributes(value={"observations","observation","categories"})
+@SessionAttributes(value="observations")
 </FONT>public class <B>FrontPageController</B><DT>extends java.lang.Object</DL>
 </PRE>
 
@@ -143,8 +143,7 @@ Controller to handle the front page. It cares for filling the map, search the
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;org.springframework.web.servlet.ModelAndView</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../org/sloth/web/FrontPageController.html#fillMap(javax.servlet.http.HttpSession, java.lang.String)">fillMap</A></B>(javax.servlet.http.HttpSession&nbsp;session,
-        java.lang.String&nbsp;string)</CODE>
+<TD><CODE><B><A HREF="../../../org/sloth/web/FrontPageController.html#fillMap(java.lang.String)">fillMap</A></B>(java.lang.String&nbsp;query)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handles the <code>GET</code> request.</TD>
@@ -152,35 +151,7 @@ Controller to handle the front page. It cares for filling the map, search the
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../org/sloth/web/FrontPageController.html#initBinder(org.springframework.web.bind.WebDataBinder)">initBinder</A></B>(org.springframework.web.bind.WebDataBinder&nbsp;webDataBinder)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets custom parameters to the <code>WebDataBinder</code>.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../org/sloth/web/FrontPageController.html#saveObservation(javax.servlet.http.HttpSession, javax.servlet.http.HttpServletResponse, org.sloth.model.Observation, org.springframework.validation.BindingResult, org.springframework.web.bind.support.SessionStatus)">saveObservation</A></B>(javax.servlet.http.HttpSession&nbsp;session,
-                javax.servlet.http.HttpServletResponse&nbsp;request,
-                <A HREF="../../../org/sloth/model/Observation.html" title="class in org.sloth.model">Observation</A>&nbsp;observation,
-                org.springframework.validation.BindingResult&nbsp;result,
-                org.springframework.web.bind.support.SessionStatus&nbsp;status)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handles the <code>POST</code> request.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../org/sloth/web/FrontPageController.html#setObservationService(org.sloth.service.ObservationService)">setObservationService</A></B>(<A HREF="../../../org/sloth/service/ObservationService.html" title="interface in org.sloth.service">ObservationService</A>&nbsp;os)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../org/sloth/web/FrontPageController.html#setObservationValidator(org.sloth.validation.ObservationValidator)">setObservationValidator</A></B>(<A HREF="../../../org/sloth/validation/ObservationValidator.html" title="class in org.sloth.validation">ObservationValidator</A>&nbsp;ov)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -225,17 +196,6 @@ public <B>FrontPageController</B>()</PRE>
 </TR>
 </TABLE>
 
-<A NAME="setObservationValidator(org.sloth.validation.ObservationValidator)"><!-- --></A><H3>
-setObservationValidator</H3>
-<PRE>
-public void <B>setObservationValidator</B>(<A HREF="../../../org/sloth/validation/ObservationValidator.html" title="class in org.sloth.validation">ObservationValidator</A>&nbsp;ov)</PRE>
-<DL>
-<DD><DL>
-<DT><B>Parameters:</B><DD><CODE>ov</CODE> - the <code>ObservationValidator</code> to set</DL>
-</DD>
-</DL>
-<HR>
-
 <A NAME="setObservationService(org.sloth.service.ObservationService)"><!-- --></A><H3>
 setObservationService</H3>
 <PRE>
@@ -247,55 +207,18 @@ public void <B>setObservationService</B>(<A HREF="../../../org/sloth/service/Obs
 </DL>
 <HR>
 
-<A NAME="initBinder(org.springframework.web.bind.WebDataBinder)"><!-- --></A><H3>
-initBinder</H3>
-<PRE>
-<FONT SIZE="-1">@InitBinder
-</FONT>public void <B>initBinder</B>(org.springframework.web.bind.WebDataBinder&nbsp;webDataBinder)</PRE>
-<DL>
-<DD>Sets custom parameters to the <code>WebDataBinder</code>.
-<P>
-<DD><DL>
-<DT><B>Parameters:</B><DD><CODE>webDataBinder</CODE> - the <code>WebDataBinder</code> to initialize</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="fillMap(javax.servlet.http.HttpSession, java.lang.String)"><!-- --></A><H3>
+<A NAME="fillMap(java.lang.String)"><!-- --></A><H3>
 fillMap</H3>
 <PRE>
 <FONT SIZE="-1">@RequestMapping(method=GET)
-</FONT>public org.springframework.web.servlet.ModelAndView <B>fillMap</B>(javax.servlet.http.HttpSession&nbsp;session,
-                                                                           <FONT SIZE="-1">@RequestParam(value="q",required=false)</FONT>
-                                                                           java.lang.String&nbsp;string)</PRE>
+</FONT>public org.springframework.web.servlet.ModelAndView <B>fillMap</B>(<FONT SIZE="-1">@RequestParam(value="q",required=false)</FONT>
+                                                                           java.lang.String&nbsp;query)</PRE>
 <DL>
 <DD>Handles the <code>GET</code> request. It creates the model to fill the Map
  with <code>Observation</code>s. An optional query parameter is also processed.
 <P>
 <DD><DL>
 </DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="saveObservation(javax.servlet.http.HttpSession, javax.servlet.http.HttpServletResponse, org.sloth.model.Observation, org.springframework.validation.BindingResult, org.springframework.web.bind.support.SessionStatus)"><!-- --></A><H3>
-saveObservation</H3>
-<PRE>
-<FONT SIZE="-1">@RequestMapping(method=POST)
-</FONT>public java.lang.String <B>saveObservation</B>(javax.servlet.http.HttpSession&nbsp;session,
-                                                       javax.servlet.http.HttpServletResponse&nbsp;request,
-                                                       <FONT SIZE="-1">@ModelAttribute(value="observation")</FONT>
-                                                       <A HREF="../../../org/sloth/model/Observation.html" title="class in org.sloth.model">Observation</A>&nbsp;observation,
-                                                       org.springframework.validation.BindingResult&nbsp;result,
-                                                       org.springframework.web.bind.support.SessionStatus&nbsp;status)
-                                 throws java.io.IOException</PRE>
-<DL>
-<DD>Handles the <code>POST</code> request. Creates a new <code>Observation</code>.
-<P>
-<DD><DL>
-
-<DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

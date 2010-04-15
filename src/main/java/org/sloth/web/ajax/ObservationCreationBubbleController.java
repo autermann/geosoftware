@@ -46,6 +46,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+/**
+ * {@code Controller} to create a {@code Observation}.
+ */
 @Controller
 @RequestMapping("/ajax/bubble")
 @SessionAttributes({"observation","categories"})
@@ -64,17 +67,28 @@ public class ObservationCreationBubbleController {
 	private ObservationValidator observationValidator;
 	private ObservationService observationService;
 
+	/**
+	 * @param observationValidator the {@code ObservationValidator} to set
+	 */
 	@Autowired
 	public void setObservationValidator(
 			ObservationValidator observationValidator) {
 		this.observationValidator = observationValidator;
 	}
 
+	/**
+	 * @param observationService the {@code ObservationService} to set
+	 */
 	@Autowired
 	public void setObservationService(ObservationService observationService) {
 		this.observationService = observationService;
 	}
 
+	/**
+	 * Configures the Binder
+	 * 
+	 * @param webDataBinder the {@code WebDataBinder} to configure
+	 */
 	@InitBinder
 	public void initBinder(WebDataBinder webDataBinder) {
 		CategorieEditor categorieEditor = new CategorieEditor();
@@ -82,6 +96,9 @@ public class ObservationCreationBubbleController {
 		webDataBinder.registerCustomEditor(Categorie.class, categorieEditor);
 	}
 
+	/**
+	 * Handles the {@code GET}-request and sets up the form.
+	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView get(HttpSession session,
 							@RequestParam(LONGITUDE_PARAM) Double longitude,
@@ -98,7 +115,10 @@ public class ObservationCreationBubbleController {
 			return new ModelAndView(REJECT_VIEW);
 		}
 	}
-
+	
+	/**
+	 * Handles the {@code POST}-request and registrates the {@code Observation}.
+	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView post(@RequestParam(LONGITUDE_PARAM) Double longitude,
 					   @RequestParam(LATITUDE_PARAM) Double latitude,

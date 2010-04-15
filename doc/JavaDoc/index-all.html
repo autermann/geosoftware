@@ -4,7 +4,7 @@
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Index (Geosoftware II 1.0.0RC API)
+Index (Geosoftware II 2.0.0-SNAPSHOT API)
 </TITLE>
 
 
@@ -14,7 +14,7 @@ Index (Geosoftware II 1.0.0RC API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Geosoftware II 1.0.0RC API)";
+        parent.document.title="Index (Geosoftware II 2.0.0-SNAPSHOT API)";
     }
 }
 </SCRIPT>
@@ -500,7 +500,7 @@ Static variable in class org.sloth.model.<A HREF="./org/sloth/model/User_.html" 
  constraint.<DT><A HREF="./org/sloth/exception/FieldLengthConstraintViolationException.html#FieldLengthConstraintViolationException()"><B>FieldLengthConstraintViolationException()</B></A> - 
 Constructor for error org.sloth.exception.<A HREF="./org/sloth/exception/FieldLengthConstraintViolationException.html" title="class in org.sloth.exception">FieldLengthConstraintViolationException</A>
 <DD>&nbsp;
-<DT><A HREF="./org/sloth/web/FrontPageController.html#fillMap(javax.servlet.http.HttpSession, java.lang.String)"><B>fillMap(HttpSession, String)</B></A> - 
+<DT><A HREF="./org/sloth/web/FrontPageController.html#fillMap(java.lang.String)"><B>fillMap(String)</B></A> - 
 Method in class org.sloth.web.<A HREF="./org/sloth/web/FrontPageController.html" title="class in org.sloth.web">FrontPageController</A>
 <DD>Handles the <code>GET</code> request.
 <DT><A HREF="./org/sloth/web/account/FirstStartController.html" title="class in org.sloth.web.account"><B>FirstStartController</B></A> - Class in <A HREF="./org/sloth/web/account/package-summary.html">org.sloth.web.account</A><DD>Controller to handle the special case, that no <code>User</code> is registered.<DT><A HREF="./org/sloth/web/account/FirstStartController.html#FirstStartController()"><B>FirstStartController()</B></A> - 
@@ -542,6 +542,9 @@ Method in interface org.sloth.service.<A HREF="./org/sloth/service/UserService.h
 <DT><A HREF="./org/sloth/service/UserService.html#get(java.lang.String)"><B>get(String)</B></A> - 
 Method in interface org.sloth.service.<A HREF="./org/sloth/service/UserService.html" title="interface in org.sloth.service">UserService</A>
 <DD>Returns the <code>User</code> with the specified mail address.
+<DT><A HREF="./org/sloth/web/ajax/ObservationCreationBubbleController.html#get(javax.servlet.http.HttpSession, java.lang.Double, java.lang.Double)"><B>get(HttpSession, Double, Double)</B></A> - 
+Method in class org.sloth.web.ajax.<A HREF="./org/sloth/web/ajax/ObservationCreationBubbleController.html" title="class in org.sloth.web.ajax">ObservationCreationBubbleController</A>
+<DD>Handles the <code>GET</code>-request and sets up the form.
 <DT><A HREF="./org/sloth/web/action/UserEditFormAction.html#getActualPassword()"><B>getActualPassword()</B></A> - 
 Method in class org.sloth.web.action.<A HREF="./org/sloth/web/action/UserEditFormAction.html" title="class in org.sloth.web.action">UserEditFormAction</A>
 <DD>&nbsp;
@@ -995,14 +998,14 @@ Method in class org.sloth.web.account.<A HREF="./org/sloth/web/account/FirstStar
 <DT><A HREF="./org/sloth/web/account/RegistrationController.html#initBinder(org.springframework.web.bind.WebDataBinder)"><B>initBinder(WebDataBinder)</B></A> - 
 Method in class org.sloth.web.account.<A HREF="./org/sloth/web/account/RegistrationController.html" title="class in org.sloth.web.account">RegistrationController</A>
 <DD>Sets custom parameters to the <code>WebDataBinder</code>.
+<DT><A HREF="./org/sloth/web/ajax/ObservationCreationBubbleController.html#initBinder(org.springframework.web.bind.WebDataBinder)"><B>initBinder(WebDataBinder)</B></A> - 
+Method in class org.sloth.web.ajax.<A HREF="./org/sloth/web/ajax/ObservationCreationBubbleController.html" title="class in org.sloth.web.ajax">ObservationCreationBubbleController</A>
+<DD>Configures the Binder
 <DT><A HREF="./org/sloth/web/categorie/CreateCategorieController.html#initBinder(org.springframework.web.bind.WebDataBinder)"><B>initBinder(WebDataBinder)</B></A> - 
 Method in class org.sloth.web.categorie.<A HREF="./org/sloth/web/categorie/CreateCategorieController.html" title="class in org.sloth.web.categorie">CreateCategorieController</A>
 <DD>Sets custom parameters to the <code>WebDataBinder</code>.
 <DT><A HREF="./org/sloth/web/categorie/DeleteCategorieController.html#initBinder(org.springframework.web.bind.WebDataBinder)"><B>initBinder(WebDataBinder)</B></A> - 
 Method in class org.sloth.web.categorie.<A HREF="./org/sloth/web/categorie/DeleteCategorieController.html" title="class in org.sloth.web.categorie">DeleteCategorieController</A>
-<DD>Sets custom parameters to the <code>WebDataBinder</code>.
-<DT><A HREF="./org/sloth/web/FrontPageController.html#initBinder(org.springframework.web.bind.WebDataBinder)"><B>initBinder(WebDataBinder)</B></A> - 
-Method in class org.sloth.web.<A HREF="./org/sloth/web/FrontPageController.html" title="class in org.sloth.web">FrontPageController</A>
 <DD>Sets custom parameters to the <code>WebDataBinder</code>.
 <DT><A HREF="./org/sloth/web/observation/DeleteObservationController.html#initBinder(org.springframework.web.bind.WebDataBinder)"><B>initBinder(WebDataBinder)</B></A> - 
 Method in class org.sloth.web.observation.<A HREF="./org/sloth/web/observation/DeleteObservationController.html" title="class in org.sloth.web.observation">DeleteObservationController</A>
@@ -1225,6 +1228,9 @@ Constructor for class org.sloth.model.<A HREF="./org/sloth/model/Observation_.ht
 <DT><A HREF="./org/sloth/web/observation/ObservationAddController.html" title="class in org.sloth.web.observation"><B>ObservationAddController</B></A> - Class in <A HREF="./org/sloth/web/observation/package-summary.html">org.sloth.web.observation</A><DD><B>Deprecated.</B>&nbsp;<I>Functionality replaced by <code>FrontPageController</code></I><DT><A HREF="./org/sloth/web/observation/ObservationAddController.html#ObservationAddController()"><B>ObservationAddController()</B></A> - 
 Constructor for class org.sloth.web.observation.<A HREF="./org/sloth/web/observation/ObservationAddController.html" title="class in org.sloth.web.observation">ObservationAddController</A>
 <DD><B>Deprecated.</B>&nbsp;&nbsp;
+<DT><A HREF="./org/sloth/web/ajax/ObservationCreationBubbleController.html" title="class in org.sloth.web.ajax"><B>ObservationCreationBubbleController</B></A> - Class in <A HREF="./org/sloth/web/ajax/package-summary.html">org.sloth.web.ajax</A><DD><code>Controller</code> to create a <code>Observation</code>.<DT><A HREF="./org/sloth/web/ajax/ObservationCreationBubbleController.html#ObservationCreationBubbleController()"><B>ObservationCreationBubbleController()</B></A> - 
+Constructor for class org.sloth.web.ajax.<A HREF="./org/sloth/web/ajax/ObservationCreationBubbleController.html" title="class in org.sloth.web.ajax">ObservationCreationBubbleController</A>
+<DD>&nbsp;
 <DT><A HREF="./org/sloth/persistence/ObservationDao.html" title="interface in org.sloth.persistence"><B>ObservationDao</B></A> - Interface in <A HREF="./org/sloth/persistence/package-summary.html">org.sloth.persistence</A><DD>Data Access Object for <A HREF="./org/sloth/model/Observation.html" title="class in org.sloth.model"><CODE>Observation</CODE></A>.<DT><A HREF="./org/sloth/persistence/impl/ObservationDaoImpl.html" title="class in org.sloth.persistence.impl"><B>ObservationDaoImpl</B></A> - Class in <A HREF="./org/sloth/persistence/impl/package-summary.html">org.sloth.persistence.impl</A><DD>Implementation of a <A HREF="./org/sloth/persistence/ObservationDao.html" title="interface in org.sloth.persistence"><CODE>ObservationDao</CODE></A>.<DT><A HREF="./org/sloth/persistence/impl/ObservationDaoImpl.html#ObservationDaoImpl()"><B>ObservationDaoImpl()</B></A> - 
 Constructor for class org.sloth.persistence.impl.<A HREF="./org/sloth/persistence/impl/ObservationDaoImpl.html" title="class in org.sloth.persistence.impl">ObservationDaoImpl</A>
 <DD>&nbsp;
@@ -1235,7 +1241,7 @@ Constructor for class org.sloth.service.impl.<A HREF="./org/sloth/service/impl/O
 <DT><A HREF="./org/sloth/validation/ObservationValidator.html" title="class in org.sloth.validation"><B>ObservationValidator</B></A> - Class in <A HREF="./org/sloth/validation/package-summary.html">org.sloth.validation</A><DD>A <code>Validator</code> for validating <code>Observation</code>s.<DT><A HREF="./org/sloth/validation/ObservationValidator.html#ObservationValidator()"><B>ObservationValidator()</B></A> - 
 Constructor for class org.sloth.validation.<A HREF="./org/sloth/validation/ObservationValidator.html" title="class in org.sloth.validation">ObservationValidator</A>
 <DD>&nbsp;
-<DT><A HREF="./org/sloth/exception/package-summary.html"><B>org.sloth.exception</B></A> - package org.sloth.exception<DD>Package for exceptions.<DT><A HREF="./org/sloth/model/package-summary.html"><B>org.sloth.model</B></A> - package org.sloth.model<DD>Package for model and metamodel classes.<DT><A HREF="./org/sloth/persistence/package-summary.html"><B>org.sloth.persistence</B></A> - package org.sloth.persistence<DD>Package for persistence classes.<DT><A HREF="./org/sloth/persistence/impl/package-summary.html"><B>org.sloth.persistence.impl</B></A> - package org.sloth.persistence.impl<DD>Package for persistence classes.<DT><A HREF="./org/sloth/service/package-summary.html"><B>org.sloth.service</B></A> - package org.sloth.service<DD>Package for <code>Service</code> layer interfaces.<DT><A HREF="./org/sloth/service/impl/package-summary.html"><B>org.sloth.service.impl</B></A> - package org.sloth.service.impl<DD>Package for <code>Service</code> layer implementations.<DT><A HREF="./org/sloth/util/package-summary.html"><B>org.sloth.util</B></A> - package org.sloth.util<DD>Package for utility classes.<DT><A HREF="./org/sloth/validation/package-summary.html"><B>org.sloth.validation</B></A> - package org.sloth.validation<DD>Package for <code>Validator</code> classes.<DT><A HREF="./org/sloth/web/package-summary.html"><B>org.sloth.web</B></A> - package org.sloth.web<DD>Package for <code>Controller</code> layer.<DT><A HREF="./org/sloth/web/account/package-summary.html"><B>org.sloth.web.account</B></A> - package org.sloth.web.account<DD>Package for account related <code>Controller</code>.<DT><A HREF="./org/sloth/web/action/package-summary.html"><B>org.sloth.web.action</B></A> - package org.sloth.web.action<DD>Package for form action beans.<DT><A HREF="./org/sloth/web/categorie/package-summary.html"><B>org.sloth.web.categorie</B></A> - package org.sloth.web.categorie<DD>Package for <code>Categorie</code> related <code>Controller</code>.<DT><A HREF="./org/sloth/web/observation/package-summary.html"><B>org.sloth.web.observation</B></A> - package org.sloth.web.observation<DD>Package for <code>Observation</code> related <code>Controller</code>.<DT><A HREF="./org/sloth/web/report/package-summary.html"><B>org.sloth.web.report</B></A> - package org.sloth.web.report<DD>Package for <code>Report</code> related <code>Controller</code>.<DT><A HREF="./org/sloth/web/user/package-summary.html"><B>org.sloth.web.user</B></A> - package org.sloth.web.user<DD>Package for <code>User</code> related <code>Controller</code>.</DL>
+<DT><A HREF="./org/sloth/exception/package-summary.html"><B>org.sloth.exception</B></A> - package org.sloth.exception<DD>Package for exceptions.<DT><A HREF="./org/sloth/model/package-summary.html"><B>org.sloth.model</B></A> - package org.sloth.model<DD>Package for model and metamodel classes.<DT><A HREF="./org/sloth/persistence/package-summary.html"><B>org.sloth.persistence</B></A> - package org.sloth.persistence<DD>Package for persistence classes.<DT><A HREF="./org/sloth/persistence/impl/package-summary.html"><B>org.sloth.persistence.impl</B></A> - package org.sloth.persistence.impl<DD>Package for persistence classes.<DT><A HREF="./org/sloth/service/package-summary.html"><B>org.sloth.service</B></A> - package org.sloth.service<DD>Package for <code>Service</code> layer interfaces.<DT><A HREF="./org/sloth/service/impl/package-summary.html"><B>org.sloth.service.impl</B></A> - package org.sloth.service.impl<DD>Package for <code>Service</code> layer implementations.<DT><A HREF="./org/sloth/util/package-summary.html"><B>org.sloth.util</B></A> - package org.sloth.util<DD>Package for utility classes.<DT><A HREF="./org/sloth/validation/package-summary.html"><B>org.sloth.validation</B></A> - package org.sloth.validation<DD>Package for <code>Validator</code> classes.<DT><A HREF="./org/sloth/web/package-summary.html"><B>org.sloth.web</B></A> - package org.sloth.web<DD>Package for <code>Controller</code> layer.<DT><A HREF="./org/sloth/web/account/package-summary.html"><B>org.sloth.web.account</B></A> - package org.sloth.web.account<DD>Package for account related <code>Controller</code>.<DT><A HREF="./org/sloth/web/action/package-summary.html"><B>org.sloth.web.action</B></A> - package org.sloth.web.action<DD>Package for form action beans.<DT><A HREF="./org/sloth/web/ajax/package-summary.html"><B>org.sloth.web.ajax</B></A> - package org.sloth.web.ajax<DD>Package for form AJAX <code>Controller</code>s.<DT><A HREF="./org/sloth/web/categorie/package-summary.html"><B>org.sloth.web.categorie</B></A> - package org.sloth.web.categorie<DD>Package for <code>Categorie</code> related <code>Controller</code>.<DT><A HREF="./org/sloth/web/observation/package-summary.html"><B>org.sloth.web.observation</B></A> - package org.sloth.web.observation<DD>Package for <code>Observation</code> related <code>Controller</code>.<DT><A HREF="./org/sloth/web/report/package-summary.html"><B>org.sloth.web.report</B></A> - package org.sloth.web.report<DD>Package for <code>Report</code> related <code>Controller</code>.<DT><A HREF="./org/sloth/web/user/package-summary.html"><B>org.sloth.web.user</B></A> - package org.sloth.web.user<DD>Package for <code>User</code> related <code>Controller</code>.</DL>
 <HR>
 <A NAME="_P_"><!-- --></A><H2>
 <B>P</B></H2>
@@ -1246,6 +1252,9 @@ Static variable in class org.sloth.model.<A HREF="./org/sloth/model/User_.html" 
 <DT><A HREF="./org/sloth/service/PasswordService.html" title="interface in org.sloth.service"><B>PasswordService</B></A> - Interface in <A HREF="./org/sloth/service/package-summary.html">org.sloth.service</A><DD>Service interface for handling passwords.<DT><A HREF="./org/sloth/validation/AbstractUserActionValidator.html#passwordService"><B>passwordService</B></A> - 
 Variable in class org.sloth.validation.<A HREF="./org/sloth/validation/AbstractUserActionValidator.html" title="class in org.sloth.validation">AbstractUserActionValidator</A>
 <DD>S PasswordService.
+<DT><A HREF="./org/sloth/web/ajax/ObservationCreationBubbleController.html#post(java.lang.Double, java.lang.Double, org.sloth.model.Observation, org.springframework.validation.BindingResult, org.springframework.web.bind.support.SessionStatus, javax.servlet.http.HttpSession, org.springframework.ui.Model)"><B>post(Double, Double, Observation, BindingResult, SessionStatus, HttpSession, Model)</B></A> - 
+Method in class org.sloth.web.ajax.<A HREF="./org/sloth/web/ajax/ObservationCreationBubbleController.html" title="class in org.sloth.web.ajax">ObservationCreationBubbleController</A>
+<DD>Handles the <code>POST</code>-request and registrates the <code>Observation</code>.
 <DT><A HREF="./org/sloth/web/account/FirstStartController.html#prepare(javax.servlet.http.HttpServletResponse)"><B>prepare(HttpServletResponse)</B></A> - 
 Method in class org.sloth.web.account.<A HREF="./org/sloth/web/account/FirstStartController.html" title="class in org.sloth.web.account">FirstStartController</A>
 <DD>Handles the <code>GET</code>-Request and sets up the registration form.
@@ -1372,9 +1381,6 @@ Method in interface org.sloth.persistence.<A HREF="./org/sloth/persistence/Repor
 <DT><A HREF="./org/sloth/persistence/UserDao.html#save(org.sloth.model.User)"><B>save(User)</B></A> - 
 Method in interface org.sloth.persistence.<A HREF="./org/sloth/persistence/UserDao.html" title="interface in org.sloth.persistence">UserDao</A>
 <DD>Save a <code>User</code> in the database.
-<DT><A HREF="./org/sloth/web/FrontPageController.html#saveObservation(javax.servlet.http.HttpSession, javax.servlet.http.HttpServletResponse, org.sloth.model.Observation, org.springframework.validation.BindingResult, org.springframework.web.bind.support.SessionStatus)"><B>saveObservation(HttpSession, HttpServletResponse, Observation, BindingResult, SessionStatus)</B></A> - 
-Method in class org.sloth.web.<A HREF="./org/sloth/web/FrontPageController.html" title="class in org.sloth.web">FrontPageController</A>
-<DD>Handles the <code>POST</code> request.
 <DT><A HREF="./org/sloth/web/user/SelfRedirectController.html" title="class in org.sloth.web.user"><B>SelfRedirectController</B></A> - Class in <A HREF="./org/sloth/web/user/package-summary.html">org.sloth.web.user</A><DD>Controller to redirect <code>User</code>s to their edit and delete pages.<DT><A HREF="./org/sloth/web/user/SelfRedirectController.html#SelfRedirectController()"><B>SelfRedirectController()</B></A> - 
 Constructor for class org.sloth.web.user.<A HREF="./org/sloth/web/user/SelfRedirectController.html" title="class in org.sloth.web.user">SelfRedirectController</A>
 <DD>&nbsp;
@@ -1525,6 +1531,9 @@ Method in class org.sloth.util.<A HREF="./org/sloth/util/CategorieEditor.html" t
 <DT><A HREF="./org/sloth/validation/CategorieValidator.html#setObservationService(org.sloth.service.ObservationService)"><B>setObservationService(ObservationService)</B></A> - 
 Method in class org.sloth.validation.<A HREF="./org/sloth/validation/CategorieValidator.html" title="class in org.sloth.validation">CategorieValidator</A>
 <DD>&nbsp;
+<DT><A HREF="./org/sloth/web/ajax/ObservationCreationBubbleController.html#setObservationService(org.sloth.service.ObservationService)"><B>setObservationService(ObservationService)</B></A> - 
+Method in class org.sloth.web.ajax.<A HREF="./org/sloth/web/ajax/ObservationCreationBubbleController.html" title="class in org.sloth.web.ajax">ObservationCreationBubbleController</A>
+<DD>&nbsp;
 <DT><A HREF="./org/sloth/web/categorie/CreateCategorieController.html#setObservationService(org.sloth.service.ObservationService)"><B>setObservationService(ObservationService)</B></A> - 
 Method in class org.sloth.web.categorie.<A HREF="./org/sloth/web/categorie/CreateCategorieController.html" title="class in org.sloth.web.categorie">CreateCategorieController</A>
 <DD>&nbsp;
@@ -1570,8 +1579,8 @@ Method in class org.sloth.web.report.<A HREF="./org/sloth/web/report/EditReportC
 <DT><A HREF="./org/sloth/web/report/ListReportController.html#setObservationService(org.sloth.service.ObservationService)"><B>setObservationService(ObservationService)</B></A> - 
 Method in class org.sloth.web.report.<A HREF="./org/sloth/web/report/ListReportController.html" title="class in org.sloth.web.report">ListReportController</A>
 <DD>&nbsp;
-<DT><A HREF="./org/sloth/web/FrontPageController.html#setObservationValidator(org.sloth.validation.ObservationValidator)"><B>setObservationValidator(ObservationValidator)</B></A> - 
-Method in class org.sloth.web.<A HREF="./org/sloth/web/FrontPageController.html" title="class in org.sloth.web">FrontPageController</A>
+<DT><A HREF="./org/sloth/web/ajax/ObservationCreationBubbleController.html#setObservationValidator(org.sloth.validation.ObservationValidator)"><B>setObservationValidator(ObservationValidator)</B></A> - 
+Method in class org.sloth.web.ajax.<A HREF="./org/sloth/web/ajax/ObservationCreationBubbleController.html" title="class in org.sloth.web.ajax">ObservationCreationBubbleController</A>
 <DD>&nbsp;
 <DT><A HREF="./org/sloth/web/observation/EditObservationController.html#setObservationValidator(org.sloth.validation.ObservationValidator)"><B>setObservationValidator(ObservationValidator)</B></A> - 
 Method in class org.sloth.web.observation.<A HREF="./org/sloth/web/observation/EditObservationController.html" title="class in org.sloth.web.observation">EditObservationController</A>
