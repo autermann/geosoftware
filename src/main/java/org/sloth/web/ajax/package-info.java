@@ -1,4 +1,4 @@
 /**
- * Package for form AJAX {@code Controller}s.
+ * Package for AJAX {@code Controller}.
  */
 package org.sloth.web.ajax;
